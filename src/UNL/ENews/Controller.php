@@ -3,10 +3,11 @@ class UNL_ENews_Controller
 {
     public $options = array('view' => 'latest');
     
-    protected $view_map = array('latest' => 'UNL_ENews_Latest',
-                                'story'  => 'UNL_ENews_Story',
-                                'submit' => 'UNL_ENews_Submission',
-                                'thanks' => 'UNL_ENews_Confirmation'
+    protected $view_map = array('latest'  => 'UNL_ENews_StoryList_Latest',
+                                'story'   => 'UNL_ENews_Story',
+                                'submit'  => 'UNL_ENews_Submission',
+                                'thanks'  => 'UNL_ENews_Confirmation',
+                                'manager' => 'UNL_ENews_Manager'
     );
     
     protected static $auth;

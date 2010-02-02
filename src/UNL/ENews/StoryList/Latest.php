@@ -1,5 +1,5 @@
 <?php
-class UNL_ENews_Latest extends ArrayIterator
+class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
 {
     function __construct($options = array())
     {
@@ -13,11 +13,6 @@ class UNL_ENews_Latest extends ArrayIterator
         }
         $mysqli->close();
         parent::__construct($stories);
-    }
-    
-    function current()
-    {
-        return UNL_ENews_Story::getByID(parent::current());
     }
     
 }
