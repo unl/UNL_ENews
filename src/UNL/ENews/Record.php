@@ -10,7 +10,10 @@ class UNL_ENews_Record
         
         $mysqli = UNL_ENews_Controller::getDB();
 
-        $stmt = $mysqli->prepare($sql);
+        if (!$stmt = $mysqli->prepare($sql)) {
+            echo $mysqli->error;
+        }
+
         $values = array();
         $values[] = $this->getTypeString(array_keys($fields)); 
         foreach ($fields as $key=>$value) {
@@ -22,6 +25,7 @@ class UNL_ENews_Record
             throw new Exception($stmt->error);
         }
         $mysqli->close();
+        return true;
     }
     
     function getTypeString($fields)
@@ -42,14 +46,40 @@ class UNL_ENews_Record
         return $types;
     }
     
+    function getDate($str)
+    {
+        if ($time = strtotime($str)) {
+            return date('Y-m-d', $time);
+        }
+
+        if (strpos($str, '/') !== false) {
+            list($month, $year) = explode('/', $str);
+            return $this->getDate($year.'-'.$month.'-01');
+        }
+        // strtotime couldn't handle it
+        return false;
+    }
+    
     public static function getRecordByID($table, $id, $field = 'id')
     {
-        $mysqli = UNL_UCARE_Controller::getDB();
+        $mysqli = UNL_ENews_Controller::getDB();
         $sql = "SELECT * FROM $table WHERE $field = ".intval($id);
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
         }
         
+        return false;
+    }
+    
+    function delete()
+    {
+        if (!empty($this->id)) {
+            $mysqli = UNL_ENews_Controller::getDB();
+            $sql = "DELETE FROM ".$this->getTable()." WHERE id = ".intval($this->id).' LIMIT 1;';
+            if ($result = $mysqli->query($sql)) {
+                return true;
+            }
+        }
         return false;
     }
     
