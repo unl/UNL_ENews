@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2010 at 04:06 PM
+-- Generation Time: Feb 02, 2010 at 04:54 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -32,6 +32,37 @@ CREATE TABLE IF NOT EXISTS `files` (
   `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `size` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsrooms`
+--
+
+CREATE TABLE IF NOT EXISTS `newsrooms` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `shortname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `shortname` (`shortname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsroom_stories`
+--
+
+CREATE TABLE IF NOT EXISTS `newsroom_stories` (
+  `newsroom_id` int(10) unsigned NOT NULL,
+  `story_id` int(10) unsigned NOT NULL,
+  `uid_created` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `status` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`newsroom_id`,`story_id`),
+  KEY `status` (`status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

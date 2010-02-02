@@ -1,6 +1,7 @@
 <?php
 class UNL_ENews_Story extends UNL_ENews_Record
 {
+    public $id;
     public $title;
     public $description;
     public $event_date;
