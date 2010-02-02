@@ -3,7 +3,8 @@ class UNL_ENews_Controller
 {
     public $options = array('view' => 'latest');
     
-    protected $view_map = array('latest' => 'UNL_ENews_Latest'
+    protected $view_map = array('latest' => 'UNL_ENews_Latest',
+                                'submit' => 'UNL_ENews_Submission'
     );
     
     protected static $auth;
@@ -47,7 +48,7 @@ class UNL_ENews_Controller
      * 
      * @return void
      */
-    function authenticate()
+    static function authenticate()
     {
         self::$auth = UNL_Auth::factory('SimpleCAS');
         if (isset($_GET['logout'])) {
@@ -59,7 +60,7 @@ class UNL_ENews_Controller
             throw new Exception('You must log in to view this resource!');
             exit();
         }
-        self::$user = new UNL_UCARE_Applicant(self::$auth->getUser());
+        self::$user = self::$auth->getUser();
     }
     
     function handlePost()
@@ -105,11 +106,6 @@ class UNL_ENews_Controller
                 $object->$key = $values[$key]; 
             }
         }
-    }
-    
-    public static function getUser()
-    {
-        return self::$user;
     }
     
     public static function getDB()
