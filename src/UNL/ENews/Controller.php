@@ -23,6 +23,9 @@ class UNL_ENews_Controller
      */
     protected static $user = false;
     
+    public static $db_user = 'enews';
+    
+    public static $db_pass = 'enews';
     
     public $actionable = array();
     
