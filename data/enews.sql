@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2010 at 01:55 PM
+-- Generation Time: Feb 02, 2010 at 04:06 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -34,11 +34,6 @@ CREATE TABLE IF NOT EXISTS `files` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `files`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -51,19 +46,12 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `event_date` datetime DEFAULT NULL,
   `sponsor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uid_created` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_submitted` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `title` (`title`,`event_date`,`uid_created`,`date_submitted`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `stories`
---
-
-INSERT INTO `stories` (`id`, `title`, `description`, `event_date`, `sponsor`, `uid_created`, `date_submitted`) VALUES
-(1, 'My Super Fun Event', 'Y''all come down to my super fun event.', '2010-02-03 00:00:00', 'Office of University Communications', '', '2010-02-02 10:56:13'),
-(2, 'My Super Fun Event', 'Y''all come down to my super fun event.', '2010-02-03 00:00:00', 'Office of University Communications', '', '2010-02-02 10:59:12');
 
 -- --------------------------------------------------------
 
@@ -76,8 +64,3 @@ CREATE TABLE IF NOT EXISTS `story_files` (
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`story_id`,`file_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `story_files`
---
-
