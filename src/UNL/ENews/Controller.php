@@ -4,6 +4,7 @@ class UNL_ENews_Controller
     public $options = array('view' => 'latest');
     
     protected $view_map = array('latest' => 'UNL_ENews_Latest',
+                                'story'  => 'UNL_ENews_Story',
                                 'submit' => 'UNL_ENews_Submission'
     );
     
@@ -20,6 +21,10 @@ class UNL_ENews_Controller
      * @var UNL_UCARE_Applicant
      */
     protected static $user;
+    
+    public static $db_user = 'enews';
+    
+    public static $db_pass = 'enews';
     
     public $actionable = array();
     
@@ -60,14 +65,24 @@ class UNL_ENews_Controller
             throw new Exception('You must log in to view this resource!');
             exit();
         }
-        self::$user = self::$auth->getUser();
+        self::$user = new UNL_ENews_User(array('uid'=>self::$auth->getUser()));
+    }
+    
+    /**
+     * get the currently logged in user
+     * 
+     * @return UNL_ENews_User
+     */
+    public static function getUser()
+    {
+        return self::$user;
     }
     
     function handlePost()
     {
         $this->filterPostValues();
         switch($_POST['_type']) {
-            case 'foo':
+            case 'story':
                 $class = $this->view_map[$_POST['_type']];
                 $object = new $class();
                 self::setObjectFromArray($object, $_POST);
@@ -108,9 +123,13 @@ class UNL_ENews_Controller
         }
     }
     
+    /**
+     * 
+     * @return mysqli
+     */
     public static function getDB()
     {
-        return new mysqli('localhost', 'ucare', 'ucare', 'ucare');
+        return new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
     }
     
     public static function isAdmin($uid)

@@ -1,0 +1,139 @@
+#maincontent form#form1 {
+    margin-bottom:20px;
+}
+#maincontent form#form1 input#q{
+    background:#eee;
+    border:1px solid #ccc;
+    border-color:#c3c3c3 #eee #eee #c3c3c3;
+    color:#333;
+    padding:1px 2px;
+}
+#maincontent ul{
+    list-style:none;
+    padding:0;
+    margin-bottom:5px;
+    border-top:1px solid #ddd;clear:both;
+}
+#maincontent ul li.ppl_Sresult,
+#maincontent ul li.org_Sresult{
+    border-bottom:1px solid #ddd;
+    padding:0.7em 0 0.7em 0.7em;
+    border-left:1px solid #ccc;
+}
+#maincontent ul li.ppl_Sresult:hover,
+#maincontent ul li.ppl_Sresult.alt:hover,
+#maincontent ul li.org_Sresult:hover,
+#maincontent ul li.org_Sresult.alt:hover{
+    background:#EBF6FF;
+    border-bottom:1px solid #d3d3d3;
+}
+#maincontent ul li.ppl_Sresult.alt,
+#maincontent ul li.org_Sresult.alt{
+    background:#FAFAFA;
+}
+#maincontent ul li.ppl_Sresult div.tel,
+#maincontent ul li.org_Sresult div.tel{
+    background:url(images/mobile.gif) no-repeat 0 0.75em;
+    padding:0.5em 0 0 1em;
+    position:relative;
+    color:#333;
+}
+#maincontent ul li.org_Sresult .organization-unit {
+    clear:both;
+}
+#maincontent ul.department li.ppl_Sresult .organization-unit {
+    display:none;
+}
+#maincontent .fn{
+    float:left;
+    margin-right:0.2em;
+}
+#maincontent .result_head{
+    position:relative;
+    padding-bottom:0.4em;
+    font-weight:bold;
+}
+#maincontent .cMatch{
+    background:#ffffcc;
+    margin:1em 0 1em 0;
+    padding:0.5em;
+    border:1px solid #d0c8a5;
+}
+#maincontent .cMatch p {
+    margin:0;
+}
+#maincontent .cNav{
+    position:absolute;
+    right:0;
+    top:0;
+    font-weight:normal;
+    letter-spacing:-0.1em;
+}
+#maincontent a.next, #maincontent a.previous{
+    background:#eee;
+    border:1px solid #eee;
+    border-color:#eee #ccc #ccc #eee;
+    margin-left:3px;
+    padding:0;
+}
+#maincontent a.cInfo{
+    padding:0 0 0 1em;
+    margin-left:0.8em;color:#555;text-decoration:underline;
+}
+#maincontent ul li.ppl_Sresult a.cInfo {
+    background:url(images/person.gif) no-repeat 0 3px;
+}
+#maincontent ul li.org_Sresult a.cInfo {
+    background:url(images/home.gif) no-repeat 0 3px;
+}
+#maincontent .eppa{
+    font-size:0.75em;
+    margin-top:0.2em;
+}
+
+/** Individual Record */
+#maincontent .vcard{
+    border:1px solid #d3d3d3;
+    margin-top:8px;
+}
+#maincontent .vcard .photo{
+    float:right;
+}
+#maincontent .vcard .fn{
+    color:#900;
+    margin-bottom:2px;
+    padding:8px 0px 2px 5px;
+}
+#maincontent .vcard .eppa {
+    float:left;
+    margin-top:10px;
+}
+#maincontent .vcardInfo{
+    clear:both;
+    background: #FAFAFA;
+    padding:6px;
+    position:relative;
+    border-top:2px solid #E3E3E3;
+}
+#maincontent .vcard .adr, #maincontent .vcard .tel{
+    margin-top:10px;
+    margin-bottom:10px;
+    font-size:0.9em;
+}
+#maincontent .type{
+    font-weight:bold;
+}
+#maincontent .value{
+    display:block;
+}
+#maincontent a.downloadVcard{
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin:0 6px 4px 0;
+}
+
+#maincontent span.email {
+    display:block;
+    line-height:1.5em
+}

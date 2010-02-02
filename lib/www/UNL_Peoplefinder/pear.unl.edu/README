@@ -1,0 +1,19 @@
+This code runs the website at http://peoplefinder.unl.edu/
+
+REQUIREMENTS:
+PHP 5
+To query the LDAP, you'll need connection credentials - contact John Thiltges.
+Otherwise, use the UNL_Peoplefinder_Driver_WebService
+
+SETUP:
+To use, copy the config-sample.inc.php to config.inc.php and provide your LDAP
+username and password. Then browse to http://localhost/peoplefinder/ and try it out.
+
+TODO:
+Move LDAP connection into a singleton class UNL_LDAP
+Change renderers to work like Savant/Zend_View
+Change UNL_Peoplefinder_Record to use overloading with __get/__set for all attributes
+
+LICENSE
+This code is covered by a BSD style license.
+http://www1.unl.edu/wdn/wiki/Software_License
