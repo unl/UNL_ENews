@@ -19,9 +19,9 @@ class UNL_ENews_Controller
     /**
      * The currently logged in user.
      * 
-     * @var UNL_UCARE_Applicant
+     * @var UNL_ENews_User
      */
-    protected static $user;
+    protected static $user = false;
     
     public static $db_user = 'enews';
     

@@ -23,7 +23,16 @@
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | Department | New Page</title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
-<!-- Place optional header elements here -->
+<?php
+if ($user = UNL_ENews_Controller::getUser()) {
+    echo '<script type="text/javascript">
+            try {
+                WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout=true";
+                WDN.idm.displayNotice("'.$user->uid.'");
+            } catch(e) {}
+          </script>';
+}
+?>
 <!-- InstanceEndEditable -->
 </head>
 <body class="fixed">
@@ -46,6 +55,7 @@
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
                     <li><a href="">E-News</a></li>
+                    <li><a href="?view=submit">Submit A News Item</a></li>
                 </ul>
                 <!-- InstanceEndEditable --></div>
         </div>
