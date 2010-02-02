@@ -5,6 +5,10 @@ function autoload($class)
     include $class . '.php';
 }
 
+//Database username/password
+$db_user = 'enews';
+$db_pass = 'enews';
+    
 spl_autoload_register("autoload");
 
 set_include_path(dirname(dirname(__FILE__)).'/src'.PATH_SEPARATOR.dirname(dirname(__FILE__)).'/lib/php');
