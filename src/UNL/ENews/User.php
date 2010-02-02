@@ -25,4 +25,9 @@ class UNL_ENews_User
     {
         return $this->peoplefinder_record->$var;
     }
+    
+    function __toString()
+    {
+        return $this->uid;
+    }
 }

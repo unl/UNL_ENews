@@ -1,5 +1,5 @@
 <?php
-class UNL_ENews_Newsroom_Stories extends UNL_ENews_Record
+class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
 {
     public $newsroom_id;
     public $story_id;

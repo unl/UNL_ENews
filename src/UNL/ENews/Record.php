@@ -24,6 +24,11 @@ class UNL_ENews_Record
         if ($stmt->execute() === false) {
             throw new Exception($stmt->error);
         }
+        
+        if ($msqli->insert_id !== 0) {
+            $this->id = $msqli->insert_id;
+        }
+        
         $mysqli->close();
         return true;
     }
