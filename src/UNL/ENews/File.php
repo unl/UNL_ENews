@@ -1,5 +1,5 @@
 <?php
-class UNL_ENews_Files extends UNL_ENews_Record
+class UNL_ENews_File extends UNL_ENews_Record
 {
     public $name;
     
