@@ -22,9 +22,23 @@ WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
             <li><label for="title" class="element"><span class="required">*</span>Headline or Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
             <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></div></li>
             <li><label for="event_date" class="element"><span class="required">*</span>Date and Time:</label><div class="element"><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></div></li>
-            <li><label for="email" class="element"><span class="required">*</span>Email</label><div class="element"><input id="email" name="email" type="text" /></div></li>
-            <li><label class="element">I Can Has Cheezburger?</label><div class="element"><input name="helpful" value="1" type="radio" id="cheezyes" /><label for="cheezyes">Yes</label><input name="helpful" value="0" type="radio" id="cheezno" /><label for="cheezno">No</label></div></li>
-            <li class="reqnote"><label class="element">&nbsp;</label><span class="required">*</span> denotes required field</li>
+            <li><label for="sponsor" class="element"><span class="required">*</span>Sponsoring Unit</label><div class="element"><input id="sponsor" name="sponsor" type="text" value="<?php echo getValue($context, 'sponsor'); ?>" /></div></li>
+            <li><label for="image" class="element">Image</label><div class="element"><input id="image" name="image" type="file" /></div></li>
+            <li>
+                <label class="element">Please consider for</label>
+                <div class="element">
+                    <?php foreach (array('enews'    => 'E-News',
+                                         'unltoday' => 'UNL Today',
+                                         'scarlet'  => 'Scarlet',
+                                         'release'  => 'News Release',
+                                         'promo'    => 'Web Promo',
+                                         'nemag'    => 'NebraskaMag') as $type=>$title) :?>
+                    <input type="checkbox" name="<?php echo $type; ?>" />
+                    <label for="<?php echo $type; ?>"><?php echo $title; ?></label><br />
+                    <?php endforeach; ?>
+                </div>
+            </li>
+            <li class="reqnote"><span class="required">*</span> denotes required field</li>
         </ol>
     </fieldset>
     <p class="submit"><input type="submit" id="submit" name="submit" value="Submit" /></p>
