@@ -75,8 +75,16 @@ class UNL_ENews_Controller
      * 
      * @return UNL_ENews_User
      */
-    public static function getUser()
+    public static function getUser($forceAuth = false)
     {
+        if (self::$user) {
+            return self::$user;
+        }
+        
+        if ($forceAuth) {
+            self::authenticate();
+        }
+        
         return self::$user;
     }
     

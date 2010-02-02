@@ -28,7 +28,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         
         // Add it to the default newsroom
         $newsroom = UNL_ENews_Newsroom::getByID(1);
-        $newsroom->addStory($this, 'pending', UNL_ENews_Controller::getUser());
+        $newsroom->addStory($this, 'pending', UNL_ENews_Controller::getUser(true));
         
         return true;
     }
