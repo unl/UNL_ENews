@@ -24,4 +24,19 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         return true;
     }
+    
+    /**
+     * 
+     * @param unknown_type $id
+     * @return UNL_ENews_Story
+     */
+    public static function getByID($id)
+    {
+        if ($record = UNL_ENews_Record::getRecordByID('stories', $id)) {
+            $object = new self();
+            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            return $object;
+        }
+        return false;
+    }
 }

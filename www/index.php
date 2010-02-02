@@ -11,4 +11,4 @@ $enews = new UNL_ENews_Controller($_GET);
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
 $savvy->setTemplatePath(dirname(__FILE__).'/templates');
-$savvy->render($enews);
+echo $savvy->render($enews);
