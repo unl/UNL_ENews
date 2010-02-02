@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2010 at 04:54 PM
+-- Generation Time: Feb 02, 2010 at 05:04 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -94,4 +94,16 @@ CREATE TABLE IF NOT EXISTS `story_files` (
   `story_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`story_id`,`file_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_has_permission`
+--
+
+CREATE TABLE IF NOT EXISTS `user_has_permission` (
+  `user_uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `newsroom_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_uid`,`newsroom_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
