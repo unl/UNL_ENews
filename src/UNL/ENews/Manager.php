@@ -3,6 +3,8 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 {
     protected $actionable;
     
+    public $options = array('type'=>'pending');
+    
     function __postConstruct()
     {
         switch($this->options['type']) {
