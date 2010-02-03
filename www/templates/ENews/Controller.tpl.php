@@ -55,7 +55,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="">E-News</a></li>
+                    <li><a href="?view=latest">E-News</a></li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
                     <li><a href="?view=manager">Manage News</a></li>
                 </ul>

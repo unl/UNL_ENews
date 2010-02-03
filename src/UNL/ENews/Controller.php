@@ -7,7 +7,8 @@ class UNL_ENews_Controller
                                 'story'   => 'UNL_ENews_Story',
                                 'submit'  => 'UNL_ENews_Submission',
                                 'thanks'  => 'UNL_ENews_Confirmation',
-                                'manager' => 'UNL_ENews_Manager'
+                                'manager' => 'UNL_ENews_Manager',
+                                'file'    => 'UNL_ENews_File'
     );
     
     protected static $auth;
