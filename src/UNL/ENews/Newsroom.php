@@ -46,8 +46,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         $has_story = new UNL_ENews_Newsroom_Story();
         $has_story->newsroom_id  = $this->id;
         $has_story->story_id     = $story->id;
-        $has_story->date_created = date('Y-m-d H:i:s');
         $has_story->status       = $status;
         $has_story->uid_created  = $user->uid;
+        return $has_story->save();
     }
 }
