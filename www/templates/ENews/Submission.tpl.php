@@ -13,18 +13,19 @@ function getValue($object, $field)
 }
 ?>
 <script type="text/javascript">
-WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
+//WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
 </script>
-<div class="wdn_collapsiblePanel" id="wdn_process_step1">
-<h3>Select E-News Type</h3>
+<form class="cool" action="?view=submit" method="post">
+<fieldset class="wdn_collapsiblePanel" id="wdn_process_step1">
+<legend>Select E-News Type</legend>
 <ul>
 	<li><a href="#" id="newsAnnouncement">Is this a News announcment?</a></li>
 	<li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
 </ul>
-</div>
-<div class="wdn_collapsiblePanel" id="wdn_process_step2">
-<h3>Enter Date Details for Event</h3>
-<form class="cool" action="?view=submit" method="post">
+</fieldset>
+<fieldset class="wdn_collapsiblePanel" id="wdn_process_step2">
+<legend>Enter Date Details for Event</legend>
+
     <input type="hidden" name="_type" value="story" />
     <fieldset>
         <legend>Date of Event</legend>
@@ -32,14 +33,12 @@ WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
         	<li><label for="title" class="element"><span class="required">*</span>Date of Event</label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
         </ol>
     </fieldset>
-    <p class="submit"><input type="submit" name="submit" value="Submit" /></p>
-</form>
-</div>
-<div class="wdn_collapsiblePanel" id="wdn_process_step3">
-<h3>Give me the details</h3>
-<form class="cool" action="?view=submit" method="post">
+
+</fieldset>
+<fieldset class="wdn_collapsiblePanel" id="wdn_process_step3">
+<legend>Give me the details</legend>
     <input type="hidden" name="_type" value="story" />
-    <fieldset>
+   
         <legend>News Announcement Submission</legend>
         <ol>
             <li><label for="title" class="element"><span class="required">*</span>Headline or Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
@@ -64,16 +63,13 @@ WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
             </li>
             <li class="reqnote"><span class="required">*</span> denotes required field</li>
         </ol>
-    </fieldset>
-    <p class="submit"><input type="submit" name="submit" value="Submit" /></p>
-</form>
+    
+    
 
-<form class="cool" action="?view=submit" method="post">
-    <input type="hidden" name="_type" value="story" />
-    <fieldset>
-        <legend>Event Announcement Submission</legend>
-        <p>Pull in the event form.</p>
-    </fieldset>
-    <p class="submit"><input type="submit" name="submit" value="Submit" /></p>
+<fieldset>
+	<legend>Event Announcement Submission</legend>
+    <p>Pull in the event form.</p>
+</fieldset>
+</fieldset>
+<p class="submit"><input type="submit" name="submit" value="Submit" /></p>
 </form>
-</div>
