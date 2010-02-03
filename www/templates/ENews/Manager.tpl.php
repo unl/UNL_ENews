@@ -12,4 +12,10 @@
     <?php endif; ?></a></li>
     <?php endforeach; ?>
 </ul>
-<?php echo $savvy->render($context->actionable); ?>
+<?php
+if ($context->actionable) { 
+    echo $savvy->render($context->actionable);
+} else {
+    echo 'No gnews is good gnews with Gary Gnu.';
+}
+?>
