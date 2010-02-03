@@ -10,9 +10,9 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     
     public $website;
     
-    function getStories($type = 'pending')
+    function getStories($status = 'pending')
     {
-        
+        return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status));
     }
     
     /**

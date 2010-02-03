@@ -1,7 +1,7 @@
 <?php
 class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 {
-    protected $actionable;
+    public $actionable;
     
     public $options = array('type'=>'pending');
     
@@ -9,7 +9,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     {
         switch($this->options['type']) {
             case 'pending':
-                $this->actionable = new UNL_ENews_StoryList(array('status'=>'pending', 'newsroom_id'=>1));
+                $this->actionable = new UNL_ENews_Newsroom_Stories(array('status'=>'pending', 'newsroom_id'=>1));
                 break;
         }
     }
