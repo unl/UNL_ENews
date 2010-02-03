@@ -15,7 +15,7 @@ function getValue($object, $field)
 <script type="text/javascript">
 //WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
 </script>
-<form class="cool" action="?view=submit" method="post">
+<form class="cool" action="?view=submit" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step1">
 	<legend>Select E-News Type</legend>
 	<ul>
@@ -30,6 +30,7 @@ function getValue($object, $field)
         </ol>
 </fieldset>
 <fieldset id="wdn_process_step3">
+    <input type="hidden" name="_type" value="story" />
 	<legend>News Announcement Submission</legend>
         <ol>
             <li><label for="title" class="element"><span class="required">*</span>Headline or Title</label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>

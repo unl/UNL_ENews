@@ -47,4 +47,12 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         return false;
     }
+    
+    public function addFile(UNL_ENews_File $file)
+    {
+        $has_file = new UNL_ENews_Story_File();
+        $has_file->file_id  = $file->id;
+        $has_file->story_id = $this->id;
+        return $has_file->save();
+    }
 }

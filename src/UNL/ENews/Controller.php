@@ -96,9 +96,37 @@ class UNL_ENews_Controller
                 $class = $this->view_map[$_POST['_type']];
                 $object = new $class();
                 self::setObjectFromArray($object, $_POST);
-                $object->save();
                 // save the data
+                $object->save();
+                if (isset($_FILES['image'])
+                    && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    $file_data = $_FILES['image'];
+                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
+                    $file = new UNL_ENews_File();
+                    self::setObjectFromArray($file, $file_data);
+                    if ($file->save()) {
+                        $object->addFile($file);
+                    } else {
+                        throw new Exception('Error saving the file');
+                    }
+                } else {
+                    throw new Exception('Error saving the file');
+                }
                 header('Location: ?view=thanks&_type='.$_POST['_type']);
+                exit();
+                break;
+            case 'file':
+                $class = $this->view_map[$_POST['_type']];
+                if ($_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    $file_data = $_FILES['image'];
+                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
+                    $object = new $class();
+                    self::setObjectFromArray($object, $file_data);
+                    $object->save();
+                    header('Location: ?view=file&id='.$object->id);
+                    exit();
+                }
+                break;
         }
         throw new Exception('Invalid data submitted.');
     }
