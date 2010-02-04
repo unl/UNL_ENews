@@ -1,5 +1,109 @@
-.wdn_collapsiblePanel {
-	border:1px solid gray;
-	padding:0 10px 10px 10px;
-	margin-bottom:10px;
+#maincontent form {width: 940px;}
+#maincontent h3 {
+	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
+	padding:5px 10px;
+	border:1px solid #dadde3;
+	border-top:1px solid #fff;
+	border-bottom:1px solid #ccc;
+	font-size:1.5em;
+	color:#999;
+}
+#maincontent h3 span {
+	background:#fff;
+	padding:1px 4px 1px 4px;
+	border-radius:10x;	
+	margin-right:10px;
+	margin-top:0px;
+	font-size:12px;
+	float:left;
+	font-weight:bold;
+	border:1px solid #fff;
+}
+#maincontent fieldset {
+	background:#f7f7f7;
+	padding:10px 10px 0px 10px;
+	margin:0px;
+}
+/*Styles for the displayed interface*/
+#maincontent h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
+#maincontent h3.highlighted span {
+	border:1px solid #e19c2b;
+	background:#de8727;
+	color:#fff;
+}
+#maincontent h3.highlighted + fieldset, #maincontent h3.highlighted + fieldset + fieldset {
+	border:1px solid #b8afa1;
+	border-top:none;
+	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
+}
+/*End styles for the displayed interface*/
+
+/*Form Styles */
+#maincontent legend { 
+	display:none;
+}
+fieldset ol {
+	margin-top:15px;
+	margin-left:-12px;	
+}
+fieldset ol li {
+	list-style:none;
+	padding:5px 20px;	
+}
+fieldset ol li label {
+	font-size:1.1em;
+}
+fieldset ol li input, fieldset ol li textarea {
+	border:1px solid #b8afa1;
+	color:#5f5f5f;
+}
+fieldset ol li input[type=text], fieldset ol li textarea {
+	width:400px;
+	font-size:1.1em;
+	padding:5px;
+	}
+fieldset ol li .required {
+	position:absolute;
+	left:10px;
+	text-indent:-9999px;
+	margin-top:-15px;
+	background:url('images/requiredIndicator.png') no-repeat top right;
+	width:40px;
+	height:20px;
+	display:block;
+}
+/* First option */
+.option_step {
+	list-style:none;
+	text-align:center;
+	margin:0px;
+	padding:0px;	
+}
+.option_step li {
+	display:inline;
+	margin:40px;
+	float:left;
+}
+.option_step li a {
+	display:block;
+	width:350px;
+	height:155px;
+	border:1px solid #b8afa1;
+	border-radius:5px;
+}
+.option_step li a:hover {
+	background:#ded2c0;
+	border-color:#9f9483;	
+}
+/* End First option */
+/*deal with nested elements */
+
+/*to move to scripts CSS */
+#maincontent h3 span {
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+.option_step li a  {
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;	
 }
