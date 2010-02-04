@@ -12,17 +12,10 @@ function getValue($object, $field)
     return '';
 }
 ?>
-<<<<<<< .mine
-<form action="?view=submit" method="post">
+
+<form action="?view=submit" method="post" enctype="multipart/form-data">
 <h3><span>1</span>Select E-News Type</h3>
 <fieldset id="wdn_process_step1" style="display:none;">
-=======
-<script type="text/javascript">
-//WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
-</script>
-<form class="cool" action="?view=submit" method="post" enctype="multipart/form-data">
-<fieldset id="wdn_process_step1">
->>>>>>> .r36
 	<legend>Select E-News Type</legend>
 	<ol class="option_step">
 		<li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
