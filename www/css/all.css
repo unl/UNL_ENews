@@ -8,6 +8,9 @@
 	font-size:1.5em;
 	color:#999;
 }
+#maincontent h3:first-of-type {
+	border-top:1px solid #dadde3;	
+}
 #maincontent h3 span {
 	background:#fff;
 	padding:1px 4px 1px 4px;
@@ -24,7 +27,9 @@
 	padding:10px 10px 0px 10px;
 	margin:0px;
 }
+
 /*Styles for the displayed interface*/
+
 #maincontent h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
 #maincontent h3.highlighted span {
 	border:1px solid #e19c2b;
@@ -39,71 +44,100 @@
 /*End styles for the displayed interface*/
 
 /*Form Styles */
-#maincontent legend { 
+#enews legend { 
 	display:none;
 }
-fieldset ol {
+#enews fieldset ol {
 	margin-top:15px;
 	margin-left:-12px;	
 }
-fieldset ol li {
+#enews fieldset ol li {
 	list-style:none;
-	padding:5px 20px;	
+	padding:5px 20px;
+	width:400px;	
 }
-fieldset ol li label {
-	font-size:1.1em;
+#enews fieldset ol li label {
+	font-size:1.3em;
 }
-fieldset ol li input, fieldset ol li textarea {
+#enews fieldset ol li input, #enews fieldset ol li textarea {
 	border:1px solid #b8afa1;
 	color:#5f5f5f;
 }
-fieldset ol li input[type=text], fieldset ol li textarea {
-	width:400px;
+#enews fieldset ol li input[type=text], #enews fieldset ol li textarea {
+	width:100%;
 	font-size:1.1em;
 	padding:5px;
 	}
-fieldset ol li .required {
+#enews fieldset ol li .required {
 	position:absolute;
-	left:10px;
+	left:8px;
 	text-indent:-9999px;
-	margin-top:-15px;
+	margin-top:-17px;
 	background:url('images/requiredIndicator.png') no-repeat top right;
 	width:40px;
 	height:20px;
 	display:block;
 }
+#enews fieldset ol li .helper{
+	font-size:.6em;
+	color: #7c7c7c;
+	padding-left:15px;
+	line-height:1.3em;
+}
 /* First option */
-.option_step {
+#enews .option_step {
 	list-style:none;
 	text-align:center;
-	margin:0px;
-	padding:0px;	
+	margin:0px;	
 }
-.option_step li {
+#enews .option_step li {
 	display:inline;
 	margin:40px;
 	float:left;
+	padding:0;
+	width:340px;
 }
-.option_step li a {
+#enews .option_step li a {
 	display:block;
 	width:350px;
 	height:155px;
 	border:1px solid #b8afa1;
 	border-radius:5px;
+	text-indent:-9999px;
 }
-.option_step li a:hover {
-	background:#ded2c0;
+#enews .option_step li a#newsAnnouncement {
+	background: #f8f3e4 url('images/typeIconNews.png') no-repeat center;
+}
+#enews .option_step li a#eventAnnouncement {
+	background: #f8f3e4 url('images/typeIconEvent.png') no-repeat center;
+}
+#enews .option_step li a#newsAnnouncement:hover {
+	background: #f5e7bc url('images/typeIconNews_hover.png') no-repeat center;
 	border-color:#9f9483;	
 }
-/* End First option */
-/*deal with nested elements */
+#enews .option_step li a#eventAnnouncement:hover {
+	background: #f5e7bc url('images/typeIconEvent_hover.png') no-repeat center;
+	border-color:#9f9483;	
+}
+/* The display sample*/
+#wdn_process_step3 ol {
+	float:left;	
+}
+#sampleLayout {
+	float:left;	
+	margin:20px 10px 0px 40px;
+	border:1px solid #b8afa1;
+	padding:10px;
+	background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
+	width:375px;
+}
 
 /*to move to scripts CSS */
 #maincontent h3 span {
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 }
-.option_step li a  {
+#enews .option_step li a  {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;	
 }

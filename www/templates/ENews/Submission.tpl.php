@@ -12,10 +12,10 @@ function getValue($object, $field)
     return '';
 }
 ?>
-
-<form action="?view=submit" method="post" enctype="multipart/form-data">
-<h3><span>1</span>Select E-News Type</h3>
-<fieldset id="wdn_process_step1" style="display:none;">
+<script type="text/javascript" src="js/functions.js"></script>
+<form id="enews" action="?view=submit" method="post" enctype="multipart/form-data">
+<h3 class="highlighted"><span>1</span>Select E-News Type</h3>
+<fieldset id="wdn_process_step1">
 	<legend>Select E-News Type</legend>
 	<ol class="option_step">
 		<li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
@@ -26,17 +26,17 @@ function getValue($object, $field)
 <fieldset id="wdn_process_step2" style="display:none;">
 	<legend><span>Enter Date Details for Event</span></legend>
         <ol>
-        	<li><label for="title" class="element"><span class="required">*</span>Date of Event</label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
+        	<li><label for="date" class="element"><span class="required">*</span>Date of Event</label><div class="element"><input id="date" name="date" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
         </ol>
 </fieldset>
-<h3 class="highlighted"><span>3</span>Announcement Submission</h3>
+<h3><span>3</span>Announcement Submission</h3>
 <fieldset id="wdn_process_step3">
 	<legend><span>News Announcement Submission</span></legend>
     <input type="hidden" name="_type" value="story" />
         <ol>
-            <li><label for="title" class="element">Headline or Title<span class="required">*</span></label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
+            <li><label for="title" class="element">Headline or Title<span class="required">*</span><span class="helper">This is helper text.</span></label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
             <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></div></li>
-            <li><label for="event_date" class="element">Date and Time<span class="required">*</span></label><div class="element"><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></div></li>
+            <li><label for="event_date" class="element">Date and Time<span class="required">*</span><span class="helper">This is some helper text.</span></label><div class="element"><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></div></li>
             <li><label for="website" class="element">Website</label><div class="element"><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></div></li>
             <li><label for="sponsor" class="element">Sponsoring Unit<span class="required">*</span></label><div class="element"><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></div></li>
             <li><label for="image" class="element">Image</label><div class="element"><input id="image" name="image" type="file" /></div></li>
@@ -55,20 +55,14 @@ function getValue($object, $field)
                 </div>
             </li>
         </ol>
+	<div id="sampleLayout">
+		<h4>This is the Title</h4>
+		<p>This is the text for the article.</p>
+	</div>
 </fieldset>
-<fieldset>
+<fieldset id="wdn_process_step3b" style="display:none;">
 	<legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
 </fieldset>
 <p class="submit"><input type="submit" name="submit" value="Submit" /></p>
 </form>
-
-<script type="text/javascript">
-//WDN.loadCSS('http://www.unl.edu/wdn/templates_3.0/css/content/forms.css');
-WDN.jQuery(document).ready(function() { 
-	alert("yeah");
-	WDN.jQuery('legend span').width(
-			WDN.jQuery(this).parent('form').width();
-	);
-});
-</script>
