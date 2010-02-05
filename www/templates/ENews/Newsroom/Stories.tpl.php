@@ -53,4 +53,10 @@
         </select>
     </fieldset>
 </div>
+<input class="btnsubmit" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
+<?php if ($parent->context->options['type']=='posted' || $parent->context->options['type']=='archived') { ?>
+<input class="btnsubmit" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
+<?php } elseif ($parent->context->options['type']=='pending') { ?>
+<input class="btnsubmit" id="moveto_posted" type="submit" name="posted" value="Add to Approved" />
+<?php } ?>
 </form>
