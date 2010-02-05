@@ -102,8 +102,8 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             } elseif (isset($_POST['pending'])) {
                 $has_story->status = 'pending';
                 return $has_story->save();
-            } elseif (isset($_POST['posted'])) {
-                $has_story->status = 'posted';
+            } elseif (isset($_POST['approved'])) {
+                $has_story->status = 'approved';
                 return $has_story->save();
             }
         } else {
