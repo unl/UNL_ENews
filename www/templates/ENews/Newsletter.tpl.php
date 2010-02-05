@@ -22,8 +22,8 @@
                         <tr>
                             <td style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
                                 <!-- This is the main content -->
-                                <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;margin-bottom:1em;">Email Title</h1>
-                                <p style="margin:1.1em 0;"><strong>Dear Seth</strong>:</p>
+                                <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;">UNL Today</h1>
+                                <p style="margin:0;font-size:.9em;color:#909090;">Tuesday, March 3, 2010</p>
                                 <?php foreach ($context->stories as $story): ?>
                                 <p style="margin:1.1em 0;">Title: <?php echo $story->title; ?><br /><?php echo $story->description; ?></p>
                                 <?php endforeach; ?>
@@ -32,8 +32,11 @@
                         <tr background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png)">
                             <td style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;">
                                 <!--  This the footer -->
-                                <p style="margin-top:95px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />&copy; 2010 Nebraska Alumni Association | 1520 R Street, Lincoln, NE 68501 | 888-353-1874 <br /> <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Comments</a> | 
-                                    <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Privacy Policy</a> | <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Email Preferences</a> | <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Unsubscribe</a></p>
+                                <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
+                                &copy; 2010 University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-7211 <br />
+                                This email produced and distributed by <a href="http://ucomm.unl.edu/" title="go to the University Communications">University Communications</a>
+                                <br /> <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+                                </p>
                             </td>
                         </tr>
                     </table>

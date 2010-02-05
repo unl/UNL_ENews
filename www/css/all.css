@@ -66,9 +66,10 @@
 #enews fieldset ol li input[type=text], #enews fieldset ol li input[type=file], #enews fieldset ol li textarea, #enews fieldset ol li select {
 	width:100%;
 	font-size:1.1em;
+}
+#enews fieldset ol li input[type=text], #enews fieldset ol li input[type=file], #enews fieldset ol li textarea {
 	padding:5px;
 }
-#enews fieldset ol li select option {font-size:1.1em;}
 #enews fieldset ol li .required {
 	position:absolute;
 	left:8px;
