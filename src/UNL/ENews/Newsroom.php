@@ -41,7 +41,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Users(array('newsroom_id'=>$this->id));
     }
     
-    function addStory(UNL_ENews_Story $story, $status = 'posted', UNL_ENews_User $user)
+    function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user)
     {
         $has_story = new UNL_ENews_Newsroom_Story();
         $has_story->newsroom_id  = $this->id;
