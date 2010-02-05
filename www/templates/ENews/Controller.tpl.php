@@ -22,7 +22,7 @@
 <?php virtual('/wdn/templates_3.0/includes/browserspecifics.html'); ?>
 <?php virtual('/wdn/templates_3.0/includes/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>UNL | Department | New Page</title>
+<title>UNL | E-Newsroom</title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
@@ -49,7 +49,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
             <!-- InstanceBeginEditable name="breadcrumbs" -->
             <ul>
                 <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-                <li>Department</li>
+                <li>E-Newsroom</li>
             </ul>
             <!-- InstanceEndEditable --></div>
         <div id="wdn_navigation_wrapper">
@@ -65,7 +65,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
     </div>
     <div id="wdn_content_wrapper">
         <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
-            <h1>Department</h1>
+            <h1>E-Newsroom</h1>
             <!-- InstanceEndEditable --></div>
         <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" --> <!-- InstanceEndEditable --></div>
         <div id="maincontent">
