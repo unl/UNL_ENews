@@ -46,7 +46,7 @@ function getValue($object, $field)
     <input type="hidden" name="_type" value="story" />
         <ol>
             <li><label for="title">Headline or Title<span class="required">*</span><span class="helper">This is helper text.</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></li>
-            <li><label for="description">Description</label><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></li>
+            <li><label for="description">Description<span class="helper">You have <strong>300</strong> characters remaining.</label><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></li>
             <li><label for="event_date">Date and Time<span class="required">*</span><span class="helper">This is some helper text.</span></label><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></li>
             <li><label for="website">Website</label><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
