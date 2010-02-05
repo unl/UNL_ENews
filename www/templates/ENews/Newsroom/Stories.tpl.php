@@ -17,24 +17,24 @@
     </fieldset>
 </div>
 <table class="storylisting">
-<thead>
-<tr>
-<th scope="col" class="select">Select</th>
-<th scope="col" class="title"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=title">Headline</a></th>
-<th scope="col" class="date"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=starttime">Date</a></th>
-<th scope="col" class="edit">Edit</th>
-</tr>
-</thead>
-<tbody>
-<?php foreach ($context as $item) : ?>
-    <tr id="row<?php echo $item->id; ?>">
-        <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
-        <td><?php echo $item->title; ?></td>
-        <td><?php echo $item->event_date; ?></td>
-        <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
-    </tr>
-<?php endforeach; ?>
-</tbody>
+    <thead>
+        <tr>
+            <th scope="col" class="select">Select</th>
+            <th scope="col" class="title"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=title">Headline</a></th>
+            <th scope="col" class="date"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=starttime">Date</a></th>
+            <th scope="col" class="edit">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($context as $item) : ?>
+        <tr id="row<?php echo $item->id; ?>">
+            <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
+            <td><?php echo $item->title; ?></td>
+            <td><?php echo $item->event_date; ?></td>
+            <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
 </table>
 <div class="storyAction">
     <div class="storyButtonAction">
