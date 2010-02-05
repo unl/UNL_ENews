@@ -26,38 +26,53 @@ function getValue($object, $field)
 <fieldset id="wdn_process_step2" style="display:none;">
 	<legend><span>Enter Date Details for Event</span></legend>
         <ol>
-        	<li><label for="date" class="element"><span class="required">*</span>Date of Event</label><div class="element"><input id="date" name="date" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
+        	<li>
+        		<label for="date">Date of Event<span class="required">*</span></label>
+				<input id="date" name="date" type="text" value="<?php echo getValue($context, 'title'); ?>" />
+			</li>
+        	<li>
+        		<label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu</label>
+				<select id="event">
+					<option value="NewEvent">New Event</option>
+					<option value="EventID1">Red Letter Day (Friday, March 3, 2009)</option>
+				</select>
+			</li>
         </ol>
+        <a href="#" id="next_step3">Continue</a>
 </fieldset>
 <h3><span>3</span>Announcement Submission</h3>
-<fieldset id="wdn_process_step3">
+<fieldset id="wdn_process_step3" style="display:none;">
 	<legend><span>News Announcement Submission</span></legend>
     <input type="hidden" name="_type" value="story" />
         <ol>
-            <li><label for="title" class="element">Headline or Title<span class="required">*</span><span class="helper">This is helper text.</span></label><div class="element"><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></div></li>
-            <li><label for="description" class="element">Description</label><div class="element"><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></div></li>
-            <li><label for="event_date" class="element">Date and Time<span class="required">*</span><span class="helper">This is some helper text.</span></label><div class="element"><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></div></li>
-            <li><label for="website" class="element">Website</label><div class="element"><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></div></li>
-            <li><label for="sponsor" class="element">Sponsoring Unit<span class="required">*</span></label><div class="element"><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></div></li>
-            <li><label for="image" class="element">Image</label><div class="element"><input id="image" name="image" type="file" /></div></li>
+            <li><label for="title">Headline or Title<span class="required">*</span><span class="helper">This is helper text.</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></li>
+            <li><label for="description">Description</label><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></li>
+            <li><label for="event_date">Date and Time<span class="required">*</span><span class="helper">This is some helper text.</span></label><input id="event_date" name="event_date" type="text" size="10"  value="<?php echo getValue($context, 'event_date'); ?>" /></li>
+            <li><label for="website">Website</label><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></li>
+            <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
+            <li><label for="image">Image</label><input id="image" name="image" type="file" /></li>
             <li>
-                <label class="element">Please consider for</label>
-                <div class="element">
+            	<fieldset>
+                <legend>Please consider for </legend> 
+					<ol>              
                     <?php foreach (array('enews'    => 'E-News',
                                          'unltoday' => 'UNL Today',
                                          'scarlet'  => 'Scarlet',
                                          'release'  => 'News Release',
                                          'promo'    => 'Web Promo',
                                          'nemag'    => 'NebraskaMag') as $type=>$title) :?>
-                    <input type="checkbox" name="<?php echo $type; ?>" />
-                    <label for="<?php echo $type; ?>"><?php echo $title; ?></label><br />
+                    <li>
+                    	<input type="checkbox" name="<?php echo $type; ?>" />
+                    	<label for="<?php echo $type; ?>"><?php echo $title; ?></label>
+                    </li>
                     <?php endforeach; ?>
-                </div>
+                    </ol>
+                    </fieldset>
             </li>
         </ol>
 	<div id="sampleLayout">
-		<h4>This is the Title</h4>
-		<p>This is the text for the article.</p>
+		<h4>&lt;Enter Your Title&gt;</h4>
+		<p>&lt;Enter Your Article Text&gt;</p>
 	</div>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
