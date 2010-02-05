@@ -17,7 +17,7 @@
         </select>
     </fieldset>
 </div>
-<table class="storylisting">
+<table class="storylisting zentable energetic" >
     <thead>
         <tr>
             <th scope="col" class="select">Select</th>
