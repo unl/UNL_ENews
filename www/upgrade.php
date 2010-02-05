@@ -15,4 +15,12 @@ if (UNL_ENews_Newsroom::getByID(1) === false) {
     $newsroom->save();
 }
 
+// @todo add a newsroom for all the others here, unltoday, scarlet, etc?
+//if (UNL_ENews_Newsroom::getByID(2) === false) {
+//    $newsroom            = new UNL_ENews_Newsroom();
+//    $newsroom->name      = 'UNL E-News';
+//    $newsroom->shortname = 'enews';
+//    $newsroom->save();
+//}
+
 echo 'Upgrade complete!';
