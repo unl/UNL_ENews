@@ -1,7 +1,11 @@
 <?php
-class UNL_ENews_User
+class UNL_ENews_User extends UNL_ENews_Record
 {
     public $uid;
+    
+    public $newsroom_id = 1;
+    
+    public $last_login;
     
     /**
      * the peoplefinder object for this person.
@@ -21,9 +25,20 @@ class UNL_ENews_User
         $this->peoplefinder_record = $pf->getUID($this->uid);
     }
     
+    function getTable()
+    {
+        return 'users';
+    }
+    
     function __get($var)
     {
-        return $this->peoplefinder_record->$var;
+        switch($var) {
+            case 'newsroom':
+                return UNL_ENews_Newsroom::getByID($this->newsroom_id);
+            break;
+            default:
+                return $this->peoplefinder_record->$var;
+        }
     }
     
     function __toString()

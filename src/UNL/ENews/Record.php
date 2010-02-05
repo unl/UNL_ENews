@@ -1,12 +1,55 @@
 <?php
 class UNL_ENews_Record
 {
-    function save()
+    protected function prepareInsertSQL(&$sql)
     {
         $sql = 'INSERT INTO '.$this->getTable();
         $fields = get_object_vars($this);
         $sql .= '('.implode(',', array_keys($fields)).')';
         $sql .= ' VALUES ('.str_repeat('?,',count($fields)-1).'?)';
+        return $fields;
+    }
+    
+    function prepareUpdateSQL(&$sql)
+    {
+        $sql = 'UPDATE '.$this->getTable().' ';
+        $fields = get_object_vars($this);
+     
+        $sql .= 'SET '.implode('=?,', array_keys($fields)).'=? ';
+        
+        $sql .= 'WHERE ';
+        foreach ($this->keys() as $key) {
+            $sql .= $key.'=? AND ';
+        }
+        $sql = substr($sql, 0, -4);
+
+        return $fields;
+    }
+    
+    function keys()
+    {
+        return array(
+            'id',
+        );
+    }
+    
+    function save()
+    {
+        $key_set = true;
+        
+        foreach ($this->keys() as $key) {
+            if (empty($this->$key)) {
+                $key_set = false;
+            }
+        }
+        
+        $sql = '';
+        
+        if (!$key_set) {
+            $fields = $this->prepareInsertSQL($sql);
+        } else {
+            $fields = $this->prepareUpdateSQL($sql);
+        }
         
         $mysqli = UNL_ENews_Controller::getDB();
 
@@ -19,7 +62,15 @@ class UNL_ENews_Record
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
         }
-
+        
+        if ($key_set) {
+            // We're doing an update, so add in the keys!
+            $values[0] .= $this->getTypeString($this->keys());
+            foreach ($this->keys() as $key) {
+                $values[] =& $this->$key;
+            }
+        }
+        
         call_user_func_array(array($stmt, 'bind_param'), $values);
         if ($stmt->execute() === false) {
             throw new Exception($stmt->error);

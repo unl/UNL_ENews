@@ -130,7 +130,6 @@ class UNL_ENews_Controller
                 }
                 break;
         }
-        throw new Exception('Invalid data submitted.');
     }
     
     function filterPostValues()

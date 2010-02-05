@@ -1,4 +1,5 @@
-<form method="post" action="?view=manage&amp;type=<?php echo $parent->context->options['type']; ?>">
+<form method="post" action="?view=manager&amp;type=<?php echo $parent->context->options['status']; ?>">
+<input type="hidden" name="_type" value="change_status" />
 <div class="storyAction">
     <div class="storyButtonAction">
         <a href="#" class="checkall" onclick="setCheckboxes('formlist',true); return false">Check All</a>
@@ -9,7 +10,7 @@
         <label for="storyaction">Action</label> 
         <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['type']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <option value="posted"    disabled="disabled">Add to Posted</option>
+            <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
             <option value="recommend" disabled="disabled">Recommend</option>
             <option value="delete"    disabled="disabled">Delete</option>
@@ -28,7 +29,7 @@
     <tbody>
     <?php foreach ($context as $item) : ?>
         <tr id="row<?php echo $item->id; ?>">
-            <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
+            <td><input type="checkbox" name="story_<?php echo $item->id; ?>" onclick="checknegate()" /></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo $item->event_date; ?></td>
             <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
@@ -46,7 +47,7 @@
         <label for="storyaction">Action</label> 
         <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['type']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <option value="posted"    disabled="disabled">Add to Posted</option>
+            <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
             <option value="recommend" disabled="disabled">Recommend</option>
             <option value="delete"    disabled="disabled">Delete</option>
@@ -54,9 +55,9 @@
     </fieldset>
 </div>
 <input class="btnsubmit" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
-<?php if ($parent->context->options['type']=='posted' || $parent->context->options['type']=='archived') { ?>
+<?php if ($parent->context->options['status']=='approved' || $parent->context->options['status']=='archived') { ?>
 <input class="btnsubmit" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
-<?php } elseif ($parent->context->options['type']=='pending') { ?>
-<input class="btnsubmit" id="moveto_posted" type="submit" name="posted" value="Add to Approved" />
+<?php } elseif ($parent->context->options['status']=='pending') { ?>
+<input class="btnsubmit" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
 <?php } ?>
 </form>

@@ -1,16 +1,132 @@
 <?php
 class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 {
-    public $actionable;
+    public $actionable = array();
     
-    public $options = array('type'=>'pending');
+    public $options = array('status'=>'pending');
     
     function __postConstruct()
     {
-        switch($this->options['type']) {
-            case 'pending':
-                $this->actionable = new UNL_ENews_Newsroom_Stories(array('status'=>'pending', 'newsroom_id'=>1));
+        if (!empty($_POST)) {
+            try {
+                $this->handlePost();
+            } catch(Exception $e) {
+                $this->actionable[] = $e;
+            }
+        }
+        $this->run();
+    }
+    
+    function handlePost()
+    {
+        switch($_POST['_type']) {
+            case 'change_status':
+                $this->processPostedStories();
                 break;
         }
+    }
+    
+    function run()
+    {
+        switch($this->options['status']) {
+            case 'pending':
+            case 'posted':
+            case 'approved':
+            case 'archived':
+                $this->actionable[] = new UNL_ENews_Newsroom_Stories(array('status'      => $this->options['status'],
+                                                                           'newsroom_id' => $this->newsroom->id));
+                break;
+        }
+    }
+    
+    /**
+     * Runs actions on the posted stories.
+     *
+     * @return bool
+     */
+    public function processPostedStories()
+    {
+        $stories         = self::getPostedStories();
+        $stories_changed = false;
+        if (count($stories)) {
+            foreach ($stories as $story) {
+                if ($this->processPostStatusChange($story)) {
+                    $stories_changed = true;
+                }
+            }
+        }
+        return $stories_changed;
+    }
+    
+    /**
+     * This function returns an array of all posted stories.
+     * stories should be posted in the form story_1923 Where 1923 is
+     * the ID of the story.
+     *
+     * @return array(UNL_ENews_StoryList)
+     */
+    static public function getPostedStories()
+    {
+        $stories = array();
+        foreach ($_POST as $key=>$value) {
+            $matches = array();
+            if (preg_match('/story_([\d]+)/', $key, $matches)) {
+                $stories[] = $matches[1];
+            }
+        }
+        return new UNL_ENews_StoryList($stories);
+    }
+    
+    /**
+     * Handles the posting of an updated story. This will alter the story's status
+     * based on what the user chose within the manager interface.
+     *
+     * @param UNL_UCBCN_Story $story  Story to update.
+     * @param string          $source Source of this change in status.
+     *
+     * @return bool
+     */
+    function processPostStatusChange($story, $source='search')
+    {
+        if ($has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id)) {
+
+            // This event date time combination was selected... find out what they chose.
+            if (isset($_POST['delete'])) {
+                // User has chosen to delete the story selected, and has permission to delete the story.
+                if ($has_story->source == 'create story form') {
+                    // This is the newsroom the story was originally created on, delete from the entire system.
+                    return $story->delete();
+                }
+                // Remove the story from this newsroom
+                return $has_story->delete();
+            } elseif (isset($_POST['pending'])) {
+                $has_story->status = 'pending';
+                return $has_story->save();
+            } elseif (isset($_POST['posted'])) {
+                $has_story->status = 'posted';
+                return $has_story->save();
+            }
+        } else {
+            $has_story = new UNL_ENews_Newsroom_Story();
+            if (isset($_POST['pending'])) {
+                $has_story->status = 'pending';
+                $has_story->source = $source;
+                return $has_story->save();
+            } elseif (isset($_POST['approved'])) {
+                $has_story->status = 'approved';
+                $has_story->source = $source;
+                return $has_story->save();
+            }
+        }
+        return false;
+    }
+    
+    function __get($var)
+    {
+        switch($var) {
+            case 'newsroom':
+                return UNL_ENews_Controller::getUser(true)->newsroom;
+        }
+        return false;
     }
 }

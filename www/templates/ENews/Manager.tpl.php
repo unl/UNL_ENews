@@ -1,15 +1,12 @@
 <ul class="wdn_tabs disableSwitching">
     <?php foreach (array('pending', 'approved', 'archived') as $type):
     $class = '';
-    if ($context->options['type'] == $type) {
+    if ($context->options['status'] == $type) {
         $class = ' class="selected"';
     }
     ?>
-    <li <?php echo $class; ?>><a href="?view=manager&amp;type=<?php echo $type; ?>"><?php echo ucfirst($type);
-    if ($context->options['type'] == $type
-        && count($context->actionable)): ?>
-        <sup><?php echo count($context->actionable); ?></sup>
-    <?php endif; ?></a></li>
+    <li <?php echo $class; ?>><a href="?view=manager&amp;status=<?php echo $type; ?>"><?php echo ucfirst($type); ?>
+        <sup><?php echo count($context->newsroom->getStories($type)); ?></sup></a></li>
     <?php endforeach; ?>
 </ul>
 <?php
