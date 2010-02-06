@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `files` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `newsletter`
+-- Table structure for table `newsletters`
 --
 
-CREATE TABLE IF NOT EXISTS `newsletter` (
+CREATE TABLE IF NOT EXISTS `newsletters` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `newsroom_id` int(10) unsigned NOT NULL,
   `release_date` datetime NOT NULL,
