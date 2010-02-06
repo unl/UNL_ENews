@@ -64,4 +64,17 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
+    
+    function delete()
+    {
+        foreach ($this->getFiles() as $file) {
+            $file->delete();
+        }
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = 'DELETE FROM newsroom_stories WHERE story_id = '.intval($this->id);
+        $mysqli->query($sql);
+        $sql = 'DELETE FROM newsletter_stories WHERE story_id = '.intval($this->id);
+        $mysqli->query($sql);
+        return parent::delete();
+    }
 }
