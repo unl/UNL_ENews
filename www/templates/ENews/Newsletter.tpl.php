@@ -25,7 +25,15 @@
                                 <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;">UNL Today</h1>
                                 <p style="margin:0;font-size:.9em;color:#909090;">Tuesday, March 3, 2010</p>
                                 <?php foreach ($context->stories as $story): ?>
-                                <p style="margin:1.1em 0;">Title: <?php echo $story->title; ?><br /><?php echo $story->description; ?></p>
+                                <p style="margin:1.1em 0;">Title: <?php echo $story->title; ?><br /><?php echo $story->description; ?>
+                                    <?php
+                                    foreach ($story->getFiles() as $file) {
+                                        if (preg_match('/^image/', $file->type)) {
+                                            echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:120px" />';
+                                        }
+                                    }
+                                    ?>
+                                </p>
                                 <?php endforeach; ?>
                           </td>
                         </tr>

@@ -20,6 +20,16 @@ class UNL_ENews_File extends UNL_ENews_Record
         }
     }
     
+    static public function getById($id)
+    {
+        if ($record = self::getRecordByID('files', $id)) {
+            $object = new self();
+            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            return $object;
+        }
+        return false;
+    }
+    
     function getTable()
     {
         return 'files';
