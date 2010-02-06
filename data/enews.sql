@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 05, 2010 at 11:59 AM
+-- Generation Time: Feb 05, 2010 at 09:24 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `size` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
   `intro` mediumtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `newsroom_id` (`newsroom_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `newsrooms` (
   `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `newsroom_stories` (
   `uid_created` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_created` datetime NOT NULL,
   `status` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `source` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`newsroom_id`,`story_id`),
   KEY `status` (`status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `date_submitted` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `title` (`title`,`event_date`,`uid_created`,`date_submitted`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -124,6 +125,19 @@ CREATE TABLE IF NOT EXISTS `story_files` (
   `story_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`story_id`,`file_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `uid` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `newsroom_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
