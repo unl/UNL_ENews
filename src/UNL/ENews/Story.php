@@ -23,12 +23,13 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $result = parent::save();
         
         if (!$result) {
-            throw new Exception('Error saving your application.');
+            throw new Exception('Error saving your story.');
         }
         
         // Add it to the default newsroom
-        $newsroom = UNL_ENews_Newsroom::getByID(1);
-        $newsroom->addStory($this, 'pending', UNL_ENews_Controller::getUser(true));
+        if (!UNL_ENews_Controller::getUser(true)->newsroom->addStory($this, 'pending', UNL_ENews_Controller::getUser(true))) {
+            throw new Exception('Could not add the story to the default newsroom');
+        }
         
         return true;
     }

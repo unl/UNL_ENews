@@ -36,25 +36,19 @@ class UNL_ENews_Record
     function save()
     {
         $key_set = true;
-        
+
         foreach ($this->keys() as $key) {
             if (empty($this->$key)) {
                 $key_set = false;
             }
         }
-        
+
         $sql = '';
-        
+
         if (!$key_set) {
             $fields = $this->prepareInsertSQL($sql);
         } else {
             $fields = $this->prepareUpdateSQL($sql);
-        }
-        
-        $mysqli = UNL_ENews_Controller::getDB();
-
-        if (!$stmt = $mysqli->prepare($sql)) {
-            echo $mysqli->error;
         }
 
         $values = array();
@@ -71,17 +65,58 @@ class UNL_ENews_Record
             }
         }
         
+        return $this->prepareAndExecute($sql, $values);
+    }
+    
+    function insert()
+    {
+        $sql = '';
+        $fields = $this->prepareInsertSQL($sql);
+        $values = array();
+        $values[] = $this->getTypeString(array_keys($fields));
+        foreach ($fields as $key=>$value) {
+            $values[] =& $this->$key;
+        }
+        return $this->prepareAndExecute($sql, $values);
+    }
+    
+    function update()
+    {
+        $sql = '';
+        $fields = $this->prepareUpdateSQL($sql);
+        $values = array();
+        $values[] = $this->getTypeString(array_keys($fields));
+        foreach ($fields as $key=>$value) {
+            $values[] =& $this->$key;
+        }
+        // We're doing an update, so add in the keys!
+        $values[0] .= $this->getTypeString($this->keys());
+        foreach ($this->keys() as $key) {
+            $values[] =& $this->$key;
+        }
+        return $this->prepareAndExecute($sql, $values);
+    }
+
+    protected function prepareAndExecute($sql, $values)
+    {
+        $mysqli = UNL_ENews_Controller::getDB();
+
+        if (!$stmt = $mysqli->prepare($sql)) {
+            echo $mysqli->error;
+        }
+
         call_user_func_array(array($stmt, 'bind_param'), $values);
         if ($stmt->execute() === false) {
             throw new Exception($stmt->error);
         }
-        
+
         if ($mysqli->insert_id !== 0) {
             $this->id = $mysqli->insert_id;
         }
-        
+
         $mysqli->close();
         return true;
+
     }
     
     function getTypeString($fields)
