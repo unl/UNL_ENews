@@ -93,7 +93,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             // This event date time combination was selected... find out what they chose.
             if (isset($_POST['delete'])) {
                 // User has chosen to delete the story selected, and has permission to delete the story.
-                if ($has_story->source == 'create story form') {
+                if ($has_story->source == 'submit form') {
                     // This is the newsroom the story was originally created on, delete from the entire system.
                     return $story->delete();
                 }

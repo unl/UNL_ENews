@@ -27,7 +27,10 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         
         // Add it to the default newsroom
-        if (!UNL_ENews_Controller::getUser(true)->newsroom->addStory($this, 'pending', UNL_ENews_Controller::getUser(true))) {
+        if (!UNL_ENews_Controller::getUser(true)->newsroom->addStory($this,
+                                                                     'pending',
+                                                                     UNL_ENews_Controller::getUser(true),
+                                                                     'submit form')) {
             throw new Exception('Could not add the story to the default newsroom');
         }
         

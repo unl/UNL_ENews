@@ -6,6 +6,7 @@ class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
     public $uid_created;
     public $date_created;
     public $status;
+    public $source;
     
     function keys()
     {

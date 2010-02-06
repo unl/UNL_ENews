@@ -125,6 +125,8 @@ class UNL_ENews_Record
         foreach ($fields as $name) {
             switch($name) {
                 case 'id':
+                case 'newsroom_id':
+                case 'file_id':
                 case 'story_id':
                 case 'length':
                     $types .= 'i';
@@ -164,12 +166,18 @@ class UNL_ENews_Record
     
     function delete()
     {
-        if (!empty($this->id)) {
-            $mysqli = UNL_ENews_Controller::getDB();
-            $sql = "DELETE FROM ".$this->getTable()." WHERE id = ".intval($this->id).' LIMIT 1;';
-            if ($result = $mysqli->query($sql)) {
-                return true;
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = "DELETE FROM ".$this->getTable()." WHERE ";
+        foreach ($this->keys() as $key) {
+            if (empty($this->$key)) {
+                throw new Exception('Cannot delete records with unset primary keys!');
             }
+            $sql .= $key.'='.$this->$key.' AND ';
+        }
+        $sql = substr($sql, 0, -4);
+        $sql .= ' LIMIT 1;';
+        if ($result = $mysqli->query($sql)) {
+            return true;
         }
         return false;
     }

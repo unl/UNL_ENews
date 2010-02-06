@@ -41,11 +41,9 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Users(array('newsroom_id'=>$this->id));
     }
     
-    function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user)
+    function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
     {
         if ($has_story = UNL_ENews_Newsroom_Story::getById($this->id, $story->id)) {
-            echo $story->id;
-            echo ' I already have this one!';
             // Already have this story thanks
             return true;
         }
@@ -54,6 +52,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         $has_story->story_id     = $story->id;
         $has_story->status       = $status;
         $has_story->uid_created  = $user->uid;
+        $has_story->source       = $source;
         if ($result = $has_story->insert()) {
             return $result;
         }
