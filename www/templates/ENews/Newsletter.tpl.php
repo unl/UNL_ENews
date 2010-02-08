@@ -42,8 +42,8 @@
                         	<td>
 		                        <table width="100%" id="newsStories">
 			                        <tr>
-				                        <td><div class="emptyStory" style="margin-right:5px" id="newsStory1"><p>move story here</p></div></td>
-				                        <td><div class="emptyStory" style="margin-left:5px;" id="newsStory2"><p>move story here</p></div></td>
+				                        <td><div class="emptyStory" style="margin-right:5px" id="newsStory_1"><p>move story here</p></div></td>
+				                        <td><div class="emptyStory" style="margin-left:5px;" id="newsStory_2"><p>move story here</p></div></td>
 			                        </tr>
 		                        </table>
 	                        </td>
