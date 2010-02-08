@@ -6,15 +6,24 @@ if (file_exists('config.inc.php')) {
 }
 
 $mysqli = UNL_ENews_Controller::getDB();
-$mysqli->query(file_get_contents(dirname(__FILE__).'/../data/enews.sql'));
-
-if (UNL_ENews_Newsroom::getByID(1) === false) {
-    $mysqli->query(file_get_contents(dirname(__FILE__).'/../data/enews_sample_data.sql'));
-    $newsroom            = new UNL_ENews_Newsroom();
-    $newsroom->name      = 'UNL E-News';
-    $newsroom->shortname = 'enews';
-    $newsroom->save();
+$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/../data/enews.sql'));
+if (!$result) {
+    echo $mysqli->error;
 }
+
+do {
+  if ($result = $mysqli->use_result()) {
+      $result->close();
+  }
+} while ($mysqli->next_result()); 
+
+
+
+$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/../data/enews_sample_data.sql'));
+if (!$result) {
+    echo $mysqli->error;
+}
+$mysqli->close();
 
 // @todo add a newsroom for all the others here, unltoday, scarlet, etc?
 //if (UNL_ENews_Newsroom::getByID(2) === false) {
