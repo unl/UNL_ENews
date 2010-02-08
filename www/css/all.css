@@ -148,14 +148,27 @@ Building the newsletter
 
 */
 #maincontent .dragItem {
-	border:1px solid black;
 	cursor:move;	
 }
-#maincontent .emptyStory {
+#maincontent .emptyStory { 
 	border:2px dashed #de8727;
 	color: #de8727;
 	padding:30px;
 	text-align:center;
+	opacity:0.45;
+}
+#maincontent .dragHover {opacity:1.0;border:4px dashed #de8727;}
+#maincontent .dragItem form, #maincontent .dragItem p {display:none;}
+#maincontent #drag_story_list .dragItem h4 {
+	font-size:0.9em;
+	color:#fff;
+	background:#494949;
+	font-weight:bold;
+	padding:0.2em 0.1em 0.2em 20px;
+}
+#maincontent .filledStory h4 {
+	font-size: 1em;
+	font-weight:bold;
 }
 /*jQuery.UI styles */
 

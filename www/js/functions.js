@@ -65,6 +65,7 @@ WDN.jQuery(document).ready(function() {
 		hoverClass: 'dragHover',
 		drop: function(event, ui) {
 			WDN.jQuery(this).addClass('filledStory').removeClass('emptyStory').children('p').remove();
+			//WDN.jQuery('#newsStories tr:last-of-type').clone().insertAfter('#newsStories tr');
 		}
 	});
 });
