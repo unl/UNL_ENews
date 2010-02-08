@@ -34,6 +34,7 @@ class UNL_ENews_User extends UNL_ENews_Record
     {
         switch($var) {
             case 'newsroom':
+                // @TODO check permissions before returning the newsroom!
                 return UNL_ENews_Newsroom::getByID($this->newsroom_id);
             break;
             default:

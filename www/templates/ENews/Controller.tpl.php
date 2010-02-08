@@ -59,7 +59,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
                     <li><a href="?view=latest">E-News</a></li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
                     <li><a href="?view=manager">Manage News</a></li>
-                    <li><a href="?view=newsletter">Preview Newsletter</a></li>
+                    <li><a href="?view=newsletter">Build Newsletter</a></li>
                 </ul>
                 <!-- InstanceEndEditable --></div>
         </div>

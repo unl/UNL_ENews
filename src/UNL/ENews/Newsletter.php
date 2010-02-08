@@ -57,6 +57,26 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return false;
     }
     
+    public static function getLastModified()
+    {
+        $object = new self();
+        $sql = "SELECT * FROM newsletters WHERE newsroom_id = ".intval(UNL_ENews_Controller::getUser(true)->newsroom->id)." AND release_date IS NULL";
+        $mysqli = UNL_ENews_Controller::getDB();
+        if (($result = $mysqli->query($sql))
+            && $result->num_rows == 1) {
+            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            return $object;
+        }
+        
+        // None there yet, let's start up a new one
+        $object->newsroom_id = UNL_ENews_Controller::getUser(true)->newsroom->id;
+        $object->subject = "My newsletter";
+        $object->save();
+        
+        return $object;
+        
+    }
+    
     function getTable()
     {
         return 'newsletters';
@@ -80,5 +100,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     function getStories()
     {
         return new UNL_ENews_Newsletter_Stories(array('newsletter_id'=>$this->id));
+    }
+    
+    function __get($var)
+    {
+        switch($var) {
+            case 'newsroom':
+                return UNL_ENews_Newsroom::getById($this->newsroom_id);
+        }
+        return false;
     }
 }
