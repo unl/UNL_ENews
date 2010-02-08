@@ -82,18 +82,36 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return 'newsletters';
     }
     
-    function addStory(UNL_ENews_Story $story)
+    function addStory(UNL_ENews_Story $story, $sort_order = null, $intro = null)
     {
         if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
+            if ($sort_order) {
+                $has_story->sort_order = $sort_order;
+            }
+            
+            if ($intro) {
+                $has_story->intro = $intro;
+            }
+            
+            $has_story->update();
+            
             // Already have this story thanks
             return true;
         }
+        
         $has_story = new UNL_ENews_Newsletter_Story();
-        $has_story->newsletter_id  = $this->id;
-        $has_story->story_id     = $story->id;
-        if ($result = $has_story->insert()) {
-            return $result;
+        $has_story->newsletter_id = $this->id;
+        $has_story->story_id      = $story->id;
+
+        if ($sort_order) {
+            $has_story->sort_order = $sort_order;
         }
+        
+        if ($intro) {
+            $has_story->intro = $intro;
+        }
+        return $has_story->insert();
+            
         throw new Exception('Could not add the story');
     }
     

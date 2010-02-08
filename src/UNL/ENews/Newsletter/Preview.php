@@ -32,7 +32,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 if (!isset($_POST['story_id'])) {
                     throw new Exception('invalid data');
                 }
-                $this->addStory($_POST['story_id']);
+                $this->addStory($_POST['story_id'], $_POST['sort_order'], $_POST['intro']);
                 break;
             case 'removestory':
                 if (!isset($_POST['story_id'])) {
@@ -52,10 +52,10 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
         unset($_POST['newsroom_id']);
     }
     
-    function addStory($story_id)
+    function addStory($story_id, $sort_order = null, $intro = null)
     {
         if ($story = UNL_ENews_Story::getById($story_id)) {
-            return $this->newsletter->addStory($story);
+            return $this->newsletter->addStory($story, $sort_order, $intro);
         }
         throw new Exception('could not add the story to the newsletter');
     }

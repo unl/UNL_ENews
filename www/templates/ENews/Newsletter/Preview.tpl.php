@@ -16,6 +16,8 @@
         <form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
             <input type="hidden" name="_type" value="addstory" />
             <input type="hidden" name="story_id" value="<?php echo $story->id; ?>" />
+            <input type="hidden" name="sort_order" value="0" />
+            <input type="hidden" name="intro" value="" />
             <input type="submit" value="add story" />
         </form>
 	<?php endforeach; ?>

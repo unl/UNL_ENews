@@ -29,8 +29,6 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
      */
     public $intro;
     
-    protected $story;
-    
     public function getTable()
     {
         return 'newsletter_stories';
@@ -41,6 +39,14 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         return array('newsletter_id', 'story_id');
     }
     
+    /**
+     * get a story in this newsletter
+     * 
+     * @param int $newsletter_id
+     * @param int $story_id
+     * 
+     * @return UNL_ENews_Newsletter_Story
+     */
     static function getById($newsletter_id, $story_id)
     {
         $mysqli = UNL_ENews_Controller::getDB();
@@ -56,10 +62,11 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     
     function getStory()
     {
-        if (!isset($this->story)) {
-            $this->story = UNL_ENews_Story::getById($this->story_id);
+        static $story;
+        if (!isset($story)) {
+            $story = UNL_ENews_Story::getById($this->story_id);
         }
-        return $this->story;
+        return $story;
     }
     
     function getFiles()
