@@ -54,16 +54,17 @@ WDN.jQuery(document).ready(function() {
 		snap: '.emptyStory',
 		snapMode : 'inner',
 		connectToSortable: '.emptyStory',
-		helper: 'clone'
+		helper: 'clone',
+		opacity: 0.45
 	});
 	WDN.jQuery('.emptyStory').sortable({
 		revert: true
 	});
 	WDN.jQuery('.emptyStory').droppable({
 		activeClass: 'dragActve',
-		hoverClass: 'dragHover'
-		//drop: function(event, ui) {
-			
-		//}
+		hoverClass: 'dragHover',
+		drop: function(event, ui) {
+			WDN.jQuery(this).addClass('filledStory').removeClass('emptyStory').children('p').remove();
+		}
 	});
 });
