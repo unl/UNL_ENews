@@ -6,7 +6,7 @@ WDN.jQuery(document).ready(function() {
 			WDN.jQuery('#enews h3').eq(1).hide();
 			WDN.jQuery('#wdn_process_step3').slideToggle(function() {
 				WDN.jQuery('#enews h3').eq(0).removeClass('highlighted');
-				WDN.jQuery('#enews h3').eq(2).addClass('highlighted');
+				WDN.jQuery('#enews h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
 			});
 		} else { //we have an event request
 			WDN.jQuery('#wdn_process_step2').slideToggle(function() {
@@ -20,7 +20,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery('#wdn_process_step2').slideToggle();
 		WDN.jQuery('#wdn_process_step3').slideToggle(function() {
 			WDN.jQuery('#enews h3').eq(1).removeClass('highlighted');
-			WDN.jQuery('#enews h3').eq(2).addClass('highlighted');
+			WDN.jQuery('#enews h3').eq(2).addClass('highlighted').append(' <span class="announceType">Event Announcement</span>');
 		});
 		return false;
 	});

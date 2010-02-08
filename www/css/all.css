@@ -41,6 +41,12 @@
 	border-top:none;
 	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
 }
+#maincontent h3 span.announceType {
+	border:none;
+	float:right;
+	background:#028a02;
+	margin-top:3px;	
+}
 /*End styles for the displayed interface*/
 
 /*Form Styles */
