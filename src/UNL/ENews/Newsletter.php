@@ -49,7 +49,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      */
     public static function getByID($id)
     {
-        if ($record = UNL_ENews_Record::getRecordByID('newsletter', $id)) {
+        if ($record = UNL_ENews_Record::getRecordByID('newsletters', $id)) {
             $object = new self();
             UNL_ENews_Controller::setObjectFromArray($object, $record);
             return $object;

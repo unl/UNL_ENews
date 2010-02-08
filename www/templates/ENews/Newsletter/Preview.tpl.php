@@ -1,13 +1,16 @@
 <script type="text/javascript" src="js/functions.js"></script>
-<form method="post" action="?view=newsletter&amp;id=<?php echo $context->newsletter->id; ?>">
-    <input name="_type" value="newsletter" type="hidden" />
+<form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
+    <input type="hidden" name="_type" value="newsletter" />
+    <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
     Email Subject: <input name="subject" size="100" value="<?php echo $context->newsletter->subject; ?>" />
     <div class="col left zenbox energetic">
     <h3>Available News</h3>
 	<div id="news1" class="dragItem ui-draggable">
 	<?php foreach ($context->available_stories as $story): ?>
-    	<h4><?php echo $story->title; ?></h4>
-    	<p><?php echo $story->description; ?></p>
+    	<div id="drag_story_<?php echo $story->id; ?>">
+            <h4><?php echo $story->title; ?></h4>
+            <p><?php echo $story->description; ?></p>
+        </div>
 	<?php endforeach; ?>
 	</div>
     
