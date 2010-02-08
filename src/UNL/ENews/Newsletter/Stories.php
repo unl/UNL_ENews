@@ -12,7 +12,7 @@ class UNL_ENews_Newsletter_Stories extends UNL_ENews_StoryList
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT story_id FROM newsletter_stories ';
         $sql .= 'WHERE newsletter_id = '.$this->newsletter_id .
-                ' ORDER BY `order` ASC;';
+                ' ORDER BY `sort_order` ASC;';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $stories[] = $row[0];

@@ -20,7 +20,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
      * 
      * @var int
      */
-    public $order;
+    public $sort_order;
     
     /**
      * Any introductory text to the story

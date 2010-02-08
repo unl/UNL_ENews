@@ -15,7 +15,7 @@ class UNL_ENews_Record
         $sql = 'UPDATE '.$this->getTable().' ';
         $fields = get_object_vars($this);
      
-        $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'=?` ';
+        $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
         
         $sql .= 'WHERE ';
         foreach ($this->keys() as $key) {
