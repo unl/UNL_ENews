@@ -1,3 +1,4 @@
+
 WDN.jQuery(document).ready(function() {
 	WDN.jQuery('ol.option_step a').click(function() {
 		WDN.jQuery('#wdn_process_step1').slideToggle();
@@ -46,4 +47,7 @@ WDN.jQuery(document).ready(function() {
 			return demoText;
 		});
 	});
+	
+	//the newsletter creation page <- to be moved to it's own file/plugin
+	WDN.jQuery('.dragItem').draggable();
 });
