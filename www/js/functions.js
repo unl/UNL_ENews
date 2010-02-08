@@ -49,5 +49,21 @@ WDN.jQuery(document).ready(function() {
 	});
 	
 	//the newsletter creation page <- to be moved to it's own file/plugin
-	WDN.jQuery('.dragItem').draggable();
+	WDN.jQuery('.dragItem').draggable({ 
+		revert: 'invalid',
+		snap: '.emptyStory',
+		snapMode : 'inner',
+		connectToSortable: '.emptyStory',
+		helper: 'clone'
+	});
+	WDN.jQuery('.emptyStory').sortable({
+		revert: true
+	});
+	WDN.jQuery('.emptyStory').droppable({
+		activeClass: 'dragActve',
+		hoverClass: 'dragHover'
+		//drop: function(event, ui) {
+			
+		//}
+	});
 });

@@ -136,9 +136,14 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	width:375px;
 }
 
-/*Building the newsletter*/
+/*
+
+Building the newsletter
+
+*/
 #maincontent .dragItem {
-	border:1px solid black;	
+	border:1px solid black;
+	cursor:move;	
 }
 #maincontent .emptyStory {
 	border:2px dashed #de8727;
@@ -146,7 +151,15 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	padding:30px;
 	text-align:center;
 }
+/*jQuery.UI styles */
 
+
+
+/*
+
+End Building the newsletter 
+
+*/
 #maincontent table th {text-align:left;}
 /*to move to scripts CSS */
 #maincontent h3 span {
