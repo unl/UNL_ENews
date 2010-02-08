@@ -9,6 +9,7 @@ $mysqli = UNL_ENews_Controller::getDB();
 $mysqli->query(file_get_contents(dirname(__FILE__).'/../data/enews.sql'));
 
 if (UNL_ENews_Newsroom::getByID(1) === false) {
+    $mysqli->query(file_get_contents(dirname(__FILE__).'/../data/enews_sample_data.sql'));
     $newsroom            = new UNL_ENews_Newsroom();
     $newsroom->name      = 'UNL E-News';
     $newsroom->shortname = 'enews';
