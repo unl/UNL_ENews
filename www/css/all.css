@@ -87,6 +87,7 @@
 	line-height:1.3em;
 }
 strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
+
 /* First option */
 #enews .option_step {
 	list-style:none;
@@ -135,6 +136,18 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	width:375px;
 }
 
+/*Building the newsletter*/
+#maincontent .dragItem {
+	border:1px solid black;	
+}
+#maincontent .emptyStory {
+	border:2px dashed #de8727;
+	color: #de8727;
+	padding:30px;
+	text-align:center;
+}
+
+#maincontent table th {text-align:left;}
 /*to move to scripts CSS */
 #maincontent h3 span {
 	-moz-border-radius:10px;
@@ -145,4 +158,3 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	-webkit-border-radius:5px;	
 }
 
-#maincontent table th {text-align:left;}

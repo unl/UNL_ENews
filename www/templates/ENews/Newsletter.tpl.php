@@ -24,6 +24,7 @@
                                 <!-- This is the main content -->
                                 <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;">UNL Today</h1>
                                 <p style="margin:0;font-size:.9em;color:#909090;"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
+                                <p style="margin:1.1em 0;">Here is the latest and greatest UNL happenings today!</p>
                                 <?php foreach ($context->getStories() as $story): ?>
                                 <p style="margin:1.1em 0;">Title: <?php echo $story->title; ?><br /><?php echo $story->description; ?>
                                     <?php
@@ -36,6 +37,16 @@
                                 </p>
                                 <?php endforeach; ?>
                           </td>
+                        </tr>
+                        <tr>
+                        	<td>
+		                        <table width="100%" id="newsStories">
+			                        <tr>
+				                        <td><div class="emptyStory" style="margin-right:5px" id="newsStory1">move story here</div></td>
+				                        <td><div class="emptyStory" style="margin-left:5px;" id="newsStory2">move story here</div></td>
+			                        </tr>
+		                        </table>
+	                        </td>
                         </tr>
                         <tr background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png)">
                             <td style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;">
