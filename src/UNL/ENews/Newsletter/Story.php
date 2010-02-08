@@ -29,6 +29,8 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
      */
     public $intro;
     
+    protected $story;
+    
     public function getTable()
     {
         return 'newsletter_stories';
@@ -42,7 +44,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     static function getById($newsletter_id, $story_id)
     {
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = "SELECT * FROM newsletter_stories WHERE newsletter_id = ".intval($newsroom_id)." AND story_id = ".intval($story_id);
+        $sql = "SELECT * FROM newsletter_stories WHERE newsletter_id = ".intval($newsletter_id)." AND story_id = ".intval($story_id);
         if (($result = $mysqli->query($sql))
             && $result->num_rows > 0) {
             $object = new self();
@@ -50,5 +52,23 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
             return $object;
         }
         return false;
+    }
+    
+    function getStory()
+    {
+        if (!isset($this->story)) {
+            $this->story = UNL_ENews_Story::getById($this->story_id);
+        }
+        return $this->story;
+    }
+    
+    function getFiles()
+    {
+        return $this->getStory()->getFiles();
+    }
+    
+    function __get($var)
+    {
+        return $this->getStory()->$var;
     }
 }

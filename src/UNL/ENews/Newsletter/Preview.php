@@ -26,6 +26,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
     
     function handlePost()
     {
+        $this->filterPostValues();
         switch($_POST['_type']) {
             case 'addstory':
                 if (!isset($_POST['story_id'])) {
@@ -39,7 +40,16 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 }
                 $this->removeStory($_POST['story_id']);
                 break;
+            case 'newsletter':
+                UNL_ENews_Controller::setObjectFromArray($this->newsletter, $_POST);
+                $this->newsletter->update();
+                break;
         }
+    }
+    
+    function filterPostValues()
+    {
+        unset($_POST['newsroom_id']);
     }
     
     function addStory($story_id)

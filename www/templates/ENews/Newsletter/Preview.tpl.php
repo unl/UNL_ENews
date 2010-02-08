@@ -3,6 +3,8 @@
     <input type="hidden" name="_type" value="newsletter" />
     <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
     Email Subject: <input name="subject" size="100" value="<?php echo $context->newsletter->subject; ?>" />
+    <input type="submit" value="Save" />
+</form>
     <div class="col left zenbox energetic">
     <h3>Available News</h3>
 	<div id="news1" class="dragItem ui-draggable">
@@ -11,6 +13,11 @@
             <h4><?php echo $story->title; ?></h4>
             <p><?php echo $story->description; ?></p>
         </div>
+        <form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
+            <input type="hidden" name="_type" value="addstory" />
+            <input type="hidden" name="story_id" value="<?php echo $story->id; ?>" />
+            <input type="submit" value="add story" />
+        </form>
 	<?php endforeach; ?>
 	</div>
     
@@ -21,5 +28,3 @@
     <div class="three_col right">
     <?php echo $savvy->render($context->newsletter); ?>
     </div>
-    <input type="submit" value="Save" />
-</form>

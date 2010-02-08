@@ -5,7 +5,7 @@ class UNL_ENews_Record
     {
         $sql = 'INSERT INTO '.$this->getTable();
         $fields = get_object_vars($this);
-        $sql .= '('.implode(',', array_keys($fields)).')';
+        $sql .= '(`'.implode('`,`', array_keys($fields)).'`)';
         $sql .= ' VALUES ('.str_repeat('?,',count($fields)-1).'?)';
         return $fields;
     }
@@ -15,7 +15,7 @@ class UNL_ENews_Record
         $sql = 'UPDATE '.$this->getTable().' ';
         $fields = get_object_vars($this);
      
-        $sql .= 'SET '.implode('=?,', array_keys($fields)).'=? ';
+        $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'=?` ';
         
         $sql .= 'WHERE ';
         foreach ($this->keys() as $key) {
