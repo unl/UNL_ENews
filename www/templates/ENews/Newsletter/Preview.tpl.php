@@ -4,8 +4,10 @@
     <div class="col left zenbox energetic">
     <h3>Available News</h3>
 	<div id="news1" class="dragItem">
-	<h4>News Heading</h4>
-	<p>News article, slightly shortened...</p>
+	<?php foreach ($context->available_stories as $story): ?>
+    	<h4><?php echo $story->title; ?></h4>
+    	<p><?php echo $story->description; ?></p>
+	<?php endforeach; ?>
 	</div>
     
     
