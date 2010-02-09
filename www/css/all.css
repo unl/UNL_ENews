@@ -147,6 +147,11 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 Building the newsletter
 
 */
+#newsStories .newsColumn {
+	float:left;
+	width: 262px;
+}
+#newsStories #newsColumn2 {float:right;}
 #maincontent .dragItem {
 	cursor:move;	
 }

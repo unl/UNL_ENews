@@ -40,12 +40,14 @@
                         </tr>
                         <tr>
                         	<td>
-		                        <table width="100%" id="newsStories">
-			                        <tr>
-				                        <td><div class="emptyStory" style="margin-right:5px" id="newsStory_1"><p>move story here</p></div></td>
-				                        <td><div class="emptyStory" style="margin-left:5px;" id="newsStory_2"><p>move story here</p></div></td>
-			                        </tr>
-		                        </table>
+                        		<div id="newsStories">
+                        		<div id="newsColumn1" class="newsColumn">
+                        			<div class="emptyStory" id="newsStory_1"><p>move story here</p></div>
+                        		</div>
+                        		<div id="newsColumn2" class="newsColumn">
+                        			<div class="emptyStory" id="newsStory_2"><p>move story here</p></div>
+                        		</div>
+		                        </div>
 	                        </td>
                         </tr>
                         <tr background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png)">
