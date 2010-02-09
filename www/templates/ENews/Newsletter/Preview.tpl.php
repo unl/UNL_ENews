@@ -20,10 +20,6 @@
         </form>
         </div>
 	<?php endforeach; ?>
-    
-    
-    
-    
     </div>
     <div class="three_col right">
     <?php echo $savvy->render($context->newsletter); ?>
