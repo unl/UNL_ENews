@@ -71,6 +71,9 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         // None there yet, let's start up a new one
         $object->newsroom_id = UNL_ENews_Controller::getUser(true)->newsroom->id;
         $object->subject = "My newsletter";
+        if (isset($_GET['date'])) {
+            $object->release_date = date('Y-m-d H:i:s', strtotime($_GET['date']));
+        }
         $object->save();
         
         return $object;
