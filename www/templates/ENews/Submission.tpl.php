@@ -13,6 +13,13 @@ function getValue($object, $field)
 }
 ?>
 <script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript">
+WDN.loadJS("js/jquery.imgareaselect.pack.js");
+WDN.loadCSS("css/imgareaselect-default.css");
+WDN.jQuery(function($){
+	$("#date,#request_publish_start,#request_publish_end").datepicker();
+});
+</script>
 <form id="enews" action="?view=submit" method="post" enctype="multipart/form-data">
 <h3 class="highlighted"><span>1</span>Select E-News Type</h3>
 <fieldset id="wdn_process_step1">
