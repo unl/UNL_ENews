@@ -18,9 +18,10 @@ class UNL_ENews_Story extends UNL_ENews_Record
     
     function save()
     {
-        $this->event_date       = $this->getDate($this->event_date);
-        $this->uid_created      = strtolower(UNL_ENews_Controller::getUser(true)->uid);
-        $this->date_submitted   = date('Y-m-d H:i:s');
+        $this->request_publish_start = $this->getDate($this->request_publish_start);
+        $this->request_publish_end   = $this->getDate($this->request_publish_end);
+        $this->uid_created           = strtolower(UNL_ENews_Controller::getUser(true)->uid);
+        $this->date_submitted        = date('Y-m-d H:i:s');
         $result = parent::save();
         
         if (!$result) {
