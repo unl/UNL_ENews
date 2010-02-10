@@ -111,8 +111,6 @@ class UNL_ENews_Controller
                     } else {
                         throw new Exception('Error saving the file');
                     }
-                } else {
-                    throw new Exception('Error saving the file');
                 }
                 header('Location: ?view=thanks&_type='.$_POST['_type']);
                 exit();
