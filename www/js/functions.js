@@ -65,6 +65,7 @@ WDN.jQuery(document).ready(function() {
 		hoverClass: 'dragHover',
 		drop: function(event, ui) {
 			WDN.jQuery(this).addClass('filledStory').removeClass('emptyStory').children('p').remove();
+			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 			//WDN.jQuery('#newsStories tr:last-of-type').clone().insertAfter('#newsStories tr');
 		}
 	});
