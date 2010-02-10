@@ -178,4 +178,3 @@ class UNL_ENews_Controller
         return false;
     }
 }
-?>

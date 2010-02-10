@@ -46,4 +46,9 @@ class UNL_ENews_User extends UNL_ENews_Record
     {
         return $this->uid;
     }
+    
+    public function hasPermission($newsroom_id)
+    {
+        return UNL_ENews_User_Permission::userHasPermission($this->uid, $newsroom_id);
+    }
 }
