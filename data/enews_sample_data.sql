@@ -36,7 +36,7 @@ INSERT INTO `newsroom_stories` (`newsroom_id`, `story_id`, `uid_created`, `date_
 -- Dumping data for table `stories`
 --
 
-INSERT INTO `stories` (`id`, `title`, `description`, `event_date`, `sponsor`, `website`, `uid_created`, `date_submitted`) VALUES(1, 'Racquetball Leagues registration ends Feb. 9', 'Registration for the Faculty/Staff Racquetball Singles Leagues is open until Feb. 9 at the Campus Rec Center. There are leagues for both men and women and play will start Feb. 16. Players must be a CREC member to enter\r\nand it is free to play. Register at the Intramural Sports office in CREC.', '2010-03-15 00:00:00', 'Office of University Communications', 'http://crec.unl.edu/', 'bbieber2', '2010-02-08 14:16:45');
+INSERT INTO `stories` (`id`, `title`, `description`, `request_publish_start`, `sponsor`, `website`, `uid_created`, `date_submitted`) VALUES(1, 'Racquetball Leagues registration ends Feb. 9', 'Registration for the Faculty/Staff Racquetball Singles Leagues is open until Feb. 9 at the Campus Rec Center. There are leagues for both men and women and play will start Feb. 16. Players must be a CREC member to enter\r\nand it is free to play. Register at the Intramural Sports office in CREC.', '2010-03-15 00:00:00', 'Office of University Communications', 'http://crec.unl.edu/', 'bbieber2', '2010-02-08 14:16:45');
 
 --
 -- Dumping data for table `story_files`
