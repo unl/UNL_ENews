@@ -28,19 +28,31 @@
                             </td>
                          </tr>
                          <tr id="newsStories">
-                         	<td><!--  Even numbered stories -->
+                         	<td><?php
+                         	$stories = $context->getStories();
+                         	while($stories->valid()) {
+                         	    $story = $stories->current(); ?>
+                         	    <h4 style="margin:1.1em 0;">Title: <?php echo $story->title; ?><?php echo $story->sort_order; ?></h4>
+                                <p>
+                                    <?php
+                                    foreach ($story->getFiles() as $file) {
+                                        if (preg_match('/^image/', $file->type)) {
+                                            echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
+                                        }
+                                    }
+                                    echo $story->description; ?>
+                                </p>
+                                <?php $stories->next();$stories->next();
+                         	}
+                         	?>
                          	<div id="newsColumn1" class="newsColumn">
                         			<div class="emptyStory empty" id="newsStory_1"><p>move story here</p></div>
                         		</div>
                         	</td>
-                         	<td><!--  Odd numbered stories -->
-                         	<div id="newsColumn2" class="newsColumn">
-                        			<div class="emptyStory empty" id="newsStory_2"><p>move story here</p></div>
-                        		</div>
-                        	</td>
-                         </tr>
-                                <?php foreach ($context->getStories() as $story): ?>
-                                
+                         	<td><?php $stories->rewind();
+                         	$stories->next();
+                         	while($stories->valid()) {
+                                $story = $stories->current(); ?>
                                 <h4 style="margin:1.1em 0;">Title: <?php echo $story->title; ?><?php echo $story->sort_order; ?></h4>
                                 <p>
                                     <?php
@@ -49,10 +61,16 @@
                                             echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
                                         }
                                     }
-                                    ?>
-                                <?php echo $story->description; ?>
+                                    echo $story->description; ?>
                                 </p>
-                                <?php endforeach; ?>
+                                <?php $stories->next();
+                            }
+                         	?>
+                 	      <div id="newsColumn2" class="newsColumn">
+                        			<div class="emptyStory empty" id="newsStory_2"><p>move story here</p></div>
+                        		</div>
+                        	</td>
+                         </tr>
                         <tr background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.png)">
                             <td colspan="2" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;">
                                 <!--  This the footer -->
