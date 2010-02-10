@@ -4,7 +4,8 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $id;
     public $title;
     public $description;
-    public $event_date;
+    public $request_publish_start;
+    public $request_publish_end;
     public $sponsor;
     public $website;
     public $uid_created;

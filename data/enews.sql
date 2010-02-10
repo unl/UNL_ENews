@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2010 at 02:26 PM
+-- Generation Time: Feb 10, 2010 at 11:13 AM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -107,13 +107,15 @@ CREATE TABLE `stories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `event_date` datetime DEFAULT NULL,
+  `request_publish_start` datetime DEFAULT NULL,
+  `request_publish_end` datetime DEFAULT NULL,
   `sponsor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uid_created` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_submitted` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `title` (`title`,`event_date`,`uid_created`,`date_submitted`)
+  KEY `request_publish_end` (`request_publish_end`),
+  KEY `request_publish_start` (`request_publish_start`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
