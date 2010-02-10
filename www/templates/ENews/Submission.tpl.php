@@ -16,8 +16,11 @@ function getValue($object, $field)
 <script type="text/javascript">
 WDN.loadJS("js/jquery.imgareaselect.pack.js");
 WDN.loadCSS("css/imgareaselect-default.css");
+WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
+WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
+WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 WDN.jQuery(function($){
-	$("#date,#request_publish_start,#request_publish_end").datepicker();
+	$("#date,#request_publish_start,#request_publish_end").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
 });
 </script>
 <form id="enews" action="?view=submit" method="post" enctype="multipart/form-data">
