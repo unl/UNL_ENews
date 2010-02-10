@@ -29,6 +29,8 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
      */
     public $intro;
     
+    private $story;
+    
     public function getTable()
     {
         return 'newsletter_stories';
@@ -62,11 +64,10 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     
     function getStory()
     {
-        static $story;
-        if (!isset($story)) {
-            $story = UNL_ENews_Story::getById($this->story_id);
+        if (!isset($this->story)) {
+            $this->story = UNL_ENews_Story::getById($this->story_id);
         }
-        return $story;
+        return $this->story;
     }
     
     function getFiles()
