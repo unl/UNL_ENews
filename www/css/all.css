@@ -60,7 +60,7 @@
 #enews fieldset ol li {
 	list-style:none;
 	padding:5px 20px;
-	width:400px;	
+	width:100%;	
 }
 #enews fieldset ol li label {
 	font-size:1.3em;
@@ -134,14 +134,14 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	float:left;	
 }
 #sampleLayout {
-	float:left;	
+	float:right;	
 	margin:20px 10px 0px 40px;
 	border:1px solid #b8afa1;
 	padding:10px;
 	background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
 	width:375px;
 }
-
+#wdn_process_step3 ol {width:400px;}
 /*
 
 Building the newsletter
