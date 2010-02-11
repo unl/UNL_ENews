@@ -58,9 +58,14 @@ WDN.jQuery(document).ready(function() {
 		opacity: 0.45
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2').sortable({
-		revert: true,
-		connectWith: '.newsColumn'
+		//revert: true,
+		connectWith: '.newsColumn',
+		scroll: true,
+		delay: 250,
+		opacity: 0.45,
+		tolerance: 'pointer'
 	});
+	WDN.jQuery('#newsColumn1, #newsColumn2').disableSelection();
 	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
 			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');

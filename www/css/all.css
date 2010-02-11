@@ -158,10 +158,8 @@ Building the newsletter
 #maincontent .story { 
 	margin-top:10px;
 	cursor:move;
+	padding-top:10px;
 }
-#maincontent .story:hover {
-	border:1px dashed black;
-	}
 #maincontent .empty {
 	color: #de8727;
 	padding:30px;
