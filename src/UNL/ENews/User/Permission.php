@@ -26,7 +26,7 @@ class UNL_ENews_User_Permission extends UNL_ENews_Record
     static function getById($user_uid, $newsroom_id)
     {
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = "SELECT * FROM user_has_permission WHERE user_uid = '".$user_uid."' AND newsroom_id = ".intval($story_id);
+        $sql = "SELECT * FROM user_has_permission WHERE user_uid = '".$user_uid."' AND newsroom_id = ".intval($newsroom_id);
         if (($result = $mysqli->query($sql))
             && $result->num_rows > 0) {
             $object = new self();

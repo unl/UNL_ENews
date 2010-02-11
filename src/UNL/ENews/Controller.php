@@ -10,7 +10,8 @@ class UNL_ENews_Controller
                                 'manager'     => 'UNL_ENews_Manager',
                                 'file'        => 'UNL_ENews_File',
                                 'newsletter'  => 'UNL_ENews_Newsletter_Preview',
-                                'newsletters' => 'UNL_ENews_Newsroom_Newsletters'
+                                'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
+                                'sendnews'    => 'UNL_ENews_EmailDistributor'
     );
     
     protected static $auth;
@@ -38,6 +39,7 @@ class UNL_ENews_Controller
         $options += $this->options;
         $this->options = $options;
         //$this->authenticate();
+        
         if (!empty($_POST)) {
             try {
                 $this->handlePost();
@@ -45,7 +47,12 @@ class UNL_ENews_Controller
                 $this->actionable[] = $e;
             }
         }
-        $this->run();
+        
+        try {
+            $this->run();
+        } catch(Exception $e) {
+            $this->actionable[] = $e;
+        }
     }
     
     public static function setAdmins($admins = array())
