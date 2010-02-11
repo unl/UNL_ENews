@@ -63,14 +63,22 @@ WDN.jQuery(document).ready(function() {
 		scroll: true,
 		delay: 250,
 		opacity: 0.45,
-		tolerance: 'pointer'
+		tolerance: 'pointer',
+		stop: function(event, ui){
+			alert(getPosition());
+		}
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2').disableSelection();
 	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
 			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');
-			//alert(WDN.jQuery(this).attr('class'));
 			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 		}
 	});
 });
+function getPosition() {
+	WDN.jQuery('#newsColumn1, #newsColumn2').sortable('refresh');
+	var result1 = WDN.jQuery('#newsColumn1').sortable('toArray');
+	var result2 = WDN.jQuery('#newsColumn2').sortable('toArray');
+	return result2;
+}

@@ -39,7 +39,7 @@
                                 }
 
                                 $$column .= '
-                                    <div class="story">'
+                                    <div class="story" id="story_'.$key.'">'
                                 	. $savvy->render($story) .'
                                     </div>';
                             }
