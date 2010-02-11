@@ -39,32 +39,32 @@
                                 }
 
                                 $$column .= '
-                                    <h4 style="margin:1.1em 0;">Title: '.$story->title.'</h4>
+                                    <div class="story">
+                                	<h4 style="margin:1.1em 0;">'.$story->title.'</h4>
                                     <p>';
 
                                     foreach ($story->getFiles() as $file) {
                                         if (preg_match('/^image/', $file->type)) {
                                             $$column .= '<img src="?view=file&amp;id='
                                                      . $file->id
-                                                     . '" style="max-width:50px" align="left" />';
+                                                     . '" style="max-width:65px; margin-right:15px;" align="left" />';
                                         }
                                     }
 
                                     $$column .= $story->description.'
-                                    </p>';
+                                    </p>
+                                    </div>';
                             }
                             ?>
                          <tr id="newsStories">
-                             <td>
-                                <?php echo $column1; ?>
+                             <td valign="top">
                                 <div id="newsColumn1" class="newsColumn">
-                                    <div class="emptyStory empty" id="newsStory_1"><p>move story here</p></div>
+                                <?php echo $column1; ?>
                                 </div>
                             </td>
-                            <td>
-                                <?php echo $column2; ?>
+                            <td valign="top">
                                 <div id="newsColumn2" class="newsColumn">
-                                    <div class="emptyStory empty" id="newsStory_2"><p>move story here</p></div>
+                                <?php echo $column2; ?>
                                 </div>
                             </td>
                          </tr>
