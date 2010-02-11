@@ -39,20 +39,8 @@
                                 }
 
                                 $$column .= '
-                                    <div class="story">
-                                	<h4 style="margin:1.1em 0;">'.$story->title.'</h4>
-                                    <p>';
-
-                                    foreach ($story->getFiles() as $file) {
-                                        if (preg_match('/^image/', $file->type)) {
-                                            $$column .= '<img src="?view=file&amp;id='
-                                                     . $file->id
-                                                     . '" style="max-width:65px; margin-right:15px;" align="left" />';
-                                        }
-                                    }
-
-                                    $$column .= $story->description.'
-                                    </p>
+                                    <div class="story">'
+                                	. $savvy->render($story) .'
                                     </div>';
                             }
                             ?>

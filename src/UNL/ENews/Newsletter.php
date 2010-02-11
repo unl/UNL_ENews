@@ -131,4 +131,9 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return false;
     }
+    
+    function distribute()
+    {
+        // Send the email!
+    }
 }

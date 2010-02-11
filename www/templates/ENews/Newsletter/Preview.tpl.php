@@ -10,15 +10,7 @@
 		    <h3>Available News</h3>
 			<?php foreach ($context->available_stories as $story): ?>
 		    	<div id="drag_story_<?php echo $story->id; ?>" class="dragItem">
-		            <h4><?php echo $story->title; ?></h4>
-		            <p><?php echo $story->description; ?></p>
-			        <form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
-		            <input type="hidden" name="_type" value="addstory" />
-		            <input type="hidden" name="story_id" value="<?php echo $story->id; ?>" />
-		            <input type="hidden" name="sort_order" value="0" />
-		            <input type="hidden" name="intro" value="" />
-		            <input type="submit" value="add story" />
-		        </form>
+		            <?php echo $savvy->render($story, 'ENews/Newsletter/Story.tpl.php'); ?>
 		        </div>
 			<?php endforeach; ?>
 		</div>
