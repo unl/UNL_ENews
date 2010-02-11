@@ -13,7 +13,7 @@
         <tr>
             <td><?php echo $newsletter->release_date; ?></td>
             <td><?php echo $newsletter->subject; ?></td>
-            <td><a href="?view=newsletter&amp;id=<?php $newsletter->id; ?>">Edit</a></td>
+            <td><a href="?view=newsletter&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
             <td><a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a></td>
         </tr>
         <?php endforeach; ?>

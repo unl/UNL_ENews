@@ -7,17 +7,12 @@ class UNL_ENews_User extends UNL_ENews_Record
     
     public $last_login;
     
-    /**
-     * the peoplefinder object for this person.
-     * 
-     * @var UNL_Peoplefinder_Record
-     */
-    protected $peoplefinder_record;
+    
     
     function __construct($options = array())
     {
         if (!isset($options['uid'])) {
-            $this->uid = strtolower(UNL_ENews_Controller::getUser()->uid);
+            $this->uid = strtolower(UNL_ENews_Controller::getUser(true)->uid);
         } else {
             $this->uid = $options['uid'];
         }

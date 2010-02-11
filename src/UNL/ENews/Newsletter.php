@@ -134,6 +134,37 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     
     function distribute()
     {
+        
+        if (!isset($this->release_date)) {
+            $this->release_date = date('Y-m-d H:i:s');
+            $this->save();
+        }
+        
+        Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
+        $savvy = new Savvy();
+        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates');
+        
+        require_once 'Mail/mime.php';
+        
+        $html = "<html>".
+                "<body bgcolor='#ffffff'>".
+                    $savvy->render($this).
+                "</body>".
+            "</html>";                          
+        $crlf = "\n";
+        $hdrs = array(
+          'From'    => 'no-reply@'.$_SERVER['HTTP_HOST'],
+          'Subject' => $this->subject);
+        
+        $mime = new Mail_mime($crlf);
+        $mime->setHTMLBody($html);
+        
+        $body = $mime->get();
+        $hdrs = $mime->headers($hdrs);
+        $mail =& Mail::factory('sendmail');
+        $mail->send('brett.bieber@gmail.com', $hdrs, $body);
+        
         // Send the email!
+        return true;
     }
 }
