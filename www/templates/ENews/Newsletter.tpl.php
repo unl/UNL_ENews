@@ -31,21 +31,27 @@
                             $column1 = '';
                             $column2 = '';
                             foreach ($context->getStories() as $key=>$story) {
-                                if ($key % 2 == 0) {
-                                    $column = 'column1';
-                                } else {
+
+                                $column = 'column1';
+
+                                if ($key % 2 == 1) {
                                     $column = 'column2';
                                 }
+
                                 $$column .= '
                                     <h4 style="margin:1.1em 0;">Title: '.$story->title.'</h4>
                                     <p>';
-                                    
+
                                     foreach ($story->getFiles() as $file) {
                                         if (preg_match('/^image/', $file->type)) {
-                                            $$column .= '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
+                                            $$column .= '<img src="?view=file&amp;id='
+                                                     . $file->id
+                                                     . '" style="max-width:50px" align="left" />';
                                         }
                                     }
-                                $$column .= $story->description.'</p>';
+
+                                    $$column .= $story->description.'
+                                    </p>';
                             }
                             ?>
                          <tr id="newsStories">
