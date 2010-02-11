@@ -27,46 +27,37 @@
                                 <p style="margin:1.1em 0;">Here is the latest and greatest UNL happenings today!</p>
                             </td>
                          </tr>
-                         <tr id="newsStories">
-                             <td><?php
-                             $stories = $context->getStories();
-                             while($stories->valid()) {
-                                 $story = $stories->current(); ?>
-                                 <h4 style="margin:1.1em 0;">Title: <?php echo $story->title; ?><?php echo $story->sort_order; ?></h4>
-                                <p>
-                                    <?php
+                            <?php
+                            $column1 = '';
+                            $column2 = '';
+                            foreach ($context->getStories() as $key=>$story) {
+                                if ($key % 2 == 0) {
+                                    $column = 'column1';
+                                } else {
+                                    $column = 'column2';
+                                }
+                                $$column .= '
+                                    <h4 style="margin:1.1em 0;">Title: '.$story->title.'</h4>
+                                    <p>';
+                                    
                                     foreach ($story->getFiles() as $file) {
                                         if (preg_match('/^image/', $file->type)) {
-                                            echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
+                                            $$column .= '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
                                         }
                                     }
-                                    echo $story->description; ?>
-                                </p>
-                                <?php $stories->next();$stories->next();
-                             }
-                             ?>
-                             <div id="newsColumn1" class="newsColumn">
+                                $$column .= $story->description.'</p>';
+                            }
+                            ?>
+                         <tr id="newsStories">
+                             <td>
+                                <?php echo $column1; ?>
+                                <div id="newsColumn1" class="newsColumn">
                                     <div class="emptyStory empty" id="newsStory_1"><p>move story here</p></div>
                                 </div>
                             </td>
-                             <td><?php $stories->rewind();
-                             $stories->next();
-                             while($stories->valid()) {
-                                $story = $stories->current(); ?>
-                                <h4 style="margin:1.1em 0;">Title: <?php echo $story->title; ?><?php echo $story->sort_order; ?></h4>
-                                <p>
-                                    <?php
-                                    foreach ($story->getFiles() as $file) {
-                                        if (preg_match('/^image/', $file->type)) {
-                                            echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:50px" align="left" />';
-                                        }
-                                    }
-                                    echo $story->description; ?>
-                                </p>
-                                <?php $stories->next();
-                            }
-                             ?>
-                           <div id="newsColumn2" class="newsColumn">
+                            <td>
+                                <?php echo $column2; ?>
+                                <div id="newsColumn2" class="newsColumn">
                                     <div class="emptyStory empty" id="newsStory_2"><p>move story here</p></div>
                                 </div>
                             </td>
