@@ -34,7 +34,7 @@
 
                                 $column = 'column1';
 
-                                if ($key % 2 == 1) {
+                                if ($story->sort_order % 2 == 0) {
                                     $column = 'column2';
                                 }
 

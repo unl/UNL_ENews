@@ -65,7 +65,7 @@ WDN.jQuery(document).ready(function() {
 		opacity: 0.45,
 		tolerance: 'pointer',
 		stop: function(event, ui){
-			alert(getPosition());
+			saveStoryOrder();
 		}
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2').disableSelection();
@@ -76,9 +76,17 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 });
-function getPosition() {
+function saveStoryOrder() {
 	WDN.jQuery('#newsColumn1, #newsColumn2').sortable('refresh');
 	var result1 = WDN.jQuery('#newsColumn1').sortable('toArray');
 	var result2 = WDN.jQuery('#newsColumn2').sortable('toArray');
-	return result2;
+	var sort_order;
+	for(var i = 0; i<result1.length; i++) {
+		WDN.jQuery('#'+result1[i]+' form input[name=sort_order]').attr('value', i*2+1);
+		WDN.jQuery.post(WDN.jQuery('#'+result1[i]+' form').attr('action'), WDN.jQuery('#'+result1[i]+' form').serialize());
+	}
+	for(i = 0; i<result2.length; i++) {
+		WDN.jQuery('#'+result2[i]+' form input[name=sort_order]').attr('value', i*2+2);
+		WDN.jQuery.post(WDN.jQuery('#'+result2[i]+' form').attr('action'), WDN.jQuery('#'+result2[i]+' form').serialize());
+	}
 }
