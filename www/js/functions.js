@@ -63,7 +63,7 @@ WDN.jQuery(document).ready(function() {
 	});
 	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
-			ui.draggable.addClass('story').css('opacity', '1.0');
+			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');
 			//alert(WDN.jQuery(this).attr('class'));
 			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 		}
