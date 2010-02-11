@@ -51,22 +51,21 @@ WDN.jQuery(document).ready(function() {
 	//the newsletter creation page <- to be moved to it's own file/plugin
 	WDN.jQuery('.dragItem').draggable({ 
 		revert: 'invalid',
-		snap: '.emptyStory',
+		snap: '.newsColumn',
 		snapMode : 'inner',
-		connectToSortable: '.emptyStory',
-		helper: 'clone',
+		connectToSortable: '.newsColumn',
+		//helper: 'clone',
 		opacity: 0.45
 	});
-	WDN.jQuery('.emptyStory').sortable({
-		revert: true
+	WDN.jQuery('#newsColumn1, #newsColumn2').sortable({
+		revert: true,
+		connectWith: '.newsColumn'
 	});
-	WDN.jQuery('.emptyStory').droppable({
-		activeClass: 'dragActve',
-		hoverClass: 'dragHover',
+	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
-			WDN.jQuery(this).addClass('filledStory').removeClass('emptyStory').children('p').remove();
+			ui.draggable.addClass('story').css('opacity', '1.0');
+			//alert(WDN.jQuery(this).attr('class'));
 			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
-			//WDN.jQuery('#newsStories tr:last-of-type').clone().insertAfter('#newsStories tr');
 		}
 	});
 });

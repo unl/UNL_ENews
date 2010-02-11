@@ -155,14 +155,16 @@ Building the newsletter
 #maincontent .dragItem {
 	cursor:move;	
 }
-#maincontent .emptyStory { 
-	border:2px dashed #de8727;
+#maincontent .story { 
+	margin-top:10px;
+}
+#maincontent .empty {
 	color: #de8727;
 	padding:30px;
 	text-align:center;
 	opacity:0.45;
 }
-#maincontent .dragHover {opacity:1.0;border:2px dashed #de8727;}
+
 #maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem p img {display:none;}
 #maincontent #drag_story_list .dragItem h4 {
 	font-size:0.9em;
@@ -173,15 +175,20 @@ Building the newsletter
 	margin:3px 0;
 	border:1px solid #494949;
 }
-#maincontent .filledStory h4 {
+#maincontent .filled {
+	border:none;
+}
+#maincontent .newsColumn {min-height:75px;}
+#maincontent .newsColumn h4 {
 	font-size: 1em;
 	font-weight:bold;
 	background:#f0f0f0;
 	padding:2px;
 }
-#maincontent .filledStory p {padding:2px;margin:3px 0; font-size:98%;}
+#maincontent .newsColumn p {padding:2px;margin:3px 0; font-size:98%;margin-bottom:15px;}
 /*jQuery.UI styles */
-
+.ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
+.ui-sortable-placeholder * { visibility: hidden; }
 
 
 /*
