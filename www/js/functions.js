@@ -1,4 +1,3 @@
-
 WDN.jQuery(document).ready(function() {
 	WDN.jQuery('ol.option_step a').click(function() {
 		WDN.jQuery('#wdn_process_step1').slideToggle();
@@ -48,6 +47,16 @@ WDN.jQuery(document).ready(function() {
 		});
 	});
 	
+	//manager tables
+	WDN.jQuery(".checkall").click(function() {
+		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', true);
+		return false;
+	});
+	WDN.jQuery(".uncheckall").click(function() {
+		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', false);
+		return false;
+	});
+	
 	//the newsletter creation page <- to be moved to it's own file/plugin
 	WDN.jQuery('.dragItem').draggable({ 
 		revert: 'invalid',
@@ -76,7 +85,7 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 });
-function saveStoryOrder() {
+function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
 	WDN.jQuery('#newsColumn1, #newsColumn2').sortable('refresh');
 	var result1 = WDN.jQuery('#newsColumn1').sortable('toArray');
 	var result2 = WDN.jQuery('#newsColumn2').sortable('toArray');

@@ -12,7 +12,6 @@ function getValue($object, $field)
     return '';
 }
 ?>
-<script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript">
 WDN.loadJS("js/jquery.imgareaselect.pack.js");
 WDN.loadCSS("css/imgareaselect-default.css");

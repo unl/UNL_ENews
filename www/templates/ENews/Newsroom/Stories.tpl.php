@@ -2,8 +2,8 @@
 <input type="hidden" name="_type" value="change_status" />
 <div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="checkall" onclick="setCheckboxes('formlist',true); return false">Check All</a>
-        <a href="#" class="uncheckall" onclick="setCheckboxes('formlist',false); return false">Uncheck All</a>
+        <a href="#" class="checkall">Check All</a>
+        <a href="#" class="uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>

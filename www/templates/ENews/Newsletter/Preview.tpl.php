@@ -1,4 +1,4 @@
-<script type="text/javascript" src="js/functions.js"></script>
+
 <script type="text/javascript">
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>

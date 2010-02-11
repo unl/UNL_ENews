@@ -190,7 +190,7 @@ Building the newsletter
 	background:#f0f0f0;
 	padding:2px;
 }
-#maincontent .newsColumn p {padding:2px;margin:3px 0; font-size:98%;margin-bottom:15px;}
+#maincontent .newsColumn p {padding:2px; font-size:98%;margin-bottom:15px;}
 /*jQuery.UI styles */
 .ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
 .ui-sortable-placeholder * { visibility: hidden; }
