@@ -59,7 +59,24 @@ if ($user = UNL_ENews_Controller::getUser()) {
                     <li><a href="?view=latest">E-News</a></li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
                     <li><a href="?view=manager">Manage News</a></li>
-                    <li><a href="?view=newsletter">Build Newsletter</a></li>
+                    <li><a href="?view=newsletter">Build Newsletter</a>
+                        <?php
+                        if (($user = UNL_ENews_Controller::getUser())
+                            && $newsletters = $user->newsroom->getNewsletters()) {
+                            if (count($newsletters)) {
+                                echo '<ul>';
+                                // There is a user logged in
+                                foreach($newsletters as $newsletter) {
+                                    if (isset($newsletter->release_date)) {
+                                        echo '<li><a href="?view=newsletter&amp;id='.$newsletter->id.'">'.$newsletter->release_date.'</a></li>';
+                                    } 
+                                }
+                                echo '<li><a href="?view=newsletters">All newsletters</a></li>';
+                                echo '</ul>';
+                            }
+                        }
+                        ?>
+                    </li>
                 </ul>
                 <!-- InstanceEndEditable --></div>
         </div>

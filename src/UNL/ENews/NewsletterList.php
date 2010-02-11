@@ -1,6 +1,7 @@
 <?php
-class UNL_ENews_NewsletterList
+class UNL_ENews_NewsletterList extends ArrayIterator
 {
+    
     /**
      * @return UNL_ENews_Newsletter
      */

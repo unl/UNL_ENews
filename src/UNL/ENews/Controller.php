@@ -9,7 +9,8 @@ class UNL_ENews_Controller
                                 'thanks'     => 'UNL_ENews_Confirmation',
                                 'manager'    => 'UNL_ENews_Manager',
                                 'file'       => 'UNL_ENews_File',
-                                'newsletter' => 'UNL_ENews_Newsletter_Preview'
+                                'newsletter' => 'UNL_ENews_Newsletter_Preview',
+                                'newsletters' => 'UNL_ENews_Newsroom_Newsletters'
     );
     
     protected static $auth;
