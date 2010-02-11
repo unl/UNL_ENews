@@ -60,7 +60,6 @@
 #enews fieldset ol li {
 	list-style:none;
 	padding:5px 20px;
-	width:100%;	
 }
 #enews fieldset ol li label {
 	font-size:1.3em;
@@ -93,7 +92,10 @@
 	line-height:1.3em;
 }
 strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
-
+#enews fieldset fieldset {background:none;padding:0;}
+#enews fieldset fieldset legend {display:block;font-size:1.3em;}
+#enews fieldset fieldset ol {margin-left:-20px;margin-top:0px;}
+#enews fieldset fieldset ol li {margin-left:-30px;font-size:0.8em;padding:2px 20px;}
 /* First option */
 #enews .option_step {
 	list-style:none;
@@ -141,7 +143,7 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
 	width:375px;
 }
-#wdn_process_step3 ol {width:400px;}
+#wdn_process_step3 ol {width:450px;}
 /*
 
 Building the newsletter

@@ -91,5 +91,5 @@ WDN.jQuery(function($){
 	<legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
 </fieldset>
-<p class="submit" style="margin-top:20px;"><input type="submit" name="submit" value="Submit" /></p>
+<p class="submit"><input type="submit" name="submit" value="Submit" /></p>
 </form>
