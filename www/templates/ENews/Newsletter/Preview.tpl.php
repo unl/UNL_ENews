@@ -29,5 +29,5 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 		</div>
     </div>
     <div class="three_col right">
-    <?php echo $savvy->render($context->newsletter); ?>
+	    <?php echo $savvy->render($context->newsletter); ?>
     </div>

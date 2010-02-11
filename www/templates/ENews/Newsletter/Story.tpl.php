@@ -5,7 +5,7 @@ if ($parent->context instanceof UNL_ENews_Newsletter) {
     $newsletter_id = $parent->context->newsletter->id;
 }
 ?>
-<h4 style="margin:1.1em 0;"><?php echo $context->title; ?></h4>
+<h4 style=""><?php echo $context->title; ?></h4>
 <p>
 <?php 
 foreach ($context->getFiles() as $file) {
