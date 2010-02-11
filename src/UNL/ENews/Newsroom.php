@@ -46,6 +46,23 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Users(array('newsroom_id'=>$this->id));
     }
     
+    /**
+     * 
+     * @param UNL_ENews_User $user
+     * 
+     * @return bool
+     */
+    function addUser($user)
+    {
+        if (!$user->hasPermission($this->id)) {
+            $permission = new UNL_ENews_User_Permission();
+            $permission->newsroom_id = $this->id;
+            $permission->user_uid    = $user->uid;
+            return $permission->insert();
+        }
+        return true;
+    }
+    
     function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
     {
         if ($has_story = UNL_ENews_Newsroom_Story::getById($this->id, $story->id)) {

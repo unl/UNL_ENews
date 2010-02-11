@@ -12,17 +12,28 @@ class UNL_ENews_User extends UNL_ENews_Record
      * 
      * @var UNL_Peoplefinder_Record
      */
-    public $peoplefinder_record;
+    protected $peoplefinder_record;
     
     function __construct($options = array())
     {
         if (!isset($options['uid'])) {
-            $this->uid = strtolower(UNL_UCARE_Controller::getUser()->uid);
+            $this->uid = strtolower(UNL_ENews_Controller::getUser()->uid);
         } else {
             $this->uid = $options['uid'];
         }
-        $pf = new UNL_Peoplefinder();
-        $this->peoplefinder_record = $pf->getUID($this->uid);
+    }
+    
+    public static function getByUID($uid)
+    {
+        if ($record = UNL_ENews_Record::getRecordByID('users', $uid, 'uid')) {
+            $object = new self();
+            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            return $object;
+        }
+        
+        $object = new self(array('uid'=>$uid));
+        $object->insert();
+        return $object;
     }
     
     function getTable()
@@ -38,8 +49,17 @@ class UNL_ENews_User extends UNL_ENews_Record
                 return UNL_ENews_Newsroom::getByID($this->newsroom_id);
             break;
             default:
-                return $this->peoplefinder_record->$var;
+                return $this->getPeoplefinderRecord()->$var;
         }
+    }
+    
+    function getPeoplefinderRecord()
+    {
+        if (!isset($this->peoplefinder_record)) {
+            $pf = new UNL_Peoplefinder();
+            $this->peoplefinder_record = $pf->getUID($this->uid);
+        }
+        return $this->peoplefinder_record;
     }
     
     function __toString()
