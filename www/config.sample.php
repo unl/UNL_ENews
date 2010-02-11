@@ -12,6 +12,7 @@ set_include_path(dirname(dirname(__FILE__)).'/src'.PATH_SEPARATOR.dirname(dirnam
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
+//UNL_ENews_Controller::$url = 'http://localhost/workspace/UNL_ENews/www/';
 
 //Database username/password
 UNL_ENews_Controller::$db_user = 'enews';

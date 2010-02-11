@@ -17,7 +17,7 @@ class UNL_ENews_EmailDistributor extends UNL_ENews_LoginRequired
             throw new Exception('You are not an administrator of that newsroom and cannot send newsletters.');
         }
         if ($this->newsletter->distribute()) {
-            header('Location: ?view=confirmation&_type=sendnews&id='.$this->newsletter->id);
+            header('Location: ?view=thanks&_type=sendnews&id='.$this->newsletter->id);
             exit();
         } else {
             throw new Exception('There was an error in distribution.');

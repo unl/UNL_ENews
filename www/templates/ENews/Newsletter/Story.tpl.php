@@ -10,13 +10,15 @@ if ($parent->context instanceof UNL_ENews_Newsletter) {
 <?php 
 foreach ($context->getFiles() as $file) {
     if (preg_match('/^image/', $file->type)) {
-        echo '<img src="?view=file&amp;id='
+        echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
              . $file->id
              . '" style="max-width:65px; margin-right:15px;" align="left" />';
     }
 }
 
-echo $context->description; ?>
+echo $context->description;
+if ($parent->context instanceof UNL_ENews_Newsletter_Preview):
+?>
 <form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $newsletter_id; ?>">
     <input type="hidden" name="_type" value="addstory" />
     <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
@@ -24,4 +26,5 @@ echo $context->description; ?>
     <input type="hidden" name="intro" value="" />
     <input type="submit" value="add story" />
 </form>
+<?php endif; ?>
 </p>
