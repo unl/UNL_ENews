@@ -157,7 +157,11 @@ Building the newsletter
 }
 #maincontent .story { 
 	margin-top:10px;
+	cursor:move;
 }
+#maincontent .story:hover {
+	border:1px dashed black;
+	}
 #maincontent .empty {
 	color: #de8727;
 	padding:30px;
@@ -179,6 +183,7 @@ Building the newsletter
 	border:none;
 }
 #maincontent .newsColumn {min-height:75px;}
+#maincontent .newsColumn form {display:none;}
 #maincontent .newsColumn h4 {
 	font-size: 1em;
 	font-weight:bold;
