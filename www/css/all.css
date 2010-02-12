@@ -168,7 +168,6 @@ Building the newsletter
 	text-align:center;
 	opacity:0.45;
 }
-
 #maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem p img {display:none;}
 #maincontent #drag_story_list .dragItem h4 {
 	font-size:0.9em;
@@ -200,10 +199,35 @@ Building the newsletter
 	padding:2px;
 }
 #maincontent .newsColumn p {padding:2px; font-size:98%;margin-bottom:15px;}
+
 /*jQuery.UI styles */
 .ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
 .ui-sortable-placeholder * { visibility: hidden; }
+.ui-datepicker-trigger {
+	float:right;
+	left:5px;
+	position:relative;
+	top:-23px;
+	cursor:pointer;
+}
 
+/* wdn_notice box */
+#maincontent div.wdn_notice div.message {
+	background:url('images/checkbox.png') no-repeat center left;
+}
+#maincontent div.wdn_notice {
+    border: 1px solid #cad094;
+    background:#f8f9d1;
+    width:100%;
+}
+#maincontent div.wdn_notice div.minimize a, #maincontent div.wdn_notice div.maximize a, #maincontent div.wdn_notice div.minimize a:hover, #maincontent div.wdn_notice div.maximize a:hover {
+	border: 1px solid #cad094;
+
+}
+#maincontent div.wdn_notice div.minimize a:hover, #maincontent div.wdn_notice div.maximize a:hover {
+	border: 1px solid #aaaf7d;
+
+}
 
 /*
 
