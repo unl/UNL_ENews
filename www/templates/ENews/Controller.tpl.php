@@ -102,9 +102,23 @@ if ($user = UNL_ENews_Controller::getUser()) {
                 <?php virtual('/wdn/templates_3.0/includes/feedback.html'); ?>
             </div>
             <div class="footer_col"><!-- InstanceBeginEditable name="leftcollinks" -->
+                <h3>Related Links</h3>
+                <ul>
+                    <li><a href="http://www.unl.edu/ucomm/chancllr/" title="Welcome, statements, initiatives of the Office of the Chancellor">Office of the Chancellor</a></li>
+                    <li><a href="http://www.unl.edu/ucomm/ucomm/speakers/" title="UNL Speakers Bureau">Speakers Bureau</a></li>
+                    <li><a href="http://www.unl.edu/is/" title="Computing and telecommunications services for the university community">Information Services</a></li>
+                    <li><a href="http://iris.unl.edu/" title="Catalogs, resources, services and information from University Libraries">Libraries</a></li>
+                    <li><a href="http://www.unl.edu/regrec/calendar/calendar_main.shtml" title="Academic Calender">Academic Calendar</a></li>
+                    <li><a href="http://events.unl.edu/" title="Upcoming UNL events in a searchable database">UNL Calendar</a></li>
+                </ul>
                 
                 <!-- InstanceEndEditable --></div>
             <div class="footer_col"><!-- InstanceBeginEditable name="contactinfo" -->
+                <h3>Contacting Us</h3>
+                <p><strong>University of Nebraska-Lincoln</strong><br />
+                1400 R Street<br />
+                Lincoln, NE 68588 <br />
+                402-472-7211</p>
                 
                 <!-- InstanceEndEditable --></div>
             <div class="footer_col">
