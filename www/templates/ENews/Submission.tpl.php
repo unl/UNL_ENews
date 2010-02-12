@@ -18,7 +18,6 @@ WDN.loadJS("js/jquery.jfeed.pack");
 WDN.loadCSS("css/imgareaselect-default.css");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
-WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 WDN.jQuery(function($){
 	$("#date,#request_publish_start,#request_publish_end").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
