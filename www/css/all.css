@@ -117,6 +117,26 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	border-radius:5px;
 	text-indent:-9999px;
 }
+#enews p.nextStep {
+	margin-top: 0px;
+	margin-left: 33px;
+	background:url('images/actionButtonL.png') top left no-repeat;
+	display:inline-block;
+	height:37px;
+	padding-left:7px;
+}
+#enews p.nextStep a {
+    background:url('images/actionButtonR.png') no-repeat top right;
+    font-size:1.1em;
+    color:#494949;
+    display:inline-block;
+    padding:9px 30px 0px 6px;
+    margin:0;
+    border:0;
+    height:37px;
+    border:none;
+    width:auto;
+}
 #enews .option_step li a#newsAnnouncement {
 	background: #f8f3e4 url('images/typeIconNews.png') no-repeat center;
 }

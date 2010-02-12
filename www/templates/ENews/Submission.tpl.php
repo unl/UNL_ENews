@@ -69,7 +69,7 @@ WDN.jQuery(function($){
 				</select>
 			</li>
         </ol>
-        <a href="#" id="next_step3">Continue</a>
+        <p class="nextStep"><a href="#" id="next_step3">Continue</a></p>
 </fieldset>
 <h3><span>3</span>Announcement Submission</h3>
 <fieldset id="wdn_process_step3" style="display:none;">

@@ -19,7 +19,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery('#wdn_process_step2').slideToggle();
 		WDN.jQuery('#wdn_process_step3').slideToggle(function() {
 			WDN.jQuery('#enews h3').eq(1).removeClass('highlighted');
-			WDN.jQuery('#enews h3').eq(2).addClass('highlighted').append(' <span class="announceType">Event Announcement</span>');
+			WDN.jQuery('#enews h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>');
 		});
 		return false;
 	});
