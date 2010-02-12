@@ -26,6 +26,6 @@ if ($parent->context instanceof UNL_ENews_Newsletter_Preview):
     <input type="hidden" name="intro" value="" />
     <input type="submit" value="add story" />
 </form>
-<span class="requestedDates">03/10/2010 = 03/12/2010</span>
+<span class="requestedDates">March 3 - March 10</span>
 <?php endif; ?>
 </p>

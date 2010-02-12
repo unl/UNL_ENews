@@ -179,11 +179,20 @@ Building the newsletter
 	margin:3px 0;
 	border:1px solid #494949;
 }
+.dragItem span.requestedDates  {
+	background:#d8d8d8 url('images/tapTopShadow.png') repeat-x top left;
+	color:#494949;
+	font-size:0.7em;
+	padding:1px 5px;
+	position:relative;
+	top:-5px;
+	border-radius:3px;
+}
 #maincontent .filled {
 	border:none;
 }
 #maincontent .newsColumn {min-height:75px;}
-#maincontent .newsColumn form {display:none;}
+#maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
 #maincontent .newsColumn h4 {
 	font-size: 1em;
 	font-weight:bold;
@@ -210,5 +219,11 @@ End Building the newsletter
 #enews .option_step li a  {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;	
+}
+.dragItem span.requestedDates  {
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;	
+	-webkit-border-top-right-radius:3px;
 }
 
