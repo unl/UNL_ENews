@@ -26,6 +26,12 @@ if ($parent->context instanceof UNL_ENews_Newsletter_Preview):
     <input type="hidden" name="intro" value="" />
     <input type="submit" value="add story" />
 </form>
-<span class="requestedDates">March 3 - March 10</span>
+<span class="requestedDates">
+<?php
+echo date('F j', strtotime($context->request_publish_start));
+if (isset($context->request_publish_end)) {
+        echo ' - '.date('F j', strtotime($context->request_publish_end));
+} ?>
+</span>
 <?php endif; ?>
 </p>
