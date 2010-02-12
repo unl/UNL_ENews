@@ -17,7 +17,8 @@ foreach ($context->getFiles() as $file) {
 }
 
 echo $context->description;
-if ($parent->context instanceof UNL_ENews_Newsletter_Preview):
+if ($parent->context instanceof UNL_ENews_Newsletter_Preview
+    || (isset($parent->parent) && $parent->parent->context instanceof UNL_ENews_Newsletter_Preview) ):
 ?>
 <form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $newsletter_id; ?>">
     <input type="hidden" name="_type" value="addstory" />
