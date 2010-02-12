@@ -14,6 +14,7 @@ function getValue($object, $field)
 ?>
 <script type="text/javascript">
 WDN.loadJS("js/jquery.imgareaselect.pack.js");
+WDN.loadJS("js/jquery.jfeed.pack");
 WDN.loadCSS("css/imgareaselect-default.css");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
@@ -21,6 +22,25 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 WDN.jQuery(function($){
 	$("#date,#request_publish_start,#request_publish_end").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
+	$("#date").change(function(){
+		var date = $(this).val().split(/\//);
+		
+	    $.getFeed({
+	        url: 'js/proxy.php?url=' + escape('http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss'),
+	        success: function(feed) {
+	        	$("#event").html('<option value="NewEvent">New Event</option>');
+	            for(var i = 0, l = feed.items.length; i < l; i++) {
+	                var item = feed.items[i];
+	               $("#event").append('<option value="'+item.link+'">' + item.title + '</option>');
+	            }
+	            
+	        }    
+	    });
+	    
+	});
+
+
+	
 });
 </script>
 <form id="enews" class="energetic" action="?view=submit" method="post" enctype="multipart/form-data">
@@ -44,7 +64,7 @@ WDN.jQuery(function($){
         		<label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu</label>
 				<select id="event">
 					<option value="NewEvent">New Event</option>
-					<option value="EventID1">Red Letter Day (Friday, March 3, 2009)</option>
+					
 				</select>
 			</li>
         </ol>
