@@ -45,12 +45,12 @@
                             }
                             ?>
                          <tr id="newsStories">
-                             <td valign="top">
+                             <td valign="top" width="50%">
                                 <div id="newsColumn1" class="newsColumn">
                                 <?php echo $column1; ?>
                                 </div>
                             </td>
-                            <td valign="top">
+                            <td valign="top" width="50%">
                                 <div id="newsColumn2" class="newsColumn">
                                 <?php echo $column2; ?>
                                 </div>
