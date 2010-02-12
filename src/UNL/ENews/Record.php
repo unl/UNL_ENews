@@ -146,8 +146,8 @@ class UNL_ENews_Record
         }
 
         if (strpos($str, '/') !== false) {
-            list($month, $year) = explode('/', $str);
-            return $this->getDate($year.'-'.$month.'-01');
+            list($month, $day, $year) = explode('/', $str);
+            return $this->getDate($year.'-'.$month.'-'.$day);
         }
         // strtotime couldn't handle it
         return false;

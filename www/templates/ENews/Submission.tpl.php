@@ -87,15 +87,15 @@ WDN.jQuery(function($){
             	<fieldset>
                 <legend>Please consider for </legend> 
 					<ol>              
-                    <?php foreach (array('enews'    => 'E-News',
-                                         'unltoday' => 'UNL Today',
-                                         'scarlet'  => 'Scarlet',
-                                         'release'  => 'News Release',
-                                         'promo'    => 'Web Promo',
-                                         'nemag'    => 'NebraskaMag') as $type=>$title) :?>
+                    <?php foreach (array(1 => 'E-News',
+                                         2 => 'UNL Today',
+                                         3 => 'Scarlet',
+                                         4 => 'News Release',
+                                         5 => 'Web Promo',
+                                         6 => 'NebraskaMag') as $id=>$title) :?>
                     <li>
-                    	<input type="checkbox" name="<?php echo $type; ?>" />
-                    	<label for="<?php echo $type; ?>"><?php echo $title; ?></label>
+                    	<input type="checkbox" name="newsroom_id[]<?php echo $type; ?>" value="<?php echo $id; ?>" />
+                    	<label for="newsroom_id[]<?php echo $type; ?>"><?php echo $title; ?></label>
                     </li>
                     <?php endforeach; ?>
                     </ol>

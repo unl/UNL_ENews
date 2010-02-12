@@ -106,8 +106,11 @@ class UNL_ENews_Controller
                 $class = $this->view_map[$_POST['_type']];
                 $object = new $class();
                 self::setObjectFromArray($object, $_POST);
-                // save the data
-                $object->save();
+                
+                if (!$object->save()) {
+                    throw new Exception('Could not save the story');
+                }
+                
                 if (isset($_FILES['image'])
                     && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $file_data = $_FILES['image'];
@@ -120,6 +123,19 @@ class UNL_ENews_Controller
                         throw new Exception('Error saving the file');
                     }
                 }
+                
+                foreach ($_POST['newsroom_id'] as $id) {
+                    if ($newsroom = UNL_ENews_Newsroom::getByID($id)) {
+                        $status = 'pending';
+                        if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                            $status = 'approved';
+                        }
+                        $newsroom->addStory($object, $status, UNL_ENews_Controller::getUser(true), 'create event form');
+                    } else {
+                        throw new Exception('Invalid newsroom selected');
+                    }
+                }
+                
                 header('Location: ?view=thanks&_type='.$_POST['_type']);
                 exit();
                 break;
