@@ -39,6 +39,9 @@ WDN.jQuery(function($){
 	    });
 	    
 	});
+		$('.hasDatepicker').each(function() {
+			$(this).attr({'autocomplete' : 'off'});
+		});
 
 
 	
