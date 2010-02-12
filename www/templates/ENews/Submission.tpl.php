@@ -23,6 +23,8 @@ WDN.jQuery(function($){
 	$("#date,#request_publish_start,#request_publish_end").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
 	$("#date").change(function(){
 		var date = $(this).val().split(/\//);
+
+		$('#request_publish_end').attr('value', $(this).val());
 		
 	    $.getFeed({
 	        url: 'http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss',
