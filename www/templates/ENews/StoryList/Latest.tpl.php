@@ -6,6 +6,6 @@
         <?php endforeach; ?>
     </ul>
 </div>
-<div class="col right" style="overflow:hidden;">
+<div class="col right">
     <a href="?view=submit">Submit News</a>
 </div>
