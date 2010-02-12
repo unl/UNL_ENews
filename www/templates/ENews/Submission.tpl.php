@@ -14,7 +14,7 @@ function getValue($object, $field)
 ?>
 <script type="text/javascript">
 WDN.loadJS("js/jquery.imgareaselect.pack.js");
-WDN.loadJS("js/jquery.jfeed.pack");
+WDN.loadJS("js/jquery.jfeedUNL.js");
 WDN.loadCSS("css/imgareaselect-default.css");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
@@ -29,8 +29,10 @@ WDN.jQuery(function($){
 	    $.getFeed({
 	        url: 'http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss',
 	        success: function(feed) {
+	        	window.whatisfeed = feed;
 	        	$("#event").html('<option value="NewEvent">New Event</option>');
 	            for(var i = 0, l = feed.items.length; i < l; i++) {
+		            
 	                var item = feed.items[i];
 	               $("#event").append('<option value="'+item.link+'">' + item.title + '</option>');
 	            }
