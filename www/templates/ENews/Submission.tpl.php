@@ -25,7 +25,7 @@ WDN.jQuery(function($){
 		var date = $(this).val().split(/\//);
 		
 	    $.getFeed({
-	        url: 'js/proxy.php?url=' + escape('http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss'),
+	        url: 'http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss',
 	        success: function(feed) {
 	        	$("#event").html('<option value="NewEvent">New Event</option>');
 	            for(var i = 0, l = feed.items.length; i < l; i++) {
