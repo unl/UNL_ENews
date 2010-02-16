@@ -19,27 +19,6 @@ jQuery.getFeed = function(options) {
     if(options.url) {
     	/* begin UNL modification */
         WDN.get(options.url,options.data,function(xml) {
-        	// in case we get a string back, convert it to an XML doc
-        	if (typeof xml == "string") {
-        		var doc;
-				try {
-					if (window.ActiveXObject) {
-						doc = new ActiveXObject('Microsoft.XMLDOM');
-						doc.async = 'false';
-						doc.loadXML(xml);
-					}
-					else {
-						var parser = new DOMParser();
-						doc = parser.parseFromString(xml, 'text/xml');
-					}
-				}
-				catch(e) {
-					if (window.console && window.console.error)
-						WDN.log('ERROR parsing XML string for conversion: ' + e);
-					throw e;
-				}
-        		xml = doc;
-        	}
         	var feed = new JFeed(xml);
         	if(jQuery.isFunction(options.success)) options.success(feed);
         },'xml');
