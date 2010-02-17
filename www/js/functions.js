@@ -84,6 +84,8 @@ WDN.jQuery(document).ready(function() {
 			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 		}
 	});
+	WDN.jQuery('#enews h3').eq(0).css('cursor','pointer').click(backToStep1);
+	WDN.jQuery('#enews h3').eq(1).css('cursor','pointer').click(backToStep2);
 });
 function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
 	WDN.jQuery('#newsColumn1, #newsColumn2').sortable('refresh');
@@ -97,4 +99,22 @@ function saveStoryOrder() { //this function determines the order of the stories 
 		WDN.jQuery('#'+result2[i]+' form input[name=sort_order]').attr('value', i*2+2);
 		WDN.jQuery.post(WDN.jQuery('#'+result2[i]+' form').attr('action'), WDN.jQuery('#'+result2[i]+' form').serialize());
 	}
-}
+};
+function backToStep1 () {
+	WDN.jQuery('#wdn_process_step2').slideUp();
+	WDN.jQuery('#wdn_process_step3').slideUp();
+	WDN.jQuery('#wdn_process_step1').slideDown();
+	WDN.jQuery('#enews h3').eq(2).removeClass("highlighted");
+	WDN.jQuery('#enews h3').eq(1).removeClass("highlighted");
+	WDN.jQuery('#enews h3').eq(0).addClass("highlighted");
+	WDN.jQuery('#enews h3 span.announceType').remove();
+};
+function backToStep2 () {
+	WDN.jQuery('#wdn_process_step1').slideUp();
+	WDN.jQuery('#wdn_process_step3').slideUp();
+	WDN.jQuery('#wdn_process_step2').slideDown();
+	WDN.jQuery('#enews h3').eq(2).removeClass("highlighted");
+	WDN.jQuery('#enews h3').eq(0).removeClass("highlighted");
+	WDN.jQuery('#enews h3').eq(1).addClass("highlighted");
+	WDN.jQuery('#enews h3 span.announceType').remove();
+};
