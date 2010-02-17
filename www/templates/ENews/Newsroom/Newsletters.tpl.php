@@ -17,10 +17,10 @@
             <td><a href="?view=newsletter&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
             <td><a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a></td>
             <td>
-                <form action="?view=newsletters" method="post" id="deletenewsletter" style="width:120px;">
+                <form action="?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <input type="hidden" name="_type" value="deletenewsletter" />
-                    <input type="hidden" name="id" value="<?php echo $newsletter->id; ?>" />
-                    <a href="#" onclick="if (confirm('Are you sure?')) document.getElementById('deletenewsletter').submit();">Delete</a>
+                    <input type="hidden" name="newsletter_id" value="<?php echo $newsletter->id; ?>" />
+                    <a href="#" onclick="if (confirm('Are you sure?')) document.getElementById('deletenewsletter_<?php echo $newsletter->id; ?>').submit();">Delete</a>
                 </form>
             </td>
         </tr>

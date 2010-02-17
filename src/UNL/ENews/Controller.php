@@ -151,6 +151,14 @@ class UNL_ENews_Controller
                     exit();
                 }
                 break;
+            case 'deletenewsletter':
+                if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
+                    throw new Exception('Invalid newsletter selected for delete');
+                }
+                if (UNL_ENews_Controller::getUser(true)->hasPermission($newsletter->newsroom_id)) {
+                    $newsletter->delete();
+                }
+                break;
         }
     }
     

@@ -80,6 +80,15 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         
     }
     
+    function delete()
+    {
+        foreach($this->getStories() as $has_story) {
+            // Remove the link between this newsletter and the story story
+            $has_story->delete();
+        }
+        return parent::delete();
+    }
+    
     function getTable()
     {
         return 'newsletters';

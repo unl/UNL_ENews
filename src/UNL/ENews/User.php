@@ -7,6 +7,10 @@ class UNL_ENews_User extends UNL_ENews_Record
     
     public $last_login;
     
+    /**
+     * @var UNL_ENews_Newsroom $newsroom Newsroom
+     */
+    
     
     
     function __construct($options = array())
