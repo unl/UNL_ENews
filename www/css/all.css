@@ -219,6 +219,11 @@ Building the newsletter
 	background:#f0f0f0;
 	padding:2px;
 }
+#maincontent #newsColumnIntro h4 {
+	font-size:1.5em;	
+	margin-bottom:10px;
+	background:none;
+}
 #maincontent .newsColumn p {padding:2px; font-size:98%;margin-bottom:15px;}
 
 /*jQuery.UI styles */
