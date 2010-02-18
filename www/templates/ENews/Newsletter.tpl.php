@@ -27,15 +27,8 @@
                                 <p style="margin:1.1em 0;">Here is the latest and greatest UNL happenings today!</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="2" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
-                                <!-- This is the main content -->
-                                <div id="newsColumnIntro" class="newsColumn">
-                                
-                                </div>
-                            </td>
-                         </tr>
                             <?php
+                            $columnIntro = '';
                             $column1 = '';
                             $column2 = '';
                             foreach ($context->getStories() as $key=>$story) {
@@ -45,6 +38,9 @@
                                 if ($story->sort_order % 2 == 0) {
                                     $column = 'column2';
                                 }
+                                if ($story->sort_order == 0) {
+                                	$column = 'columnIntro';
+                                }
 
                                 $$column .= '
                                     <div class="story" id="story_'.$key.'">'
@@ -52,6 +48,14 @@
                                     </div>';
                             }
                             ?>
+                        <tr>
+                            <td colspan="2" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
+                                <!-- This is the main content -->
+                                <div id="newsColumnIntro" class="newsColumn">
+                                <?php echo $columnIntro; ?>
+                                </div>
+                            </td>
+                         </tr>
                          <tr id="newsStories">
                              <td valign="top" width="50%">
                                 <div id="newsColumn1" class="newsColumn">
