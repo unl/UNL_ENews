@@ -66,7 +66,7 @@ WDN.jQuery(document).ready(function() {
 		//helper: 'clone',
 		opacity: 0.45
 	});
-	WDN.jQuery('#newsColumn1, #newsColumn2').sortable({
+	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({
 		//revert: true,
 		connectWith: '.newsColumn',
 		scroll: true,
@@ -77,7 +77,7 @@ WDN.jQuery(document).ready(function() {
 			saveStoryOrder();
 		}
 	});
-	WDN.jQuery('#newsColumn1, #newsColumn2').disableSelection();
+	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').disableSelection();
 	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
 			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');
@@ -88,7 +88,7 @@ WDN.jQuery(document).ready(function() {
 	WDN.jQuery('#enews h3').eq(1).css('cursor','pointer').click(backToStep2);
 });
 function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
-	WDN.jQuery('#newsColumn1, #newsColumn2').sortable('refresh');
+	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable('refresh');
 	var result1 = WDN.jQuery('#newsColumn1').sortable('toArray');
 	var result2 = WDN.jQuery('#newsColumn2').sortable('toArray');
 	for(var i = 0; i<result1.length; i++) {

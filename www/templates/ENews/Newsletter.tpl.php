@@ -26,6 +26,14 @@
                                 <p style="margin:0;font-size:.9em;color:#909090;"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
                                 <p style="margin:1.1em 0;">Here is the latest and greatest UNL happenings today!</p>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
+                                <!-- This is the main content -->
+                                <div id="newsColumnIntro" class="newsColumn">
+                                
+                                </div>
+                            </td>
                          </tr>
                             <?php
                             $column1 = '';

@@ -177,6 +177,7 @@ Building the newsletter
 #maincontent .dragItem {
 	cursor:move;	
 }
+#newsColumnIntro {border-bottom:1px dashed #e0e0e0;}
 #maincontent .story { 
 	margin-top:10px;
 	cursor:move;
