@@ -108,6 +108,7 @@ function backToStep1 () {
 	WDN.jQuery('#enews h3').eq(1).removeClass("highlighted");
 	WDN.jQuery('#enews h3').eq(0).addClass("highlighted");
 	WDN.jQuery('#enews h3 span.announceType').remove();
+	WDN.jQuery('#enews h3').show();
 };
 function backToStep2 () {
 	WDN.jQuery('#wdn_process_step1').slideUp();
@@ -117,4 +118,5 @@ function backToStep2 () {
 	WDN.jQuery('#enews h3').eq(0).removeClass("highlighted");
 	WDN.jQuery('#enews h3').eq(1).addClass("highlighted");
 	WDN.jQuery('#enews h3 span.announceType').remove();
+	WDN.jQuery('#enews h3').show();
 };
