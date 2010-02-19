@@ -97,9 +97,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     function addStory(UNL_ENews_Story $story, $sort_order = null, $intro = null)
     {
         if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
-            if ($sort_order) {
-                $has_story->sort_order = $sort_order;
-            }
+            $has_story->sort_order = $sort_order;
             
             if ($intro) {
                 $has_story->intro = $intro;
@@ -114,10 +112,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $has_story = new UNL_ENews_Newsletter_Story();
         $has_story->newsletter_id = $this->id;
         $has_story->story_id      = $story->id;
-
-        if ($sort_order) {
-            $has_story->sort_order = $sort_order;
-        }
+        $has_story->sort_order    = $sort_order;
         
         if ($intro) {
             $has_story->intro = $intro;

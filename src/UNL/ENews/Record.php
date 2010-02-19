@@ -129,6 +129,7 @@ class UNL_ENews_Record
                 case 'file_id':
                 case 'story_id':
                 case 'length':
+                case 'sort_order':
                     $types .= 'i';
                     break;
                 default:
