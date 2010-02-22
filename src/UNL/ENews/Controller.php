@@ -198,7 +198,11 @@ class UNL_ENews_Controller
      */
     public static function getDB()
     {
-        return new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
+        $mysqli = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
+        if (mysqli_connect_error()) {
+            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+        }
     }
     
     public static function isAdmin($uid)
