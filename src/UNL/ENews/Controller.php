@@ -203,6 +203,7 @@ class UNL_ENews_Controller
             throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
                     . mysqli_connect_error());
         }
+        return $mysqli;
     }
     
     public static function isAdmin($uid)
