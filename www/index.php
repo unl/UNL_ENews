@@ -10,7 +10,21 @@ $enews = new UNL_ENews_Controller($_GET);
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
-$savvy->setTemplatePath(dirname(__FILE__).'/templates');
+$savvy->setTemplatePath(dirname(__FILE__).'/templates/default');
+
+
+if ($enews->options['format'] != 'html') {
+	switch($enews->options['format']) {
+		case 'rss':
+			$savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
+			break;
+		default:
+			
+	}
+}
+
+
+
 
 if ($enews->actionable[0] instanceof UNL_ENews_File) {
     // pass through without any outer template
