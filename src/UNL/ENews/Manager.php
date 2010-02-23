@@ -33,12 +33,11 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'posted':
             case 'approved':
             case 'archived':
-            	if (UNL_ENews_Controller::getUser(true)->hasPermission($this->newsroom->id)) {
-                	$this->actionable[] = new UNL_ENews_Newsroom_Stories(array('status'      => $this->options['status'],
-                                                                           'newsroom_id' => $this->newsroom->id));
-            	} else {
+            	if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsroom->id)) {
             		throw new Exception('Don\'t have permission to view that newsroom');
             	}
+                $this->actionable[] = new UNL_ENews_Newsroom_Stories(array('status'      => $this->options['status'],
+                                                                           	   'newsroom_id' => $this->newsroom->id));
                 break;
         }
     }
@@ -130,7 +129,9 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
         switch($var) {
             case 'newsroom':
        			if (isset($this->options['newsroom'])) {
-            		$newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom']);
+       				if (!$newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
+            			throw new Exception('Newsroom does not exist');
+       				}
             	} else {
             		$newsroom = UNL_ENews_Controller::getUser(true)->newsroom;
             	}
