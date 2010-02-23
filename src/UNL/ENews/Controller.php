@@ -1,7 +1,7 @@
 <?php
 class UNL_ENews_Controller
 {
-    public $options = array('view' => 'latest');
+    public $options = array('view' => 'latest', 'format' => 'html');
     
     protected $view_map = array('latest'      => 'UNL_ENews_StoryList_Latest',
                                 'story'       => 'UNL_ENews_Story',
@@ -183,7 +183,7 @@ class UNL_ENews_Controller
     function run()
     {
          if (isset($this->view_map[$this->options['view']])) {
-             $this->options['controller'] = $this;
+         //    $this->options['controller'] = $this;
              $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
          } else {
              throw new Exception('Un-registered view');
