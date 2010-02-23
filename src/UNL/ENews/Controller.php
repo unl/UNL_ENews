@@ -1,7 +1,11 @@
 <?php
 class UNL_ENews_Controller
 {
-    public $options = array('view' => 'latest', 'format' => 'html');
+	/**
+	 * Options array
+	 * Will include $_GET vars, this is the newsroom being used across views 
+	 */
+    public $options = array('view' => 'latest', 'format' => 'html', 'newsroom' => '1');
     
     protected $view_map = array('latest'      => 'UNL_ENews_StoryList_Latest',
                                 'story'       => 'UNL_ENews_Story',
@@ -23,8 +27,6 @@ class UNL_ENews_Controller
     protected static $admins = array('bbieber2', // Brett Bieber
     								 'erasmussen2' //Eric Rasmussen
         );
-        
-    public static $url = '';
     
     /**
      * The currently logged in user.
@@ -32,6 +34,8 @@ class UNL_ENews_Controller
      * @var UNL_ENews_User
      */
     protected static $user = false;
+    
+    public static $url = '';
     
     public static $db_user = 'enews';
     

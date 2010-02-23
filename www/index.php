@@ -6,8 +6,9 @@ if (file_exists('config.inc.php')) {
 }
 
 $enews = new UNL_ENews_Controller($_GET);
-
-
+/*
+?><pre><?php var_dump($enews);?></pre><?php 
+*/
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
 $savvy->setTemplatePath(dirname(__FILE__).'/templates/default');
@@ -18,12 +19,9 @@ if ($enews->options['format'] != 'html') {
 		case 'rss':
 			$savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
 			break;
-		default:
-			
+		default:			
 	}
 }
-
-
 
 
 if ($enews->actionable[0] instanceof UNL_ENews_File) {

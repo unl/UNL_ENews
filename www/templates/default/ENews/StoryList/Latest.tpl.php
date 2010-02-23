@@ -2,7 +2,7 @@
     <h1>Latest E-News</h1>
     <ul>
         <?php foreach($context as $item) :?>
-        <li><?php echo $savvy->render($item, 'ENews/Newsletter/Story.tpl.php'); ?></li>
+        <li style="clear:both"><?php echo $savvy->render($item, 'ENews/Newsletter/Story.tpl.php'); ?></li>
         <?php endforeach; ?>
     </ul>
 </div>

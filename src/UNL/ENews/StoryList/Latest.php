@@ -5,7 +5,8 @@ class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
     {
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'SELECT id FROM stories;';
+        //$sql = 'SELECT id FROM stories;';
+        $sql = 'SELECT story_id FROM newsroom_stories WHERE newsroom_id = '.(int)$options['newsroom'];
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $stories[] = $row[0];
