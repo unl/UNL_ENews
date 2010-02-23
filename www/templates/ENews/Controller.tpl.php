@@ -86,7 +86,9 @@ if ($user = UNL_ENews_Controller::getUser()) {
         <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
             <h1>E-Newsroom</h1>
             <!-- InstanceEndEditable --></div>
-        <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" --> <!-- InstanceEndEditable --></div>
+        <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" -->
+        	<h2><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></h2>
+        	<!-- InstanceEndEditable --></div>
         <div id="maincontent">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->

@@ -14,9 +14,14 @@ class UNL_ENews_Controller
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
     );
     
+    public static $pagetitle = array('submit'		=> 'Submit an Item',
+                                	 'manager'     	=> 'Manage News',
+    );
+    
     protected static $auth;
     
     protected static $admins = array('bbieber2', // Brett Bieber
+    								 'erasmussen2' //Eric Rasmussen
         );
         
     public static $url = '';
