@@ -54,13 +54,14 @@ foreach (array(
     'smeranda2',
     'rcrisler1',
     'acoleman1',
-    'kbartling2'
+    'kbartling2',
+    'erasmussen2'
     ) as $uid) {
-    
+
     UNL_ENews_Newsroom::getByID(1)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(2)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(3)->addUser(UNL_ENews_User::getByUID($uid));
-    UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));  
+    UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));
 
 }
 
