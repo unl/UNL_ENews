@@ -77,7 +77,9 @@ class UNL_ENews_Controller
             throw new Exception('You must log in to view this resource!');
             exit();
         }
-        self::$user = new UNL_ENews_User(array('uid'=>self::$auth->getUser()));
+        self::$user = UNL_ENews_User::getByUID(self::$auth->getUser());
+        self::$user->last_login = date('Y-m-d H:i:s');
+        self::$user->update();
     }
     
     /**
