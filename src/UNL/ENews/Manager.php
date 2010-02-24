@@ -36,6 +36,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             	if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsroom->id)) {
             		throw new Exception('Don\'t have permission to view that newsroom');
             	}
+                $this->actionable[] = new UNL_ENews_User_Newsrooms(array('uid' => UNL_ENews_Controller::getUser(false)->uid));
                 $this->actionable[] = new UNL_ENews_Newsroom_Stories(array('status'      => $this->options['status'],
                                                                            	   'newsroom_id' => $this->newsroom->id));
                 break;

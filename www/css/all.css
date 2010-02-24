@@ -1,4 +1,30 @@
 #maincontent form {width: 940px;}
+
+/* Manage Page - Newsroom chooser Form */
+
+#enews.newsroom_choose {
+	position:relative;
+	bottom:42px;
+	width:auto;
+	float:right;
+}
+
+#enews.newsroom_choose fieldset {
+	padding:0;
+	background:transparent;
+}
+
+#enews.newsroom_choose ol {
+	list-style:none outside none;
+}
+
+#enews.newsroom_choose li {
+	padding:0 10px 10px 0;
+	float:left;
+}
+
+/* */
+
 #maincontent h3 {
 	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
 	padding:5px 10px;

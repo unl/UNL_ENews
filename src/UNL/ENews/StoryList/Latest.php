@@ -1,8 +1,14 @@
 <?php
 class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
 {
+	public $newsroom;
+	
     function __construct($options = array())
     {
+    	if (!$this->newsroom = UNL_ENews_Newsroom::getByID($options['newsroom'])) {
+    		throw new Exception('Newsroom not found');
+    	}
+    	
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
         //$sql = 'SELECT id FROM stories;';
