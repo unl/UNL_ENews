@@ -1,7 +1,7 @@
 
 <script type="text/javascript">
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
-</script><form class="energetic" method="post" action="?view=manager&amp;type=<?php echo $parent->context->options['status']; ?>">
+</script><form class="energetic" method="post" action="?view=manager&amp;status=<?php echo $parent->context->options['status']; ?>">
 <input type="hidden" name="_type" value="change_status" />
 <div class="storyAction">
     <div class="storyButtonAction">
@@ -11,7 +11,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
         <label for="storyaction">Action</label> 
-        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['type']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['status']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
@@ -24,8 +24,8 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <thead>
         <tr>
             <th scope="col" class="select">Select</th>
-            <th scope="col" class="title"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=title">Headline</a></th>
-            <th scope="col" class="date"><a href="?view=manager&amp;type=<?php echo $parent->context->options['type']; ?>&amp;orderby=starttime">Request Publish Date</a></th>
+            <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=title">Headline</a></th>
+            <th scope="col" class="date"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Request Publish Date</a></th>
             <th scope="col" class="edit">Edit</th>
         </tr>
     </thead>
@@ -48,7 +48,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
         <label for="storyaction">Action</label> 
-        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['type']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['status']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
