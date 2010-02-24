@@ -1,4 +1,15 @@
- 
-    <?php foreach($context as $item) :?>
-    	<?php echo $savvy->render($item, 'ENews/Story.tpl.php'); ?>
-    <?php endforeach; ?>
+<rss version="2.0">
+    <channel>
+        <title><?php echo $context->newsroom->name; ?></title>
+        <link><?php echo UNL_ENews_Controller::getURL(); ?></link>
+        <description>Latest news from <?php echo $context->newsroom->name; ?></description>
+        <language>en-us</language>
+        <generator>Magic</generator>
+        <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
+    </channel>  
+    
+<?php foreach($context as $item) :?>
+	<?php echo $savvy->render($item, 'ENews/Story.tpl.php'); ?>
+<?php endforeach; ?>
+
+</rss>
