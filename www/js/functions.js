@@ -198,9 +198,9 @@ var manager = function() {
         /* This function is called when an action is selected within an event listing */
         actionMenuChange  : function(sel) {
             switch(sel[sel.selectedIndex].value) {
-            case 'posted':
+            case 'approved':
             case 'archived':
-                var button = document.getElementById('moveto_posted');
+                var button = document.getElementById('moveto_approved');
                 button.click();
                 break;
             case 'pending':
@@ -213,7 +213,7 @@ var manager = function() {
                 form.submit();
                 break;
             case 'delete':
-                var button = document.getElementById('delete_event');
+                var button = document.getElementById('delete_story');
                 button.click();
                 break;
             }

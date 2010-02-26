@@ -1,3 +1,7 @@
+.btnsubmit {
+display:none;
+}
+
 #maincontent form {width: 940px;}
 
 /* Manage Page - Newsroom chooser Form */
