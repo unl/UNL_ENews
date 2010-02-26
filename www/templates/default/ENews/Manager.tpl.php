@@ -1,4 +1,8 @@
-<h3><?php echo $context->newsroom->name;?></h3>
+<h3><?php echo $context->newsroom->name;?>
+	(<a href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>">Live View</a>, 
+	 <a class="rsslink" href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>&amp;format=rss">RSS</a>
+	)
+</h3>
 
 <?php
 if ($context->actionable) {

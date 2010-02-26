@@ -1,7 +1,9 @@
 
 <script type="text/javascript">
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
-</script><form class="energetic" method="post" action="?view=manager&amp;status=<?php echo $parent->context->options['status']; ?>">
+</script>
+
+<form id="formlist" name="formlist" class="energetic" method="post" action="?view=manager&amp;status=<?php echo $parent->context->options['status']; ?>">
 <input type="hidden" name="_type" value="change_status" />
 <div class="storyAction">
     <div class="storyButtonAction">
@@ -31,8 +33,8 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     </thead>
     <tbody>
     <?php foreach ($context as $item) : ?>
-        <tr id="row<?php echo $item->id; ?>">
-            <td><input type="checkbox" name="story_<?php echo $item->id; ?>" onclick="checknegate()" /></td>
+        <tr id="row<?php echo $item->id; ?>" onclick="highlightLine(this,<?php echo $item->id; ?>);">
+            <td><input type="checkbox" name="story<?php echo $item->id; ?>" onclick="checknegate(<?php echo $item->id; ?>)" /></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
             <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>

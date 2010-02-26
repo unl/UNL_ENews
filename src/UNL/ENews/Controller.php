@@ -18,8 +18,11 @@ class UNL_ENews_Controller
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
     );
     
-    public static $pagetitle = array('submit'		=> 'Submit an Item',
+    public static $pagetitle = array('latest'		=> 'Latest News',
+    								 'submit'		=> 'Submit an Item',
                                 	 'manager'     	=> 'Manage News',
+                               		 'newsletter'  	=> 'Build Newsletter',
+                               		 'newsletters' 	=> 'Newsletters',
     );
     
     protected static $auth;

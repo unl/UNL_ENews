@@ -48,6 +48,19 @@
 	font-weight:bold;
 	border:1px solid #fff;
 }
+
+#maincontent a.rsslink {
+	background:url('images/rss.png') no-repeat;
+	display:inline-block;
+	height:20px;
+	width:20px;
+	text-indent:-9999px;
+}
+
+#maincontent h3 span a.rsslink {
+		
+}
+
 #maincontent fieldset {
 	background:#f7f7f7;
 	padding:10px 10px 0px 10px;
