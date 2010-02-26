@@ -7,7 +7,7 @@
     </ul>
 </div>
 <div class="col right">
-    <a href="?view=submit">Submit News</a>
+    <a href="?view=submit&amp;newsroom=<?php echo $context->newsroom->id;?>">Submit News</a>
     <br />
     
 </div>
