@@ -259,7 +259,7 @@ function animation(l,id){
 
 function checkevent(id) {
     try {
-        var checkSet = eval("document.formlist.story" + id);
+        var checkSet = eval("document.formlist.story_" + id);
         checkSet.checked = !checkSet.checked
     } catch(e) {}
 }
