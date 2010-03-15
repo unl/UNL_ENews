@@ -12,8 +12,8 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
     
     function __postConstruct()
     {
-        if (isset($this->options['newsletter_id'])) {
-            $this->newsletter = UNL_ENews_Newsletter::getById($this->options['newsletter_id']);
+        if (isset($this->options['id'])) {
+            $this->newsletter = UNL_ENews_Newsletter::getById($this->options['id']);
         } else {
             $this->newsletter = UNL_ENews_Newsletter::getLastModified();
         }

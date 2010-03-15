@@ -28,6 +28,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
             <th scope="col" class="select">Select</th>
             <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=title">Headline</a></th>
             <th scope="col" class="date"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Request Publish Date</a></th>
+            <th scope="col" class="submitter"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=uid_created">Submitter</a></th>
             <th scope="col" class="edit">Edit</th>
         </tr>
     </thead>
@@ -37,6 +38,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
+            <td><?php echo $item->uid_created; ?></td>
             <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
         </tr>
     <?php endforeach; ?>

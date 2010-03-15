@@ -82,7 +82,7 @@ WDN.jQuery(function($){
 <h3><span>3</span>Announcement Submission</h3>
 <fieldset id="wdn_process_step3" style="display:none;">
 	<legend><span>News Announcement Submission</span></legend>
-    <input type="hidden" name="_type" value="submission" />
+    <input type="hidden" name="_type" value="story" />
         <ol>
             <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></li>
             <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></li>

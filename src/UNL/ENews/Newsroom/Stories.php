@@ -16,4 +16,20 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
         $mysqli->close();
         parent::__construct($stories);
     }
+    
+    public static function relationshipExists($newsroom_id,$story_id)
+    {
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = 'SELECT newsroom_id,story_id FROM newsroom_stories ';
+        $sql .= 'WHERE newsroom_id = '.(int)$newsroom_id .
+                ' AND story_id = '.(int)$story_id;
+        if ($result = $mysqli->query($sql)) {
+            if ($result->num_rows > 0) {
+            	$mysqli->close();
+            	return true;
+            }
+        }
+        $mysqli->close();
+        return false;    	
+    }
 }
