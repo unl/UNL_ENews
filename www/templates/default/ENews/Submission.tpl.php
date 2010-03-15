@@ -92,7 +92,7 @@ WDN.jQuery(function($){
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
             <li><label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label><input id="image" name="image" type="file" /></li>
-            <?php if ($context->newsroom->id != 1 && $context->newsroom->id != 2) : ?>
+            <?php if ($context->newsroom->id != 1) : ?>
             <li>
             	<fieldset>
             		<legend>Please consider for</legend>
@@ -103,11 +103,7 @@ WDN.jQuery(function($){
             		</li>
             		<li>
             			<input type="checkbox" name="newsroom_id[]" value="1" />
-                    	<label for="newsroom_id[]">E-News</label>
-                    </li>
-            		<li>
-            			<input type="checkbox" name="newsroom_id[]" value="2" />
-                    	<label for="newsroom_id[]">UNL Today</label>
+                    	<label for="newsroom_id[]">University Communications Publications (E-News, UNL Today, Scarlet, etc.)</label>
                     </li>
             		</ol>
             	</fieldset>	
@@ -131,7 +127,6 @@ WDN.jQuery(function($){
             <?php else : ?>
             <li>
             	<input type="hidden" name="newsroom_id[]" value="1" />
-            	<input type="hidden" name="newsroom_id[]" value="2" />
             </li>
             <?php endif; ?>
         </ol>
