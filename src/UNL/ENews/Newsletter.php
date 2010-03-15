@@ -146,10 +146,13 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
         $savvy = new Savvy();
+		$savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
+		
+		$plaintext = $savvy->render($this);
+
+		$savvy = new Savvy();
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/default');
-        
-        require_once 'Mail/mime.php';
-        
+  
         $html = "<html>".
                 "<body bgcolor='#ffffff'>".
                     $savvy->render($this).
@@ -160,13 +163,15 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
           'From'    => 'no-reply@'.$_SERVER['HTTP_HOST'],
           'Subject' => $this->subject);
         
+        require_once 'Mail/mime.php';
         $mime = new Mail_mime($crlf);
+        $mime->setTXTBody($plaintext);
         $mime->setHTMLBody($html);
         
         $body = $mime->get();
         $hdrs = $mime->headers($hdrs);
         $mail =& Mail::factory('sendmail');
-        $mail->send('brett.bieber@gmail.com', $hdrs, $body);
+        $mail->send('ericrasmussen1@gmail.com', $hdrs, $body);
         
         // Send the email!
         return true;
