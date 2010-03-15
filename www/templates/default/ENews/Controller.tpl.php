@@ -30,7 +30,7 @@
 if ($user = UNL_ENews_Controller::getUser()) {
     echo '<script type="text/javascript">
             try {
-                WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout=true";
+                WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
                 WDN.idm.displayNotice("'.$user->uid.'");
             } catch(e) {}
           </script>';

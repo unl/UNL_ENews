@@ -31,6 +31,13 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     
     private $story;
     
+    function __construct($options = array())
+    {
+    	if (isset($options['id'])) {
+    		$this->story = UNL_ENews_Story::getByID($options['id']);
+    	}
+    }
+    
     public function getTable()
     {
         return 'newsletter_stories';

@@ -8,7 +8,7 @@ class UNL_ENews_Controller
     public $options = array('view' => 'latest', 'format' => 'html', 'newsroom' => '1');
     
     protected $view_map = array('latest'      => 'UNL_ENews_StoryList_Latest',
-                                'story'       => 'UNL_ENews_Story',
+                                'story'       => 'UNL_ENews_Newsletter_Story',
                                 'submit'      => 'UNL_ENews_Submission',
                                 'thanks'      => 'UNL_ENews_Confirmation',
                                 'manager'     => 'UNL_ENews_Manager',
@@ -50,7 +50,7 @@ class UNL_ENews_Controller
     {
         $options += $this->options;
         $this->options = $options;
-        //$this->authenticate();
+        $this->authenticate(true);
         
         if (!empty($_POST)) {
             try {
@@ -77,14 +77,19 @@ class UNL_ENews_Controller
      * 
      * @return void
      */
-    static function authenticate()
+    static function authenticate($logoutonly = false)
     {
-        self::$auth = UNL_Auth::factory('SimpleCAS');
         if (isset($_GET['logout'])) {
+        	self::$auth = UNL_Auth::factory('SimpleCAS');
             self::$auth->logout();
-        } else {
-            self::$auth->login();
         }
+        if ($logoutonly) {
+        	return true;
+        }
+
+        self::$auth = UNL_Auth::factory('SimpleCAS');
+        self::$auth->login();
+        
         if (!self::$auth->isLoggedIn()) {
             throw new Exception('You must log in to view this resource!');
             exit();
