@@ -10,7 +10,18 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $website;
     public $uid_created;
     public $date_submitted;
-    
+
+    function __construct($options = array())
+    {
+    	if (isset($options['id'])) {
+    		$story = self::getByID($options['id']);
+    		$this->id 			= $story->id;
+    		$this->title 		= $story->title;
+    		$this->description 	= $story->description;
+    		$this->website		= $story->website;
+    	}
+    }
+      
     function getTable()
     {
         return 'stories';

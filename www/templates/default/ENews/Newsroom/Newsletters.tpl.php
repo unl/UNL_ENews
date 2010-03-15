@@ -1,5 +1,4 @@
-<h2>Newsletters</h2>
-<table class="zentable bright two_col">
+<table class="zentable bright">
     <thead>
         <tr>
             <th>Release Date</th>
