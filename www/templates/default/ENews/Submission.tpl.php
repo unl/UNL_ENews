@@ -15,42 +15,12 @@ function getValue($object, $field)
 <script type="text/javascript">
 WDN.loadJS("js/jquery.imgareaselect.pack.js");
 WDN.loadJS("js/jquery.jfeedUNL.js");
+WDN.loadJS("js/submission.js");
 WDN.loadCSS("css/imgareaselect-default.css");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
 WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
-WDN.jQuery(function($){
-	$("#date,#request_publish_start,#request_publish_end").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
-	$("#date").change(function(){
-		var date = $(this).val().split(/\//);
 
-		$('#request_publish_end').attr('value', $(this).val());
-		
-	    $.getFeed({
-	        url: 'http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss',
-	        success: function(feed) {
-	        	window.whatisfeed = feed;
-	        	$("#event").html('<option value="NewEvent">New Event</option>');
-	            for(var i = 0, l = feed.items.length; i < l; i++) {
-		            
-	                var item = feed.items[i];
-	               $("#event").append('<option value="'+item.link+'">' + item.title + '</option>');
-	            }
-	            
-	        }    
-	    });
-	    
-	});
-	$('.hasDatepicker').each(function() {
-		$(this).attr({'autocomplete' : 'off'});
-	});
-	$('select#event').change(function(){
-		$('form#enews input[name=website]').val($(this).val());
-	});
-
-
-	
-});
 </script>
 <form id="enews" class="energetic" action="?view=submit" method="post" enctype="multipart/form-data">
 <h3 class="highlighted"><span>1</span>Select News Type</h3>
@@ -132,7 +102,10 @@ WDN.jQuery(function($){
         </ol>
 	<div id="sampleLayout">
 		<h4>&lt;Enter Your Title&gt;</h4>
-		<p>&lt;Enter Your Article Text&gt;</p>
+		<p>&lt;Enter Your Article Text&gt;
+			<br />
+			<a href="#"></a>
+		</p>
 	</div>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
