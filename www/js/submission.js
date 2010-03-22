@@ -82,17 +82,14 @@ WDN.jQuery(function($){
 		var website = $(this).val();
 		var goURLPrefix = RegExp('http://go.unl.edu');
 		if (!goURLPrefix.test(website)) {
-			submission.createGoURL(
-				website,
-				function(data) {
-					submission.addURLtoPreview(data);
-				}
-			);
+			submission.createGoURL(website);
+		} else {
+			if (!submission.urlPreview){
+				submission.addURLtoPreview(website);
+			}
 		}
 		//Now, let's add the URL to the preview
-		if (!submission.urlPreview){
-			submission.addURLtoPreview(website);
-		}
+		
 	});
 
 	
@@ -107,7 +104,7 @@ var submission = function() {
 		
 		utm_medium : 'email',
 		
-		utm_content : WDN.jQuery('#website').attr('value'),
+		utm_content : '',
 		
 		utm_source : 'eNews',
 		
@@ -116,19 +113,21 @@ var submission = function() {
 		createGoURL : function(url) {
 			WDN.jQuery('#website').siblings('label').append('<span class="helper">Building a GoURL...</span>');
 			WDN.jQuery('#website').attr('disabled','disabled');
+			submission.utm_content = WDN.jQuery('#title').val();
 			
-			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_cotent="+submission.utm_content;
+			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_content="+submission.utm_content;
 			
 			WDN.socialmediashare.createURL(
 				WDN.socialmediashare.buildGAURL(url, gaTagging),
 				function(data) {
 					$('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a GoURL');
+					submission.addURLtoPreview(data);
 				}
 			);
 		},
 	
 		addURLtoPreview : function(url) {
-			WDN.jQuery('#sampleLayout p a').text(function(index){
+			WDN.jQuery('#sampleLayout a').text(function(index){
 				return url;
 				submission.urlPreview = true;
 			});

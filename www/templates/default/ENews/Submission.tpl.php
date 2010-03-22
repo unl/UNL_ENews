@@ -102,10 +102,8 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
         </ol>
 	<div id="sampleLayout">
 		<h4>&lt;Enter Your Title&gt;</h4>
-		<p>&lt;Enter Your Article Text&gt;
-			<br />
-			<a href="#"></a>
-		</p>
+		<p>&lt;Enter Your Article Text&gt;</p>
+		<a href="#"></a>
 	</div>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
