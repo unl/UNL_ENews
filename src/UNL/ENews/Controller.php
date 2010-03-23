@@ -1,14 +1,14 @@
 <?php
 class UNL_ENews_Controller
 {
-	/**
-	 * Options array
-	 * Will include $_GET vars, this is the newsroom being used across views 
-	 */
+    /**
+     * Options array
+     * Will include $_GET vars, this is the newsroom being used across views 
+     */
     public $options = array('view' => 'latest', 'format' => 'html', 'newsroom' => '1');
     
     protected $view_map = array('latest'      => 'UNL_ENews_StoryList_Latest',
-    							'story'		  => 'UNL_ENews_Story',
+                                'story'       => 'UNL_ENews_Story',
                                 'submit'      => 'UNL_ENews_Submission',
                                 'thanks'      => 'UNL_ENews_Confirmation',
                                 'manager'     => 'UNL_ENews_Manager',
@@ -18,17 +18,17 @@ class UNL_ENews_Controller
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
     );
     
-    public static $pagetitle = array('latest'		=> 'Latest News',
-    								 'submit'		=> 'Submit an Item',
-                                	 'manager'     	=> 'Manage News',
-                               		 'newsletter'  	=> 'Build Newsletter',
-                               		 'newsletters' 	=> 'Newsletters',
+    public static $pagetitle = array('latest'      => 'Latest News',
+                                     'submit'      => 'Submit an Item',
+                                     'manager'     => 'Manage News',
+                                     'newsletter'  => 'Build Newsletter',
+                                     'newsletters' => 'Newsletters',
     );
     
     protected static $auth;
     
     protected static $admins = array('bbieber2', // Brett Bieber
-    								 'erasmussen2' //Eric Rasmussen
+                                     'erasmussen2' //Eric Rasmussen
         );
     
     /**
@@ -80,11 +80,11 @@ class UNL_ENews_Controller
     static function authenticate($logoutonly = false)
     {
         if (isset($_GET['logout'])) {
-        	self::$auth = UNL_Auth::factory('SimpleCAS');
+            self::$auth = UNL_Auth::factory('SimpleCAS');
             self::$auth->logout();
         }
         if ($logoutonly) {
-        	return true;
+            return true;
         }
 
         self::$auth = UNL_Auth::factory('SimpleCAS');
