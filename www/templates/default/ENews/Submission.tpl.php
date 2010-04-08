@@ -110,5 +110,5 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 	<legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
 </fieldset>
-<p class="submit"><input type="submit" name="submit" value="Submit" /></p>
+<p class="submit" style="display:none"><input type="submit" name="submit" value="Submit" /></p>
 </form>

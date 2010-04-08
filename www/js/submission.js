@@ -33,6 +33,7 @@ WDN.jQuery(function($){
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enews h3').eq(0).removeClass('highlighted');
 				$('#enews h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
+				$('#enews p.submit').show();
 			});
 		} else { //we have an event request
 			$('#wdn_process_step2').slideToggle(function() {
@@ -48,6 +49,7 @@ WDN.jQuery(function($){
 		$('#wdn_process_step3').slideToggle(function() {
 			$('#enews h3').eq(1).removeClass('highlighted');
 			$('#enews h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>');
+			$('#enews p.submit').show();
 		});
 		return false;
 	});
@@ -92,7 +94,28 @@ WDN.jQuery(function($){
 		
 	});
 
-	
+	function backToStep1() {
+		$('#wdn_process_step2').slideUp();
+		$('#wdn_process_step3').slideUp();
+		$('#wdn_process_step1').slideDown();
+		$('#enews h3').eq(2).removeClass("highlighted");
+		$('#enews h3').eq(1).removeClass("highlighted");
+		$('#enews h3').eq(0).addClass("highlighted");
+		$('#enews h3 span.announceType').remove();
+		$('#enews h3').show();
+		$('#enews p.submit').hide();
+	};
+	function backToStep2() {
+		$('#wdn_process_step1').slideUp();
+		$('#wdn_process_step3').slideUp();
+		$('#wdn_process_step2').slideDown();
+		$('#enews h3').eq(2).removeClass("highlighted");
+		$('#enews h3').eq(0).removeClass("highlighted");
+		$('#enews h3').eq(1).addClass("highlighted");
+		$('#enews h3 span.announceType').remove();
+		$('#enews h3').show();
+		$('#enews p.submit').hide();
+	};
 });
 /**
  * Namespace for submission javascript.
@@ -135,23 +158,3 @@ var submission = function() {
 	};
 }();
 
-function backToStep1() {
-	$('#wdn_process_step2').slideUp();
-	$('#wdn_process_step3').slideUp();
-	$('#wdn_process_step1').slideDown();
-	$('#enews h3').eq(2).removeClass("highlighted");
-	$('#enews h3').eq(1).removeClass("highlighted");
-	$('#enews h3').eq(0).addClass("highlighted");
-	$('#enews h3 span.announceType').remove();
-	$('#enews h3').show();
-};
-function backToStep2() {
-	$('#wdn_process_step1').slideUp();
-	$('#wdn_process_step3').slideUp();
-	$('#wdn_process_step2').slideDown();
-	$('#enews h3').eq(2).removeClass("highlighted");
-	$('#enews h3').eq(0).removeClass("highlighted");
-	$('#enews h3').eq(1).addClass("highlighted");
-	$('#enews h3 span.announceType').remove();
-	$('#enews h3').show();
-};
