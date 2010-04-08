@@ -73,7 +73,7 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
             		</li>
             		<li>
             			<input type="checkbox" name="newsroom_id[]" value="1" />
-                    	<label for="newsroom_id[]">University Communications Publications (E-News, UNL Today, Scarlet, etc.)</label>
+                    	<label for="newsroom_id[]">UComm Publications (E-News, UNL Today, Scarlet, etc.)</label>
                     </li>
             		</ol>
             	</fieldset>	

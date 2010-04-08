@@ -4,6 +4,54 @@
 
 #maincontent form {width: 940px;}
 
+/* Manage Page - Check/Uncheck/Action */
+
+.storyAction  {
+	background:#EEE;
+	border-bottom:1px solid #DDDDDD;
+	border-right:1px solid #DDDDDD;
+	height:1%;
+	margin:0 0 5px;
+	overflow:auto;
+	padding:4px 5px;
+	position:relative;
+}
+.storyButtonAction  {
+	float:left;
+	margin:2px 0 0;
+	width:144px;
+}
+#maincontent a.checkall,
+#maincontent a.uncheckall {
+	background:#F0F0F0;
+	border:1px solid #B8AFA1;
+	color:#5F5F5F;
+	display:block;
+	float:left;
+	font-size:10px;
+	margin-right:4px;
+	padding:1px 4px;
+}
+#maincontent form fieldset.storyFieldsetAction {
+	background:none repeat scroll 0 0 transparent;
+	border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-color #BBBBBB;
+	border-style:none none none solid;
+	border-width:medium medium medium 1px;
+	clear:none;
+	margin:3px 0 0 0;
+	padding:0;
+	width:110px;
+}
+#maincontent form fieldset.storyFieldsetAction label,
+#maincontent form fieldset.storyFieldsetAction legend {
+	display:none;
+}
+#maincontent form fieldset.storyFieldsetAction select {
+	margin:0 5px;
+}
+
+
+
 /* Manage Page - Newsroom chooser Form */
 
 #enews.newsroom_choose {
