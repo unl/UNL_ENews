@@ -24,7 +24,7 @@
 <?php virtual('/wdn/templates_3.0/includes/browserspecifics.html'); ?>
 <?php virtual('/wdn/templates_3.0/includes/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>UNL | E-Newsroom</title>
+<title>UNL | E-Newsroom | <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
@@ -51,16 +51,17 @@ if ($user = UNL_ENews_Controller::getUser()) {
             <!-- InstanceBeginEditable name="breadcrumbs" -->
             <ul>
                 <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-                <li>E-Newsroom</li>
+                <li><a href="<?php echo UNL_ENews_Controller::getURL();?>">E-Newsroom</a></li>
+                <li><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></li>
             </ul>
             <!-- InstanceEndEditable --></div>
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="?view=latest">E-News</a></li>
+                    <li><a href="?view=newsletter">E-News</a></li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
                     <li><a href="?view=manager">Manage News</a></li>
-                    <li><a href="?view=newsletter">Build Newsletter</a>
+                    <li><a href="?view=preview">Build Newsletter</a>
                         <?php
                         if (($user = UNL_ENews_Controller::getUser())
                             && $newsletters = $user->newsroom->getNewsletters()) {
@@ -69,7 +70,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
                                 // There is a user logged in
                                 foreach($newsletters as $newsletter) {
                                     if (isset($newsletter->release_date)) {
-                                        echo '<li><a href="?view=newsletter&amp;id='.$newsletter->id.'">'.$newsletter->release_date.'</a></li>';
+                                        echo '<li><a href="?view=preview&amp;id='.$newsletter->id.'">'.$newsletter->release_date.'</a></li>';
                                     } 
                                 }
                                 echo '<li><a href="?view=newsletters">All newsletters</a></li>';
@@ -84,7 +85,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
     </div>
     <div id="wdn_content_wrapper">
         <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
-            <h1>E-Newsroom</h1>
+            <h1><?php if (isset(UNL_ENews_Controller::$titlegraphic[$context->options['view']])) echo UNL_ENews_Controller::$titlegraphic[$context->options['view']]; else echo 'E-Newsroom';?></h1>
             <!-- InstanceEndEditable --></div>
         <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" -->
         	<h2><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></h2>

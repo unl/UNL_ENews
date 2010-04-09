@@ -5,23 +5,27 @@ class UNL_ENews_Controller
      * Options array
      * Will include $_GET vars, this is the newsroom being used across views 
      */
-    public $options = array('view' => 'latest', 'format' => 'html', 'newsroom' => '1');
+    public $options = array('view' => 'newsletter', 'format' => 'html', 'newsroom' => '1');
     
-    protected $view_map = array('latest'      => 'UNL_ENews_StoryList_Latest',
+    protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
+    							'latest'      => 'UNL_ENews_StoryList_Latest',
                                 'story'       => 'UNL_ENews_Story',
                                 'submit'      => 'UNL_ENews_Submission',
                                 'thanks'      => 'UNL_ENews_Confirmation',
                                 'manager'     => 'UNL_ENews_Manager',
                                 'file'        => 'UNL_ENews_File',
-                                'newsletter'  => 'UNL_ENews_Newsletter_Preview',
+                                'preview'	  => 'UNL_ENews_Newsletter_Preview',
                                 'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
+    );
+    
+    public static $titlegraphic = array('newsletter' => 'Today@UNL'
     );
     
     public static $pagetitle = array('latest'      => 'Latest News',
                                      'submit'      => 'Submit an Item',
                                      'manager'     => 'Manage News',
-                                     'newsletter'  => 'Build Newsletter',
+                                     'preview'  => 'Build Newsletter',
                                      'newsletters' => 'Newsletters',
     );
     

@@ -77,7 +77,20 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $object->save();
         
         return $object;
+    }
+    
+    public static function getLastReleased()
+    {
+        $object = new self();
+        $sql = "SELECT * FROM newsletters WHERE release_date IS NOT NULL ORDER BY release_date DESC LIMIT 1";
+        $mysqli = UNL_ENews_Controller::getDB();
+        if (($result = $mysqli->query($sql))
+            && $result->num_rows == 1) {
+            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            return $object;
+        }
         
+        return $object;
     }
     
     function delete()
