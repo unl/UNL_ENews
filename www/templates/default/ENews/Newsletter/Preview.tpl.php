@@ -28,6 +28,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 			<?php endforeach; ?>
 		</div>
     </div>
-    <div class="three_col right">
+    <div class="three_col right">               
+    	<?php $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/www/templates/email');?>
 	    <?php echo $savvy->render($context->newsletter); ?>
     </div>
