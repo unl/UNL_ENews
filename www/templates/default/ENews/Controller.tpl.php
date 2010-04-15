@@ -19,8 +19,6 @@
 <link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/all.css" />
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
-<script type="text/javascript" src="js/functions.js"></script>
 <?php virtual('/wdn/templates_3.0/includes/browserspecifics.html'); ?>
 <?php virtual('/wdn/templates_3.0/includes/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="doctitle" -->

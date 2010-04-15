@@ -13,16 +13,24 @@ function getValue($object, $field)
 }
 ?>
 <script type="text/javascript">
-WDN.loadJS("js/jquery.imgareaselect.pack.js");
-WDN.loadJS("js/jquery.jfeedUNL.js");
-WDN.loadJS("js/submission.js");
-WDN.loadCSS("css/imgareaselect-default.css");
-WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
-WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
-WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
-
+	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+	WDN.loadJS("js/functions.js");
+	WDN.loadJS("js/jquery.imgareaselect.pack.js");
+	WDN.loadJS("js/jquery.jfeedUNL.js");
+	WDN.loadJS("js/submission.js");
+	WDN.loadJS("js/ajaxfileupload.js");
+	WDN.loadCSS("css/imgareaselect-default.css");
+	WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
+	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
+	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 </script>
-<form id="enews" class="energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+ 
+
+<form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+	
+<?php //Story id if we are editing ?>
+<input type="hidden" id="storyid" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
+
 <h3 class="highlighted"><span>1</span>Select News Type</h3>
 <fieldset id="wdn_process_step1">
 	<legend>Select News Type</legend>
@@ -61,7 +69,6 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
             <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo getValue($context, 'request_publish_end'); ?>" /></li>
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
-            <li><label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label><input id="image" name="image" type="file" /></li>
             <?php if ($context->newsroom->id != 1) : ?>
             <li>
             	<fieldset>
@@ -76,23 +83,7 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
                     	<label for="newsroom_id[]">UComm Publications (E-News, UNL Today, Scarlet, etc.)</label>
                     </li>
             		</ol>
-            	</fieldset>	
-      <!--      <fieldset>
-      				<legend>Please consider for </legend> 
-					<ol>              
-                    <?php foreach (array(1 => 'E-News',
-                                         2 => 'UNL Today',
-                                         3 => 'Scarlet',
-                                         4 => 'News Release',
-                                         5 => 'Web Promo',
-                                         6 => 'NebraskaMag') as $id=>$title) :?>
-                    <li>
-                    	<input type="checkbox" name="newsroom_id[]<?php echo $type; ?>" value="<?php echo $id; ?>" />
-                    	<label for="newsroom_id[]<?php echo $type; ?>"><?php echo $title; ?></label>
-                    </li>
-                    <?php endforeach; ?>
-                    </ol>
-                </fieldset>  -->
+            	</fieldset>
             </li>
             <?php else : ?>
             <li>
@@ -105,10 +96,34 @@ WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 		<p>&lt;Enter Your Article Text&gt;</p>
 		<a href="#"></a>
 	</div>
+	<div class="clear"></div>
+	<p class="nextStep"><a href="#" id="next_step4">Save Story and Continue to Image Upload</a></p>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
 	<legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
+</fieldset> 
+</form>
+
+
+
+
+
+
+<form id="enewsImage" name="enewsImage" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_type" value="file" />
+<h3><span>4</span>Image Upload</h3>
+
+<?php //Story id that gets attached when the story is submitted above ?>
+<input type="hidden" id="storyid" name="storyid" value="" />
+
+<fieldset id="wdn_process_step4" style="display:none;">
+            <ol><li>
+            <label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
+            <input id="image" name="image" type="file" />
+            </li></ol>
+            
+			<div id="upload_area">where you will preview the image</div>
 </fieldset>
-<p class="submit" style="display:none"><input type="submit" name="submit" value="Submit" /></p>
+ 
 </form>

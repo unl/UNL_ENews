@@ -1,7 +1,9 @@
-
 <script type="text/javascript">
-WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
+	WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
+	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+	WDN.loadJS("js/functions.js");
 </script>
+
 <form id="enews" class="energetic" method="post" action="?view=preview&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
 	<fieldset style="background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;">
 	<legend>Your Newsletter</legend>

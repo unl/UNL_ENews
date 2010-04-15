@@ -24,7 +24,7 @@
                                     </div>';
                             }
                             ?>
-                       
+           <div id="newsletterWeb">            
                                 <div id="newsColumnIntro" class="newsColumn">
                                 <?php echo $columnIntro; ?>
                                 </div>
@@ -39,4 +39,4 @@
                                 <?php echo $column2; ?>
                                 </div>
                          </div>
-  
+  			</div>

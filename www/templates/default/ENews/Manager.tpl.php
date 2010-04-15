@@ -1,3 +1,8 @@
+<script type="text/javascript">
+WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+WDN.loadJS("js/functions.js");
+</script>
+
 <h3><?php echo $context->newsroom->name;?>
 	(<a href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>">Live View</a>, 
 	 <a class="rsslink" href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>&amp;format=rss">RSS</a>

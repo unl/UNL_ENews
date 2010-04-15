@@ -129,23 +129,11 @@ class UNL_ENews_Controller
                 $class = $this->view_map[$_POST['_type']];
                 $object = new $class();
                 self::setObjectFromArray($object, $_POST);
+                $object->id = (int)$_POST['storyid'];
                 
                 if (!$object->save()) {
                     throw new Exception('Could not save the story');
-                }
-                
-                if (isset($_FILES['image'])
-                    && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-                    $file_data = $_FILES['image'];
-                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-                    $file = new UNL_ENews_File();
-                    self::setObjectFromArray($file, $file_data);
-                    if ($file->save()) {
-                        $object->addFile($file);
-                    } else {
-                        throw new Exception('Error saving the file');
-                    }
-                }
+                } 
                 
                 foreach ($_POST['newsroom_id'] as $id) {
                     if ($newsroom = UNL_ENews_Newsroom::getByID($id)) {
@@ -159,7 +147,7 @@ class UNL_ENews_Controller
                     }
                 }
                 
-                header('Location: ?view=thanks&_type='.$_POST['_type']);
+                echo $object->id;
                 exit();
                 break;
             case 'file':
@@ -167,10 +155,19 @@ class UNL_ENews_Controller
                 if ($_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $file_data = $_FILES['image'];
                     $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-                    $object = new $class();
-                    self::setObjectFromArray($object, $file_data);
-                    $object->save();
-                    header('Location: ?view=file&id='.$object->id);
+                    $file = new $class();
+                    self::setObjectFromArray($file, $file_data);
+                    $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
+                	if ($file->save()) {
+                        $story->addFile($file);
+	                    if (!isset($this->options['ajaxupload'])) {
+	                    	header('Location: ?view=thanks&_type='.$_POST['_type']);
+	                    } else {
+	                    	header('Location: ?view=file&id='.$file->id);
+	                    }
+                    } else {
+                        throw new Exception('Error saving the file');
+                    }
                     exit();
                 }
                 break;
