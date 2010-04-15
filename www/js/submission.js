@@ -214,7 +214,9 @@ function setImageCrop() {
 			WDN.jQuery('#enewsSubmit input[name=y1]').val(selection.y1); 
 			WDN.jQuery('#enewsSubmit input[name=x2]').val(selection.x2); 
 			WDN.jQuery('#enewsSubmit input[name=y2]').val(selection.y2);
-			WDN.jQuery('#enewssubmitbutton').show();
+			if((selection.x1 + 40) < selection.x2) { //make sure we actually have a real selection
+				WDN.jQuery('#enewssubmitbutton').show();
+			}
 		} 
 	}); 
 };
