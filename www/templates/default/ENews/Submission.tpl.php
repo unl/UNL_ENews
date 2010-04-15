@@ -115,7 +115,7 @@ function getValue($object, $field)
 <h3><span>4</span>Image Upload</h3>
 
 <?php //Story id that gets attached when the story is submitted above ?>
-<input type="hidden" id="storyid" name="storyid" value="" />
+<input type="hidden" id="storyid" name="storyid" value="" /> 
 
 <fieldset id="wdn_process_step4" style="display:none;">
             <ol><li>
@@ -125,5 +125,4 @@ function getValue($object, $field)
             
 			<div id="upload_area">where you will preview the image</div>
 </fieldset>
- 
 </form>

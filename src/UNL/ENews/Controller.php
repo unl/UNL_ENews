@@ -163,6 +163,19 @@ class UNL_ENews_Controller
 	                    if (!isset($this->options['ajaxupload'])) {
 	                    	header('Location: ?view=thanks&_type='.$_POST['_type']);
 	                    } else {
+	                    	//We're doing the ajax upload in step 4 of the submission, so delete the previous photo
+	                    	foreach ($story->getFiles() as $curfile) {
+    							if (preg_match('/^image/', $curfile->type)) {
+    								//Check to see that we Don't Delete the File we just uploaded
+    								if ($curfile->id != $file->id) { 
+	    								$curfile->delete();
+	    								$mysqli = UNL_ENews_Controller::getDB();
+								        $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($curfile->id);
+								        $mysqli->query($sql); 
+    								}
+    							}
+	                    	}
+	                    	//Output the image that will be shown in step 4
 	                    	header('Location: ?view=file&id='.$file->id);
 	                    }
                     } else {
