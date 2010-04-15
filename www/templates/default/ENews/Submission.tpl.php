@@ -123,6 +123,20 @@ function getValue($object, $field)
             <input id="image" name="image" type="file" />
             </li></ol>
             
-			<div id="upload_area">where you will preview the image</div>
+			<div id="upload_area"><div style="border:1px dashed #888;background:white;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div></div>
 </fieldset>
+</form>
+
+
+
+
+<form id="enewsSubmit" name="enewsSubmit" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_type" value="savecropped" />
+<input type="hidden" name="x1" value="" />
+<input type="hidden" name="y1" value="" />
+<input type="hidden" name="x2" value="" />
+<input type="hidden" name="y2" value="" /> 
+<input type="hidden" id="storyid" name="storyid" value="" />
+<?php //Submit button removed when an image is uplaoded but then is (re)appended dynamically when image is clicked on to crop in order to force users to make a thumbnail ?>
+<div id="enewssubmitbutton" style="display:none;margin:20px 0;"><input type="submit" name="submit" value="Finish Your Submission" /></div>
 </form>

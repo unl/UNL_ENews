@@ -54,7 +54,7 @@ function ajaxUpload(form){
 	var doUpload = function(){
 		removeEvent($m('ajax-temp'),"load", doUpload);
 		var cross = "javascript: ";
-		cross += "window.parent.$m('"+id_element+"').innerHTML = document.body.innerHTML; void(0);";
+		cross += "window.parent.$m('"+id_element+"').innerHTML = document.body.innerHTML + '<div style=\"margin-top:5px;\">Click and drag on the image above to select the area to crop for the thumbnail.<br />Once that is done a button will appear below to allow you to finish your submission.</div>'; window.parent.setImageCrop(); void(0);";
 		$m(id_element).innerHTML = html_error_http;
 		$m('ajax-temp').src = cross;
 		if(detectWebKit){

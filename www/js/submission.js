@@ -53,15 +53,20 @@ WDN.jQuery(function($){
 		return false;
 	});
 	$('#next_step4').click(function() {
-		$('#wdn_process_step3').slideToggle();
-		$('#wdn_process_step4').slideToggle(function() {
-			$('#enewsSubmission h3').eq(2).removeClass('highlighted');
-			$('#enewsImage h3').eq(0).addClass('highlighted');
-			$('#enewsImage p.submit').show();
-		}); 
-		$('#enewsSubmission h3').eq(0).unbind('click');
-		$('#enewsSubmission h3').eq(2).css('cursor','pointer').click(backToStep3);
-		submitStory();
+		if (!submitStory()) {
+			$('#wdn_process_step3').slideToggle();
+			$('#wdn_process_step4').slideToggle(function() {
+				$('#enewsSubmission h3').eq(2).removeClass('highlighted');
+				$('#enewsImage h3').eq(0).addClass('highlighted');
+				$('#enewsImage p.submit').show();
+			}); 
+			$('#enewsSubmission h3').eq(0).unbind('click');
+			$('#enewsSubmission h3').eq(2).css('cursor','pointer').click(backToStep3);
+			$('#enewssubmitbutton').show();
+		} else {
+			$('#reqnotice').remove();
+			$('#wdn_process_step3').prepend('<p id="reqnotice" style="color:red">Please Fill Out All Required Fields</p>');
+		}
 		return false;
 	});
 	
@@ -109,12 +114,21 @@ WDN.jQuery(function($){
 		
 	});
 
+	//When a file is selected from users local machine, do the ajax image upload
 	$('#enewsImage #image').change(function() {
-		//alert(this.form);return false;
-		ajaxUpload(this.form);
+		//Hide submit button until user selects a crop area
+		$('#enewssubmitbutton').hide();
+		//Remove the previous crop selection area if it exists
+		$('#upload_area img').imgAreaSelect({
+			disable:true,
+			hide:true
+		}); 
+		ajaxUpload(this.form); 
 		return false;
 	});
 	
+ 
+
 	
 	function backToStep1() {
 		$('#wdn_process_step2').slideUp();
@@ -143,31 +157,17 @@ WDN.jQuery(function($){
 	};
 	
 	function submitStory() {
-		//e.preventDefault(); 
-		
-		//Validation
 	  	var storyid = $("input#storyid").val();
-	  	
 	  	var title = $("input#title").val();
-		if (title == "") { 
-	      return false;
-	    }
-		var description = $("textarea#description").val();
-		if (description == "") {
-	      	return false;
-	    }
+	  	var description = $("textarea#description").val();
 		var request_publish_start = $("input#request_publish_start").val();
-		if (request_publish_start == "") { 
-	      return false;
-	    }
 		var request_publish_end = $("input#request_publish_end").val();
-		if (request_publish_end == "") { 
-	      return false;
-	    }
 		var sponsor = $("input#sponsor").val();
-		if (sponsor == "") { 
-	      return false;
+		
+		if (title == "" || description == "" || request_publish_start == "" || request_publish_end == "" || sponsor == "") { 
+	      return "Error";
 	    }
+		
 	    var newsroom_id = new Array();
 	    $("input[name=newsroom_id\\[\\]]").each( function(index) {
 			newsroom_id.push($(this).val());
@@ -190,6 +190,7 @@ WDN.jQuery(function($){
 	      success: function(data,status) {
 			//We get back the id of the newly saved story
 	        document.enewsImage.storyid.value = data; 
+	        document.enewsSubmit.storyid.value = data; 
 	      },
 	      error: function (data, status, e) {
 			alert(e);
@@ -199,10 +200,30 @@ WDN.jQuery(function($){
 	 	return false;
 	}; 
 });
+
+
+
+
+function setImageCrop() {
+	WDN.jQuery('#upload_area img').imgAreaSelect({
+		enable:true,
+		hide:false,
+		aspectRatio: "4:3",
+		onSelectEnd: function (img, selection) {
+			WDN.jQuery('#enewsSubmit input[name=x1]').val(selection.x1); 
+			WDN.jQuery('#enewsSubmit input[name=y1]').val(selection.y1); 
+			WDN.jQuery('#enewsSubmit input[name=x2]').val(selection.x2); 
+			WDN.jQuery('#enewsSubmit input[name=y2]').val(selection.y2);
+			WDN.jQuery('#enewssubmitbutton').show();
+		} 
+	}); 
+};
+
+
+
 /**
  * Namespace for submission javascript.
  */
-
 var submission = function() {
 	return {
 		utm_campaign : 'UNL_ENews',

@@ -184,6 +184,20 @@ class UNL_ENews_Controller
                     exit();
                 }
                 break;
+            case 'savecropped':
+            	$story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
+            	foreach ($story->getFiles() as $file) {
+    				if (preg_match('/^image/', $file->type)) {
+    					$newfile = new UNL_ENews_File();
+    					$newfile = $file;
+    					$newfile->id = NULL;
+    					$newfile->save();
+    					$story->addFile($newfile);
+    				}
+            	}
+            	header('Location: ?view=thanks&_type='.$_POST['_type']);
+            	exit();
+            	break;
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');
