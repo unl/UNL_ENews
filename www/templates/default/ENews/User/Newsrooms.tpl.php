@@ -1,4 +1,4 @@
-<form id="enews" class="newsroom_choose" name="newsroom_choose" method="get" action="">
+<form class="enews newsroom_choose" name="newsroom_choose" method="get" action="">
 	<input type="hidden" name="view" value="manager">
 	<fieldset>
 		<ol>
