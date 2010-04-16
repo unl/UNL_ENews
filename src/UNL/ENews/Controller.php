@@ -184,18 +184,52 @@ class UNL_ENews_Controller
                     exit();
                 }
                 break;
-            case 'savecropped':
+			case 'savethumb':
             	$story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
             	foreach ($story->getFiles() as $file) {
     				if (preg_match('/^image/', $file->type)) {
     					$newfile = new UNL_ENews_File();
     					$newfile = $file;
-    					$newfile->id = NULL;
+    					
+    					// Crop the image ***************************************************************
+						// Get dimensions of the original image
+    					$filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
+						list($current_width, $current_height) = getimagesize($filename);
+						
+						// The x and y coordinates on the original image where we
+						// will begin cropping the image
+						$left = $_POST['x1'];
+						$top = $_POST['y1'];
+						
+						// This will be the final size of the image (e.g. how many pixels
+						// left and down we will be going)
+						$crop_width = $_POST['x2']-$_POST['x1'];
+						$crop_height = $_POST['y2']-$_POST['y1'];
+						
+						// Resample the image
+						$croppedimage = imagecreatetruecolor($crop_width, $crop_height);
+						$current_image = imagecreatefromjpeg($filename);
+						imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
+						
+						// Resize the image ************************************************************
+						$current_width = $crop_width;
+						$current_height = $crop_height; 
+						$canvas = imagecreatetruecolor(72, 54); 
+						imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 72, 54, $current_width, $current_height);
+						
+						ob_start();
+						imagejpeg($canvas);
+    					$newfile->data = ob_get_clean();
+    					imagedestroy($canvas);
+    					
+    					// Save the thumbnail **********************************************************
+    					//Clear the id so the database will increment it
+    					$newfile->id = NULL;				
     					$newfile->save();
     					$story->addFile($newfile);
     				}
             	}
-            	header('Location: ?view=thanks&_type='.$_POST['_type']);
+            	header('Location: ?view=thanks&_type=story');
             	exit();
             	break;
             case 'deletenewsletter':

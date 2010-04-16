@@ -131,7 +131,7 @@ function getValue($object, $field)
 
 
 <form id="enewsSubmit" name="enewsSubmit" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
-<input type="hidden" name="_type" value="savecropped" />
+<input type="hidden" name="_type" value="savethumb" />
 <input type="hidden" name="x1" value="" />
 <input type="hidden" name="y1" value="" />
 <input type="hidden" name="x2" value="" />
