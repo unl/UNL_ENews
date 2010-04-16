@@ -1,7 +1,17 @@
+<?php $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/www/templates/email');?>
+
 <script type="text/javascript">
 	WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
 	WDN.loadJS("js/functions.js");
+	WDN.jQuery(document).ready(function(){
+		//We don't want to see the links right now but we will still want them in the actual email
+        WDN.jQuery("#maincontent h4 a").each(function(){
+            var $t = jQuery(this);
+			$t.after($t.text());
+			$t.remove();
+		});
+	});
 </script>
 
 <form class="enews energetic" method="post" action="?view=preview&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
@@ -30,7 +40,6 @@
 			<?php endforeach; ?>
 		</div>
     </div>
-    <div class="three_col right">               
-    	<?php $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/www/templates/email');?>
+    <div class="three_col right">
 	    <?php echo $savvy->render($context->newsletter); ?>
     </div>

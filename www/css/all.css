@@ -270,6 +270,7 @@ Building the newsletter
 }
 #newsColumnIntro {border-bottom:1px dashed #e0e0e0;}
 #maincontent table .story { 
+	clear:both;
 	margin-top:10px;
 	cursor:move;
 	padding-top:10px;

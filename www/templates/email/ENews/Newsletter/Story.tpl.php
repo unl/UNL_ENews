@@ -5,7 +5,7 @@ if ($parent->context instanceof UNL_ENews_Newsletter) {
     $newsletter_id = $parent->context->newsletter->id;
 }
 ?>
-<h4 style=""><?php echo $context->title; ?></h4>
+<h4><a style="color:#666;" href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=story&id=<?php echo $context->id; ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
 foreach ($context->getFiles() as $file) {

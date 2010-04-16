@@ -201,8 +201,7 @@ class UNL_ENews_Controller
 						$left = $_POST['x1'];
 						$top = $_POST['y1'];
 						
-						// This will be the final size of the image (e.g. how many pixels
-						// left and down we will be going)
+						// This will be the final size of the cropped image
 						$crop_width = $_POST['x2']-$_POST['x1'];
 						$crop_height = $_POST['y2']-$_POST['y1'];
 						
