@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.6
+-- version 3.2.3
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 10, 2010 at 11:13 AM
--- Server version: 5.1.37
+-- Generation Time: Apr 19, 2010 at 12:06 PM
+-- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 
 --
 -- Database: `enews`
@@ -20,15 +19,15 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `files`
 --
 
-DROP TABLE IF EXISTS `files`;
-CREATE TABLE `files` (
+CREATE TABLE IF NOT EXISTS `files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `data` blob NOT NULL,
   `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `size` bigint(20) unsigned NOT NULL,
+  `use` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -36,8 +35,7 @@ CREATE TABLE `files` (
 -- Table structure for table `newsletters`
 --
 
-DROP TABLE IF EXISTS `newsletters`;
-CREATE TABLE `newsletters` (
+CREATE TABLE IF NOT EXISTS `newsletters` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `newsroom_id` int(10) unsigned NOT NULL,
   `release_date` datetime DEFAULT NULL,
@@ -45,7 +43,7 @@ CREATE TABLE `newsletters` (
   `intro` mediumtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `newsroom_id` (`newsroom_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -53,8 +51,7 @@ CREATE TABLE `newsletters` (
 -- Table structure for table `newsletter_stories`
 --
 
-DROP TABLE IF EXISTS `newsletter_stories`;
-CREATE TABLE `newsletter_stories` (
+CREATE TABLE IF NOT EXISTS `newsletter_stories` (
   `newsletter_id` int(10) unsigned NOT NULL,
   `story_id` int(10) unsigned NOT NULL,
   `sort_order` int(10) unsigned DEFAULT NULL,
@@ -68,15 +65,14 @@ CREATE TABLE `newsletter_stories` (
 -- Table structure for table `newsrooms`
 --
 
-DROP TABLE IF EXISTS `newsrooms`;
-CREATE TABLE `newsrooms` (
+CREATE TABLE IF NOT EXISTS `newsrooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `shortname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -84,8 +80,7 @@ CREATE TABLE `newsrooms` (
 -- Table structure for table `newsroom_stories`
 --
 
-DROP TABLE IF EXISTS `newsroom_stories`;
-CREATE TABLE `newsroom_stories` (
+CREATE TABLE IF NOT EXISTS `newsroom_stories` (
   `newsroom_id` int(10) unsigned NOT NULL,
   `story_id` int(10) unsigned NOT NULL,
   `uid_created` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -102,8 +97,7 @@ CREATE TABLE `newsroom_stories` (
 -- Table structure for table `stories`
 --
 
-DROP TABLE IF EXISTS `stories`;
-CREATE TABLE `stories` (
+CREATE TABLE IF NOT EXISTS `stories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
@@ -116,7 +110,7 @@ CREATE TABLE `stories` (
   PRIMARY KEY (`id`),
   KEY `request_publish_end` (`request_publish_end`),
   KEY `request_publish_start` (`request_publish_start`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -124,8 +118,7 @@ CREATE TABLE `stories` (
 -- Table structure for table `story_files`
 --
 
-DROP TABLE IF EXISTS `story_files`;
-CREATE TABLE `story_files` (
+CREATE TABLE IF NOT EXISTS `story_files` (
   `story_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`story_id`,`file_id`)
@@ -137,8 +130,7 @@ CREATE TABLE `story_files` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `uid` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `newsroom_id` int(10) unsigned NOT NULL DEFAULT '1',
   `last_login` datetime DEFAULT NULL,
@@ -151,8 +143,7 @@ CREATE TABLE `users` (
 -- Table structure for table `user_has_permission`
 --
 
-DROP TABLE IF EXISTS `user_has_permission`;
-CREATE TABLE `user_has_permission` (
+CREATE TABLE IF NOT EXISTS `user_has_permission` (
   `user_uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `newsroom_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_uid`,`newsroom_id`)

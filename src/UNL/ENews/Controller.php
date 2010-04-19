@@ -207,7 +207,17 @@ class UNL_ENews_Controller
 						
 						// Resample the image
 						$croppedimage = imagecreatetruecolor($crop_width, $crop_height);
-						$current_image = imagecreatefromjpeg($filename);
+						switch ($file->type) {
+							case 'image/jpeg':
+								$current_image = imagecreatefromjpeg($filename);
+								break;
+                            case 'image/png':
+                                $current_image = imagecreatefrompng($filename);
+                                break;
+                            case 'image/gif':
+                                $current_image = imagecreatefromgif($filename);
+                                break;
+						}
 						imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
 						
 						// Resize the image ************************************************************
@@ -217,13 +227,25 @@ class UNL_ENews_Controller
 						imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 72, 54, $current_width, $current_height);
 						
 						ob_start();
-						imagejpeg($canvas);
+                        switch ($file->type) {
+                            case 'image/jpeg':
+                                imagejpeg($canvas);
+                                break;
+                            case 'image/png':
+                                imagepng($canvas);
+                                break;
+                            case 'image/gif':
+                                imagegif($canvas);
+                                break;
+                        }
+                        $newfile->size = ob_get_length();
     					$newfile->data = ob_get_clean();
     					imagedestroy($canvas);
     					
     					// Save the thumbnail **********************************************************
-    					//Clear the id so the database will increment it
-    					$newfile->id = NULL;				
+    					// Clear the id so the database will increment it
+    					$newfile->id = NULL;
+    					$newfile->use = 'thumbnail';				
     					$newfile->save();
     					$story->addFile($newfile);
     				}
