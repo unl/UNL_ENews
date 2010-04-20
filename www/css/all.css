@@ -1,82 +1,21 @@
+@import 'submission.css';
+@import 'manage.css';
+@import 'newsletter.css';
+
 .btnsubmit {
 	display:none;
 }
-
+#maincontent table th {text-align:left;}
 #maincontent form {width: 940px;}
-
-/* Manage Page - Check/Uncheck/Action */
-
-.storyAction  {
-	background:#EEE;
-	border-bottom:1px solid #DDDDDD;
-	border-right:1px solid #DDDDDD;
-	height:1%;
-	margin:0 0 5px;
-	overflow:auto;
-	padding:4px 5px;
-	position:relative;
-}
-.storyButtonAction  {
-	float:left;
-	margin:2px 0 0;
-	width:144px;
-}
-#maincontent a.checkall,
-#maincontent a.uncheckall {
-	background:#F0F0F0;
-	border:1px solid #B8AFA1;
-	color:#5F5F5F;
-	display:block;
-	float:left;
-	font-size:10px;
-	margin-right:4px;
-	padding:1px 4px;
-}
-#maincontent form fieldset.storyFieldsetAction {
-	background:none repeat scroll 0 0 transparent;
-	border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-color #BBBBBB;
-	border-style:none none none solid;
-	border-width:medium medium medium 1px;
-	clear:none;
-	margin:3px 0 0 0;
-	padding:0;
-	width:110px;
-}
-#maincontent form fieldset.storyFieldsetAction label,
-#maincontent form fieldset.storyFieldsetAction legend {
-	display:none;
-}
-#maincontent form fieldset.storyFieldsetAction select {
-	margin:0 5px;
+#maincontent fieldset {
+    background:#f7f7f7;
+    padding:10px 10px 0px 10px;
+    margin:0px;
 }
 
 
-
-/* Manage Page - Newsroom chooser Form */
-
-#maincontent .enews.newsroom_choose {
-	position:relative;
-	bottom:42px;
-	width:auto;
-	float:right;
-}
-
-#maincontent .enews.newsroom_choose fieldset {
-	padding:0;
-	background:transparent;
-}
-
-#maincontent .enews.newsroom_choose ol {
-	list-style:none outside none;
-}
-
-#maincontent .enews.newsroom_choose li {
-	padding:0 10px 10px 0;
-	float:left;
-}
-
-/* */
-
+/* h3
+*************/
 #maincontent h3 {
 	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
 	padding:5px 10px;
@@ -100,7 +39,6 @@
 	font-weight:bold;
 	border:1px solid #fff;
 }
-
 #maincontent a.rsslink {
 	background:url('images/rss.png') no-repeat;
 	display:inline-block;
@@ -108,19 +46,12 @@
 	width:20px;
 	text-indent:-9999px;
 }
-
 #maincontent h3 span a.rsslink {
 		
 }
 
-#maincontent fieldset {
-	background:#f7f7f7;
-	padding:10px 10px 0px 10px;
-	margin:0px;
-}
-
-/*Styles for the displayed interface*/
-
+/* h3 - Styles for the displayed interface
+*************************/
 #maincontent h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
 #maincontent h3.highlighted span {
 	border:1px solid #e19c2b;
@@ -138,9 +69,9 @@
 	background:#028a02;
 	margin-top:3px;	
 }
-/*End styles for the displayed interface*/
 
-/*Form Styles */
+/* Form Styles 
+************************/
 #maincontent .enews legend { 
 	display:none;
 }
@@ -242,94 +173,10 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	background: #f5e7bc url('images/typeIconEvent_hover.png') no-repeat center;
 	border-color:#9f9483;	
 }
-/* The display sample*/
-#wdn_process_step3 ol {
-	float:left;	
-}
-#sampleLayout {
-	float:right;	
-	margin:20px 10px 0px 40px;
-	border:1px solid #b8afa1;
-	padding:10px;
-	background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
-	width:375px;
-}
-#wdn_process_step2 ol, #wdn_process_step3 ol {width:450px;}
-/*
 
-Building the newsletter
 
-*/
-#newsStories .newsColumn {
-	float:left;
-	width: 262px;
-}
-#newsStories #newsColumn2 {float:right;}
-#maincontent .dragItem {
-	cursor:move;	
-}
-#newsColumnIntro {border-bottom:1px dashed #e0e0e0;}
-#maincontent table .story { 
-	clear:both;
-	margin-top:10px;
-	cursor:move;
-	padding-top:10px;
-}
-#maincontent .empty {
-	color: #de8727;
-	padding:30px;
-	text-align:center;
-	opacity:0.45;
-}
-#maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem p img {display:none;}
-#maincontent #drag_story_list .dragItem h4 {
-	font-size:0.9em;
-	color:#fff;
-	font-weight:bold;
-	padding:0.3em 0.1em 0.2em 22px;
-	background: #7c7c7c url('images/dragIndicator.png') repeat-y top left;
-	margin:3px 0;
-	border:1px solid #494949;
-}
-.dragItem span.requestedDates  {
-	background:#d8d8d8 url('images/tapTopShadow.png') repeat-x top left;
-	color:#494949;
-	font-size:0.7em;
-	padding:1px 5px;
-	position:relative;
-	top:-5px;
-	border-radius:3px;
-}
-#maincontent .filled {
-	border:none;
-}
-#maincontent .newsColumn {min-height:75px;}
-#maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
-#maincontent .newsColumn h4 {
-	font-size: 1em;
-	font-weight:bold;
-	background:#f0f0f0;
-	padding:2px;
-}
-#maincontent #newsColumnIntro h4 {
-	font-size:1.5em;	
-	margin-bottom:10px;
-	background:none;
-}
-#maincontent .newsColumn p {padding:2px; font-size:98%;margin-bottom:15px;}
-
-/*jQuery.UI styles */
-.ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
-.ui-sortable-placeholder * { visibility: hidden; }
-.ui-datepicker-trigger {
-	float:right;
-	left:5px;
-	position:relative;
-	top:-23px;
-	cursor:pointer;
-}
-
-/* wdn_notice box */
+/* wdn_notice box
+**********************/
 #maincontent div.wdn_notice div.message {
 	background:url('images/checkbox.png') no-repeat center left;
 }
@@ -347,13 +194,12 @@ Building the newsletter
 
 }
 
-/*
 
-End Building the newsletter 
 
-*/
-#maincontent table th {text-align:left;}
-/*to move to scripts CSS */
+
+
+/* -moz -webkit
+********************/
 #maincontent h3 span {
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
@@ -369,20 +215,3 @@ End Building the newsletter
 	-webkit-border-top-right-radius:3px;
 }
 
-
-/*
-
-Image upload Preview 
-
-*/
-
-#upload_area {
-	text-align:center;
-	margin-bottom:10px;
-}
-#upload_area img {
-	height:auto;
-	width:auto;
-	max-width:920px;
-	cursor:default !important;	
-}

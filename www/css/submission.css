@@ -1,0 +1,30 @@
+/* Submission Form Display Sample
+**********************/
+#wdn_process_step3 ol {
+    float:left; 
+}
+#sampleLayout {
+    float:right;    
+    margin:20px 10px 0px 40px;
+    border:1px solid #b8afa1;
+    padding:10px;
+    background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
+    width:375px;
+}
+#wdn_process_step2 ol,
+#wdn_process_step3 ol {
+    width:450px;
+}
+
+/* Image Upload Preview 
+********************/
+#upload_area {
+    text-align:center;
+    margin-bottom:10px;
+}
+#upload_area img {
+    height:auto;
+    width:auto;
+    max-width:920px;
+    cursor:default !important;  
+}

@@ -223,8 +223,8 @@ class UNL_ENews_Controller
 						// Resize the image ************************************************************
 						$current_width = $crop_width;
 						$current_height = $crop_height; 
-						$canvas = imagecreatetruecolor(72, 54); 
-						imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 72, 54, $current_width, $current_height);
+						$canvas = imagecreatetruecolor(96, 72); 
+						imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
 						
 						ob_start();
                         switch ($file->type) {
