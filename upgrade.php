@@ -73,6 +73,12 @@ $result = $mysqli->query("ALTER TABLE `files` CHANGE `data` `data` LONGBLOB NOT 
 if (!$result) {
     echo $mysqli->error;
 }
+// Insert fulltext field for story
+$mysqli = UNL_ENews_Controller::getDB();
+$result = $mysqli->query("ALTER TABLE `stories` ADD `fulltext` LONGTEXT NULL AFTER `description`;");
+if (!$result) {
+    echo $mysqli->error;
+}
 
 
 echo 'Upgrade complete!';

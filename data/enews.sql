@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `fulltext` longtext COLLATE utf8_unicode_ci NOT NULL,
   `request_publish_start` datetime DEFAULT NULL,
   `request_publish_end` datetime DEFAULT NULL,
   `sponsor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
