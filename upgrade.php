@@ -24,7 +24,7 @@ if (!$result) {
     echo $mysqli->error;
 }
 $mysqli->close();
-
+/*
 // @todo add a newsroom for all the others here, unltoday, scarlet, etc?
 if (UNL_ENews_Newsroom::getByID(2) === false) {
     $newsroom            = new UNL_ENews_Newsroom();
@@ -33,6 +33,7 @@ if (UNL_ENews_Newsroom::getByID(2) === false) {
     $newsroom->save();
 }
 
+exit();
 if (UNL_ENews_Newsroom::getByID(3) === false) {
     $newsroom            = new UNL_ENews_Newsroom();
     $newsroom->name      = 'Scarlet';
@@ -46,6 +47,7 @@ if (UNL_ENews_Newsroom::getByID(4) === false) {
     $newsroom->shortname = 'newsrelease';
     $newsroom->save();
 }
+*/
 
 // Now let's set up some newsroom admins
 foreach (array(
@@ -64,5 +66,13 @@ foreach (array(
     UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));
 
 }
+
+// Make sure data field in files table in longblob
+$mysqli = UNL_ENews_Controller::getDB();
+$result = $mysqli->query("ALTER TABLE `files` CHANGE `data` `data` LONGBLOB NOT NULL;");
+if (!$result) {
+    echo $mysqli->error;
+}
+
 
 echo 'Upgrade complete!';

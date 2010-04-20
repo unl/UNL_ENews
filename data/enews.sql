@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `data` blob NOT NULL,
+  `data` longblob NOT NULL,
   `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `size` bigint(20) unsigned NOT NULL,
   `use` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
