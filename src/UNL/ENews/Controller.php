@@ -17,10 +17,7 @@ class UNL_ENews_Controller
                                 'preview'	  => 'UNL_ENews_Newsletter_Preview',
                                 'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
-    );
-    
-    public static $titlegraphic = array('newsletter' => 'Today@UNL'
-    );
+    ); 
     
     public static $pagetitle = array('latest'      => 'Latest News',
                                      'submit'      => 'Submit an Item',

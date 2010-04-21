@@ -1,4 +1,8 @@
-<h3 class="sec_header"><?php echo date('l F j, Y', strtotime($context->release_date)); ?></h3>
+<h3 class="sec_main">
+    <?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?>
+    -
+    <?php echo date('l F j, Y', strtotime($context->release_date)); ?>
+</h3>
                         
            
                        

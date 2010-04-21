@@ -15,8 +15,37 @@
 
 
 /* h3
+**************/
+#maincontent h3.sec_main {
+	border-radius:.3em;
+    -webkit-border-radius:.3em;
+    -moz-border-radius:.3em;
+    
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+
+    border:1px solid #bbb;
+    line-height:100%;
+    margin:0 0 10px 0;
+    padding:6px 6px 5px 9px;
+    color:#fcfcfc;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    
+    background: #8b8b8b; /* for non-css3 browsers */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a9a9a9', endColorstr='#7a7a7a'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#a9a9a9), to(#7a7a7a)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #a9a9a9,  #7a7a7a); /* for firefox 3.6+ */
+    
+}
+#maincontent h3.sec_main a {
+	color:#ddd;
+	text-decoration:underline;
+}
+
+
+/* Forms h3
 *************/
-#maincontent h3 {
+#maincontent form.enews h3 {
 	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
 	padding:5px 10px;
 	border:1px solid #dadde3;
@@ -25,10 +54,10 @@
 	font-size:1.5em;
 	color:#999;
 }
-#maincontent h3:first-of-type {
+#maincontent form.enews h3:first-of-type {
 	border-top:1px solid #dadde3;	
 }
-#maincontent h3 span {
+#maincontent form.enews h3 span {
 	background:#fff;
 	padding:1px 4px 1px 4px;
 	border-radius:10x;	
@@ -39,31 +68,18 @@
 	font-weight:bold;
 	border:1px solid #fff;
 }
-#maincontent a.rsslink {
-	background:url('images/rss.png') no-repeat;
-	display:inline-block;
-	height:20px;
-	width:20px;
-	text-indent:-9999px;
-}
-#maincontent h3 span a.rsslink {
-		
-}
-
-/* h3 - Styles for the displayed interface
-*************************/
-#maincontent h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
-#maincontent h3.highlighted span {
+#maincontent form.enews h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
+#maincontent form.enews h3.highlighted span {
 	border:1px solid #e19c2b;
 	background:#de8727;
 	color:#fff;
 }
-#maincontent h3.highlighted + fieldset, #maincontent h3.highlighted + fieldset + fieldset {
+#maincontent form.enews h3.highlighted + fieldset, #maincontent form.enews h3.highlighted + fieldset + fieldset {
 	border:1px solid #b8afa1;
 	border-top:none;
 	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
 }
-#maincontent h3 span.announceType {
+#maincontent form.enews h3 span.announceType {
 	border:none;
 	float:right;
 	background:#028a02;
@@ -196,7 +212,17 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 
 
 
-
+/* rss icon
+********************/
+#maincontent a.rsslink {
+    background:url('images/rss.png') no-repeat;
+    display:inline-block;
+    height:20px;
+    width:20px;
+    position:relative;
+    top:-2px;
+    text-indent:-9999px;
+} 
 
 /* -moz -webkit
 ********************/

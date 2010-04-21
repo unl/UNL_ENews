@@ -83,7 +83,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
     </div>
     <div id="wdn_content_wrapper">
         <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
-            <h1><?php if (isset(UNL_ENews_Controller::$titlegraphic[$context->options['view']])) echo UNL_ENews_Controller::$titlegraphic[$context->options['view']]; else echo 'E-Newsroom';?></h1>
+            <h1>E-Newsroom</h1>
             <!-- InstanceEndEditable --></div>
         <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" -->
         	<h2><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></h2>

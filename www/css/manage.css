@@ -58,6 +58,7 @@
 }
 #maincontent .enews.newsroom_choose ol {
     list-style:none outside none;
+    margin-top:5px;
 }
 #maincontent .enews.newsroom_choose li {
     padding:0 10px 10px 0;
