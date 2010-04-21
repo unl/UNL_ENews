@@ -72,6 +72,19 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
     
+    function getThumbnail()
+    {
+        $files = new UNL_ENews_Story_Files(array('story_id'=>$this->id));
+        foreach ($files as $file) {
+            if ($file->use_for == 'thumbnail') {
+            	return $file;
+            	//only want one thumbnail
+            	break;
+            }
+        }
+        return false;
+    }
+    
     function delete()
     {
         foreach ($this->getFiles() as $file) {

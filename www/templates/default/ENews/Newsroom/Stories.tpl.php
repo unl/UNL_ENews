@@ -26,8 +26,10 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <thead>
         <tr>
             <th scope="col" class="select">Select</th>
+            <th scope="col" class="image">Image</th>
             <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=title">Headline</a></th>
-            <th scope="col" class="date"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Request Publish Date</a></th>
+            <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">First Publish Date</a></th>
+            <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Last Publish Date</a></th>
             <th scope="col" class="submitter"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=uid_created">Submitter</a></th>
             <th scope="col" class="edit">Edit</th>
         </tr>
@@ -36,8 +38,10 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <?php foreach ($context as $item) : ?>
         <tr id="row<?php echo $item->id; ?>">
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
+            <td><?php if ($file=$item->getThumbnail()) {echo '<img src="?view=file&id='.$file->id.'" style="max-width:30px" alt="'.$file->name.'" />';} ?></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
+            <td><?php echo date('Y-m-d', strtotime($item->request_publish_end)); ?></td>
             <td><?php echo $item->uid_created; ?></td>
             <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
         </tr>
