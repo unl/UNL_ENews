@@ -11,12 +11,10 @@ WDN.jQuery(function($){
 	        	window.whatisfeed = feed;
 	        	$("#event").html('<option value="NewEvent">New Event</option>');
 	            for(var i = 0, l = feed.items.length; i < l; i++) {
-		            
 	                var item = feed.items[i];
 	               $("#event").append('<option value="'+item.link+'">' + item.title + '</option>');
 	            }
-	            
-	        }    
+	        }
 	    });
 	    
 	});
@@ -25,6 +23,17 @@ WDN.jQuery(function($){
 	});
 	$('select#event').change(function(){
 		$('form.enews input[name=website]').val($(this).val());
+		$.getFeed({
+	        url: $(this).val()+'/?format=rss',
+	        success: function(feed) {
+				for(var i = 0, l = feed.items.length; i < l; i++) {
+					var item = feed.items[i];
+					$('form.enews input[name=title]').val(item.title);
+					// The description here is actually HTML, we should grab ?format=xml
+					//$('form.enews input[name=description]').val(escape(item.description));
+				}
+			}
+		});
 	});
 	$('ol.option_step a').click(function() {
 		$('#wdn_process_step1').slideToggle();
