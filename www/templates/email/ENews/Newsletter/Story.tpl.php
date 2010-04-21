@@ -9,7 +9,7 @@ if ($parent->context instanceof UNL_ENews_Newsletter) {
 <p>
 <?php 
 foreach ($context->getFiles() as $file) {
-    if ($file->use == 'thumbnail') {
+    if ($file->use_for == 'thumbnail') {
         echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
              . $file->id
              . '" style="max-width:65px; margin-right:15px;" align="left" />';
