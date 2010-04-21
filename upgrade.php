@@ -65,20 +65,6 @@ foreach (array(
     UNL_ENews_Newsroom::getByID(3)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));
 
-}
-
-// Make sure data field in files table in longblob
-$mysqli = UNL_ENews_Controller::getDB();
-$result = $mysqli->query("ALTER TABLE `files` CHANGE `data` `data` LONGBLOB NOT NULL;");
-if (!$result) {
-    echo $mysqli->error;
-}
-// Insert fulltext field for story
-$mysqli = UNL_ENews_Controller::getDB();
-$result = $mysqli->query("ALTER TABLE `stories` ADD `fulltext` LONGTEXT NULL AFTER `description`;");
-if (!$result) {
-    echo $mysqli->error;
-}
-
+} 
 
 echo 'Upgrade complete!';

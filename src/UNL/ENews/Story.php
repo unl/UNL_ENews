@@ -4,7 +4,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $id;
     public $title;
     public $description;
-    public $fulltext;
+    public $full_article;
     public $request_publish_start;
     public $request_publish_end;
     public $sponsor;
@@ -19,6 +19,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     		$this->id 			= $story->id;
     		$this->title 		= $story->title;
     		$this->description 	= $story->description;
+            $this->full_article = $story->full_article;
     		$this->website		= $story->website;
     	}
     }

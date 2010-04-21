@@ -11,7 +11,7 @@ class UNL_ENews_File extends UNL_ENews_Record
     
     public $data;
     
-    public $use;
+    public $use_for;
     
     function __construct($options = array())
     {

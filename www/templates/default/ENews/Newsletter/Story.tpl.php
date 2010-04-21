@@ -7,7 +7,7 @@
 <p>
 <?php 
 foreach ($context->getFiles() as $file) {
-    if ($file->use == 'thumbnail') {
+    if ($file->use_for == 'thumbnail') {
         echo '<a href="'.$storylink.'">'
              . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
              . $file->id

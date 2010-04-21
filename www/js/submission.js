@@ -160,6 +160,7 @@ WDN.jQuery(function($){
 	  	var storyid = $("input#storyid").val();
 	  	var title = $("input#title").val();
 	  	var description = $("textarea#description").val();
+	  	var full_article = $("textarea#full_article").val();
 		var request_publish_start = $("input#request_publish_start").val();
 		var request_publish_end = $("input#request_publish_end").val();
 		var sponsor = $("input#sponsor").val();
@@ -174,7 +175,7 @@ WDN.jQuery(function($){
 	    }); 
 
 		//Create the data string to POST
-		var dataString = '_type=story&storyid=' + storyid + '&title='+ title + '&description=' + description + '&request_publish_start=' + request_publish_start;
+		var dataString = '_type=story&storyid=' + storyid + '&title='+ title + '&description=' + description + '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
 		dataString += '&request_publish_end=' + request_publish_end + '&sponsor=' + sponsor;
 		$.each(newsroom_id, function(key, value) { 
 			  dataString += '&newsroom_id[]=';

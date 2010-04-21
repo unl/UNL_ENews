@@ -242,7 +242,7 @@ class UNL_ENews_Controller
     					// Save the thumbnail **********************************************************
     					// Clear the id so the database will increment it
     					$newfile->id = NULL;
-    					$newfile->use = 'thumbnail';				
+    					$newfile->use_for = 'thumbnail';				
     					$newfile->save();
     					$story->addFile($newfile);
     				}
