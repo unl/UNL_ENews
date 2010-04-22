@@ -102,7 +102,9 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     
     function save()
     {
-        $this->release_date = $this->getDate($this->release_date);
+        if (!empty($this->release_date)) {
+            $this->release_date = $this->getDate($this->release_date);
+        }
         return parent::save();
     }
     
