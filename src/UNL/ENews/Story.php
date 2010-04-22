@@ -14,14 +14,14 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     function __construct($options = array())
     {
-    	if (isset($options['id'])) {
-    		$story = self::getByID($options['id']);
-    		$this->id 			= $story->id;
-    		$this->title 		= $story->title;
-    		$this->description 	= $story->description;
+        if (isset($options['id'])) {
+            $story = self::getByID($options['id']);
+            $this->id           = $story->id;
+            $this->title        = $story->title;
+            $this->description  = $story->description;
             $this->full_article = $story->full_article;
-    		$this->website		= $story->website;
-    	}
+            $this->website      = $story->website;
+        }
     }
       
     function getTable()
@@ -77,9 +77,9 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $files = new UNL_ENews_Story_Files(array('story_id'=>$this->id));
         foreach ($files as $file) {
             if ($file->use_for == 'thumbnail') {
-            	return $file;
-            	//only want one thumbnail
-            	break;
+                return $file;
+                //only want one thumbnail
+                break;
             }
         }
         return false;
