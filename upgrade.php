@@ -5,26 +5,37 @@ if (file_exists(dirname(__FILE__).'/www/config.inc.php')) {
     require dirname(__FILE__).'/www/config.sample.php';
 }
 
+echo 'Connecting to the database&hellip;';
 $mysqli = UNL_ENews_Controller::getDB();
+echo 'connected successfully!<br />';
+
+echo 'Initializing database structure&hellip;';
 $result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/enews.sql'));
 if (!$result) {
+    echo 'There was an error initializing the database.<br />';
     echo $mysqli->error;
+    exit();
 }
 
 do {
-  if ($result = $mysqli->use_result()) {
-      $result->close();
-  }
+    if ($result = $mysqli->use_result()) {
+        $result->close();
+    }
 } while ($mysqli->next_result()); 
 
+echo 'initialization complete!<br />';
 
-
-$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/enews_sample_data.sql'));
-if (!$result) {
-    echo $mysqli->error;
+if (UNL_ENews_Newsroom::getByID(1) === false ) {
+    echo 'Inserting sample data&hellip;';
+    $result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/enews_sample_data.sql'));
+    if (!$result) {
+        echo 'There was an error inserting the sample data!<br />';
+        echo $mysqli->error;
+        exit();
+    }
+    $mysqli->close();
 }
-$mysqli->close();
-/*
+
 // @todo add a newsroom for all the others here, unltoday, scarlet, etc?
 if (UNL_ENews_Newsroom::getByID(2) === false) {
     $newsroom            = new UNL_ENews_Newsroom();
@@ -33,7 +44,6 @@ if (UNL_ENews_Newsroom::getByID(2) === false) {
     $newsroom->save();
 }
 
-exit();
 if (UNL_ENews_Newsroom::getByID(3) === false) {
     $newsroom            = new UNL_ENews_Newsroom();
     $newsroom->name      = 'Scarlet';
@@ -47,8 +57,8 @@ if (UNL_ENews_Newsroom::getByID(4) === false) {
     $newsroom->shortname = 'newsrelease';
     $newsroom->save();
 }
-*/
 
+echo 'Adding newsroom administrators&hellip;<br />';
 // Now let's set up some newsroom admins
 foreach (array(
     'bbieber2',
@@ -60,11 +70,13 @@ foreach (array(
     'erasmussen2'
     ) as $uid) {
 
+    echo '* adding '.$uid.'&hellip;';
     UNL_ENews_Newsroom::getByID(1)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(2)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(3)->addUser(UNL_ENews_User::getByUID($uid));
     UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));
+    echo 'done.<br />';
 
-} 
+}
 
 echo 'Upgrade complete!';
