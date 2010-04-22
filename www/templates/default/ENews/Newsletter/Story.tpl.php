@@ -6,13 +6,12 @@
 </h4>
 <p>
 <?php 
-foreach ($context->getFiles() as $file) {
-    if ($file->use_for == 'thumbnail') {
-        echo '<a href="'.$storylink.'">'
-             . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
-             . $file->id
-             . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
-    }
+
+if ($file = $context->getThumbnail()) {
+    echo '<a href="'.$storylink.'">'
+         . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
+         . $file->id
+         . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
 }
 
 echo $context->description;

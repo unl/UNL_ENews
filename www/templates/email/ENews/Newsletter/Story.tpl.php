@@ -8,12 +8,10 @@ if ($parent->context instanceof UNL_ENews_Newsletter) {
 <h4><a style="color:#666;" href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=story&id=<?php echo $context->id; ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
-foreach ($context->getFiles() as $file) {
-    if ($file->use_for == 'thumbnail') {
-        echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
-             . $file->id
-             . '" style="max-width:65px; margin-right:15px;" align="left" />';
-    }
+if ($file = $context->getThumbnail()) {
+    echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
+         . $file->id
+         . '" style="max-width:65px; margin-right:15px;" align="left" />';
 }
 
 echo $context->description;
