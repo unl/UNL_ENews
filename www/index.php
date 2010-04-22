@@ -23,6 +23,8 @@ if ($enews->options['format'] != 'html') {
     }
 }
 
+// Always escape output, use $context->getRaw('var'); to get the raw data.
+$savvy->setEscape('htmlentities');
 
 if ($enews->actionable[0] instanceof UNL_ENews_File) {
     // pass through without any outer template

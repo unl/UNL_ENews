@@ -2,7 +2,7 @@
 function getValue($object, $field)
 {
     if (isset($object->$field)) {
-        return htmlentities($object->$field, ENT_QUOTES);
+        return htmlentities($object->getRaw($field), ENT_QUOTES);
     }
     
     if (isset($_POST[$field])) {
@@ -76,7 +76,7 @@ function getValue($object, $field)
             		<ol>
             		<li> 
             			<input type="checkbox" name="newsroom_id[]" value="<?php echo (int)$context->newsroom->id; ?>" checked="checked" />
-                    	<label for="newsroom_id[]"><?php echo htmlentities($context->newsroom->name); ?></label>
+                    	<label for="newsroom_id[]"><?php echo $context->newsroom->name; ?></label>
             		</li>
             		<li>
             			<input type="checkbox" name="newsroom_id[]" value="1" />
