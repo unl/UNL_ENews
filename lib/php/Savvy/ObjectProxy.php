@@ -1,6 +1,6 @@
 <?php
 /**
- * pear2\Templates\Savant\ObjectProxy
+ * Savvy_ObjectProxy
  *
  * PHP version 5
  *
@@ -104,6 +104,30 @@ class Savvy_ObjectProxy
     }
     
     /**
+     * Magic method for checking if a property is set.
+     * 
+     * @param string $var The var
+     * 
+     * @return bool
+     */
+    function __isset($var)
+    {
+        return isset($this->object->$var);
+    }
+    
+    /**
+     * Unset a property.
+     * 
+     * @param string $var The var
+     * 
+     * @return void
+     */
+    function __unset($var)
+    {
+        unset($this->object->$var);
+    }
+    
+    /**
      * Magic method which will call methods on the object.
      * 
      * @return mixed
@@ -143,5 +167,13 @@ class Savvy_ObjectProxy
             return new Savvy_ObjectProxy_ArrayAccess($object, $savvy);
         }
         return new self($object, $savvy);
+    }
+    
+    function __toString()
+    {
+        if (method_exists($this->object, '__toString')) {
+            return $this->savvy->escape($this->object->__toString());
+        }
+        throw new Savvy_BadMethodCallException('Object of class '.$this->__getClass().' could not be converted to string');
     }
 }

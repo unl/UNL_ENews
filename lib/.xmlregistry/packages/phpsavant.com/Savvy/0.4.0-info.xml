@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-02-02</date>
- <time>08:38:45</time>
+ <date>2010-04-21</date>
+ <time>22:20:56</time>
  <version>
-  <release>0.1.0</release>
+  <release>0.4.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,10 +31,8 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Port PEAR2_Templates_Savant to Savvy.
+ <notes>Add renderNULL method for rendering NULL variables or direct templates.
 
-* Always throw exceptions.
-* Never load files internally.
 
 Package Savvy API release notes for version 0.1.0.</notes>
  <contents>
@@ -51,21 +49,22 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="test" name="tests/escape/object.phpt" md5sum="7012a6b97c7cb20391bde8243b582e1b"/>
    <file role="test" name="tests/escape/Foo.tpl.php" md5sum="d960fd1fa4867a04702db10cda65d772"/>
    <file role="test" name="tests/escape/echostring.tpl.php" md5sum="a45c7c6b67b56e43935d844f358f080b"/>
-   <file role="php" name="src/Savvy/UnexpectedValueException.php" md5sum="7dd2b8cc83fe72fa97df6dafca9a4e44"/>
-   <file role="php" name="src/Savvy/TemplateException.php" md5sum="6135455d32a7a53fcf9ab074e1d95d37"/>
-   <file role="php" name="src/Savvy/ObjectProxy/Traversable.php" md5sum="b2da240e55d55b50b0a509bacd3a61be"/>
-   <file role="php" name="src/Savvy/ObjectProxy/ArrayAccess.php" md5sum="9e0ddf3ada4683dfc1f9c8ab9440653b"/>
-   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="8e95f0272e87683ce5122b15f8cf7dd2"/>
+   <file role="php" name="src/Savvy/UnexpectedValueException.php" md5sum="bc88ee83b651bea0cb3190c4785be447"/>
+   <file role="php" name="src/Savvy/TemplateException.php" md5sum="0dcf725a67d3db2457f4f9793654e8d1"/>
+   <file role="php" name="src/Savvy/ObjectProxy/Traversable.php" md5sum="d8ecfde88e9de6d70e051ac27c1f5952"/>
+   <file role="php" name="src/Savvy/ObjectProxy/ArrayAccess.php" md5sum="a18cde5a30fcd4f6c5b6437a1fa702d9"/>
+   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="d32437d0ec075c45b34865e9c9801ece"/>
    <file role="php" name="src/Savvy/MapperInterface.php" md5sum="127c43a259b071872044a492d101faca"/>
-   <file role="php" name="src/Savvy/FilterAbstract.php" md5sum="b8f7d4cb0fcd7057cd92d6f3f6a81893"/>
+   <file role="php" name="src/Savvy/FilterAbstract.php" md5sum="dc9abe43fa8f2a7ec038d8bc4e2fd0da"/>
    <file role="php" name="src/Savvy/FastCompilerInterface.php" md5sum="213b589107a0b18d2074167f2d0fe864"/>
    <file role="php" name="src/Savvy/Exception.php" md5sum="1e05784e2648c5daf2bf8848f302290d"/>
    <file role="php" name="src/Savvy/CompilerInterface.php" md5sum="45622fa0a1eea84981eb8265b43ce2da"/>
    <file role="php" name="src/Savvy/CompilerException.php" md5sum="05e9107fb803c7f54d512a4daee8cd30"/>
    <file role="php" name="src/Savvy/ClassToTemplateMapper.php" md5sum="fd04a4a3f7bb2e2317bc32e5451b56a3"/>
-   <file role="php" name="src/Savvy/BasicFastCompiler.php" md5sum="a1922662b3cca8d283556bfdb73a87b1"/>
+   <file role="php" name="src/Savvy/BasicFastCompiler.php" md5sum="313d6d9ac280509c7f0e072e6841d80d"/>
+   <file role="php" name="src/Savvy/BadMethodCallException.php" md5sum="e5d06612d101d72bc82709df7ae0426e"/>
    <file role="php" name="src/Savvy/Autoload.php" md5sum="c0ee9b9628bed191991bc641721a39d8"/>
-   <file role="php" name="src/Savvy.php" md5sum="c6873316ba23c2decc2b56c9ba1b4231"/>
+   <file role="php" name="src/Savvy.php" md5sum="a9982446453ade6d12c996ded3c38bf5"/>
    <file role="doc" name="examples/templates/StringView.tpl.php" md5sum="b4746d9c4e29624cb75c4bbf74600371"/>
    <file role="doc" name="examples/templates/stdClass.tpl.php" md5sum="ecb083ab102eac7b1bc6d5306092b36d"/>
    <file role="doc" name="examples/templates/MyTemplate.tpl.php" md5sum="b7004c1f5eed19602e5c7afe97dbbd27"/>
