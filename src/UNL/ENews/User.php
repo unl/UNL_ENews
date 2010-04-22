@@ -52,6 +52,8 @@ class UNL_ENews_User extends UNL_ENews_Record
                 // @TODO check permissions before returning the newsroom!
                 return UNL_ENews_Newsroom::getByID($this->newsroom_id);
             break;
+            case 'newsrooms':
+                return new UNL_ENews_User_Newsrooms(array('uid'=>$this->uid));
             default:
                 return $this->getPeoplefinderRecord()->$var;
         }

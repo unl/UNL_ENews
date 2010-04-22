@@ -124,9 +124,15 @@ class UNL_ENews_Controller
         switch($_POST['_type']) {
             case 'story':
                 $class = $this->view_map[$_POST['_type']];
-                $object = new $class();
+                if (isset($_POST['storyid'])) {
+                    $object = UNL_ENews_Story::getByID($_POST['storyid']);
+                    if (!$object->userCanEdit(UNL_ENews_Controller::getUser(true))) {
+                        throw new Exception('You cannot edit that story.');
+                    }
+                } else {
+                    $object = new $class();
+                }
                 self::setObjectFromArray($object, $_POST);
-                $object->id = (int)$_POST['storyid'];
                 
                 if (!$object->save()) {
                     throw new Exception('Could not save the story');
@@ -182,7 +188,9 @@ class UNL_ENews_Controller
                 }
                 break;
             case 'savethumb':
-                $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
+                if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
+                    throw new Exception('Could not find that story!');
+                }
                 foreach ($story->getFiles() as $file) {
                     if (preg_match('/^image/', $file->type)) {
                         $newfile = new UNL_ENews_File();

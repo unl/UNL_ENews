@@ -108,7 +108,9 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `sponsor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uid_created` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `uid_modified` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_submitted` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `request_publish_end` (`request_publish_end`),
   KEY `request_publish_start` (`request_publish_start`)

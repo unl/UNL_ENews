@@ -10,17 +10,15 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $sponsor;
     public $website;
     public $uid_created;
+    public $uid_modified;
     public $date_submitted;
+    public $date_modified;
 
     function __construct($options = array())
     {
         if (isset($options['id'])) {
             $story = self::getByID($options['id']);
-            $this->id           = $story->id;
-            $this->title        = $story->title;
-            $this->description  = $story->description;
-            $this->full_article = $story->full_article;
-            $this->website      = $story->website;
+            UNL_ENews_Controller::setObjectFromArray($this, $story->toArray());
         }
     }
       
@@ -33,8 +31,14 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         $this->request_publish_start = $this->getDate($this->request_publish_start);
         $this->request_publish_end   = $this->getDate($this->request_publish_end);
-        $this->uid_created           = strtolower(UNL_ENews_Controller::getUser(true)->uid);
-        $this->date_submitted        = date('Y-m-d H:i:s');
+
+        if (empty($this->id)) {
+            $this->uid_created    = strtolower(UNL_ENews_Controller::getUser(true)->uid);
+            $this->date_submitted = date('Y-m-d H:i:s');
+        } else {
+            $this->uid_modified   = strtolower(UNL_ENews_Controller::getUser(true)->uid);
+            $this->date_modified  = date('Y-m-d H:i:s');
+        }
         $result = parent::save();
         
         if (!$result) {
@@ -106,5 +110,20 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $sql = 'DELETE FROM newsletter_stories WHERE story_id = '.intval($this->id);
         $mysqli->query($sql);
         return parent::delete();
+    }
+    
+    function userCanEdit(UNL_ENews_User $user)
+    {
+        if ($user->uid == $this->uid_created) {
+            return true;
+        }
+        
+        foreach ($user->newsrooms as $newsroom) {
+            if (UNL_ENews_Newsroom_Stories::relationshipExists($newsroom->id, $this->id)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
