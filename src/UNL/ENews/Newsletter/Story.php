@@ -70,6 +70,11 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         return $this->story;
     }
     
+    function getThumbnail()
+    {
+        return $this->getStory()->getThumbnail();
+    }
+    
     function getFiles()
     {
         return $this->getStory()->getFiles();
