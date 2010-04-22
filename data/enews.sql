@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.3
+-- version 3.2.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2010 at 12:06 PM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- Generation Time: Apr 21, 2010 at 08:41 PM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `newsletters` (
   `release_date` datetime DEFAULT NULL,
   `subject` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `intro` mediumtext COLLATE utf8_unicode_ci,
+  `distributed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `newsroom_id` (`newsroom_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
