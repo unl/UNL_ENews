@@ -15,22 +15,6 @@ if ($file = $context->getThumbnail()) {
 }
 
 echo $context->description;
-if ($parent->context instanceof UNL_ENews_Newsletter_Preview
-    || (isset($parent->parent) && $parent->parent->context instanceof UNL_ENews_Newsletter_Preview) ):
 ?>
-<form method="post" action="?view=newsletter&amp;newsletter_id=<?php echo $newsletter_id; ?>">
-    <input type="hidden" name="_type" value="addstory" />
-    <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
-    <input type="hidden" name="sort_order" value="0" />
-    <input type="hidden" name="intro" value="" />
-    <input type="submit" value="add story" />
-</form>
-<span class="requestedDates">
-<?php
-echo date('F j', strtotime($context->request_publish_start));
-if (isset($context->request_publish_end)) {
-        echo ' - '.date('F j', strtotime($context->request_publish_end));
-} ?>
-</span>
-<?php endif; ?>
 </p>
+<div class="clear"></div>
