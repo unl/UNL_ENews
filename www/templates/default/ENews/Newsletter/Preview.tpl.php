@@ -4,13 +4,16 @@
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
     WDN.loadJS("js/functions.js");
-    WDN.jQuery(document).ready(function(){
+    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
+    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
+    WDN.jQuery(document).ready(function($){
         //We don't want to see the links right now but we will still want them in the actual email
         WDN.jQuery("#maincontent h4 a").each(function(){
             var $t = jQuery(this);
             $t.after($t.text());
             $t.remove();
         });
+        $("input.datepicker").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
     });
 </script>
 
@@ -23,6 +26,8 @@
             <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
             <label for="emailSubject">Email Subject<span class="required">*</span></label>
             <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
+            <label for="releaseDate">Release Date</label>
+            <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo $context->newsletter->release_date; ?>" id="releaseDate" />
         </li>
     </ol>
     

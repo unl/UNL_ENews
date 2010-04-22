@@ -100,6 +100,18 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $object;
     }
     
+    function update()
+    {
+        $this->release_date = $this->getDate($this->release_date);
+        return parent::update();
+    }
+    
+    function save()
+    {
+        $this->release_date = $this->getDate($this->release_date);
+        return parent::save();
+    }
+    
     function delete()
     {
         foreach($this->getStories() as $has_story) {
