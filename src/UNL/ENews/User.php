@@ -49,7 +49,9 @@ class UNL_ENews_User extends UNL_ENews_Record
     {
         switch($var) {
             case 'newsroom':
-                // @TODO check permissions before returning the newsroom!
+                if (!$this->hasPermission($this->newsroom_id)) {
+                    throw new Exception('Whoah nelly, your default newsroom is one you don\'t have permission to.');
+                }
                 return UNL_ENews_Newsroom::getByID($this->newsroom_id);
             break;
             case 'newsrooms':
