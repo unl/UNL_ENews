@@ -17,7 +17,7 @@
     });
 </script>
 
-<form class="enews energetic" method="post" action="?view=preview&amp;newsletter_id=<?php echo $context->newsletter->id; ?>">
+<form class="enews energetic" method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>">
     <fieldset style="background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;">
     <legend>Your Newsletter</legend>
     <ol>

@@ -42,7 +42,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 break;
             case 'newsletter':
                 UNL_ENews_Controller::setObjectFromArray($this->newsletter, $_POST);
-                $this->newsletter->update();
+                $this->newsletter->save();
                 break;
         }
     }
