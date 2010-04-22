@@ -36,6 +36,13 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      */
     public $intro;
     
+    /**
+     * Whether this newsletter has been distributed
+     * 
+     * @var int
+     */
+    public $distributed = 0;
+    
     function __construct($options = array())
     {
         
@@ -187,6 +194,8 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $mail =& Mail::factory('sendmail');
         $mail->send('ericrasmussen1@gmail.com', $hdrs, $body);
         
+        $this->distributed = 1;
+        $this->save();
         // Send the email!
         return true;
     }
