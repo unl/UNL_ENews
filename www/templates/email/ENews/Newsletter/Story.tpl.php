@@ -15,7 +15,8 @@ if ($file = $context->getThumbnail()) {
 }
 
 echo $context->description;
-if ($parent->context->options['view'] == 'preview'):
+if ($parent->context->options['view'] == 'preview'
+    || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
 ?>
 <form method="post" action="?view=preview&amp;newsletter_id=<?php echo $newsletter_id; ?>">
     <input type="hidden" name="_type" value="addstory" />
