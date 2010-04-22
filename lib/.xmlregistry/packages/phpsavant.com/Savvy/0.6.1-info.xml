@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-04-21</date>
- <time>22:20:56</time>
+ <date>2010-04-22</date>
+ <time>11:47:44</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.6.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,7 +31,8 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Add renderNULL method for rendering NULL variables or direct templates.
+ <notes>Fix:
+* Also filter the return values of methods.
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -53,7 +54,7 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="php" name="src/Savvy/TemplateException.php" md5sum="0dcf725a67d3db2457f4f9793654e8d1"/>
    <file role="php" name="src/Savvy/ObjectProxy/Traversable.php" md5sum="d8ecfde88e9de6d70e051ac27c1f5952"/>
    <file role="php" name="src/Savvy/ObjectProxy/ArrayAccess.php" md5sum="a18cde5a30fcd4f6c5b6437a1fa702d9"/>
-   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="d32437d0ec075c45b34865e9c9801ece"/>
+   <file role="php" name="src/Savvy/ObjectProxy.php" md5sum="7405216723a277699ec7169931d5b196"/>
    <file role="php" name="src/Savvy/MapperInterface.php" md5sum="127c43a259b071872044a492d101faca"/>
    <file role="php" name="src/Savvy/FilterAbstract.php" md5sum="dc9abe43fa8f2a7ec038d8bc4e2fd0da"/>
    <file role="php" name="src/Savvy/FastCompilerInterface.php" md5sum="213b589107a0b18d2074167f2d0fe864"/>
