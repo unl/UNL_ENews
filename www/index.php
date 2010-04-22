@@ -15,12 +15,12 @@ $savvy->setTemplatePath(dirname(__FILE__).'/templates/default');
 
 
 if ($enews->options['format'] != 'html') {
-	switch($enews->options['format']) {
-		case 'rss':
-			$savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-			break;
-		default:			
-	}
+    switch($enews->options['format']) {
+        case 'rss':
+            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
+            break;
+        default:
+    }
 }
 
 
