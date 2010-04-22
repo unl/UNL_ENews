@@ -38,11 +38,20 @@
     <div class="col left">
         <div class="zenbox energetic" id="drag_story_list" style="margin-top:200px;"> 
             <h3>Available News</h3>
-            <?php foreach ($context->available_stories as $story): ?>
-                <div id="drag_story_<?php echo $story->id; ?>" class="dragItem">
-                    <?php echo $savvy->render($story, 'ENews/Newsletter/Story.tpl.php'); ?>
-                </div>
+            <?php
+            $story_available = false;
+            foreach ($context->available_stories->getIterator() as $story):
+
+                if (!$context->newsletter->hasStory($story)):
+                    $story_available = true; ?>
+                    <div id="drag_story_<?php echo $story->id; ?>" class="dragItem">
+                        <?php echo $savvy->render($story, 'ENews/Newsletter/Story.tpl.php'); ?>
+                    </div>
+                <?php endif; ?>
             <?php endforeach; ?>
+            <?php if (!$story_available) {
+                echo "Sorry, no unused/available stories.";
+            } ?>
         </div>
     </div>
     <div class="three_col right">

@@ -150,6 +150,24 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         throw new Exception('Could not add the story');
     }
     
+    function hasStory(UNL_ENews_Story $story)
+    {
+        if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
+            return true;
+        }
+        return false;
+    }
+    
+    function removeStory(UNL_ENews_Story $story)
+    {
+        if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
+
+            return $has_story->delete();
+        }
+
+        return true;
+    }
+    
     function getStories()
     {
         return new UNL_ENews_Newsletter_Stories(array('newsletter_id'=>$this->id));
