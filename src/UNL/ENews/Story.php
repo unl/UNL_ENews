@@ -72,17 +72,27 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
     
-    function getThumbnail()
+    /**
+     * Retrieves the first file found matching the use given.
+     * 
+     * @param string $use Type of use eg: thumbnail
+     * 
+     * @return UNL_ENews_Story_File
+     */
+    function getFileByUse($use)
     {
         $files = new UNL_ENews_Story_Files(array('story_id'=>$this->id));
         foreach ($files as $file) {
-            if ($file->use_for == 'thumbnail') {
+            if ($file->use_for == $use) {
                 return $file;
-                //only want one thumbnail
-                break;
             }
         }
         return false;
+    }
+    
+    function getThumbnail()
+    {
+        return $this->getFileByUse('thumbnail');
     }
     
     function delete()
