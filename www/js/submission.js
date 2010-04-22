@@ -195,7 +195,7 @@ WDN.jQuery(function($){
 			
 		$.ajax({
 	      type: "POST",
-	      url: "/workspace/UNL_ENews/www/?view=submit",
+	      url: $('#enewsSubmission').attr('action'),
 	      data: dataString,
 	      success: function(data,status) {
 			//We get back the id of the newly saved story
