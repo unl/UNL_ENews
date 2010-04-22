@@ -165,7 +165,8 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
 
         $savvy = new Savvy();
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
-  
+        $savvy->setEscape('htmlentities');
+
         $html = "<html>".
                 "<body bgcolor='#ffffff'>".
                     $savvy->render($this).
