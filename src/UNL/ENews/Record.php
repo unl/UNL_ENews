@@ -130,6 +130,7 @@ class UNL_ENews_Record
                 case 'story_id':
                 case 'length':
                 case 'sort_order':
+                case 'distributed':
                     $types .= 'i';
                     break;
                 default:
