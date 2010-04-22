@@ -33,13 +33,16 @@
                             $column2 = '';
                             foreach ($context->getStories() as $key=>$story) {
 
-                                $column = 'column1';
-
-                                if ($story->sort_order % 2 == 0) {
-                                    $column = 'column2';
-                                }
-                                if ($story->sort_order == 0) {
-                                	$column = 'columnIntro';
+                                switch($story->sort_order % 3) {
+                                    case 1:
+                                        $column = 'columnIntro';
+                                        break;
+                                    case 2:
+                                        $column = 'column1';
+                                        break;
+                                    case 0:
+                                        $column = 'column2';
+                                        break;
                                 }
 
                                 $$column .= '
