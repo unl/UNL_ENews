@@ -8,13 +8,13 @@ class UNL_ENews_Controller
     public $options = array('view' => 'newsletter', 'format' => 'html', 'newsroom' => '1');
     
     protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
-    							'latest'      => 'UNL_ENews_StoryList_Latest',
+                                'latest'      => 'UNL_ENews_StoryList_Latest',
                                 'story'       => 'UNL_ENews_Story',
                                 'submit'      => 'UNL_ENews_Submission',
                                 'thanks'      => 'UNL_ENews_Confirmation',
                                 'manager'     => 'UNL_ENews_Manager',
                                 'file'        => 'UNL_ENews_File',
-                                'preview'	  => 'UNL_ENews_Newsletter_Preview',
+                                'preview'     => 'UNL_ENews_Newsletter_Preview',
                                 'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'    => 'UNL_ENews_EmailDistributor'
     ); 
@@ -155,75 +155,75 @@ class UNL_ENews_Controller
                     $file = new $class();
                     self::setObjectFromArray($file, $file_data);
                     $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
-                	if ($file->save()) {
+                    if ($file->save()) {
                         $story->addFile($file);
-	                    if (!isset($this->options['ajaxupload'])) {
-	                    	header('Location: ?view=thanks&_type='.$_POST['_type']);
-	                    } else {
-	                    	//We're doing the ajax upload in step 4 of the submission, so delete the previous photo
-	                    	foreach ($story->getFiles() as $curfile) {
-    							if (preg_match('/^image/', $curfile->type)) {
-    								//Check to see that we Don't Delete the File we just uploaded
-    								if ($curfile->id != $file->id) { 
-	    								$curfile->delete();
-	    								$mysqli = UNL_ENews_Controller::getDB();
-								        $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($curfile->id);
-								        $mysqli->query($sql); 
-    								}
-    							}
-	                    	}
-	                    	//Output the image that will be shown in step 4
-	                    	header('Location: ?view=file&id='.$file->id);
-	                    }
+                        if (!isset($this->options['ajaxupload'])) {
+                            header('Location: ?view=thanks&_type='.$_POST['_type']);
+                        } else {
+                            //We're doing the ajax upload in step 4 of the submission, so delete the previous photo
+                            foreach ($story->getFiles() as $curfile) {
+                                if (preg_match('/^image/', $curfile->type)) {
+                                    //Check to see that we Don't Delete the File we just uploaded
+                                    if ($curfile->id != $file->id) { 
+                                        $curfile->delete();
+                                        $mysqli = UNL_ENews_Controller::getDB();
+                                        $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($curfile->id);
+                                        $mysqli->query($sql); 
+                                    }
+                                }
+                            }
+                            //Output the image that will be shown in step 4
+                            header('Location: ?view=file&id='.$file->id);
+                        }
                     } else {
                         throw new Exception('Error saving the file');
                     }
                     exit();
                 }
                 break;
-			case 'savethumb':
-            	$story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
-            	foreach ($story->getFiles() as $file) {
-    				if (preg_match('/^image/', $file->type)) {
-    					$newfile = new UNL_ENews_File();
-    					$newfile = $file;
-    					
-    					// Crop the image ***************************************************************
-						// Get dimensions of the original image
-    					$filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
-						list($current_width, $current_height) = getimagesize($filename);
-						
-						// The x and y coordinates on the original image where we
-						// will begin cropping the image
-						$left = $_POST['x1'];
-						$top = $_POST['y1'];
-						
-						// This will be the final size of the cropped image
-						$crop_width = $_POST['x2']-$_POST['x1'];
-						$crop_height = $_POST['y2']-$_POST['y1'];
-						
-						// Resample the image
-						$croppedimage = imagecreatetruecolor($crop_width, $crop_height);
-						switch ($file->type) {
-							case 'image/jpeg':
-								$current_image = imagecreatefromjpeg($filename);
-								break;
+            case 'savethumb':
+                $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
+                foreach ($story->getFiles() as $file) {
+                    if (preg_match('/^image/', $file->type)) {
+                        $newfile = new UNL_ENews_File();
+                        $newfile = $file;
+                        
+                        // Crop the image ***************************************************************
+                        // Get dimensions of the original image
+                        $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
+                        list($current_width, $current_height) = getimagesize($filename);
+                        
+                        // The x and y coordinates on the original image where we
+                        // will begin cropping the image
+                        $left = $_POST['x1'];
+                        $top = $_POST['y1'];
+                        
+                        // This will be the final size of the cropped image
+                        $crop_width = $_POST['x2']-$_POST['x1'];
+                        $crop_height = $_POST['y2']-$_POST['y1'];
+                        
+                        // Resample the image
+                        $croppedimage = imagecreatetruecolor($crop_width, $crop_height);
+                        switch ($file->type) {
+                            case 'image/jpeg':
+                                $current_image = imagecreatefromjpeg($filename);
+                                break;
                             case 'image/png':
                                 $current_image = imagecreatefrompng($filename);
                                 break;
                             case 'image/gif':
                                 $current_image = imagecreatefromgif($filename);
                                 break;
-						}
-						imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-						
-						// Resize the image ************************************************************
-						$current_width = $crop_width;
-						$current_height = $crop_height; 
-						$canvas = imagecreatetruecolor(96, 72); 
-						imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
-						
-						ob_start();
+                        }
+                        imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
+                        
+                        // Resize the image ************************************************************
+                        $current_width = $crop_width;
+                        $current_height = $crop_height; 
+                        $canvas = imagecreatetruecolor(96, 72); 
+                        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
+                        
+                        ob_start();
                         switch ($file->type) {
                             case 'image/jpeg':
                                 imagejpeg($canvas);
@@ -236,20 +236,20 @@ class UNL_ENews_Controller
                                 break;
                         }
                         $newfile->size = ob_get_length();
-    					$newfile->data = ob_get_clean();
-    					imagedestroy($canvas);
-    					
-    					// Save the thumbnail **********************************************************
-    					// Clear the id so the database will increment it
-    					$newfile->id = NULL;
-    					$newfile->use_for = 'thumbnail';				
-    					$newfile->save();
-    					$story->addFile($newfile);
-    				}
-            	}
-            	header('Location: ?view=thanks&_type=story');
-            	exit();
-            	break;
+                        $newfile->data = ob_get_clean();
+                        imagedestroy($canvas);
+                        
+                        // Save the thumbnail **********************************************************
+                        // Clear the id so the database will increment it
+                        $newfile->id = NULL;
+                        $newfile->use_for = 'thumbnail';                
+                        $newfile->save();
+                        $story->addFile($newfile);
+                    }
+                }
+                header('Location: ?view=thanks&_type=story');
+                exit();
+                break;
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');
