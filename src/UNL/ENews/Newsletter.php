@@ -159,11 +159,11 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
         $savvy = new Savvy();
-		$savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
-		
-		$plaintext = $savvy->render($this);
+        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
+        
+        $plaintext = $savvy->render($this);
 
-		$savvy = new Savvy();
+        $savvy = new Savvy();
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
   
         $html = "<html>".
