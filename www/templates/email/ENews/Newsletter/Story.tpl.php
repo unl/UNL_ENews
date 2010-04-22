@@ -1,10 +1,3 @@
-<?php
-if ($parent->context instanceof UNL_ENews_Newsletter) {
-    $newsletter_id = $parent->context->id;
-} elseif ($parent->context instanceof UNL_ENews_Newsletter_Preview) {
-    $newsletter_id = $parent->context->newsletter->id;
-}
-?>
 <h4><a style="color:#666;" href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=story&id=<?php echo $context->id; ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
@@ -17,8 +10,13 @@ if ($file = $context->getThumbnail()) {
 echo $context->description;
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
+    if (isset($parent->context->id)) {
+        $newsletter_id = $parent->context->id;
+    } elseif (isset($parent->context->newsletter)) {
+        $newsletter_id = $parent->context->newsletter->id;
+    }
 ?>
-<form method="post" action="?view=preview&amp;newsletter_id=<?php echo $newsletter_id; ?>">
+<form method="post" action="?view=preview&amp;id=<?php echo $newsletter_id; ?>">
     <input type="hidden" name="_type" value="addstory" />
     <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
     <input type="hidden" name="sort_order" value="0" />
