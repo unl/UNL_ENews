@@ -124,7 +124,7 @@ class UNL_ENews_Controller
         switch($_POST['_type']) {
             case 'story':
                 $class = $this->view_map[$_POST['_type']];
-                if (isset($_POST['storyid'])) {
+                if (!empty($_POST['storyid'])) {
                     $object = UNL_ENews_Story::getByID($_POST['storyid']);
                     if (!$object->userCanEdit(UNL_ENews_Controller::getUser(true))) {
                         throw new Exception('You cannot edit that story.');
