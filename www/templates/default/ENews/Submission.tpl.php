@@ -45,7 +45,7 @@ function getValue($object, $field)
         <ol>
         	<li>
         		<label for="date">Date of Event<span class="required">*</span></label>
-				<input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'title'); ?>" />
+				<input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'request_publish_end'); ?>" />
 			</li>
         	<li>
         		<label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
