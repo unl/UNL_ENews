@@ -29,6 +29,7 @@ WDN.jQuery(function($){
 				for(var i = 0, l = feed.items.length; i < l; i++) {
 					var item = feed.items[i];
 					$('form.enews input[name=title]').val(item.title);
+					$('#sampleLayout h4').text(item.title);
 					// The description here is actually HTML, we should grab ?format=xml
 					//$('form.enews input[name=description]').val(escape(item.description));
 				}
