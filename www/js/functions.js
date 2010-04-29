@@ -22,7 +22,7 @@ WDN.jQuery(document).ready(function() {
 		snap: '.newsColumn',
 		snapMode : 'inner',
 		connectToSortable: '.newsColumn',
-		helper: 'clone',
+		helper: 'original',
 		opacity: 0.45
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({

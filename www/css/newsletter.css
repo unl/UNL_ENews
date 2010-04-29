@@ -1,8 +1,10 @@
-
 #maincontent .story { 
     clear:both;
-    margin-top:10px;
-    padding-top:10px;
+    margin-top:20px;
+    min-height:80px;
+}
+#maincontent .story:hover {
+	outline:2px solid #FA6520;
 }
 #maincontent .newsColumn h4 {
     font-size: 1em;
@@ -50,8 +52,12 @@
 ************************/
 #maincontent .newsColumn {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
+#maincontent #newsStories td {padding-top:20px;}
 #maincontent table .story {
     cursor:move;
+    position:relative;
+    margin-top:0px;
+    margin-bottom:20px;
 }
 #newsStories .newsColumn {
     float:left;
@@ -72,7 +78,7 @@
     font-size:0.9em;
     color:#fff;
     font-weight:bold;
-    padding:0.3em 0.1em 0.2em 22px;
+    padding:0.3em 0.1em 0.2"/Users/smeranda/Desktop/1272554843_pencil_48.png"em 22px;
     background: #7c7c7c url('images/dragIndicator.png') repeat-y top left;
     margin:3px 0;
     border:1px solid #494949;
@@ -88,6 +94,62 @@
 }
 #maincontent .filled {
     border:none;
+}
+
+/* Story inline controls
+************************/
+
+.storyTools {
+	background:url('images/toolBG.png');
+	height:100%;
+	z-index:9;
+	width:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	display:none;
+	text-align:center;
+}
+#maincontent table .story:hover .storyTools {display:block;}
+#maincontent .storyTools a {
+	width:48px;
+	height:48px;
+	border:1px solid #fda967;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	display:inline-block;
+	vertical-align:middle;
+	background-color:#ff7000;
+	background-image:-webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0.2, rgb(255,111,0)),
+	    color-stop(1, rgb(197,88,4))
+	);
+	background-image:-moz-linear-gradient(
+	    center top,
+	    rgb(253,229,210) 20%,
+	    rgb(253,169,103) 100%
+	);
+	font-size:0.8em;
+	font-weight:bold;
+	text-transform:uppercase;
+	color:#fff;
+	margin-top:10px;
+	
+}
+.storyTools a span {
+	display:block;
+	width:100%;
+	height:100%;
+}
+.storyTools a.edit span {
+	background:url('images/toolEdit.png') no-repeat 50% 50%;
+}
+.storyTools a.remove span {
+	background:url('images/toolRemove.png') no-repeat 50% 50%;
 }
 
 
