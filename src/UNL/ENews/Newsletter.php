@@ -204,10 +204,10 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
                 "<body bgcolor='#ffffff'>".
                     $savvy->render($this).
                 "</body>".
-            "</html>";                          
+            "</html>";
         $crlf = "\n";
         $hdrs = array(
-          'From'    => 'no-reply@'.$_SERVER['HTTP_HOST'],
+          'From'    => 'today@unl.edu', // @TODO THIS NEEDS TO BE NEWSLETTER SPECIFIC, and NOT configurable to be today@unl.edu
           'Subject' => $this->subject);
         
         require_once 'Mail/mime.php';
@@ -219,6 +219,8 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $hdrs = $mime->headers($hdrs);
         $mail =& Mail::factory('sendmail');
         $mail->send('ericrasmussen1@gmail.com', $hdrs, $body);
+        $mail->send('brett.bieber@gmail.com', $hdrs, $body);
+        $mail->send('today@listserv.unl.edu', $hdrs, $body); // @TODO THIS NEEDS TO BE NEWSLETTER SPECIFIC, and NOT configurable to today@unl.edu
         
         $this->distributed = 1;
         $this->save();
