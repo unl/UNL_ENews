@@ -187,6 +187,7 @@ class UNL_ENews_Controller
                             }
                             //Output the image that will be shown in step 4
                             header('Location: ?view=file&id='.$file->id);
+                            exit();
                         }
                     } else {
                         throw new Exception('Error saving the file');
@@ -213,10 +214,17 @@ class UNL_ENews_Controller
                         
                         // The x and y coordinates on the original image where we will begin cropping
                         // Needs to be adjusted to account for the 410px width size it's displayed to the user
-                        $left = ($current_width/410)*$_POST['x1'];
-                        $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
-                        $right = ($current_width/410)*$_POST['x2'];
-                        $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                        if ($current_width > 410) {
+                            $left = ($current_width/410)*$_POST['x1'];
+                            $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
+                            $right = ($current_width/410)*$_POST['x2'];
+                            $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                        } else {
+                            $left = $_POST['x1'];
+                            $top = $_POST['y1'];
+                            $right = $_POST['x2'];
+                            $bottom = $_POST['y2'];
+                        }
                         
                         // This will be the final size of the cropped image
                         $crop_width = $right-$left;
