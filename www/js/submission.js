@@ -39,16 +39,18 @@ WDN.jQuery(function($){
 	$('ol.option_step a').click(function() {
 		$('#wdn_process_step1').slideToggle();
 		if($(this).attr('id') == 'newsAnnouncement') { //the user has selected news, so hide the event date panel and show the news form
-			$('.enews h3').eq(1).hide();
+			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
-				$('.enews h3').eq(0).removeClass('highlighted');
-				$('.enews h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
-				//$('.enews p.submit').show();
+				$('#enewsForm h3').eq(0).removeClass('highlighted');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
+				$('#sampleLayout').show();
+				$('#enewsImage').show();
+				$('#enewssubmitbutton').show();
 			});
 		} else { //we have an event request
 			$('#wdn_process_step2').slideToggle(function() {
-				$('.enews h3').eq(0).removeClass('highlighted');
-				$('.enews h3').eq(1).addClass('highlighted');
+				$('#enewsForm h3').eq(0).removeClass('highlighted');
+				$('#enewsForm h3').eq(1).addClass('highlighted');
 			});
 		}
 		return false;
@@ -57,32 +59,17 @@ WDN.jQuery(function($){
 	$('#next_step3').click(function() {
 		$('#wdn_process_step2').slideToggle();
 		$('#wdn_process_step3').slideToggle(function() {
-			$('.enews h3').eq(1).removeClass('highlighted');
-			$('.enews h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
+			$('#enewsForm h3').eq(1).removeClass('highlighted');
+			$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
 		});
+		$('#sampleLayout').show();
+		$('#enewsImage').show();
+		$('#enewssubmitbutton').show();
 		return false;
-	});
-	$('#next_step4').click(function() {
-		if (!submitStory()) {
-			$('#wdn_process_step3').slideToggle();
-			$('#wdn_process_step4').slideToggle(function() {
-				$('#enewsSubmission h3').eq(2).removeClass('highlighted');
-				$('#enewsImage h3').eq(0).addClass('highlighted');
-				$('#enewsImage p.submit').show();
-			}); 
-			$('#enewsSubmission h3').eq(0).unbind('click');
-			$('#enewsSubmission h3').eq(2).css('cursor','pointer').click(backToStep3);
-			$('#enewssubmitbutton').show();
-		} else {
-			$('#reqnotice').remove();
-			$('#wdn_process_step3').prepend('<p id="reqnotice" style="color:red">Please Fill Out All Required Fields</p>');
-		}
-		return false;
-	});
+	}); 
 	
-	
-	$('#enewsSubmission h3').eq(0).css('cursor','pointer').click(backToStep1);
-	$('#enewsSubmission h3').eq(1).css('cursor','pointer').click(backToStep2);
+	$('#enewsForm h3').eq(0).css('cursor','pointer').click(backToStep1);
+	$('#enewsForm h3').eq(1).css('cursor','pointer').click(backToStep2);
 	
 	
 	//Update the sample layout
@@ -126,14 +113,24 @@ WDN.jQuery(function($){
 
 	//When a file is selected from users local machine, do the ajax image upload
 	$('#enewsImage #image').change(function() {
-		//Hide submit button until user selects a crop area
-		$('#enewssubmitbutton').hide();
-		//Remove the previous crop selection area if it exists
-		$('#upload_area img').imgAreaSelect({
-			disable:true,
-			hide:true
-		}); 
-		ajaxUpload(this.form); 
+		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />')
+		if (submitStory()) {
+			//Hide submit button until user selects a crop area
+			$('#enewssubmitbutton').hide();
+			//Remove the previous crop selection area if it exists
+			$('#upload_area img').imgAreaSelect({
+				disable:true,
+				hide:true
+			});
+			//need stupid closure here and timeout because storyid from the submitted story is not available immediately
+			(function(){
+				var myform = document.getElementById("enewsImage");
+				setTimeout(function(){ajaxUpload(myform);},500);
+			})();
+		} else {
+			alert('Error');
+		}
+		
 		return false;
 	});
 	
@@ -141,29 +138,30 @@ WDN.jQuery(function($){
 
 	
 	function backToStep1() {
+		$('#sampleLayout').hide();
+		$('#enewsImage').hide();
+		$('#enewssubmitbutton').hide();
 		$('#wdn_process_step2').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step1').slideDown();
-		$('.enews h3').eq(2).removeClass("highlighted");
-		$('.enews h3').eq(1).removeClass("highlighted");
-		$('.enews h3').eq(0).addClass("highlighted");
-		$('.enews h3 span.announceType').remove();
-		$('.enews h3').show();
-		$('.enews p.submit').hide();
+		$('#enewsForm h3').eq(2).removeClass("highlighted");
+		$('#enewsForm h3').eq(1).removeClass("highlighted");
+		$('#enewsForm h3').eq(0).addClass("highlighted");
+		$('#enewsForm h3 span.announceType').remove();
+		$('#enewsForm h3').show();
 	};
 	function backToStep2() {
+		$('#sampleLayout').hide();
+		$('#enewsImage').hide();
+		$('#enewssubmitbutton').hide();
 		$('#wdn_process_step1').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step2').slideDown();
-		$('.enews h3').eq(2).removeClass("highlighted");
-		$('.enews h3').eq(0).removeClass("highlighted");
-		$('.enews h3').eq(1).addClass("highlighted");
-		$('.enews h3 span.announceType').remove();
-		$('.enews h3').show();
-		$('.enews p.submit').hide();
-	};
-	function backToStep3() {
-		
+		$('#enewsForm h3').eq(2).removeClass("highlighted");
+		$('#enewsForm h3').eq(0).removeClass("highlighted");
+		$('#enewsForm h3').eq(1).addClass("highlighted");
+		$('#enewsForm h3 span.announceType').remove();
+		$('#enewsForm h3').show();
 	};
 	
 	function submitStory() {
@@ -175,10 +173,18 @@ WDN.jQuery(function($){
 		var request_publish_end = $("input#request_publish_end").val();
 		var sponsor = $("input#sponsor").val();
 		
-		if (title == "" || description == "" || request_publish_start == "" || request_publish_end == "" || sponsor == "") { 
-	      return "Error";
-	    }
-		
+		//Use placeholder text if user uploads an image first
+		if (title == "")
+			title = 'PH';
+		if (description == "")
+			description = 'PH';
+		if (request_publish_start == "")
+			request_publish_start = '2020-01-01';
+		if (request_publish_end == "")
+			request_publish_end = '2020-01-01';
+		if (sponsor == "")
+			sponsor = 'PH';
+	    		
 	    var newsroom_id = new Array();
 	    $("input[name=newsroom_id\\[\\]]").each( function(index) {
 			newsroom_id.push($(this).val());
@@ -208,7 +214,7 @@ WDN.jQuery(function($){
 	  	  }
 	    });
 	 
-	 	return false;
+	 	return true;
 	}; 
 });
 

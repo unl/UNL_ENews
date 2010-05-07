@@ -156,6 +156,13 @@ class UNL_ENews_Controller
             case 'file':
                 $class = $this->view_map[$_POST['_type']];
                 if ($_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    if (isset($this->options['ajaxupload'])) {
+                        $allowedExtensions = array("gif","jpeg","jpg","png");
+                        if (!in_array(end(explode(".",strtolower($_FILES['image']['name']))),$allowedExtensions)) {
+                            echo 'Please Upload an Image in .jpg .png or .gif format.';
+                            exit();
+                        }
+                    }
                     $file_data = $_FILES['image'];
                     $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
                     $file = new $class();
@@ -185,6 +192,9 @@ class UNL_ENews_Controller
                         throw new Exception('Error saving the file');
                     }
                     exit();
+                } else {
+                    echo "Error Uploading File!";
+                    exit();
                 }
                 break;
             case 'savethumb':
@@ -201,14 +211,16 @@ class UNL_ENews_Controller
                         $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
                         list($current_width, $current_height) = getimagesize($filename);
                         
-                        // The x and y coordinates on the original image where we
-                        // will begin cropping the image
-                        $left = $_POST['x1'];
-                        $top = $_POST['y1'];
+                        // The x and y coordinates on the original image where we will begin cropping
+                        // Needs to be adjusted to account for the 410px width size it's displayed to the user
+                        $left = ($current_width/410)*$_POST['x1'];
+                        $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
+                        $right = ($current_width/410)*$_POST['x2'];
+                        $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
                         
                         // This will be the final size of the cropped image
-                        $crop_width = $_POST['x2']-$_POST['x1'];
-                        $crop_height = $_POST['y2']-$_POST['y1'];
+                        $crop_width = $right-$left;
+                        $crop_height = $bottom-$top;
                         
                         // Resample the image
                         $croppedimage = imagecreatetruecolor($crop_width, $crop_height);

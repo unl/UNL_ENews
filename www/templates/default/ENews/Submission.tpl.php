@@ -26,12 +26,12 @@ function getValue($object, $field)
 </script>
  
 
-<form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+<div id="enewsForm">
 	
-<?php //Story id if we are editing ?>
-<input type="hidden" id="storyid" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
+
 
 <h3 class="highlighted"><span>1</span>Select News Type</h3>
+<form id="enewsStep1" name="enewsStep1" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step1">
 	<legend>Select News Type</legend>
 	<ol class="option_step">
@@ -39,7 +39,13 @@ function getValue($object, $field)
 		<li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
 	</ol>
 </fieldset>
+</form>
+
+
+
+
 <h3><span>2</span>Enter Date Details for Event</h3>
+<form id="enewsStep2" name="enewsStep2" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step2" style="display:none;">
 	<legend><span>Enter Date Details for Event</span></legend>
         <ol>
@@ -57,9 +63,17 @@ function getValue($object, $field)
         </ol>
         <p class="nextStep"><a href="#" id="next_step3">Continue</a></p>
 </fieldset>
+</form>
+
+
+
+
 <h3><span>3</span>Announcement Submission</h3>
+<form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step3" style="display:none;">
 	<legend><span>News Announcement Submission</span></legend>
+	<?php //Story id if we are editing ?>
+    <input type="hidden" id="storyid" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
     <input type="hidden" name="_type" value="story" />
         <ol>
             <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></li>
@@ -91,13 +105,6 @@ function getValue($object, $field)
             </li>
             <?php endif; ?>
         </ol>
-	<div id="sampleLayout">
-		<h4>&lt;Enter Your Title&gt;</h4>
-		<p>&lt;Enter Your Article Text&gt;</p>
-		<a href="#"></a>
-	</div>
-	<div class="clear"></div>
-	<p class="nextStep"><a href="#" id="next_step4">Save Story and Continue to Image Upload</a></p>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
 	<legend>Event Announcement Submission</legend>
@@ -110,14 +117,24 @@ function getValue($object, $field)
 
 
 
-<form id="enewsImage" name="enewsImage" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+
+<div id="sampleLayout" style="display:none;">
+    <h4>&lt;Enter Your Title&gt;</h4>
+    <p>&lt;Enter Your Article Text&gt;</p>
+    <a href="#"></a>
+</div>
+
+
+
+
+
+<form id="enewsImage" name="enewsImage" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data" style="display:none;">
 <input type="hidden" name="_type" value="file" />
-<h3><span>4</span>Image Upload</h3>
 
 <?php //Story id that gets attached when the story is submitted above ?>
 <input type="hidden" id="storyid" name="storyid" value="" /> 
 
-<fieldset id="wdn_process_step4" style="display:none;">
+<fieldset>
             <ol><li>
             <label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
             <input id="image" name="image" type="file" />
@@ -138,5 +155,10 @@ function getValue($object, $field)
 <input type="hidden" name="y2" value="" /> 
 <input type="hidden" id="storyid" name="storyid" value="" />
 <?php //Submit button removed when an image is uplaoded but then is (re)appended dynamically when image is clicked on to crop in order to force users to make a thumbnail ?>
-<div id="enewssubmitbutton" style="display:none;margin:20px 0;"><input type="submit" name="submit" value="Finish Your Submission" /></div>
+<div id="enewssubmitbutton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
+
+
+<?php //ending div for #enewsForm ?>
+<div class="clear"></div>
+</div>

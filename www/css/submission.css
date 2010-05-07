@@ -1,23 +1,90 @@
+div#enewsForm {
+    width:940px;
+    background:#f7f7f7;
+}
+
+/* Submission Form h3
+*************/
+#maincontent div#enewsForm h3 {
+    background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
+    padding:5px 10px;
+    border:1px solid #dadde3;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #ccc;
+    font-size:1.5em;
+    color:#999;
+}
+#maincontent div#enewsForm h3:first-of-type {
+    border-top:1px solid #dadde3;   
+}
+#maincontent div#enewsForm h3 span {
+    background:#fff;
+    padding:1px 4px 1px 4px;
+    border-radius:10x;  
+    margin-right:10px;
+    margin-top:0px;
+    font-size:12px;
+    float:left;
+    font-weight:bold;
+    border:1px solid #fff;
+}
+#maincontent div#enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
+#maincontent div#enewsForm h3.highlighted span {
+    border:1px solid #e19c2b;
+    background:#de8727;
+    color:#fff;
+}
+#maincontent div#enewsForm h3.highlighted + fieldset,
+#maincontent div#enewsForm h3.highlighted + fieldset + fieldset {
+    border:1px solid #b8afa1;
+    border-top:none;
+    background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
+}
+#maincontent div#enewsForm h3 span.announceType {
+    border:none;
+    float:right;
+    background:#028a02;
+    margin-top:3px; 
+    color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+form#enewsSubmission {
+    float:left;
+    width:470px;
+    margin-right:10px;	
+}
+
+
+
 /* Submission Form Display Sample
 **********************/
-#wdn_process_step3 ol {
-    float:left; 
-}
 #sampleLayout {
     float:right;    
-    margin:20px 10px 0px 40px;
+    margin:20px 10px 0px 10px;
     border:1px solid #b8afa1;
     padding:10px;
     background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
     width:375px;
 }
-#wdn_process_step2 ol,
-#wdn_process_step3 ol {
-    width:450px;
-}
 
 /* Image Upload Preview 
 ********************/
+form#enewsImage {
+    float:right;
+    width:430px;
+    border:1px solid #b8afa1;
+    margin:30px 10px;
+}
 #upload_area {
     text-align:center;
     margin-bottom:10px;
@@ -25,6 +92,6 @@
 #upload_area img {
     height:auto;
     width:auto;
-    max-width:920px;
+    max-width:410px;
     cursor:default !important;  
 }
