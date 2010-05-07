@@ -115,14 +115,12 @@ WDN.jQuery(function($){
 	$('#enewsImage #image').change(function() {
 		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />')
 		if (submitStory()) {
-			//Hide submit button until user selects a crop area
-			$('#enewssubmitbutton').hide();
 			//Remove the previous crop selection area if it exists
 			$('#upload_area img').imgAreaSelect({
 				disable:true,
 				hide:true
 			});
-			//need stupid closure here and timeout because storyid from the submitted story is not available immediately
+			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){ajaxUpload(myform);},500);

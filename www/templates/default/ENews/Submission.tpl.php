@@ -154,7 +154,6 @@ function getValue($object, $field)
 <input type="hidden" name="x2" value="" />
 <input type="hidden" name="y2" value="" /> 
 <input type="hidden" id="storyid" name="storyid" value="" />
-<?php //Submit button removed when an image is uplaoded but then is (re)appended dynamically when image is clicked on to crop in order to force users to make a thumbnail ?>
 <div id="enewssubmitbutton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
 

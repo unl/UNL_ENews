@@ -212,18 +212,25 @@ class UNL_ENews_Controller
                         $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
                         list($current_width, $current_height) = getimagesize($filename);
                         
-                        // The x and y coordinates on the original image where we will begin cropping
-                        // Needs to be adjusted to account for the 410px width size it's displayed to the user
-                        if ($current_width > 410) {
-                            $left = ($current_width/410)*$_POST['x1'];
-                            $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
-                            $right = ($current_width/410)*$_POST['x2'];
-                            $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                        if (empty($_POST['x1'])) {
+                            // User did not select a cropping area
+                            $left = 0;
+                            $top = 0;
+                            $right = $current_width;
+                            $bottom = $current_width*(3/4);
                         } else {
-                            $left = $_POST['x1'];
-                            $top = $_POST['y1'];
-                            $right = $_POST['x2'];
-                            $bottom = $_POST['y2'];
+                            // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
+                            if ($current_width > 410) {
+                                $left = ($current_width/410)*$_POST['x1'];
+                                $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
+                                $right = ($current_width/410)*$_POST['x2'];
+                                $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                            } else {
+                                $left = $_POST['x1'];
+                                $top = $_POST['y1'];
+                                $right = $_POST['x2'];
+                                $bottom = $_POST['y2'];
+                            }
                         }
                         
                         // This will be the final size of the cropped image
