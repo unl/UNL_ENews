@@ -5,36 +5,29 @@ WDN.jQuery(function($){
 
 		$('#request_publish_end').attr('value', $(this).val());
 		
-	    $.getFeed({
-	        url: 'http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=rss',
-	        success: function(feed) {
-	        	window.whatisfeed = feed;
-	        	$("#event").html('<option value="NewEvent">New Event</option>');
-	            for(var i = 0, l = feed.items.length; i < l; i++) {
-	                var item = feed.items[i];
-	               $("#event").append('<option value="'+item.link+'">' + item.title + '</option>');
-	            }
-	        }
-	    });
-	    
+		WDN.get('http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=xml', null,
+			function(eventsXML){
+				$("#event").html('<option value="NewEvent">New Event</option>');
+				$(eventsXML).find('Event').each(function(){
+					$("#event").append('<option value="'+$(this).find('WebPage URL').text()+'">' + $(this).find('EventTitle').text() + '</option>');
+				});
+			}, 'xml');
 	});
 	$('.hasDatepicker').each(function() {
 		$(this).attr({'autocomplete' : 'off'});
 	});
 	$('select#event').change(function(){
 		$('form.enews input[name=website]').val($(this).val());
-		$.getFeed({
-	        url: $(this).val()+'/?format=rss',
-	        success: function(feed) {
-				for(var i = 0, l = feed.items.length; i < l; i++) {
-					var item = feed.items[i];
-					$('form.enews input[name=title]').val(item.title);
-					$('#sampleLayout h4').text(item.title);
-					// The description here is actually HTML, we should grab ?format=xml
-					//$('form.enews input[name=description]').val(escape(item.description));
-				}
-			}
-		});
+		WDN.get($(this).val()+'?format=xml', null, function(data) {
+
+			$('form.enews input[name=title]').val($(data).find('EventTitle').text());
+			$('form.enews textarea[name=description]').val($(data).find('Description').text());
+
+			$('#title').keyup();
+			$('#description').keyup();
+
+		}, 'xml');
+
 	});
 	$('ol.option_step a').click(function() {
 		$('#wdn_process_step1').slideToggle();

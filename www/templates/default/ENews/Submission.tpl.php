@@ -16,7 +16,6 @@ function getValue($object, $field)
 	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
 	WDN.loadJS("js/functions.js");
 	WDN.loadJS("js/jquery.imgareaselect.pack.js");
-	WDN.loadJS("js/jquery.jfeedUNL.js");
 	WDN.loadJS("js/submission.js");
 	WDN.loadJS("js/ajaxfileupload.js");
 	WDN.loadCSS("css/imgareaselect-default.css");
