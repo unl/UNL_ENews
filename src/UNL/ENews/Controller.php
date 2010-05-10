@@ -207,86 +207,91 @@ class UNL_ENews_Controller
                 if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
                     throw new Exception('Could not find that story!');
                 }
-                foreach ($story->getFiles() as $file) {
-                    if (preg_match('/^image/', $file->type)) {
-                        $newfile = new UNL_ENews_File();
-                        $newfile = $file;
-                        
-                        // Crop the image ***************************************************************
-                        // Get dimensions of the original image
-                        $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
-                        list($current_width, $current_height) = getimagesize($filename);
-                        
-                        if (empty($_POST['x1'])) {
-                            // User did not select a cropping area
-                            $left = 0;
-                            $top = 0;
-                            $right = $current_width;
-                            $bottom = $current_width*(3/4);
-                        } else {
-                            // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
-                            if ($current_width > 410) {
-                                $left = ($current_width/410)*$_POST['x1'];
-                                $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
-                                $right = ($current_width/410)*$_POST['x2'];
-                                $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
-                            } else {
-                                $left = $_POST['x1'];
-                                $top = $_POST['y1'];
-                                $right = $_POST['x2'];
-                                $bottom = $_POST['y2'];
-                            }
-                        }
-                        
-                        // This will be the final size of the cropped image
-                        $crop_width = $right-$left;
-                        $crop_height = $bottom-$top;
-                        
-                        // Resample the image
-                        $croppedimage = imagecreatetruecolor($crop_width, $crop_height);
-                        switch ($file->type) {
-                            case 'image/jpeg':
-                                $current_image = imagecreatefromjpeg($filename);
-                                break;
-                            case 'image/png':
-                                $current_image = imagecreatefrompng($filename);
-                                break;
-                            case 'image/gif':
-                                $current_image = imagecreatefromgif($filename);
-                                break;
-                        }
-                        imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-                        
-                        // Resize the image ************************************************************
-                        $current_width = $crop_width;
-                        $current_height = $crop_height; 
-                        $canvas = imagecreatetruecolor(96, 72); 
-                        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
-                        
-                        ob_start();
-                        switch ($file->type) {
-                            case 'image/jpeg':
-                                imagejpeg($canvas);
-                                break;
-                            case 'image/png':
-                                imagepng($canvas);
-                                break;
-                            case 'image/gif':
-                                imagegif($canvas);
-                                break;
-                        }
-                        $newfile->size = ob_get_length();
-                        $newfile->data = ob_get_clean();
-                        imagedestroy($canvas);
-                        
-                        // Save the thumbnail **********************************************************
-                        // Clear the id so the database will increment it
-                        $newfile->id = NULL;
-                        $newfile->use_for = 'thumbnail';                
-                        $newfile->save();
-                        $story->addFile($newfile);
+                //Delete exisiting thumbnail
+                $thumb = $story->getFileByUse('thumbnail');
+                $thumb->delete();
+                $mysqli = UNL_ENews_Controller::getDB();
+                $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($thumb->id);
+                $mysqli->query($sql); 
+                
+                $file = $story->getFileByUse('originalimage');
+                $newfile = new UNL_ENews_File();
+                $newfile = $file;
+                
+                // Crop the image ***************************************************************
+                // Get dimensions of the original image
+                $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
+                list($current_width, $current_height) = getimagesize($filename);
+                
+                if (empty($_POST['x1'])) {
+                    // User did not select a cropping area
+                    $left = 0;
+                    $top = 0;
+                    $right = $current_width;
+                    $bottom = $current_width*(3/4);
+                } else {
+                    // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
+                    if ($current_width > 410) {
+                        $left = ($current_width/410)*$_POST['x1'];
+                        $top = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
+                        $right = ($current_width/410)*$_POST['x2'];
+                        $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                    } else {
+                        $left = $_POST['x1'];
+                        $top = $_POST['y1'];
+                        $right = $_POST['x2'];
+                        $bottom = $_POST['y2'];
                     }
                 }
+                
+                // This will be the final size of the cropped image
+                $crop_width = $right-$left;
+                $crop_height = $bottom-$top;
+                
+                // Resample the image
+                $croppedimage = imagecreatetruecolor($crop_width, $crop_height);
+                switch ($file->type) {
+                    case 'image/jpeg':
+                        $current_image = imagecreatefromjpeg($filename);
+                        break;
+                    case 'image/png':
+                        $current_image = imagecreatefrompng($filename);
+                        break;
+                    case 'image/gif':
+                        $current_image = imagecreatefromgif($filename);
+                        break;
+                }
+                imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
+                
+                // Resize the image ************************************************************
+                $current_width = $crop_width;
+                $current_height = $crop_height; 
+                $canvas = imagecreatetruecolor(96, 72); 
+                imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
+                
+                ob_start();
+                switch ($file->type) {
+                    case 'image/jpeg':
+                        imagejpeg($canvas);
+                        break;
+                    case 'image/png':
+                        imagepng($canvas);
+                        break;
+                    case 'image/gif':
+                        imagegif($canvas);
+                        break;
+                }
+                $newfile->size = ob_get_length();
+                $newfile->data = ob_get_clean();
+                imagedestroy($canvas);
+                
+                // Save the thumbnail **********************************************************
+                // Clear the id so the database will increment it
+                $newfile->id = NULL;
+                $newfile->use_for = 'thumbnail';                
+                $newfile->save();
+                $story->addFile($newfile);
+          
                 header('Location: ?view=thanks&_type=story');
                 exit();
                 break;

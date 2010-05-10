@@ -1,4 +1,4 @@
-WDN.jQuery(function($){
+WDN.jQuery(document).ready(function($){
 	$("input.datepicker").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
 	$("#date").change(function(){
 		var date = $(this).val().split(/\//);
@@ -262,7 +262,7 @@ var submission = function() {
 			WDN.socialmediashare.createURL(
 				WDN.socialmediashare.buildGAURL(url, gaTagging),
 				function(data) {
-					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" taget="_blank">GoURL</a>');
+					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
 					submission.addURLtoPreview(data);
 				}
 			);

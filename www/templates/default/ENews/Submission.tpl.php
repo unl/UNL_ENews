@@ -22,6 +22,21 @@ function getValue($object, $field)
 	WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
 	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
+
+	<?php //Set up the form for editing if an id is specified
+	      $id = getValue($context,'id'); ?>
+	<?php if (!empty($id)) : ?>
+	WDN.jQuery(document).ready(function($){
+		(function(){
+			setTimeout(function(){
+				$('#newsAnnouncement').click();
+	            $('#enewsSubmissionButton').remove();
+	            $('#enewsSubmitButton').show();
+	            document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
+			},100);
+		})();
+	});
+	<?php endif; ?>
 </script>
  
 
@@ -154,6 +169,7 @@ function getValue($object, $field)
                 <?php if ($id = getValue($context,"id")) {
                         if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
                             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
+                            <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
                             <script type="text/javascript">setImageCrop();</script>
                 <?php   }
                       } else { ?>
