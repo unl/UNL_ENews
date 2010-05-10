@@ -92,6 +92,7 @@ form#enewsSubmission {
 ********************/
 form#enewsImage {
     float:right;
+    clear:right;
     width:430px;
     border:1px solid #b8afa1;
     margin:30px 10px;
@@ -108,6 +109,10 @@ form#enewsImage {
 }
 #upload_area span {
 	display:block;
-    margin:0 0 8px 0;
-    color:green;
+    margin:10px 0 8px 0;
+    background:#F8F9D1;
+    color:#A5690C;
+    font-size:1.1em;
+    padding:10px;
+    border:1px solid #CAD094;
 }

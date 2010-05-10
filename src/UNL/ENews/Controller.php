@@ -149,9 +149,13 @@ class UNL_ENews_Controller
                         throw new Exception('Invalid newsroom selected');
                     }
                 }
-                
-                echo $object->id;
-                exit();
+                if (isset($_POST['ajaxupload'])) {
+                    echo $object->id;
+                    exit();
+                } else {
+                    header('Location: ?view=thanks&_type='.$_POST['_type']);
+                    exit();
+                }
                 break;
             case 'file':
                 $class = $this->view_map[$_POST['_type']];

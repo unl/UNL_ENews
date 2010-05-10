@@ -109,6 +109,8 @@ function getValue($object, $field)
 	<legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
 </fieldset> 
+
+<div id="enewsSubmissionButton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
 
 
@@ -125,7 +127,7 @@ function getValue($object, $field)
                     <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />                 
         <?php   }
               } else { ?>
-                &lt;Upload<br />Image<br />Below&gt;
+                &lt;Upload Image Below&gt;
         <?php }  ?>
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
@@ -143,7 +145,7 @@ function getValue($object, $field)
 <input type="hidden" id="storyid" name="storyid" value="" /> 
 
 <fieldset>
-            <ol><li>
+            <ol style="padding:0;margin-top:0;"><li>
             <label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
             <input id="image" name="image" type="file" />
             </li></ol>
@@ -171,7 +173,7 @@ function getValue($object, $field)
 <input type="hidden" name="x2" value="" />
 <input type="hidden" name="y2" value="" /> 
 <input type="hidden" id="storyid" name="storyid" value="" />
-<div id="enewssubmitbutton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
+<div id="enewsSubmitButton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
 
 
