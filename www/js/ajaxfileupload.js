@@ -2,6 +2,8 @@ var ajaxUpload = function() {
 	return {
 		url_action : "?view=submit&ajaxupload=yes",
 		id_element : "upload_area",
+		sampleLayoutImage : "sampleLayoutImage",
+		message : 'Click and drag on the image below to select a thumbnail:',
 		html_show_loading : '<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />',
 		html_error_http : "Error....",
 		
@@ -52,7 +54,8 @@ var ajaxUpload = function() {
 			var doUpload = function() {
 				ajaxUpload.removeEvent(document.getElementById('ajax-temp'),"load", doUpload);
 				var cross = "javascript: ";
-				cross += "window.parent.document.getElementById('"+ajaxUpload.id_element+"').innerHTML = document.body.innerHTML + '<div style=\"margin-top:5px;\">Click and drag on the image above to select a thumbnail.</div>'; window.parent.setImageCrop(); void(0);";
+				cross += "window.parent.document.getElementById('"+ajaxUpload.sampleLayoutImage+"').innerHTML = document.body.innerHTML;";
+				cross += "window.parent.document.getElementById('"+ajaxUpload.id_element+"').innerHTML = '<span>"+ajaxUpload.message+"</span>' + document.body.innerHTML; window.parent.setImageCrop(); void(0);";
 				document.getElementById(ajaxUpload.id_element).innerHTML = ajaxUpload.html_error_http;
 				document.getElementById('ajax-temp').src = cross;
 				if (ajaxUpload.isWebKit()) {

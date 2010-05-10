@@ -173,7 +173,7 @@ class UNL_ENews_Controller
                         if (!isset($this->options['ajaxupload'])) {
                             header('Location: ?view=thanks&_type='.$_POST['_type']);
                         } else {
-                            //We're doing the ajax upload in step 4 of the submission, so delete the previous photo
+                            //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
                             foreach ($story->getFiles() as $curfile) {
                                 if (preg_match('/^image/', $curfile->type)) {
                                     //Check to see that we Don't Delete the File we just uploaded
@@ -185,7 +185,7 @@ class UNL_ENews_Controller
                                     }
                                 }
                             }
-                            //Output the image that will be shown in step 4
+                            //Output the image that will be shown on step 3 of submission page
                             header('Location: ?view=file&id='.$file->id);
                             exit();
                         }

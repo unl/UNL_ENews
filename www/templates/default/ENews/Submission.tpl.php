@@ -119,6 +119,7 @@ function getValue($object, $field)
 
 <div id="sampleLayout" style="display:none;">
     <h4>&lt;Enter Your Title&gt;</h4>
+    <div id="sampleLayoutImage" style="float:left;margin-right:5px;background:#f7f7f7;padding:5px;border:1px solid #ededed;font-size:.8em;line-height:1em;text-align:center;">&lt;Upload<br />Image<br />Below&gt;</div>
     <p>&lt;Enter Your Article Text&gt;</p>
     <a href="#"></a>
 </div>

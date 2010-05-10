@@ -76,6 +76,17 @@ form#enewsSubmission {
     background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
     width:375px;
 }
+#sampleLayoutImage {
+	width:96px;
+	max-height:78px;
+    overflow:hidden;	
+}
+#sampleLayoutImage img {
+    height:auto;
+    width:auto;
+    max-width:96px;
+    cursor:default !important;  
+}
 
 /* Image Upload Preview 
 ********************/
@@ -94,4 +105,9 @@ form#enewsImage {
     width:auto;
     max-width:410px;
     cursor:default !important;  
+}
+#upload_area span {
+	display:block;
+    margin:0 0 8px 0;
+    color:green;
 }

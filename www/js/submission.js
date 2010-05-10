@@ -116,7 +116,7 @@ WDN.jQuery(function($){
 			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
 				var myform = document.getElementById("enewsImage");
-				setTimeout(function(){ajaxUpload.upload(myform);},500);
+				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();
 		} else {
 			alert('Error');
