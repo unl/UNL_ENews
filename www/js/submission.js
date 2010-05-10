@@ -92,6 +92,9 @@ WDN.jQuery(function($){
 	//Make a GoURL with campaign tagging for the Supporting Website
 	$('#website').change(function() {
 		var website = $(this).val();
+		if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
+			website = "http://" + website;
+		}
 		var goURLPrefix = RegExp('http://go.unl.edu');
 		if (!goURLPrefix.test(website)) {
 			submission.createGoURL(website);
@@ -244,8 +247,8 @@ var submission = function() {
 		urlPreview : false,
 		
 		createGoURL : function(url) {
-			WDN.jQuery('#website').siblings('label').append('<span class="helper">Building a GoURL...</span>');
-			WDN.jQuery('#website').attr('disabled','disabled');
+			WDN.jQuery('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
+			//WDN.jQuery('#website').attr('disabled','disabled');
 			submission.utm_content = WDN.jQuery('#title').val();
 			
 			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_content="+submission.utm_content;
@@ -253,12 +256,12 @@ var submission = function() {
 			WDN.socialmediashare.createURL(
 				WDN.socialmediashare.buildGAURL(url, gaTagging),
 				function(data) {
-					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a GoURL');
+					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" taget="_blank">GoURL</a>');
 					submission.addURLtoPreview(data);
 				}
 			);
+			
 		},
-	
 		addURLtoPreview : function(url) {
 			WDN.jQuery('#sampleLayout a').text(function(index){
 				return url;
