@@ -156,18 +156,19 @@ class UNL_ENews_Controller
             case 'file':
                 $class = $this->view_map[$_POST['_type']];
                 if ($_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    $file_data = $_FILES['image'];
+                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
+                    $file = new $class();
+                    self::setObjectFromArray($file, $file_data);
+                    $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
                     if (isset($this->options['ajaxupload'])) {
                         $allowedExtensions = array("gif","jpeg","jpg","png");
                         if (!in_array(end(explode(".",strtolower($_FILES['image']['name']))),$allowedExtensions)) {
                             echo 'Please Upload an Image in .jpg .png or .gif format.';
                             exit();
                         }
+                        $file->use_for = 'originalimage'; 
                     }
-                    $file_data = $_FILES['image'];
-                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-                    $file = new $class();
-                    self::setObjectFromArray($file, $file_data);
-                    $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
                     if ($file->save()) {
                         $story->addFile($file);
                         if (!isset($this->options['ajaxupload'])) {

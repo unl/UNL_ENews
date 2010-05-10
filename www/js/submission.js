@@ -96,12 +96,10 @@ WDN.jQuery(function($){
 		if (!goURLPrefix.test(website)) {
 			submission.createGoURL(website);
 		} else {
-			if (!submission.urlPreview){
+			if (!submission.urlPreview) {
 				submission.addURLtoPreview(website);
 			}
 		}
-		//Now, let's add the URL to the preview
-		
 	});
 
 	//When a file is selected from users local machine, do the ajax image upload
@@ -162,19 +160,20 @@ WDN.jQuery(function($){
 	  	var full_article = $("textarea#full_article").val();
 		var request_publish_start = $("input#request_publish_start").val();
 		var request_publish_end = $("input#request_publish_end").val();
+		var website = $("input#website").val();
 		var sponsor = $("input#sponsor").val();
 		
 		//Use placeholder text if user uploads an image first
 		if (title == "")
-			title = 'PH';
+			title = '?';
 		if (description == "")
-			description = 'PH';
+			description = '?';
 		if (request_publish_start == "")
 			request_publish_start = '2000-01-01';
 		if (request_publish_end == "")
 			request_publish_end = '2000-01-01';
 		if (sponsor == "")
-			sponsor = 'PH';
+			sponsor = '?';
 	    		
 	    var newsroom_id = new Array();
 	    $("input[name=newsroom_id\\[\\]]").each( function(index) {
@@ -183,7 +182,7 @@ WDN.jQuery(function($){
 
 		//Create the data string to POST
 		var dataString = '_type=story&storyid=' + storyid + '&title='+ title + '&description=' + description + '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
-		dataString += '&request_publish_end=' + request_publish_end + '&sponsor=' + sponsor;
+		dataString += '&request_publish_end=' + request_publish_end + '&website=' + website + '&sponsor=' + sponsor;
 		$.each(newsroom_id, function(key, value) { 
 			  dataString += '&newsroom_id[]=';
 			  dataString += value; 

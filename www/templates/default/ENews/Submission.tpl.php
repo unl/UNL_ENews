@@ -77,10 +77,10 @@ function getValue($object, $field)
         <ol>
             <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" /></li>
             <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" cols="60" rows="5"><?php echo getValue($context, 'description'); ?></textarea></li>
-            <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" cols="60" rows="5"><?php /*echo getValue($context, 'description');*/ ?></textarea></li>
+            <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" cols="60" rows="5"><?php echo getValue($context, 'full_article'); ?></textarea></li>
             <li><label for="request_publish_start">What date would like this to run?<span class="required">*</span></label><input class="datepicker" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo getValue($context, 'request_publish_start'); ?>" /></li>
             <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo getValue($context, 'request_publish_end'); ?>" /></li>
-            <li><label for="website">Supporting Website</label><input id="website" name="website" type="text"  value="<?php echo getValue($context, 'website'); ?>" /></li>
+            <li><label for="website">Supporting Website</label><input id="website" name="website" type="text" value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
             <?php if ($context->newsroom->id != 1) : ?>
             <li>
@@ -119,7 +119,15 @@ function getValue($object, $field)
 
 <div id="sampleLayout" style="display:none;">
     <h4>&lt;Enter Your Title&gt;</h4>
-    <div id="sampleLayoutImage" style="float:left;margin-right:5px;background:#f7f7f7;padding:5px;border:1px solid #ededed;font-size:.8em;line-height:1em;text-align:center;">&lt;Upload<br />Image<br />Below&gt;</div>
+    <div id="sampleLayoutImage" style="float:left;margin-right:5px;background:#f7f7f7;padding:5px;border:1px solid #ededed;font-size:.8em;line-height:1em;text-align:center;">
+        <?php if ($id = getValue($context,"id")) {
+                if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) { ?>
+                    <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />                 
+        <?php   }
+              } else { ?>
+                &lt;Upload<br />Image<br />Below&gt;
+        <?php }  ?>
+    </div>
     <p>&lt;Enter Your Article Text&gt;</p>
     <a href="#"></a>
 </div>
@@ -140,7 +148,16 @@ function getValue($object, $field)
             <input id="image" name="image" type="file" />
             </li></ol>
             
-			<div id="upload_area"><div style="border:1px dashed #888;background:white;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div></div>
+			<div id="upload_area">
+                <?php if ($id = getValue($context,"id")) {
+                        if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
+                            <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
+                            <script type="text/javascript">setImageCrop();</script>
+                <?php   }
+                      } else { ?>
+                        <div style="border:1px dashed #888;background:white;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
+                <?php }  ?>
+            </div>
 </fieldset>
 </form>
 
