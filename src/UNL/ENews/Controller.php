@@ -213,9 +213,10 @@ class UNL_ENews_Controller
                     header('Location: ?view=thanks&_type=story');
                     exit();
                 }
-                //Delete exisiting thumbnail
-                $thumb = $story->getFileByUse('thumbnail');
-                $thumb->delete();
+                //Delete existing thumbnail
+                if ($thumb = $story->getFileByUse('thumbnail')) {
+                    $thumb->delete();
+                }
                 $mysqli = UNL_ENews_Controller::getDB();
                 $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($thumb->id);
                 $mysqli->query($sql); 
