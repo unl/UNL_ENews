@@ -116,7 +116,7 @@ WDN.jQuery(function($){
 			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
 				var myform = document.getElementById("enewsImage");
-				setTimeout(function(){ajaxUpload(myform);},500);
+				setTimeout(function(){ajaxUpload.upload(myform);},500);
 			})();
 		} else {
 			alert('Error');
@@ -170,9 +170,9 @@ WDN.jQuery(function($){
 		if (description == "")
 			description = 'PH';
 		if (request_publish_start == "")
-			request_publish_start = '2020-01-01';
+			request_publish_start = '2000-01-01';
 		if (request_publish_end == "")
-			request_publish_end = '2020-01-01';
+			request_publish_end = '2000-01-01';
 		if (sponsor == "")
 			sponsor = 'PH';
 	    		
@@ -188,8 +188,6 @@ WDN.jQuery(function($){
 			  dataString += '&newsroom_id[]=';
 			  dataString += value; 
 		});
-
-		//alert(dataString);//return false;
 			
 		$.ajax({
 	      type: "POST",
