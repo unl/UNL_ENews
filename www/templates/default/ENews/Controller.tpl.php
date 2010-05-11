@@ -56,7 +56,11 @@ if ($user = UNL_ENews_Controller::getUser()) {
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="?view=newsletter">E-News</a></li>
+                    <li><a href="?view=newsletter">E-News</a>
+                        <ul>
+                            <li><a href="?view=help">Help</a></li>
+                        </ul>
+                    </li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
                     <?php if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) : ?>
                     <li><a href="?view=manager">Manage News</a></li>
