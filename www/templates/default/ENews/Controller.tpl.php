@@ -58,6 +58,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
                 <ul>
                     <li><a href="?view=newsletter">E-News</a></li>
                     <li><a href="?view=submit">Submit A News Item</a></li>
+                    <?php if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) : ?>
                     <li><a href="?view=manager">Manage News</a></li>
                     <li><a href="?view=preview">Build Newsletter</a>
                         <?php
@@ -77,6 +78,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
                         }
                         ?>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <!-- InstanceEndEditable --></div>
         </div>
