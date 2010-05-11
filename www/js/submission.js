@@ -107,8 +107,8 @@ WDN.jQuery(document).ready(function($){
 
 	//When a file is selected from users local machine, do the ajax image upload
 	$('#enewsImage #image').change(function() {
-		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />');
-		if (submitStory()) {
+		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
+		if (!submitStory()) {
 			//Remove the previous crop selection area if it exists
 			$('#upload_area img').imgAreaSelect({
 				disable:true,
@@ -131,7 +131,10 @@ WDN.jQuery(document).ready(function($){
  
 	//When the final submission button is pressed, save whatever changes were made to the story first
 	$('form#enewsSubmit').submit(function(){
-		submitStory();
+		if (message = submitStory(true)) {
+			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
+			return false;
+		}
 	});
 
 	
@@ -164,7 +167,7 @@ WDN.jQuery(document).ready(function($){
 		$('#enewsForm h3').show();
 	};
 	
-	function submitStory() {
+	function submitStory(validate) {
 	  	var storyid = $("input#storyid").val();
 	  	var title = $("input#title").val();
 	  	var description = $("textarea#description").val();
@@ -174,15 +177,22 @@ WDN.jQuery(document).ready(function($){
 		var website = $("input#website").val();
 		var sponsor = $("input#sponsor").val();
 		
+		if (validate && (title == "" || description == "" || request_publish_start == "" || request_publish_end == "" || sponsor == "")) {
+			return 'Required fields cannot be left blank';
+		}
+		if (validate && (request_publish_start > request_publish_end)) {
+			return '"Last date this could run" must be later then "What date would like this to run?"';
+		}
+		
 		//Use placeholder text if user uploads an image first
 		if (title == "")
 			title = '?';
 		if (description == "")
 			description = '?';
 		if (request_publish_start == "")
-			request_publish_start = '2000-01-01';
+			request_publish_start = '1999-01-01';
 		if (request_publish_end == "")
-			request_publish_end = '2000-01-01';
+			request_publish_end = '1999-01-01';
 		if (sponsor == "")
 			sponsor = '?';
 	    		
@@ -192,7 +202,8 @@ WDN.jQuery(document).ready(function($){
 	    }); 
 
 		//Create the data string to POST
-		var dataString = '_type=story&ajaxupload=yes&storyid=' + storyid + '&title='+ title + '&description=' + description + '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
+		var dataString = '_type=story&ajaxupload=yes&storyid=' + storyid + '&title='+ title + '&description=' + description;
+		dataString += '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
 		dataString += '&request_publish_end=' + request_publish_end + '&website=' + website + '&sponsor=' + sponsor;
 		$.each(newsroom_id, function(key, value) { 
 			  dataString += '&newsroom_id[]=';
@@ -214,7 +225,7 @@ WDN.jQuery(document).ready(function($){
 	  	  }
 	    });
 	 
-	 	return true;
+	 	return false;
 	}; 
 });
 

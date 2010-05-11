@@ -135,6 +135,8 @@ function getValue($object, $field)
 
 
 <div id="sampleLayout" style="display:none;">
+    <h5>Preview of Your Submission</h5>
+    <div id="sampleLayoutInner">
     <h4>&lt;Enter Your Title&gt;</h4>
     <div id="sampleLayoutImage" style="float:left;margin-right:5px;background:#f7f7f7;padding:5px;border:1px solid #ededed;font-size:.8em;line-height:1em;text-align:center;">
         <?php if ($id = getValue($context,"id")) {
@@ -147,6 +149,8 @@ function getValue($object, $field)
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
     <a href="#"></a>
+    <div class="clear"></div>
+    </div>
 </div>
 
 
@@ -173,7 +177,7 @@ function getValue($object, $field)
                             <script type="text/javascript">setImageCrop();</script>
                 <?php   }
                       } else { ?>
-                        <div style="border:1px dashed #888;background:white;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
+                        <div style="border:1px dashed #888;background:#ECF3FA;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
                 <?php }  ?>
             </div>
 </fieldset>

@@ -7,7 +7,6 @@
 }
 #maincontent table th {text-align:left;}
 #maincontent fieldset {
-    background:#f7f7f7;
     padding:10px 10px 0px 10px;
     margin:0px;
 }
@@ -148,24 +147,7 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 }
 
 
-/* wdn_notice box
-**********************/
-#maincontent div.wdn_notice div.message {
-	background:url('images/checkbox.png') no-repeat center left;
-}
-#maincontent div.wdn_notice {
-    border: 1px solid #cad094;
-    background:#f8f9d1;
-    width:100%;
-}
-#maincontent div.wdn_notice div.minimize a, #maincontent div.wdn_notice div.maximize a, #maincontent div.wdn_notice div.minimize a:hover, #maincontent div.wdn_notice div.maximize a:hover {
-	border: 1px solid #cad094;
 
-}
-#maincontent div.wdn_notice div.minimize a:hover, #maincontent div.wdn_notice div.maximize a:hover {
-	border: 1px solid #aaaf7d;
-
-}
 
 
 

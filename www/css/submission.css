@@ -71,10 +71,18 @@ form#enewsSubmission {
 #sampleLayout {
     float:right;    
     margin:20px 10px 0px 10px;
-    border:1px solid #b8afa1;
+    width:430px;
+}
+#sampleLayout > h5 {
+    font-size:1.3em;
+    font-family:"Lucida Grande",Verdana,Arial;
+    color:#494949;	
+    padding-bottom:0;
+}
+#sampleLayoutInner {
+    background:#fff;
     padding:10px;
-    background:#fff url('images/process_step_header_fade.gif') repeat-x bottom;
-    width:375px;
+    border:1px solid #b8afa1;
 }
 #sampleLayoutImage {
 	width:96px;
@@ -95,6 +103,7 @@ form#enewsImage {
     clear:right;
     width:430px;
     border:1px solid #b8afa1;
+    background:#fff;
     margin:30px 10px;
 }
 #upload_area {
