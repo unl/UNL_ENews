@@ -15,7 +15,9 @@ function getValue($object, $field)
 <script type="text/javascript">
 	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
 	WDN.loadJS("js/functions.js");
-	WDN.loadJS("js/jquery.imgareaselect.pack.js");
+	WDN.jQuery(function($){
+		WDN.loadJS("js/jquery.imgareaselect.pack.js");
+	});
 	WDN.loadJS("js/submission.js");
 	WDN.loadJS("js/ajaxfileupload.js");
 	WDN.loadCSS("css/imgareaselect-default.css");
@@ -24,24 +26,24 @@ function getValue($object, $field)
 	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 
 	<?php //Set up the form for editing if an id is specified
-	      $id = getValue($context,'id'); ?>
+          $id = getValue($context,'id'); ?>
 	<?php if (!empty($id)) : ?>
 	WDN.jQuery(document).ready(function($){
 		(function(){
 			setTimeout(function(){
 				$('#newsAnnouncement').click();
-	            $('#enewsSubmissionButton').remove();
-	            $('#enewsSubmitButton').show();
-	            document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
+				$('#enewsSubmissionButton').remove();
+				$('#enewsSubmitButton').show();
+				document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
 			},100);
 		})();
 	});
 	<?php endif; ?>
 </script>
- 
+
 
 <div id="enewsForm">
-	
+
 
 
 <h3 class="highlighted"><span>1</span>Select News Type</h3>

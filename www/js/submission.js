@@ -96,7 +96,8 @@ WDN.jQuery(document).ready(function($){
 			website = "http://" + website;
 		}
 		var goURLPrefix = RegExp('http://go.unl.edu');
-		if (!goURLPrefix.test(website)) {
+		var eventsPrefix = RegExp('http://events.unl.edu');
+		if (!goURLPrefix.test(website) && !eventsPrefix.test(website)) {
 			submission.createGoURL(website);
 		} else {
 			if (!submission.urlPreview) {
@@ -109,13 +110,13 @@ WDN.jQuery(document).ready(function($){
 	$('#enewsImage #image').change(function() {
 		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
 		if (!submitStory()) {
-			//Remove the previous crop selection area if it exists
-			$('#upload_area img').imgAreaSelect({
-				disable:true,
-				hide:true
-			});
 			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
+				//Remove the previous crop selection area if it exists
+				$('#upload_area img').imgAreaSelect({
+					disable:true,
+					hide:true
+				});
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();
@@ -128,7 +129,14 @@ WDN.jQuery(document).ready(function($){
 		return false;
 	});
 	
- 
+	//When the final submission button is pressed, save whatever changes were made to the story first
+	$('form#enewsSubmission').submit(function(){
+		if (message = submitStory(true)) {
+			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
+			return false;
+		}
+	});
+	
 	//When the final submission button is pressed, save whatever changes were made to the story first
 	$('form#enewsSubmit').submit(function(){
 		if (message = submitStory(true)) {
@@ -206,27 +214,37 @@ WDN.jQuery(document).ready(function($){
 		dataString += '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
 		dataString += '&request_publish_end=' + request_publish_end + '&website=' + website + '&sponsor=' + sponsor;
 		$.each(newsroom_id, function(key, value) { 
-			  dataString += '&newsroom_id[]=';
-			  dataString += value; 
+			dataString += '&newsroom_id[]=';
+			dataString += value; 
 		});
 			
 		$.ajax({
-	      type: "POST",
-	      url: $('#enewsSubmission').attr('action'),
-	      data: dataString,
-	      success: function(data,status) {
-			//We get back the id of the newly saved story
-	        document.enewsSubmission.storyid.value = data; 
-	        document.enewsImage.storyid.value = data; 
-	        document.enewsSubmit.storyid.value = data;
-	      },
-	      error: function (data, status, e) {
-			alert(e);
-	  	  }
-	    });
-	 
-	 	return false;
-	}; 
+			type: "POST",
+			//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
+			xhr: (window.ActiveXObject) ?
+				function() {
+					try {
+						return new window.ActiveXObject("Microsoft.XMLHTTP");
+					} catch(e) {}
+				} :
+				function() {
+					return new window.XMLHttpRequest();
+				},
+			url: $('#enewsSubmission').attr('action'),
+			data: dataString,
+			success: function(data,status) {
+				//We get back the id of the newly saved story
+				document.enewsSubmission.storyid.value = data; 
+				document.enewsImage.storyid.value = data; 
+				document.enewsSubmit.storyid.value = data;
+			},
+			error: function (data, status, e) {
+				alert(e);
+			}
+		});
+		
+		return false;
+	};
 });
 
 
@@ -238,12 +256,12 @@ function setImageCrop() {
 		hide:false,
 		aspectRatio: "4:3",
 		onSelectEnd: function (img, selection) {
-			WDN.jQuery('#enewsSubmit input[name=x1]').val(selection.x1); 
-			WDN.jQuery('#enewsSubmit input[name=y1]').val(selection.y1); 
-			WDN.jQuery('#enewsSubmit input[name=x2]').val(selection.x2); 
+			WDN.jQuery('#enewsSubmit input[name=x1]').val(selection.x1);
+			WDN.jQuery('#enewsSubmit input[name=y1]').val(selection.y1);
+			WDN.jQuery('#enewsSubmit input[name=x2]').val(selection.x2);
 			WDN.jQuery('#enewsSubmit input[name=y2]').val(selection.y2);
-		} 
-	}); 
+		}
+	});
 };
 
 

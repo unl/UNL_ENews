@@ -215,12 +215,12 @@ class UNL_ENews_Controller
                 }
                 //Delete existing thumbnail
                 if ($thumb = $story->getFileByUse('thumbnail')) {
+                    $mysqli = UNL_ENews_Controller::getDB();
+                    $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($thumb->id);
+                    $mysqli->query($sql); 
+                    
                     $thumb->delete();
                 }
-                $mysqli = UNL_ENews_Controller::getDB();
-                $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($thumb->id);
-                $mysqli->query($sql); 
-                
                 $file = $story->getFileByUse('originalimage');
                 $newfile = new UNL_ENews_File();
                 $newfile = $file;
@@ -259,9 +259,11 @@ class UNL_ENews_Controller
                 $croppedimage = imagecreatetruecolor($crop_width, $crop_height);
                 switch ($file->type) {
                     case 'image/jpeg':
+                    case 'image/pjpeg':
                         $current_image = imagecreatefromjpeg($filename);
                         break;
                     case 'image/png':
+                    case 'image/x-png':
                         $current_image = imagecreatefrompng($filename);
                         break;
                     case 'image/gif':
@@ -272,16 +274,18 @@ class UNL_ENews_Controller
                 
                 // Resize the image ************************************************************
                 $current_width = $crop_width;
-                $current_height = $crop_height; 
-                $canvas = imagecreatetruecolor(96, 72); 
+                $current_height = $crop_height;
+                $canvas = imagecreatetruecolor(96, 72);
                 imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
                 
                 ob_start();
                 switch ($file->type) {
                     case 'image/jpeg':
+                    case 'image/pjpeg':
                         imagejpeg($canvas);
                         break;
                     case 'image/png':
+                    case 'image/x-png':
                         imagepng($canvas);
                         break;
                     case 'image/gif':
@@ -291,11 +295,11 @@ class UNL_ENews_Controller
                 $newfile->size = ob_get_length();
                 $newfile->data = ob_get_clean();
                 imagedestroy($canvas);
-                
+                var_dump($newfile);exit();
                 // Save the thumbnail **********************************************************
                 // Clear the id so the database will increment it
                 $newfile->id = NULL;
-                $newfile->use_for = 'thumbnail';                
+                $newfile->use_for = 'thumbnail';
                 $newfile->save();
                 $story->addFile($newfile);
           
