@@ -16,7 +16,8 @@ class UNL_ENews_Controller
                                 'file'        => 'UNL_ENews_File',
                                 'preview'     => 'UNL_ENews_Newsletter_Preview',
                                 'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
-                                'sendnews'    => 'UNL_ENews_EmailDistributor'
+                                'sendnews'    => 'UNL_ENews_EmailDistributor',
+                                'help'        => 'UNL_ENews_Help',
     ); 
     
     public static $pagetitle = array('latest'      => 'Latest News',
