@@ -47,12 +47,15 @@
 
                                 $$column .= '
                                     <div class="story" id="story_'.$key.'">'
-                                        . $savvy->render($story) .'
-                                        <div class="storyTools">
-                                            <a class="edit" href="#"><span></span>Edit</a>
-                                            <a class="remove" href="#"><span></span>Remove</a>
-                                        </div>
-                                    </div>';
+                                        . $savvy->render($story);
+                                if ($parent->context instanceof Savvy_ObjectProxy
+                                    && $parent->context->getRawObject() instanceof UNL_ENews_Newsletter_Preview) {
+                                    $$column .= '<div class="storyTools">
+                                                    <a class="edit" href="#"><span></span>Edit</a>
+                                                    <a class="remove" href="#"><span></span>Remove</a>
+                                                </div>';
+                                }
+                                $$column .= '</div>';
                             }
                             ?>
                         <tr>
