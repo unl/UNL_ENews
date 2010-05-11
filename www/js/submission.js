@@ -113,10 +113,13 @@ WDN.jQuery(document).ready(function($){
 			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
 				//Remove the previous crop selection area if it exists
-				$('#upload_area img').imgAreaSelect({
-					disable:true,
-					hide:true
-				});
+				WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){
+					$('#upload_area img').imgAreaSelect({
+						disable:true,
+						hide:true
+					});
+				},true,true);
+				//Ajax up the image
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();

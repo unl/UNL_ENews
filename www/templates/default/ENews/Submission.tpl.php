@@ -15,9 +15,6 @@ function getValue($object, $field)
 <script type="text/javascript">
 	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
 	WDN.loadJS("js/functions.js");
-	WDN.jQuery(function($){
-		WDN.loadJS("js/jquery.imgareaselect.pack.js");
-	});
 	WDN.loadJS("js/submission.js");
 	WDN.loadJS("js/ajaxfileupload.js");
 	WDN.loadCSS("css/imgareaselect-default.css");
@@ -166,22 +163,22 @@ function getValue($object, $field)
 <input type="hidden" id="storyid" name="storyid" value="" /> 
 
 <fieldset>
-            <ol style="padding:0;margin-top:0;"><li>
-            <label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
-            <input id="image" name="image" type="file" />
-            </li></ol>
-            
+			<ol style="padding:0;margin-top:0;"><li>
+			<label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
+			<input id="image" name="image" type="file" />
+			</li></ol>
+			
 			<div id="upload_area">
-                <?php if ($id = getValue($context,"id")) {
-                        if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
-                            <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
-                            <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
-                            <script type="text/javascript">setImageCrop();</script>
-                <?php   }
-                      } else { ?>
-                        <div style="border:1px dashed #888;background:#ECF3FA;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
-                <?php }  ?>
-            </div>
+			<?php if ($id = getValue($context,"id")) { ?>
+					<?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
+							<img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
+							<span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
+							<script type="text/javascript">WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){setImageCrop();},true,true);</script>
+					<?php } ?>
+			<?php } else { ?>
+					<div style="border:1px dashed #888;background:#ECF3FA;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
+			<?php }  ?>
+			</div>
 </fieldset>
 </form>
 
