@@ -72,7 +72,7 @@ function checkInput() {
     var flag = 0;
     var inputUncheck = WDN.jQuery('a.uncheckall');
     var inputCheck = WDN.jQuery('a.checkall');
-    var f = document.formlist;
+    var f = document.enewsManage;
     var checks = f.getElementsByTagName('input');
     
     for(var k=0;k<checks.length;k++){
@@ -136,7 +136,7 @@ var manager = function() {
                 button.click();
                 break;
             case 'recommend':
-                var form = document.getElementById('formlist');
+                var form = document.getElementById('enewsManage');
                 form.action = '?view=recommend';
                 form.submit();
                 break;

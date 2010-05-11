@@ -24,6 +24,7 @@
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | E-Newsroom <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+<link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="E-Newsroom" />
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
     echo '<script type="text/javascript">
@@ -48,7 +49,9 @@ if ($user = UNL_ENews_Controller::getUser()) {
             <!-- WDN: see glossary item 'breadcrumbs' -->
             <!-- InstanceBeginEditable name="breadcrumbs" -->
             <ul>
-                <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
+                <li><a href="http://www.unl.edu/" title="University of Nebraska-Lincoln Home">UNL</a></li>
+                <li><a href="http://ucomm.unl.edu/" title="Office of University Communications">UComm</a></li>
+                <li><a href="http://newsroom.unl.edu/" title="UNL Newsroom">Newsroom</a></li>
                 <li><a href="<?php echo UNL_ENews_Controller::getURL();?>">E-Newsroom</a></li>
                 <li><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></li>
             </ul>

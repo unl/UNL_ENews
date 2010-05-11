@@ -3,7 +3,7 @@
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 
-<form id="formlist" name="formlist" class="energetic" method="post" action="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>">
+<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>">
 <input type="hidden" name="_type" value="change_status" />
 <div class="storyAction">
     <div class="storyButtonAction">
@@ -28,9 +28,10 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
             <th scope="col" class="select">Select</th>
             <th scope="col" class="image">Image</th>
             <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=title">Headline</a></th>
-            <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">First Publish Date</a></th>
-            <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Last Publish Date</a></th>
+            <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">First Pub Date</a></th>
+            <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=starttime">Last Pub Date</a></th>
             <th scope="col" class="submitter"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=uid_created">Submitter</a></th>
+            <th scope="col" class="modifier"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $parent->context->options['status']; ?>&amp;orderby=uid_modified">Last Edited By</a></th>
             <th scope="col" class="edit">Edit</th>
         </tr>
     </thead>
@@ -43,6 +44,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_end)); ?></td>
             <td><?php echo $item->uid_created; ?></td>
+            <td><?php echo $item->uid_modified; ?></td>
             <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
         </tr>
     <?php endforeach; ?>
