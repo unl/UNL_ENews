@@ -295,7 +295,7 @@ class UNL_ENews_Controller
                 $newfile->size = ob_get_length();
                 $newfile->data = ob_get_clean();
                 imagedestroy($canvas);
-                var_dump($newfile);exit();
+                
                 // Save the thumbnail **********************************************************
                 // Clear the id so the database will increment it
                 $newfile->id = NULL;
