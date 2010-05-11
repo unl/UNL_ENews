@@ -5,7 +5,7 @@ class UNL_ENews_Controller
      * Options array
      * Will include $_GET vars, this is the newsroom being used across views 
      */
-    public $options = array('view' => 'newsletter', 'format' => 'html', 'newsroom' => '1');
+    public $options = array('view' => 'submit', 'format' => 'html', 'newsroom' => '1');
     
     protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
                                 'latest'      => 'UNL_ENews_StoryList_Latest',
