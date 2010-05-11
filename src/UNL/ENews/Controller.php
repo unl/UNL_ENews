@@ -28,8 +28,7 @@ class UNL_ENews_Controller
     
     protected static $auth;
     
-    protected static $admins = array('bbieber2', // Brett Bieber
-                                     'erasmussen2' //Eric Rasmussen
+    protected static $admins = array('admin'
         );
     
     /**
