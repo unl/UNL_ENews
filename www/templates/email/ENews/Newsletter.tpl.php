@@ -47,11 +47,11 @@
 
                                 $$column .= '
                                     <div class="story" id="story_'.$key.'">'
-                                   		. $savvy->render($story) .'
-                                    	<div class="storyTools">
-                                    		<a class="edit" href="#"><span></span>Edit</a>
-                                    		<a class="remove" href="#"><span></span>Remove</a>
-                                    	</div>
+                                        . $savvy->render($story) .'
+                                        <div class="storyTools">
+                                            <a class="edit" href="#"><span></span>Edit</a>
+                                            <a class="remove" href="#"><span></span>Remove</a>
+                                        </div>
                                     </div>';
                             }
                             ?>
