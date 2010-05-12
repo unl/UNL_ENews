@@ -143,7 +143,7 @@ function getValue($object, $field)
                     <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />                 
         <?php   }
               } else { ?>
-                &lt;Upload Image Below&gt;
+                &lt;Upload Image&gt;
         <?php }  ?>
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
@@ -164,7 +164,7 @@ function getValue($object, $field)
 
 <fieldset>
 			<ol style="padding:0;margin-top:0;"><li>
-			<label for="image">Image<span class="helper">This is the image that will be displayed with your announcement.</span></label>
+			<label for="image">Image<span class="helper">To be displayed with your announcement</span></label>
 			<input id="image" name="image" type="file" />
 			</li></ol>
 			
@@ -176,7 +176,7 @@ function getValue($object, $field)
 							<script type="text/javascript">WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){setImageCrop();},true,true);</script>
 					<?php } ?>
 			<?php } else { ?>
-					<div style="border:1px dashed #888;background:#ECF3FA;text-align:center;margin:0 auto;width:100px;min-height:90px;">Upload An Image To Accompany Your Submission</div>
+					<div>Image preview</div>
 			<?php }  ?>
 			</div>
 </fieldset>

@@ -110,7 +110,14 @@
 	display:none;
 	text-align:center;
 }
+/*
 #maincontent table .story:hover .storyTools {display:block;}
+*/
+#maincontent table .story textarea {
+	width:100%;
+	min-height:75px;
+	font:0.8em "Lucida Grande",Verdana,Arial;
+}
 #maincontent .storyTools a {
 	width:48px;
 	height:48px;

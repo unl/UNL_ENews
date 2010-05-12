@@ -17,6 +17,20 @@ WDN.jQuery(document).ready(function() {
 	});
 	
 	//the newsletter creation page <- to be moved to it's own file/plugin
+	WDN.jQuery('#maincontent table .story').hover(
+			function(){
+				WDN.jQuery(this).children('.storyTools').delay(500).fadeIn(800);
+			},
+			function() {
+				WDN.jQuery(this).children('.storyTools').fadeOut(200);
+			}
+	);
+	WDN.jQuery('a.edit').click(function(){ // we have clicked the edit story icon
+		WDN.jQuery(this).parent().siblings('p').before("<textarea>"+WDN.jQuery(this).parent().siblings('p').text()+"</textarea>");
+		WDN.jQuery(this).parent().hide();
+		return false;
+	
+	});
 	WDN.jQuery('.dragItem').draggable({ 
 		revert: 'invalid',
 		snap: '.newsColumn',
