@@ -15,11 +15,13 @@ WDN.jQuery(document).ready(function() {
 		checkInput();
 		return this;
 	});
-	
+	WDN.jQuery('#drag_story_list > .dragItem, tr#newsStories .story').each(function(){
+		WDN.jQuery(this).append('<div class="storyTools"><a class="edit" href="#"><span></span>Edit</a><a class="remove" href="#"><span></span>Remove</a></div>');
+	});
 	//the newsletter creation page <- to be moved to it's own file/plugin
 	WDN.jQuery('#maincontent table .story').hover(
 			function(){
-				WDN.jQuery(this).children('.storyTools').delay(500).fadeIn(800);
+				WDN.jQuery(this).children('.storyTools').delay(200).fadeIn(800);
 			},
 			function() {
 				WDN.jQuery(this).children('.storyTools').fadeOut();
@@ -52,6 +54,7 @@ WDN.jQuery(document).ready(function() {
 		helper: 'clone',
 		start: function(event, ui){
 			WDN.jQuery(ui.item).children('.storyTools').hide();
+			WDN.jQuery('.ui-sortable-helper .storyTools').hide();
 		},
 		stop: function(event, ui){
 			saveStoryOrder();
