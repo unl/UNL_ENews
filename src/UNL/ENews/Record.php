@@ -131,6 +131,7 @@ class UNL_ENews_Record
                 case 'length':
                 case 'sort_order':
                 case 'distributed':
+                case 'allow_submissions':
                     $types .= 'i';
                     break;
                 default:
