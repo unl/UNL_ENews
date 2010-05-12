@@ -10,6 +10,15 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     
     public $website;
     
+    function __construct($options = array())
+    {
+        if (!isset($options['id'])) {
+            if ($record = UNL_ENews_Record::getRecordByID('newsrooms', UNL_ENews_Controller::getUser(true)->newsroom_id)) {
+                UNL_ENews_Controller::setObjectFromArray($this, $record);
+            }
+        }
+    }
+    
     function getStories($status = 'pending')
     {
         return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status));

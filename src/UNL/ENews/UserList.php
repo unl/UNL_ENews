@@ -6,6 +6,6 @@ class UNL_ENews_UserList extends ArrayIterator
      */
     function current()
     {
-        return UNL_ENews_User(array('uid'=>parent::current()));
+        return new UNL_ENews_User(array('uid'=>parent::current()));
     }
 }

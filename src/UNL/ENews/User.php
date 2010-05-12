@@ -15,7 +15,14 @@ class UNL_ENews_User extends UNL_ENews_Record
     
     function __construct($options = array())
     {
-
+        if (isset($options['uid'])) {
+            $mysqli = UNL_ENews_Controller::getDB();
+            $sql = "SELECT * FROM users WHERE uid = '".$mysqli->escape_string($options['uid'])."';";
+            if (($result = $mysqli->query($sql))
+                && $result->num_rows > 0) {
+                UNL_ENews_Controller::setObjectFromArray($this, $result->fetch_assoc());
+            }
+        }
     }
     
     public static function getByUID($uid)
