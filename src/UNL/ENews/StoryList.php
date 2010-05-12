@@ -7,6 +7,6 @@ class UNL_ENews_StoryList extends ArrayIterator
      */
     function current()
     {
-    	return UNL_ENews_Story::getByID(parent::current());
+        return UNL_ENews_Story::getByID(parent::current());
     }
 }
