@@ -36,4 +36,29 @@ class UNL_ENews_File extends UNL_ENews_Record
     {
         return 'files';
     }
+    
+    /**
+     * Check if type is valid/supported
+     * 
+     * @param string $type
+     * 
+     * @return bool
+     */
+    public static function validFileType($type)
+    {
+        return true;
+    }
+    
+    /**
+     * Checks if the filename is supported.
+     * 
+     * @param string $filename Filename to check
+     * 
+     * @return bool
+     */
+    public static function validFileName($filename)
+    {
+        $allowedExtensions = array("gif","jpeg","jpg","png");
+        return in_array(end(explode(".", strtolower($filename))), $allowedExtensions);
+    }
 }

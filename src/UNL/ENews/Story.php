@@ -71,6 +71,14 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return $has_file->save();
     }
     
+    public function removeFile(UNL_ENews_File $file)
+    {
+        if ($has_file = UNL_ENews_Story_File::getById($this->id, $file->id)) {
+            $has_file->delete();
+        }
+        return true;
+    }
+    
     function getFiles()
     {
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));

@@ -125,86 +125,85 @@ class UNL_ENews_Controller
         $this->filterPostValues();
         switch($_POST['_type']) {
             case 'story':
-                $class = $this->view_map[$_POST['_type']];
                 if (!empty($_POST['storyid'])) {
-                    $object = UNL_ENews_Story::getByID($_POST['storyid']);
-                    if (!$object->userCanEdit(UNL_ENews_Controller::getUser(true))) {
+                    $story = UNL_ENews_Story::getByID($_POST['storyid']);
+                    if (!$story->userCanEdit(UNL_ENews_Controller::getUser(true))) {
                         throw new Exception('You cannot edit that story.');
                     }
                 } else {
-                    $object = new $class();
+                    $story = new UNL_ENews_Story;
                 }
                 self::setObjectFromArray($object, $_POST);
-                
-                if (!$object->save()) {
+
+                if (!$story->save()) {
                     throw new Exception('Could not save the story');
                 } 
-                
+
                 foreach ($_POST['newsroom_id'] as $id) {
-                    if ($newsroom = UNL_ENews_Newsroom::getByID($id)) {
-                        $status = 'pending';
-                        if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
-                            $status = 'approved';
-                        }
-                        $newsroom->addStory($object, $status, UNL_ENews_Controller::getUser(true), 'create event form');
-                    } else {
+                    if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
                         throw new Exception('Invalid newsroom selected');
                     }
+                    $status = 'pending';
+                    if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                        $status = 'approved';
+                    }
+                    $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
                 }
+
                 if (isset($_POST['ajaxupload'])) {
-                    echo $object->id;
+                    echo $story->id;
                     exit();
-                } else {
+                }
+
+                header('Location: ?view=thanks&_type='.$_POST['_type']);
+                exit();
+            case 'file':
+                if ($_FILES['image']['error'] != UPLOAD_ERR_OK) {
+                    throw new Exception("Error Uploading File!");
+                }
+
+                if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
+                    throw new Exception('Cannot get story to add file for!');
+                }
+
+                $file = new UNL_ENews_File;
+
+                $file_data         = $_FILES['image'];
+                $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
+
+                self::setObjectFromArray($file, $file_data);
+
+                if (isset($this->options['ajaxupload'])) {
+                    if (!UNL_ENews_File::validFileName($_FILES['image']['name'])) {
+                        throw new Exception('Please Upload an Image in .jpg .png or .gif format.');
+                    }
+                    $file->use_for = 'originalimage'; 
+                }
+
+                if (!$file->save()) {
+                    throw new Exception('Error saving the file');
+                }
+
+                $story->addFile($file);
+
+                if (!isset($this->options['ajaxupload'])) {
                     header('Location: ?view=thanks&_type='.$_POST['_type']);
                     exit();
                 }
-                break;
-            case 'file':
-                $class = $this->view_map[$_POST['_type']];
-                if ($_FILES['image']['error'] == UPLOAD_ERR_OK) {
-                    $file_data = $_FILES['image'];
-                    $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-                    $file = new $class();
-                    self::setObjectFromArray($file, $file_data);
-                    $story = UNL_ENews_Story::getByID((int)$_POST['storyid']);
-                    if (isset($this->options['ajaxupload'])) {
-                        $allowedExtensions = array("gif","jpeg","jpg","png");
-                        if (!in_array(end(explode(".",strtolower($_FILES['image']['name']))),$allowedExtensions)) {
-                            echo 'Please Upload an Image in .jpg .png or .gif format.';
-                            exit();
+
+                //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
+                foreach ($story->getFiles() as $curfile) {
+                    if (preg_match('/^image/', $curfile->type)) {
+                        //Check to see that we Don't Delete the File we just uploaded
+                        if ($curfile->id != $file->id) {
+                            $story->removeFile($curfile);
+                            $curfile->delete();
                         }
-                        $file->use_for = 'originalimage'; 
                     }
-                    if ($file->save()) {
-                        $story->addFile($file);
-                        if (!isset($this->options['ajaxupload'])) {
-                            header('Location: ?view=thanks&_type='.$_POST['_type']);
-                        } else {
-                            //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
-                            foreach ($story->getFiles() as $curfile) {
-                                if (preg_match('/^image/', $curfile->type)) {
-                                    //Check to see that we Don't Delete the File we just uploaded
-                                    if ($curfile->id != $file->id) { 
-                                        $curfile->delete();
-                                        $mysqli = UNL_ENews_Controller::getDB();
-                                        $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($curfile->id);
-                                        $mysqli->query($sql); 
-                                    }
-                                }
-                            }
-                            //Output the image that will be shown on step 3 of submission page
-                            header('Location: ?view=file&id='.$file->id);
-                            exit();
-                        }
-                    } else {
-                        throw new Exception('Error saving the file');
-                    }
-                    exit();
-                } else {
-                    echo "Error Uploading File!";
-                    exit();
                 }
-                break;
+                //Output the image that will be shown on step 3 of submission page
+                header('Location: ?view=file&id='.$file->id);
+                exit();
             case 'savethumb':
                 if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
                     throw new Exception('Could not find that story!');
@@ -217,10 +216,7 @@ class UNL_ENews_Controller
                 }
                 //Delete existing thumbnail
                 if ($thumb = $story->getFileByUse('thumbnail')) {
-                    $mysqli = UNL_ENews_Controller::getDB();
-                    $sql = 'DELETE FROM story_files WHERE story_id = '.intval($story->id).' AND file_id = '.intval($thumb->id);
-                    $mysqli->query($sql); 
-                    
+                    $story->removeFile($thumb);
                     $thumb->delete();
                 }
                 $file = $story->getFileByUse('originalimage');
