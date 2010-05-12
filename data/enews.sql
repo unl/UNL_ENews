@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.2
+-- version 3.2.3
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2010 at 08:41 PM
--- Server version: 5.1.44
--- PHP Version: 5.3.1
+-- Generation Time: May 12, 2010 at 03:49 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `size` bigint(20) unsigned NOT NULL,
   `use_for` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=103 ;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `newsletters` (
   `distributed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `newsroom_id` (`newsroom_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -71,9 +71,11 @@ CREATE TABLE IF NOT EXISTS `newsrooms` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `shortname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_lists` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `allow_submissions` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `full_article` longtext COLLATE utf8_unicode_ci NULL,
+  `full_article` longtext COLLATE utf8_unicode_ci,
   `request_publish_start` datetime DEFAULT NULL,
   `request_publish_end` datetime DEFAULT NULL,
   `sponsor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
@@ -114,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   PRIMARY KEY (`id`),
   KEY `request_publish_end` (`request_publish_end`),
   KEY `request_publish_start` (`request_publish_start`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=92 ;
 
 -- --------------------------------------------------------
 
