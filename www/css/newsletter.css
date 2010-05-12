@@ -3,7 +3,7 @@
     margin-top:20px;
     min-height:80px;
 }
-#maincontent .story:hover {
+#maincontent table .story:hover {
 	outline:2px solid #FA6520;
 }
 #maincontent .newsColumn h4 {
@@ -78,7 +78,7 @@
     font-size:0.9em;
     color:#fff;
     font-weight:bold;
-    padding:0.3em 0.1em 0.2"/Users/smeranda/Desktop/1272554843_pencil_48.png"em 22px;
+    padding:0.3em 0.1em 0.2em 22px;
     background: #7c7c7c url('images/dragIndicator.png') repeat-y top left;
     margin:3px 0;
     border:1px solid #494949;
@@ -89,8 +89,8 @@
     font-size:0.7em;
     padding:1px 5px;
     position:relative;
-    top:-5px;
-    border-radius:3px;
+    top:-4px;
+    border-radius:0px 0px 3px 3px;
 }
 #maincontent .filled {
     border:none;
@@ -110,9 +110,9 @@
 	display:none;
 	text-align:center;
 }
-/*
-#maincontent table .story:hover .storyTools {display:block;}
-*/
+
+.ui-sortable-helper .storyTools {display:none;}
+
 #maincontent table .story textarea {
 	width:100%;
 	min-height:75px;
