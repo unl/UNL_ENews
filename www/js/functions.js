@@ -22,7 +22,7 @@ WDN.jQuery(document).ready(function() {
 				WDN.jQuery(this).children('.storyTools').delay(500).fadeIn(800);
 			},
 			function() {
-				WDN.jQuery(this).children('.storyTools').fadeOut(200);
+				WDN.jQuery(this).children('.storyTools').fadeOut();
 			}
 	);
 	WDN.jQuery('#maincontent table .story').focus(function() {
@@ -43,7 +43,7 @@ WDN.jQuery(document).ready(function() {
 		opacity: 0.45
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({
-		revert: true,
+		revert: false,
 		connectWith: '.newsColumn',
 		scroll: true,
 		delay: 250,
