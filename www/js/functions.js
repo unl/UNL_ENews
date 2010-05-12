@@ -15,7 +15,7 @@ WDN.jQuery(document).ready(function() {
 		checkInput();
 		return this;
 	});
-	WDN.jQuery('#drag_story_list > .dragItem, tr#newsStories .story').each(function(){
+	WDN.jQuery('#drag_story_list > .dragItem, table .story').each(function(){
 		WDN.jQuery(this).append('<div class="storyTools"><a class="edit" href="#"><span></span>Edit</a><a class="remove" href="#"><span></span>Remove</a></div>');
 	});
 	//the newsletter creation page <- to be moved to it's own file/plugin
@@ -35,6 +35,11 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).parent().hide();
 		return false;
 	
+	});
+	WDN.jQuery('a.remove').click(function(){//we have clicked the remove story icon
+		WDN.jQuery(this).parent('.storyTools').hide().parents('.story').unbind().removeClass('story').addClass('dragItem').appendTo('#drag_story_list');
+		saveStoryOrder();
+		return false;
 	});
 	WDN.jQuery('.dragItem').draggable({ 
 		revert: 'invalid',
