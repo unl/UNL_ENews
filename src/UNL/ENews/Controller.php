@@ -9,6 +9,7 @@ class UNL_ENews_Controller
     
     protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
                                 'latest'      => 'UNL_ENews_StoryList_Latest',
+                                'mynews'      => 'UNL_ENews_User_StoryList',
                                 'story'       => 'UNL_ENews_Story',
                                 'submit'      => 'UNL_ENews_Submission',
                                 'thanks'      => 'UNL_ENews_Confirmation',

@@ -1,3 +1,12 @@
+<?php
+$status = 'approved';
+
+if (isset($parent->context->options['status'])) {
+    $status = $parent->context->options['status'];
+}
+
+?>
+
 
 <script type="text/javascript">
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
@@ -13,7 +22,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
         <label for="storyaction">Action</label> 
-        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['status']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
@@ -58,7 +67,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
         <label for="storyaction">Action</label> 
-        <select name="storyaction" onfocus="manager.list = '<?php echo $parent->context->options['status']; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <option value="approved"  disabled="disabled">Add to Approved</option>
             <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
@@ -68,9 +77,9 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     </fieldset>
 </div>
 <input class="btnsubmit" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
-<?php if ($parent->context->options['status']=='approved' || $parent->context->options['status']=='archived') { ?>
+<?php if ($status=='approved' || $status=='archived') { ?>
 <input class="btnsubmit" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
-<?php } elseif ($parent->context->options['status']=='pending') { ?>
+<?php } elseif ($status=='pending') { ?>
 <input class="btnsubmit" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
 <?php } ?>
 </form>

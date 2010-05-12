@@ -64,7 +64,11 @@ if ($user = UNL_ENews_Controller::getUser()) {
                             <li><a href="?view=help">Help</a></li>
                         </ul>
                     </li>
-                    <li><a href="?view=submit">Submit A News Item</a></li>
+                    <li><a href="?view=submit">Submit A News Item</a>
+                        <ul>
+                            <li><a href="?view=mynews">Your News Items</a></li>
+                        </ul>
+                    </li>
                     <?php if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) : ?>
                     <li><a href="?view=manager">Manage News</a></li>
                     <li><a href="?view=preview">Build Newsletter</a>
