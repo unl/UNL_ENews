@@ -39,7 +39,7 @@ WDN.jQuery(document).ready(function() {
 		snap: '.newsColumn',
 		snapMode : 'inner',
 		connectToSortable: '.newsColumn',
-		helper: 'clone',
+		helper: 'original',
 		opacity: 0.45
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({
@@ -49,6 +49,7 @@ WDN.jQuery(document).ready(function() {
 		delay: 250,
 		opacity: 0.45,
 		tolerance: 'pointer',
+		helper: 'clone',
 		start: function(event, ui){
 			WDN.jQuery(ui.item).children('.storyTools').hide();
 		},
