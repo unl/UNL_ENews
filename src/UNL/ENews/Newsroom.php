@@ -10,6 +10,10 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     
     public $website;
     
+    public $allow_submissions;
+    
+    public $email_lists;
+    
     function __construct($options = array())
     {
         if (!isset($options['id'])) {
