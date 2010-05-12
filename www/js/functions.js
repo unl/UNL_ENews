@@ -25,6 +25,9 @@ WDN.jQuery(document).ready(function() {
 				WDN.jQuery(this).children('.storyTools').fadeOut(200);
 			}
 	);
+	WDN.jQuery('#maincontent table .story').focus(function() {
+		WDN.jQuery(this).children('.storyTools').hide();
+	});
 	WDN.jQuery('a.edit').click(function(){ // we have clicked the edit story icon
 		WDN.jQuery(this).parent().siblings('p').before("<textarea>"+WDN.jQuery(this).parent().siblings('p').text()+"</textarea>");
 		WDN.jQuery(this).parent().hide();
@@ -36,16 +39,19 @@ WDN.jQuery(document).ready(function() {
 		snap: '.newsColumn',
 		snapMode : 'inner',
 		connectToSortable: '.newsColumn',
-		helper: 'original',
+		helper: 'clone',
 		opacity: 0.45
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({
-		//revert: true,
+		revert: true,
 		connectWith: '.newsColumn',
 		scroll: true,
 		delay: 250,
 		opacity: 0.45,
 		tolerance: 'pointer',
+		start: function(event, ui){
+			WDN.jQuery(ui.item).children('.storyTools').hide();
+		},
 		stop: function(event, ui){
 			saveStoryOrder();
 		}
