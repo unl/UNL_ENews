@@ -23,6 +23,7 @@ if ($enews->options['format'] != 'html') {
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
         default:
+            header('Content-type:text/html;charset=UTF-8');
     }
 }
 
