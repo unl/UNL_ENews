@@ -14,7 +14,7 @@ if ($file = $context->getThumbnail()) {
          . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
 }
 
-echo $context->description;
+echo nl2br($context->description);
 ?>
 </p>
 <div class="clear"></div>

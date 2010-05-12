@@ -7,7 +7,7 @@ if ($file = $context->getThumbnail()) {
          . '" style="max-width:65px; margin-right:15px;" align="left" />';
 }
 
-echo $context->description;
+echo nl2br($context->description);
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
     if (isset($parent->context->id)) {
