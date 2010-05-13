@@ -5,7 +5,7 @@ class UNL_ENews_Story_Files extends UNL_ENews_FileList
     {
         $files = array();
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'SELECT file_id FROM story_files ';
+        $sql = 'SELECT DISTINCT file_id FROM story_files ';
         $sql .= 'WHERE story_id = '.(int)$options['story_id'];
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
