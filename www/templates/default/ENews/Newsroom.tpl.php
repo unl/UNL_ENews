@@ -60,11 +60,17 @@
         echo '<li>'.$user->uid.'
         <form action="?view=newsroom" method="post">
             <input type="hidden" id="newsroom_id" name="newsroom_id" value="'.$context->id.'" />
-            <input type="hidden" name="_type" value="newsroom_user" />
-            <input type="hidden" name="uid" value="'.$user->uid.'" />
+            <input type="hidden" name="_type" value="removeuser" />
+            <input type="hidden" name="user_uid" value="'.$user->uid.'" />
             <input type="submit" value="Remove" />
         </form></li>';
     }
     ?>
     </ul>
+    <form action="?view=newsroom" method="post">
+        <input type="hidden" id="newsroom_id" name="newsroom_id" value="<?php echo $context->id; ?>" />
+        <input type="hidden" name="_type" value="adduser" />
+        <input type="text" name="user_uid" />
+        <input type="submit" value="Add User" />
+    </form>
 </div>

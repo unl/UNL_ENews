@@ -21,6 +21,23 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 UNL_ENews_Controller::setObjectFromArray($this, $record);
             }
         }
+        if (!empty($_POST)) {
+            $this->handlePost();
+        }
+    }
+    
+    function handlePost()
+    {
+        switch($_POST['_type']) {
+            case 'removeuser':
+            case 'adduser':
+                if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
+                    throw new Exception('you cannot modify a newsroom you don\'t have permission to!');
+                }
+                $user = UNL_ENews_User::getByUID($_POST['user_uid']);
+                $this->{$_POST['_type']}($user);
+                break;
+        }
     }
     
     function getStories($status = 'pending')
@@ -72,6 +89,20 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             $permission->newsroom_id = $this->id;
             $permission->user_uid    = $user->uid;
             return $permission->insert();
+        }
+        return true;
+    }
+    
+    /**
+     * 
+     * @param UNL_ENews_User $user
+     * 
+     * @return bool
+     */
+    function removeUser($user)
+    {
+        if ($permission = UNL_ENews_User_Permission::getById($user->uid, $this->id)) {
+            return $permission->delete();
         }
         return true;
     }

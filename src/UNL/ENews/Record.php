@@ -175,7 +175,11 @@ class UNL_ENews_Record
             if (empty($this->$key)) {
                 throw new Exception('Cannot delete records with unset primary keys!');
             }
-            $sql .= $key.'='.$this->$key.' AND ';
+            $value = $this->$key;
+            if ($this->getTypeString(array($key)) == 's') {
+                $value = '"'.$mysqli->escape_string($value).'"';
+            }
+            $sql .= $key.'='.$value.' AND ';
         }
         $sql = substr($sql, 0, -4);
         $sql .= ' LIMIT 1;';
