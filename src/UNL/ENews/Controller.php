@@ -55,15 +55,10 @@ class UNL_ENews_Controller
         $this->options = $options;
         $this->authenticate(true);
         
-        if (!empty($_POST)) {
-            try {
-                $this->handlePost();
-            } catch(Exception $e) {
-                $this->actionable[] = $e;
-            }
-        }
-        
         try {
+            if (!empty($_POST)) {
+                $this->handlePost();
+            }
             $this->run();
         } catch(Exception $e) {
             $this->actionable[] = $e;
@@ -126,18 +121,20 @@ class UNL_ENews_Controller
         switch($_POST['_type']) {
             case 'story':
                 if (!empty($_POST['storyid'])) {
-                    $story = UNL_ENews_Story::getByID($_POST['storyid']);
+                    if (!($story = UNL_ENews_Story::getByID($_POST['storyid']))) {
+                        throw new Exception('The story could not be retrieved');
+                    }
                     if (!$story->userCanEdit(UNL_ENews_Controller::getUser(true))) {
                         throw new Exception('You cannot edit that story.');
                     }
                 } else {
                     $story = new UNL_ENews_Story;
                 }
-                self::setObjectFromArray($object, $_POST);
+                self::setObjectFromArray($story, $_POST);
 
                 if (!$story->save()) {
                     throw new Exception('Could not save the story');
-                } 
+                }
 
                 foreach ($_POST['newsroom_id'] as $id) {
                     if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
@@ -205,7 +202,7 @@ class UNL_ENews_Controller
                 header('Location: ?view=file&id='.$file->id);
                 exit();
             case 'savethumb':
-                if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
+                if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
                 }
                 //If there is an existing thumbnail we know we're in editing mode...
@@ -220,86 +217,8 @@ class UNL_ENews_Controller
                     $thumb->delete();
                 }
                 $file = $story->getFileByUse('originalimage');
-                $newfile = new UNL_ENews_File();
-                $newfile = $file;
-                
-                // Crop the image ***************************************************************
-                // Get dimensions of the original image
-                $filename = UNL_ENews_Controller::getURL().'?view=file&id='.$file->id;
-                list($current_width, $current_height) = getimagesize($filename);
-                
-                if (empty($_POST['x1'])) {
-                    // User did not select a cropping area
-                    $left   = 0;
-                    $top    = 0;
-                    $right  = $current_width;
-                    $bottom = $current_width*(3/4);
-                } else {
-                    // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
-                    if ($current_width > 410) {
-                        $left   = ($current_width/410)*$_POST['x1'];
-                        $top    = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
-                        $right  = ($current_width/410)*$_POST['x2'];
-                        $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
-                    } else {
-                        $left   = $_POST['x1'];
-                        $top    = $_POST['y1'];
-                        $right  = $_POST['x2'];
-                        $bottom = $_POST['y2'];
-                    }
-                }
-                
-                // This will be the final size of the cropped image
-                $crop_width = $right-$left;
-                $crop_height = $bottom-$top;
-                
-                // Resample the image
-                $croppedimage = imagecreatetruecolor($crop_width, $crop_height);
-                switch ($file->type) {
-                    case 'image/jpeg':
-                    case 'image/pjpeg':
-                        $current_image = imagecreatefromjpeg($filename);
-                        break;
-                    case 'image/png':
-                    case 'image/x-png':
-                        $current_image = imagecreatefrompng($filename);
-                        break;
-                    case 'image/gif':
-                        $current_image = imagecreatefromgif($filename);
-                        break;
-                }
-                imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-                
-                // Resize the image ************************************************************
-                $current_width = $crop_width;
-                $current_height = $crop_height;
-                $canvas = imagecreatetruecolor(96, 72);
-                imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
-                
-                ob_start();
-                switch ($file->type) {
-                    case 'image/jpeg':
-                    case 'image/pjpeg':
-                        imagejpeg($canvas);
-                        break;
-                    case 'image/png':
-                    case 'image/x-png':
-                        imagepng($canvas);
-                        break;
-                    case 'image/gif':
-                        imagegif($canvas);
-                        break;
-                }
-                $newfile->size = ob_get_length();
-                $newfile->data = ob_get_clean();
-                imagedestroy($canvas);
-                
-                // Save the thumbnail **********************************************************
-                // Clear the id so the database will increment it
-                $newfile->id = NULL;
-                $newfile->use_for = 'thumbnail';
-                $newfile->save();
-                $story->addFile($newfile);
+                $thumb = $file->saveThumbnail();
+                $story->addFile($thumb);
           
                 header('Location: ?view=thanks&_type=story');
                 exit();
@@ -338,6 +257,9 @@ class UNL_ENews_Controller
     
     public static function setObjectFromArray(&$object, $values)
     {
+        if (!isset($object)) {
+            throw new Exception('No object passed!');
+        }
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
                 $object->$key = $values[$key]; 

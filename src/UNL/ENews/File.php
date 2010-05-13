@@ -25,7 +25,11 @@ class UNL_ENews_File extends UNL_ENews_Record
     static public function getById($id)
     {
         if ($record = self::getRecordByID('files', $id)) {
-            $object = new self();
+            $class = __CLASS__;
+            if (strstr($record['type'], 'image/')) {
+                $class = 'UNL_ENews_File_Image';
+            }
+            $object = new $class;
             UNL_ENews_Controller::setObjectFromArray($object, $record);
             return $object;
         }
