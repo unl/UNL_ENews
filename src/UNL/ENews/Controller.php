@@ -163,6 +163,10 @@ class UNL_ENews_Controller
                     throw new Exception('Cannot get story to add file for!');
                 }
 
+                if (!$story->userCanEdit(self::getUser(true))) {
+                    throw new Exception('Cannot add files to stories you cannot edit');
+                }
+
                 $file = new UNL_ENews_File;
 
                 $file_data         = $_FILES['image'];
@@ -204,6 +208,10 @@ class UNL_ENews_Controller
             case 'savethumb':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
+                }
+
+                if (!$story->userCanEdit(self::getUser(true))) {
+                    throw new Exception('Cannot add thumbnail to stories you cannot edit');
                 }
 
                 //If there is an existing thumbnail we know we're in editing mode...
