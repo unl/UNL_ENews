@@ -136,8 +136,8 @@
 	    linear,
 	    left top,
 	    left bottom,
-	    color-stop(0.2, rgb(255,111,0)),
-	    color-stop(1, rgb(197,88,4))
+	    color-stop(0.2, rgb(253,229,210)),
+	    color-stop(1, rgb(253,169,103))
 	);
 	background-image:-moz-linear-gradient(
 	    center top,
