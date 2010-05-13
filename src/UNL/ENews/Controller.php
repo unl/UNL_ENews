@@ -214,15 +214,16 @@ class UNL_ENews_Controller
                     throw new Exception('Cannot add thumbnail to stories you cannot edit');
                 }
 
-                //If there is an existing thumbnail we know we're in editing mode...
-                //...and if no coords have been selected we keep existing thumbnail and exit
-                if ($story->getFileByUse('thumbnail') && empty($_POST['x1'])) {
+                if ((false === $story->getFileByUse('originalimage'))
+                    || (false !== $story->getThumbnail()
+                        && empty($_POST['x1']))) {
+                    // No need to continue, there's no image, or we're keeping the existing thumb.
                     header('Location: ?view=thanks&_type=story');
                     exit();
                 }
 
-                //Delete existing thumbnail
-                if ($thumb = $story->getFileByUse('thumbnail')) {
+                if ($thumb = $story->getThumbnail()) {
+                    //Delete existing thumbnail
                     $story->removeFile($thumb);
                     $thumb->delete();
                 }
