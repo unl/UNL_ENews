@@ -70,24 +70,30 @@ function setupDragAndSort() {
 		drop: function(event, ui) {
 			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');
 			ui.helper.remove();
+			setupEditRemove();
 			//WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 		}
 	});
+	
+	//All items in the left column are there ready to be added to the newsletter... let's make sure they are setup to be added
 	WDN.jQuery('#drag_story_list input[name="_type"]').each(function(){
-		WDN.jQuery(this).attr('value', 'addstory');
+		WDN.jQuery(this).attr('value', 'addstory'); 
 	});
 	
 	setupEditRemove();
 }
 function setupEditRemove() {
-	WDN.jQuery('#maincontent table .story').hover(
+	WDN.jQuery('#maincontent table .story').each(function() {
+		WDN.jQuery(this).removeClass('ui-draggable');
+		WDN.jQuery(this).hover(
 			function(){
 				WDN.jQuery(this).children('.storyTools').delay(200).fadeIn(800);
 			},
 			function() {
 				WDN.jQuery(this).children('.storyTools').fadeOut();
 			}
-	);
+		);
+	});
 }
 function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable('refresh');
