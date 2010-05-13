@@ -16,6 +16,7 @@ if ($parent->context->options['view'] == 'preview'
         $newsletter_id = $parent->context->newsletter->id;
     }
 ?>
+</p>
 <form method="post" action="?view=preview&amp;id=<?php echo $newsletter_id; ?>">
     <input type="hidden" name="_type" value="addstory" />
     <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
@@ -31,4 +32,3 @@ if (isset($context->request_publish_end)) {
 } ?>
 </span>
 <?php endif; ?>
-</p>
