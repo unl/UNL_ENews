@@ -52,6 +52,14 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
         unset($_POST['newsroom_id']);
     }
     
+    function removeStory($story_id)
+    {
+        if ($story = UNL_ENews_Story::getById($story_id)) {
+            return $this->newsletter->removeStory($story);
+        }
+        return true;
+    }
+    
     function addStory($story_id, $sort_order = null, $intro = null)
     {
         if ($story = UNL_ENews_Story::getById($story_id)) {

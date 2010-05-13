@@ -38,7 +38,9 @@ WDN.jQuery(document).ready(function() {
 	});
 	WDN.jQuery('a.remove').click(function(){//we have clicked the remove story icon
 		WDN.jQuery(this).parent('.storyTools').hide().parents('.story').unbind().removeClass('story').addClass('dragItem').appendTo('#drag_story_list');
+		WDN.jQuery(this).parent('.storyTools').siblings("form").children("input[name='_type']").attr('value', 'removestory');
 		saveStoryOrder();
+		WDN.jQuery.post(WDN.jQuery(this).parent('.storyTools').siblings("form").attr('action'), WDN.jQuery(this).parent('.storyTools').siblings("form").serialize());
 		return false;
 	});
 	WDN.jQuery('.dragItem').draggable({ 
