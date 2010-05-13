@@ -22,4 +22,9 @@ class UNL_ENews_Story_File extends UNL_ENews_Record
         }
         return false;
     }
+    
+    function keys()
+    {
+        return array('story_id', 'file_id');
+    }
 }
