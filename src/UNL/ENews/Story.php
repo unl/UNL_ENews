@@ -14,6 +14,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $date_submitted;
     public $date_modified;
 
+    /**
+     * Construct a new story
+     * 
+     * @param $options = array([id])
+     */
     function __construct($options = array())
     {
         if (isset($options['id'])) {
@@ -49,8 +54,10 @@ class UNL_ENews_Story extends UNL_ENews_Record
     }
     
     /**
+     * Retrieve a story
      * 
-     * @param unknown_type $id
+     * @param int $id
+     * 
      * @return UNL_ENews_Story
      */
     public static function getByID($id)
@@ -63,6 +70,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return false;
     }
     
+    /**
+     * Add a related file to this story.
+     * 
+     * @param UNL_ENews_File $file The file to add
+     */
     public function addFile(UNL_ENews_File $file)
     {
         $has_file = new UNL_ENews_Story_File();
@@ -71,6 +83,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return $has_file->insert();
     }
     
+    /**
+     * Remove a related file
+     *
+     * @param UNL_ENews_File $file The file to remove
+     */
     public function removeFile(UNL_ENews_File $file)
     {
         if ($has_file = UNL_ENews_Story_File::getById($this->id, $file->id)) {
@@ -79,6 +96,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return true;
     }
     
+    /**
+     * Retrieve all files related to this story
+     *
+     * @return UNL_ENews_Story_Files
+     */
     function getFiles()
     {
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
@@ -102,6 +124,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return false;
     }
     
+    /**
+     * Gets the thumbnail, if any
+     *
+     * @return UNL_ENews_File_Image
+     */
     function getThumbnail()
     {
         return $this->getFileByUse('thumbnail');
@@ -120,6 +147,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return parent::delete();
     }
     
+    /**
+     * Check if the user has permission to edit this story.
+     *
+     * @param UNL_ENews_User $user The user to check
+     */
     function userCanEdit(UNL_ENews_User $user)
     {
         if ($user->uid == $this->uid_created) {
