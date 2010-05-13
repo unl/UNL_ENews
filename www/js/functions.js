@@ -18,18 +18,9 @@ WDN.jQuery(document).ready(function() {
 	WDN.jQuery('#drag_story_list > .dragItem, table .story').each(function(){
 		WDN.jQuery(this).append('<div class="storyTools"><a class="edit" href="#"><span></span>Edit</a><a class="remove" href="#"><span></span>Remove</a></div>');
 	});
-	//the newsletter creation page <- to be moved to it's own file/plugin
-	WDN.jQuery('#maincontent table .story').hover(
-			function(){
-				WDN.jQuery(this).children('.storyTools').delay(200).fadeIn(800);
-			},
-			function() {
-				WDN.jQuery(this).children('.storyTools').fadeOut();
-			}
-	);
-	WDN.jQuery('#maincontent table .story').focus(function() {
-		WDN.jQuery(this).children('.storyTools').hide();
-	});
+	
+	setupDragAndSort();
+	
 	WDN.jQuery('a.edit').click(function(){ // we have clicked the edit story icon
 		WDN.jQuery(this).parent().siblings('p').before("<textarea>"+WDN.jQuery(this).parent().siblings('p').text()+"</textarea>");
 		WDN.jQuery(this).parent().hide();
@@ -41,15 +32,22 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).parent('.storyTools').siblings("form").children("input[name='_type']").attr('value', 'removestory');
 		saveStoryOrder();
 		WDN.jQuery.post(WDN.jQuery(this).parent('.storyTools').siblings("form").attr('action'), WDN.jQuery(this).parent('.storyTools').siblings("form").serialize());
+		setupDragAndSort();
 		return false;
 	});
+});
+function setupDragAndSort() {
 	WDN.jQuery('.dragItem').draggable({ 
 		revert: 'invalid',
 		snap: '.newsColumn',
 		snapMode : 'inner',
 		connectToSortable: '.newsColumn',
-		helper: 'original',
-		opacity: 0.45
+		helper: 'clone',
+		opacity: 0.45,
+		stop: function(event, ui){
+			WDN.jQuery(this).remove();
+			ui.helper.find("input[name='_type']").attr('value', 'addstory');
+		}
 	});
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable({
 		revert: false,
@@ -60,7 +58,7 @@ WDN.jQuery(document).ready(function() {
 		tolerance: 'pointer',
 		helper: 'clone',
 		start: function(event, ui){
-			WDN.jQuery(ui.item).children('.storyTools').hide();
+			WDN.jQuery(this).children('.storyTools').hide();
 			WDN.jQuery('.ui-sortable-helper .storyTools').hide();
 		},
 		stop: function(event, ui){
@@ -71,10 +69,26 @@ WDN.jQuery(document).ready(function() {
 	WDN.jQuery('.newsColumn').droppable({
 		drop: function(event, ui) {
 			ui.draggable.addClass('story').removeAttr('style').removeClass('dragItem');
-			WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
+			ui.helper.remove();
+			//WDN.jQuery.post(WDN.jQuery(this).find('form').attr('action'), WDN.jQuery(this).find('form').serialize());
 		}
 	});
-});
+	WDN.jQuery('#drag_story_list input[name="_type"]').each(function(){
+		WDN.jQuery(this).attr('value', 'addstory');
+	});
+	
+	setupEditRemove();
+}
+function setupEditRemove() {
+	WDN.jQuery('#maincontent table .story').hover(
+			function(){
+				WDN.jQuery(this).children('.storyTools').delay(200).fadeIn(800);
+			},
+			function() {
+				WDN.jQuery(this).children('.storyTools').fadeOut();
+			}
+	);
+}
 function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
 	WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').sortable('refresh');
 	var resultIntro = WDN.jQuery('#newsColumnIntro').sortable('toArray');
