@@ -49,7 +49,7 @@ class UNL_ENews_File_Image extends UNL_ENews_File
             case 'image/png':
             case 'image/x-png':
                 $create_method = 'imagecreatefrompng';
-                $output_method = 'imagejpeg';
+                $output_method = 'imagepng';
                 break;
             case 'image/gif':
                 $create_method = 'imagecreatefromgif';
@@ -78,8 +78,10 @@ class UNL_ENews_File_Image extends UNL_ENews_File
 
         // Save the thumbnail **********************************************************
         $thumb->use_for = 'thumbnail';
-        $thumb->save();
-        return $thumb;
+        if ($thumb->save()) {
+            return $thumb;
+        }
+        return false;
     }
 }
 ?>

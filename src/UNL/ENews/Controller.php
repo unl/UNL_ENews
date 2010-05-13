@@ -205,21 +205,25 @@ class UNL_ENews_Controller
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
                 }
+
                 //If there is an existing thumbnail we know we're in editing mode...
                 //...and if no coords have been selected we keep existing thumbnail and exit
                 if ($story->getFileByUse('thumbnail') && empty($_POST['x1'])) {
                     header('Location: ?view=thanks&_type=story');
                     exit();
                 }
+
                 //Delete existing thumbnail
                 if ($thumb = $story->getFileByUse('thumbnail')) {
                     $story->removeFile($thumb);
                     $thumb->delete();
                 }
+
+                // Get the original, and make a new thumbnail
                 $file = $story->getFileByUse('originalimage');
                 $thumb = $file->saveThumbnail();
                 $story->addFile($thumb);
-          
+
                 header('Location: ?view=thanks&_type=story');
                 exit();
                 break;
