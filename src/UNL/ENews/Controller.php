@@ -152,8 +152,7 @@ class UNL_ENews_Controller
                     exit();
                 }
 
-                header('Location: ?view=thanks&_type='.$_POST['_type']);
-                exit();
+                self::redirect('?view=thanks&_type='.$_POST['_type']);
             case 'file':
                 if ($_FILES['image']['error'] != UPLOAD_ERR_OK) {
                     throw new Exception("Error Uploading File!");
@@ -188,8 +187,7 @@ class UNL_ENews_Controller
                 $story->addFile($file);
 
                 if (!isset($this->options['ajaxupload'])) {
-                    header('Location: ?view=thanks&_type='.$_POST['_type']);
-                    exit();
+                    self::redirect('?view=thanks&_type='.$_POST['_type']);
                 }
 
                 //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
@@ -203,8 +201,7 @@ class UNL_ENews_Controller
                     }
                 }
                 //Output the image that will be shown on step 3 of submission page
-                header('Location: ?view=file&id='.$file->id);
-                exit();
+                self::redirect('?view=file&id='.$file->id);
             case 'savethumb':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
@@ -218,8 +215,7 @@ class UNL_ENews_Controller
                     || (false !== $story->getThumbnail()
                         && empty($_POST['x1']))) {
                     // No need to continue, there's no image, or we're keeping the existing thumb.
-                    header('Location: ?view=thanks&_type=story');
-                    exit();
+                    self::redirect('?view=thanks&_type=story');
                 }
 
                 if ($thumb = $story->getThumbnail()) {
@@ -233,9 +229,7 @@ class UNL_ENews_Controller
                 $thumb = $file->saveThumbnail();
                 $story->addFile($thumb);
 
-                header('Location: ?view=thanks&_type=story');
-                exit();
-                break;
+                self::redirect('?view=thanks&_type=story');
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');
@@ -302,5 +296,13 @@ class UNL_ENews_Controller
         }
         
         return false;
+    }
+    
+    static function redirect($url, $exit = true)
+    {
+        header('Location: '.$url);
+        if (false !== $exit) {
+            exit($exit);
+        }
     }
 }
