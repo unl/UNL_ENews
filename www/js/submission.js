@@ -54,7 +54,7 @@ WDN.jQuery(document).ready(function($){
 		}
 		return false;
 	});
-	
+
 	$('#next_step3').click(function() {
 		$('#wdn_process_step2').slideToggle();
 		$('#wdn_process_step3').slideToggle(function() {
@@ -66,11 +66,11 @@ WDN.jQuery(document).ready(function($){
 		$('#enewsSubmissionButton').show();
 		return false;
 	}); 
-	
+
 	$('#enewsForm h3').eq(0).css('cursor','pointer').click(backToStep1);
 	$('#enewsForm h3').eq(1).css('cursor','pointer').click(backToStep2);
-	
-	
+
+
 	//Update the sample layout
 	$('#title').keyup(function() {
 		var demoTitle = $(this).val();
@@ -94,7 +94,7 @@ WDN.jQuery(document).ready(function($){
 			return demoText;
 		});
 	});
-	
+
 	//Make a GoURL with campaign tagging for the Supporting Website
 	$('#website').change(function() {
 		var website = $(this).val();
@@ -129,37 +129,25 @@ WDN.jQuery(document).ready(function($){
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();
-			$('#enewsSubmissionButton').remove();
-			$('#enewsSubmitButton').show();
 		} else {
 			alert('Error');
 		}
-		
+
 		return false;
 	});
-	
-	//When the final submission button is pressed, save whatever changes were made to the story first
+
+	//When the submission button is pressed, save whatever changes were made to the story first
 	$('form#enewsSubmission').submit(function(){
 		if (message = submitStory(true)) {
 			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
 			return false;
 		}
 	});
-	
-	//When the final submission button is pressed, save whatever changes were made to the story first
-	$('form#enewsSubmit').submit(function(){
-		if (message = submitStory(true)) {
-			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
-			return false;
-		}
-	});
 
-	
 	function backToStep1() {
 		$('#enewsSubmissionButton').hide();
 		$('#sampleLayout').hide();
 		$('#enewsImage').hide();
-		$('#enewssubmitbutton').hide();
 		$('#wdn_process_step2').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step1').slideDown();
@@ -173,7 +161,6 @@ WDN.jQuery(document).ready(function($){
 		$('#enewsSubmissionButton').hide();
 		$('#sampleLayout').hide();
 		$('#enewsImage').hide();
-		$('#enewssubmitbutton').hide();
 		$('#wdn_process_step1').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step2').slideDown();
@@ -243,12 +230,11 @@ WDN.jQuery(document).ready(function($){
 			data: dataString,
 			success: function(data,status) {
 				//We get back the id of the newly saved story
-				document.enewsSubmission.storyid.value = data; 
-				document.enewsImage.storyid.value = data; 
-				document.enewsSubmit.storyid.value = data;
+				document.enewsSubmission.storyid.value = data;
+				document.enewsImage.storyid.value = data;
 			},
 			error: function (data, status, e) {
-				alert(e);
+				return e;
 			}
 		});
 		
@@ -265,10 +251,30 @@ function setImageCrop() {
 		hide:false,
 		aspectRatio: "4:3",
 		onSelectEnd: function (img, selection) {
-			WDN.jQuery('#enewsSubmit input[name=x1]').val(selection.x1);
-			WDN.jQuery('#enewsSubmit input[name=y1]').val(selection.y1);
-			WDN.jQuery('#enewsSubmit input[name=x2]').val(selection.x2);
-			WDN.jQuery('#enewsSubmit input[name=y2]').val(selection.y2);
+			var dataString = '_type=thumbnail&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
+			dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
+			
+			WDN.jQuery.ajax({
+				type: "POST",
+				//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
+				xhr: (window.ActiveXObject) ?
+					function() {
+						try {
+							return new window.ActiveXObject("Microsoft.XMLHTTP");
+						} catch(e) {}
+					} :
+					function() {
+						return new window.XMLHttpRequest();
+					},
+				url: WDN.jQuery('#enewsSubmission').attr('action'),
+				data: dataString,
+				success: function(data,status) {
+					return false;
+				},
+				error: function (data, status, e) {
+					return e;
+				}
+			});
 		}
 	});
 };

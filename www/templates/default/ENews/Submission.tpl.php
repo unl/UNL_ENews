@@ -29,9 +29,8 @@ function getValue($object, $field)
         (function(){
             setTimeout(function(){
                 $('#newsAnnouncement').click();
-                $('#enewsSubmissionButton').remove();
-                $('#enewsSubmitButton').show();
-                document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
+                $('#enewsSubmissionButton').show();
+                document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = <?php echo $id;?>;
             },100);
         })();
     });
@@ -182,18 +181,6 @@ function getValue($object, $field)
 </fieldset>
 </form>
 
-
-
-
-<form id="enewsSubmit" name="enewsSubmit" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
-<input type="hidden" name="_type" value="savethumb" />
-<input type="hidden" name="x1" value="" />
-<input type="hidden" name="y1" value="" />
-<input type="hidden" name="x2" value="" />
-<input type="hidden" name="y2" value="" /> 
-<input type="hidden" id="storyid" name="storyid" value="" />
-<div id="enewsSubmitButton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
-</form>
 
 
 <?php //ending div for #enewsForm ?>

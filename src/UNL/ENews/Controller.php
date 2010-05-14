@@ -202,7 +202,7 @@ class UNL_ENews_Controller
                 }
                 //Output the image that will be shown on step 3 of submission page
                 self::redirect('?view=file&id='.$file->id);
-            case 'savethumb':
+            case 'thumbnail':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
                 }
