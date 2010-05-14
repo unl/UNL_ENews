@@ -226,6 +226,11 @@ class UNL_ENews_Controller
                 $thumb = $file->saveThumbnail();
                 $story->addFile($thumb);
 
+                if (isset($_POST['ajaxupload'])) {
+                    echo $thumb->id;
+                    exit();
+                }
+
                 self::redirect('?view=thanks&_type=thumbnail');
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {

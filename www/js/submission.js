@@ -130,7 +130,7 @@ WDN.jQuery(document).ready(function($){
 				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();
 		} else {
-			alert('Error');
+			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
 		}
 
 		return false;
@@ -183,38 +183,29 @@ WDN.jQuery(document).ready(function($){
 				message = 'Required fields cannot be left blank';
 			}
 		});
-		if (message != '') {
-			return message;
+		if (request_publish_start > request_publish_end) {
+			message = '"Last date this could run" must be later then "What date would like this to run?"';
 		}
-
-		if (validate && (request_publish_start > request_publish_end)) {
-			return '"Last date this could run" must be later then "What date would like this to run?"';
+		if (validate && message != '') {
+			return message;
 		}
 		
 		//Use placeholder text if user uploads an image first
-		if (title == "")
-			title = '?';
-		if (description == "")
-			description = '?';
-		if (request_publish_start == "")
-			request_publish_start = '1999-01-01';
-		if (request_publish_end == "")
-			request_publish_end = '1999-01-01';
-		if (sponsor == "")
-			sponsor = '?';
-	    		
-	    var newsroom_id = new Array();
-	    $("input[name=newsroom_id\\[\\]]").each( function(index) {
-			newsroom_id.push($(this).val());
-	    }); 
-
+		if ($('input#title').val() == '')
+			$('input#title').val('Title');
+		if ($('textarea#description').val() == '')
+			$('textarea#description').val('Story');
+		if ($('input#request_publish_start').val() == '')
+			$('input#request_publish_start').val('1999-01-01');
+		if ($('input#request_publish_end').val() == '')
+			$('input#request_publish_end').val('1999-01-01');
+		if ($('input#sponsor').val() == '')
+			$('input#sponsor').val('Sponsoring Unit');
+		
 		//Create the data string to POST
 		var dataString = $('#enewsSubmission').serialize();
-		$.each(newsroom_id, function(key, value) { 
-			dataString += '&newsroom_id[]=';
-			dataString += value; 
-		});
-			
+		dataString += '&ajaxupload=yes';
+		
 		$.ajax({
 			type: "POST",
 			//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
@@ -233,6 +224,17 @@ WDN.jQuery(document).ready(function($){
 				//We get back the id of the newly saved story
 				document.enewsSubmission.storyid.value = data;
 				document.enewsImage.storyid.value = data;
+				//Clear out the placeholder text
+				if ($('input#title').val() == 'Title')
+					$('input#title').val('');
+				if ($('textarea#description').val() == 'Story')
+					$('textarea#description').val('');
+				if ($('input#request_publish_start').val() == '1999-01-01')
+					$('input#request_publish_start').val('');
+				if ($('input#request_publish_end').val() == '1999-01-01')
+					$('input#request_publish_end').val('');
+				if ($('input#sponsor').val() == 'Sponsoring Unit')
+					$('input#sponsor').val('');
 			},
 			error: function (data, status, e) {
 				return e;
@@ -292,7 +294,7 @@ var submission = function() {
 				hide:false,
 				aspectRatio: "4:3",
 				onSelectEnd: function (img, selection) {
-					var dataString = '_type=thumbnail&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
+					var dataString = '_type=thumbnail&ajaxupload&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
 					dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
 					
 					WDN.jQuery.ajax({
@@ -310,7 +312,6 @@ var submission = function() {
 						url: WDN.jQuery('#enewsSubmission').attr('action'),
 						data: dataString,
 						success: function(data,status) {
-							alert(data +'--'+status);
 							return false;
 						},
 						error: function (data, status, e) {
