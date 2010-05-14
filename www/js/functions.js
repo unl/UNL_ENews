@@ -19,7 +19,7 @@ WDN.jQuery(document).ready(function() {
 	preview.initialize();
 });
 
-/*
+/**
  * 
  *  Namespace for the newsletter preview functionality
  * 
@@ -29,7 +29,7 @@ var preview = function() {
     return {
     	initialize : function() {
 	    	WDN.jQuery('#drag_story_list > .dragItem, table .story').each(function(){ //add the tools to all the stories on the page
-	    		WDN.jQuery(this).append('<div class="storyTools"><a class="edit" href="#"><span></span>Edit</a><a class="remove" href="#"><span></span>Remove</a></div>');
+	    		WDN.jQuery(this).append('<div class="storyTools"><a class="edit" href="?view=submit&id='+WDN.jQuery(this).children('form').children('input[name="story_id"]').attr('value')+'"><span></span>Edit</a><a class="remove" href="#"><span></span>Remove</a></div>');
 	    	});
 	    	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupEditRemove);
 	    	preview.setupDragAndSort();
@@ -46,6 +46,7 @@ var preview = function() {
     	
     	editStory : function() {
     		
+    		//return false;
     	},
     	
     	removeStory : function() {
@@ -173,7 +174,9 @@ function checkInput() {
  
 
 /**
+ * 
  * Namespace for manager javascript.
+ * 
  */
 var manager = function() {
     return {
