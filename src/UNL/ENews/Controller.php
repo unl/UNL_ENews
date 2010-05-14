@@ -211,11 +211,8 @@ class UNL_ENews_Controller
                     throw new Exception('Cannot add thumbnail to stories you cannot edit');
                 }
 
-                if ((false === $story->getFileByUse('originalimage'))
-                    || (false !== $story->getThumbnail()
-                        && empty($_POST['x1']))) {
-                    // No need to continue, there's no image, or we're keeping the existing thumb.
-                    self::redirect('?view=thanks&_type=story');
+                if (false === $story->getFileByUse('originalimage')) {
+                    throw new Exception('Cannot create a thumbnail for an image that does not exist');
                 }
 
                 if ($thumb = $story->getThumbnail()) {
@@ -229,7 +226,7 @@ class UNL_ENews_Controller
                 $thumb = $file->saveThumbnail();
                 $story->addFile($thumb);
 
-                self::redirect('?view=thanks&_type=story');
+                self::redirect('?view=thanks&_type=thumbnail');
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');

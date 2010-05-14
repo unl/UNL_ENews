@@ -246,39 +246,7 @@ WDN.jQuery(document).ready(function($){
 
 
 
-function setImageCrop() {
-	WDN.jQuery('#upload_area img').imgAreaSelect({
-		enable:true,
-		hide:false,
-		aspectRatio: "4:3",
-		onSelectEnd: function (img, selection) {
-			var dataString = '_type=thumbnail&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
-			dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
-			
-			WDN.jQuery.ajax({
-				type: "POST",
-				//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
-				xhr: (window.ActiveXObject) ?
-					function() {
-						try {
-							return new window.ActiveXObject("Microsoft.XMLHTTP");
-						} catch(e) {}
-					} :
-					function() {
-						return new window.XMLHttpRequest();
-					},
-				url: WDN.jQuery('#enewsSubmission').attr('action'),
-				data: dataString,
-				success: function(data,status) {
-					return false;
-				},
-				error: function (data, status, e) {
-					return e;
-				}
-			});
-		}
-	});
-};
+
 
 
 
@@ -311,12 +279,45 @@ var submission = function() {
 					submission.addURLtoPreview(data);
 				}
 			);
-			
 		},
 		addURLtoPreview : function(url) {
 			WDN.jQuery('#sampleLayout a').text(function(index){
 				return url;
 				submission.urlPreview = true;
+			});
+		},
+		setImageCrop : function() {
+			WDN.jQuery('#upload_area img').imgAreaSelect({
+				enable:true,
+				hide:false,
+				aspectRatio: "4:3",
+				onSelectEnd: function (img, selection) {
+					var dataString = '_type=thumbnail&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
+					dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
+					
+					WDN.jQuery.ajax({
+						type: "POST",
+						//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
+						xhr: (window.ActiveXObject) ?
+							function() {
+								try {
+									return new window.ActiveXObject("Microsoft.XMLHTTP");
+								} catch(e) {}
+							} :
+							function() {
+								return new window.XMLHttpRequest();
+							},
+						url: WDN.jQuery('#enewsSubmission').attr('action'),
+						data: dataString,
+						success: function(data,status) {
+							alert(data +'--'+status);
+							return false;
+						},
+						error: function (data, status, e) {
+							return e;
+						}
+					});
+				}
 			});
 		}
 	};
