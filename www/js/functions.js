@@ -105,6 +105,7 @@ var preview = function() {
     			},
     			stop: function(event, ui){
     				preview.saveStoryOrder();
+    				ui.item.children('.storyTools').hide();
     			}
     		});
     		WDN.jQuery('#newsColumn1, #newsColumn2, #newsColumnIntro').disableSelection(); //This keeps content from being highlighted and instead draggable
@@ -145,19 +146,6 @@ var preview = function() {
     	
     }
 }();
-   
-function setupDragAndSort() {
-	
-	
-	
-	
-	
-	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', setupEditRemove);
-}
-function setupEditRemove() {
-	
-}
-
 
 
 /* JS from events for controlling manager actions 
