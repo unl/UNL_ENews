@@ -69,7 +69,7 @@
 #maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea {
 	padding:5px;
 }
-#maincontent .enews fieldset ol li .required {
+#maincontent .enews fieldset ol li span.required {
 	position:absolute;
 	left:8px;
 	text-indent:-9999px;
