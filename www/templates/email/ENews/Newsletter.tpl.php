@@ -24,7 +24,7 @@
                                 <!-- This is the main content -->
                                 <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;">Today@UNL</h1>
                                 <p style="margin:0;font-size:.9em;color:#909090;"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
-                                <p style="margin:1.1em 0;">Here is the latest and greatest UNL happenings today!</p>
+                                
                             </td>
                         </tr>
                             <?php
