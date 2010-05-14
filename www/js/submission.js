@@ -172,18 +172,19 @@ WDN.jQuery(document).ready(function($){
 	};
 	
 	function submitStory(validate) {
-	  	var storyid = $("input#storyid").val();
-	  	var title = $("input#title").val();
-	  	var description = $("textarea#description").val();
-	  	var full_article = $("textarea#full_article").val();
+		
+		var storyid = $("input#storyid").val();
 		var request_publish_start = $("input#request_publish_start").val();
 		var request_publish_end = $("input#request_publish_end").val();
-		var website = $("input#website").val();
-		var sponsor = $("input#sponsor").val();
 		
-		if (validate && (title == "" || description == "" || request_publish_start == "" || request_publish_end == "" || sponsor == "")) {
-			return 'Required fields cannot be left blank';
+		var message = '';
+		$('input.required,textarea.required').each(function(){
+			message = 'Required fields cannot be left blank';
+		});
+		if (message != '') {
+			return message;
 		}
+
 		if (validate && (request_publish_start > request_publish_end)) {
 			return '"Last date this could run" must be later then "What date would like this to run?"';
 		}
@@ -206,9 +207,7 @@ WDN.jQuery(document).ready(function($){
 	    }); 
 
 		//Create the data string to POST
-		var dataString = '_type=story&ajaxupload=yes&storyid=' + storyid + '&title='+ title + '&description=' + description;
-		dataString += '&full_article=' + full_article + '&request_publish_start=' + request_publish_start;
-		dataString += '&request_publish_end=' + request_publish_end + '&website=' + website + '&sponsor=' + sponsor;
+		var dataString = $('#enewsSubmission').serialize();
 		$.each(newsroom_id, function(key, value) { 
 			dataString += '&newsroom_id[]=';
 			dataString += value; 
