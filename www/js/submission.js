@@ -179,7 +179,9 @@ WDN.jQuery(document).ready(function($){
 		
 		var message = '';
 		$('input.required,textarea.required').each(function(){
-			message = 'Required fields cannot be left blank';
+			if (this.value == '') {
+				message = 'Required fields cannot be left blank';
+			}
 		});
 		if (message != '') {
 			return message;
