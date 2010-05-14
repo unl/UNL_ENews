@@ -13,29 +13,29 @@ function getValue($object, $field)
 }
 ?>
 <script type="text/javascript">
-	WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-	WDN.loadJS("js/functions.js");
-	WDN.loadJS("js/submission.js");
-	WDN.loadJS("js/ajaxfileupload.js");
-	WDN.loadCSS("css/imgareaselect-default.css");
-	WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
-	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
-	WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
+    WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+    WDN.loadJS("js/functions.js");
+    WDN.loadJS("js/submission.js");
+    WDN.loadJS("js/ajaxfileupload.js");
+    WDN.loadCSS("css/imgareaselect-default.css");
+    WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
+    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
+    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 
-	<?php //Set up the form for editing if an id is specified
+    <?php //Set up the form for editing if an id is specified
           $id = getValue($context,'id'); ?>
-	<?php if (!empty($id)) : ?>
-	WDN.jQuery(document).ready(function($){
-		(function(){
-			setTimeout(function(){
-				$('#newsAnnouncement').click();
-				$('#enewsSubmissionButton').remove();
-				$('#enewsSubmitButton').show();
-				document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
-			},100);
-		})();
-	});
-	<?php endif; ?>
+    <?php if (!empty($id)) : ?>
+    WDN.jQuery(document).ready(function($){
+        (function(){
+            setTimeout(function(){
+                $('#newsAnnouncement').click();
+                $('#enewsSubmissionButton').remove();
+                $('#enewsSubmitButton').show();
+                document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = document.enewsSubmit.storyid.value = <?php echo $id;?>;
+            },100);
+        })();
+    });
+    <?php endif; ?>
 </script>
 
 
@@ -46,11 +46,11 @@ function getValue($object, $field)
 <h3 class="highlighted"><span>1</span>Select News Type</h3>
 <form id="enewsStep1" name="enewsStep1" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step1">
-	<legend>Select News Type</legend>
-	<ol class="option_step">
-		<li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
-		<li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
-	</ol>
+    <legend>Select News Type</legend>
+    <ol class="option_step">
+        <li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
+        <li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
+    </ol>
 </fieldset>
 </form>
 
@@ -60,19 +60,19 @@ function getValue($object, $field)
 <h3><span>2</span>Enter Date Details for Event</h3>
 <form id="enewsStep2" name="enewsStep2" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step2" style="display:none;">
-	<legend><span>Enter Date Details for Event</span></legend>
+    <legend><span>Enter Date Details for Event</span></legend>
         <ol>
-        	<li>
-        		<label for="date">Date of Event<span class="required">*</span></label>
-				<input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'request_publish_end'); ?>" />
-			</li>
-        	<li>
-        		<label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
-				<select id="event">
-					<option value="NewEvent">New Event</option>
-					
-				</select>
-			</li>
+            <li>
+                <label for="date">Date of Event<span class="required">*</span></label>
+                <input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'request_publish_end'); ?>" />
+            </li>
+            <li>
+                <label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
+                <select id="event">
+                    <option value="NewEvent">New Event</option>
+                    
+                </select>
+            </li>
         </ol>
         <p class="nextStep"><a href="#" id="next_step3">Continue</a></p>
 </fieldset>
@@ -84,8 +84,8 @@ function getValue($object, $field)
 <h3><span>3</span>Announcement Submission</h3>
 <form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step3" style="display:none;">
-	<legend><span>News Announcement Submission</span></legend>
-	<?php //Story id if we are editing ?>
+    <legend><span>News Announcement Submission</span></legend>
+    <?php //Story id if we are editing ?>
     <input type="hidden" id="storyid" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
     <input type="hidden" name="_type" value="story" />
         <ol>
@@ -98,29 +98,29 @@ function getValue($object, $field)
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" /></li>
             <?php if ($context->newsroom->id != 1) : ?>
             <li>
-            	<fieldset>
-            		<legend>Please consider for</legend>
-            		<ol>
-            		<li> 
-            			<input type="checkbox" name="newsroom_id[]" value="<?php echo (int)$context->newsroom->id; ?>" checked="checked" />
-                    	<label for="newsroom_id[]"><?php echo $context->newsroom->name; ?></label>
-            		</li>
-            		<li>
-            			<input type="checkbox" name="newsroom_id[]" value="1" />
-                    	<label for="newsroom_id[]">UComm Publications (E-News, UNL Today, Scarlet, etc.)</label>
+                <fieldset>
+                    <legend>Please consider for</legend>
+                    <ol>
+                    <li> 
+                        <input type="checkbox" name="newsroom_id[]" value="<?php echo (int)$context->newsroom->id; ?>" checked="checked" />
+                        <label for="newsroom_id[]"><?php echo $context->newsroom->name; ?></label>
                     </li>
-            		</ol>
-            	</fieldset>
+                    <li>
+                        <input type="checkbox" name="newsroom_id[]" value="1" />
+                        <label for="newsroom_id[]">UComm Publications (E-News, UNL Today, Scarlet, etc.)</label>
+                    </li>
+                    </ol>
+                </fieldset>
             </li>
             <?php else : ?>
             <li>
-            	<input type="hidden" name="newsroom_id[]" value="1" />
+                <input type="hidden" name="newsroom_id[]" value="1" />
             </li>
             <?php endif; ?>
         </ol>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
-	<legend>Event Announcement Submission</legend>
+    <legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
 </fieldset> 
 
@@ -163,22 +163,22 @@ function getValue($object, $field)
 <input type="hidden" id="storyid" name="storyid" value="" /> 
 
 <fieldset>
-			<ol style="padding:0;margin-top:0;"><li>
-			<label for="image">Image<span class="helper">To be displayed with your announcement</span></label>
-			<input id="image" name="image" type="file" />
-			</li></ol>
-			
-			<div id="upload_area">
-			<?php if ($id = getValue($context,"id")) { ?>
-					<?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
-							<img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
-							<span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
-							<script type="text/javascript">WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){setImageCrop();},true,true);</script>
-					<?php } ?>
-			<?php } else { ?>
-					<div>Image preview</div>
-			<?php }  ?>
-			</div>
+            <ol style="padding:0;margin-top:0;"><li>
+            <label for="image">Image<span class="helper">To be displayed with your announcement</span></label>
+            <input id="image" name="image" type="file" />
+            </li></ol>
+            
+            <div id="upload_area">
+            <?php if ($id = getValue($context,"id")) { ?>
+                    <?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
+                            <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
+                            <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
+                            <script type="text/javascript">WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){setImageCrop();},true,true);</script>
+                    <?php } ?>
+            <?php } else { ?>
+                    <div>Image preview</div>
+            <?php }  ?>
+            </div>
 </fieldset>
 </form>
 
