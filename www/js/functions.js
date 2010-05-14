@@ -80,19 +80,18 @@ function setupDragAndSort() {
 		WDN.jQuery(this).attr('value', 'addstory'); 
 	});
 	
-	setupEditRemove();
+	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', setupEditRemove);
 }
 function setupEditRemove() {
+	hoverConfig = {
+		over : function() { WDN.jQuery(this).children('.storyTools').fadeIn(800) },
+		timeout : 300,
+		interval : 300,
+		out : function() { WDN.jQuery(this).children('.storyTools').fadeOut() }
+	};
 	WDN.jQuery('#maincontent table .story').each(function() {
 		WDN.jQuery(this).removeClass('ui-draggable');
-		WDN.jQuery(this).hover(
-			function(){
-				WDN.jQuery(this).children('.storyTools').delay(200).fadeIn(800);
-			},
-			function() {
-				WDN.jQuery(this).children('.storyTools').fadeOut();
-			}
-		);
+		WDN.jQuery(this).hoverIntent(hoverConfig);
 	});
 }
 function saveStoryOrder() { //this function determines the order of the stories and sends it to the DB.
