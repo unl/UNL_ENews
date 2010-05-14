@@ -1,11 +1,17 @@
 WDN.jQuery(document).ready(function($){
-	$("input.datepicker").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
+	
+	$("input.datepicker").datepicker({
+		showOn: 'both',
+		buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
+		buttonImageOnly: true,
+		dateFormat: 'yy-mm-dd',
+		defaultDate: this.value});
 	$("#date").change(function(){
-		var date = $(this).val().split(/\//);
+		var date = $(this).val().split(/-/);
 
 		$('#request_publish_end').attr('value', $(this).val());
 		
-		WDN.get('http://events.unl.edu/'+date[2]+'/'+date[0]+'/'+date[1]+'/?format=xml', null,
+		WDN.get('http://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
 			function(eventsXML){
 				$("#event").html('<option value="NewEvent">New Event</option>');
 				$(eventsXML).find('Event').each(function(){
