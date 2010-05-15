@@ -6,7 +6,12 @@ class UNL_ENews_Controller
      * Will include $_GET vars, this is the newsroom being used across views 
      */
     public $options = array('view' => 'submit', 'format' => 'html', 'newsroom' => '1');
-    
+
+    /**
+     * A map of views to models
+     * 
+     * @var array(view=>CLASSNAME)
+     */
     protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
                                 'latest'      => 'UNL_ENews_StoryList_Latest',
                                 'mynews'      => 'UNL_ENews_User_StoryList',
@@ -21,7 +26,7 @@ class UNL_ENews_Controller
                                 'help'        => 'UNL_ENews_Help',
                                 'newsroom'    => 'UNL_ENews_Newsroom',
     ); 
-    
+
     public static $pagetitle = array('latest'      => 'Latest News',
                                      'submit'      => 'Submit an Item',
                                      'manager'     => 'Manage News',
@@ -33,7 +38,7 @@ class UNL_ENews_Controller
     
     protected static $admins = array('admin'
         );
-    
+
     /**
      * The currently logged in user.
      * 
@@ -47,12 +52,18 @@ class UNL_ENews_Controller
     
     public static $db_pass = 'enews';
     
+    /**
+     * The database
+     * 
+     * @var mysqli
+     */
+    protected static $db;
+    
     public $actionable = array();
     
     function __construct($options)
     {
-        $options += $this->options;
-        $this->options = $options;
+        $this->options = $options + $this->options;
         $this->authenticate(true);
         
         try {
@@ -65,6 +76,11 @@ class UNL_ENews_Controller
         }
     }
     
+    /**
+     * Set a list of site admin uids
+     * 
+     * @param array $admins Array of UIDs
+     */
     public static function setAdmins($admins = array())
     {
         self::$admins = $admins;
@@ -114,7 +130,12 @@ class UNL_ENews_Controller
         
         return self::$user;
     }
-    
+
+    /**
+     * Handle data that is POST'ed to the controller.
+     * 
+     * @return void
+     */
     function handlePost()
     {
         $this->filterPostValues();
@@ -242,28 +263,51 @@ class UNL_ENews_Controller
                 break;
         }
     }
-    
+
+    /**
+     * Filter any pre-populated POST fields to prevent their use.
+     * 
+     * @return void
+     */
     function filterPostValues()
     {
         unset($_POST['uid']);
         unset($_POST['id']);
     }
-    
+
+    /**
+     * Get the URL to the main site.
+     * 
+     * @return string The URL to the site
+     */
     public static function getURL()
     {
         return self::$url;
     }
-    
+
+    /**
+     * Populate the actionable items according to the view map.
+     * 
+     * @throws Exception if view is unregistered
+     */
     function run()
     {
          if (isset($this->view_map[$this->options['view']])) {
-         //    $this->options['controller'] = $this;
              $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
          } else {
              throw new Exception('Un-registered view');
          }
     }
-    
+
+    /**
+     * Set the public properties for an object with the values in an associative array
+     * 
+     * @param mixed &$object The object to set, usually a UNL_ENews_Record
+     * @param array $values  Associtive array of key=>value
+     * @throws Exception
+     * 
+     * @return void
+     */
     public static function setObjectFromArray(&$object, $values)
     {
         if (!isset($object)) {
@@ -275,22 +319,30 @@ class UNL_ENews_Controller
             }
         }
     }
-    
+
     /**
+     * Connect to the database and return it
      * 
      * @return mysqli
      */
     public static function getDB()
     {
-        $mysqli = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
-        if (mysqli_connect_error()) {
-            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                    . mysqli_connect_error());
+        if (!isset(self::$db)) {
+            self::$db = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
+            if (mysqli_connect_error()) {
+                throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                        . mysqli_connect_error());
+            }
+            self::$db->set_charset('utf8');
         }
-        $mysqli->set_charset('utf8');
-        return $mysqli;
+        return self::$db;
     }
-    
+
+    /**
+     * Check if the user is a site admin or not.
+     *
+     * @param string $uid The uid to check
+     */
     public static function isAdmin($uid)
     {
         if (in_array($uid, self::$admins)) {
