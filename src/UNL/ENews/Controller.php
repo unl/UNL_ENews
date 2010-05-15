@@ -52,13 +52,6 @@ class UNL_ENews_Controller
     
     public static $db_pass = 'enews';
     
-    /**
-     * The database
-     * 
-     * @var mysqli
-     */
-    protected static $db;
-    
     public $actionable = array();
     
     function __construct($options)
@@ -327,15 +320,13 @@ class UNL_ENews_Controller
      */
     public static function getDB()
     {
-        if (!isset(self::$db)) {
-            self::$db = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
-            if (mysqli_connect_error()) {
-                throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                        . mysqli_connect_error());
-            }
-            self::$db->set_charset('utf8');
+        $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
+        if (mysqli_connect_error()) {
+            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
         }
-        return self::$db;
+        $db->set_charset('utf8');
+        return $db;
     }
 
     /**
