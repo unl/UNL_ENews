@@ -161,6 +161,14 @@ class UNL_ENews_Controller
                     $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
                 }
 
+                //If image was uploaded but a crop area was never selected, make a default thumbnail
+                if ($file = $story->getFileByUse('originalimage')) {
+                    if (!$story->getThumbnail()) {
+                        $thumb = $file->saveThumbnail(-1);
+                        $story->addFile($thumb);
+                    }
+                }
+
                 if (isset($_POST['ajaxupload'])) {
                     echo $story->id;
                     exit();
@@ -237,7 +245,7 @@ class UNL_ENews_Controller
 
                 // Get the original, and make a new thumbnail
                 $file = $story->getFileByUse('originalimage');
-                $thumb = $file->saveThumbnail();
+                $thumb = $file->saveThumbnail($_POST['x1'],$_POST['x2'],$_POST['y1'],$_POST['y2']);
                 $story->addFile($thumb);
 
                 if (isset($_POST['ajaxupload'])) {

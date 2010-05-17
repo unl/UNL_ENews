@@ -118,7 +118,7 @@ WDN.jQuery(document).ready(function($){
 		if (!submitStory()) {
 			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
-				//Remove the previous crop selection area if it exists
+				//Load the ImageAreaSelect plugin and remove the previous crop selection area if it exists
 				WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){
 					$('#upload_area img').imgAreaSelect({
 						disable:true,

@@ -6,14 +6,14 @@ class UNL_ENews_File_Image extends UNL_ENews_File
      * 
      * @return UNL_ENews_File_Image
      */
-    function saveThumbnail()
+    function saveThumbnail($x1=0,$x2=0,$y1=0,$y2=0,$thumb_width=96,$thumb_height=72)
     {
         // Crop the image ***************************************************************
         // Get dimensions of the original image
         $filename = UNL_ENews_Controller::getURL().'?view=file&id='.(int)$this->id;
         list($current_width, $current_height) = getimagesize($filename);
         
-        if (empty($_POST['x1'])) {
+        if ($x1 < 0) {
             // User did not select a cropping area
             $left   = 0;
             $top    = 0;
@@ -22,15 +22,15 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         } else {
             // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
             if ($current_width > 410) {
-                $left   = ($current_width/410)*$_POST['x1'];
-                $top    = ($current_height/(410*$current_height/$current_width))*$_POST['y1'];
-                $right  = ($current_width/410)*$_POST['x2'];
-                $bottom = ($current_height/(410*$current_height/$current_width))*$_POST['y2'];
+                $left   = ($current_width/410)*$x1;
+                $top    = ($current_height/(410*$current_height/$current_width))*$y1;
+                $right  = ($current_width/410)*$x2;
+                $bottom = ($current_height/(410*$current_height/$current_width))*$y2;
             } else {
-                $left   = $_POST['x1'];
-                $top    = $_POST['y1'];
-                $right  = $_POST['x2'];
-                $bottom = $_POST['y2'];
+                $left   = $x1;
+                $top    = $y1;
+                $right  = $x2;
+                $bottom = $y2;
             }
         }
         
@@ -63,8 +63,8 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         // Resize the image ************************************************************
         $current_width = $crop_width;
         $current_height = $crop_height;
-        $canvas = imagecreatetruecolor(96, 72);
-        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, 96, 72, $current_width, $current_height);
+        $canvas = imagecreatetruecolor($thumb_width, $thumb_height);
+        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, $thumb_width, $thumb_height, $current_width, $current_height);
         
         ob_start();
         $output_method($canvas);
