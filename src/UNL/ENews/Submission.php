@@ -5,6 +5,11 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
     
     public $newsroom;
     
+    function getOpenNewsrooms()
+    {
+        return new UNL_ENews_Newsroom_AllowSubmissions();
+    }
+    
     function __postConstruct()
     {   
         if (!$this->newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {

@@ -26,7 +26,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
             UNL_ENews_Controller::setObjectFromArray($this, $story->toArray());
         }
     }
-      
+
     function getTable()
     {
         return 'stories';
@@ -52,7 +52,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         
         return true;
     }
-    
+
     /**
      * Retrieve a story
      * 
@@ -69,7 +69,19 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         return false;
     }
-    
+
+    /**
+     * Retrieve newsrooms a story belongs to
+     * 
+     * @param 
+     * 
+     * @return UNL_ENews_Story_Newsrooms array
+     */
+    function getNewsrooms()
+    {
+        return new UNL_ENews_Story_Newsrooms(array('id'=>$this->id));
+    }
+
     /**
      * Add a related file to this story.
      * 
@@ -123,7 +135,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         return false;
     }
-    
+
     /**
      * Gets the thumbnail, if any
      *
@@ -146,7 +158,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $mysqli->query($sql);
         return parent::delete();
     }
-    
+
     /**
      * Check if the user has permission to edit this story.
      *

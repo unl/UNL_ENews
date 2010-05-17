@@ -139,7 +139,7 @@ WDN.jQuery(document).ready(function($){
 	$('#addAnotherNewsroom').click(function(){
 		var dropdown = $('#newsroom_id_dropdown').html();
 		$(this).before(dropdown);
-		$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>').css('margin-top','5px');
+		$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>');
 		return false;
 	});
 
