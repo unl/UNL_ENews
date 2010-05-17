@@ -136,6 +136,13 @@ WDN.jQuery(document).ready(function($){
 		return false;
 	});
 
+	$('#addAnotherNewsroom').click(function(){
+		var dropdown = $('#newsroom_id_dropdown').html();
+		$(this).before(dropdown);
+		$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>').css('margin-top','5px');
+		return false;
+	});
+
 	//When the submission button is pressed, save whatever changes were made to the story first
 	$('form#enewsSubmission').submit(function(){
 		if (message = submitStory(true)) {

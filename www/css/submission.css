@@ -54,7 +54,19 @@ div#enewsForm {
 
 
 
-
+#addAnotherNewsroom {
+	margin:5px 0 0 5px;
+	display:block;
+}
+#addAnotherNewsroom:hover {
+	cursor:pointer;
+}
+#addAnotherNewsroom span {
+	padding:0 2px;
+	border:1px solid #fff;
+	background:#de8727;
+	color:#fff;
+}
 
 
 

@@ -66,7 +66,7 @@
 	width:100%;
 	font-size:1.1em;
 }
-#maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea {
+#maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
 	padding:5px;
 }
 #maincontent .enews fieldset ol li span.required {

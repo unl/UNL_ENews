@@ -95,27 +95,23 @@ function getValue($object, $field)
             <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text" value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" class="required" /></li>
-            <?php if ($context->newsroom->id != 1) : ?>
             <li>
-                <fieldset>
+                <fieldset id="newsroom_id">
                     <legend>Please consider for</legend>
-                    <ol>
-                    <li> 
-                        <input type="checkbox" name="newsroom_id[]" value="<?php echo (int)$context->newsroom->id; ?>" checked="checked" />
-                        <label for="newsroom_id[]"><?php echo $context->newsroom->name; ?></label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name="newsroom_id[]" value="1" />
-                        <label for="newsroom_id[]">UComm Publications (E-News, UNL Today, Scarlet, etc.)</label>
-                    </li>
-                    </ol>
+                    <div id="newsroom_id_dropdown">
+                        <select name="newsroom_id[]">
+                        <?php foreach (UNL_ENews_NewsroomList::allowSubmissions() as $item): ?>
+                            <?php if ($item->id == 1) : ?>
+                            <option value="1">Today@UNL and other UComm publications (Scarlet, UNL Today, etc)</option>
+                            <?php else : ?>
+                            <option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
                 </fieldset>
             </li>
-            <?php else : ?>
-            <li>
-                <input type="hidden" name="newsroom_id[]" value="1" />
-            </li>
-            <?php endif; ?>
         </ol>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
