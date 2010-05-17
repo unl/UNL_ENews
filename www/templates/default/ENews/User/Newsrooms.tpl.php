@@ -3,7 +3,7 @@
 	<fieldset>
 		<ol>
 			<li>
-			<select name="newsroom" id="newsroom">
+			<select name="newsroom" id="newsroom" style="padding:0">
 				<option selected="selected" value="<?php echo $parent->context->options['newsroom'] ?>">Choose your newsroom</option>
 				<?php foreach ($context as $item): ?>
 				<option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>

@@ -17,6 +17,7 @@ function getValue($object, $field)
     WDN.loadJS("js/functions.js");
     WDN.loadJS("js/submission.js");
     WDN.loadJS("js/ajaxfileupload.js");
+    WDN.loadJS("js/jquery.textarearesizer.compressed.js");
     WDN.loadCSS("css/imgareaselect-default.css");
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
@@ -26,6 +27,7 @@ function getValue($object, $field)
           $id = getValue($context,'id'); ?>
     <?php if (!empty($id)) : ?>
     WDN.jQuery(document).ready(function($){
+    	$('textarea.resizable:not(.processed)').TextAreaResizer();
         (function(){
             setTimeout(function(){
                 $('#newsAnnouncement').click();
@@ -36,7 +38,6 @@ function getValue($object, $field)
     });
     <?php endif; ?>
 </script>
-
 
 <div id="enewsForm">
 
@@ -89,8 +90,8 @@ function getValue($object, $field)
     <input type="hidden" name="_type" value="story" />
         <ol>
             <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
-            <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
-            <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" cols="60" rows="5"><?php echo getValue($context, 'full_article'); ?></textarea></li>
+            <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" class="resizable" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
+            <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" class="resizable" cols="60" rows="5"><?php echo getValue($context, 'full_article'); ?></textarea></li>
             <li><label for="request_publish_start">What date would like this to run?<span class="required">*</span></label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
             <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text" value="<?php echo getValue($context, 'website'); ?>" /></li>
