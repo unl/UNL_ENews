@@ -77,7 +77,7 @@
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
                                 &copy; 2010 University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-7211 <br />
                                 This email produced and distributed by <a href="http://ucomm.unl.edu/" title="go to the University Communications">University Communications</a>
-                                <br /> <a href="#" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+                                <br /> <a href="<?php echo UNL_ENews_Controller::getURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
                                 </p>
                             </td>
                         </tr>
