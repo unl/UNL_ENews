@@ -21,7 +21,7 @@ class UNL_ENews_File extends UNL_ENews_Record
             }
         }
     }
-    
+
     static public function getById($id)
     {
         if ($record = self::getRecordByID('files', $id)) {

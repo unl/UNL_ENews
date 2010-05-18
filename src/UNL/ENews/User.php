@@ -64,7 +64,10 @@ class UNL_ENews_User extends UNL_ENews_Record
             case 'newsrooms':
                 return new UNL_ENews_User_Newsrooms(array('uid'=>$this->uid));
             default:
-                return $this->getPeoplefinderRecord()->$var;
+                if ($pf = $this->getPeoplefinderRecord()) {
+                    return $pf->$var;
+                }
+                return false;
         }
     }
     

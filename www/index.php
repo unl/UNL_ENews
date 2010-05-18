@@ -9,9 +9,8 @@ $enews = new UNL_ENews_Controller($_GET);
 /*
 ?><pre><?php var_dump($enews);?></pre><?php 
 */
-Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-$savvy = new Savvy();
-$savvy->setTemplatePath(dirname(__FILE__).'/templates/default');
+
+$savvy = new UNL_ENews_OutputController();
 
 
 if ($enews->options['format'] != 'html') {
