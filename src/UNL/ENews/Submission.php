@@ -5,9 +5,14 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
     
     public $newsroom;
     
+    /**
+     * Get the list of newsrooms that allow submissions.
+     * 
+     * @return UNL_ENews_NewsroomList_AllowSubmissions
+     */
     function getOpenNewsrooms()
     {
-        return new UNL_ENews_Newsroom_AllowSubmissions();
+        return new UNL_ENews_NewsroomList_AllowSubmissions();
     }
     
     function __postConstruct()

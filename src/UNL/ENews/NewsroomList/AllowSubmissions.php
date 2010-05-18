@@ -1,5 +1,5 @@
 <?php
-class UNL_ENews_Newsroom_AllowSubmissions extends UNL_ENews_NewsroomList
+class UNL_ENews_NewsroomList_AllowSubmissions extends UNL_ENews_NewsroomList
 {
     function __construct($options = array())
     {
