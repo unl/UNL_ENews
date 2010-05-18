@@ -344,7 +344,7 @@ class UNL_ENews_Controller
      */
     public static function isAdmin($uid)
     {
-        if (in_array($uid, self::$admins)) {
+        if (in_array((string)$uid, self::$admins)) {
             return true;
         }
         

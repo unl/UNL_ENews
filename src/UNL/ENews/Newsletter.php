@@ -182,19 +182,50 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return false;
     }
     
-    function distribute()
+    function distribute($to = null)
     {
-        
         if (!isset($this->release_date)) {
             $this->release_date = date('Y-m-d H:i:s');
             $this->save();
         }
-        
+
+        $plaintext = $this->getEmailTXT();
+        $html      = $this->getEmailHTML();
+
+        // @TODO THIS SHOULD BE NEWSLETTER SPECIFIC, and NOT configurable to be today@unl.edu
+        $from = 'no-reply@newsroom.unl.edu';
+
+        if ($this->newsroom_id == 1) {
+            // Only set from address to today@unl.edu if the default newsroom.
+            $from = 'today@unl.edu';
+        }
+
+        if (!isset($to)) {
+            $to = $this->getNewsroom()->email_lists;
+        }
+
+        $hdrs = array(
+          'From'    => $from,
+          'Subject' => $this->subject);
+
+        require_once 'Mail/mime.php';
+        $mime = new Mail_mime("\n");
+        $mime->setTXTBody($plaintext);
+        $mime->setHTMLBody($html);
+
+        $body = $mime->get();
+        $hdrs = $mime->headers($hdrs);
+        $mail =& Mail::factory('sendmail');
+
+
+        // Send the email!
+        $mail->send($to, $hdrs, $body);
+        return true;
+    }
+    
+    function getEmailHTML()
+    {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-        $savvy = new Savvy();
-        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
-        
-        $plaintext = $savvy->render($this);
 
         $savvy = new Savvy();
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
@@ -205,26 +236,25 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
                     $savvy->render($this).
                 "</body>".
             "</html>";
-        $crlf = "\n";
-        $hdrs = array(
-          'From'    => 'today@unl.edu', // @TODO THIS NEEDS TO BE NEWSLETTER SPECIFIC, and NOT configurable to be today@unl.edu
-          'Subject' => $this->subject);
+        return $html;
+    }
+    
+    function getEmailTXT()
+    {
+        Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
+        $savvy = new Savvy();
+        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
         
-        require_once 'Mail/mime.php';
-        $mime = new Mail_mime($crlf);
-        $mime->setTXTBody($plaintext);
-        $mime->setHTMLBody($html);
-        
-        $body = $mime->get();
-        $hdrs = $mime->headers($hdrs);
-        $mail =& Mail::factory('sendmail');
-        $mail->send('ericrasmussen1@gmail.com', $hdrs, $body);
-        $mail->send('brett.bieber@gmail.com', $hdrs, $body);
-        $mail->send('today@listserv.unl.edu', $hdrs, $body); // @TODO THIS NEEDS TO BE NEWSLETTER SPECIFIC, and NOT configurable to today@unl.edu
-        
-        $this->distributed = 1;
-        $this->save();
-        // Send the email!
-        return true;
+        return $savvy->render($this);
+    }
+    
+    /**
+     * Get the newsroom associated with this newsletter.
+     * 
+     * @return UNL_ENews_Newsroom
+     */
+    function getNewsroom()
+    {
+        return UNL_ENews_Newsroom::getByID($this->newsroom_id);
     }
 }
