@@ -51,8 +51,7 @@ form#enewsManage {
 **************************/
 #maincontent .enews.newsroom_choose {
     position:relative;
-    bottom:42px;
-    width:auto;
+    bottom:42px; 
     float:right;
 }
 #maincontent .enews.newsroom_choose fieldset {
@@ -66,4 +65,7 @@ form#enewsManage {
 #maincontent .enews.newsroom_choose li {
     padding:0 10px 10px 0;
     float:left;
+}
+#maincontent .enews.newsroom_choose select {
+    width:auto; /*ie7*/
 }

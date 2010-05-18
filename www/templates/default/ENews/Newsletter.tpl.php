@@ -1,7 +1,5 @@
 <h3 class="sec_main">
-    <?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?>
-    -
-    <?php echo date('l F j, Y', strtotime($context->release_date)); ?>
+    <?php echo $context->subject; ?>
 </h3>
 
 
@@ -47,5 +45,10 @@ foreach ($context->getStories() as $key=>$story) {
             <?php echo $column2; ?>
             <div class="clear"></div>
         </div>
+    </div>
+    <div style="clear:both;display:block;text-align:center;font-size:.8em;border-top:1px solid #E0E0E0;margin-top:5px;padding-top:5px">
+        Originally published <?php echo date('l F j, Y', strtotime($context->release_date)); ?>
+        -
+        <a href="<?php echo UNL_ENews_Controller::getURL();?>?view=submit&newsroom=<?php echo $context->id; ?>">Submit an Item</a>
     </div>
 </div>
