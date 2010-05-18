@@ -159,7 +159,7 @@ class UNL_ENews_Record
     public static function getRecordByID($table, $id, $field = 'id')
     {
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = "SELECT * FROM $table WHERE $field = ".intval($id);
+        $sql = "SELECT * FROM $table WHERE $field = ".intval($id).' LIMIT 1;';
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
         }

@@ -23,6 +23,21 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'change_status':
                 $this->processPostedStories();
                 break;
+            case 'newsroom':
+                $newsroom = UNL_ENews_Newsroom::getByID($_POST['newsroom_id']);
+                if (false === $newsroom) {
+                    throw new Exception('Could not find the newsroom you were trying to edit!');
+                }
+
+                if (!UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                    throw new Exception('you cannot modify a newsroom you don\'t have permission to!');
+                }
+
+                UNL_ENews_Controller::setObjectFromArray($newsroom, $_POST);
+                $newsroom->save();
+
+                UNL_ENews_Controller::redirect('?view=newsroom');
+                break;
         }
     }
     

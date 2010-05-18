@@ -7,8 +7,9 @@
     //]]>
     </script>
     <h3 class="zenform">Edit details for the current newsroom</h3>
-    <form class="zenform" action="?view=newsroom" method="post">
+    <form class="zenform" action="?view=manager" method="post">
         <input type="hidden" name="_type" value="newsroom" />
+        <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <fieldset>
                 <legend>Newsroom Details</legend>
                 <ol>
@@ -59,7 +60,7 @@
     foreach ($context->getUsers() as $user) {
         echo '<li>'.$user->uid.'
         <form action="?view=newsroom" method="post">
-            <input type="hidden" id="newsroom_id" name="newsroom_id" value="'.$context->id.'" />
+            <input type="hidden" name="newsroom_id" value="'.$context->id.'" />
             <input type="hidden" name="_type" value="removeuser" />
             <input type="hidden" name="user_uid" value="'.$user->uid.'" />
             <input type="submit" value="Remove" />
@@ -68,7 +69,7 @@
     ?>
     </ul>
     <form action="?view=newsroom" method="post">
-        <input type="hidden" id="newsroom_id" name="newsroom_id" value="<?php echo $context->id; ?>" />
+        <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <input type="hidden" name="_type" value="adduser" />
         <input type="text" name="user_uid" />
         <input type="submit" value="Add User" />
