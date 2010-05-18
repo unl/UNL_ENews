@@ -97,12 +97,16 @@ function getValue($object, $field)
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text" value="<?php echo getValue($context, 'website'); ?>" /></li>
             <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" class="required" /></li>
             <li>
-                <?php $id = getValue($context, 'id'); ?>
+            <fieldset id="newsroom_id">
+             <legend>Please consider for</legend>
+                <?php
+                    $id = getValue($context, 'id');
+                    $newsroom_id = getValue($context->newsroom, 'id');
+                    $newsroom_name = getValue($context->newsroom, 'name');
+                ?>
                 <?php if (!empty($id)) : ?>
-                    <fieldset id="newsroom_id">
-                        <legend>Please consider for</legend>
                             <?php foreach (UNL_ENews_Story::getByID($id)->getNewsrooms() as $item) : ?>
-                                <select name="newsroom_id[]">
+                                <select name="newsroom_id[]" disabled="disabled">
                                 <option value=""></option>
                                 <option selected="selected" value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
                                 <?php foreach (UNL_ENews_Submission::getOpenNewsrooms() as $item2): ?>
@@ -122,31 +126,31 @@ function getValue($object, $field)
                                 <?php endforeach ?>
                             </select>
                         </div>
-                        <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
-                    </fieldset>
                 <?php else : ?>
-                    <fieldset id="newsroom_id">
-                        <legend>Please consider for</legend>
                         <div id="newsroom_id_dropdown">
                             <select name="newsroom_id[]">
+                                <?php if ($newsroom_id == 1) : ?>
                                 <option value="1">Today@UNL and other UComm publications (Scarlet, UNL Today, etc)</option>
+                                <?php  else : ?>
+                                <option value="<?php echo $newsroom_id; ?>"><?php echo $newsroom_name;?></option>
+                                <?php endif ?>
                                 <?php foreach (UNL_ENews_Submission::getOpenNewsrooms() as $item): ?>
-                                    <?php if ($item->id != 1) : ?>
+                                    <?php if ($item->id != $newsroom_id) : ?>
                                     <option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
                                     <?php endif ?>
                                 <?php endforeach ?>
                             </select>
                         </div>
-                        <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
-                    </fieldset>
                 <?php endif ?>
+             <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
+            </fieldset>
             </li>
         </ol>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
     <legend>Event Announcement Submission</legend>
     <p>Pull in the event form.</p>
-</fieldset> 
+</fieldset>
 
 <div id="enewsSubmissionButton" style="display:none;margin:20px 0;padding-bottom:20px;clear:both;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
