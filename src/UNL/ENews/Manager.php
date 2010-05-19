@@ -132,9 +132,9 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 if (UNL_ENews_Controller::getUser()->uid !== $story->uid_created) {
                     throw new Exception('You did not create that story - you can not delete it');
                 }
-                $story_newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
-                foreach ($story_newsrooms as $story_newsroom) {
-                    if ($story_newsroom->status !== 'pending') {
+                $newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
+                foreach ($newsrooms as $newsroom) {
+                    if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') {
                         throw new Exception('A story you attempted to delete has already been approved for use by a newsroom');
                     }
                 }
