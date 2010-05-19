@@ -52,6 +52,12 @@ class UNL_ENews_User extends UNL_ENews_Record
         return 'users';
     }
     
+    function getNewsrooms()
+    {
+        return new UNL_ENews_User_Newsrooms(array('uid'=>$this->uid));
+    }
+    
+    
     function __get($var)
     {
         switch($var) {

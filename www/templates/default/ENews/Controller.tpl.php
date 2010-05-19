@@ -72,11 +72,23 @@ if ($user = UNL_ENews_Controller::getUser()) {
                     <?php
                     $user = UNL_ENews_Controller::getUser();
                     if (false !== $user && UNL_ENews_Controller::isAdmin($user->uid)) : ?>
-                    <li><a href="?view=manager">Manage News</a></li>
+                    <li><a href="?view=manager">Manage News</a>
+                        <?php 
+                        if ($user_newsrooms = $user->getNewsrooms()) {
+                            if (count($user_newsrooms)) {
+                                echo '<ul>';
+                                foreach ($user_newsrooms as $newsroom) {
+                                    echo '<li><a href="?view=manage&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
+                                }
+                                echo '</ul>';
+                            }
+                        }
+                        ?>
+                    
+                    </li>
                     <li><a href="?view=preview">Build Newsletter</a>
                         <?php
-                        if (false !== $user
-                            && $newsletters = $user->newsroom->getNewsletters()) {
+                        if ($newsletters = $user->newsroom->getNewsletters()) {
                             if (count($newsletters)) {
                                 echo '<ul>';
                                 // There is a user logged in
