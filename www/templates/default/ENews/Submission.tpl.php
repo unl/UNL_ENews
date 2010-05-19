@@ -23,11 +23,10 @@ function getValue($object, $field)
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
 
-    <?php //Set up the form for editing if an id is specified
-          $id = getValue($context,'id'); ?>
-    <?php if (!empty($id)) : ?>
+    <?php $id = getValue($context,'id'); //Set up the form for editing if an id is specified ?>
     WDN.jQuery(document).ready(function($){
-    	$('textarea.resizable:not(.processed)').TextAreaResizer();
+        $('textarea.resizable:not(.processed)').TextAreaResizer();
+        <?php if (!empty($id)) : ?>
         (function(){
             setTimeout(function(){
                 $('#newsAnnouncement').click();
@@ -35,8 +34,8 @@ function getValue($object, $field)
                 document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = <?php echo $id;?>;
             },100);
         })();
+        <?php endif; ?>
     });
-    <?php endif; ?>
 </script>
 
 <div id="enewsForm">

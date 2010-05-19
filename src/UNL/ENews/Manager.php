@@ -135,11 +135,8 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 $story_newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
                 foreach ($story_newsrooms as $story_newsroom) {
                     if ($story_newsroom->status !== 'pending') {
-                        $cantdelete = true;
+                        throw new Exception('A story you attempted to delete has already been approved for use by a newsroom');
                     }
-                }
-                if (isset($cantdelete)) {
-                    throw new Exception('A story you attempted to delete has already been approved for use by a newsroom');
                 }
                 return $story->delete();
             }
