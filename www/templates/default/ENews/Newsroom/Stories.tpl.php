@@ -3,10 +3,15 @@ $status = 'approved';
 if (isset($parent->context->options['status'])) {
     $status = $parent->context->options['status'];
 }
+if ($parent->context->options['view'] === 'mynews') {
+    $status = 'none';
+}
 ?>
 
 
 <script type="text/javascript">
+WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+WDN.loadJS("js/functions.js");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 
