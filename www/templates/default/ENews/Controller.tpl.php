@@ -69,11 +69,13 @@ if ($user = UNL_ENews_Controller::getUser()) {
                             <li><a href="?view=mynews">Your News Items</a></li>
                         </ul>
                     </li>
-                    <?php if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) : ?>
+                    <?php
+                    $user = UNL_ENews_Controller::getUser();
+                    if (false !== $user && UNL_ENews_Controller::isAdmin($user->uid)) : ?>
                     <li><a href="?view=manager">Manage News</a></li>
                     <li><a href="?view=preview">Build Newsletter</a>
                         <?php
-                        if (($user = UNL_ENews_Controller::getUser())
+                        if (false !== $user
                             && $newsletters = $user->newsroom->getNewsletters()) {
                             if (count($newsletters)) {
                                 echo '<ul>';
