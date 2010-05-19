@@ -19,7 +19,7 @@
                 <?php if ($newsletter->distributed): ?>
                 Sent
                 <?php else: ?>
-                <a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a>
+                <a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" onclick="return confirm('Are you sure?')">Send</a>
                 <?php endif; ?>
             </td>
             <td>
