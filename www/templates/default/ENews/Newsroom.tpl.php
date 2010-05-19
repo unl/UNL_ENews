@@ -40,7 +40,7 @@
                         <label for="allow_submissions">Allow Submissions
                         <span class="helper">Can users send news items for review?</span>
                         </label>
-                        <input type="checkbox" id="allow_submissions" name="allow_submissions" /> Yes
+                        <input type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> /> Yes
                     </li>
                     <li>
                         <label for="email_lists">Email Lists
