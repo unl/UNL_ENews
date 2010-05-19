@@ -78,7 +78,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
                             if (count($user_newsrooms)) {
                                 echo '<ul>';
                                 foreach ($user_newsrooms as $newsroom) {
-                                    echo '<li><a href="?view=manage&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
+                                    echo '<li><a href="?view=manager&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
                                 }
                                 echo '</ul>';
                             }
