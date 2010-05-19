@@ -8,7 +8,7 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
         $this->options = $options + $this->options;
         
         if (!isset($this->options['uid'])) {
-            $this->options['uid'] = UNL_ENews_Controller::getUser(true);
+            $this->options['uid'] = UNL_ENews_Controller::getUser(true)->uid;
         }
 
         $stories = array();
