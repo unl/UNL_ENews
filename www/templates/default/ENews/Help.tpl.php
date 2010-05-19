@@ -1,7 +1,7 @@
 <dl>
 <dt>Submit a news/event announcement for consideration in Today@UNL?</dt>
 <dd>
-    <p>From the E-Newsroom, select Submit A News Item</p>
+    <p>From <a href="<?php echo UNL_ENews_Controller::getURL(); ?>">UNL Announce</a>, select <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit">Submit A News Item</a></p>
     <ul>
         <li>Is your item a News Announcement or an Event Announcement?</li>
         <li>Examples of news: grant, honor, award, feature story, discovery, new project</li>
