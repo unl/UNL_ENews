@@ -160,7 +160,7 @@ class UNL_ENews_Controller
                         $status = 'pending';
                         if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
                             $status = 'approved';
-                        }var_dump($newsroom);
+                        }
                         $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
                     }
                 }
