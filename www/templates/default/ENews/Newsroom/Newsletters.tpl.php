@@ -15,7 +15,13 @@
             <td><?php echo $newsletter->release_date; ?></td>
             <td><?php echo $newsletter->subject; ?></td>
             <td><a href="?view=preview&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
-            <td><a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a></td>
+            <td>
+                <?php if ($newsletter->distributed): ?>
+                Sent
+                <?php else: ?>
+                <a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a>
+                <?php endif; ?>
+            </td>
             <td>
                 <a href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
                 <div class="hidden">
