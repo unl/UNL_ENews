@@ -26,12 +26,14 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
-        <label for="storyaction">Action</label> 
+        <label for="storyaction">Action</label>
         <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <option value="approved"  disabled="disabled">Add to Approved</option>
-            <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
-            <option value="recommend" disabled="disabled">Recommend</option>
+            <?php if ($parent->context->options['view'] === 'manager') : ?>
+                <option value="approved"  disabled="disabled">Add to Approved</option>
+                <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
+                <option value="recommend" disabled="disabled">Recommend</option>
+            <?php endif ?>
             <option value="delete"    disabled="disabled">Delete</option>
         </select>
     </fieldset>
@@ -71,12 +73,14 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
-        <label for="storyaction">Action</label> 
+        <label for="storyaction">Action</label>
         <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <option value="approved"  disabled="disabled">Add to Approved</option>
-            <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
-            <option value="recommend" disabled="disabled">Recommend</option>
+            <?php if ($parent->context->options['view'] === 'manager') : ?>
+                <option value="approved"  disabled="disabled">Add to Approved</option>
+                <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
+                <option value="recommend" disabled="disabled">Recommend</option>
+            <?php endif ?>
             <option value="delete"    disabled="disabled">Delete</option>
         </select>
     </fieldset>

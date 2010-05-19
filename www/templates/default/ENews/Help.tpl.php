@@ -1,4 +1,3 @@
-<h2>Help! How do I&hellip;</h2>
 <dl>
 <dt>Submit a news/event announcement for consideration in Today@UNL?</dt>
 <dd>

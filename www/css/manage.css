@@ -1,6 +1,9 @@
 form#enewsManage {
 	width:940px;
 }
+form#enewsManage .btnsubmit {
+    display:none !important;
+}
 
 /* Check/Uncheck/Action 
 ****************************/

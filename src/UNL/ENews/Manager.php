@@ -113,6 +113,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     function processPostStatusChange($story, $source='search')
     {
         if (isset($this->options['newsroom'])) { //view=manager
+            $has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id);
             if (isset($_POST['delete'])) {
                 if (count($story->getNewsrooms()) === 1 ) {
                     //Story only belongs to one newsroom, delete entirely
