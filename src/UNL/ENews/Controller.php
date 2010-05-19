@@ -33,6 +33,7 @@ class UNL_ENews_Controller
                                      'manager'     => 'Manage News',
                                      'preview'     => 'Build Newsletter',
                                      'newsletters' => 'Newsletters',
+                                     'help'        => 'Help! How do I&hellip;',
     );
     
     protected static $auth;
@@ -152,14 +153,16 @@ class UNL_ENews_Controller
                 }
 
                 foreach ($_POST['newsroom_id'] as $id) {
-                    if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
-                        throw new Exception('Invalid newsroom selected');
+                    if (!empty($id)) {
+                        if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
+                            throw new Exception('Invalid newsroom selected');
+                        }
+                        $status = 'pending';
+                        if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                            $status = 'approved';
+                        }var_dump($newsroom);
+                        $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
                     }
-                    $status = 'pending';
-                    if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
-                        $status = 'approved';
-                    }
-                    $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
                 }
 
                 //If image was uploaded but a crop area was never selected, make a default thumbnail
