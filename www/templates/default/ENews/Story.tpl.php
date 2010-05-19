@@ -19,7 +19,7 @@ foreach ($context->getFiles() as $file) {
     <?php echo nl2br($context->description); ?>
     </div>
     <p>
-    <?php echo nl2br($context->full_article); ?>
+    <?php echo nl2br(UNL_ENews_Controller::makeClickableLinks($context->full_article)); ?>
     </p>
 <?php else : ?>
     <?php echo nl2br($context->description); ?>
