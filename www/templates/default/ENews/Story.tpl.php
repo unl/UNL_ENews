@@ -16,13 +16,13 @@ foreach ($context->getFiles() as $file) {
 <?php $full = trim($context->full_article); ?>
 <?php if (!empty($full)) : ?>
     <div style="background:#f0f0f0;width:350px;margin:0 10px 15px 0;padding:10px;font-style:italic;">
-    <?php echo $context->description;?>
+    <?php echo nl2br($context->description); ?>
     </div>
     <p>
-    <?php echo $context->full_article; ?>
+    <?php echo nl2br($context->full_article); ?>
     </p>
 <?php else : ?>
-    <?php echo $context->description;?>
+    <?php echo nl2br($context->description); ?>
 <?php endif ?>
 
 </div>
