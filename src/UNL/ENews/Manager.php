@@ -19,6 +19,11 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     
     function handlePost()
     {
+        if (isset($_POST['newsroom'])) {
+            $this->options['newsroom'] = $_POST['newsroom'];
+        } else {
+            unset($this->options['newsroom']);
+        }
         switch($_POST['_type']) {
             case 'change_status':
                 $this->processPostedStories();
@@ -100,23 +105,20 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
      * Handles the posting of an updated story. This will alter the story's status
      * based on what the user chose within the manager interface.
      *
-     * @param UNL_UCBCN_Story $story  Story to update.
+     * @param UNL_ENews_Story $story  Story to update.
      * @param string          $source Source of this change in status.
      *
      * @return bool
      */
     function processPostStatusChange($story, $source='search')
     {
-        if ($has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id)) {
-
-            // This event date time combination was selected... find out what they chose.
+        if (isset($this->options['newsroom'])) { //view=manager
             if (isset($_POST['delete'])) {
-                // User has chosen to delete the story selected, and has permission to delete the story.
-                if ($has_story->source == 'submit form') {
-                    // This is the newsroom the story was originally created on, delete from the entire system.
+                if (count($story->getNewsrooms()) === 1 ) {
+                    //Story only belongs to one newsroom, delete entirely
                     return $story->delete();
                 }
-                // Remove the story from this newsroom
+                // Remove the story from this newsroom only
                 return $has_story->delete();
             } elseif (isset($_POST['pending'])) {
                 $has_story->status = 'pending';
@@ -125,16 +127,21 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 $has_story->status = 'approved';
                 return $has_story->save();
             }
-        } else {
-            $has_story = new UNL_ENews_Newsroom_Story();
-            if (isset($_POST['pending'])) {
-                $has_story->status = 'pending';
-                $has_story->source = $source;
-                return $has_story->save();
-            } elseif (isset($_POST['approved'])) {
-                $has_story->status = 'approved';
-                $has_story->source = $source;
-                return $has_story->save();
+        } else { //view=mynews
+            if (isset($_POST['delete'])) {
+                if (UNL_ENews_Controller::getUser()->uid !== $story->uid_created) {
+                    throw new Exception('You did not create that story - you can not delete it');
+                }
+                $story_newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
+                foreach ($story_newsrooms as $story_newsroom) {
+                    if ($story_newsroom->status !== 'pending') {
+                        $cantdelete = true;
+                    }
+                }
+                if (isset($cantdelete)) {
+                    throw new Exception('A story you attempted to delete has already been approved for use by a newsroom');
+                }
+                return $story->delete();
             }
         }
         return false;

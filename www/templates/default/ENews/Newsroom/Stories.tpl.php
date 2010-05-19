@@ -1,10 +1,8 @@
 <?php
 $status = 'approved';
-
 if (isset($parent->context->options['status'])) {
     $status = $parent->context->options['status'];
 }
-
 ?>
 
 
@@ -12,8 +10,15 @@ if (isset($parent->context->options['status'])) {
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 
-<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>">
+<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo ($parent->context->options['view']==='manager') ? '?view=manager' : '?view=mynews';?>">
+
 <input type="hidden" name="_type" value="change_status" />
+
+<?php if ($parent->context->options['view'] === 'manager') : ?>
+<input type="hidden" name="newsroom" value="<?php echo $parent->context->options['newsroom']; ?>" />
+<input type="hidden" name="status" value="<?php echo $status; ?>" />
+<?php endif ?>
+
 <div class="storyAction">
     <div class="storyButtonAction">
         <a href="#" class="checkall">Check All</a>

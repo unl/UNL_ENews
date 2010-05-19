@@ -28,6 +28,7 @@ class UNL_ENews_Controller
     ); 
 
     public static $pagetitle = array('latest'      => 'Latest News',
+                                     'mynews'      => 'Your News Submissions',
                                      'submit'      => 'Submit an Item',
                                      'manager'     => 'Manage News',
                                      'preview'     => 'Build Newsletter',
