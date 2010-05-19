@@ -17,12 +17,14 @@
             <td><a href="?view=preview&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
             <td><a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a></td>
             <td>
-                <a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send Preview</a>
-                <form action="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post">
-                    <input type="hidden" name="_type" value="previewnewsletter" />
-                    <input type="text" name="to" value="<?php echo UNL_ENews_Controller::getUser(true)->mail; ?>" />
-                    <input type="submit" value="Send" />
-                </form>
+                <a href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
+                <div class="hidden">
+                    <form id="sendPreview<?php echo $newsletter->id; ?>" action="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post">
+                        <input type="hidden" name="_type" value="previewnewsletter" />
+                        Email Address: <input type="text" name="to" value="<?php echo UNL_ENews_Controller::getUser(true)->mail; ?>" />
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
             </td>
             <td>
                 <form action="?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
