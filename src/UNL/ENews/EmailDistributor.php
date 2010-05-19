@@ -16,13 +16,30 @@ class UNL_ENews_EmailDistributor extends UNL_ENews_LoginRequired
         if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsletter->newsroom_id)) {
             throw new Exception('You are not an administrator of that newsroom and cannot send newsletters.');
         }
-        if ($this->newsletter->distribute()) {
-            $this->newsletter->distributed = 1;
-            $this->newsletter->save();
-            header('Location: ?view=thanks&_type=sendnews&id='.$this->newsletter->id);
-            exit();
-        } else {
+
+        $to = null;
+        if (!empty($_POST['to'])) {
+            // Just sending a preview
+            $to = $_POST['to'];
+        }
+
+        if (!$this->newsletter->distribute($to)) {
             throw new Exception('There was an error in distribution.');
         }
+
+        if (!isset($to)) {
+            // This is the real deal, mark it as distributed.
+            $this->newsletter->distributed = 1;
+            $this->newsletter->save();
+        }
+
+        $format = '';
+        if (isset($this->options['format'])
+            && $this->options['format'] == 'partial') {
+            $format = '&format=partial';
+        }
+
+        header('Location: ?view=thanks&_type=sendnews&id='.$this->newsletter->id.$format);
+        exit();
     }
 }

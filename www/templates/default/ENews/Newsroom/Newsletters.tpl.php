@@ -5,6 +5,7 @@
             <th>Subject</th>
             <th>Edit</th>
             <th>Send</th>
+            <th>Send Preview</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -15,6 +16,14 @@
             <td><?php echo $newsletter->subject; ?></td>
             <td><a href="?view=preview&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
             <td><a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send</a></td>
+            <td>
+                <a href="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>">Send Preview</a>
+                <form action="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post">
+                    <input type="hidden" name="_type" value="previewnewsletter" />
+                    <input type="text" name="to" value="<?php echo UNL_ENews_Controller::getUser(true)->mail; ?>" />
+                    <input type="submit" value="Send" />
+                </form>
+            </td>
             <td>
                 <form action="?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <input type="hidden" name="_type" value="deletenewsletter" />
