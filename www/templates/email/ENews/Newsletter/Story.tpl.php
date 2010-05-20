@@ -2,12 +2,14 @@
 <p>
 <?php 
 if ($file = $context->getThumbnail()) {
-    echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
+    echo '<img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
-         . '" style="max-width:65px; margin-right:15px;" align="left" />';
+         . '.jpg" style="max-width:65px; margin-right:15px;" align="left" />';
 }
 
-echo nl2br($context->description);
+echo nl2br($context->description); ?>
+</p>
+<?php
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
     if (isset($parent->context->id)) {
@@ -15,20 +17,19 @@ if ($parent->context->options['view'] == 'preview'
     } elseif (isset($parent->context->newsletter)) {
         $newsletter_id = $parent->context->newsletter->id;
     }
-?>
-</p>
-<form method="post" action="?view=preview&amp;id=<?php echo $newsletter_id; ?>">
-    <input type="hidden" name="_type" value="addstory" />
-    <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
-    <input type="hidden" name="sort_order" value="0" />
-    <input type="hidden" name="intro" value="" />
-    <input type="submit" value="add story" />
-</form>
-<span class="requestedDates">
-<?php
-echo date('F j', strtotime($context->request_publish_start));
-if (isset($context->request_publish_end)) {
-        echo ' - '.date('F j', strtotime($context->request_publish_end));
-} ?>
-</span>
+    ?>
+    <form method="post" action="?view=preview&amp;id=<?php echo $newsletter_id; ?>">
+        <input type="hidden" name="_type" value="addstory" />
+        <input type="hidden" name="story_id" value="<?php echo $context->id; ?>" />
+        <input type="hidden" name="sort_order" value="0" />
+        <input type="hidden" name="intro" value="" />
+        <input type="submit" value="add story" />
+    </form>
+    <span class="requestedDates">
+    <?php
+    echo date('F j', strtotime($context->request_publish_start));
+    if (isset($context->request_publish_end)) {
+            echo ' - '.date('F j', strtotime($context->request_publish_end));
+    } ?>
+    </span>
 <?php endif; ?>
