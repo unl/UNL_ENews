@@ -56,7 +56,7 @@ class UNL_ENews_Controller
     
     public $actionable = array();
     
-    function __construct($options)
+    function __construct($options = array())
     {
         $this->options = $options + $this->options;
         $this->authenticate(true);
