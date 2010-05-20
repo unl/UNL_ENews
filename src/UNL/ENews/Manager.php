@@ -38,6 +38,12 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                     throw new Exception('you cannot modify a newsroom you don\'t have permission to!');
                 }
 
+                if (isset($_POST['allow_submissions'])
+                    && $_POST['allow_submissions'] == 'on') {
+                    $_POST['allow_submissions'] = 1;
+                } else {
+                    $_POST['allow_submissions'] = 0;
+                }
                 UNL_ENews_Controller::setObjectFromArray($newsroom, $_POST);
                 $newsroom->save();
 
