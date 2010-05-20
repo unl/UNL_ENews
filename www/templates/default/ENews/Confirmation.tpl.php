@@ -11,7 +11,7 @@ WDN.initializePlugin('notice');
 		    <h4>Distribution Successful.</h4>
 		    <p>Your newsletter has been submitted to the distribution queue.</p>
 		<?php else: ?>
-		    <h4>Thank you for submitting your e-news/newstip.</h4>
+		    <h4>Thank you for submitting your newstip.</h4>
 		    <p>If you have any questions, please contact us.</p>
 		<?php endif;?>
 	</div>
