@@ -82,6 +82,9 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     
     function __get($var)
     {
+        if ($var === 'story') {
+            return $this->getStory();
+        }
         return $this->getStory()->$var;
     }
 }
