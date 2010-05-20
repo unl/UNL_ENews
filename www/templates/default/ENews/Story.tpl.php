@@ -15,9 +15,6 @@ foreach ($context->getFiles() as $file) {
 
 <?php $full = trim($context->full_article); ?>
 <?php if (!empty($full)) : ?>
-    <div style="background:#f0f0f0;width:350px;margin:0 10px 15px 0;padding:10px;font-style:italic;">
-    <?php echo nl2br($context->description); ?>
-    </div>
     <p>
     <?php echo nl2br(UNL_ENews_Controller::makeClickableLinks($context->full_article)); ?>
     </p>
