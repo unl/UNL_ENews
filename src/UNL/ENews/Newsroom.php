@@ -1,9 +1,8 @@
 <?php
 class UNL_ENews_Newsroom extends UNL_ENews_Record
 {
-    
     public $id;
-
+    
     public $name;
     
     public $shortname;
@@ -16,13 +15,17 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     
     function __construct($options = array())
     {
-
-        if (!isset($options['id'])) {
-            if ($record = UNL_ENews_Record::getRecordByID('newsrooms', UNL_ENews_Controller::getUser(true)->newsroom_id)) {
-                UNL_ENews_Controller::setObjectFromArray($this, $record);
-            }
+        if (isset($options['id'])) {
+            $record = UNL_ENews_Record::getRecordByID('newsrooms', $options['id']);
+        } else {
+            $record = UNL_ENews_Record::getRecordByID('newsrooms', UNL_ENews_Controller::getUser(true)->newsroom_id);
         }
-
+        UNL_ENews_Controller::setObjectFromArray($this, $record);
+        
+        if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
+            throw new Exception('User does not have permission for this newsroom');
+        }
+        
         if (!empty($_POST)) {
             $this->handlePost();
         }
@@ -34,12 +37,12 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             case 'removeuser':
             case 'adduser':
                 if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
-                    throw new Exception('you cannot modify a newsroom you don\'t have permission to!');
+                    throw new Exception('You cannot modify a newsroom you don\'t have permission to!');
                 }
                 $user = UNL_ENews_User::getByUID($_POST['user_uid']);
-
+                
                 $this->{$_POST['_type']}($user);
-
+                
                 UNL_ENews_Controller::redirect('?view=newsroom');
                 break;
         }
