@@ -22,7 +22,7 @@
                         <tr>
                             <td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
                                 <!-- This is the main content -->
-                                <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;">Today@UNL</h1>
+                                <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:1.6em;line-height:1;font-weight:bold;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
                                 <p style="margin:0;font-size:.9em;color:#909090;"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
                                 
                             </td>
@@ -78,7 +78,7 @@
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
                                 &copy; 2010 University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-8515 <br />
                                 This email produced and distributed by <a href="http://ucomm.unl.edu/" title="go to the University Communications">University Communications</a>
-                                <br /> <a href="<?php echo UNL_ENews_Controller::getURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+                                <br /> <a href="<?php echo UNL_ENews_Controller::getURL()."?view=submit&newsroom=".$context->newsroom_id; ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
                                 </p>
                             </td>
                         </tr>
