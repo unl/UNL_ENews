@@ -67,6 +67,10 @@ class UNL_ENews_Controller
             }
             $this->run();
         } catch(Exception $e) {
+            if (isset($this->options['ajaxupload'])) {
+                echo $e->getMessage();
+                exit();
+            }
             $this->actionable[] = $e;
         }
     }
