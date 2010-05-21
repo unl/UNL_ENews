@@ -31,7 +31,7 @@ $savvy->setEscape('htmlentities');
 
 if ($enews->actionable[0] instanceof UNL_ENews_File) {
     // pass through without any outer template
-    echo $savvy->render($enews->actionable);
+    echo $savvy->render($enews->actionable[0], 'ENews/File.tpl.php');
 } else {
     echo $savvy->render($enews);
 }

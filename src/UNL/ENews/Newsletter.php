@@ -186,7 +186,6 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         if (!isset($this->release_date)) {
             $this->release_date = date('Y-m-d H:i:s');
-            $this->save();
         }
 
         $plaintext = $this->getEmailTXT();
