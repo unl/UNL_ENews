@@ -37,7 +37,7 @@ class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
         $result = parent::save();
         
         if (!$result) {
-            throw new Exception('Error adding the story to the newsroom.');
+            throw new Exception('Error adding the story to the newsroom.', 500);
         }
         return $result;
     }
@@ -48,7 +48,7 @@ class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
         $result = parent::insert();
         
         if (!$result) {
-            throw new Exception('Error adding the story to the newsroom.');
+            throw new Exception('Error adding the story to the newsroom.', 500);
         }
         return $result;
     }

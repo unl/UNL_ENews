@@ -146,8 +146,6 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
             $has_story->intro = $intro;
         }
         return $has_story->insert();
-            
-        throw new Exception('Could not add the story');
     }
     
     function hasStory(UNL_ENews_Story $story)

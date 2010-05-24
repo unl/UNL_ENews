@@ -25,7 +25,7 @@ class UNL_ENews_Controller
                                 'sendnews'    => 'UNL_ENews_EmailDistributor',
                                 'help'        => 'UNL_ENews_Help',
                                 'newsroom'    => 'UNL_ENews_Newsroom',
-    ); 
+    );
 
     public static $pagetitle = array('latest'      => 'Latest News',
                                      'mynews'      => 'Your News Submissions',
@@ -71,6 +71,13 @@ class UNL_ENews_Controller
                 echo $e->getMessage();
                 exit();
             }
+
+            if (false == headers_sent()
+                && $code = $e->getCode()) {
+                header('HTTP/1.1 '.$code.' '.$e->getMessage());
+                header('Status: '.$code.' '.$e->getMessage());
+            }
+
             $this->actionable[] = $e;
         }
     }

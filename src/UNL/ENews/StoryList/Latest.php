@@ -11,7 +11,7 @@ class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
     function __construct($options = array())
     {
         if (!$this->newsroom = UNL_ENews_Newsroom::getByID($options['newsroom'])) {
-            throw new Exception('Newsroom not found');
+            throw new Exception('Newsroom not found', 404);
         }
         
         $stories = array();

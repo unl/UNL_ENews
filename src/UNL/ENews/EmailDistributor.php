@@ -14,7 +14,7 @@ class UNL_ENews_EmailDistributor extends UNL_ENews_LoginRequired
             $this->newsletter = UNL_ENews_Newsletter::getByID($this->options['id']);
         }
         if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsletter->newsroom_id)) {
-            throw new Exception('You are not an administrator of that newsroom and cannot send newsletters.');
+            throw new Exception('You are not an administrator of that newsroom and cannot send newsletters.', 403);
         }
 
         $to = null;
@@ -24,7 +24,7 @@ class UNL_ENews_EmailDistributor extends UNL_ENews_LoginRequired
         }
 
         if (!$this->newsletter->distribute($to)) {
-            throw new Exception('There was an error in distribution.');
+            throw new Exception('There was an error in distribution.', 500);
         }
 
         if (!isset($to)) {

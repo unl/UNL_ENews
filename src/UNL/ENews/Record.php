@@ -107,7 +107,7 @@ class UNL_ENews_Record
 
         call_user_func_array(array($stmt, 'bind_param'), $values);
         if ($stmt->execute() === false) {
-            throw new Exception($stmt->error);
+            throw new Exception($stmt->error, 500);
         }
 
         if ($mysqli->insert_id !== 0) {
@@ -173,7 +173,7 @@ class UNL_ENews_Record
         $sql = "DELETE FROM ".$this->getTable()." WHERE ";
         foreach ($this->keys() as $key) {
             if (empty($this->$key)) {
-                throw new Exception('Cannot delete records with unset primary keys!');
+                throw new Exception('Cannot delete records with unset primary keys!', 400);
             }
             $value = $this->$key;
             if ($this->getTypeString(array($key)) == 's') {

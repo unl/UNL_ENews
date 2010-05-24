@@ -18,18 +18,18 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
     function __postConstruct()
     {   
         if (!$this->newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
-            throw new Exception("Newsroom not found");
+            throw new Exception("Newsroom not found", 404);
         }
         
         if (isset($this->options['id'])) {
 
             if (!$this->story = UNL_ENews_Story::getByID($this->options['id'])) {
-                throw new Exception('Could not find the story you were trying to edit!');
+                throw new Exception('Could not find the story you were trying to edit!', 404);
             }
 
             //Can only edit the item specified if current user created it or has permission to a newsroom it's in
             if (!$this->story->userCanEdit(UNL_ENews_Controller::getUser(true))) {
-                throw new Exception('No permission to edit this story');
+                throw new Exception('No permission to edit this story', 403);
             }
         } else {
             $this->story = new UNL_ENews_Story();

@@ -47,7 +47,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $result = parent::save();
         
         if (!$result) {
-            throw new Exception('Error saving your story.');
+            throw new Exception('Error saving your story.', 500);
         }
         
         return true;

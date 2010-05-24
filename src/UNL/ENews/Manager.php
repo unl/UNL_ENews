@@ -31,11 +31,11 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'newsroom':
                 $newsroom = UNL_ENews_Newsroom::getByID($_POST['newsroom_id']);
                 if (false === $newsroom) {
-                    throw new Exception('Could not find the newsroom you were trying to edit!');
+                    throw new Exception('Could not find the newsroom you were trying to edit!', 400);
                 }
 
                 if (!UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
-                    throw new Exception('you cannot modify a newsroom you don\'t have permission to!');
+                    throw new Exception('you cannot modify a newsroom you don\'t have permission to!', 403);
                 }
 
                 if (isset($_POST['allow_submissions'])
@@ -60,7 +60,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'approved':
             case 'archived':
                 if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsroom->id)) {
-                    throw new Exception('Don\'t have permission to view that newsroom');
+                    throw new Exception('Don\'t have permission to view that newsroom', 403);
                 }
                 $this->actionable[] = new UNL_ENews_User_Newsrooms(array('uid' => UNL_ENews_Controller::getUser(false)->uid));
                 $this->actionable[] = new UNL_ENews_Newsroom_Stories(array('status'      => $this->options['status'],
@@ -137,12 +137,12 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
         } else { //view=mynews
             if (isset($_POST['delete'])) {
                 if (UNL_ENews_Controller::getUser()->uid !== $story->uid_created) {
-                    throw new Exception('You did not create that story - you can not delete it');
+                    throw new Exception('You did not create that story - you can not delete it', 403);
                 }
                 $newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
                 foreach ($newsrooms as $newsroom) {
                     if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') {
-                        throw new Exception('A story you attempted to delete has already been approved for use by a newsroom');
+                        throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
                     }
                 }
                 return $story->delete();
@@ -157,7 +157,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'newsroom':
                 if (isset($this->options['newsroom'])) {
                     if (!$newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
-                        throw new Exception('Newsroom does not exist');
+                        throw new Exception('Newsroom does not exist', 404);
                     }
                 } else {
                     $newsroom = UNL_ENews_Controller::getUser(true)->newsroom;

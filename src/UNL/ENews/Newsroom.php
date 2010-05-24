@@ -23,7 +23,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         UNL_ENews_Controller::setObjectFromArray($this, $record);
         
         if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
-            throw new Exception('User does not have permission for this newsroom');
+            throw new Exception('User does not have permission for this newsroom', 403);
         }
         
         if (!empty($_POST)) {
@@ -37,7 +37,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             case 'removeuser':
             case 'adduser':
                 if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
-                    throw new Exception('You cannot modify a newsroom you don\'t have permission to!');
+                    throw new Exception('You cannot modify a newsroom you don\'t have permission to!', 403);
                 }
                 $user = UNL_ENews_User::getByUID($_POST['user_uid']);
                 
@@ -130,6 +130,6 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         if ($result = $has_story->insert()) {
             return $result;
         }
-        throw new Exception('Could not save the story');
+        throw new Exception('Could not save the story', 500);
     }
 }
