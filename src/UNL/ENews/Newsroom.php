@@ -114,7 +114,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         }
         return true;
     }
-    
+
     function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
     {
         if ($has_story = UNL_ENews_Newsroom_Story::getById($this->id, $story->id)) {
@@ -131,5 +131,16 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             return $result;
         }
         throw new Exception('Could not save the story', 500);
+    }
+
+    public static function archivePastStories()
+    {
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = 'UPDATE newsroom_stories, stories
+                SET newsroom_stories.status = "archived"
+                WHERE newsroom_stories.story_id = stories.id
+                    AND stories.request_publish_end < "'.date('Y-m-d').'"
+                    AND newsroom_stories.story_id != "archived"';
+        return $mysqli->query($sql);
     }
 }

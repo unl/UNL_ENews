@@ -7,6 +7,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     
     function __postConstruct()
     {
+        UNL_ENews_Newsroom::archivePastStories();
         if (!empty($_POST)) {
             try {
                 $this->handlePost();
@@ -141,7 +142,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 }
                 $newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
                 foreach ($newsrooms as $newsroom) {
-                    if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') {
+                    if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') { //@TODO hmmm what about archived?
                         throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
                     }
                 }
