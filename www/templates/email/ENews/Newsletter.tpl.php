@@ -1,7 +1,7 @@
 <style>
  td {color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;}
 </style>
-
+<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletter&amp;id=<?php echo $context->id; ?>">Problem viewing? Click here</a>
 <div>
 <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
 <tr>

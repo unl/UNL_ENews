@@ -8,10 +8,10 @@ class UNL_ENews_Newsletter_Public
      */
     public $newsletter;
     
-    function __construct()
+    function __construct($options = array())
     {
-        if (isset($this->options['id'])) {
-            $this->newsletter = UNL_ENews_Newsletter::getById($this->options['id']);
+        if (isset($options['id'])) {
+            $this->newsletter = UNL_ENews_Newsletter::getById($options['id']);
         } else {
             $this->newsletter = UNL_ENews_Newsletter::getLastReleased();
         }
