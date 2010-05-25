@@ -16,6 +16,10 @@ if (!empty($context->full_article)) {
 }
 ?>
 </p>
+<?php if (($context->website)) {?>
+<p>Find out more at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></p>
+<?php }?>
+
 <?php
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
