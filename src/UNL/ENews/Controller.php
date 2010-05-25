@@ -145,6 +145,10 @@ class UNL_ENews_Controller
     function handlePost()
     {
         $this->filterPostValues();
+        if (!isset($_POST['type'])) {
+            // Nothing to do here
+            return;
+        }
         switch($_POST['_type']) {
             case 'story':
                 if (!empty($_POST['storyid'])) {
