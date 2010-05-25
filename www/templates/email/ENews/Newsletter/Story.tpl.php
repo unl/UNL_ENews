@@ -17,7 +17,7 @@ if (!empty($context->full_article)) {
 ?>
 </p>
 <?php if (($context->website)) {?>
-<p>Find out more at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></p>
+<p>More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></p>
 <?php }?>
 
 <?php
