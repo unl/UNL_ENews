@@ -9,11 +9,11 @@
     WDN.jQuery(document).ready(function($){
         //We don't want to see the links right now but we will still want them in the actual email
         WDN.jQuery("#maincontent h4 a").each(function(){
-            var $t = jQuery(this);
+            var $t = WDN.jQuery(this);
             $t.after($t.text());
             $t.remove();
         });
-        $("input.datepicker").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
+        $("#releaseDate").datepicker({showOn: 'both', buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png', buttonImageOnly: true});
     });
 </script>
 
