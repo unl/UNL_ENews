@@ -12,7 +12,7 @@ if ($file = $context->getThumbnail()) {
 
 echo nl2br($context->description);
 if (!empty($context->full_article)) {
-    echo ' <a href="'.$url.'" style="color:#BA0000;">More&hellip;</a>';
+    echo ' <a href="'.$url.'" style="color:#BA0000;">Continue reading&hellip;</a>';
 }
 ?>
 </p>
