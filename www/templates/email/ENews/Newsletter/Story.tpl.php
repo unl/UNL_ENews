@@ -1,13 +1,20 @@
-<h4><a style="color:#666;" href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=story&id=<?php echo $context->id; ?>"><?php echo $context->title; ?></a></h4>
+<?php
+$url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
+?>
+<h4><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
 if ($file = $context->getThumbnail()) {
-    echo '<img src="'.UNL_ENews_Controller::getURL().'file'
+    echo '<a href="'.$url.'" style="outline:none;border:none;"><img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
-         . '.jpg" style="max-width:65px; margin-right:15px;" align="left" />';
+         . '.jpg" style="max-width:65px; margin-right:15px;" border="0" align="left" /></a>';
 }
 
-echo nl2br($context->description); ?>
+echo nl2br($context->description);
+if (!empty($context->full_article)) {
+    echo ' <a href="'.$url.'" style="color:#BA0000;">More&hellip;</a>';
+}
+?>
 </p>
 <?php
 if ($parent->context->options['view'] == 'preview'

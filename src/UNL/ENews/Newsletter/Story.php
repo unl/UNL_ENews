@@ -82,4 +82,9 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         }
         return $this->getStory()->$var;
     }
+    
+    function __isset($var)
+    {
+        return isset($this->getStory()->$var);
+    }
 }
