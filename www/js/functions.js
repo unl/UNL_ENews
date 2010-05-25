@@ -29,6 +29,7 @@ var preview = function() {
 		},
 		
 		removeStory : function() {
+			WDN.jQuery('#drag_story_list p').remove();
 			WDN.jQuery(this).parent('.storyTools').hide().parents('.story').unbind().removeClass('story').addClass('dragItem').appendTo('#drag_story_list');
 			WDN.jQuery(this).parent('.storyTools').siblings("form").children("input[name='_type']").attr('value', 'removestory');
 			

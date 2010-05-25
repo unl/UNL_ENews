@@ -50,7 +50,7 @@
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (!$story_available) {
-                echo "Sorry, no unused/available stories.";
+                echo "<p>Sorry, no unused/available stories.</p>";
             } ?>
         </div>
     </div>
