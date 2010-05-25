@@ -89,7 +89,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     public static function getLastReleased()
     {
         $object = new self();
-        $sql = "SELECT * FROM newsletters WHERE release_date IS NOT NULL ORDER BY release_date DESC LIMIT 1";
+        $sql = "SELECT * FROM newsletters WHERE distributed = '1' ORDER BY release_date DESC LIMIT 1";
         $mysqli = UNL_ENews_Controller::getDB();
         if (($result = $mysqli->query($sql))
             && $result->num_rows == 1) {
