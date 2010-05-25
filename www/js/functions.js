@@ -1,24 +1,3 @@
-WDN.jQuery(document).ready(function() {	
-	//manager tables
-	WDN.jQuery(".checkall").click(function() {
-		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', true);
-		checkInput();
-		return false;
-	});
-	WDN.jQuery(".uncheckall").click(function() {
-		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', false);
-		manager.storyselected = false;
-		checkInput();
-		return false;
-	});
-	WDN.jQuery(".storylisting input[type=checkbox]").click(function() { 
-		checkInput();
-		return this;
-	});
-	
-	preview.initialize();
-});
-
 /**
  * 
  *  Namespace for the newsletter preview functionality
@@ -238,5 +217,24 @@ var manager = function() {
 	};
 }();
 
-
+WDN.jQuery(document).ready(function() {	
+	//manager tables
+	WDN.jQuery(".checkall").click(function() {
+		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', true);
+		checkInput();
+		return false;
+	});
+	WDN.jQuery(".uncheckall").click(function() {
+		WDN.jQuery('.storylisting input[type=checkbox]').attr('checked', false);
+		manager.storyselected = false;
+		checkInput();
+		return false;
+	});
+	WDN.jQuery(".storylisting input[type=checkbox]").click(function() { 
+		checkInput();
+		return this;
+	});
+	
+	preview.initialize();
+});
  
