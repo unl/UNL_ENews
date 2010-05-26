@@ -21,7 +21,7 @@ class MockAuth
     
     function getUser()
     {
-        return new stdClass;
+        return 'testuser';
     }
 }
 
