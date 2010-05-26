@@ -37,7 +37,16 @@ if ($user = UNL_ENews_Controller::getUser()) {
 ?>
 <!-- InstanceEndEditable -->
 </head>
-<body class="fixed">
+<?php
+$body_class = 'fixed';
+if ($context->options['view'] == 'story'
+    && true == isset($_SERVER['HTTP_USER_AGENT'])
+    && false !== strpos($_SERVER['HTTP_USER_AGENT'], 'Gecko/2008')) {
+    // Firefox 2.0.0 series, or Lotus Notes web browser
+    $body_class = 'document';
+}
+?>
+<body class="<?php echo $body_class; ?>">
 <p class="skipnav"> <a class="skipnav" href="#maincontent">Skip Navigation</a> </p>
 <div id="wdn_wrapper">
     <div id="header"> <a href="http://www.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
