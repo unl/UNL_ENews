@@ -17,4 +17,4 @@ $controller = new UNL_ENews_Controller(array('view'=>'submit'));
 ?>
 --EXPECTF--
 INSERT ID SHOULD BE RETURNED
-%s
+%d
