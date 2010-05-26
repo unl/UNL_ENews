@@ -145,7 +145,7 @@ class UNL_ENews_Controller
     function handlePost()
     {
         $this->filterPostValues();
-        if (!isset($_POST['type'])) {
+        if (!isset($_POST['_type'])) {
             // Nothing to do here
             return;
         }
