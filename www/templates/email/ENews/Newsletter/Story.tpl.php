@@ -1,7 +1,7 @@
 <?php
 $url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
 ?>
-<h4 style="background-color:##F0F0F0;padding:2px;"><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
+<h4 style="background-color:#F0F0F0;padding:2px;"><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
 if ($file = $context->getThumbnail()) {
