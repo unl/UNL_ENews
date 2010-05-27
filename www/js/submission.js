@@ -97,10 +97,11 @@ WDN.jQuery(document).ready(function($){
 
 	//Make a GoURL with campaign tagging for the Supporting Website
 	$('#website').change(function() {
-		var website = $(this).val();
+		var website = $.trim($(this).val());
 		if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 			website = "http://" + website;
 		}
+		
 		var goURLPrefix = RegExp('http://go.unl.edu');
 		var eventsPrefix = RegExp('http://events.unl.edu');
 		if (!goURLPrefix.test(website) && !eventsPrefix.test(website)) {
