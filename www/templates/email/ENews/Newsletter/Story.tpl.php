@@ -1,7 +1,7 @@
 <?php
 $url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
 ?>
-<h4><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
+<h4 style="background-color:##F0F0F0;padding:2px;"><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
 <p>
 <?php 
 if ($file = $context->getThumbnail()) {
@@ -15,11 +15,12 @@ if (!empty($context->full_article)) {
     echo ' <a href="'.$url.'" style="color:#BA0000;">Continue reading&hellip;</a>';
 }
 ?>
-</p>
-<?php if (($context->website)) {?>
-<p>More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></p>
-<?php }?>
 
+<?php if (($context->website)) {?>
+<br />
+<span style="font-size:10px;margin-top:7px;display:block;">More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></span>
+<?php }?>
+</p>
 <?php
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
