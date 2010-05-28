@@ -18,7 +18,7 @@
         <!-- [ header starts here] -->
         <table cellspacing="0" cellpadding="0" border="0" width="600">
             <tr>
-                <td valign="top"><img src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0"/></td>
+                <td valign="top"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0"/></td>
             </tr>
         </table>
         <table cellspacing="0" cellpadding="0" border="0" width="600" valign="top">
@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <img class="spacer" src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
+                                <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
                             </td>
                         </tr>
                             <?php
@@ -62,7 +62,7 @@
                                     <div class="story" id="story_'.$key.'" valign="top">'
                                         . $savvy->render($story);
                                 $$column .= '</div>';
-                                $$column .= '<img class="spacer" src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />';
+                                $$column .= '<img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />';
                             }
                             ?>
                         <tr>
@@ -91,7 +91,7 @@
                                 </div>
                             </td>
                          </tr>
-                        <tr valign="top" background="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" bgcolor="white" style="background-image: url(http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
+                        <tr valign="top" background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" bgcolor="white" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
                             <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" valign="top">
                                 <!--  This the footer -->
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
@@ -109,7 +109,7 @@
         </table>
         <table cellspacing="0" cellpadding="0" border="0" width="600" height="22">
             <tr>
-                <td valign="top"><img src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/footer.jpg" alt="The University of Nebraska-Lincoln" width="600" height="22" /></td>
+                <td valign="top"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/footer.jpg" alt="The University of Nebraska-Lincoln" width="600" height="22" /></td>
             </tr>
         </table>
     </td>
