@@ -35,7 +35,6 @@
 }
 #maincontent #newsColumnIntro h4 {
     font-size:1.5em;     
-    background:none;
     margin-bottom:0;
 }
 
@@ -51,6 +50,7 @@
    -webkit-box-shadow: 1px 1px 5px #999;
    box-shadow: 1px 1px 5px #999;
 }
+#maincontent img.spacer {display:none;}
 
 /* Newsletter Email Preview
 ************************/

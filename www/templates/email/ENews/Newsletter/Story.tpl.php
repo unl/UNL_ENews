@@ -1,13 +1,13 @@
 <?php
 $url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
 ?>
-<h4 style="background-color:#F0F0F0;padding:2px;"><a style="color:#666;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
-<p>
+<h4><a style="color:#666; text-decoration:none;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
+<p style="margin-bottom:5px">
 <?php 
 if ($file = $context->getThumbnail()) {
-    echo '<a href="'.$url.'" style="outline:none;border:none;"><img src="'.UNL_ENews_Controller::getURL().'file'
+    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="left"><tr><td valign="top" algin="left"><img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
-         . '.jpg" style="max-width:65px; margin-right:15px;" border="0" align="left" /></a>';
+         . '.jpg" style="margin-right:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
 }
 
 echo nl2br($context->description);
@@ -15,12 +15,14 @@ if (!empty($context->full_article)) {
     echo ' <a href="'.$url.'" style="color:#BA0000;">Continue reading&hellip;</a>';
 }
 ?>
-
-<?php if (($context->website)) {?>
-<br />
-<span style="font-size:10px;margin-top:7px;display:block;">More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></span>
-<?php }?>
 </p>
+<?php if (($context->website)) {?>
+<p style="margin-top:-10px;">
+<img class="spacer" src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="2" />
+<span style="font-size:10px;margin-top:7px;display:block;">More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></span>
+</p>
+<?php }?>
+
 <?php
 if ($parent->context->options['view'] == 'preview'
     || (isset($parent->parent) && $parent->parent->context->options['view'] == 'preview')):
