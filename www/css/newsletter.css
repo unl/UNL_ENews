@@ -9,7 +9,6 @@
 #maincontent .newsColumn h4 {
     font-size: 1em;
     font-weight:bold;
-    background:#f0f0f0;
     padding:2px;
     margin:0 0 7px 0;
 }
@@ -56,12 +55,11 @@
 ************************/
 #maincontent .newsColumn {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
-#maincontent #newsStories td {padding-top:20px;}
 #maincontent table .story {
     cursor:move;
     position:relative;
     margin-top:0px;
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 #newsStories .newsColumn {
     float:left;
@@ -77,7 +75,7 @@
     text-align:center;
     opacity:0.45;
 }
-#maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem p img, #maincontent #drag_story_list .dragItem p a {display:none;}
+#maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem table img, #maincontent #drag_story_list .dragItem p a {display:none;}
 #maincontent #drag_story_list .dragItem h4 {
     font-size:0.9em;
     color:#fff;

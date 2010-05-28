@@ -1,8 +1,8 @@
 <style type="text/css">
  <!--td {color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;}-->
- <!--.newsColumn h4 {font-size: 12px; font-weight:bold; background-color:#f0f0f0;padding:2px; text-decoration:none;}-->
+ <!--.newsColumn h4 {font-size: 15px; font-weight:bold; padding:2px; text-decoration:none;}-->
  <!--.newsColumn h4 a{text-decoration:none;}-->
- <!--.newsColumn .story {padding-bottom:10px;border-bottom:1px; border-style: dashed; border-color: #e0e0e0;}-->
+ <!--.newsColumn .story {padding-bottom:10px;}-->
  <!--#newsColumnIntro h4 {font-size:20px; margin-bottom:10px;}-->
  <!--#newsColumnIntro {border-bottom:1px dashed #e0e0e0;padding-bottom:10px;}-->
 </style>
@@ -21,12 +21,12 @@
                 <td valign="top"><img src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0"/></td>
             </tr>
         </table>
-        <table cellspacing="0" cellpadding="0" border="0" width="600">
+        <table cellspacing="0" cellpadding="0" border="0" width="600" valign="top">
             <tr>
                 <td width="12" bgcolor="#E0E0E0">&nbsp;</td>
                 <td width="10">&nbsp;</td>
                 <td align="left" valign="top" width="556">
-                    <table cellspacing="0" cellpadding="0" border="0">
+                    <table cellspacing="0" cellpadding="0" border="0" valign="top">
                         <tr>
                             <td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
                                 <!-- This is the main content -->
@@ -59,7 +59,7 @@
                                 }
 
                                 $$column .= '
-                                    <div class="story" id="story_'.$key.'">'
+                                    <div class="story" id="story_'.$key.'" valign="top">'
                                         . $savvy->render($story);
                                 $$column .= '</div>';
                                 $$column .= '<img class="spacer" src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />';
@@ -91,8 +91,8 @@
                                 </div>
                             </td>
                          </tr>
-                        <tr valign="top" background="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" style="background-image: url(http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
-                            <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;">
+                        <tr valign="top" background="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" bgcolor="white" style="background-image: url(http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
+                            <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" valign="top">
                                 <!--  This the footer -->
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
                                 &copy; 2010 University of Nebraska&ndash;Lincoln | Lincoln, NE 68588 | 402-472-8515 <br />
@@ -107,9 +107,9 @@
                 <td width="12" bgcolor="#E0E0E0"></td>
             </tr>
         </table>
-        <table cellspacing="0" cellpadding="0" border="0" width="600">
+        <table cellspacing="0" cellpadding="0" border="0" width="600" height="22">
             <tr>
-                <td><img src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/footer.jpg" alt="The University of Nebraska-Lincoln" width="600" height="22" /></td>
+                <td valign="top"><img src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/footer.jpg" alt="The University of Nebraska-Lincoln" width="600" height="22" /></td>
             </tr>
         </table>
     </td>

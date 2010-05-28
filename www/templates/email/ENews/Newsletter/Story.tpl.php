@@ -2,14 +2,16 @@
 $url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
 ?>
 <h4><a style="color:#666; text-decoration:none;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
-<p style="margin-bottom:5px">
+
 <?php 
 if ($file = $context->getThumbnail()) {
     echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="left"><tr><td valign="top" algin="left"><img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
          . '.jpg" style="margin-right:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
 }
-
+?>
+<p style="margin-bottom:5px">
+<?php 
 echo nl2br($context->description);
 if (!empty($context->full_article)) {
     echo ' <a href="'.$url.'" style="color:#BA0000;">Continue reading&hellip;</a>';
@@ -17,10 +19,13 @@ if (!empty($context->full_article)) {
 ?>
 </p>
 <?php if (($context->website)) {?>
-<p style="margin-top:-10px;">
-<img class="spacer" src="http://ucommmeranda.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="2" />
-<span style="font-size:10px;margin-top:7px;display:block;">More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a></span>
-</p>
+<table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#f7f6f6" width="100%">
+<tr>
+<td>
+More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a>
+</td>
+</tr>
+</table>
 <?php }?>
 
 <?php
