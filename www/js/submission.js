@@ -97,7 +97,7 @@ WDN.jQuery(document).ready(function($){
 
 	//Make a GoURL with campaign tagging for the Supporting Website
 	$('#website').change(function() {
-		var website = $.trim($(this).val());
+		website = $.trim($(this).val());
 		if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 			website = "http://" + website;
 		}
@@ -287,6 +287,10 @@ var submission = function() {
 				function(data) {
 					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
 					submission.addURLtoPreview(data);
+				},
+				function(){
+					WDN.jQuery('#website').attr('value', website).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
+					submission.addURLtoPreview(website);
 				}
 			);
 		},
