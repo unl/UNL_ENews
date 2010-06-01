@@ -53,9 +53,10 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status));
     }
     
-    function getNewsletters()
+    function getNewsletters($options = array())
     {
-        return new UNL_ENews_Newsroom_Newsletters(array('newsroom_id'=>$this->id));
+        $options += array('newsroom_id'=>$this->id);
+        return new UNL_ENews_Newsroom_Newsletters($options);
     }
     
     /**

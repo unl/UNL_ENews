@@ -97,7 +97,7 @@ if ($context->options['view'] == 'story'
                     </li>
                     <li><a href="?view=preview">Build Newsletter</a>
                         <?php
-                        if ($newsletters = $user->newsroom->getNewsletters()) {
+                        if ($newsletters = $user->newsroom->getNewsletters(array('limit'=>3))) {
                             if (count($newsletters)) {
                                 echo '<ul>';
                                 // There is a user logged in
