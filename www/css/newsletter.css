@@ -75,7 +75,12 @@
     text-align:center;
     opacity:0.45;
 }
-#maincontent .dragItem form, #maincontent #drag_story_list .dragItem p, #maincontent #drag_story_list .dragItem table img, #maincontent #drag_story_list .dragItem p a {display:none;}
+#maincontent .dragItem form,
+#maincontent #drag_story_list .dragItem p,
+#maincontent #drag_story_list .dragItem p a,
+#maincontent #drag_story_list .dragItem table {
+	display:none;
+}
 #maincontent #drag_story_list .dragItem h4 {
     font-size:0.9em;
     color:#fff;
