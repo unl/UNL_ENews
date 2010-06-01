@@ -23,14 +23,7 @@
                 <?php endif; ?>
             </td>
             <td>
-                <a href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
-                <div class="hidden">
-                    <form id="sendPreview<?php echo $newsletter->id; ?>" action="?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post">
-                        <input type="hidden" name="_type" value="previewnewsletter" />
-                        Email Address: <input type="text" name="to" value="<?php echo UNL_ENews_Controller::getUser(true)->mail; ?>" />
-                        <input type="submit" value="Send" />
-                    </form>
-                </div>
+                <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
             </td>
             <td>
                 <form action="?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">

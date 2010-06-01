@@ -1,4 +1,6 @@
-<?php $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/www/templates/email');?>
+<?php
+$preview_form = $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php');
+$savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/www/templates/email');?>
 
 <script type="text/javascript">
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
@@ -33,8 +35,8 @@
     
     </fieldset>
     <p class="submit"><input type="submit" name="submit" value="Save" /></p>
-    
 </form>
+    <?php echo $preview_form; ?>
     <div class="col left">
         <div class="zenbox energetic" id="drag_story_list" style="margin-top:200px;"> 
             <h3>Available News</h3>
