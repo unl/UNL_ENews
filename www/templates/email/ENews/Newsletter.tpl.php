@@ -61,8 +61,8 @@
                                 $$column .= '
                                     <div class="story" id="story_'.$key.'" valign="top">'
                                         . $savvy->render($story);
-                                $$column .= '</div>';
                                 $$column .= '<img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />';
+                                $$column .= '</div>';
                             }
                             ?>
                         <tr>
@@ -71,11 +71,6 @@
                                 <div id="newsColumnIntro" class="newsColumn">
                                 <?php echo $columnIntro; ?>
                                 </div>
-                            </td>
-                         </tr>
-                         <tr>
-                            <td>
-                                
                             </td>
                          </tr>
                          <tr id="newsStories">
