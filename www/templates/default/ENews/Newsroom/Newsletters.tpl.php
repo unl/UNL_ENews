@@ -36,3 +36,13 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php
+if (count($context) > $context->options['limit']) {
+    $pager = new stdClass();
+    $pager->total  = count($context);
+    $pager->limit  = $context->options['limit'];
+    $pager->offset = $context->options['offset'];
+    $pager->url    = UNL_ENews_Controller::getURL().'?view=newsletters';
+    echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
+}
+?>
