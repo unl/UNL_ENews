@@ -103,7 +103,7 @@ if ($context->options['view'] == 'story'
                                 // There is a user logged in
                                 foreach($newsletters as $newsletter) {
                                     if (isset($newsletter->release_date)) {
-                                        echo '<li><a href="?view=preview&amp;id='.$newsletter->id.'">'.$newsletter->release_date.'</a></li>';
+                                        echo '<li><a href="?view=preview&amp;id='.$newsletter->id.'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
                                     } 
                                 }
                                 echo '<li><a href="?view=newsletters">All newsletters</a></li>';
