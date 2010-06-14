@@ -20,7 +20,7 @@ $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__
 </script>
 
 <form class="enews energetic" method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>">
-    <fieldset style="background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;">
+    <fieldset>
     <legend>Your Newsletter</legend>
     <ol>
         <li>
