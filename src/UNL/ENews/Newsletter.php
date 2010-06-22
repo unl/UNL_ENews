@@ -228,11 +228,11 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
         $savvy->setEscape('htmlentities');
 
-        $html = "<html>".
-                "<body bgcolor='#ffffff'>".
+        $html = '<html>'.
+                '<body style="word-wrap: break-word;" bgcolor="#ffffff">'.
                     $savvy->render($this).
-                "</body>".
-            "</html>";
+                '</body>'.
+                '</html>';
         return $html;
     }
     

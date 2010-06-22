@@ -22,14 +22,7 @@ if (!empty($context->full_article)) {
 <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#f7f6f6" width="100%">
 <tr>
 <td>
-More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage">
-    <?php 
-    if (strlen($context->website) > 24){
-    	echo substr($context->website, 0, 21) . '...';
-    } else {
-        echo $context->website;
-    } ?>
-</a>
+More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"></a>
 </td>
 </tr>
 </table>
