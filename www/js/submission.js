@@ -81,18 +81,19 @@ WDN.jQuery(document).ready(function($){
 	var characterLimit = 300;
 	$('#description').keyup(function() {
 		var demoText = $(this).val();
-		$(this).prev('label').children('span').children('strong').text(characterLimit - demoText.length);
 		if ((characterLimit - demoText.length) < (characterLimit * .08)) {
-			$(this).prev('label').children('span').children('strong').addClass('warning');
+			$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').addClass('warning');
 		} else {
-			$(this).prev('label').children('span').children('strong').removeClass('warning');
+			$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').removeClass('warning');
 		}
 		if (demoText.length > characterLimit) {
-			$(this).val(demoText.substr(0,characterLimit));
+			demoText = demoText.substr(0,characterLimit);
+			$(this).val(demoText);
 		}
 		$('#sampleLayout p').text(function(index){
-			return demoText;
+			return demoText.substring(0,300);
 		});
+		$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').text(characterLimit - demoText.length);
 	});
 
 	//Make a GoURL with campaign tagging for the Supporting Website
