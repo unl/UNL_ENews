@@ -15,6 +15,16 @@ if ($file = $context->getThumbnail()) {
 }
 
 echo nl2br($context->description);
+if (!empty($context->full_article)) {
+    echo ' <a href="'.$storylink.'">Continue reading&hellip;</a>';
+}
 ?>
 </p>
+<?php
+if (($context->website)) { ?>
+
+More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a>
+<?php 
+}
+?>
 <div class="clear"></div>
