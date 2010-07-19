@@ -14,13 +14,14 @@ class UNL_ENews_Record
     {
         $sql = 'UPDATE '.$this->getTable().' ';
         $fields = get_object_vars($this);
-     
+
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
-        
+
         $sql .= 'WHERE ';
         foreach ($this->keys() as $key) {
             $sql .= $key.'=? AND ';
         }
+
         $sql = substr($sql, 0, -4);
 
         return $fields;
@@ -64,7 +65,6 @@ class UNL_ENews_Record
                 $values[] =& $this->$key;
             }
         }
-        
         return $this->prepareAndExecute($sql, $values);
     }
     
@@ -99,7 +99,7 @@ class UNL_ENews_Record
 
     protected function prepareAndExecute($sql, $values)
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = self::getDB();
 
         if (!$stmt = $mysqli->prepare($sql)) {
             echo $mysqli->error;
@@ -158,7 +158,7 @@ class UNL_ENews_Record
     
     public static function getRecordByID($table, $id, $field = 'id')
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = self::getDB();
         $sql = "SELECT * FROM $table WHERE $field = ".intval($id).' LIMIT 1;';
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
@@ -169,7 +169,7 @@ class UNL_ENews_Record
     
     function delete()
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = self::getDB();
         $sql = "DELETE FROM ".$this->getTable()." WHERE ";
         foreach ($this->keys() as $key) {
             if (empty($this->$key)) {
@@ -188,7 +188,39 @@ class UNL_ENews_Record
         }
         return false;
     }
-    
+
+    public static function __callStatic($method, $args)
+    {
+        switch (true) {
+            case preg_match('/getBy([\w]+)/', $method, $matches):
+                $mysqli = self::getDB();
+                $class  = get_called_class();
+                $record = new $class;
+                $field  = strtolower($matches[1]);
+                $sql    = 'SELECT * FROM '.$record->getTable(). ' WHERE '.$field.' = "'.$mysqli->escape_string($args[0]).'"';
+                $result = $mysqli->query($sql);
+
+                if ($result === false
+                    || $result->num_rows == 0) {
+                    return false;
+                }
+
+                UNL_ENews_Controller::setObjectFromArray($record, $result->fetch_assoc());
+                return $record;
+        }
+        throw new Exception('Invalid static method called.');
+    }
+
+    /**
+     * Get the DB
+     * 
+     * @return mysqli
+     */
+    public static function getDB()
+    {
+        return UNL_ENews_Controller::getDB();
+    }
+
     function toArray()
     {
         return get_object_vars($this);
