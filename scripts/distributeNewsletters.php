@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 if (file_exists(dirname(__FILE__).'/../www/config.inc.php')) {
