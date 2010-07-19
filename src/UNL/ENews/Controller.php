@@ -138,6 +138,16 @@ class UNL_ENews_Controller
     }
 
     /**
+     * Set the currently logged in user
+     * 
+     * @return UNL_ENews_User
+     */
+    public static function setUser(UNL_ENews_User $user)
+    {
+        self::$user = $user;
+    }
+
+    /**
      * Handle data that is POST'ed to the controller.
      * 
      * @return void
