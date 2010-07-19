@@ -35,11 +35,10 @@ class UNL_ENews_Controller
                                      'newsletters' => 'Newsletters',
                                      'help'        => 'Help! How do I&hellip;',
     );
-    
+
     protected static $auth;
-    
-    protected static $admins = array('admin'
-        );
+
+    protected static $admins = array('admin');
 
     /**
      * The currently logged in user.
@@ -47,20 +46,20 @@ class UNL_ENews_Controller
      * @var UNL_ENews_User
      */
     protected static $user = false;
-    
+
     public static $url = '';
-    
+
     public static $db_user = 'enews';
-    
+
     public static $db_pass = 'enews';
-    
+
     public $actionable = array();
-    
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
         $this->authenticate(true);
-        
+
         try {
             if (!empty($_POST)) {
                 $this->handlePost();
@@ -109,7 +108,7 @@ class UNL_ENews_Controller
 
         self::$auth = UNL_Auth::factory('SimpleCAS');
         self::$auth->login();
-        
+
         if (!self::$auth->isLoggedIn()) {
             throw new Exception('You must log in to view this resource!');
             exit();
@@ -118,7 +117,7 @@ class UNL_ENews_Controller
         self::$user->last_login = date('Y-m-d H:i:s');
         self::$user->update();
     }
-    
+
     /**
      * get the currently logged in user
      * 
@@ -129,11 +128,11 @@ class UNL_ENews_Controller
         if (self::$user) {
             return self::$user;
         }
-        
+
         if ($forceAuth) {
             self::authenticate();
         }
-        
+
         return self::$user;
     }
 
@@ -398,7 +397,7 @@ class UNL_ENews_Controller
         
         return false;
     }
-    
+
     static function redirect($url, $exit = true)
     {
         header('Location: '.$url);
