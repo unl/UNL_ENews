@@ -2,17 +2,17 @@
 class UNL_ENews_Newsroom extends UNL_ENews_Record
 {
     public $id;
-    
+
     public $name;
-    
+
     public $shortname;
-    
+
     public $website;
-    
+
     public $allow_submissions;
-    
+
     public $email_lists;
-    
+
     function __construct($options = array())
     {
         if (isset($options['id'])) {
@@ -21,16 +21,16 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             $record = UNL_ENews_Record::getRecordByID('newsrooms', UNL_ENews_Controller::getUser(true)->newsroom_id);
         }
         UNL_ENews_Controller::setObjectFromArray($this, $record);
-        
+
 //        if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
 //            throw new Exception('User does not have permission for this newsroom', 403);
 //        }
-        
+
         if (!empty($_POST)) {
             $this->handlePost();
         }
     }
-    
+
     function handlePost()
     {
         switch($_POST['_type']) {
@@ -47,18 +47,18 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 break;
         }
     }
-    
+
     function getStories($status = 'pending')
     {
         return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status));
     }
-    
+
     function getNewsletters($options = array())
     {
         $options += array('newsroom_id'=>$this->id);
         return new UNL_ENews_Newsroom_Newsletters($options);
     }
-    
+
     /**
      * 
      * @param int $id
@@ -74,17 +74,17 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         }
         return false;
     }
-    
+
     function getTable()
     {
         return 'newsrooms';
     }
-    
+
     function getUsers()
     {
         return new UNL_ENews_Newsroom_Users(array('newsroom_id'=>$this->id));
     }
-    
+
     /**
      * 
      * @param UNL_ENews_User $user
@@ -101,7 +101,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         }
         return true;
     }
-    
+
     /**
      * 
      * @param UNL_ENews_User $user
