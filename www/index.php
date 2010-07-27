@@ -6,9 +6,6 @@ if (file_exists('config.inc.php')) {
 }
 
 $enews = new UNL_ENews_Controller($_GET);
-/*
-?><pre><?php var_dump($enews);?></pre><?php 
-*/
 
 $savvy = new UNL_ENews_OutputController();
 
