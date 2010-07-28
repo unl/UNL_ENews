@@ -7,6 +7,15 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     
     function __postConstruct()
     {
+        if (isset($this->options['newsroom'])) {
+            $user = UNL_ENews_Controller::getUser(true);
+            if ($user->newsroom_id != $this->options['newsroom']
+                && $user->hasPermission($this->options['newsroom'])) {
+                // Update the selected newsroom
+                $user->newsroom_id = $this->options['newsroom'];
+                $user->update();
+            }
+        }
         UNL_ENews_Newsroom::archivePastStories();
         if (!empty($_POST)) {
             try {
@@ -156,14 +165,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     {
         switch($var) {
             case 'newsroom':
-                if (isset($this->options['newsroom'])) {
-                    if (!$newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
-                        throw new Exception('Newsroom does not exist', 404);
-                    }
-                } else {
-                    $newsroom = UNL_ENews_Controller::getUser(true)->newsroom;
-                }
-                return $newsroom;
+                return UNL_ENews_Controller::getUser(true)->newsroom;
         }
         return false;
     }
