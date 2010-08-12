@@ -192,9 +192,15 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         // @TODO THIS SHOULD BE NEWSLETTER SPECIFIC, and NOT configurable to be today@unl.edu
         $from = 'no-reply@newsroom.unl.edu';
 
-        if ($this->newsroom_id == 1) {
-            // Only set from address to today@unl.edu if the default newsroom.
-            $from = 'today@unl.edu';
+        switch ($this->newsroom_id) {
+            case 1:
+                // Only set from address to today@unl.edu if the default newsroom.
+                $from = 'today@unl.edu';
+                break;
+            case 5:
+                // Newsroom 5 is the student email newsletter, must be configured to send from nextnebraska@unl.edu
+                $from = 'nextnebraska@unl.edu';
+                break;
         }
 
         if (!isset($to)) {
