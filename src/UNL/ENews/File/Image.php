@@ -84,4 +84,3 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         return false;
     }
 }
-?>
