@@ -80,7 +80,7 @@ if ($context->options['view'] == 'story'
                     </li>
                     <?php
                     $user = UNL_ENews_Controller::getUser();
-                    if (false !== $user && UNL_ENews_Controller::isAdmin($user->uid)) : ?>
+                    if (false !== $user && isset($user->newsroom_id) && $user->hasPermission($user->newsroom_id)) : ?>
                     <li><a href="?view=manager">Manage News</a>
                         <?php 
                         if ($user_newsrooms = $user->getNewsrooms()) {
