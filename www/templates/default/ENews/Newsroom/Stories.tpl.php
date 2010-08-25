@@ -6,6 +6,12 @@ if (isset($parent->context->options['status'])) {
 if ($parent->context->options['view'] === 'mynews') {
     $status = 'none';
 }
+
+if (count($context) == 0) {
+    echo "No Gnews is Good Gnews with Gary Gnu!";
+    return;
+}
+
 ?>
 
 
@@ -97,3 +103,14 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 <input class="btnsubmit" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
 <?php } ?>
 </form>
+<?php
+if (isset($context->options['limit'])
+    && count($context) > $context->options['limit']) {
+    $pager = new stdClass();
+    $pager->total  = count($context);
+    $pager->limit  = $context->options['limit'];
+    $pager->offset = $context->options['offset'];
+    $pager->url    = UNL_ENews_Controller::getURL().'?view='.$parent->context->options['view'].'&status='.$status;
+    echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
+}
+?>

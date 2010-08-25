@@ -1,8 +1,10 @@
 <?php
 class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
 {
-    public $options = array('uid'=>NULL);
-    
+    public $options = array('uid'    => NULL,
+                            'limit'  => 30,
+                            'offset' => 0);
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -24,6 +26,6 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
             }
         }
         $mysqli->close();
-        parent::__construct($stories);
+        parent::__construct($stories, $this->options['offset'], $this->options['limit']);
     }
 }
