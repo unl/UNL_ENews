@@ -21,7 +21,8 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
             $this->handlePost();
         }
         $this->available_stories = new UNL_ENews_Newsroom_Stories(array('status'      => 'approved',
-                                                                        'newsroom_id' => UNL_ENews_Controller::getUser(true)->newsroom->id));
+                                                                        'newsroom_id' => UNL_ENews_Controller::getUser(true)->newsroom->id,
+                                                                        'limit'       => -1));
     }
     
     function handlePost()
