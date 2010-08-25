@@ -15,6 +15,9 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
             case 'archived':
                 $sql .= ' ORDER BY stories.date_submitted DESC';
                 break;
+            case 'approved':
+                $sql .= ' ORDER BY stories.request_publish_start ASC';
+                break;
         }
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {

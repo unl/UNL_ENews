@@ -17,7 +17,8 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
                     SELECT newsletter_stories.story_id FROM newsletter_stories, newsletters
                         WHERE newsletters.newsroom_id = '.(int)$options['newsroom_id']. '
                             AND newsletter_stories.newsletter_id = newsletters.id
-                    )';
+                    )
+                    ORDER BY stories.title;';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $stories[] = $row[0];
