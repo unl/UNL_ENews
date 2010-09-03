@@ -10,6 +10,7 @@ class UNL_ENews_OutputController extends Savvy
         parent::__construct();
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
         $this->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/default');
+        $this->addFilters(array('UNL_ENews_Controller', 'postRun'));
     }
     
     static public function setCacheInterface(UNL_ENews_CacheInterface $cache)

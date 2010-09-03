@@ -1,3 +1,6 @@
+<?php
+UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
+?>
 <div class="three_col left">
 <h3 class="sec_main"><?php echo $context->title; ?></h3>
 

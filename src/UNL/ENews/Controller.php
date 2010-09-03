@@ -80,7 +80,7 @@ class UNL_ENews_Controller
             $this->actionable[] = $e;
         }
     }
-    
+
     /**
      * Set a list of site admin uids
      * 
@@ -404,5 +404,24 @@ class UNL_ENews_Controller
         if (false !== $exit) {
             exit($exit);
         }
+    }
+
+    static function setReplacementData($field, $data)
+    {
+        switch($field) {
+            case 'pagetitle':
+                self::$pagetitle['dynamic'] = $data;
+                break;
+        }
+    }
+
+    public function postRun($data)
+    {
+        if (isset(self::$pagetitle['dynamic'])) {
+            $data = str_replace('<title>UNL | Announce </title>',
+                                '<title>UNL | Announce | '.self::$pagetitle['dynamic'].'</title>',
+                                $data);
+        }
+        return $data;
     }
 }
