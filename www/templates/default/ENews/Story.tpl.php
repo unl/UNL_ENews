@@ -24,7 +24,14 @@ foreach ($context->getFiles() as $file) {
 <?php else : ?>
     <?php echo nl2br($context->description); ?>
 <?php endif ?>
-
+<?php
+if (($context->website)) { ?>
+<p>
+More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a>
+</p>
+<?php 
+}
+?>
 </div>
 <div class="col right">
 
