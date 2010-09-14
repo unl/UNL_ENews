@@ -220,6 +220,9 @@ class UNL_ENews_Controller
 
                 $file_data         = $_FILES['image'];
                 $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
+           
+                $file_data['description'] = $_POST['description'];
+          
 
                 self::setObjectFromArray($file, $file_data);
 
@@ -375,7 +378,7 @@ class UNL_ENews_Controller
      */
     public static function getDB()
     {
-        $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'enews');
+        $db = new mysqli('127.0.0.1', self::$db_user, self::$db_pass, 'enews');
         if (mysqli_connect_error()) {
             throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
                     . mysqli_connect_error());

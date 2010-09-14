@@ -193,10 +193,12 @@ function getValue($object, $field)
             <ol style="padding:0;margin-top:0;"><li>
             <label for="image">Image<span class="helper">To be displayed with your announcement</span></label>
             <input id="image" name="image" type="file" />
+            <label for="file_description">Description<span class="helper">The Description of the image</span></label>
+            <input id="file_description" name="description" type="text" />
             </li></ol>
             
             <div id="upload_area">
-            <?php if ($id = getValue($context,"id")) { ?>
+            <?php if ($id ==getValue($context,"id")) { ?>
                     <?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
                             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
                             <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
