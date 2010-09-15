@@ -198,7 +198,7 @@ function getValue($object, $field)
             </li></ol>
             
             <div id="upload_area">
-            <?php if ($id ==getValue($context,"id")) { ?>
+            <?php if ($id = getValue($context, "id")) { ?>
                     <?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
                             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
                             <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
