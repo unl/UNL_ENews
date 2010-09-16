@@ -94,7 +94,7 @@ function getValue($object, $field)
             <li><label for="request_publish_start">What date would like this to run?<span class="required">*</span></label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
             <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
             <li><label for="website">Supporting Website</label><input id="website" name="website" type="text" value="<?php echo getValue($context, 'website'); ?>" /></li>
-            <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment; ?>" class="required" /></li>
+            <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="required" /></li>
             <li>
             <fieldset id="newsroom_id">
              <legend>Please consider for</legend>
