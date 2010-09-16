@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `size` bigint(20) unsigned NOT NULL,
   `use_for` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -136,16 +137,12 @@ CREATE TABLE IF NOT EXISTS `story_files` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `files` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `data` longblob NOT NULL,
-  `type` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `size` bigint(20) unsigned NOT NULL,
-  `use_for` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `users` (
+  `uid` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `newsroom_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
