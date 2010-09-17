@@ -5,7 +5,7 @@ $savvy->setTemplatePath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__
 <script type="text/javascript">
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-    WDN.loadJS("js/functions.js");
+    WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/functions.js");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
     WDN.jQuery(document).ready(function($){

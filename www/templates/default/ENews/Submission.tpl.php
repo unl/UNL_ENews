@@ -14,11 +14,11 @@ function getValue($object, $field)
 ?>
 <script type="text/javascript">
     WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-    WDN.loadJS("js/functions.js");
-    WDN.loadJS("js/submission.js");
-    WDN.loadJS("js/ajaxfileupload.js");
-    WDN.loadJS("js/jquery.textarearesizer.compressed.js");
-    WDN.loadCSS("css/imgareaselect-default.css");
+    WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/functions.js");
+    WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/submission.js");
+    WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js");
+    WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js");
+    WDN.loadCSS("<?php echo UNL_ENews_Controller::getURL();?>css/imgareaselect-default.css");
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
@@ -202,7 +202,7 @@ function getValue($object, $field)
                     <?php if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage')) { ?>
                             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
                             <span><script type="text/javascript">document.write(ajaxUpload.message);</script></span>
-                            <script type="text/javascript">WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){submission.setImageCrop();},true,true);</script>
+                            <script type="text/javascript">WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/jquery.imgareaselect.pack.js",function(){submission.setImageCrop();},true,true);</script>
                     <?php } ?>
             <?php } else { ?>
                     <div>Image preview</div>

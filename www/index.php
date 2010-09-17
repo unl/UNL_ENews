@@ -5,7 +5,7 @@ if (file_exists('config.inc.php')) {
     require 'config.sample.php';
 }
 
-$enews = new UNL_ENews_Controller($_GET);
+$enews = new UNL_ENews_Controller(UNL_ENews_Router::route($_SERVER['REQUEST_URI']) + $_GET);
 
 $savvy = new UNL_ENews_OutputController();
 

@@ -69,6 +69,7 @@ foreach (array(
     'kbartling2',
     'erasmussen2',
     'tfedderson2',
+	's-mfairch4',
     ) as $uid) {
 
     echo '* adding '.$uid.'&hellip;';

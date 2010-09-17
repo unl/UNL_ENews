@@ -17,7 +17,7 @@ if (count($context) == 0) {
 
 <script type="text/javascript">
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-WDN.loadJS("js/functions.js");
+WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/functions.js");
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 

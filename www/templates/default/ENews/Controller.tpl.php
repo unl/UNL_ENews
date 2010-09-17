@@ -17,7 +17,7 @@
 -->
 <link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/all.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo UNL_ENews_Controller::getURL();?>css/all.css" />
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/browserspecifics.html'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/metanfavico.html'; ?>
@@ -68,26 +68,26 @@ if ($context->options['view'] == 'story'
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="?view=newsletter">Today@UNL</a>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=newsletter">Today@UNL</a>
                         <ul>
-                            <li><a href="?view=help">Help</a></li>
+                            <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=help">Help</a></li>
                         </ul>
                     </li>
-                    <li><a href="?view=submit">Submit A News Item</a>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=submit">Submit A News Item</a>
                         <ul>
-                            <li><a href="?view=mynews">Your News Items</a></li>
+                            <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=mynews">Your News Items</a></li>
                         </ul>
                     </li>
                     <?php
                     $user = UNL_ENews_Controller::getUser();
                     if (false !== $user && isset($user->newsroom_id) && $user->hasPermission($user->newsroom_id)) : ?>
-                    <li><a href="?view=manager">Manage News</a>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=manager">Manage News</a>
                         <?php 
                         if ($user_newsrooms = $user->getNewsrooms()) {
                             if (count($user_newsrooms)) {
                                 echo '<ul>';
                                 foreach ($user_newsrooms as $newsroom) {
-                                    echo '<li><a href="?view=manager&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
+                                    echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=manager&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -103,10 +103,10 @@ if ($context->options['view'] == 'story'
                                 // There is a user logged in
                                 foreach($newsletters as $newsletter) {
                                     if (isset($newsletter->release_date)) {
-                                        echo '<li><a href="?view=preview&amp;id='.$newsletter->id.'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
+                                        echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=preview&amp;id='.$newsletter->id.'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
                                     } 
                                 }
-                                echo '<li><a href="?view=newsletters">All newsletters</a></li>';
+                                echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=newsletters">All newsletters</a></li>';
                                 echo '</ul>';
                             }
                         }
