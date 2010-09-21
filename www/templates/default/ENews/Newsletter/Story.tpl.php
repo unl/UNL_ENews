@@ -1,5 +1,4 @@
-<?php //$storylink = UNL_ENews_Controller::getURL().'?view=story&id='.$context->id; ?> 
-<?php $storylink = UNL_ENews_Controller::getURL().$context->getNewsroomShortName($context->newsletter_id).'/'.$context->newsletter_id.'/'.$context->id; ?> 
+<?php $storylink = $context->getStoryLink();?>
 <h4>
     <a href="<?php echo $storylink; ?>">
       <?php echo $context->title; ?>

@@ -77,17 +77,26 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     
     function __get($var)
     {
-        if ($var === 'story') {
-            return $this->getStory();
+        switch($var){
+            case 'story':
+                return $this->getStory();
+                break;
+            case 'newsroom':
+                return UNL_ENews_Newsroom::getByID($this->newsletter->newsroom_id);
+                break;
+            case 'newsletter':
+                return UNL_Enews_newsletter::getByID($this->newsletter_id);
+                break;
+            default:
+                return $this->getStory()->$var;
         }
-        return $this->getStory()->$var;
     }
     
     function __isset($var)
     {
         return isset($this->getStory()->$var);
     }
-    function getNewsroomShortName($newsletter_id){
-    	return UNL_ENews_Newsroom::getByID(UNL_Enews_newsletter::getByID($newsletter_id)->newsroom_id)->shortname;
+    function getStoryLink(){
+        return UNL_ENews_Controller::getURL().$this->newsroom->shortname.'/'.$this->newsletter->id.'/'.$this->story_id;
     }
 }
