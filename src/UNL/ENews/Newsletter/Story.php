@@ -87,4 +87,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     {
         return isset($this->getStory()->$var);
     }
+    function getNewsroomShortName($newsletter_id){
+    	return UNL_ENews_Newsroom::getByID(UNL_Enews_newsletter::getByID($newsletter_id)->newsroom_id)->shortname;
+    }
 }

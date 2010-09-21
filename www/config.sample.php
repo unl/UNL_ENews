@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 
 UNL_ENews_Controller::setAdmins(array('bbieber2', 'erasmussen2', 's-mfairch4'));
 
-UNL_ENews_Controller::$url = 'http://localhost/workspace/UNL_ENews/www/';
+UNL_ENews_Controller::$url = 'http://ucommnaber.unl.edu/~mfairchild/UNL_ENews/www/';
 
 //Database username/password
 UNL_ENews_Controller::$db_user = 'enews';
