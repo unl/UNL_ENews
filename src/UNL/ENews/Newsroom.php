@@ -68,7 +68,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     public static function getByShortname($shortname)
     {
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = "SELECT * FROM newsrooms WHERE shortname = '".$shortname."' LIMIT 1;";
+        $sql = "SELECT * FROM newsrooms WHERE shortname = '".$mysqli->escape_string($shortname)."' LIMIT 1;";
         if ($result = $mysqli->query($sql)) {
             if ($record = $result->fetch_assoc()) {
                 $object = new self(array('shortname'=>$shortname));

@@ -90,18 +90,18 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         $object = new self();
         if ($newsroomID != NULL) {
-            $sql = "SELECT * FROM newsletters WHERE distributed = '1' AND newsroom_id = '$newsroomID' ORDER BY release_date DESC LIMIT 1";
+            $sql = "SELECT * FROM newsletters WHERE distributed = '1' AND newsroom_id = '".(int)$newsroomID."' ORDER BY release_date DESC LIMIT 1";
         } else {
             $sql = "SELECT * FROM newsletters WHERE distributed = '1' ORDER BY release_date DESC LIMIT 1";
         }
         $mysqli = UNL_ENews_Controller::getDB();
-        if (($result = $mysqli->query($sql))
-            && $result->num_rows == 1) {
-            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
-            return $object;
-        } else {
+        $result = $mysqli->query($sql);
+
+        if ($result->num_rows != 1) {
             return false;
         }
+
+        UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
         return $object;
     }
     

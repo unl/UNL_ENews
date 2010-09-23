@@ -28,17 +28,17 @@ class UNL_ENews_Newsletter_Public
             }
         } else {
             if (isset($options['shortname'])) {
-                if($this->newsroom = UNL_ENews_Newsroom::getByShortname($options['shortname'])){
+                if ($this->newsroom = UNL_ENews_Newsroom::getByShortname($options['shortname'])) {
                     $this->newsletter = UNL_ENews_Newsletter::getLastReleased($this->newsroom->id);
-                    if(!$this->newsletter){
+                    if (!$this->newsletter) {
                       throw new Exception('There are no published newsletters for this newsroom.', 404);
                     }
-                }else{
+                } else {
                     throw new Exception('There are no newsrooms by that name.', 404);
                 }
-            }else{
+            } else {
                 $this->newsletter = UNL_ENews_Newsletter::getLastReleased(NULL);
-                if(!$this->newsletter){
+                if (!$this->newsletter) {
                     throw new Exception('There are no published newsletters.', 404);
                 }
             }
