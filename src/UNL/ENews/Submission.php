@@ -17,8 +17,14 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
     
     function __postConstruct()
     {   
-        if (!$this->newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
-            throw new Exception("Newsroom not found", 404);
+        if(isset($this->options['shortname'])){
+            if (!$this->newsroom = UNL_ENews_Newsroom::getByShortname($this->options['shortname'])) {
+                throw new Exception("Newsroom not found", 404);
+            }
+        }else{
+            if (!$this->newsroom = UNL_ENews_Newsroom::getByID($this->options['newsroom'])) {
+                throw new Exception("Newsroom not found", 404);
+            }
         }
         
         if (isset($this->options['id'])) {

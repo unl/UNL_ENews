@@ -167,6 +167,17 @@ class UNL_ENews_Record
         return false;
     }
     
+    public static function getRecordByShortname($table, $shortname, $field = 'shortname')
+    {
+        $mysqli = self::getDB();
+        $sql = "SELECT * FROM $table WHERE $field = '".$shortname."' LIMIT 1;";
+        if ($result = $mysqli->query($sql)) {
+            return $result->fetch_assoc();
+        }
+        
+        return false;
+    }
+    
     function delete()
     {
         $mysqli = self::getDB();

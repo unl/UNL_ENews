@@ -61,6 +61,22 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     /**
      * 
+     * @param string $shortname
+     * 
+     * @return UNL_ENews_Newsroom
+     */
+    public static function getByShortname($shortname)
+    {
+        if ($record = UNL_ENews_Record::getRecordByShortname('newsrooms', $shortname)) {
+            $object = new self(array('shortname'=>$shortname));
+            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            return $object;
+        }
+        return false;
+    }
+
+    /**
+     * 
      * @param int $id
      * 
      * @return UNL_ENews_Newsroom
