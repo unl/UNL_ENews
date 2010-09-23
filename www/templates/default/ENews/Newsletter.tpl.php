@@ -24,7 +24,7 @@ foreach ($context->getStories() as $key=>$story) {
 
     $$column .= '
         <div class="story" id="story_'.$key.'">'
-        . $savvy->render($story) .'
+        . $savvy->render($story, 'ENews/Newsletter/StorySummary.tpl.php') .'
         </div>';
 }
 ?>
