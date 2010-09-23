@@ -70,10 +70,11 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = "SELECT * FROM newsrooms WHERE shortname = '".$shortname."' LIMIT 1;";
         if ($result = $mysqli->query($sql)) {
-            $record = $result->fetch_assoc();
-            $object = new self(array('shortname'=>$shortname));
-            UNL_ENews_Controller::setObjectFromArray($object, $record);
-            return $object;
+            if ($record = $result->fetch_assoc()) {
+                $object = new self(array('shortname'=>$shortname));
+                UNL_ENews_Controller::setObjectFromArray($object, $record);
+                return $object;
+            }
         }
         return false;
     }
