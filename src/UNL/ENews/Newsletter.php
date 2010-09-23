@@ -86,17 +86,22 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $object;
     }
     
-    public static function getLastReleased()
+    public static function getLastReleased($newsroomID)
     {
         $object = new self();
-        $sql = "SELECT * FROM newsletters WHERE distributed = '1' ORDER BY release_date DESC LIMIT 1";
+        if ($newsroomID != NULL) {
+            $sql = "SELECT * FROM newsletters WHERE distributed = '1' AND newsroom_id = '$newsroomID' ORDER BY release_date DESC LIMIT 1";
+        } else {
+            $sql = "SELECT * FROM newsletters WHERE distributed = '1' ORDER BY release_date DESC LIMIT 1";
+        }
         $mysqli = UNL_ENews_Controller::getDB();
         if (($result = $mysqli->query($sql))
             && $result->num_rows == 1) {
             UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
             return $object;
+        } else {
+            return false;
         }
-        
         return $object;
     }
     

@@ -30,6 +30,11 @@ class UNL_ENews_Router
                 $options['view']         = 'submit';
                 $options['shortname']    = $matches[1];
                 break;
+            //For viewing the newest newsletter for a newsroom.
+            case preg_match('/'.$base.'((?:[a-z][a-z]+))/is', $requestURI, $matches):
+                $options['view']         = 'newsletter';
+                $options['shortname']    = $matches[1];
+                break;
             default:
                 //Check to see if the URI is a clean link.  if it is, call a bad view.
                 if(preg_match('/'.$base.'(([\\w\\.\\-]+)+)/is', $requestURI, $matches)){
