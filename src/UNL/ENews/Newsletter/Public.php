@@ -15,12 +15,11 @@ class UNL_ENews_Newsletter_Public
             if (!$this->newsletter) {
                 throw new Exception('Could not find that newsletter', 404);
             }
-            if(isset($options['newsName'])) {
+            if (isset($options['newsName'])) {
                 if($this->newsletter->newsroom->shortname != $options['newsName']){
                     throw new Exception('Could not find a newsletter with that name.', 404);
                 }
             }
-
             // If this is an unpublished newsletter, check permissions
             if ((empty($this->newsletter->release_date)
                 || ($this->newsletter->release_date > date('Y-m-d H:i:s')))
