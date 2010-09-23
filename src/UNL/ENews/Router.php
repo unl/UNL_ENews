@@ -15,14 +15,14 @@ class UNL_ENews_Router
             //For calling a story.  url = www/newsRoomShortName/newsletterID/storyID/
             case preg_match('/'.$base.'((?:[a-z][a-z]+))(\\/)(\\d+)(\\/)(\\d+)/is', $requestURI, $matches):
                 $options['view']         = 'newsletterStory';
-                $options['newsName'] 	 = $matches[1];
+                $options['shortname']    = $matches[1];
                 $options['newsID']       = $matches[3];
                 $options['id']           = $matches[5];	
                 break;
             //For calling a newsletter.  url = www/newsRoomShortName/newsletterID/
             case preg_match('/'.$base.'((?:[a-z][a-z]+))(\\/)(\\d+)/is', $requestURI, $matches):
                 $options['view']         = 'newsletter';
-                $options['newsName']     = $matches[1];
+                $options['shortname']    = $matches[1];
                 $options['id']           = $matches[3];
                 break;
             //For submiting to a news letter.  url = www/newsRoomShortName/submit

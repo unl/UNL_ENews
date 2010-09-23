@@ -14,7 +14,7 @@ class UNL_ENews_NewsletterStory
                 if($this->story = UNL_ENews_Story::getById($options['id'])){
                     if($this->newsletter->hasStory($this->story)){
                         if($this->newsroom = UNL_ENews_Newsroom::getByID($this->newsletter->newsroom_id)){
-                            if($this->newsroom->shortname == $options['newsName']){
+                            if($this->newsroom->shortname == $options['shortname']){
                             }else{
                                 throw new Exception('Not a valid news room name.');
                             }
