@@ -20,6 +20,11 @@ class UNL_ENews_Router
 
         $options = array();
         switch(true) {
+            // Files associated with tstories
+            case preg_match('/'.$quotedBase.'file([\d]+)\.jpg$/', $requestURI, $matches):
+                $options['view'] = 'file';
+                $options['id']   = $matches[1];
+                break;
             //For calling a story.  url = www/newsRoomShortName/newsletterID/storyID/
             case preg_match('/'.$quotedBase.'([a-z]+)\/([\d]+)\/([\d]+)$/i', $requestURI, $matches):
                 $options['view']          = 'newsletterStory';

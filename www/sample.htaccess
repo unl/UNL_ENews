@@ -1,8 +1,6 @@
 RewriteEngine On
 RewriteBase /workspace/UNL_ENews/www/
 
-RewriteRule ^file([\d]+)\.jpg$ index.php?view=file&id=$1 [L]
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-f
 
