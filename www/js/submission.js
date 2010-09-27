@@ -1,16 +1,24 @@
 WDN.jQuery(document).ready(function($){
-	
+	// Set up date pickers on all inputs with datepicker class
 	$("input.datepicker").datepicker({
 		showOn: 'both',
 		buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
 		buttonImageOnly: true,
 		dateFormat: 'yy-mm-dd',
 		defaultDate: this.value});
+	$('.hasDatepicker').each(function() {
+		$(this).attr({'autocomplete' : 'off'});
+		});
+
+	// Set up the 'Event' story type date select box
 	$("#date").change(function(){
+
+		// Update the story end publish date to match the event date
+		$('#request_publish_end').attr('value', $(this).val());
+
 		var date = $(this).val().split(/-/);
 
-		$('#request_publish_end').attr('value', $(this).val());
-		
+		// Grab the latest events for this date and populate select box
 		WDN.get('http://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
 			function(eventsXML){
 				$("#event").html('<option value="NewEvent">New Event</option>');
@@ -18,23 +26,29 @@ WDN.jQuery(document).ready(function($){
 					$("#event").append('<option value="'+$(this).find('WebPage URL').text()+'">' + $(this).find('EventTitle').text() + '</option>');
 				});
 			}, 'xml');
+
 	});
-	$('.hasDatepicker').each(function() {
-		$(this).attr({'autocomplete' : 'off'});
-	});
+
+	// When an event has been selected from the drop down
 	$('select#event').change(function(){
 		$('form.enews input[name=website]').val($(this).val());
+
+		// Get the details for this specific event
 		WDN.get($(this).val()+'?format=xml', null, function(data) {
 
+			// Set the title and description from data we know
 			$('form.enews input[name=title]').val($(data).find('EventTitle').text());
 			$('form.enews textarea[name=description]').val($(data).find('Description').text());
 
+			// Trigger the keyup on these fields so the preview is updated
 			$('#title').keyup();
 			$('#description').keyup();
 
 		}, 'xml');
 
 	});
+
+	// Sliding action for the three part form
 	$('ol.option_step a').click(function() {
 		$('#wdn_process_step1').slideToggle();
 		if($(this).attr('id') == 'newsAnnouncement') { //the user has selected news, so hide the event date panel and show the news form
@@ -96,7 +110,7 @@ WDN.jQuery(document).ready(function($){
 		$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').text(characterLimit - demoText.length);
 	});
 
-	//Make a GoURL with campaign tagging for the Supporting Website
+	// Make a GoURL with campaign tagging for the Supporting Website
 	$('#website').change(function() {
 		website = $.trim($(this).val());
 		if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
@@ -114,20 +128,20 @@ WDN.jQuery(document).ready(function($){
 		}
 	});
 
-	//When a file is selected from users local machine, do the ajax image upload
+	// When a file is selected from users local machine, do the ajax image upload
 	$('#enewsImage #image').change(function() {
 		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
 		if (!submitStory()) {
-			//Need stupid closure here and timeout because storyid from the submitted story is not available immediately
+			// Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
-				//Load the ImageAreaSelect plugin and remove the previous crop selection area if it exists
+				// Load the ImageAreaSelect plugin and remove the previous crop selection area if it exists
 				WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){
 					$('#upload_area img').imgAreaSelect({
 						disable:true,
 						hide:true
 					});
 				},true,true);
-				//Ajax up the image
+				// Ajax up the image
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){ajaxUpload.upload(myform);},1000);
 			})();
