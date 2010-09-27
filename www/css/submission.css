@@ -133,7 +133,7 @@ form#enewsSubmission {
 
 /* Image Upload Preview 
 ********************/
-form#enewsImage, form#enewsImageDescription {
+form#enewsImage {
     float:right;
     clear:right;
     width:430px;

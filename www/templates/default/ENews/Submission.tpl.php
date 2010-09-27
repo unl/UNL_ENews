@@ -107,8 +107,11 @@ function getValue($object, $field)
                     $id = getValue($context, 'id');
                     $newsroom_id = getValue($context->newsroom, 'id');
                     $newsroom_name = getValue($context->newsroom, 'name');
+                    $original_image = null;
                 ?>
-                <?php if (!empty($id)) : ?>
+                <?php if (!empty($id)) :
+                            $original_image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage');
+                            ?>
                             <?php foreach (UNL_ENews_Story::getByID($id)->getNewsrooms() as $item) : ?>
                                 <select name="newsroom_id[]" disabled="disabled">
                                 <option value=""></option>
@@ -149,6 +152,17 @@ function getValue($object, $field)
              <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
             </fieldset>
             </li>
+            <li>
+            <label for="file_description">Image Caption<span class="helper">The Description of the image</span></label>
+            <?php
+            $disabled = 'disabled="disabled"';
+            
+            if (isset($original_image)) {
+                $disabled = '';
+            }
+            ?>
+            <input id="file_description" name="originalimage_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($original_image, 'description'); ?>" />
+            </li>
         </ol>
 </fieldset>
 <fieldset id="wdn_process_step3b" style="display:none;">
@@ -184,7 +198,7 @@ function getValue($object, $field)
     </div>
 </div>
 
-<?php echo $savvy->render($context, 'ENews/Submission/ImageForm.tpl.php'); ?>
+<?php include(dirname(__FILE__) . '/Submission/ImageForm.tpl.php'); ?>
 
 
 <?php //ending div for #enewsForm ?>

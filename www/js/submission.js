@@ -56,7 +56,7 @@ WDN.jQuery(document).ready(function($){
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
-				$('#sampleLayout,#enewsImage,#enewsImageDescription,#enewsSubmissionButton').show();
+				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
 			});
 		} else { //we have an event request
 			$('#wdn_process_step2').slideToggle(function() {
@@ -73,7 +73,7 @@ WDN.jQuery(document).ready(function($){
 			$('#enewsForm h3').eq(1).removeClass('highlighted');
 			$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
 		});
-		$('#sampleLayout,#enewsImage,#enewsImageDescription,#enewsSubmissionButton').show();
+		$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
 		return false;
 	}); 
 
@@ -141,7 +141,6 @@ WDN.jQuery(document).ready(function($){
 				var myform = document.getElementById("enewsImage");
 				setTimeout(function(){
 						ajaxUpload.upload(myform);
-						$('#enewsImageDescription').show();
 						$('#file_description').removeAttr('disabled');
 					},1000);
 			})();
@@ -159,7 +158,7 @@ WDN.jQuery(document).ready(function($){
 		return false;
 	});
 
-	//When the submission button is pressed, save whatever changes were made to the story first
+	// When the submission button is pressed, save whatever changes were made to the story first
 	$('form#enewsSubmission').submit(function(){
 		if (message = submitStory(true)) {
 			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
@@ -168,7 +167,7 @@ WDN.jQuery(document).ready(function($){
 	});
 
 	function backToStep1() {
-		$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#enewsImageDescription').hide();
+		$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
 		$('#wdn_process_step2').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step1').slideDown();
@@ -179,7 +178,7 @@ WDN.jQuery(document).ready(function($){
 		$('#enewsForm h3').show();
 	};
 	function backToStep2() {
-		$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#enewsImageDescription').hide();
+		$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
 		$('#wdn_process_step1').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step2').slideDown();
@@ -203,7 +202,7 @@ WDN.jQuery(document).ready(function($){
 			}
 		});
 		if (request_publish_start > request_publish_end) {
-			message = '"Last date this could run" must be later then "What date would like this to run?"';
+			message = '"Last date this could run" must be after or equal to "What date would like this to run?"';
 		}
 		if (validate && message != '') {
 			return message;
