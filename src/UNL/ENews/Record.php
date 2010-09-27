@@ -102,7 +102,7 @@ class UNL_ENews_Record
         $mysqli = self::getDB();
 
         if (!$stmt = $mysqli->prepare($sql)) {
-            echo $mysqli->error;
+            throw new Exception('Error preparing database statement! '.$mysqli->error, 500);
         }
 
         call_user_func_array(array($stmt, 'bind_param'), $values);
