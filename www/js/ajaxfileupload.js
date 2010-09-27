@@ -4,7 +4,7 @@ var ajaxUpload = function() {
 		id_element : "upload_area",
 		sampleLayoutImage : "sampleLayoutImage",
 		message : 'Click and drag on the image above to select a thumbnail',
-		html_show_loading : '<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />',
+		html_show_loading : '<img src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />',
 		html_error_http : "Error....",
 		
 		remove : function(theVar) {
