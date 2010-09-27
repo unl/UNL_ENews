@@ -10,7 +10,7 @@
 <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
 <tr>
     <td align="center">
-        <a href="<?php echo UNL_ENews_Controller::getURL().$context->newsroom->shortname."/".$context->id; ?>">Problem viewing? Click here to read online.</a>
+        <a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a>
     </td>
 </tr>
 <tr>

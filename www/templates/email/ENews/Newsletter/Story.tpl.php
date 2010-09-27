@@ -1,5 +1,5 @@
 <?php
-$url = UNL_ENews_Controller::getURL().'?view=story&amp;id='.$context->id;
+$url = $context->newsletter->getURL().'/'.$context->id;
 ?>
 <h4><a style="color:#666; text-decoration:none;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
 
