@@ -30,7 +30,7 @@ if ($id = getValue($context, "id")) {
 </fieldset>
 </form>
 
-<form id="enewsImageDescription" action="?view=submit" method="post" class="enews energetic">
+<form id="enewsImageDescription" action="?view=submit" method="post" class="enews energetic" style="display:none;">
     <input type="hidden" name="_type" value="file" />
     <input type="hidden" name="id" value="<?php echo getValue($image, 'id'); ?>" />
     <fieldset>
