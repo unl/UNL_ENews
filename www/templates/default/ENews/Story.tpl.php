@@ -1,7 +1,6 @@
 <?php
 UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
 ?>
-<div class="three_col left">
 <h3 class="sec_main"><?php echo $context->title; ?></h3>
 
 <div style="float:right;width:310px;margin:0 0 20px 10px;">
@@ -10,7 +9,10 @@ foreach ($context->getFiles() as $file) {
     if (preg_match('/^image/', $file->type) && $file->use_for != 'thumbnail') {
         echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
              . $file->id
-             . '" style="max-width:300px;float:left;" class="frame" alt="'.$file->name.'" />';
+             . '" style="max-width:300px;" class="frame" alt="'.$file->name.'" />';
+        if (isset($file->description)) {
+            echo '<p class="caption">'.$file->description.'</p>';
+        }
     }
 }
 ?>
@@ -32,7 +34,3 @@ More details at: <a href="<?php echo $context->website; ?>" title="Go to the sup
 <?php 
 }
 ?>
-</div>
-<div class="col right">
-
-</div>
