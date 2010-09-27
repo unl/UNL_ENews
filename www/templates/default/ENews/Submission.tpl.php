@@ -2,7 +2,12 @@
 function getValue($object, $field)
 {
     if (isset($object->$field)) {
-        return htmlentities($object->getRaw($field), ENT_QUOTES);
+        if ($object instanceof Savvy_ObjectProxy) {
+            $value = $object->getRaw($field);
+        } else {
+            $value = $object->$field;
+        }
+        return htmlentities($value, ENT_QUOTES);
     }
     
     if (isset($_POST[$field])) {

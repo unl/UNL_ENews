@@ -35,8 +35,14 @@ if ($id = getValue($context, "id")) {
     <input type="hidden" name="id" value="<?php echo getValue($image, 'id'); ?>" />
     <fieldset>
         <ol style="padding:0;margin-top:0;"><li>
-            <label for="file_description">Description<span class="helper">The Description of the image</span></label>
-            <input id="file_description" name="description" type="text" value="<?php echo getValue($image, 'description'); ?>" />
+            <label for="file_description">Image Caption<span class="helper">The Description of the image</span></label>
+            <?php
+            $disabled = 'disabled="disabled"';
+            if (isset($image)) {
+                $disabled = '';
+            }
+            ?>
+            <input id="file_description" name="description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($image, 'description'); ?>" />
             </li>
         </ol>
     </fieldset>

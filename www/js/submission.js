@@ -51,7 +51,7 @@ WDN.jQuery(document).ready(function($){
 	// Sliding action for the three part form
 	$('ol.option_step a').click(function() {
 		$('#wdn_process_step1').slideToggle();
-		if($(this).attr('id') == 'newsAnnouncement') { //the user has selected news, so hide the event date panel and show the news form
+		if ($(this).attr('id') == 'newsAnnouncement') { //the user has selected news, so hide the event date panel and show the news form
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
@@ -139,7 +139,11 @@ WDN.jQuery(document).ready(function($){
 				},true,true);
 				// Ajax up the image
 				var myform = document.getElementById("enewsImage");
-				setTimeout(function(){ajaxUpload.upload(myform);},1000);
+				setTimeout(function(){
+						ajaxUpload.upload(myform);
+						$('#enewsImageDescription').show();
+						$('#file_description').removeAttr('disabled');
+					},1000);
 			})();
 		} else {
 			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
