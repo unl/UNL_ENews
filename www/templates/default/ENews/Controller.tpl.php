@@ -68,12 +68,12 @@ if ($context->options['view'] == 'story'
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=newsletter">Today@UNL</a>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>todayatunl">Today@UNL</a>
                         <ul>
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=help">Help</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=submit">Submit A News Item</a>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>todayatunl/submit">Submit A News Item</a>
                         <ul>
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=mynews">Your News Items</a></li>
                         </ul>
@@ -93,7 +93,6 @@ if ($context->options['view'] == 'story'
                             }
                         }
                         ?>
-                    
                     </li>
                     <li><a href="?view=preview">Build Newsletter</a>
                         <?php
