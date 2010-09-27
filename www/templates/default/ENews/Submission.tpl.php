@@ -37,6 +37,9 @@ function getValue($object, $field)
                 $('#newsAnnouncement').click();
                 $('#enewsSubmissionButton').show();
                 document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = <?php echo $id;?>;
+                // Trigger the keyup on these fields so the preview is updated
+                $('#title').keyup();
+                $('#description').keyup();
             },100);
         })();
         <?php endif; ?>
