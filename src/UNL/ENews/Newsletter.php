@@ -180,7 +180,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         switch($var) {
             case 'newsroom':
-                return UNL_ENews_Newsroom::getById($this->newsroom_id);
+                return $this->getNewsroom();
         }
         return false;
     }
@@ -264,5 +264,10 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     function getNewsroom()
     {
         return UNL_ENews_Newsroom::getByID($this->newsroom_id);
+    }
+
+    function getURL()
+    {
+        return $this->newsroom->getURL().'/'.$this->id;
     }
 }

@@ -164,4 +164,14 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                     AND newsroom_stories.story_id != "archived"';
         return $mysqli->query($sql);
     }
+
+    public function getURL()
+    {
+        return UNL_ENews_Controller::getURL().$this->shortname;
+    }
+
+    public function getSubmitURL()
+    {
+        return $this->getURL().'/submit';
+    }
 }
