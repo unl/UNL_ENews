@@ -28,7 +28,6 @@ var ajaxUpload = function() {
 			return RegExp(" AppleWebKit/").test(navigator.userAgent);
 		},
 		upload : function(form) {
-			form = typeof(form)=="string"?document.getElementById(form):form;
 			var erro = "";
 			if (form == null || typeof(form) == "undefined") {
 				erro += "The form of 1st parameter does not exists.\n";
@@ -53,10 +52,13 @@ var ajaxUpload = function() {
 			window.frames['ajax-temp'].name="ajax-temp";
 			var doUpload = function() {
 				ajaxUpload.removeEvent(document.getElementById('ajax-temp'),"load", doUpload);
+
+				// Prepopulate the upload area with error content as a precaution
+				document.getElementById(ajaxUpload.id_element).innerHTML = ajaxUpload.html_error_http;
+
 				var cross = "javascript: ";
 				cross += "window.parent.document.getElementById('"+ajaxUpload.sampleLayoutImage+"').innerHTML = document.body.innerHTML;";
 				cross += "window.parent.document.getElementById('"+ajaxUpload.id_element+"').innerHTML = document.body.innerHTML + '<span>"+ajaxUpload.message+"</span>'; window.parent.submission.setImageCrop(); void(0);";
-				document.getElementById(ajaxUpload.id_element).innerHTML = ajaxUpload.html_error_http;
 				document.getElementById('ajax-temp').src = cross;
 				if (ajaxUpload.isWebKit()) {
 					ajaxUpload.remove(document.getElementById('ajax-temp'));

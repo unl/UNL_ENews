@@ -56,9 +56,7 @@ WDN.jQuery(document).ready(function($){
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
-				$('#sampleLayout').show();
-				$('#enewsImage').show();
-				$('#enewsSubmissionButton').show();
+				$('#sampleLayout,#enewsImage,#enewsImageDescription,#enewsSubmissionButton').show();
 			});
 		} else { //we have an event request
 			$('#wdn_process_step2').slideToggle(function() {
@@ -75,9 +73,7 @@ WDN.jQuery(document).ready(function($){
 			$('#enewsForm h3').eq(1).removeClass('highlighted');
 			$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
 		});
-		$('#sampleLayout').show();
-		$('#enewsImage').show();
-		$('#enewsSubmissionButton').show();
+		$('#sampleLayout,#enewsImage,#enewsImageDescription,#enewsSubmissionButton').show();
 		return false;
 	}); 
 
@@ -130,7 +126,7 @@ WDN.jQuery(document).ready(function($){
 
 	// When a file is selected from users local machine, do the ajax image upload
 	$('#enewsImage #image').change(function() {
-		$('#upload_area').html('<img src="http://www.unl.edu/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
+		$('#upload_area').html('<img src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
 		if (!submitStory()) {
 			// Need stupid closure here and timeout because storyid from the submitted story is not available immediately
 			(function(){
@@ -168,9 +164,7 @@ WDN.jQuery(document).ready(function($){
 	});
 
 	function backToStep1() {
-		$('#enewsSubmissionButton').hide();
-		$('#sampleLayout').hide();
-		$('#enewsImage').hide();
+		$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#enewsImageDescription').hide();
 		$('#wdn_process_step2').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step1').slideDown();
@@ -181,9 +175,7 @@ WDN.jQuery(document).ready(function($){
 		$('#enewsForm h3').show();
 	};
 	function backToStep2() {
-		$('#enewsSubmissionButton').hide();
-		$('#sampleLayout').hide();
-		$('#enewsImage').hide();
+		$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#enewsImageDescription').hide();
 		$('#wdn_process_step1').slideUp();
 		$('#wdn_process_step3').slideUp();
 		$('#wdn_process_step2').slideDown();
