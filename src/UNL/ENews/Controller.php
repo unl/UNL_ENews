@@ -186,12 +186,16 @@ class UNL_ENews_Controller
                         if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
                             $status = 'approved';
                         }
-                        $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create event form');
+                        $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create story form');
                     }
                 }
 
                 //If image was uploaded but a crop area was never selected, make a default thumbnail
                 if ($file = $story->getFileByUse('originalimage')) {
+                    if (!empty($_POST['originalimage_description'])) {
+                        $file->description = $_POST['originalimage_description'];
+                        $file->save();
+                    }
                     if (!$story->getThumbnail()) {
                         $thumb = $file->saveThumbnail(-1);
                         $story->addFile($thumb);
