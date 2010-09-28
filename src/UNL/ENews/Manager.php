@@ -57,7 +57,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 UNL_ENews_Controller::setObjectFromArray($newsroom, $_POST);
                 $newsroom->save();
 
-                UNL_ENews_Controller::redirect('?view=newsroom');
+                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
         }
     }

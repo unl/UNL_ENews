@@ -207,7 +207,7 @@ class UNL_ENews_Controller
                     exit();
                 }
 
-                self::redirect('?view=thanks&_type='.$_POST['_type']);
+                self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
             case 'file':
                 if ($_FILES['image']['error'] != UPLOAD_ERR_OK) {
                     throw new Exception("Error Uploading File!");
@@ -245,7 +245,7 @@ class UNL_ENews_Controller
                 $story->addFile($file);
 
                 if (!isset($this->options['ajaxupload'])) {
-                    self::redirect('?view=thanks&_type='.$_POST['_type']);
+                    self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
                 }
 
                 //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
@@ -259,7 +259,7 @@ class UNL_ENews_Controller
                     }
                 }
                 //Output the image that will be shown on step 3 of submission page
-                self::redirect('?view=file&id='.$file->id);
+                self::redirect(self::getURL().'?view=file&id='.$file->id);
             case 'thumbnail':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
@@ -289,7 +289,7 @@ class UNL_ENews_Controller
                     exit();
                 }
 
-                self::redirect('?view=thanks&_type=thumbnail');
+                self::redirect(self::getURL().'?view=thanks&_type=thumbnail');
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');

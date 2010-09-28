@@ -43,7 +43,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 
                 $this->{$_POST['_type']}($user);
                 
-                UNL_ENews_Controller::redirect('?view=newsroom');
+                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
         }
     }
