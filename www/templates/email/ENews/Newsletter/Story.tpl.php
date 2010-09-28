@@ -1,5 +1,8 @@
 <?php
-$url = $context->newsletter->getURL().'/'.$context->id;
+$url = '';
+if (isset($context->newsletter)) {
+    $url = $context->newsletter->getURL().'/'.$context->id;
+}
 ?>
 <h4><a style="color:#666; text-decoration:none;" href="<?php echo $url ?>"><?php echo $context->title; ?></a></h4>
 
