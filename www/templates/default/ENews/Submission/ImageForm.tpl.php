@@ -1,4 +1,4 @@
-<form id="enewsImage" name="enewsImage" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data" style="display:none;">
+<form id="enewsImage" name="enewsImage" class="enews energetic" action="#" method="post" enctype="multipart/form-data" style="display:none;">
 <input type="hidden" name="_type" value="file" />
 
 <?php //Story id that gets attached when the story is submitted above ?>

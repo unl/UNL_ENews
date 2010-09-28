@@ -89,7 +89,7 @@ function getValue($object, $field)
 
 
 <h3><span>3</span>Announcement Submission</h3>
-<form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="?view=submit" method="post" enctype="multipart/form-data">
+<form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step3" style="display:none;">
     <legend><span>News Announcement Submission</span></legend>
     <?php //Story id if we are editing ?>

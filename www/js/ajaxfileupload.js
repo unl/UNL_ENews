@@ -1,6 +1,6 @@
 var ajaxUpload = function() {
 	return {
-		url_action : "?view=submit&ajaxupload=yes",
+		url_action : ENEWS_HOME + "?view=submit&ajaxupload=yes",
 		id_element : "upload_area",
 		sampleLayoutImage : "sampleLayoutImage",
 		message : 'Click and drag on the image above to select a thumbnail',

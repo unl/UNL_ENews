@@ -25,6 +25,9 @@
 <title>UNL | Announce <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="UNL Announce" />
+<script type="text/javascript">
+var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
+</script>
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
     echo '<script type="text/javascript">
