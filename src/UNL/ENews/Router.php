@@ -18,7 +18,6 @@ class UNL_ENews_Router
 
         $options = array();
 
-        $options = array();
         switch(true) {
             // Files associated with tstories
             case preg_match('/'.$quotedBase.'file([\d]+)\.jpg$/', $requestURI, $matches):
