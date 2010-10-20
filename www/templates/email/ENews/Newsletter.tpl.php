@@ -18,7 +18,7 @@
         <!-- [ header starts here] -->
         <table cellspacing="0" cellpadding="0" border="0" width="600">
             <tr>
-                <td valign="top"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0"/></td>
+                <td><img src="http://www.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0" valign="bottom" /></td>
             </tr>
         </table>
         <table cellspacing="0" cellpadding="0" border="0" width="600" valign="top">
