@@ -250,18 +250,25 @@ class UNL_ENews_Controller
                 
                 $file = UNL_ENews_File::getById($_POST['fileID']);
                 
-                $file['description'] = $_POST['fileDescription'];
+                $file->description = $_POST['fileDescription'];
                 $file->save();
                 
+                // A story being edited has default thumbnail coords of -1 to ensure the current thumbnail is not overwritten if new coords are not selected
                 if ($_POST['thumbX1'] > 0 &&
                     $_POST['thumbX2'] > 0 &&
                     $_POST['thumbY1'] > 0 &&
                     $_POST['thumbY2'] > 0) {
                     $thumbnail = $file->saveThumbnail($_POST['thumbX1'],$_POST['thumbX2'],$_POST['thumbY1'],$_POST['thumbY2']);
                 }
-                
-                $story->addFile($file);
-                $story->addFile($thumbnail);
+
+                // Get existing story_files connections and add the files if no connection exists
+                $story_files = new UNL_ENews_Story_Files($options= array('story_id'=>$story->id));
+                if (!in_array($file->id, $story_files->getArrayCopy())) {
+                    $story->addFile($file);
+                }
+                if (!in_array($thumbnail->id, $story_files->getArrayCopy())) {
+                    $story->addFile($thumbnail);
+                }
 
                 self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
             case 'file':
