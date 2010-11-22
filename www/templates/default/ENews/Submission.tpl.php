@@ -109,11 +109,18 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     <input type="hidden" name="_type" value="story" />
     <input type="hidden" id="presentation_id" name="presentation_id" value="<?php echo getValue($context, 'presentation_id'); ?>" />
     
-    <input type="hidden" id="fileID" name="fileID" value="" />
-    <input type="hidden" id="thumbX1" name="thumbX1"  />
-    <input type="hidden" id="thumbX2" name="thumbX2"  />
-    <input type="hidden" id="thumbY1" name="thumbY1" value="" />
-    <input type="hidden" id="thumbY2" name="thumbY2" value="" />
+    <?php
+        $originalImage = null;
+        if (!empty($id)) { 
+            $originalImage = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage');
+        }
+     ?>
+    <input type="hidden" id="fileID" name="fileID" value="<?php echo getValue($originalImage, 'id'); ?>" />
+    <input type="hidden" id="fileDescription" name="fileDescription" value="<?php echo getValue($originalImage, 'description'); ?>" />
+    <input type="hidden" id="thumbX1" name="thumbX1" value="-1" />
+    <input type="hidden" id="thumbX2" name="thumbX2" value="-1" />
+    <input type="hidden" id="thumbY1" name="thumbY1" value="-1" />
+    <input type="hidden" id="thumbY2" name="thumbY2" value="-1" />
     
     <ol>
         <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
@@ -130,11 +137,8 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
                 $id = getValue($context, 'id');
                 $newsroom_id = getValue($context->newsroom, 'id');
                 $newsroom_name = getValue($context->newsroom, 'name');
-                $original_image = null;
             ?>
-            <?php if (!empty($id)) :
-                    $original_image = UNL_ENews_Story::getByID($id)->getFileByUse('originalimage');
-                    ?>
+            <?php if (!empty($id)) : ?>
                     <?php foreach (UNL_ENews_Story::getByID($id)->getNewsrooms() as $item) : ?>
                         <select name="newsroom_id[]" disabled="disabled">
                         <option value=""></option>

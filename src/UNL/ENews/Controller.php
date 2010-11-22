@@ -231,22 +231,37 @@ class UNL_ENews_Controller
                     }
                 }
 
-                //If image was uploaded but a crop area was never selected, make a default thumbnail
+                /*If image was uploaded but a crop area was never selected, make a default thumbnail
                 if ($file = $story->getFileByUse('originalimage')) {
-                    if (!empty($_POST['originalimage_description'])) {
-                        $file->description = $_POST['originalimage_description'];
+                    if (!empty($_POST['file_description'])) {
+                        $file->description = $_POST['file_description'];
                         $file->save();
                     }
                     if (!$story->getThumbnail()) {
                         $thumb = $file->saveThumbnail(-1);
                         $story->addFile($thumb);
                     }
-                }
+                }*/
 
-                if (isset($_POST['ajaxupload'])) {
+                /*if (isset($_POST['ajaxupload'])) {
                     echo $story->id;
                     exit();
+                }*/
+                
+                $file = UNL_ENews_File::getById($_POST['fileID']);
+                
+                $file['description'] = $_POST['fileDescription'];
+                $file->save();
+                
+                if ($_POST['thumbX1'] > 0 &&
+                    $_POST['thumbX2'] > 0 &&
+                    $_POST['thumbY1'] > 0 &&
+                    $_POST['thumbY2'] > 0) {
+                    $thumbnail = $file->saveThumbnail($_POST['thumbX1'],$_POST['thumbX2'],$_POST['thumbY1'],$_POST['thumbY2']);
                 }
+                
+                $story->addFile($file);
+                $story->addFile($thumbnail);
 
                 self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
             case 'file':
@@ -254,21 +269,18 @@ class UNL_ENews_Controller
                     throw new Exception("Error Uploading File!");
                 }
 
-                if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
+                /*if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
                     throw new Exception('Cannot get story ('.(int)$_POST['storyid'].') to add file for!');
                 }
 
                 if (!$story->userCanEdit(self::getUser(true))) {
                     throw new Exception('Cannot add files to stories you cannot edit');
-                }
+                }*/
 
                 $file = new UNL_ENews_File;
 
                 $file_data         = $_FILES['image'];
                 $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-
-                //$file_data['description'] = $_POST['description'];
-
 
                 self::setObjectFromArray($file, $file_data);
 
@@ -283,13 +295,13 @@ class UNL_ENews_Controller
                     throw new Exception('Error saving the file');
                 }
 
-                $story->addFile($file);
+                //$story->addFile($file);
 
                 if (!isset($this->options['ajaxupload'])) {
                     self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
                 }
 
-                // We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
+                /* We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
                 foreach ($story->getFiles() as $curfile) {
                     if (preg_match('/^image/', $curfile->type)) {
                         //Check to see that we Don't Delete the File we just uploaded
@@ -298,11 +310,11 @@ class UNL_ENews_Controller
                             $curfile->delete();
                         }
                     }
-                }
+                }*/
                 // Return the id as the response
                 echo $file->id;
                 exit();
-            case 'thumbnail':
+/*          case 'thumbnail':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
                 }
@@ -332,7 +344,7 @@ class UNL_ENews_Controller
                     exit();
                 }
 
-                self::redirect(self::getURL().'?view=thanks&_type=thumbnail');
+                self::redirect(self::getURL().'?view=thanks&_type=thumbnail');*/
             case 'deletenewsletter':
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');

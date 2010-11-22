@@ -120,12 +120,25 @@ var submission = function($) {
 				ajaxUpload.removeIframe();
 			});
 
+			// When the file description filed is edited, copy over to the hidden field in the story form that will be submitted
+			$('#file_description').bind('change', function(){
+				$('#fileDescription').val($(this));
+			});
+
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
 				if (validationErrorMessage = submission.submitStory(true, false)) {
 					$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
 					return false;
 				}
+			});
+
+			// Update the sample layout
+			$('#description').bind('keyup', function() {
+				submission.updatePreview();
+			});
+			$('#title').bind('keyup', function() {
+				submission.updatePreview();
 			});
 
 			$('#next_step3').bind('click', function() {
@@ -137,20 +150,9 @@ var submission = function($) {
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
 				return false;
 			});
-
-			$('#description').bind('keyup', function() {
-				submission.updatePreview();
-			});
-
-			// Update the sample layout
-			$('#title').bind('keyup', function() {
-				submission.updatePreview();
-			});
-
 			$('#enewsForm h3').eq(0).bind('click', function() {
 				submission.goToStep(1)
 			});
-
 			$('#enewsForm h3').eq(1).bind('click', function() {
 				submission.goToStep(2)
 			});
@@ -320,21 +322,6 @@ var submission = function($) {
 					$('input[name=thumbX2]').val(selection.x2);
 					$('input[name=thumbY1]').val(selection.y1);
 					$('input[name=thumbY2]').val(selection.y2);
-					/*
-					var dataString = '_type=thumbnail&ajaxupload=y&storyid=' + $('#enewsSubmission input[name=storyid]').val();
-					dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
-					$.post(
-						window.location.href,
-						dataString,
-						function (data, status) {
-							// Thumbnail updated successfully
-							//$('#sampleLayoutImage img').attr('src', ENEWS_HOME+'?view=file&id='+data);
-							return false;
-						},
-						function (data, status, e) {
-							return e;
-						}
-					);*/
 				}
 			});
 			$('#cropMessage').show();
@@ -383,18 +370,6 @@ var submission = function($) {
 				}
 			}
 
-			// Use placeholder text if user uploads an image first
-			if ($('input#title').val() == '')
-				$('input#title').val('Title');
-			if ($('textarea#description').val() == '')
-				$('textarea#description').val('Story');
-			if ($('input#request_publish_start').val() == '')
-				$('input#request_publish_start').val('1999-01-01');
-			if ($('input#request_publish_end').val() == '')
-				$('input#request_publish_end').val('1999-01-01');
-			if ($('input#sponsor').val() == '')
-				$('input#sponsor').val('Sponsoring Unit');
-
 			// Create the data string to POST
 			var dataString = $('#enewsSubmission').serialize();
 			dataString += '&ajaxupload=yes';
@@ -407,17 +382,6 @@ var submission = function($) {
 						//We get back the id of the newly saved story
 						$('#enewsSubmission #storyid').val(data);
 						$('#enewsImage #storyid').val(data).change();
-						//Clear out the placeholder text
-						if ($('input#title').val() == 'Title')
-							$('input#title').val('');
-						if ($('textarea#description').val() == 'Story')
-							$('textarea#description').val('');
-						if ($('input#request_publish_start').val() == '1999-01-01')
-							$('input#request_publish_start').val('');
-						if ($('input#request_publish_end').val() == '1999-01-01')
-							$('input#request_publish_end').val('');
-						if ($('input#sponsor').val() == 'Sponsoring Unit')
-							$('input#sponsor').val('');
 					},
 					function (data, status, e) {
 						$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
@@ -442,7 +406,6 @@ WDN.jQuery(document).ready(function($){
 	if (editType) { // We're editing, so update where needed
 		submission.editing = true;
 		submission.announcementType = editType;
-		document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = storyID;
 		$('textarea.resizable:not(.processed)').TextAreaResizer();
 		$('#enewsSubmissionButton').show();
 		$('#enewsSaveCopyButton').show();
