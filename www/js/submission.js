@@ -101,14 +101,7 @@ var submission = function($) {
 			// When a file is selected from users local machine, save the story first to get the story's id then...
 			$('#enewsImage #image').bind('change', function() {
 				$('#upload_area').html('<img src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
-				submission.submitStory(false, true);
-				return false;
-			});
-
-			// Ajax upload the image by submitting the enewsImage form
-			$('#enewsImage #storyid').bind('change', function() {
-				var imageForm = document.getElementById("enewsImage");
-				ajaxUpload.upload(imageForm);
+				ajaxUpload.upload(document.getElementById("enewsImage"));
 				return false;
 			});
 
@@ -122,7 +115,7 @@ var submission = function($) {
 
 			// When the file description filed is edited, copy over to the hidden field in the story form that will be submitted
 			$('#file_description').bind('change', function(){
-				$('#fileDescription').val($(this));
+				$('#fileDescription').val($(this).val());
 			});
 
 			// When the submission button is pressed, save whatever changes were made to the story first
@@ -332,7 +325,7 @@ var submission = function($) {
 			var imgWidth = $('#upload_area > img').width();
 			var imgHeight = $('#upload_area > img').height();
 			
-			alert(imgWidth+' '+imgHeight);
+			//alert(imgWidth+' '+imgHeight);
 			
 			if (imgWidth/imgHeight > 4/3) {
 				submission.ias.setOptions({
