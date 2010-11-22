@@ -1,23 +1,23 @@
 #maincontent .story { 
-    clear:both;
-    margin-top:20px;
-    min-height:80px;
+	clear:both;
+	margin-top:20px;
+	min-height:80px;
 }
 #maincontent table .story:hover {
 	outline:2px solid #FA6520;
 }
 #maincontent .newsColumn h4 {
-    font-size: 1em;
-    font-weight:bold;
-    padding:2px;
-    margin:0 0 7px 0;
+	font-size: 1em;
+	font-weight:bold;
+	padding:2px;
+	margin:0 0 7px 0;
 }
 #maincontent .newsColumn h4 a {
-    color:inherit;
+	color:inherit;
 }
 #maincontent .newsColumn h4 a:hover {
-    text-decoration:underline;
-    color:#777;
+	text-decoration:underline;
+	color:#777;
 }
 #maincontent .newsColumn p {
 	padding:2px;
@@ -25,21 +25,21 @@
 	margin-bottom:15px;
 }
 #maincontent .newsColumn a {
-    margin-top:-10px;
-    margin-bottom:5px;	
+	margin-top:-10px;
+	margin-bottom:5px;
 }
 #maincontent #newsColumnIntro {
-    border-bottom:1px dashed #e0e0e0;
-    padding-bottom:10px;
+	border-bottom:1px dashed #e0e0e0;
+	padding-bottom:10px;
 }
 #maincontent #newsColumnIntro h4 {
-    font-size:1.5em;     
-    margin-bottom:0;
+	font-size:1.5em;
+	margin-bottom:0;
 }
 
 
 /* Newsletter Web View
-************************/ 
+************************/
 #maincontent #newsletterWeb .story img {
 	margin-bottom:0;
 }
@@ -56,24 +56,63 @@
 #maincontent .newsColumn {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
 #maincontent table .story {
-    cursor:move;
-    position:relative;
-    margin-top:0px;
-    margin-bottom:10px;
+	cursor:move;
+	position:relative;
+	margin-top:0px;
+	margin-bottom:10px;
+	display:block !important;
 }
 #newsStories .newsColumn {
-    float:left;
-    width: 262px;
+	float:left;
+	width: 273px;
 }
 #newsStories #newsColumn2 {float:right;}
-#maincontent .dragItem {
-    cursor:move;    
+
+/*Story Dragging */
+#maincontent #drag_story_list {margin-top:50px;}
+#maincontent #drag_story_list h3 {
+	postion:relative;
+	background:#eee;
+	border-radius:5px 5px 0px 0px;
+	-moz-border-radius:5px 5px 0px 0px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	padding:5px 8px;
+	border-bottom:2px solid #ccc;
+	margin-top:20px;
 }
+#maincontent #drag_story_list h3 a.showHide {
+	float:right;
+	text-indent:-99999px;
+	background:url(/wdn/templates_3.0/css/content/images/zenboxShowHide.png) no-repeat top right;
+	background-position:0px 0px;
+	display:block;
+	width:20px;
+	height:20px;
+}
+#maincontent #drag_story_list h3 a.showHide.show {
+	background-position: 0 -42px;
+}
+#maincontent #drag_story_list h3 span {
+	font-size:.6em;
+	color:#999;
+}
+#maincontent .dragItem {
+	cursor:move;
+	border-bottom:1px solid #ddd;
+	display:inline-block;
+	padding: 3px 0;
+	width:100%;
+}
+#maincontent .dragItem:hover {
+	background:#f4f4f4;
+}
+
 #maincontent .empty {
-    color: #de8727;
-    padding:30px;
-    text-align:center;
-    opacity:0.45;
+	color: #de8727;
+	padding:30px;
+	text-align:center;
+	opacity:0.45;
 }
 #maincontent .dragItem form,
 #maincontent #drag_story_list .dragItem p,
@@ -82,25 +121,65 @@
 	display:none;
 }
 #maincontent #drag_story_list .dragItem h4 {
-    font-size:0.9em;
-    color:#fff;
-    font-weight:bold;
-    padding:0.3em 0.1em 0.2em 22px;
-    background: #7c7c7c url('images/dragIndicator.png') repeat-y top left;
-    margin:3px 0;
-    border:1px solid #494949;
+	font-size:0.85em;
+	font-weight:bold;
+	margin:3px 0;
+	float:left;
+	display:inline-block;
+	max-width:160px;
+	padding-left:4px;
 }
+
 .dragItem span.requestedDates  {
-    background:#d8d8d8 url('images/tapTopShadow.png') repeat-x top left;
-    color:#494949;
-    font-size:0.7em;
-    padding:1px 5px;
-    position:relative;
-    top:-4px;
-    border-radius:0px 0px 3px 3px;
+	background:#eee;
+	color:#494949;
+	float:right;
+	font-size:0.7em;
+	padding:3px 5px;
+	position:relative;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	display:inline-block;
+	max-width:50px;
+	line-height:0.9em;
+}
+#maincontent .dragItem:hover span.requestedDates {
+	background:#fff;
+}
+.dragItem span.dateRange {
+	float:left;
+	text-align:center;
+}
+.dragItem span.dateRange:first-of-type{
+	padding-right:2px;
+	border-right:1px solid #ddd;
+}
+.dragItem span.dateRange:last-of-type{
+	padding-left:3px;
+}
+.dragItem span.dateRange .month{
+	display:block;
+	text-transform:uppercase;
+	color:#999999;
+}
+.dragItem span.dateRange .day{
+	text-align:center;
+	font-size:120%;
+	font-weight:bold;
 }
 #maincontent .filled {
-    border:none;
+	border:none;
+}
+/* Ads */
+#maincontent .dragItem.ad img {
+	width:220px !important;
+	height:inherit !important;
+	float:left;
+}
+.dragItem.ad span.requestedDates {
+	position:absolute;
+	right:10px;
 }
 
 /* Story inline controls
@@ -136,16 +215,16 @@
 	vertical-align:middle;
 	background-color:rgb(253,229,210);
 	background-image:-webkit-gradient(
-	    linear,
-	    left top,
-	    left bottom,
-	    color-stop(0.2, rgb(253,229,210)),
-	    color-stop(1, rgb(253,169,103))
+		linear,
+		left top,
+		left bottom,
+		color-stop(0.2, rgb(253,229,210)),
+		color-stop(1, rgb(253,169,103))
 	);
 	background-image:-moz-linear-gradient(
-	    center top,
-	    rgb(253,229,210) 20%,
-	    rgb(253,169,103) 100%
+		center top,
+		rgb(253,229,210) 20%,
+		rgb(253,169,103) 100%
 	);
 	font-size:0.8em;
 	font-weight:bold;
@@ -165,6 +244,9 @@
 .storyTools a.remove span {
 	background:url('images/toolRemove.png') no-repeat 50% 50%;
 }
+.storyTools a.layout span {
+	background:url('images/toolLayout.png') no-repeat 50% 50%;
+}
 
 
 /* jQuery.UI Styles 
@@ -172,9 +254,9 @@
 .ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
 .ui-sortable-placeholder * { visibility: hidden; }
 .ui-datepicker-trigger {
-    float:right;
-    left:5px;
-    position:relative;
-    top:-23px;
-    cursor:pointer;
+	float:right;
+	left:5px;
+	position:relative;
+	top:-23px;
+	cursor:pointer;
 }

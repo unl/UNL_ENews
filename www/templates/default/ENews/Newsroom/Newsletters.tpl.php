@@ -1,3 +1,8 @@
+<script type="text/javascript">
+WDN.jQuery('document').ready(function(){
+    WDN.jQuery("a.gaStats").colorbox();
+});
+</script>
 <table class="zentable bright">
     <thead>
         <tr>
@@ -6,13 +11,16 @@
             <th>Edit</th>
             <th>Send</th>
             <th>Send Preview</th>
+            <th>Stats</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($context as $newsletter): ?>
+        <?php foreach ($context as $newsletter):
+            $newsletterDate = strtotime($newsletter->release_date);
+        ?>
         <tr>
-            <td><?php echo str_replace(' 00:00:00', '', $newsletter->release_date); ?></td>
+            <td><?php echo date('D. M d, Y', $newsletterDate); ?></td>
             <td><?php echo $newsletter->subject; ?></td>
             <td><a href="?view=preview&amp;id=<?php echo $newsletter->id; ?>">Edit</a></td>
             <td>
@@ -24,6 +32,11 @@
             </td>
             <td>
                 <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
+            </td>
+            <td>
+                <?php if ($newsletter->distributed): ?>
+                <a href="?view=gastats&start_date=<?php echo date('Y-m-d', $newsletterDate); ?>&end_date=<?php echo date('Y-m-d', strtotime(date('Y-m-d', $newsletterDate)."+1 week")); ?>&newsletter=<?php echo $newsletter->id; ?>&format=partial" class="gaStats">Stats</a>
+                <?php endif; ?>
             </td>
             <td>
                 <form action="?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">

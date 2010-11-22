@@ -31,11 +31,19 @@ if (UNL_ENews_Newsroom::getByID(1) === false ) {
     if (!$result) {
         echo 'There was an error inserting the sample data!<br />';
         echo $mysqli->error;
+        $mysqli->close();
         exit();
     }
-    $mysqli->close();
 }
 
+$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/story_presentations.sql'));
+if (!$result) {
+    echo 'There was an error updating the story presentation types!<br />';
+    echo $mysqli->error;
+    exit();
+}
+
+/*
 // @todo add a newsroom for all the others here, unltoday, scarlet, etc?
 if (UNL_ENews_Newsroom::getByID(2) === false) {
     $newsroom            = new UNL_ENews_Newsroom();
@@ -57,19 +65,18 @@ if (UNL_ENews_Newsroom::getByID(4) === false) {
     $newsroom->shortname = 'newsrelease';
     $newsroom->save();
 }
-
+*/
 echo 'Adding newsroom administrators&hellip;<br />';
 // Now let's set up some newsroom admins
 foreach (array(
     'bbieber2',
-    's-mjuhl2',
     'smeranda2',
     'rcrisler1',
     'acoleman1',
     'kbartling2',
     'erasmussen2',
     'tfedderson2',
-	's-mfairch4',
+    's-mfairch4',
     ) as $uid) {
 
     echo '* adding '.$uid.'&hellip;';
@@ -80,5 +87,50 @@ foreach (array(
     echo 'done.<br />';
 
 }
+
+echo 'Adding presentation_id field to stories table<br />';
+$result = $mysqli->query("ALTER TABLE `stories` ADD `presentation_id` INT( 10 ) NOT NULL AFTER `website`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already exists but that\'s ok!<br />';
+    } else {
+        echo $mysqli->error;
+        exit();
+    }
+} else {
+    echo 'Setting existing stories to presentation_id of 1<br />';
+    $result = $mysqli->query("UPDATE stories SET presentation_id = 1;");
+    if (!$result) {
+        echo 'Error setting default presentations on existing stories: ';
+        echo $mysqli->error;
+        exit();
+    }
+}
+echo 'Adding description field to files table<br />';
+$result = $mysqli->query("ALTER TABLE `files` ADD `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `use_for`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already exists but that\'s ok!<br />';
+    }
+}
+
+echo 'Correcting default presentation type field&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `story_presentations` CHANGE `default` `isdefault` TINYINT( 1 ) NOT NULL ;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been corrected<br />';
+    }
+}
+
+echo 'Adding presentation_id field to newsletter_stories&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `newsletter_stories` ADD `presentation_id` INT( 10 ) NULL AFTER `story_id`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />';
+    }
+}
+
+
+$mysqli->close();
 
 echo 'Upgrade complete!';

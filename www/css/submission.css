@@ -1,55 +1,52 @@
 div#enewsForm {
-    width:940px;
-    background:#f7f7f7;
+	width:940px;
+	background:#f7f7f7;
 }
 
 /* Submission Form h3
 *************/
 #maincontent div#enewsForm h3 {
-    background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
-    padding:5px 10px;
-    border:1px solid #dadde3;
-    border-top:1px solid #fff;
-    border-bottom:1px solid #ccc;
-    font-size:1.5em;
-    color:#999;
+	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
+	padding:5px 10px;
+	border:1px solid #dadde3;
+	border-top:1px solid #fff;
+	border-bottom:1px solid #ccc;
+	font-size:1.5em;
+	color:#999;
 }
 #maincontent div#enewsForm h3:first-of-type {
-    border-top:1px solid #dadde3;   
+	border-top:1px solid #dadde3;
 }
 #maincontent div#enewsForm h3 span {
-    background:#fff;
-    padding:1px 4px 1px 4px;
-    border-radius:10x;  
-    margin-right:10px;
-    margin-top:0px;
-    font-size:12px;
-    float:left;
-    font-weight:bold;
-    border:1px solid #fff;
+	background:#fff;
+	padding:1px 4px 1px 4px;
+	border-radius:10x;  
+	margin-right:10px;
+	margin-top:0px;
+	font-size:12px;
+	float:left;
+	font-weight:bold;
+	border:1px solid #fff;
 }
 #maincontent div#enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
 #maincontent div#enewsForm h3.highlighted span {
-    border:1px solid #e19c2b;
-    background:#de8727;
-    color:#fff;
+	border:1px solid #e19c2b;
+	background:#de8727;
+	color:#fff;
 }
 #maincontent div#enewsForm h3.highlighted + fieldset,
 #maincontent div#enewsForm h3.highlighted + fieldset + fieldset {
-    border:1px solid #b8afa1;
-    border-top:none;
-    background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
+	border:1px solid #b8afa1;
+	border-top:none;
+	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
 }
 #maincontent div#enewsForm h3 span.announceType {
-    border:none;
-    float:right;
-    background:#028a02;
-    margin-top:3px; 
-    color:#fff;
+	border:none;
+	float:right;
+	background:#028a02;
+	margin-top:3px; 
+	color:#fff;
 }
-
-
-
 
 /* Resizable Textarea
 ************************/
@@ -91,81 +88,83 @@ div.grippie {
 	color:#fff;
 }
 
-
-
 form#enewsSubmission {
-    float:left;
-    width:470px;
-    margin-right:10px;	
+	float:left;
+	width:470px;
+	margin-right:10px;
 }
-
-
 
 /* Submission Form Display Sample
 **********************/
 #sampleLayout {
-    float:right;    
-    margin:20px 10px 0px 10px;
-    width:430px;
+	float:right;
+	margin:20px 10px 0px 10px;
+	width:430px;
 }
 #sampleLayout > h5 {
-    font-size:1.3em;
-    font-family:"Lucida Grande",Verdana,Arial;
-    color:#494949;	
-    padding-bottom:0;
+	font-size:1.3em;
+	font-family:"Lucida Grande",Verdana,Arial;
+	color:#494949;
+	padding-bottom:0;
 }
 #sampleLayoutInner {
-    background:#fff;
-    padding:10px;
-    border:1px solid #b8afa1;
+	background:#fff;
+	padding:10px;
+	border:1px solid #b8afa1;
 }
 #sampleLayoutImage {
+	height:72px;
 	width:96px;
-	max-height:78px;
-    overflow:hidden;	
+	overflow:hidden;
 }
 #sampleLayoutImage img {
-    height:auto;
-    width:auto;
-    max-width:96px;
-    cursor:default !important;  
+	height:72px;
+	width:96px;
+	cursor:default !important;
 }
 
-/* Image Upload Preview 
+/* Image Upload Preview
 ********************/
 form#enewsImage {
-    float:right;
-    clear:right;
-    width:430px;
-    border:1px solid #b8afa1;
-    background:#fff;
-    margin:30px 10px;
+	float:right;
+	clear:right;
+	width:430px;
+	border:1px solid #b8afa1;
+	background:#fff;
+	margin:30px 10px;
 }
 #upload_area {
-    text-align:center;
-    margin-bottom:10px;
+	text-align:center;
+	margin:10px 0;
 }
 #upload_area img {
-    height:auto;
-    width:auto;
-    max-width:410px;
-    cursor:default !important;  
-}
-#upload_area span {
-	display:block;
-    margin:10px 0 8px 0;
-    background:#F8F9D1;
-    color:#A5690C;
-    font-size:1.1em;
-    padding:10px;
-    border:1px solid #CAD094;
+	height:auto;
+	width:auto;
+	max-width:410px;
+	cursor:default !important;
 }
 #upload_area div {
-    border:2px dashed #de8727;
-    background:#fcfcfc;
-    text-align:center;
-    margin:0 auto;
-    padding:3px;
-    width:100px;
-    min-height:90px;
+	border:2px dashed #de8727;
+	background:#fcfcfc;
+	text-align:center;
+	margin:0 auto;
+	padding:3px;
+	width:100px;
+	min-height:90px;
+}
+#cropMessage {
+	display:none;
+	margin:10px 0 8px 0;
+	background:#F8F9D1;
+	color:#A5690C;
+	font-size:1.1em;
+	padding:10px;
+	border:1px solid #CAD094;
+}
+
+/******** Submit Buttons ********/
+.submissionButton {
+	margin:20px 0;
+	padding-bottom:20px;
+	clear:both;
 }

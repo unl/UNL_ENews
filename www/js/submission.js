@@ -1,3 +1,435 @@
+var submission = function($) {
+	return {
+		utm_campaign : 'UNL_ENews',
+
+		utm_medium : 'email',
+
+		utm_content : '',
+
+		utm_source : 'eNews',
+
+		urlPreview : false,
+
+		characterLimit : 300,
+
+		editting : false,
+
+		announcementType : false,
+
+		initialize : function() {
+			$('.hasDatepicker').each(function() {
+				$(this).attr({'autocomplete' : 'off'});
+			});
+			$('#enewsForm h3').eq(0).css('cursor','pointer');
+			$('#enewsForm h3').eq(1).css('cursor','pointer');
+			submission.bindActions();
+
+			// If we're editting, then call the presenation function
+			if(submission.editting){
+				submission.determinePresentation(submission.announcementType);
+				submission.updatePreview();
+			};
+		},
+
+		determinePresentation : function(announcementType) {
+			submission.announcementType = announcementType;
+			switch (announcementType) {
+			case 'news' :
+				submission.prepareNewsSubmission();
+				break;
+			case 'event' :
+				submission.prepareEventSubmission();
+				break;
+			case 'ad' :
+				submission.prepareAdSubmission();
+				break;
+			}
+		},
+
+		bindActions : function() {
+			$("#date").bind('change', function() {// Set up the 'Event' story type date select box
+				// Update the story end publish date to match the event date
+				$('#request_publish_end').attr('value', $(this).val());
+				submission.findEvents($(this).val());
+			});
+
+			$('select#event').bind('change', function(){
+				$('#website').attr('value', $(this).val());
+				// Get the details for this specific event
+				WDN.get($(this).val()+'?format=xml', null, function(data) {
+					// Set the title and description from data we know
+					$('form.enews input[name=title]').val($(data).find('EventTitle').text());
+					$('form.enews textarea[name=description]').val($(data).find('Description').text());
+					// Trigger the keyup on these fields so the preview is updated
+					$('#title').keyup();
+					$('#description').keyup();
+				}, 'xml');
+			});
+
+			$('ol.option_step a').bind('click', function(){// Sliding action for the three part form
+				var a = $(this).attr('id');
+				announcementType = a.replace('Announcement', '');
+				submission.determinePresentation(announcementType);
+				return false;
+			});
+
+			// Make a GoURL with campaign tagging for the Supporting Website
+			$('#website').bind('change', function() {
+				var website = $.trim($(this).val());
+				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
+					website = 'http://' + website;
+				}
+				var goURLPrefix = RegExp('http://go.unl.edu');
+				var eventsPrefix = RegExp('http://events.unl.edu');
+				if (!goURLPrefix.test(website) && !eventsPrefix.test(website)) {
+					submission.createGoURL(website);
+				} else {
+					if (!submission.urlPreview) {
+						submission.updatePreview();
+						submission.urlPreview = true;
+					}
+				}
+			});
+
+			$('#addAnotherNewsroom').bind('click', function() {
+				var dropdown = $('#newsroom_id_dropdown').html();
+				$(this).before(dropdown);
+				$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>');
+				return false;
+			});
+
+			// When a file is selected from users local machine, save the story first to get the story's id then...
+			$('#enewsImage #image').bind('change', function() {
+				$('#upload_area').html('<img src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
+				submission.submitStory(false, true);
+				return false;
+			});
+
+			// Ajax upload the image by submitting the enewsImage form
+			$('#enewsImage #storyid').bind('change', function() {
+				var imageForm = document.getElementById("enewsImage");
+				ajaxUpload.upload(imageForm);
+				return false;
+			});
+
+			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
+			$('#enewsSubmission #fileID').bind('change', function() {
+				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" onload="submission.loadImageCrop();" />';
+				$('#upload_area').html(imgString);
+				$('#sampleLayoutImage').html(imgString);
+				ajaxUpload.removeIframe();
+			});
+
+			// When the submission button is pressed, save whatever changes were made to the story first
+			$('form#enewsSubmission').bind('submit', function() {
+				if (validationErrorMessage = submission.submitStory(true, false)) {
+					$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
+					return false;
+				}
+			});
+
+			$('#next_step3').bind('click', function() {
+				$('#wdn_process_step2').slideToggle();
+				$('#wdn_process_step3').slideToggle(function() {
+					$('#enewsForm h3').eq(1).removeClass('highlighted');
+					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
+				});
+				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
+				return false;
+			});
+
+			$('#description').bind('keyup', function() {
+				submission.updatePreview();
+			});
+
+			// Update the sample layout
+			$('#title').bind('keyup', function() {
+				submission.updatePreview();
+			});
+
+			$('#enewsForm h3').eq(0).bind('click', function() {
+				submission.goToStep(1)
+			});
+
+			$('#enewsForm h3').eq(1).bind('click', function() {
+				submission.goToStep(2)
+			});
+		},
+
+		goToStep : function(step) {
+			$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
+			switch(step){
+			case 1:
+				oppStep = 2;
+				break;
+			case 2: 
+				oppStep = 1;
+				break;
+			}
+			$('#wdn_process_step'+oppStep).slideUp();
+			$('#wdn_process_step'+step).slideDown();
+			$('#enewsForm h3').eq(oppStep-1).removeClass("highlighted");
+			$('#enewsForm h3').eq(step-1).addClass("highlighted");
+			$('#wdn_process_step3').slideUp();
+			$('#enewsForm h3').eq(2).removeClass("highlighted");
+			$('#enewsForm h3 span.announceType').remove();
+			$('#enewsForm h3').show();
+		},
+
+		prepareNewsSubmission : function(){
+			$('#wdn_process_step1').slideToggle();
+			$('#enewsForm h3').eq(1).hide();
+			$('#wdn_process_step3').slideToggle(function() {
+				$('#enewsForm h3').eq(0).removeClass('highlighted');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
+				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
+			});
+			submission.setPresentationId('news');
+		},
+
+		prepareEventSubmission : function(){
+			$('#wdn_process_step1').slideToggle();
+			submission.goToStep(2);
+			submission.setPresentationId('event');
+		},
+
+		prepareAdSubmission : function(){
+			$('#wdn_process_step1').slideToggle();
+			$('#enewsForm h3').eq(1).hide();
+			$('#wdn_process_step3').slideToggle(function() {
+				$('#enewsForm h3').eq(0).removeClass('highlighted');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">Advertisement</span>');
+				$('#enewsImage,#enewsSubmissionButton').show();
+			});
+			submission.setPresentationId('ad');
+			submission.setupAd();
+			
+		},
+		
+		setupAd : function(){ //let's tweak the main form to streamline when we're doing a simple ad
+			$('#sampleLayout').hide();
+			$('#upload_area span').remove();
+			$('#full_article').parents('li').hide();
+			$('label[for="title"]').html('Advertisement Name<span class="required">*</span>');
+			$('label[for="image"]').html('Image advertisement <span class="helper">Must be 273px X 104px</span>')
+		},
+
+		setPresentationId : function(value){
+			$('#presentation_id').attr('value', ENEWS_DEFAULT_PRESENTATIONID[value]);
+		},
+
+		findEvents : function(selectedDate) {
+			var date = selectedDate.split(/-/);
+			// Grab the latest events for this date and populate select box
+			WDN.get('http://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
+				function(eventsXML){
+					$("#event").html('<option value="NewEvent">New Event</option>');
+					$(eventsXML).find('Event').each(function(){
+						var url = $(this).find('WebPage URL:contains(events.unl.edu)').first();
+						$("#event").append('<option value="'+url.text()+'">' + $(this).find('EventTitle').text() + '</option>');
+					});
+				},
+				'xml'
+			);
+		},
+
+		updatePreview : function() {
+			$('#sampleLayout p').text(function(index){
+				if ($('#description').val().length) {
+					return $('#description').val().substring(0,300);
+				}
+			});
+			$('#sampleLayout h4').text(function(index){
+				if ($('#title').val().length) {
+					return $('#title').val();
+				}
+			});
+			$('#sampleLayout a').text(function(index){
+				return $('#website').val();
+			});
+			var demoText = $('#description').val();
+			if ((submission.characterLimit - demoText.length) < (submission.characterLimit * .08)) {
+				$('label[for="description"] span.helper strong').addClass('warning');
+			} else {
+				$('label[for="description"] span.helper strong').removeClass('warning');
+			}
+			if (demoText.length > submission.characterLimit) {
+				demoText = demoText.substr(0,submission.characterLimit);
+				$(this).val(demoText);
+			}
+			$('label[for="description"] span.helper strong').text(submission.characterLimit - demoText.length);
+		},
+
+		createGoURL : function(url) {
+			$('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
+			submission.utm_content = $('#title').val();
+			submission.utm_source = submission.announcementType;
+
+			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_content="+submission.utm_content;
+
+			WDN.socialmediashare.createURL(
+				WDN.socialmediashare.buildGAURL(url, gaTagging),
+				function(data) {
+					$('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
+					submission.addURLtoPreview(data);
+				},
+				function(){
+					$('#website').attr('value', website).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
+					submission.addURLtoPreview(website);
+				}
+			);
+		},
+
+		loadImageCrop : function() {
+			WDN.loadJS(ENEWS_HOME+'/js/jquery.imgareaselect.dev.js',function() {
+				submission.clearImageCrop();
+				submission.setUpImageCrop();
+			});
+		},
+
+		clearImageCrop : function() {
+			if (submission.ias) {
+				submission.ias.setOptions({disable:true,hide:true,remove:true});
+				submission.ias.update();
+			}
+			$('#cropMessage').hide();
+			$('#file_description').attr('disabled','disabled');
+		},
+
+		setUpImageCrop : function() {
+			var preview = function(img, selection) {
+				var scaleX = 96 / (selection.width || 1);
+				var scaleY = 72 / (selection.height || 1);
+				$('#sampleLayoutImage > img').css({
+					width: Math.round(scaleX * imgWidth) + 'px',
+					height: Math.round(scaleY * imgHeight) + 'px',
+					marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+					marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+				}); 
+			}
+			
+			submission.ias = $('#upload_area img').imgAreaSelect({
+				instance: true,
+				enable : true,
+				hide : false,
+				aspectRatio : "4:3",
+				handles : true,
+				onSelectChange: preview,
+				onSelectEnd : function(img, selection) {
+					$('input[name=thumbX1]').val(selection.x1);
+					$('input[name=thumbX2]').val(selection.x2);
+					$('input[name=thumbY1]').val(selection.y1);
+					$('input[name=thumbY2]').val(selection.y2);
+					/*
+					var dataString = '_type=thumbnail&ajaxupload=y&storyid=' + $('#enewsSubmission input[name=storyid]').val();
+					dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
+					$.post(
+						window.location.href,
+						dataString,
+						function (data, status) {
+							// Thumbnail updated successfully
+							//$('#sampleLayoutImage img').attr('src', ENEWS_HOME+'?view=file&id='+data);
+							return false;
+						},
+						function (data, status, e) {
+							return e;
+						}
+					);*/
+				}
+			});
+			$('#cropMessage').show();
+			$('#file_description').removeAttr('disabled');
+			
+			// Get the width/height of img, this doesn't work if it's before imgAreaSelect init (?)
+			$('#upload_area > img').removeAttr('width').removeAttr('height');
+			var imgWidth = $('#upload_area > img').width();
+			var imgHeight = $('#upload_area > img').height();
+			
+			alert(imgWidth+' '+imgHeight);
+			
+			if (imgWidth/imgHeight > 4/3) {
+				submission.ias.setOptions({
+					maxHeight : imgHeight,
+					x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
+					y1 : imgHeight*(1/4),
+					x2 : (imgWidth/2)+((imgHeight/2)*(4/3)/2),
+					y2 : imgHeight*(3/4)
+				});
+			} else {
+				submission.ias.setOptions({
+					maxWidth : imgWidth,
+					x1: imgWidth*(1/4),
+					y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
+					x2: imgWidth*(3/4),
+					y2: (imgHeight/2)+((imgWidth/2)*(3/4)/2)
+				});
+			}
+			submission.ias.update();
+		},
+
+		submitStory : function(validate, ajax){
+			if (validate) {
+				var message = '';
+				$('input.required,textarea.required').each(function() {
+					if (this.value == '') {
+						message = 'Required fields cannot be left blank';
+					}
+				});
+				if ($("input#request_publish_start").val() > $("input#request_publish_end").val()) {
+					message = '"Last date this could run" must be after or equal to "What date would like this to run?"';
+				}
+				if (message != '') {
+					return message;
+				}
+			}
+
+			// Use placeholder text if user uploads an image first
+			if ($('input#title').val() == '')
+				$('input#title').val('Title');
+			if ($('textarea#description').val() == '')
+				$('textarea#description').val('Story');
+			if ($('input#request_publish_start').val() == '')
+				$('input#request_publish_start').val('1999-01-01');
+			if ($('input#request_publish_end').val() == '')
+				$('input#request_publish_end').val('1999-01-01');
+			if ($('input#sponsor').val() == '')
+				$('input#sponsor').val('Sponsoring Unit');
+
+			// Create the data string to POST
+			var dataString = $('#enewsSubmission').serialize();
+			dataString += '&ajaxupload=yes';
+
+			if (ajax) {
+				$.post(
+					window.location.href,
+					dataString,
+					function(data,status) {
+						//We get back the id of the newly saved story
+						$('#enewsSubmission #storyid').val(data);
+						$('#enewsImage #storyid').val(data).change();
+						//Clear out the placeholder text
+						if ($('input#title').val() == 'Title')
+							$('input#title').val('');
+						if ($('textarea#description').val() == 'Story')
+							$('textarea#description').val('');
+						if ($('input#request_publish_start').val() == '1999-01-01')
+							$('input#request_publish_start').val('');
+						if ($('input#request_publish_end').val() == '1999-01-01')
+							$('input#request_publish_end').val('');
+						if ($('input#sponsor').val() == 'Sponsoring Unit')
+							$('input#sponsor').val('');
+					},
+					function (data, status, e) {
+						$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
+						return e;
+					}
+				);
+			}
+			return false;
+		}
+	};
+}(WDN.jQuery);
+
 WDN.jQuery(document).ready(function($){
 	// Set up date pickers on all inputs with datepicker class
 	$("input.datepicker").datepicker({
@@ -5,344 +437,16 @@ WDN.jQuery(document).ready(function($){
 		buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
 		buttonImageOnly: true,
 		dateFormat: 'yy-mm-dd',
-		defaultDate: this.value});
-	$('.hasDatepicker').each(function() {
-		$(this).attr({'autocomplete' : 'off'});
-		});
-
-	// Set up the 'Event' story type date select box
-	$("#date").change(function(){
-
-		// Update the story end publish date to match the event date
-		$('#request_publish_end').attr('value', $(this).val());
-
-		var date = $(this).val().split(/-/);
-
-		// Grab the latest events for this date and populate select box
-		WDN.get('http://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
-			function(eventsXML){
-				$("#event").html('<option value="NewEvent">New Event</option>');
-				$(eventsXML).find('Event').each(function(){
-					$("#event").append('<option value="'+$(this).find('WebPage URL').text()+'">' + $(this).find('EventTitle').text() + '</option>');
-				});
-			}, 'xml');
-
+		defaultDate: this.value
 	});
-
-	// When an event has been selected from the drop down
-	$('select#event').change(function(){
-		$('form.enews input[name=website]').val($(this).val());
-
-		// Get the details for this specific event
-		WDN.get($(this).val()+'?format=xml', null, function(data) {
-
-			// Set the title and description from data we know
-			$('form.enews input[name=title]').val($(data).find('EventTitle').text());
-			$('form.enews textarea[name=description]').val($(data).find('Description').text());
-
-			// Trigger the keyup on these fields so the preview is updated
-			$('#title').keyup();
-			$('#description').keyup();
-
-		}, 'xml');
-
-	});
-
-	// Sliding action for the three part form
-	$('ol.option_step a').click(function() {
-		$('#wdn_process_step1').slideToggle();
-		if ($(this).attr('id') == 'newsAnnouncement') { //the user has selected news, so hide the event date panel and show the news form
-			$('#enewsForm h3').eq(1).hide();
-			$('#wdn_process_step3').slideToggle(function() {
-				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
-				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
-			});
-		} else { //we have an event request
-			$('#wdn_process_step2').slideToggle(function() {
-				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(1).addClass('highlighted');
-			});
-		}
-		return false;
-	});
-
-	$('#next_step3').click(function() {
-		$('#wdn_process_step2').slideToggle();
-		$('#wdn_process_step3').slideToggle(function() {
-			$('#enewsForm h3').eq(1).removeClass('highlighted');
-			$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
-		});
-		$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
-		return false;
-	}); 
-
-	$('#enewsForm h3').eq(0).css('cursor','pointer').click(backToStep1);
-	$('#enewsForm h3').eq(1).css('cursor','pointer').click(backToStep2);
-
-
-	//Update the sample layout
-	$('#title').keyup(function() {
-		var demoTitle = $(this).val();
-		$('#sampleLayout h4').text(function(index){
-			return demoTitle;
-		});
-	});
-	var characterLimit = 300;
-	$('#description').keyup(function() {
-		var demoText = $(this).val();
-		if ((characterLimit - demoText.length) < (characterLimit * .08)) {
-			$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').addClass('warning');
-		} else {
-			$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').removeClass('warning');
-		}
-		if (demoText.length > characterLimit) {
-			demoText = demoText.substr(0,characterLimit);
-			$(this).val(demoText);
-		}
-		$('#sampleLayout p').text(function(index){
-			return demoText.substring(0,300);
-		});
-		$(this).parents('.resizable-textarea').prev('label').children('span').children('strong').text(characterLimit - demoText.length);
-	});
-
-	// Make a GoURL with campaign tagging for the Supporting Website
-	$('#website').change(function() {
-		website = $.trim($(this).val());
-		if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
-			website = "http://" + website;
-		}
-		
-		var goURLPrefix = RegExp('http://go.unl.edu');
-		var eventsPrefix = RegExp('http://events.unl.edu');
-		if (!goURLPrefix.test(website) && !eventsPrefix.test(website)) {
-			submission.createGoURL(website);
-		} else {
-			if (!submission.urlPreview) {
-				submission.addURLtoPreview(website);
-			}
-		}
-	});
-
-	// When a file is selected from users local machine, do the ajax image upload
-	$('#enewsImage #image').change(function() {
-		$('#upload_area').html('<img src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" alt="Loading..." />');
-		if (!submitStory()) {
-			// Need stupid closure here and timeout because storyid from the submitted story is not available immediately
-			(function(){
-				// Load the ImageAreaSelect plugin and remove the previous crop selection area if it exists
-				WDN.loadJS("js/jquery.imgareaselect.pack.js",function(){
-					$('#upload_area img').imgAreaSelect({
-						disable:true,
-						hide:true
-					});
-				},true,true);
-				// Ajax up the image
-				var myform = document.getElementById("enewsImage");
-				setTimeout(function(){
-						ajaxUpload.upload(myform);
-						$('#file_description').removeAttr('disabled');
-					},1000);
-			})();
-		} else {
-			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
-		}
-
-		return false;
-	});
-
-	$('#addAnotherNewsroom').click(function(){
-		var dropdown = $('#newsroom_id_dropdown').html();
-		$(this).before(dropdown);
-		$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>');
-		return false;
-	});
-
-	// When the submission button is pressed, save whatever changes were made to the story first
-	$('form#enewsSubmission').submit(function(){
-		if (message = submitStory(true)) {
-			$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+message+'</p></div></div>');
-			return false;
-		}
-	});
-
-	function backToStep1() {
-		$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
-		$('#wdn_process_step2').slideUp();
-		$('#wdn_process_step3').slideUp();
-		$('#wdn_process_step1').slideDown();
-		$('#enewsForm h3').eq(2).removeClass("highlighted");
-		$('#enewsForm h3').eq(1).removeClass("highlighted");
-		$('#enewsForm h3').eq(0).addClass("highlighted");
-		$('#enewsForm h3 span.announceType').remove();
-		$('#enewsForm h3').show();
-	};
-	function backToStep2() {
-		$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
-		$('#wdn_process_step1').slideUp();
-		$('#wdn_process_step3').slideUp();
-		$('#wdn_process_step2').slideDown();
-		$('#enewsForm h3').eq(2).removeClass("highlighted");
-		$('#enewsForm h3').eq(0).removeClass("highlighted");
-		$('#enewsForm h3').eq(1).addClass("highlighted");
-		$('#enewsForm h3 span.announceType').remove();
-		$('#enewsForm h3').show();
-	};
-	
-	function submitStory(validate) {
-		
-		var storyid = $("input#storyid").val();
-		var request_publish_start = $("input#request_publish_start").val();
-		var request_publish_end = $("input#request_publish_end").val();
-		
-		var message = '';
-		$('input.required,textarea.required').each(function(){
-			if (this.value == '') {
-				message = 'Required fields cannot be left blank';
-			}
-		});
-		if (request_publish_start > request_publish_end) {
-			message = '"Last date this could run" must be after or equal to "What date would like this to run?"';
-		}
-		if (validate && message != '') {
-			return message;
-		}
-		
-		//Use placeholder text if user uploads an image first
-		if ($('input#title').val() == '')
-			$('input#title').val('Title');
-		if ($('textarea#description').val() == '')
-			$('textarea#description').val('Story');
-		if ($('input#request_publish_start').val() == '')
-			$('input#request_publish_start').val('1999-01-01');
-		if ($('input#request_publish_end').val() == '')
-			$('input#request_publish_end').val('1999-01-01');
-		if ($('input#sponsor').val() == '')
-			$('input#sponsor').val('Sponsoring Unit');
-		
-		//Create the data string to POST
-		var dataString = $('#enewsSubmission').serialize();
-		dataString += '&ajaxupload=yes';
-		
-		$.ajax({
-			type: "POST",
-			//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
-			xhr: (window.ActiveXObject) ?
-				function() {
-					try {
-						return new window.ActiveXObject("Microsoft.XMLHTTP");
-					} catch(e) {}
-				} :
-				function() {
-					return new window.XMLHttpRequest();
-				},
-			url: $('#enewsSubmission').attr('action'),
-			data: dataString,
-			success: function(data,status) {
-				//We get back the id of the newly saved story
-				document.enewsSubmission.storyid.value = data;
-				document.enewsImage.storyid.value = data;
-				//Clear out the placeholder text
-				if ($('input#title').val() == 'Title')
-					$('input#title').val('');
-				if ($('textarea#description').val() == 'Story')
-					$('textarea#description').val('');
-				if ($('input#request_publish_start').val() == '1999-01-01')
-					$('input#request_publish_start').val('');
-				if ($('input#request_publish_end').val() == '1999-01-01')
-					$('input#request_publish_end').val('');
-				if ($('input#sponsor').val() == 'Sponsoring Unit')
-					$('input#sponsor').val('');
-			},
-			error: function (data, status, e) {
-				return e;
-			}
-		});
-		
-		return false;
-	};
+	if (editType) { // We're editing, so update where needed
+		submission.editting = true;
+		submission.announcementType = editType;
+		document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = storyID;
+		$('textarea.resizable:not(.processed)').TextAreaResizer();
+		$('#enewsSubmissionButton').show();
+		$('#enewsSaveCopyButton').show();
+		submission.updatePreview();
+	}
+	submission.initialize();
 });
-
-
-
-
-
-
-
-
-/**
- * Namespace for submission javascript.
- */
-var submission = function() {
-	return {
-		utm_campaign : 'UNL_ENews',
-		
-		utm_medium : 'email',
-		
-		utm_content : '',
-		
-		utm_source : 'eNews',
-		
-		urlPreview : false,
-		
-		createGoURL : function(url) {
-			WDN.jQuery('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
-			//WDN.jQuery('#website').attr('disabled','disabled');
-			submission.utm_content = WDN.jQuery('#title').val();
-			
-			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_content="+submission.utm_content;
-			
-			WDN.socialmediashare.createURL(
-				WDN.socialmediashare.buildGAURL(url, gaTagging),
-				function(data) {
-					WDN.jQuery('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
-					submission.addURLtoPreview(data);
-				},
-				function(){
-					WDN.jQuery('#website').attr('value', website).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
-					submission.addURLtoPreview(website);
-				}
-			);
-		},
-		addURLtoPreview : function(url) {
-			WDN.jQuery('#sampleLayout a').text(function(index){
-				return url;
-				submission.urlPreview = true;
-			});
-		},
-		setImageCrop : function() {
-			WDN.jQuery('#upload_area img').imgAreaSelect({
-				enable:true,
-				hide:false,
-				aspectRatio: "4:3",
-				onSelectEnd: function (img, selection) {
-					var dataString = '_type=thumbnail&ajaxupload&storyid=' + WDN.jQuery('#enewsSubmission input[name=storyid]').val();
-					dataString += '&x1=' + selection.x1 + '&x2=' + selection.x2 + '&y1=' + selection.y1 + '&y2=' + selection.y2;
-					
-					WDN.jQuery.ajax({
-						type: "POST",
-						//xhr needed to make ie8 work, jQuery 1.4.2 has a bug: http://forum.jquery.com/topic/jquery-ajax-ie8-problem	
-						xhr: (window.ActiveXObject) ?
-							function() {
-								try {
-									return new window.ActiveXObject("Microsoft.XMLHTTP");
-								} catch(e) {}
-							} :
-							function() {
-								return new window.XMLHttpRequest();
-							},
-						url: WDN.jQuery('#enewsSubmission').attr('action'),
-						data: dataString,
-						success: function(data,status) {
-							return false;
-						},
-						error: function (data, status, e) {
-							return e;
-						}
-					});
-				}
-			});
-		}
-	};
-}();
-

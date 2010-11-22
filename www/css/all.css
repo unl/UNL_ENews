@@ -18,7 +18,7 @@
 	border-radius:.3em;
     -webkit-border-radius:.3em;
     -moz-border-radius:.3em;
-    
+    min-width:700x;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 
@@ -49,7 +49,7 @@
 }
 #maincontent .enews fieldset ol {
 	margin-top:15px;
-	margin-left:-12px;	
+	margin-left:-12px;
 }
 #maincontent .enews fieldset ol li {
 	list-style:none;
@@ -94,19 +94,27 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 #maincontent .enews .option_step {
 	list-style:none;
 	text-align:center;
-	margin:0px;	
+	margin:11px 0 20px 0px;
+	display:inline-block;
+	padding-left:110px;
+}
+#maincontent .enews.showAd .option_step {
+	padding-left:0;
 }
 #maincontent .enews .option_step li {
 	display:inline;
-	margin:40px;
+	margin:0 0 0 15px;
 	float:left;
 	padding:0;
 	width:340px;
 }
+#maincontent .enews.showAd .option_step li {
+	width:290px;
+}
 #maincontent .enews .option_step li a {
 	display:block;
-	width:350px;
-	height:155px;
+	width:277px;
+	height:113px;
 	border:1px solid #b8afa1;
 	border-radius:5px;
 	text-indent:-9999px;
@@ -134,22 +142,28 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 #maincontent .enews .option_step li a#newsAnnouncement {
 	background: #f8f3e4 url('images/typeIconNews.png') no-repeat center;
 }
-#maincontent .enews .option_step li a#eventAnnouncement {
-	background: #f8f3e4 url('images/typeIconEvent.png') no-repeat center;
-}
 #maincontent .enews .option_step li a#newsAnnouncement:hover {
 	background: #f5e7bc url('images/typeIconNews_hover.png') no-repeat center;
 	border-color:#9f9483;	
+}
+#maincontent .enews .option_step li a#eventAnnouncement {
+	background: #f8f3e4 url('images/typeIconEvent.png') no-repeat center;
 }
 #maincontent .enews .option_step li a#eventAnnouncement:hover {
 	background: #f5e7bc url('images/typeIconEvent_hover.png') no-repeat center;
 	border-color:#9f9483;	
 }
-
-
-
-
-
+#maincontent .enews .option_step li a#adAnnouncement {
+	display: none;
+}
+#maincontent .enews.showAd .option_step li a#adAnnouncement {
+	display:block;
+	background: #f8f3e4 url('images/typeIconAd.png') no-repeat center;
+}
+#maincontent .enews .option_step li a#adAnnouncement:hover {
+	background: #f5e7bc url('images/typeIconAd_hover.png') no-repeat center;
+	border-color:#9f9483;	
+}
 
 /* rss icon
 ********************/
@@ -174,9 +188,5 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	-webkit-border-radius:5px;	
 }
 .dragItem span.requestedDates  {
-	-moz-border-radius-bottomleft:3px;
-	-moz-border-radius-bottomright:3px;
-	-webkit-border-bottom-right-radius:3px;	
-	-webkit-border-top-right-radius:3px;
 }
 

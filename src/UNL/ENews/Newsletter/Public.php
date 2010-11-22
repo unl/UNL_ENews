@@ -27,7 +27,7 @@ class UNL_ENews_Newsletter_Public
             // If this is an unpublished newsletter, check permissions
             if ((empty($this->newsletter->release_date)
                 || ($this->newsletter->release_date > date('Y-m-d H:i:s')))
-                && !UNL_ENews_Controller::getUser(true)->hasPermission($this->newsletter->newsroom_id)) {
+                && !UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->newsletter->newsroom_id)) {
                 throw new Exception('You do not have permission to view unpublished newsletters for this newsroom', 403);
             }
         } else {

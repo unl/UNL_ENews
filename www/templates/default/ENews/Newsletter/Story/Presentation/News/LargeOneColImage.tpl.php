@@ -1,19 +1,20 @@
-<?php $storylink = $context->getStoryLink();?>
+<?php 
+$storylink = $context->getURL();
+
+if ($file = $context->getFileByUse('originalimage')) {
+    echo '<a href="'.$storylink.'">'
+         . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
+         . $file->id
+         . '" style="margin-bottom:5px;width:96%;" class="frame" alt="'.$file->name.'" /></a>';
+}
+?>
 <h4>
     <a href="<?php echo $storylink; ?>">
       <?php echo $context->title; ?>
     </a>
 </h4>
 <p>
-<?php 
-
-if ($file = $context->getThumbnail()) {
-    echo '<a href="'.$storylink.'">'
-         . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
-         . $file->id
-         . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
-}
-
+<?php
 echo nl2br($context->description);
 if (!empty($context->full_article)) {
     echo ' <a href="'.$storylink.'">Continue reading&hellip;</a>';
@@ -24,7 +25,7 @@ if (!empty($context->full_article)) {
 if (($context->website)) { ?>
 
 More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a>
-<?php 
+<?php
 }
 ?>
 <div class="clear"></div>

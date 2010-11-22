@@ -8,11 +8,12 @@ WDN.initializePlugin('notice');
 	</div>
 	<div class="message">
 		<?php if ($context->type == 'sendnews'): ?>
-		    <h4>Distribution Successful.</h4>
+		    <h4>Oh yeah! Distribution Successful!</h4>
 		    <p>Your newsletter has been submitted to the distribution queue.</p>
 		<?php else: ?>
-		    <h4>Thank you for submitting your newstip.</h4>
-		    <p>If you have any questions, please contact us.</p>
+		    <h4>Thanks for your submission!</h4>
+		    <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>
+		    <p>Have a great day!</p>
 		<?php endif;?>
 	</div>
 </div>

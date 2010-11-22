@@ -26,6 +26,6 @@ if ($context->actionable) {
 if ($context->actionable) { 
     echo $savvy->render($context->actionable[1]);
 } else {
-    echo 'No gnews is good gnews with Gary Gnu.';
+    echo '<div class="four_col">No gnews is good gnews with Gary Gnu.</div>';
 }
 ?>

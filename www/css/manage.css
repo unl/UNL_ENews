@@ -50,6 +50,17 @@ form#enewsManage .btnsubmit {
     margin:0 5px;
 }
 
+span.announcementType {
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	color:#fff;
+	background:#999900;
+	font-size:9px;
+	padding:2px 4px;
+}
+span.announcementType.ad{background:#009900;}
+span.announcementType.event{background:#660099;}
 /* Newsroom Chooser Form 
 **************************/
 #maincontent .enews.newsroom_choose {

@@ -10,7 +10,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
         if (isset($this->options['newsroom'])) {
             $user = UNL_ENews_Controller::getUser(true);
             if ($user->newsroom_id != $this->options['newsroom']
-                && $user->hasPermission($this->options['newsroom'])) {
+                && $user->hasNewsroomPermission($this->options['newsroom'])) {
                 // Update the selected newsroom
                 $user->newsroom_id = $this->options['newsroom'];
                 $user->update();
@@ -44,7 +44,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                     throw new Exception('Could not find the newsroom you were trying to edit!', 400);
                 }
 
-                if (!UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($newsroom->id)) {
                     throw new Exception('you cannot modify a newsroom you don\'t have permission to!', 403);
                 }
 
@@ -69,7 +69,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             case 'posted':
             case 'approved':
             case 'archived':
-                if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->newsroom->id)) {
+                if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->newsroom->id)) {
                     throw new Exception('Don\'t have permission to view that newsroom', 403);
                 }
                 $this->actionable[] = new UNL_ENews_User_Newsrooms(array('uid' => UNL_ENews_Controller::getUser(false)->uid));

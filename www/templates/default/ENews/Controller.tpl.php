@@ -3,16 +3,16 @@
 <head>
 <!--
     Membership and regular participation in the UNL Web Developer Network
-    is required to use the UNL templates. Visit the WDN site at 
+    is required to use the UNL templates. Visit the WDN site at
     http://wdn.unl.edu/. Click the WDN Registry link to log in and
     register your unl.edu site.
     All UNL template code is the property of the UNL Web Developer Network.
-    The code seen in a source code view is not, and may not be used as, a 
-    template. You may not use this code, a reverse-engineered version of 
+    The code seen in a source code view is not, and may not be used as, a
+    template. You may not use this code, a reverse-engineered version of
     this code, or its associated visual presentation in whole or in part to
     create a derivative work.
     This message may not be removed from any pages based on the UNL site template.
-    
+
     $Id: php.fixed.dwt.php 536 2009-07-23 15:47:30Z bbieber2 $
 -->
 <link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
@@ -25,6 +25,7 @@
 <title>UNL | Announce <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="UNL Announce" />
+<link rel="logout" href="<?php echo UNL_ENews_Controller::getURL();?>?logout" title="Log out" />
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
 </script>
@@ -32,9 +33,11 @@ var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
 if ($user = UNL_ENews_Controller::getUser()) {
     echo '<script type="text/javascript">
             try {
-                WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
-                WDN.idm.displayNotice("'.$user->uid.'");
-            } catch(e) {}
+                WDN.initializePlugin("idm", function(){
+                    WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
+                    WDN.idm.displayNotice("'.$user->uid.'");
+                });
+            } catch(e) {WDN.log(e);}
           </script>';
 }
 ?>
@@ -83,9 +86,9 @@ if ($context->options['view'] == 'story'
                     </li>
                     <?php
                     $user = UNL_ENews_Controller::getUser();
-                    if (false !== $user && isset($user->newsroom_id) && $user->hasPermission($user->newsroom_id)) : ?>
+                    if (false !== $user && isset($user->newsroom_id) && $user->hasNewsroomPermission($user->newsroom_id)) : ?>
                     <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=manager">Manage News</a>
-                        <?php 
+                        <?php
                         if ($user_newsrooms = $user->getNewsrooms()) {
                             if (count($user_newsrooms)) {
                                 echo '<ul>';
@@ -106,7 +109,7 @@ if ($context->options['view'] == 'story'
                                 foreach($newsletters as $newsletter) {
                                     if (isset($newsletter->release_date)) {
                                         echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=preview&amp;id='.$newsletter->id.'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
-                                    } 
+                                    }
                                 }
                                 echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=newsletters">All newsletters</a></li>';
                                 echo '</ul>';
@@ -150,7 +153,7 @@ if ($context->options['view'] == 'story'
                     <li><a href="http://www.unl.edu/regrec/calendar/calendar_main.shtml" title="Academic Calender">Academic Calendar</a></li>
                     <li><a href="http://events.unl.edu/" title="Upcoming UNL events in a searchable database">UNL Calendar</a></li>
                 </ul>
-                
+
                 <!-- InstanceEndEditable --></div>
             <div class="footer_col"><!-- InstanceBeginEditable name="contactinfo" -->
                 <h3>Contacting Us</h3>
@@ -158,7 +161,7 @@ if ($context->options['view'] == 'story'
                 1400 R Street<br />
                 Lincoln, NE 68588 <br />
                 402-472-7211</p>
-                
+
                 <!-- InstanceEndEditable --></div>
             <div class="footer_col">
                 <?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/socialmediashare.html'; ?>

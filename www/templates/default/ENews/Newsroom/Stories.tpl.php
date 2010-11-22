@@ -8,7 +8,7 @@ if ($parent->context->options['view'] === 'mynews') {
 }
 
 if (count($context) == 0) {
-    echo "No Gnews is Good Gnews with Gary Gnu!";
+    echo '<div class="four_col">No Gnews is Good Gnews with Gary Gnu!</div>';
     return;
 }
 
@@ -17,7 +17,9 @@ if (count($context) == 0) {
 
 <script type="text/javascript">
 WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/functions.js");
+WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/manager.js",function(){
+	manager.initialize();
+});
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 
@@ -54,6 +56,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         <tr>
             <th scope="col" class="select">Select</th>
             <th scope="col" class="image">Image</th>
+            <th scope="col" class="type"></th>
             <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=title">Headline</a></th>
             <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">First Pub Date</a></th>
             <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">Last Pub Date</a></th>
@@ -67,6 +70,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         <tr id="row<?php echo $item->id; ?>">
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
             <td><?php if ($file = $item->getThumbnail()) { echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:30px" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?></td>
+            <td><span class="announcementType <?php echo $item->presentation->type; ?>"><?php echo $item->presentation->type; ?></span></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_end)); ?></td>

@@ -3,13 +3,13 @@ class UNL_ENews_Controller
 {
     /**
      * Options array
-     * Will include $_GET vars, this is the newsroom being used across views 
+     * Will include $_GET vars, this is the newsroom being used across views
      */
     public $options = array('view' => 'submit', 'format' => 'html', 'newsroom' => '1');
 
     /**
      * A map of views to models
-     * 
+     *
      * @var array(view=>CLASSNAME)
      */
     protected $view_map = array('newsletter'  => 'UNL_ENews_Newsletter_Public',
@@ -21,11 +21,16 @@ class UNL_ENews_Controller
                                 'manager'     => 'UNL_ENews_Manager',
                                 'file'        => 'UNL_ENews_File',
                                 'preview'     => 'UNL_ENews_Newsletter_Preview',
+                                'previewStory' => 'UNL_ENews_Newsletter_Preview_Story',
+                                'presentationList' => 'UNL_ENews_PresentationLister',
                                 'newsletters' => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'    => 'UNL_ENews_EmailDistributor',
                                 'help'        => 'UNL_ENews_Help',
                                 'newsroom'    => 'UNL_ENews_Newsroom',
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
+                                'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
+                                'gastats' => 'UNL_ENews_GAStats'
+    
     );
 
     public static $pagetitle = array('latest'      => 'Latest News',
@@ -43,16 +48,14 @@ class UNL_ENews_Controller
 
     /**
      * The currently logged in user.
-     * 
+     *
      * @var UNL_ENews_User
      */
     protected static $user = false;
 
     public static $url = '';
 
-    public static $db_user = 'enews';
-
-    public static $db_pass = 'enews';
+    protected static $db_settings = array();
 
     public $actionable = array();
 
@@ -82,19 +85,47 @@ class UNL_ENews_Controller
         }
     }
 
+    public static function setDbSettings($settings = array())
+    {
+        $settings = $settings + self::$db_settings;
+        if (empty($settings['host'])) {
+            $settings['host'] = '127.0.0.1';
+        }
+        if (empty($settings['user'])) {
+            $settings['user'] = 'enews';
+        }
+        if (empty($settings['password'])) {
+            $settings['password'] = 'enews';
+        }
+        if (empty($settings['dbname'])) {
+            $settings['dbname'] = 'enews';
+        }
+
+        self::$db_settings = $settings;
+    }
+
+    public static function getDbSettings()
+    {
+        if (empty(self::$db_settings)) {
+            self::setDbSettings();
+        }
+
+        return self::$db_settings;
+    }
+
     /**
      * Set a list of site admin uids
-     * 
+     *
      * @param array $admins Array of UIDs
      */
     public static function setAdmins($admins = array())
     {
         self::$admins = $admins;
     }
-    
+
     /**
      * Log in the current user
-     * 
+     *
      * @return void
      */
     static function authenticate($logoutonly = false)
@@ -121,7 +152,7 @@ class UNL_ENews_Controller
 
     /**
      * get the currently logged in user
-     * 
+     *
      * @return UNL_ENews_User
      */
     public static function getUser($forceAuth = false)
@@ -132,14 +163,24 @@ class UNL_ENews_Controller
 
         if ($forceAuth) {
             self::authenticate();
+        } elseif (self::isLoggedIn()) {
+            self::$user = UNL_ENews_User::getByUID(self::$auth->getUser());
         }
 
         return self::$user;
     }
 
+    public static function isLoggedIn()
+    {
+        if (self::$auth === null) {
+            self::$auth = UNL_Auth::factory('SimpleCAS');
+        }
+        return self::$auth->isLoggedIn();
+    }
+
     /**
      * Set the currently logged in user
-     * 
+     *
      * @return UNL_ENews_User
      */
     public static function setUser(UNL_ENews_User $user)
@@ -149,7 +190,7 @@ class UNL_ENews_Controller
 
     /**
      * Handle data that is POST'ed to the controller.
-     * 
+     *
      * @return void
      */
     function handlePost()
@@ -183,7 +224,7 @@ class UNL_ENews_Controller
                             throw new Exception('Invalid newsroom selected');
                         }
                         $status = 'pending';
-                        if (UNL_ENews_Controller::getUser(true)->hasPermission($newsroom->id)) {
+                        if (UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($newsroom->id)) {
                             $status = 'approved';
                         }
                         $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create story form');
@@ -214,7 +255,7 @@ class UNL_ENews_Controller
                 }
 
                 if (!$story = UNL_ENews_Story::getByID((int)$_POST['storyid'])) {
-                    throw new Exception('Cannot get story to add file for!');
+                    throw new Exception('Cannot get story ('.(int)$_POST['storyid'].') to add file for!');
                 }
 
                 if (!$story->userCanEdit(self::getUser(true))) {
@@ -225,9 +266,9 @@ class UNL_ENews_Controller
 
                 $file_data         = $_FILES['image'];
                 $file_data['data'] = file_get_contents($_FILES['image']['tmp_name']);
-           
-                $file_data['description'] = $_POST['description'];
-          
+
+                //$file_data['description'] = $_POST['description'];
+
 
                 self::setObjectFromArray($file, $file_data);
 
@@ -235,7 +276,7 @@ class UNL_ENews_Controller
                     if (!UNL_ENews_File::validFileName($_FILES['image']['name'])) {
                         throw new Exception('Please Upload an Image in .jpg .png or .gif format.');
                     }
-                    $file->use_for = 'originalimage'; 
+                    $file->use_for = 'originalimage';
                 }
 
                 if (!$file->save()) {
@@ -248,7 +289,7 @@ class UNL_ENews_Controller
                     self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
                 }
 
-                //We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
+                // We're doing the ajax upload in step 3 of the submission form, so delete the previous photo
                 foreach ($story->getFiles() as $curfile) {
                     if (preg_match('/^image/', $curfile->type)) {
                         //Check to see that we Don't Delete the File we just uploaded
@@ -258,8 +299,9 @@ class UNL_ENews_Controller
                         }
                     }
                 }
-                //Output the image that will be shown on step 3 of submission page
-                self::redirect(self::getURL().'?view=file&id='.$file->id);
+                // Return the id as the response
+                echo $file->id;
+                exit();
             case 'thumbnail':
                 if (!($story = UNL_ENews_Story::getByID((int)$_POST['storyid']))) {
                     throw new Exception('Could not find that story!');
@@ -269,7 +311,9 @@ class UNL_ENews_Controller
                     throw new Exception('Cannot add thumbnail to stories you cannot edit');
                 }
 
-                if (false === $story->getFileByUse('originalimage')) {
+                // Get the original
+                $file = $story->getFileByUse('originalimage');
+                if (false === $file) {
                     throw new Exception('Cannot create a thumbnail for an image that does not exist');
                 }
 
@@ -279,9 +323,8 @@ class UNL_ENews_Controller
                     $thumb->delete();
                 }
 
-                // Get the original, and make a new thumbnail
-                $file = $story->getFileByUse('originalimage');
-                $thumb = $file->saveThumbnail($_POST['x1'],$_POST['x2'],$_POST['y1'],$_POST['y2']);
+                // make a new thumbnail
+                $thumb = $file->saveThumbnail($_POST['x1'], $_POST['x2'], $_POST['y1'], $_POST['y2']);
                 $story->addFile($thumb);
 
                 if (isset($_POST['ajaxupload'])) {
@@ -294,7 +337,7 @@ class UNL_ENews_Controller
                 if (!($newsletter = UNL_ENews_Newsletter::getByID($_POST['newsletter_id']))) {
                     throw new Exception('Invalid newsletter selected for delete');
                 }
-                if (UNL_ENews_Controller::getUser(true)->hasPermission($newsletter->newsroom_id)) {
+                if (UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($newsletter->newsroom_id)) {
                     $newsletter->delete();
                 }
                 break;
@@ -303,7 +346,7 @@ class UNL_ENews_Controller
 
     /**
      * Filter any pre-populated POST fields to prevent their use.
-     * 
+     *
      * @return void
      */
     function filterPostValues()
@@ -314,7 +357,7 @@ class UNL_ENews_Controller
 
     /**
      * Get the URL to the main site.
-     * 
+     *
      * @return string The URL to the site
      */
     public static function getURL()
@@ -324,7 +367,7 @@ class UNL_ENews_Controller
 
     /**
      * Populate the actionable items according to the view map.
-     * 
+     *
      * @throws Exception if view is unregistered
      */
     function run()
@@ -338,11 +381,11 @@ class UNL_ENews_Controller
 
     /**
      * Set the public properties for an object with the values in an associative array
-     * 
+     *
      * @param mixed &$object The object to set, usually a UNL_ENews_Record
      * @param array $values  Associtive array of key=>value
      * @throws Exception
-     * 
+     *
      * @return void
      */
     public static function setObjectFromArray(&$object, $values)
@@ -352,16 +395,16 @@ class UNL_ENews_Controller
         }
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
-                $object->$key = $values[$key]; 
+                $object->$key = $values[$key];
             }
         }
     }
 
     /**
      * Converts text urls into clickable links
-     * 
+     *
      * @param $string
-     * 
+     *
      * @return string
      */
     public static function makeClickableLinks($string)
@@ -372,18 +415,19 @@ class UNL_ENews_Controller
         $string = preg_replace("/([\w]+:\/\/[\w-?&;#~=\.\/\@]+[\w\/])/i","<a href=\"$1\">$1</a>",$string);
         // make all emails links
         $string = preg_replace("/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?))/i","<a href=\"mailto:$1\">$1</a>",$string);
-        
+
         return $string;
     }
 
     /**
      * Connect to the database and return it
-     * 
+     *
      * @return mysqli
      */
     public static function getDB()
     {
-        $db = new mysqli('127.0.0.1', self::$db_user, self::$db_pass, 'enews');
+        $settings = self::getDbSettings();
+        $db = new mysqli($settings['host'], $settings['user'], $settings['password'], $settings['dbname']);
         if (mysqli_connect_error()) {
             throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
                     . mysqli_connect_error());
@@ -402,7 +446,7 @@ class UNL_ENews_Controller
         if (in_array((string)$uid, self::$admins)) {
             return true;
         }
-        
+
         return false;
     }
 

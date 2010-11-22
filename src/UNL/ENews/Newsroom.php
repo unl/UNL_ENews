@@ -22,7 +22,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         }
         UNL_ENews_Controller::setObjectFromArray($this, $record);
 
-//        if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
+//        if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
 //            throw new Exception('User does not have permission for this newsroom', 403);
 //        }
 
@@ -36,7 +36,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         switch($_POST['_type']) {
             case 'removeuser':
             case 'adduser':
-                if (!UNL_ENews_Controller::getUser(true)->hasPermission($this->id)) {
+                if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
                     throw new Exception('You cannot modify a newsroom you don\'t have permission to!', 403);
                 }
                 $user = UNL_ENews_User::getByUID($_POST['user_uid']);
@@ -113,7 +113,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
      */
     function addUser($user)
     {
-        if (!$user->hasPermission($this->id)) {
+        if (!$user->hasNewsroomPermission($this->id)) {
             $permission = new UNL_ENews_User_Permission();
             $permission->newsroom_id = $this->id;
             $permission->user_uid    = $user->uid;

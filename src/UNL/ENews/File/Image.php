@@ -1,41 +1,77 @@
 <?php
 class UNL_ENews_File_Image extends UNL_ENews_File
 {
+    
+    const THUMB_WIDTH    = 96;
+    const THUMB_HEIGHT   = 72;
+
+    const FULL_AD_WIDTH  = 556;
+    const FULL_AD_HEIGHT = 212;
+    
+    const HALF_AD_WIDTH  = 273;
+    const HALF_AD_HEIGHT = 104;
+
+    // Max image size displayed to the user
+    const MAX_WIDTH      = 410;
+    
     /**
      * Save a thumbnail and return the object
      * 
+     * Sample:
+     * ------------------------------
+     * |                            |
+     * |      y1----------          |
+     * |      |          |          |
+     * |      |          |          |
+     * |    x1,y2--------x2         |
+     * |-----------------------------
+     * 
+     * @param int $left   X coordinate offset start
+     * @param int $right  X coordinate offset end
+     * @param int $top    Y coordinate offset start
+     * @param int $bottom Y coordinate offset end
+     * @param int $width  Final image width
+     * @param int $height Final image height
+     * 
      * @return UNL_ENews_File_Image
      */
-    function saveThumbnail($x1=0,$x2=0,$y1=0,$y2=0,$thumb_width=96,$thumb_height=72)
+    function saveThumbnail($left=0, $right=0, $top=0, $bottom=0, $width=self::THUMB_WIDTH, $height=self::THUMB_HEIGHT)
     {
         // Crop the image ***************************************************************
         // Get dimensions of the original image
-        $filename = UNL_ENews_Controller::getURL().'?view=file&id='.(int)$this->id;
-        list($current_width, $current_height) = getimagesize($filename);
+        list($current_width, $current_height) = getimagesize('data://'.$this->type.';base64,' . base64_encode($this->data));
         
-        if ($x1 < 0) {
+        if ($left < 0) {
             // User did not select a cropping area
             $left   = 0;
             $top    = 0;
             $right  = $current_width;
-            $bottom = $current_width*(3/4);
+            $bottom = $current_width*(self::THUMB_HEIGHT/self::THUMB_WIDTH);
         } else {
             // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
-            if ($current_width > 410) {
-                $left   = ($current_width/410)*$x1;
-                $top    = ($current_height/(410*$current_height/$current_width))*$y1;
-                $right  = ($current_width/410)*$x2;
-                $bottom = ($current_height/(410*$current_height/$current_width))*$y2;
-            } else {
-                $left   = $x1;
-                $top    = $y1;
-                $right  = $x2;
-                $bottom = $y2;
+            if ($current_width > self::MAX_WIDTH) {
+                $left   = ($current_width/self::MAX_WIDTH)*$left;
+                $top    = ($current_height/(self::MAX_WIDTH*$current_height/$current_width))*$top;
+                $right  = ($current_width/self::MAX_WIDTH)*$right;
+                $bottom = ($current_height/(self::MAX_WIDTH*$current_height/$current_width))*$bottom;
             }
         }
         
+        if ($thumb = $this->resizeImage($left, $right, $top, $bottom, $width, $height)) {
+            $thumb->use_for = 'thumbnail';
+            $thumb->save();
+            return $thumb;
+        }
+        return false;
+        
+    }
+
+    function resizeImage($left=0, $right=0, $top=0, $bottom=0, $width, $height)
+    {
+        $file = 'data://'.$this->type.';base64,' . base64_encode($this->data);
+        list($current_width, $current_height) = getimagesize($file);
         // This will be the final size of the cropped image
-        $crop_width = $right-$left;
+        $crop_width  = $right-$left;
         $crop_height = $bottom-$top;
         
         // Resample the image
@@ -56,30 +92,30 @@ class UNL_ENews_File_Image extends UNL_ENews_File
                 $output_method = 'imagegif';
                 break;
         }
-        $current_image = $create_method($filename);
+        $current_image = $create_method($file);
         
         imagecopy($croppedimage, $current_image, 0, 0, $left, $top, $current_width, $current_height);
         
         // Resize the image ************************************************************
         $current_width = $crop_width;
         $current_height = $crop_height;
-        $canvas = imagecreatetruecolor($thumb_width, $thumb_height);
-        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, $thumb_width, $thumb_height, $current_width, $current_height);
+        $canvas = imagecreatetruecolor($width, $height);
+        imagecopyresampled($canvas, $croppedimage, 0, 0, 0, 0, $width, $height, $current_width, $current_height);
         
         ob_start();
         $output_method($canvas);
         imagedestroy($canvas);
 
-        $thumb = new self();
-        $thumb->name = $this->name;
-        $thumb->type = $this->type;
-        $thumb->size = ob_get_length();
-        $thumb->data = ob_get_clean();
+        $resized = new self();
+        $resized->name = $this->name;
+        $resized->type = $this->type;
+        $resized->size = ob_get_length();
+        $resized->data = ob_get_clean();
+        
 
         // Save the thumbnail **********************************************************
-        $thumb->use_for = 'thumbnail';
-        if ($thumb->save()) {
-            return $thumb;
+        if ($resized->save()) {
+            return $resized;
         }
         return false;
     }

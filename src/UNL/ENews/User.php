@@ -32,7 +32,7 @@ class UNL_ENews_User extends UNL_ENews_Record
         if (($result = $mysqli->query($sql))
             && $result->num_rows > 0) {
             $object = new self();
-            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            $object->synchronizeWithArray($result->fetch_assoc());
             return $object;
         }
 
@@ -62,7 +62,7 @@ class UNL_ENews_User extends UNL_ENews_Record
     {
         switch($var) {
             case 'newsroom':
-                if (!$this->hasPermission($this->newsroom_id)) {
+                if (!$this->hasNewsroomPermission($this->newsroom_id)) {
                     throw new Exception('Whoah nelly, your default newsroom is one you don\'t have permission to.', 403);
                 }
                 return UNL_ENews_Newsroom::getByID($this->newsroom_id);
@@ -91,8 +91,8 @@ class UNL_ENews_User extends UNL_ENews_Record
         return $this->uid;
     }
     
-    public function hasPermission($newsroom_id = false)
+    public function hasNewsroomPermission($newsroom_id = false)
     {
-        return UNL_ENews_User_Permission::userHasPermission($this->uid, $newsroom_id);
+        return UNL_ENews_User_Permission::userHasNewsroomPermission($this->uid, $newsroom_id);
     }
 }

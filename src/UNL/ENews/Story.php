@@ -9,6 +9,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     public $request_publish_end;
     public $sponsor;
     public $website;
+    public $presentation_id;
     public $uid_created;
     public $uid_modified;
     public $date_submitted;
@@ -127,13 +128,18 @@ class UNL_ENews_Story extends UNL_ENews_Record
      */
     function getFileByUse($use)
     {
-        $files = new UNL_ENews_Story_Files(array('story_id'=>$this->id));
-        foreach ($files as $file) {
+        // @TODO fix looping here for no reason
+        foreach ($this->getFiles() as $file) {
             if ($file->use_for == $use) {
                 return $file;
             }
         }
         return false;
+    }
+    
+    function getURL()
+    {
+        return UNL_ENews_Controller::getURL().'?view=story&id='.$this->id;
     }
 
     /**
@@ -177,5 +183,65 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         
         return false;
+    }
+
+    function __get($var)
+    {
+
+        switch ($var) {
+        case 'presentation':
+        case 'newsrooms':
+        case 'thumbnail':
+        case 'files':
+            $method = 'get'.$var;
+            return $this->$method();
+        }
+
+        $trace = debug_backtrace();
+        trigger_error(
+            'Undefined property via __get(): ' . $var .
+            ' in ' . $trace[0]['file'] .
+            ' on line ' . $trace[0]['line'],
+            E_USER_NOTICE);
+        return null;
+    }
+
+    function getPresentationTypeString()
+    {
+        if ($presentation = $this->getPresentation()) {
+            return $presentation->type;
+        }
+        return false;
+    }
+
+    /**
+     * Get the presentation to be used for this story.
+     * 
+     * @return UNL_ENews_Story_Presentation
+     */
+    function getPresentation()
+    {
+        $presentation = UNL_ENews_Story_Presentation::getByID($this->presentation_id);
+
+        if (false == $presentation) {
+            throw new Exception('This story references a presentation type that is unknown!');
+        }
+        return $presentation;
+    }
+
+    function isWithinRequestedPublishDate()
+    {
+        $now = time();
+        if ($now < strtotime($this->request_publish_start)) {
+            // Not ready to release yet
+            return false;
+        }
+
+        if ($now > strtotime($this->request_publish_end)) {
+            // Expired content/advertisement
+            return false;
+        }
+
+        return true;
     }
 }

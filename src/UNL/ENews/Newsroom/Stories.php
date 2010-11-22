@@ -3,6 +3,7 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
 {
     public $options = array('offset' => 0,
                             'limit'  => 30);
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
