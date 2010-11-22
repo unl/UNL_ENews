@@ -23,7 +23,15 @@
     <?php if ($id) : ?>
         <?php if ($originalImage) : ?>
             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany story submission" />
-            <script type="text/javascript">submission.loadImageCrop();</script>
+            <script type="text/javascript">
+            submission.loadImageCrop();
+            WDN.jQuery(document).ready(function($) {
+                $('#upload_area img').bind('click', function() {
+                    var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" onload="submission.loadImageCrop();" />';
+                    $('#sampleLayoutImage').html(imgString);
+                });
+            });
+            </script>
         <?php endif; ?>
     <?php else : ?>
         <div>Image preview</div>
