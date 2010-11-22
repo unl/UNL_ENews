@@ -12,7 +12,7 @@ var submission = function($) {
 
 		characterLimit : 300,
 
-		editting : false,
+		editing : false,
 
 		announcementType : false,
 
@@ -24,8 +24,8 @@ var submission = function($) {
 			$('#enewsForm h3').eq(1).css('cursor','pointer');
 			submission.bindActions();
 
-			// If we're editting, then call the presenation function
-			if(submission.editting){
+			// If we're editing, then call the presenation function
+			if(submission.editing){
 				submission.determinePresentation(submission.announcementType);
 				submission.updatePreview();
 			};
@@ -440,7 +440,7 @@ WDN.jQuery(document).ready(function($){
 		defaultDate: this.value
 	});
 	if (editType) { // We're editing, so update where needed
-		submission.editting = true;
+		submission.editing = true;
 		submission.announcementType = editType;
 		document.enewsSubmission.storyid.value = document.enewsImage.storyid.value = storyID;
 		$('textarea.resizable:not(.processed)').TextAreaResizer();
