@@ -107,16 +107,35 @@ var submission = function($) {
 
 			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
 			$('#enewsSubmission #fileID').bind('change', function() {
-				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" onload="submission.loadImageCrop();" />';
+				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" onload="submission.loadImageCrop(\'4:3\');" />';
 				$('#upload_area').html(imgString);
-				$('#sampleLayoutImage').html(imgString);
+				$('#sampleLayoutImage').html('Select Thumbnail Below');
 				ajaxUpload.removeIframe();
 			});
 
 			// When the file description filed is edited, copy over to the hidden field in the story form that will be submitted
-			$('#file_description').bind('change', function(){
+			$('#file_description').bind('change', function() {
 				$('#fileDescription').val($(this).val());
 			});
+
+			$('#cropRatio').toggle(
+				function() {
+					$('#sampleLayoutImage').html('Select Thumbnail Below');
+					$('input[name=thumbX1]').val('-1');
+					$('input[name=thumbX2]').val('-1');
+					$('input[name=thumbY1]').val('-1');
+					$('input[name=thumbY2]').val('-1');
+					submission.loadImageCrop('3:4');
+				},
+				function() {
+					$('#sampleLayoutImage').html('Select Thumbnail Below');
+					$('input[name=thumbX1]').val('-1');
+					$('input[name=thumbX2]').val('-1');
+					$('input[name=thumbY1]').val('-1');
+					$('input[name=thumbY2]').val('-1');
+					submission.loadImageCrop('4:3');
+				}
+			);
 
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
@@ -275,10 +294,10 @@ var submission = function($) {
 			);
 		},
 
-		loadImageCrop : function() {
+		loadImageCrop : function(ratio) {
 			WDN.loadJS(ENEWS_HOME+'/js/jquery.imgareaselect.dev.js',function() {
 				submission.clearImageCrop();
-				submission.setUpImageCrop();
+				submission.setUpImageCrop(ratio);
 			});
 		},
 
@@ -287,14 +306,30 @@ var submission = function($) {
 				submission.ias.setOptions({disable:true,hide:true,remove:true});
 				submission.ias.update();
 			}
-			$('#cropMessage').hide();
+			$('#imageControls').hide();
 			$('#file_description').attr('disabled','disabled');
 		},
 
-		setUpImageCrop : function() {
+		setUpImageCrop : function(ratio) {
+			if (ratio == '3:4') {
+				xWidth = 72;
+				yWidth = 96;
+			} else {
+				xWidth = 96;
+				yWidth = 72;
+			}
+
+			$('#sampleLayoutImage').css({
+				width: xWidth + 'px',
+				height: yWidth + 'px'
+			});
+
 			var preview = function(img, selection) {
-				var scaleX = 96 / (selection.width || 1);
-				var scaleY = 72 / (selection.height || 1);
+				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" />';
+				$('#sampleLayoutImage').html(imgString);
+				
+				var scaleX = xWidth / (selection.width || 1);
+				var scaleY = yWidth / (selection.height || 1);
 				$('#sampleLayoutImage > img').css({
 					width: Math.round(scaleX * imgWidth) + 'px',
 					height: Math.round(scaleY * imgHeight) + 'px',
@@ -302,14 +337,14 @@ var submission = function($) {
 					marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
 				}); 
 			}
-			
+
 			submission.ias = $('#upload_area img').imgAreaSelect({
 				instance: true,
 				enable : true,
 				hide : false,
-				aspectRatio : "4:3",
+				aspectRatio : ratio,
 				handles : true,
-				onSelectChange: preview,
+				onSelectChange : preview,
 				onSelectEnd : function(img, selection) {
 					$('input[name=thumbX1]').val(selection.x1);
 					$('input[name=thumbX2]').val(selection.x2);
@@ -317,33 +352,53 @@ var submission = function($) {
 					$('input[name=thumbY2]').val(selection.y2);
 				}
 			});
-			$('#cropMessage').show();
+
+			$('#imageControls').show();
 			$('#file_description').removeAttr('disabled');
-			
+
 			// Get the width/height of img, this doesn't work if it's before imgAreaSelect init (?)
 			$('#upload_area > img').removeAttr('width').removeAttr('height');
 			var imgWidth = $('#upload_area > img').width();
 			var imgHeight = $('#upload_area > img').height();
-			
-			//alert(imgWidth+' '+imgHeight);
-			
-			if (imgWidth/imgHeight > 4/3) {
-				submission.ias.setOptions({
-					maxHeight : imgHeight,
-					x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
-					y1 : imgHeight*(1/4),
-					x2 : (imgWidth/2)+((imgHeight/2)*(4/3)/2),
-					y2 : imgHeight*(3/4)
-				});
+
+			if (ratio == '3:4') {
+				if (imgWidth/imgHeight < 3/4) {
+					submission.ias.setOptions({
+						maxWidth : imgWidth,
+						x1: imgWidth*(1/4),
+						y1: (imgHeight/2)-((imgWidth/2)*(4/3)/2),
+						x2: imgWidth*(3/4),
+						y2: (imgHeight/2)+((imgWidth/2)*(4/3)/2)
+					});
+				} else {
+					submission.ias.setOptions({
+						maxHeight : imgHeight,
+						x1 : (imgWidth/2)-((imgHeight/2)*(3/4)/2),
+						y1 : imgHeight*(1/4),
+						x2 : (imgWidth/2)+((imgHeight/2)*(3/4)/2),
+						y2 : imgHeight*(3/4)
+					});
+				}
 			} else {
-				submission.ias.setOptions({
-					maxWidth : imgWidth,
-					x1: imgWidth*(1/4),
-					y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
-					x2: imgWidth*(3/4),
-					y2: (imgHeight/2)+((imgWidth/2)*(3/4)/2)
-				});
+				if (imgWidth/imgHeight > 4/3) {
+					submission.ias.setOptions({
+						maxHeight : imgHeight,
+						x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
+						y1 : imgHeight*(1/4),
+						x2 : (imgWidth/2)+((imgHeight/2)*(4/3)/2),
+						y2 : imgHeight*(3/4)
+					});
+				} else {
+					submission.ias.setOptions({
+						maxWidth : imgWidth,
+						x1: imgWidth*(1/4),
+						y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
+						x2: imgWidth*(3/4),
+						y2: (imgHeight/2)+((imgWidth/2)*(3/4)/2)
+					});
+				}
 			}
+
 			submission.ias.update();
 		},
 

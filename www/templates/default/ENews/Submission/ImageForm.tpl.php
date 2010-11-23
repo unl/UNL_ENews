@@ -24,10 +24,10 @@
         <?php if ($originalImage) : ?>
             <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany story submission" />
             <script type="text/javascript">
-            submission.loadImageCrop();
+            submission.loadImageCrop('4:3');
             WDN.jQuery(document).ready(function($) {
                 $('#upload_area img').bind('click', function() {
-                    var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" onload="submission.loadImageCrop();" />';
+                    var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" onload="submission.loadImageCrop(\'4:3\');" />';
                     $('#sampleLayoutImage').html(imgString);
                 });
             });
@@ -37,6 +37,10 @@
         <div>Image preview</div>
     <?php endif; ?>
     </div>
-    <div id="cropMessage">Click and drag on the image above to select a thumbnail</div>
+    <ul id="imageControls">
+        <li id="cropMessage">Click and drag on the image above to select a thumbnail</li>
+        <li id="cropRatio">Ratio</li>
+        <li id="deleteImage">Delete</li>
+    </ul>
 </fieldset>
 </form>

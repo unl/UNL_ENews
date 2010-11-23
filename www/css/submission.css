@@ -113,6 +113,12 @@ form#enewsSubmission {
 	border:1px solid #b8afa1;
 }
 #sampleLayoutImage {
+	float:left;
+	margin-right:5px;
+	background:#f7f7f7;
+	font-size:.8em;
+	line-height:1em;
+	text-align:center;
 	height:72px;
 	width:96px;
 	overflow:hidden;
@@ -152,15 +158,39 @@ form#enewsImage {
 	width:100px;
 	min-height:90px;
 }
-#cropMessage {
+#maincontent #imageControls {
 	display:none;
-	margin:10px 0 8px 0;
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+#imageControls li {
+	display:inline-block;
+	vertical-align:top;
+	text-align:center;
+	margin:10px 10px 8px 0;
+    font-size:1.1em;
+    padding:10px;
+}
+#cropMessage {
+	width:200px;
 	background:#F8F9D1;
 	color:#A5690C;
-	font-size:1.1em;
-	padding:10px;
 	border:1px solid #CAD094;
 }
+#cropRatio {
+    width:65px;
+    background:#F8F9D1;
+    color:#A5690C;
+    border:1px solid #CAD094;
+}
+#deleteImage {
+    width:50px;
+    background:#F8F9D1;
+    color:#A5690C;
+    border:1px solid #CAD094;
+    margin-right:0 !important;
+
 
 /******** Submit Buttons ********/
 .submissionButton {

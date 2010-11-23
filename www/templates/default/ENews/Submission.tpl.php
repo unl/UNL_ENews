@@ -202,7 +202,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     <h5>Preview of Your Submission</h5>
     <div id="sampleLayoutInner">
     <h4>&lt;Enter Your Title&gt;</h4>
-    <div id="sampleLayoutImage" style="float:left;margin-right:5px;background:#f7f7f7;padding:5px;border:1px solid #ededed;font-size:.8em;line-height:1em;text-align:center;">
+    <div id="sampleLayoutImage">
         <?php if ($id = getValue($context,"id")) {
                 if ($image = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) { ?>
                     <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$image->id; ?>" alt="Image to accompany story submission" />
