@@ -20,19 +20,17 @@
     </ol>
     
     <div id="upload_area">
-    <?php if ($id) : ?>
-        <?php if ($originalImage) : ?>
-            <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany story submission" />
-            <script type="text/javascript">
-            submission.loadImageCrop('4:3');
-            WDN.jQuery(document).ready(function($) {
-                $('#upload_area img').bind('click', function() {
-                    var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" onload="submission.loadImageCrop(\'4:3\');" />';
-                    $('#sampleLayoutImage').html(imgString);
-                });
+    <?php if ($id && $originalImage) : ?>
+        <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany story submission" />
+        <script type="text/javascript">
+        submission.loadImageCrop('4:3');
+        WDN.jQuery(document).ready(function($) {
+            $('#upload_area img').bind('click', function() {
+                var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" onload="submission.loadImageCrop(\'4:3\');" />';
+                $('#sampleLayoutImage').html(imgString);
             });
-            </script>
-        <?php endif; ?>
+        });
+        </script>
     <?php else : ?>
         <div>Image preview</div>
     <?php endif; ?>
