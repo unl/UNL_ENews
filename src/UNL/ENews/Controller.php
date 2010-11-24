@@ -148,6 +148,8 @@ class UNL_ENews_Controller
         self::$user = UNL_ENews_User::getByUID(self::$auth->getUser());
         self::$user->last_login = date('Y-m-d H:i:s');
         self::$user->update();
+
+        return self::$user;
     }
 
     /**

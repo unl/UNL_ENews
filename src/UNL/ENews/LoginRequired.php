@@ -6,7 +6,8 @@ abstract class UNL_ENews_LoginRequired
     final function __construct($options = array())
     {
         $this->options = $options + $this->options;
-        UNL_ENews_Controller::authenticate();
+        $user = UNL_ENews_Controller::authenticate();
+        $this->options['newsroom'] = $user->newsroom_id;
         $this->__postConstruct();
     }
 }
