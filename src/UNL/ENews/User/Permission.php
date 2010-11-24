@@ -2,21 +2,21 @@
 class UNL_ENews_User_Permission extends UNL_ENews_Record
 {
     public $user_uid;
-    
+
     public $newsroom_id;
-    
+
     function getTable()
     {
         return 'user_has_permission';
     }
-    
+
     function keys()
     {
         return array('user_uid', 'newsroom_id');
     }
-    
+
     /**
-     * get a story in this newsletter
+     * Check if a user is in the user_has_permission table
      * 
      * @param string $user_uid
      * @param int    $newsroom_id
@@ -38,13 +38,12 @@ class UNL_ENews_User_Permission extends UNL_ENews_Record
         }
         return false;
     }
-    
+
     public static function userHasNewsroomPermission($user_uid, $newsroom_id = false)
     {
         if (self::getById($user_uid, $newsroom_id)) {
             return true;
         }
-        
         return false;
     }
 }

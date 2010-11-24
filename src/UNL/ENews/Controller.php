@@ -5,7 +5,7 @@ class UNL_ENews_Controller
      * Options array
      * Will include $_GET vars, this is the newsroom being used across views
      */
-    public $options = array('view' => 'submit', 'format' => 'html', 'newsroom' => '1');
+    public $options = array('view' => 'submit', 'format' => 'html');
 
     /**
      * A map of views to models
