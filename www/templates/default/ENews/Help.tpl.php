@@ -1,5 +1,46 @@
+<style type="text/css">
+dt {
+     font-weight: bold; 
+     margin: 15px 50px 5px;
+}
+
+dt:before {
+     content: "Q";
+     font-size: 2.5em;
+     font-family: Georgia, "Times New Roman", Times, serif;
+     margin-right: 7px;
+     padding: 0 8px 5px 8px;
+     color: #FFF;
+     background-color: #C20403;
+     font-weight: normal;
+     margin-left: -47px;
+     position: relative;
+     top: 13px;
+}
+ 
+dd {
+     margin: 25px 50px 0px;
+     border-bottom: 1px solid #ccc;
+     padding-bottom: 20px;
+     line-height: 150%;
+}
+
+dd:before {
+     content: "A";
+     font-size: 2.5em;
+     font-family: Georgia, "Times New Roman", Times, serif;
+     margin-right: 7px;
+     padding: 0 9px;
+     color: #FFF;
+     background-color: #028A02;
+     margin-left: -47px;
+     position: relative;
+     top: 13px;
+}
+</style>
+
 <dl>
-<dt>Submit a news/event announcement for consideration in Today@UNL?</dt>
+<dt>How do I submit a news/event announcement for consideration in Today@UNL?</dt>
 <dd>
     <p>From <a href="<?php echo UNL_ENews_Controller::getURL(); ?>">UNL Announce</a>, select <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit">Submit A News Item</a></p>
     <ul>
@@ -80,13 +121,15 @@ Ideally a summary is the few sentences that will appear in the e-newsletter that
 
 <dt>What if I have some late-breaking news that I just found out about that I really need to get out and it's after deadline?</dt>
 <dd>This is probably a news judgment call that we can help with: Call Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059. Most likely, it can wait until the next day; please remember to plan ahead</dd>
+
 <dt>Can I use this site to submit news releases or Scarlet features and briefs (instead of e-mailing them to Tom Simons or Troy?</dt>
 <dd>
 Yes. Until we all get used to this change, it's best to call ahead and explain your request
 </dd>
-<dt>
-Where will these items be archived and will there be a way to search through previous Today@UNL news?
-</dt>
+
+<!--<dt>-->
+<!--Where will these items be archived and will there be a way to search through previous Today@UNL news?-->
+<!--</dt>-->
 
 <dt>Can I buy an advertisement or sponsorship within the electronic newsletter?</dt>
 <dd>Yes. Call Troy Fedderson 472-8515</dd>
