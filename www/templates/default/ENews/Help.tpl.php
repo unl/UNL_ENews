@@ -20,12 +20,12 @@
 
 <dt>Under the Event Announcement submission, it asks me "Which Event" when I entered the date. Why?</dt>
 <dd>
-Either enter the event as a new event, or, before you get to this screen, enter your event in the Events calendar &ndash; this interface pulls events from the Events calendar <url>
+Either enter the event as a new event, or, before you get to this screen, enter your event in the Events calendar &ndash; this interface pulls events from the <a href="http://events.unl.edu/">Events calendar</a>
 </dd>
 
 <dt>What's a summary and how long is a summary?</dt> 
 <dd>
-Ideally a summary is the few sentences that will appear in the e-newsletter that serves as a teaser/mini headline to get readers interested or give them the gist and no more. As you type, you will see the summary appear in the box on the right. The best summaries are very short &ndash; one or two sentences &ndsah; and give the basic facts. This interface limits summaries to 300 characters.
+Ideally a summary is the few sentences that will appear in the e-newsletter that serves as a teaser/mini headline to get readers interested or give them the gist and no more. As you type, you will see the summary appear in the box on the right. The best summaries are very short &ndash; one or two sentences &ndash; and give the basic facts. This interface limits summaries to 300 characters.
 </dd>
 
 
@@ -63,10 +63,10 @@ Ideally a summary is the few sentences that will appear in the e-newsletter that
 <dt>Image upload: What type and size of image works best?</dt>
 <dd>
     <ul>
-    <li>Photos with action or plenty of visual appeal are best.</li>
-    <li>If you have a speaker or event highlighting one or two people, submit "head and shoulders" shots</li>
-    <li>Provide good quality color photos, saved as RGB jpeg/jpg images and have them already tightly cropped, in good focus with good contrast.</li> 
-    <li>Type treatments, word marks and logos (university-approved) will be considered</li>
+        <li>Photos with action or plenty of visual appeal are best.</li>
+        <li>If you have a speaker or event highlighting one or two people, submit "head and shoulders" shots</li>
+        <li>Provide good quality color photos, saved as RGB jpeg/jpg images and have them already tightly cropped, in good focus with good contrast.</li> 
+        <li>Type treatments, word marks and logos (university-approved) will be considered</li>
     </ul>
 </dd>
 
@@ -89,7 +89,7 @@ Where will these items be archived and will there be a way to search through pre
 </dt>
 
 <dt>Can I buy an advertisement or sponsorship within the electronic newsletter?</dt>
-<dd>No. </dd>
+<dd>Yes. Call Troy Fedderson 472-8515</dd>
 
 <dt>Who do I call with questions about Today@UNL?</dt>
 <dd>Call Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059</dd>
