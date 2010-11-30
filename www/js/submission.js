@@ -298,7 +298,7 @@ var submission = function($) {
 			WDN.loadJS(ENEWS_HOME+'/js/jquery.imgareaselect.dev.js',function() {
 				submission.clearImageCrop();
 				submission.setUpImageCrop(ratio);
-			});
+			},true,true);
 		},
 
 		clearImageCrop : function() {
@@ -356,10 +356,10 @@ var submission = function($) {
 			$('#imageControls').show();
 			$('#file_description').removeAttr('disabled');
 
-			// Get the width/height of img, this doesn't work if it's before imgAreaSelect init (?)
+			// Get the width/height of img
 			$('#upload_area > img').removeAttr('width').removeAttr('height');
-			var imgWidth = $('#upload_area > img').width();
-			var imgHeight = $('#upload_area > img').height();
+			var imgWidth = document.getElementById("upload_area").getElementsByTagName("img")[0].width;
+			var imgHeight = document.getElementById("upload_area").getElementsByTagName("img")[0].height;
 
 			if (ratio == '3:4') {
 				if (imgWidth/imgHeight < 3/4) {
