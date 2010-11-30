@@ -23,6 +23,7 @@ var preview = function($) {
 			});
 			$('#releaseDate').change(function(){
 				preview.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
+				preview.updateDates($(this).val());
 			});
 		},
 		
@@ -280,6 +281,13 @@ var preview = function($) {
 					preview.initDraggable('#' + val + 'Available .dragItem');
 				});
 			});
+		},
+		
+		updateDates : function(selectedDate) {
+			var date = new Date(selectedDate);
+			var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			$('.newsletterDate').html(weekday[date.getDay()]+', '+ month[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear());
 		}
 	}
 }(WDN.jQuery);

@@ -3,7 +3,7 @@
 <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
 <tr>
     <td align="center">
-    	<span style="font-size:9px;color:#777777;">Campus Activities for <?php echo date('l, F j, Y', strtotime($context->release_date)); ?><br/>
+    	<span style="font-size:9px;color:#777777;">Campus Activities for <span class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></span><br/>
         <a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a></span>
     </td>
 </tr>
@@ -25,7 +25,7 @@
                             <td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
                                 <!-- This is the main content -->
                                 <h1 style="color:#BA0000;font-family:arial;text-decoration:none;font-size:24px;line-height:1;font-weight:bold;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
-                                <p style="margin:0 0 10px 0;font-size:12px;color:#909090;"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
+                                <p style="margin:0 0 10px 0;font-size:12px;color:#909090;" class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></p>
 
                             </td>
                         </tr>
