@@ -3,7 +3,7 @@ class UNL_ENews_Controller
 {
     /**
      * Options array
-     * Will include $_GET vars, this is the newsroom being used across views
+     * Will include $_GET vars
      */
     public $options = array('view' => 'submit', 'format' => 'html');
 
@@ -30,7 +30,6 @@ class UNL_ENews_Controller
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
                                 'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
                                 'gastats' => 'UNL_ENews_GAStats'
-    
     );
 
     public static $pagetitle = array('latest'      => 'Latest News',
