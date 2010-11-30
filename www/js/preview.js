@@ -21,7 +21,7 @@ var preview = function($) {
 				WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
 				preview.setupDragAndSort();
 			});
-			$('#releaseDate').change(function(){
+			$('#releaseDate').attr('autocomplete', 'off').change(function(){
 				preview.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
 				preview.updateDates($(this).val());
 			});
@@ -284,7 +284,9 @@ var preview = function($) {
 		},
 		
 		updateDates : function(selectedDate) {
+			WDN.log(selectedDate);
 			var date = new Date(selectedDate);
+			WDN.log(date);
 			var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 			var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 			$('.newsletterDate').html(weekday[date.getDay()]+', '+ month[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear());
