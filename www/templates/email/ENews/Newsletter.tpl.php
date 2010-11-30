@@ -3,7 +3,8 @@
 <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
 <tr>
     <td align="center">
-        <a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a>
+    	<span style="font-size:9px;color:#777777;">Campus Activities for <?php echo date('l, F j, Y', strtotime($context->release_date)); ?><br/>
+        <a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a></span>
     </td>
 </tr>
 <tr>
@@ -11,7 +12,7 @@
         <!-- [ header starts here] -->
         <table cellspacing="0" cellpadding="0" border="0" width="600">
             <tr>
-                <td><img src="http://www.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="The University of Nebraska-Lincoln" width="600" height="126" border="0" valign="bottom" /></td>
+                <td><img src="http://www.unl.edu/wdn/templates_3.0/images/email/header.jpg" alt="UNL" width="600" height="126" border="0" valign="bottom" /></td>
             </tr>
         </table>
         <table cellspacing="0" cellpadding="0" border="0" width="600" valign="top">
