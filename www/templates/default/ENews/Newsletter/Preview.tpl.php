@@ -31,7 +31,7 @@
         <li>
             <input type="hidden" name="_type" value="newsletter" />
             <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-            <label for="emailSubject">Email Subject<span class="required">*</span></label>
+            <label for="emailSubject">Email Subject<span class="required">*</span><span class="helper">Include story keywords!</span></label>
             <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
             <label for="releaseDate">Release Date</label>
             <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
@@ -45,7 +45,7 @@
     </p>
     <div class="clear"></div>
 </form>
-<div style="float:right;margin-top:-60px">
+<div style="float:right;margin-top:-60px;position:relative;right:53px;top:36px;">
 <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
 </div>
 </div>
