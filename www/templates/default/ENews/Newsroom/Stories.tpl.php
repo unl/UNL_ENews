@@ -69,7 +69,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     <?php foreach ($context as $item) : ?>
         <tr id="row<?php echo $item->id; ?>">
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
-            <td><?php if ($file = $item->getThumbnail()) { echo '<img src="?view=file&amp;id='.$file->id.'" style="max-width:30px" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?></td>
+            <td><?php if ($file = $item->getThumbnail()) { echo '<img src="?view=file&amp;id='.$file->id.'" style="max-height:25px;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?></td>
             <td><span class="announcementType <?php echo $item->presentation->type; ?>"><?php echo $item->presentation->type; ?></span></td>
             <td><?php echo $item->title; ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
