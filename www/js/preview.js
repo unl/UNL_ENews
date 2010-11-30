@@ -286,6 +286,7 @@ var preview = function($) {
 		updateDates : function(selectedDate) {
 			WDN.log(selectedDate);
 			var date = new Date(selectedDate);
+			date.setUTCHours(6);
 			WDN.log(date);
 			var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 			var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
