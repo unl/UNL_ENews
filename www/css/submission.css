@@ -114,6 +114,7 @@ form#enewsSubmission {
 	border:1px solid #b8afa1;
 }
 #sampleLayoutImage {
+	min-height:72px;
 	float:left;
 	margin-right:5px;
 	background:#f7f7f7;
@@ -159,35 +160,46 @@ form#enewsImage {
 	display:none;
 	list-style:none;
 	padding:0;
-	margin:0;
+	margin:0 0 10px 0;
+	border:1px solid #DDDDDD;
+	background-image:-webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0.3, rgb(255,255,255)),
+		color-stop(0.97, rgb(228,233,243))
+	);
+	background-image:-moz-linear-gradient(
+		center top,
+		rgb(255,255,255) 30%,
+		rgb(228,233,243) 97%
+	);
+	color: #736357;
 }
 #imageControls li {
 	display:inline-block;
 	vertical-align:top;
 	text-align:center;
 	margin:10px 10px 8px 0;
-    font-size:1.1em;
-    padding:10px;
 }
 #cropMessage {
+	font-size:1.1em;
 	width:200px;
-	background:#F8F9D1;
-	color:#A5690C;
-	border:1px solid #CAD094;
 }
 #cropRatio {
-    width:65px;
-    background:#F8F9D1;
-    color:#A5690C;
-    border:1px solid #CAD094;
+	width:80px;
+	height:40px;
+	background-position:3px 3px;
+	background-repeat:no-repeat;
+	background-image:url(images/cropRatio.png);
+	background-color:#78A8C0;
+	color:#FFFFFF;
+	font-size:0;
+	padding:0;
+	cursor:pointer;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
 }
-#deleteImage {
-    width:50px;
-    background:#F8F9D1;
-    color:#A5690C;
-    border:1px solid #CAD094;
-    margin-right:0 !important;
-
 
 /******** Submit Buttons ********/
 .submissionButton {

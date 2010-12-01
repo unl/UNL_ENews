@@ -28,8 +28,7 @@
     </div>
     <ul id="imageControls">
         <li id="cropMessage">Click and drag on the image above to select a thumbnail</li>
-        <li id="cropRatio">Ratio</li>
-        <li id="deleteImage">Delete</li>
+        <li id="cropRatio">Change Crop Ratio</li>
     </ul>
 </fieldset>
 </form>
