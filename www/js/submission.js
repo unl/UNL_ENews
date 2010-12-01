@@ -107,7 +107,7 @@ var submission = function($) {
 
 			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
 			$('#enewsSubmission #fileID').bind('change', function() {
-				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" onload="submission.loadImageCrop(\'4:3\');" />';
+				var imgString = '<img onload="submission.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
 				ajaxUpload.removeIframe();
@@ -319,17 +319,18 @@ var submission = function($) {
 				yWidth = 72;
 			}
 
-			$('#sampleLayoutImage').css({
-				width: xWidth + 'px',
-				height: yWidth + 'px'
-			});
-
 			var preview = function(img, selection) {
+				$('#sampleLayoutImage').css({
+					width: xWidth + 'px',
+					height: yWidth + 'px'
+				});
+				
 				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" />';
 				$('#sampleLayoutImage').html(imgString);
 				
 				var scaleX = xWidth / (selection.width || 1);
 				var scaleY = yWidth / (selection.height || 1);
+				
 				$('#sampleLayoutImage > img').css({
 					width: Math.round(scaleX * imgWidth) + 'px',
 					height: Math.round(scaleY * imgHeight) + 'px',
@@ -356,50 +357,60 @@ var submission = function($) {
 			$('#imageControls').show();
 			$('#file_description').removeAttr('disabled');
 
-			// Get the width/height of img
-			$('#upload_area > img').removeAttr('width').removeAttr('height');
-			var imgWidth = document.getElementById("upload_area").getElementsByTagName("img")[0].width;
-			var imgHeight = document.getElementById("upload_area").getElementsByTagName("img")[0].height;
-
-			if (ratio == '3:4') {
-				if (imgWidth/imgHeight < 3/4) {
-					submission.ias.setOptions({
-						maxWidth : imgWidth,
-						x1: imgWidth*(1/4),
-						y1: (imgHeight/2)-((imgWidth/2)*(4/3)/2),
-						x2: imgWidth*(3/4),
-						y2: (imgHeight/2)+((imgWidth/2)*(4/3)/2)
-					});
+			/* Get the width/height of image and set the coords according to the given ratio.
+			 * Using a setTimeout because .width() and .height() of the image return 0 immediately after the image onload event,
+			 * could use window.load but don't want to be dependent on other servers (alert,planetred)
+			 */
+			var imgWidth = 0;
+			var imgHeight = 0;
+			var calcSize = function(){
+				imgWidth = $('#upload_area > img').width();
+				imgHeight = $('#upload_area > img').height();
+				if (imgWidth == 0) {
+					setTimeout(function(){calcSize();},25);
 				} else {
-					submission.ias.setOptions({
-						maxHeight : imgHeight,
-						x1 : (imgWidth/2)-((imgHeight/2)*(3/4)/2),
-						y1 : imgHeight*(1/4),
-						x2 : (imgWidth/2)+((imgHeight/2)*(3/4)/2),
-						y2 : imgHeight*(3/4)
-					});
-				}
-			} else {
-				if (imgWidth/imgHeight > 4/3) {
-					submission.ias.setOptions({
-						maxHeight : imgHeight,
-						x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
-						y1 : imgHeight*(1/4),
-						x2 : (imgWidth/2)+((imgHeight/2)*(4/3)/2),
-						y2 : imgHeight*(3/4)
-					});
-				} else {
-					submission.ias.setOptions({
-						maxWidth : imgWidth,
-						x1: imgWidth*(1/4),
-						y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
-						x2: imgWidth*(3/4),
-						y2: (imgHeight/2)+((imgWidth/2)*(3/4)/2)
-					});
+					if (ratio == '3:4') {
+						if (imgWidth/imgHeight < 3/4) {
+							submission.ias.setOptions({
+								maxWidth : imgWidth,
+								x1: imgWidth*(1/4),
+								y1: (imgHeight/2)-((imgWidth/2)*(4/3)/2),
+								x2: imgWidth*(3/4),
+								y2: (imgHeight/2)+((imgWidth/2)*(4/3)/2)
+							});
+						} else {
+							submission.ias.setOptions({
+								maxHeight : imgHeight,
+								x1 : (imgWidth/2)-((imgHeight/2)*(3/4)/2),
+								y1 : imgHeight*(1/4),
+								x2 : (imgWidth/2)+((imgHeight/2)*(3/4)/2),
+								y2 : imgHeight*(3/4)
+							});
+						}
+					} else {
+						if (imgWidth/imgHeight > 4/3) {
+							submission.ias.setOptions({
+								maxHeight : imgHeight,
+								x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
+								y1 : imgHeight*(1/4),
+								x2 : (imgWidth/2)+((imgHeight/2)*(4/3)/2),
+								y2 : imgHeight*(3/4)
+							});
+						} else {
+							submission.ias.setOptions({
+								maxWidth : imgWidth,
+								x1: imgWidth*(1/4),
+								y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
+								x2: imgWidth*(3/4),
+								y2: (imgHeight/2)+((imgWidth/2)*(3/4)/2)
+							});
+						}
+					}
+					submission.ias.update();
+					return false;
 				}
 			}
-
-			submission.ias.update();
+			calcSize();
 		},
 
 		submitStory : function(validate, ajax){
