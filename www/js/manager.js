@@ -28,13 +28,6 @@ var manager = function($) {
 			}).hover(function() {
 				$(this).css({'cursor':'pointer'});
 			});
-			var rowBackgroundColor;
-			$('table.storylisting tr td').hover(function(){
-				rowBackgroundColor = $(this).css('background-color');
-				$(this).parent().children('td').css({'background-color':'#ddd'});
-			},function() {
-				$(this).parent().children('td').css({'background-color':rowBackgroundColor});
-			});
 		},
 
 		checkInput : function() {
