@@ -21,8 +21,8 @@ var manager = function($) {
 			});
 			
 			/* Make entire row clickable */
-			$('table.storylisting tr td + td:not(:nth-child(9n))').click(function() {
-				var editHref = $(this).parent().children('td:last').children('a').attr('href');
+			$('table.storylisting tr td + td').click(function() {
+				var editHref = $(this).parent().children('td').children('a.edit').attr('href');
 				window.location = editHref;
 				return false;
 			}).hover(function() {
@@ -42,9 +42,9 @@ var manager = function($) {
 					flag = 1;
 				}
 			}
-			if (flag === 0) { 
+			if (flag === 0) {
 				manager.storyselected = false;
-			} else { 
+			} else {
 				manager.storyselected = true;
 			}
 		},
