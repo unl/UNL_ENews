@@ -24,8 +24,13 @@ var submission = function($) {
 			$('#enewsForm h3').eq(1).css('cursor','pointer');
 			submission.bindActions();
 
-			// If we're editing, then call the presenation function
-			if(submission.editing){
+			if (submission.editing) {
+				$('#enewsForm h3').eq(0).hide();
+				$('#enewsForm h3').eq(1).hide();
+				$('#enewsForm h3').eq(2).html('Edit Submission');
+				$('textarea.resizable:not(.processed)').TextAreaResizer();
+				$('#enewsSubmissionButton').show();
+				$('#enewsSaveCopyButton').show();
 				submission.determinePresentation(submission.announcementType);
 				submission.updatePreview();
 			};
@@ -36,12 +41,15 @@ var submission = function($) {
 			switch (announcementType) {
 			case 'news' :
 				submission.prepareNewsSubmission();
+				submission.setPresentationId('news');
 				break;
 			case 'event' :
 				submission.prepareEventSubmission();
+				submission.setPresentationId('event');
 				break;
 			case 'ad' :
 				submission.prepareAdSubmission();
+				submission.setPresentationId('ad');
 				break;
 			}
 		},
@@ -53,7 +61,7 @@ var submission = function($) {
 				submission.findEvents($(this).val());
 			});
 
-			$('select#event').bind('change', function(){
+			$('select#event').bind('change', function() {
 				$('#website').attr('value', $(this).val());
 				// Get the details for this specific event
 				WDN.get($(this).val()+'?format=xml', null, function(data) {
@@ -66,7 +74,7 @@ var submission = function($) {
 				}, 'xml');
 			});
 
-			$('ol.option_step a').bind('click', function(){// Sliding action for the three part form
+			$('ol.option_step a').bind('click', function() {// Sliding action for the three part form
 				var a = $(this).attr('id');
 				announcementType = a.replace('Announcement', '');
 				submission.determinePresentation(announcementType);
@@ -107,7 +115,7 @@ var submission = function($) {
 
 			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
 			$('#enewsSubmission #fileID').bind('change', function() {
-				var imgString = '<img onload="submission.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
+				var imgString = '<img onload="if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
 				ajaxUpload.removeIframe();
@@ -163,10 +171,10 @@ var submission = function($) {
 				return false;
 			});
 			$('#enewsForm h3').eq(0).bind('click', function() {
-				submission.goToStep(1)
+				submission.goToStep(1);
 			});
 			$('#enewsForm h3').eq(1).bind('click', function() {
-				submission.goToStep(2)
+				submission.goToStep(2);
 			});
 		},
 
@@ -190,7 +198,7 @@ var submission = function($) {
 			$('#enewsForm h3').show();
 		},
 
-		prepareNewsSubmission : function(){
+		prepareNewsSubmission : function() {
 			$('#wdn_process_step1').slideToggle();
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
@@ -198,16 +206,14 @@ var submission = function($) {
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
 			});
-			submission.setPresentationId('news');
 		},
 
-		prepareEventSubmission : function(){
+		prepareEventSubmission : function() {
 			$('#wdn_process_step1').slideToggle();
 			submission.goToStep(2);
-			submission.setPresentationId('event');
 		},
 
-		prepareAdSubmission : function(){
+		prepareAdSubmission : function() {
 			$('#wdn_process_step1').slideToggle();
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
@@ -215,7 +221,6 @@ var submission = function($) {
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">Advertisement</span>');
 				$('#enewsImage,#enewsSubmissionButton').show();
 			});
-			submission.setPresentationId('ad');
 			submission.setupAd();
 			
 		},
@@ -413,7 +418,7 @@ var submission = function($) {
 			calcSize();
 		},
 
-		submitStory : function(validate, ajax){
+		submitStory : function(validate, ajax) {
 			if (validate) {
 				var message = '';
 				$('input.required,textarea.required').each(function() {
@@ -438,7 +443,7 @@ var submission = function($) {
 					window.location.href,
 					dataString,
 					function(data,status) {
-						//We get back the id of the newly saved story
+						// We get back the id of the newly saved story
 						$('#enewsSubmission #storyid').val(data);
 						$('#enewsImage #storyid').val(data).change();
 					},
@@ -453,7 +458,7 @@ var submission = function($) {
 	};
 }(WDN.jQuery);
 
-WDN.jQuery(document).ready(function($){
+WDN.jQuery(document).ready(function($) {
 	// Set up date pickers on all inputs with datepicker class
 	$("input.datepicker").datepicker({
 		showOn: 'both',
@@ -462,13 +467,9 @@ WDN.jQuery(document).ready(function($){
 		dateFormat: 'yy-mm-dd',
 		defaultDate: this.value
 	});
-	if (editType) { // We're editing, so update where needed
+	if (editType) { // Editing, so update where needed
 		submission.editing = true;
 		submission.announcementType = editType;
-		$('textarea.resizable:not(.processed)').TextAreaResizer();
-		$('#enewsSubmissionButton').show();
-		$('#enewsSaveCopyButton').show();
-		submission.updatePreview();
 	}
 	submission.initialize();
 });
