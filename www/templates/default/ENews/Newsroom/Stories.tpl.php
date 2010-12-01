@@ -51,32 +51,31 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         </select>
     </fieldset>
 </div>
-<table class="storylisting zentable energetic" >
+<table class="storylisting functionTable" >
     <thead>
         <tr>
-            <th scope="col" class="select">Select</th>
-            <th scope="col" class="image">Image</th>
-            <th scope="col" class="type"></th>
-            <th scope="col" class="title"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=title">Headline</a></th>
+            <th scope="col" class="select"></th>
+            <th scope="col" class="headline">Article</th>
             <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">First Pub Date</a></th>
             <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">Last Pub Date</a></th>
-            <th scope="col" class="submitter"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=uid_created">Submitter</a></th>
-            <th scope="col" class="modifier"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=uid_modified">Last Edited By</a></th>
-            <th scope="col" class="edit">Edit</th>
         </tr>
     </thead>
     <tbody>
     <?php foreach ($context as $item) : ?>
-        <tr id="row<?php echo $item->id; ?>">
+        <tr id="row<?php echo $item->id; ?>" class="<?php echo $item->presentation->type; ?>">
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
-            <td><?php if ($file = $item->getThumbnail()) { echo '<img src="?view=file&amp;id='.$file->id.'" style="max-height:25px;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?></td>
-            <td><span class="announcementType <?php echo $item->presentation->type; ?>"><?php echo $item->presentation->type; ?></span></td>
-            <td><?php echo $item->title; ?></td>
+            <td class="mainCell">
+            	<?php if ($file = $item->getThumbnail()) { echo '<img src="?view=file&amp;id='.$file->id.'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?>
+            	<h5><?php echo $item->title; ?></h5>
+            	<a href="?view=submit&amp;id=<?php echo $item->id; ?>" class="action edit">Edit</a>
+            	<span>Submitted by <?php echo $item->uid_created; ?>.
+            	<?php if (!empty($item->uid_modified)) { ?>
+            		Edited by <?php echo $item->uid_modified;?>.
+            	<?php }?>
+            	</span>
+            </td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_start)); ?></td>
             <td><?php echo date('Y-m-d', strtotime($item->request_publish_end)); ?></td>
-            <td><?php echo $item->uid_created; ?></td>
-            <td><?php echo $item->uid_modified; ?></td>
-            <td><a href="?view=submit&amp;id=<?php echo $item->id; ?>">Edit</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

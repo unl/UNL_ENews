@@ -8,11 +8,9 @@ form#enewsManage .btnsubmit {
 /* Check/Uncheck/Action 
 ****************************/
 .storyAction  {
-    background:#EEE;
-    border-bottom:1px solid #DDDDDD;
-    border-right:1px solid #DDDDDD;
+    background:#C0A878;
+    border-bottom:2px solid #D8C090;
     height:1%;
-    margin:0 0 5px;
     padding:4px 5px;
     position:relative;
 }
@@ -23,14 +21,20 @@ form#enewsManage .btnsubmit {
 }
 #maincontent a.checkall,
 #maincontent a.uncheckall {
-    background:#F0F0F0;
-    border:1px solid #B8AFA1;
-    color:#5F5F5F;
+    background:#80590e;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    color:#fff;
     display:block;
     float:left;
     font-size:10px;
     margin-right:4px;
     padding:1px 4px;
+}
+#maincontent a.checkall:focus,
+#maincontent a.uncheckall:focus {
+	color:#fff !important;
 }
 #maincontent form fieldset.storyFieldsetAction {
     background:none repeat scroll 0 0 transparent;
@@ -49,18 +53,6 @@ form#enewsManage .btnsubmit {
 #maincontent form fieldset.storyFieldsetAction select {
     margin:0 5px;
 }
-
-span.announcementType {
-	border-radius:3px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	color:#fff;
-	background:#999900;
-	font-size:9px;
-	padding:2px 4px;
-}
-span.announcementType.ad{background:#009900;}
-span.announcementType.event{background:#660099;}
 /* Newsroom Chooser Form 
 **************************/
 #maincontent .enews.newsroom_choose {
@@ -82,4 +74,92 @@ span.announcementType.event{background:#660099;}
 }
 #maincontent .enews.newsroom_choose select {
     width:auto; /*ie7*/
+}
+
+/* Function Tables
+*************************/
+
+#maincontent .functionTable {
+	width:940px;
+}
+#maincontent .functionTable thead {
+	background-image:-webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0.3, rgb(255,255,255)),
+	    color-stop(0.97, rgb(228,233,243))
+	);
+	background-image:-moz-linear-gradient(
+	    center top,
+	    rgb(255,255,255) 30%,
+	    rgb(228,233,243) 97%
+	);
+	color: #736357;
+}
+#maincontent .functionTable thead th, #maincontent .functionTable tbody td {
+	padding: 5px;
+    border-left: 1px solid #DDD;
+	border-right: 1px solid #E8D6C1;
+}
+#maincontent .storylisting.functionTable tbody tr td:first-of-type {
+	border-right:0;
+}
+#maincontent .storylisting.functionTable tbody tr.event td:first-of-type {
+	background:url('images/typeIndicatorEvent.png') no-repeat 0 0;
+}
+#maincontent .storylisting.functionTable tbody tr.news td:first-of-type {
+    background:url('images/typeIndicatorNews.png') no-repeat 0 0;
+}
+#maincontent .storylisting.functionTable tbody tr.ad td:first-of-type {
+    background:url('images/typeIndicatorad.png') no-repeat 0 0;
+}
+#maincontent .storylisting.functionTable tbody tr td.mainCell {
+	border-left:0;
+	padding-left:0;
+}
+.functionTable tbody tr:nth-child(even) {background-color: #F1EDE0;}
+#maincontent .functionTable tbody td {
+	padding:10px;
+}
+#maincontent .functionTable tbody td.mainCell {
+    max-width:600px;
+    padding:15px;
+}
+#maincontent .functionTable tbody td.mainCell h5 {
+	color:#705538;
+	font-size:1.1em;
+	font-weight:bold;
+	border-bottom:1px solid #ece4da;
+	margin-bottom:9px;
+}
+#maincontent .functionTable tbody tr:nth-child(even) td.mainCell h5 {border-bottom:1px solid #cdc4bb;}
+#maincontent .functionTable tbody tr:hover {background:#ddd;}
+#maincontent .functionTable tbody td a.action {
+    background:#78A8C0;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    padding:3px 5px;
+    color:#fff !important;
+}
+#maincontent .functionTable tbody td.mainCell form a, #maincontent .functionTable tbody td.mainCell span {
+	font-size:0.8em;
+}
+#maincontent .functionTable tbody td a.action.send {
+	background:#705538;
+	font-weight:bold;
+	font-size:1.2em;
+    padding:5px 8px;
+    margin:0 auto;
+}
+#maincontent .functionTable tbody td.mainCell form {
+	display:inline;
+}
+.functionTable a.gaStats {
+	text-indent: -99999px;
+	background:url('images/iconReport.png') no-repeat 0 0;
+	display:block;
+	width:32px;
+	height:32px;
 }
