@@ -27,15 +27,20 @@ class UNL_ENews_File extends UNL_ENews_Record
     static public function getById($id)
     {
         if ($record = self::getRecordByID('files', $id)) {
-            $class = __CLASS__;
-            if (strstr($record['type'], 'image/')) {
-                $class = 'UNL_ENews_File_Image';
-            }
-            $object = new $class;
-            UNL_ENews_Controller::setObjectFromArray($object, $record);
-            return $object;
+            return self::newFromArray($record);
         }
         return false;
+    }
+
+    static public function newFromArray($array)
+    {
+        $class = __CLASS__;
+        if (strstr($array['type'], 'image/')) {
+            $class = 'UNL_ENews_File_Image';
+        }
+        $object = new $class;
+        UNL_ENews_Controller::setObjectFromArray($object, $array);
+        return $object;
     }
     
     function getTable()
