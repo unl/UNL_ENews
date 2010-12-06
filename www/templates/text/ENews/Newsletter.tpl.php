@@ -6,7 +6,7 @@ View the full version at <?php echo UNL_ENews_Controller::getURL() . "?view=news
     $column = '';
     foreach ($context->getStories() as $key=>$story) {
         if ($story->presentation->type == 'ad') {
-            $column .= $savvy->render($story, 'UNL_ENews_Newsletter_Story_Presentation_Ad');
+            $column .= $savvy->render($story, 'ENews/Newsletter/Story/Presentation/Ad.tpl.php');
         } else {
             $column .= $savvy->render($story);
         }
