@@ -9,9 +9,11 @@ class UNL_ENews_File_Image extends UNL_ENews_File
 
     const HALF_AD_WIDTH  = 273;
     const HALF_AD_HEIGHT = 104;
+    
+    const MAX_WIDTH = 556;
 
     // Max image size displayed to the user
-    const MAX_WIDTH      = 410;
+    const THUMBNAIL_SELECTION_WIDTH = 410;
 
     /**
      * Save a thumbnail and return the object
@@ -47,26 +49,40 @@ class UNL_ENews_File_Image extends UNL_ENews_File
 
         // Crop the image ***************************************************************
         // Get dimensions of the original image
-        list($current_width, $current_height) = getimagesize('data://'.$this->type.';base64,' . base64_encode($this->data));
+        list($current_width, $current_height) = $this->getSize();
 
         if ($x1 < 0) {
             // User did not select a cropping area
-            $x1   = 0;
-            $y1    = 0;
-            $x2  = $current_width;
+            $x1 = 0;
+            $y1 = 0;
+            $x2 = $current_width;
             $y2 = $current_width*($height/$width);
         } else {
             // Needs to be adjusted to account for the scaled down 410px-width size that's displayed to the user
-            if ($current_width > self::MAX_WIDTH) {
-                $x1   = ($current_width/self::MAX_WIDTH)*$x1;
-                $y1    = ($current_height/(self::MAX_WIDTH*$current_height/$current_width))*$y1;
-                $x2  = ($current_width/self::MAX_WIDTH)*$x2;
-                $y2 = ($current_height/(self::MAX_WIDTH*$current_height/$current_width))*$y2;
+            if ($current_width > self::THUMBNAIL_SELECTION_WIDTH) {
+                $x1 = ($current_width/self::THUMBNAIL_SELECTION_WIDTH)*$x1;
+                $y1 = ($current_height/(self::THUMBNAIL_SELECTION_WIDTH*$current_height/$current_width))*$y1;
+                $x2 = ($current_width/self::THUMBNAIL_SELECTION_WIDTH)*$x2;
+                $y2 = ($current_height/(self::THUMBNAIL_SELECTION_WIDTH*$current_height/$current_width))*$y2;
             }
         }
 
         if ($thumb = $this->resizeImage($x1, $x2, $y1, $y2, $width, $height)) {
             $thumb->use_for = 'thumbnail';
+            $thumb->save();
+            return $thumb;
+        }
+
+        return false;
+    }
+
+    function saveMaxWidth()
+    {
+        list($current_width, $current_height) = $this->getSize();
+
+        $new_height = self::MAX_WIDTH/$current_width * $current_height;
+        if ($thumb = $this->resizeImage(0, $current_width, 0, $current_height, self::MAX_WIDTH, $new_height)) {
+            $thumb->use_for = self::MAX_WIDTH.'_wide';
             $thumb->save();
             return $thumb;
         }
@@ -127,5 +143,11 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         }
 
         return false;
+    }
+
+    function getSize()
+    {
+        $file = 'data://'.$this->type.';base64,' . base64_encode($this->data);
+        return getimagesize($file);
     }
 }
