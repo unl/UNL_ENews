@@ -3,7 +3,7 @@
 <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
 <tr>
     <td align="center">
-    	<span style="font-size:9px;color:#777777;">Campus Activities for <span class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></span><br/>
+    	<span style="font-size:9px;color:#ffffff;">Campus Activities for <span class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></span><br/>
         <a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a></span>
     </td>
 </tr>
