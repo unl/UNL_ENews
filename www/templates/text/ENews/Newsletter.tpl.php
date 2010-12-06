@@ -5,7 +5,11 @@ View the full version at <?php echo UNL_ENews_Controller::getURL() . "?view=news
 <?php
     $column = '';
     foreach ($context->getStories() as $key=>$story) {
-        $column .= $savvy->render($story);
+        if ($story->presentation->type == 'ad') {
+            $column .= $savvy->render($story, 'UNL_ENews_Newsletter_Story_Presentation_Ad');
+        } else {
+            $column .= $savvy->render($story);
+        }
     }
     
     echo $column . "\n";
