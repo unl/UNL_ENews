@@ -50,11 +50,9 @@ class UNL_LDAP_Entry_Attribute extends ArrayIterator
         return $this->count;
     }
 
-    public function __wakeup()
+    public function unserialize($data)
     {
-        if (isset($this->storage)) {
-            parent::__construct($this->storage);
-        }
+        parent::unserialize($data);
         $this->rewind();
     }
 
