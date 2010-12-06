@@ -126,14 +126,33 @@ class UNL_ENews_Story extends UNL_ENews_Record
      * 
      * @return UNL_ENews_Story_File
      */
-    function getFileByUse($use)
+    function getFileByUse($use, $create = false)
     {
-        // @TODO fix looping here for no reason
-        foreach ($this->getFiles() as $file) {
-            if ($file->use_for == $use) {
-                return $file;
+        $db = UNL_ENews_Controller::getDB();
+        $sql = "SELECT files.* FROM story_files, files WHERE story_files.story_id = ".(int)$this->id." AND story_files.file_id = files.id AND files.use_for = '".$db->escape_string($use)."';";
+        if (($result = $db->query($sql))
+            && $result->num_rows > 0) {
+            return UNL_ENews_File::newFromArray($result->fetch_assoc());
+        }
+
+        if (true === $create
+            && $file = $this->getFileByUse('originalimage', false)) {
+            switch ($use) {
+            case 'thumbnail':
+                $new = $file->saveThumbnail();
+                break;
+            case UNL_ENews_File_Image::MAX_WIDTH.'_wide':
+                $new = $file->saveMaxWidth();
+                break;
+            default:
+                throw new Exception('I cannot create that for you.');
+            }
+            if ($new) {
+                $this->addFile($new);
+                return $new;
             }
         }
+
         return false;
     }
     
