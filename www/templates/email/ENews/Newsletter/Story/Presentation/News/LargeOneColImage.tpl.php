@@ -1,5 +1,5 @@
 <?php
-if ($file = $context->getFileByUse('originalimage')) {
+if ($file = $context->getFileByUse(UNL_ENews_File_Image::MAX_WIDTH.'_wide', true)) {
     echo '<table cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td valign="top" algin="left"><img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
          . '.jpg" style="margin-bottom:5px;width:100%;" /></td></tr></table>';

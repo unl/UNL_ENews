@@ -1,7 +1,7 @@
 <?php 
 $storylink = $context->getURL();
 
-if ($file = $context->getFileByUse('originalimage')) {
+if ($file = $context->getFileByUse(UNL_ENews_File_Image::MAX_WIDTH.'_wide', true)) {
     echo '<a href="'.$storylink.'">'
          . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
          . $file->id
