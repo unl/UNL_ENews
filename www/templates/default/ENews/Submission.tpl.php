@@ -176,7 +176,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
                     </select>
                 </div>
             <?php endif ?>
-         <span id="addAnotherNewsroom"><span>+</span> Add another newsroom to submit to</span>
+         <span id="addAnotherNewsroom"><span>+</span> Add another newsroom for submission</span>
         </fieldset>
         </li>
     </ol>
