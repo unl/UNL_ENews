@@ -23,7 +23,10 @@ var submission = function($) {
 			$('#enewsForm h3').eq(0).css('cursor','pointer');
 			$('#enewsForm h3').eq(1).css('cursor','pointer');
 			submission.bindActions();
-
+			
+			WDN.loadJS('jquery.textarearesizer.compressed.js', function() {
+				WDN.jQuery('#wdn_process_step3 textarea').TextAreaResizer();
+			});
 			if (submission.editing) {
 				$('#enewsForm h3').eq(0).hide();
 				$('#enewsForm h3').eq(1).hide();
