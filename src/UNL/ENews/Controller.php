@@ -232,9 +232,23 @@ class UNL_ENews_Controller
                     }
                 }
 
-                $file = UNL_ENews_File::getById($_POST['fileID']);
+                $original = $story->getFileByUse('originalimage');
 
-                if ($file) {
+                if (!empty($_POST['fileID'])
+                    && false !== $original
+                    && $original->id != $_POST['fileID']) {
+
+                    // We've got a new original image we're working with, delete all the old ones.
+                    $story->removeFile($original);
+                    $original->delete();
+
+                    foreach ($story->getFiles() as $old_file) {
+                        $story->removeFile($old_file);
+                        $old_file->delete();
+                    }
+                }
+
+                if ($file = UNL_ENews_File::getById($_POST['fileID'])) {
                     $file->description = $_POST['fileDescription'];
                     $file->save();
 
@@ -252,7 +266,7 @@ class UNL_ENews_Controller
                     }
 
                     // Get existing story_files connections and add the files if no connection exists
-                    $story_files = new UNL_ENews_Story_Files($options= array('story_id'=>$story->id));
+                    $story_files = $story->getFiles();
                     if (!in_array($file->id, $story_files->getArrayCopy())) {
                         $story->addFile($file);
                     }
