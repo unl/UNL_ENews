@@ -33,7 +33,7 @@ foreach ($context as $key=>$story) {
         <div id="newsColumn2" class="newsColumn">
         <?php foreach ($columns[0] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+                <?php echo $savvy->render($story, 'ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
             </div>
         <?php endforeach; ?>
