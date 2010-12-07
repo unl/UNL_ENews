@@ -10,7 +10,7 @@ foreach ($context as $key=>$story) {
         <div id="newsColumnIntro" class="newsColumn">
         <?php foreach ($columns[1] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+                <?php echo $savvy->render($story, 'ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
             </div>
         <?php endforeach; ?>
@@ -22,7 +22,7 @@ foreach ($context as $key=>$story) {
         <div id="newsColumn1" class="newsColumn">
         <?php foreach ($columns[2] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+                <?php echo $savvy->render($story, 'ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
             </div>
         <?php endforeach; ?>
