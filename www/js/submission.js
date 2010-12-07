@@ -290,11 +290,11 @@ var submission = function($) {
 				WDN.socialmediashare.buildGAURL(url, gaTagging),
 				function(data) {
 					$('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
-					submission.addURLtoPreview(data);
+					submission.updatePreview(data);
 				},
 				function(){
 					$('#website').attr('value', website).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
-					submission.addURLtoPreview(website);
+					submission.updatePreview(website);
 				}
 			);
 		},
