@@ -6,7 +6,7 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
 <div style="float:right;width:310px;margin:0 0 20px 10px;">
 <?php 
 foreach ($context->getFiles() as $file) {
-    if (preg_match('/^image/', $file->type) && $file->use_for != 'thumbnail') {
+    if (preg_match('/^image/', $file->type) && $file->use_for == 'originalimage') {
         echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
              . $file->id
              . '" style="max-width:300px;" class="frame" alt="'.$file->name.'" />';
