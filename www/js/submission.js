@@ -24,14 +24,11 @@ var submission = function($) {
 			$('#enewsForm h3').eq(1).css('cursor','pointer');
 			submission.bindActions();
 			
-			WDN.loadJS('jquery.textarearesizer.compressed.js', function() {
-				WDN.jQuery('#wdn_process_step3 textarea').TextAreaResizer();
-			});
+			$('textarea.resizable:not(.processed)').TextAreaResizer();
 			if (submission.editing) {
 				$('#enewsForm h3').eq(0).hide();
 				$('#enewsForm h3').eq(1).hide();
 				$('#enewsForm h3').eq(2).html('Edit Submission');
-				$('textarea.resizable:not(.processed)').TextAreaResizer();
 				$('#enewsSubmissionButton').show();
 				$('#enewsSaveCopyButton').show();
 				submission.determinePresentation(submission.announcementType);
