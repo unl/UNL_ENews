@@ -22,10 +22,17 @@
     <div id="upload_area">
     <?php
     if ($id && $originalImage) :
-    list($width, $height) = $originalImage->getSize();
+    
+    $ratio = '4:3';
+    if ($thumbnail) {
+        list($width, $height) = $thumbnail->getSize();
+        if ($width/$height == 0.75) {
+            $ratio = '3:4';
+        }
+    }
     
     ?>
-        <img onload="if(submission.announcementType != 'ad')submission.loadImageCrop('4:3');" src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany submission" />
+        <img onload="if(submission.announcementType != 'ad')submission.loadImageCrop('<?php echo $ratio; ?>');" src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany submission" />
     <?php else : ?>
         <div>Image preview</div>
     <?php endif; ?>
