@@ -129,22 +129,24 @@ var submission = function($) {
 				$('#fileDescription').val($(this).val());
 			});
 
-			$('#cropRatio').toggle(
+			$('#cropRatio').click(
 				function() {
 					$('#sampleLayoutImage').html('Select Thumbnail Below');
 					$('input[name=thumbX1]').val('-1');
 					$('input[name=thumbX2]').val('-1');
 					$('input[name=thumbY1]').val('-1');
 					$('input[name=thumbY2]').val('-1');
-					submission.loadImageCrop('3:4');
-				},
-				function() {
-					$('#sampleLayoutImage').html('Select Thumbnail Below');
-					$('input[name=thumbX1]').val('-1');
-					$('input[name=thumbX2]').val('-1');
-					$('input[name=thumbY1]').val('-1');
-					$('input[name=thumbY2]').val('-1');
-					submission.loadImageCrop('4:3');
+					
+					if ($(this).hasClass('r34')) {
+						submission.loadImageCrop('4:3');
+						$(this).removeClass('r34');
+						$(this).addClass('r43');
+					} else {
+						submission.loadImageCrop('3:4');
+						$(this).removeClass('r43');
+						$(this).addClass('r34');
+					}
+					
 				}
 			);
 
