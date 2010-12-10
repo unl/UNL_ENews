@@ -231,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `story_presentations` (
 INSERT INTO `story_presentations` (`id`, `type`, `isdefault`, `description`, `template`) VALUES
 (1, 'news', 1, 'Thumbnail floated left', 'ENews/Story/Presentation/News/ThumbnailFloatedLeft.tpl.php'),
 (2, 'news', 0, 'Thumbnail floated right', 'ENews/Story/Presentation/News/ThumbnailFloatedRight.tpl.php'),
-(3, 'news', 0, 'Large one column wide image', 'ENews/Story/Presentation/News/LargeOneColImage.tpl.php'),
+(3, 'news', 0, 'Large two column wide image (main story)', 'ENews/Story/Presentation/News/LargeOneColImage.tpl.php'),
 (4, 'event', 1, 'Thumbnail floated left', 'ENews/Story/Presentation/Event/ThumbnailFloatedLeft.tpl.php'),
 (5, 'event', 0, 'Thumbnail floated right', 'ENews/Story/Presentation/Event/ThumbnailFloatedRight.tpl.php'),
 (6, 'ad', 1, 'One column image only', 'ENews/Story/Presentation/Ad/OneColImage.tpl.php'),
