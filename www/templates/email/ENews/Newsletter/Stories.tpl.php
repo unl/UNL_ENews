@@ -18,7 +18,7 @@ foreach ($context as $key=>$story) {
     </td>
     </tr>
     <tr id="newsStories">
-     <td valign="top" width="273">
+     <td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
         <div id="newsColumn1" class="newsColumn">
         <?php foreach ($columns[2] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
@@ -29,7 +29,7 @@ foreach ($context as $key=>$story) {
         </div>
     </td>
     <td width="10">&nbsp;</td>
-    <td valign="top" width="273">
+    <td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
         <div id="newsColumn2" class="newsColumn">
         <?php foreach ($columns[0] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
