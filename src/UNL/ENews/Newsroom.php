@@ -59,6 +59,29 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Newsletters($options);
     }
 
+    function getEmails($options = array())
+    {
+        $options += array('newsroom_id'=>$this->id);
+        return new UNL_ENews_Newsroom_Emails($options);
+    }
+
+    function addEmail($email_address, $optout = 0, $newsletter_default = 1)
+    {
+        $existing = $this->getEmails();
+        foreach ($existing as $existing_email) {
+            if ($existing_email->email == $email_address) {
+                // we already have this email address
+                return;
+            }
+        }
+        $email = new UNL_ENews_Newsroom_Email();
+        $email->email = $email_address;
+        $email->newsroom_id = $this->id;
+        $email->newsletter_default = $newsletter_default;
+        $email->optout = $optout;
+        return $email->insert();
+    }
+
     /**
      * 
      * @param string $shortname
