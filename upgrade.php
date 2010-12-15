@@ -88,6 +88,16 @@ foreach (array(
 
 }
 
+$result = $mysqli->query("SELECT id, email_lists FROM newsrooms;");
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        if (!empty($row['email_lists'])) {
+            UNL_ENews_Newsroom::getByID($row['id'])->addEmail($row['email_lists']);
+        }
+    }
+    // Assume we did a good job, and drop the email_lists field?
+}
+
 echo 'Adding presentation_id field to stories table<br />';
 $result = $mysqli->query("ALTER TABLE `stories` ADD `presentation_id` INT( 10 ) NOT NULL AFTER `website`;");
 if (!$result) {
