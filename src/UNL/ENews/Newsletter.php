@@ -112,7 +112,43 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return parent::save();
     }
-    
+
+    function insert()
+    {
+        $result = parent::insert();
+        if (!$result) {
+            return $result;
+        }
+
+        // Add all the default email addresses
+        foreach (new UNL_ENews_Newsroom_Emails_Filter_ByDefault($this->getNewsroom()->getEmails()) as $email) {
+            $this->addEmail($email);
+        }
+
+        return $result;
+    }
+
+    function addEmail(UNL_ENews_Newsroom_Email $email)
+    {
+        $existing = $this->getEmails();
+        foreach ($existing as $existing_email) {
+            if ($existing_email->id == $email->id) {
+                // we already have this email address
+                return;
+            }
+        }
+        $newsletter_email = new UNL_ENews_Newsletter_Email();
+        $newsletter_email->newsletter_id = $this->id;
+        $newsletter_email->newsroom_email_id = $email->id;
+        return $newsletter_email->insert();
+    }
+
+    function getEmails($options = array())
+    {
+        $options += array('newsletter_id'=>$this->id);
+        return new UNL_ENews_Newsletter_Emails($options);
+    }
+
     function delete()
     {
         foreach($this->getStories() as $has_story) {
