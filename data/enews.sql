@@ -1,13 +1,19 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.3
+-- version 3.3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 05, 2010 at 05:10 PM
+-- Generation Time: Dec 15, 2010 at 02:07 PM
 -- Server version: 5.1.48
--- PHP Version: 5.3.2
+-- PHP Version: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `enews`
@@ -28,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `use_for` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -45,7 +51,19 @@ CREATE TABLE IF NOT EXISTS `newsletters` (
   `distributed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `newsroom_id` (`newsroom_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsletter_emails`
+--
+
+CREATE TABLE IF NOT EXISTS `newsletter_emails` (
+  `newsletter_id` int(10) unsigned NOT NULL,
+  `newsroom_email_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`newsletter_id`,`newsroom_email_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -77,7 +95,22 @@ CREATE TABLE IF NOT EXISTS `newsrooms` (
   `allow_submissions` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsroom_emails`
+--
+
+CREATE TABLE IF NOT EXISTS `newsroom_emails` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `newsroom_id` int(10) unsigned NOT NULL COMMENT 'fk for newsroom:id',
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `optout` tinyint(1) NOT NULL COMMENT 'can subscribers opt-out of the newsletter',
+  `newsletter_default` tinyint(1) NOT NULL COMMENT 'use by default for newsletters.',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Email addresses associated with newsrooms';
 
 -- --------------------------------------------------------
 
@@ -94,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `newsroom_stories` (
   `source` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`newsroom_id`,`story_id`),
   KEY `status` (`status`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -119,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   PRIMARY KEY (`id`),
   KEY `request_publish_end` (`request_publish_end`),
   KEY `request_publish_start` (`request_publish_start`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -147,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `story_presentations` (
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `template` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -160,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `newsroom_id` int(10) unsigned NOT NULL DEFAULT '1',
   `last_login` datetime DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -172,4 +205,4 @@ CREATE TABLE IF NOT EXISTS `user_has_permission` (
   `user_uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `newsroom_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_uid`,`newsroom_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
