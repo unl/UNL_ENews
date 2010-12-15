@@ -51,7 +51,12 @@
     <ul>
         <?php
         foreach ($context->getEmails() as $email) {
-            echo '<li>'.$email->email.'</li>';
+            echo '<li>'.$email->email.'
+        <form action="?view=newsroom" method="post">
+            <input type="hidden" name="email_id" value="'.$email->id.'" />
+            <input type="hidden" name="_type" value="removeemail" />
+            <input type="submit" value="Remove" />
+        </form></li>';
         }
         ?>
     </ul>
