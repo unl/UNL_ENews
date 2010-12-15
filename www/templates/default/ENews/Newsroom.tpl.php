@@ -42,15 +42,24 @@
                         </label>
                         <input type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> /> Yes
                     </li>
-                    <li>
-                        <label for="email_lists">Email Lists
-                            <span class="helper">The email addresses to send newsletters to</span>
-                        </label>
-                        <textarea id="email_lists" name="email_lists" rows="4" cols="auto"><?php echo $context->email_lists; ?></textarea>
-                    </li>
                 </ol>
         </fieldset> 
         <input type="submit" name="submit" value="Submit" />
+    </form>
+    <h3>Email Addresses</h3>
+    <p>The email addresses to send newsletters to</p>
+    <ul>
+        <?php
+        foreach ($context->getEmails() as $email) {
+            echo '<li>'.$email->email.'</li>';
+        }
+        ?>
+    </ul>
+    <form action="?view=newsroom" method="post">
+        <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
+        <input type="hidden" name="_type" value="addemail" />
+        <input type="text" name="email" />
+        <input type="submit" value="Add Email" />
     </form>
 </div>
 <div class="two_col right">
