@@ -276,7 +276,7 @@ var submission = function($) {
 			}
 			if (demoText.length > submission.characterLimit) {
 				demoText = demoText.substr(0,submission.characterLimit);
-				$(this).val(demoText);
+				$('#description').val(demoText);
 			}
 			$('label[for="description"] span.helper strong').text(submission.characterLimit - demoText.length);
 		},
