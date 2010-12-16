@@ -44,5 +44,6 @@ class UNL_ENews_Newsroom_Newsletters extends UNL_ENews_NewsletterList
                 return $row[0];
             }
         }
+        return 0;
     }
 }
