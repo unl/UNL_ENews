@@ -47,6 +47,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 $user = UNL_ENews_User::getByUID($_POST['user_uid']);
 
                 $this->{$_POST['_type']}($user);
+                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
             case 'addemail':
                 $optout             = 0;
@@ -58,13 +59,14 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                     $newsletter_default = $_POST['newsletter_default'];
                 }
                 $this->{$_POST['_type']}($_POST['email'], $optout, $newsletter_default);
+                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
             case 'removeemail':
                 $email = UNL_ENews_Newsroom_Email::getById($_POST['email_id']);
                 $this->{$_POST['_type']}($email);
+                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
         }
-        UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
     }
 
     function getStories($status = 'pending')
