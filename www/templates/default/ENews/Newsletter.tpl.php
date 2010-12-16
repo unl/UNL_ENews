@@ -27,5 +27,6 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
         }
         ?>
         </ul>
+        <a href="<?php echo $context->newsroom->getURL();?>/archive">Full archives</a>
     </div>
 </div>
