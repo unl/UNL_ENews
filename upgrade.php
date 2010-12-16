@@ -98,6 +98,24 @@ if ($result) {
     // Assume we did a good job, and drop the email_lists field?
 }
 
+echo 'Adding from_address field to newsroom table<br />';
+$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `from_address` VARCHAR( 255 ) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `website`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already exists but that\'s ok!<br />';
+    } else {
+        echo $mysqli->error;
+        exit();
+    }
+}
+$today = UNL_ENews_Newsroom::getByID(1);
+$today->from_address = 'today@unl.edu';
+$today->save();
+
+$next = UNL_ENews_Newsroom::getByID(5);
+$next->from_address = 'nextnebraska@unl.edu';
+$next->save();
+
 echo 'Adding presentation_id field to stories table<br />';
 $result = $mysqli->query("ALTER TABLE `stories` ADD `presentation_id` INT( 10 ) NOT NULL AFTER `website`;");
 if (!$result) {

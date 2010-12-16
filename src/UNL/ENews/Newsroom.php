@@ -13,6 +13,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     public $email_lists;
 
+    public $from_address;
+
     function __construct($options = array())
     {
         if (isset($options['result']) && $options['result'] instanceof mysqli_result) {
