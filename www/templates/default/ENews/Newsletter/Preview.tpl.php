@@ -40,14 +40,29 @@
 
     </fieldset>
     <p class="submit" style="float:left;margin-left:60px">
-    <input type="submit" name="submit" value="Save" style="margin:50px 20px 0 0" />
-
+        <input type="submit" name="submit" value="Save" style="margin:50px 20px 0 0" />
     </p>
     <div class="clear"></div>
 </form>
 <div style="float:right;margin-top:-60px;position:relative;right:53px;top:36px;">
 <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
 </div>
+    <div class="email_addresses">
+        This newsletter will be sent to the following email addresses:
+        <ul>
+            <?php
+            foreach ($context->newsletter->getEmails() as $email): ?>
+            <li><?php echo $email->email; ?>
+                <form action="?view=preview" method="post">
+                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
+                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
+                    <input type="hidden" name="_type" value="removeemail" />
+                    <input type="submit" value="Remove" />
+                </form>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </div>
 <div class="col left" id="drag_story_list">
 <?php $stories = $context->getRaw('available_stories'); ?>
