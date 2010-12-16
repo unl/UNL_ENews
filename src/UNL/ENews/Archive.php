@@ -1,35 +1,32 @@
 <?php
-class UNL_ENews_Archive extends UNL_ENews_Record
+class UNL_ENews_Archive extends LimitIterator implements Countable
 {
-	public $shortname;
-	public $page = 1;
+	public $newsroom;
+	public $options = array('limit'=>10, 'offset'=>0);
 	
-function __construct($options = array())
+    function __construct($options = array())
     {
-        if (isset($options['shortname'])) {
-            $this->shortname = $options['shortname'];
-        } else {
+        if (!isset($options['shortname'])) {
             throw new Exception('No shortname was provided.');
         }
-        
+
+        $this->options = $options + $this->options;
+
         if (isset($options['page'])) {
             $this->page = $options['page'];
         }
+        $this->newsroom = UNL_ENews_Newsroom::getByShortname($this->options['shortname']);
+        $newsletters = $this->newsroom->getNewsletters();
+        parent::__construct($newsletters, $this->options['offset'], $this->options['limit']);
     }
-    
-    function __get($var)
+
+    function count()
     {
-        switch($var) {
-            case 'newsroom':
-                return UNL_ENews_Newsroom::getByShortname($this->shortname);
-            case 'newsletters':
-                return $this->getNewsLetters();
+        $iterator = $this->getInnerIterator();
+        if ($iterator instanceof EmptyIterator) {
+            return 0;
         }
-        
-        return false;
-    }
-    
-    function getNewsLetters(){
-        return $this->newsroom->getNewsletters();
+
+        return count($this->getInnerIterator());
     }
 }
