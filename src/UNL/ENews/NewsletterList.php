@@ -35,11 +35,11 @@ class UNL_ENews_NewsletterList extends ArrayIterator
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT id FROM newsletters '
              . 'WHERE '
-             . ' newsroom_id = ' . $newsroom_id
+             . ' newsroom_id = ' . (int)$newsroom_id
              . '  AND distributed = 1 '                             // The newsletter has not been distributed
              . ' ORDER BY release_date DESC ';
-        if($limit != 0){
-             $sql .= 'LIMIT ' . $limit;
+        if ($limit != 0) {
+             $sql .= 'LIMIT ' . (int)$limit;
         }
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
