@@ -3,6 +3,7 @@
     //<![CDATA[
         WDN.jQuery(document).ready(function(){
              WDN.initializePlugin('zenform');
+             WDN.loadCSS('<?php echo UNL_ENews_Controller::getURL();?>css/newsroom.css');
         });
     //]]>
     </script>
