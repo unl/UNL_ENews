@@ -331,13 +331,66 @@ class UNL_ENews_Controller
     }
 
     /**
-     * Get the URL to the main site.
+     * Get the main URL for this instance or an individual object
      *
-     * @return string The URL to the site
+     * @param mixed $mixed             An object to retrieve the URL to
+     * @param array $additional_params Querystring params to add
+     * 
+     * @return string
      */
-    public static function getURL()
+    public static function getURL($mixed = null, $additional_params = array())
     {
-        return self::$url;
+         
+        $url = self::$url;
+        
+        if (is_object($mixed)) {
+            switch (get_class($mixed)) {
+            default:
+                    
+            }
+        }
+        
+        return self::addURLParams($url, $additional_params);
+    }
+
+    /**
+     * Add unique querystring parameters to a URL
+     * 
+     * @param string $url               The URL
+     * @param array  $additional_params Additional querystring parameters to add
+     * 
+     * @return string
+     */
+    public static function addURLParams($url, $additional_params = array())
+    {
+        $params = array();
+        if (strpos($url, '?') !== false) {
+            list($url, $existing_params) = explode('?', $url);
+            $existing_params = explode('&', $existing_params);
+            foreach ($existing_params as $val) {
+                list($var, $val) = explode('=', $val);
+                $params[$var] = $val;
+            }
+        }
+
+        $params = array_merge($params, $additional_params);
+
+        $url .= '?';
+        
+        foreach ($params as $option=>$value) {
+            if ($option == 'driver') {
+                continue;
+            }
+            if ($option == 'format'
+                && $value = 'html') {
+                continue;
+            }
+            if (!empty($value)) {
+                $url .= "&$option=$value";
+            }
+        }
+        $url = str_replace('?&', '?', $url);
+        return trim($url, '?;=');
     }
 
     /**
