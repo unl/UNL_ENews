@@ -29,7 +29,8 @@ class UNL_ENews_Controller
                                 'newsroom'    => 'UNL_ENews_Newsroom',
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
                                 'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
-                                'gastats' => 'UNL_ENews_GAStats'
+                                'gastats' => 'UNL_ENews_GAStats',
+                                'archive' => 'UNL_ENews_Archive',
     );
 
     public static $pagetitle = array('latest'      => 'Latest News',

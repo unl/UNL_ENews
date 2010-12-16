@@ -47,6 +47,11 @@ class UNL_ENews_Router
                 $options['view']         = 'newsletter';
                 $options['shortname']    = $matches[1];
                 break;
+            //For viewing an archive.  url = www/newsRoomShortName/archive
+            case preg_match('/'.$quotedBase.'([a-z]+)\/archive$/i', $requestURI, $matches):
+                $options['view']         = 'archive';
+                $options['shortname']    = $matches[1];
+                break;
             // Default view
             case ($requestURI == $base):
                 break;
