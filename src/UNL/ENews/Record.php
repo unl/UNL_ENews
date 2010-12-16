@@ -196,6 +196,7 @@ class UNL_ENews_Record
                 case 'sort_order':
                 case 'distributed':
                 case 'allow_submissions':
+                case 'newsroom_email_id':
                     $types .= 'i';
                     break;
                 default:
