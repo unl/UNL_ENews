@@ -22,7 +22,7 @@
 	right:7px;
 	display:none;
 }
-#maincontent #userList li img:hover + form {display:block;}
+#maincontent #userList li:hover form {display:block;}
 #maincontent form input[type='submit'] {
 	background:#ac0302;
 	border:none;
