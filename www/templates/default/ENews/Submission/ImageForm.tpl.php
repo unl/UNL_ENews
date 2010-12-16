@@ -21,9 +21,9 @@
     
     <div id="upload_area">
     <?php
+    $ratio       = '4:3';
+    $ratio_class = 'r43';
     if ($id && $originalImage) :
-        $ratio       = '4:3';
-        $ratio_class = 'r43';
         if ($thumbnail) {
             list($width, $height) = $thumbnail->getSize();
             if ($width/$height == 0.75) {
