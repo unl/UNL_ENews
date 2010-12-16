@@ -80,3 +80,6 @@
     width:50%;
     padding:3px;
 }
+#maincontent .addData input[type='submit']{
+    background: #80590E;
+}
