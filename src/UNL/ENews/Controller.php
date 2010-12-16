@@ -252,6 +252,7 @@ class UNL_ENews_Controller
                     $file->description = $_POST['fileDescription'];
                     $file->save();
 
+                    $thumbnail = false;
                     // A story being edited has default thumbnail coords of -1 to ensure the current thumbnail is not overwritten if new coords are not selected
                     if ($_POST['thumbX1'] >= 0 &&
                         $_POST['thumbX2'] >= 0 &&
