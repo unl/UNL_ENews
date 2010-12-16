@@ -64,6 +64,20 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 $this->newsletter->save();
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=preview&id='.$this->newsletter->id);
                 break;
+            case 'addnewsletteremail':
+                $email = UNL_ENews_Newsroom_Email::getByID($_POST['newsroom_email_id']);
+                if ($email->newsroom_id != $this->newsletter->newsroom->id) {
+                    throw new Exception('You cannot add an email from another newsroom');
+                }
+                $this->newsletter->addEmail($email);
+                break;
+            case 'removenewsletteremail':
+                $email = UNL_ENews_Newsletter_Email::getByID($_POST['newsletter_id'], $_POST['newsroom_email_id']);
+                if ($email->newsletter_id != $this->newsletter->id) {
+                    throw new Exception('You cannot remove an email from another newsroom');
+                }
+                $this->newsletter->removeEmail($email);
+                break;
         }
         // no response is needed (AJAX'd)
         exit();

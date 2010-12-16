@@ -51,13 +51,26 @@
         This newsletter will be sent to the following email addresses:
         <ul>
             <?php
-            foreach ($context->newsletter->getEmails() as $email): ?>
+            $existing_emails = $context->newsletter->getEmails()->getArrayCopy(); 
+            foreach ($context->newsletter->newsroom->getEmails() as $email):
+                $checked = false;
+                if (in_array($email->id, $existing_emails)) {
+                    $checked = true;
+                }
+            ?>
             <li><?php echo $email->email; ?>
-                <form action="?view=preview" method="post">
+                <input type="checkbox" <?php if ($checked) echo 'checked="checked"'; ?> />
+                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="removeemail">
                     <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                     <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
-                    <input type="hidden" name="_type" value="removeemail" />
+                    <input type="hidden" name="_type" value="removenewsletteremail" />
                     <input type="submit" value="Remove" />
+                </form>
+                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="addemail">
+                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
+                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
+                    <input type="hidden" name="_type" value="addnewsletteremail" />
+                    <input type="submit" value="Add" />
                 </form>
             </li>
             <?php endforeach; ?>
