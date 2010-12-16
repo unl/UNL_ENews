@@ -1,3 +1,7 @@
+<h3 class="sec_main">
+    <?php echo "Archive for ".$context->newsroom->name; ?>
+</h3>
+
 <ul>
 <?php 
 foreach ($context as $newsletter) {
