@@ -1,4 +1,4 @@
-<div class="two_col left">
+<div class="three_col left">
     <script type="text/javascript">
     //<![CDATA[
         WDN.jQuery(document).ready(function(){
@@ -46,46 +46,49 @@
         </fieldset> 
         <input type="submit" name="submit" value="Submit" />
     </form>
-    <h3>Email Addresses</h3>
-    <p>The email addresses to send newsletters to</p>
-    <ul>
-        <?php
-        foreach ($context->getEmails() as $email) {
-            echo '<li>'.$email->email.'
-        <form action="?view=newsroom" method="post">
-            <input type="hidden" name="email_id" value="'.$email->id.'" />
-            <input type="hidden" name="_type" value="removeemail" />
-            <input type="submit" value="Remove" />
-        </form></li>';
-        }
-        ?>
-    </ul>
-    <form action="?view=newsroom" method="post">
-        <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
-        <input type="hidden" name="_type" value="addemail" />
-        <input type="text" name="email" />
-        <input type="submit" value="Add Email" />
-    </form>
-</div>
-<div class="two_col right">
-    <h3>Users</h3>
-    <ul>
+    <h3 class="sec_main">Users</h3>
+    <ul id="userList">
     <?php
     foreach ($context->getUsers() as $user) {
-        echo '<li>'.$user->uid.'
+        echo '<li><img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_'.$user->uid.'/medium/" />
         <form action="?view=newsroom" method="post">
             <input type="hidden" name="newsroom_id" value="'.$context->id.'" />
             <input type="hidden" name="_type" value="removeuser" />
             <input type="hidden" name="user_uid" value="'.$user->uid.'" />
             <input type="submit" value="Remove" />
-        </form></li>';
+        </form>
+        <span class="uid">('.$user->uid.')</span>
+        </li>';
     }
     ?>
     </ul>
-    <form action="?view=newsroom" method="post">
+    <form action="?view=newsroom" method="post" id="addUser" class="addData">
         <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <input type="hidden" name="_type" value="adduser" />
         <input type="text" name="user_uid" />
         <input type="submit" value="Add User" />
+    </form>
+</div>
+<div class="one_col right">
+<h3 class="sec_main">Email Addresses</h3>
+    <p>The email addresses to send newsletters to</p>
+    <ul id="emailList">
+        <?php
+        foreach ($context->getEmails() as $email) {
+            echo '<li>'.$email->email.'
+		        <form action="?view=newsroom" method="post">
+		            <input type="hidden" name="email_id" value="'.$email->id.'" />
+		            <input type="hidden" name="_type" value="removeemail" />
+		            <input type="submit" value="Remove" />
+		        </form>
+        </li>';
+        }
+        ?>
+    </ul>
+    <form action="?view=newsroom" method="post" id="addEmail" class="addData">
+        <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
+        <input type="hidden" name="_type" value="addemail" />
+        <input type="text" name="email" />
+        <input type="submit" value="Add Email" />
     </form>
 </div>
