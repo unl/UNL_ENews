@@ -143,6 +143,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $newsletter_email->insert();
     }
 
+    function removeEmail(UNL_ENews_Newsletter_Email $email)
+    {
+        if ($email->newsletter_id != $this->id) {
+            throw new Exception('That email doesn\'t belong to you. Take off, eh!');
+        }
+        return $email->delete();
+    }
+
     function getEmails($options = array())
     {
         $options += array('newsletter_id'=>$this->id);
