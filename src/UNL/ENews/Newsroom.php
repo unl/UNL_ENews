@@ -17,8 +17,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     {
         if (isset($options['result']) && $options['result'] instanceof mysqli_result) {
             $record = $options['result']->fetch_assoc();
-            if(!$record){
-                throw new Exception('That newsroom could not be found.', 403);
+            if (!$record) {
+                throw new Exception('The result passed was not a valid result!', 500);
             }
         } elseif (isset($options['id'])) {
             $record = UNL_ENews_Record::getRecordByID('newsrooms', $options['id']);
@@ -112,6 +112,9 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = "SELECT * FROM newsrooms WHERE shortname = '".$mysqli->escape_string($shortname)."' LIMIT 1;";
         if ($result = $mysqli->query($sql)) {
+            if (!$result->num_rows) {
+                throw new Exception('A newsroom with that short name could not be found.', 404);
+            }
             $object = new self(array('result'=>$result));
             return $object;
         }
