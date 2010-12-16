@@ -28,4 +28,25 @@ class UNL_ENews_NewsletterList extends ArrayIterator
         $mysqli->close();
         return new self($letters);
     }
+    
+    public static function getRecent($newsroom_id, $limit = 0)
+    {
+        $letters = array();
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = 'SELECT id FROM newsletters '
+             . 'WHERE '
+             . ' newsroom_id = ' . $newsroom_id
+             . '  AND distributed = 1 '                             // The newsletter has not been distributed
+             . ' ORDER BY release_date DESC ';
+        if($limit != 0){
+             $sql .= 'LIMIT ' . $limit;
+        }
+        if ($result = $mysqli->query($sql)) {
+            while($row = $result->fetch_array(MYSQLI_NUM)) {
+                $letters[] = $row[0];
+            }
+        }
+        $mysqli->close();
+        return new self($letters);
+    }
 }
