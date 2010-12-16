@@ -3,10 +3,10 @@ WDN.loadCSS('/wdn/templates_3.0/css/content/pagination.css');
 </script>
 <ul class="wdn_pagination">
     <?php if ($context->offset != 0) :?>
-    <li class="arrow"><a href="<?php echo $context->url.'&amp;limit='.$context->limit.'&amp;offset='.($context->offset-$context->limit); ?>" title="Go to the previous page">&larr; prev</a></li>
+    <li class="arrow"><a href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset-$context->limit))); ?>" title="Go to the previous page">&larr; prev</a></li>
     <?php endif; ?>
     <?php for ($page = 1; $page*$context->limit < $context->total+$context->limit; $page++ ) {
-        $link = $context->url.'&amp;limit='.$context->limit.'&amp;offset='.($page-1)*$context->limit;
+        $link = UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($page-1)*$context->limit));
         $class = '';
         if (($page-1)*$context->limit == $context->offset) {
             $class = 'selected';
@@ -23,6 +23,6 @@ WDN.loadCSS('/wdn/templates_3.0/css/content/pagination.css');
     </li>
     <?php } ?>
     <?php if (($context->offset+$context->limit) < $context->total) :?>
-    <li class="arrow"><a href="<?php echo $context->url.'&amp;limit='.$context->limit.'&amp;offset='.($context->offset+$context->limit); ?>" title="Go to the next page">next &rarr;</a></li>
+    <li class="arrow"><a href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset+$context->limit))); ?>" title="Go to the next page">next &rarr;</a></li>
     <?php endif; ?>
 </ul>
