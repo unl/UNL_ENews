@@ -49,7 +49,15 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 $this->{$_POST['_type']}($user);
                 break;
             case 'addemail':
-                $this->{$_POST['_type']}($_POST['email'], $_POST['optout'], $_POST['newsletter_default']);
+                $optout             = 0;
+                $newsletter_default = 1;
+                if (isset($_POST['optout'])) {
+                    $optout = $_POST['optout'];
+                }
+                if (isset($_POST['newsletter_default'])) {
+                    $newsletter_default = $_POST['newsletter_default'];
+                }
+                $this->{$_POST['_type']}($_POST['email'], $optout, $newsletter_default);
                 break;
             case 'removeemail':
                 $email = UNL_ENews_Newsroom_Email::getById($_POST['email_id']);
