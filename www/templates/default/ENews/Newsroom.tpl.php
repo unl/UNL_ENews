@@ -72,7 +72,7 @@
 </div>
 <div class="one_col right">
 <h3 class="sec_main">Email Addresses</h3>
-    <p>The email addresses to send newsletters to</p>
+    <p>Available Email Listservs</p>
     <ul id="emailList">
         <?php
         foreach ($context->getEmails() as $email) {
