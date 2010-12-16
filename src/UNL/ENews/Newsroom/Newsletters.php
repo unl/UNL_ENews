@@ -18,8 +18,11 @@ class UNL_ENews_Newsroom_Newsletters extends UNL_ENews_NewsletterList
         $letters = array();
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT id FROM newsletters ';
-        $sql .= 'WHERE newsroom_id = '. intval($this->newsroom_id) .
-                ' ORDER BY release_date DESC';
+        $sql .= 'WHERE newsroom_id = '. intval($this->newsroom_id) ;
+        if (isset($options['distributed'])) {
+            $sql .= ' AND distributed = '.(int)$options['distributed'];
+        }
+        $sql .= ' ORDER BY release_date DESC';
         if (isset($options['limit'])) {
             $sql .= ' LIMIT ';
             if (isset($options['offset'])) {

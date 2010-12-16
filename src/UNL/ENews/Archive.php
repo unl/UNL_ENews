@@ -13,7 +13,7 @@ class UNL_ENews_Archive extends LimitIterator implements Countable
         $this->options = $options + $this->options;
 
         $this->newsroom = UNL_ENews_Newsroom::getByShortname($this->options['shortname']);
-        $newsletters = $this->newsroom->getNewsletters();
+        $newsletters = $this->newsroom->getNewsletters(array('distributed'=>true));
         parent::__construct($newsletters, $this->options['offset'], $this->options['limit']);
     }
 
