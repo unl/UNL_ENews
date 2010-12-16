@@ -12,9 +12,6 @@ class UNL_ENews_Archive extends LimitIterator implements Countable
 
         $this->options = $options + $this->options;
 
-        if (isset($options['page'])) {
-            $this->page = $options['page'];
-        }
         $this->newsroom = UNL_ENews_Newsroom::getByShortname($this->options['shortname']);
         $newsletters = $this->newsroom->getNewsletters();
         parent::__construct($newsletters, $this->options['offset'], $this->options['limit']);
@@ -28,5 +25,11 @@ class UNL_ENews_Archive extends LimitIterator implements Countable
         }
 
         return count($this->getInnerIterator());
+    }
+    
+    static function getByShortName($shortname)
+    {
+        $options = array('shortname' => $shortname);
+        return new self($options);
     }
 }
