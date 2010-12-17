@@ -74,7 +74,16 @@ if ($context->options['view'] == 'story'
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>todayatunl">Today@UNL</a>
+                    <?php
+                    $newsroom = UNL_ENews_Newsroom::getByID(UNL_ENews_Newsletter::getLastModified()->newsroom_id);
+                    if (isset($context->options['newsroom'])) {
+                        $newsroom = UNL_ENews_Newsroom::getByID($context->options['newsroom']);
+                    }
+                    if (isset($context->options['shortname'])) {
+                        $newsroom = UNL_ENews_Newsroom::getByShortName($context->options['shortname']);
+                    }
+                    ?>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL().$newsroom->shortname;?>"><?php echo $newsroom->name;?></a>
                         <ul>
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=help">Help</a></li>
                         </ul>
