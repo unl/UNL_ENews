@@ -279,11 +279,10 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $html = array();
         $text = array();
         foreach ($addresses as $address) {
-            echo $address->email.'<br />';
-            if (!isset($html[$address->optout], $text[$address->optout])) {
+            if (!isset($html[$address->id], $text[$address->id])) {
                 // We haven't built the html for this type of message, build it
-                $html[$address->optout] = $this->getEmailHTML($address->optout);
-                $text[$address->optout] = $this->getEmailTXT($address->optout);
+                $html[$address->id] = $this->getEmailHTML($address);
+                $text[$address->id] = $this->getEmailTXT($address);
             }
 
             // Send the email!
@@ -291,8 +290,8 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
                 $from,
                 $address->email,
                 $this->subject,
-                $html[$address->optout],
-                $text[$address->optout]
+                $html[$address->id],
+                $text[$address->id]
             );
         }
         return true;
@@ -320,7 +319,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return true;
     }
     
-    function getEmailHTML($optout = false)
+    function getEmailHTML(UNL_ENews_Newsroom_Email $email)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 
@@ -328,21 +327,33 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
         $savvy->setEscape('htmlentities');
 
+        $body = $savvy->render($this);
+
+        if ($email->optout) {
+            $body .= $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
+        }
+
         $html = '<html>'.
                 '<body style="word-wrap: break-word;" bgcolor="#ffffff">'.
-                    $savvy->render($this).
+                    $body .
                 '</body>'.
                 '</html>';
         return $html;
     }
     
-    function getEmailTXT($optout = false)
+    function getEmailTXT(UNL_ENews_Newsroom_Email $email)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
         $savvy = new Savvy();
         $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
         
-        return $savvy->render($this);
+        $text = $savvy->render($this);
+
+        if ($email->optout) {
+            $text .= $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
+        }
+
+        return $text;
     }
     
     /**
