@@ -7,7 +7,7 @@ WDN.initializePlugin('notice');
 		<a href="#" title="Close this notice">Close this notice</a>
 	</div>
 	<div class="message">
-		<?php if ($context->type == 'sendnews'): ?>
+		<?php if ($context->options['_type'] == 'sendnews'): ?>
 		    <h4>Oh yeah! Distribution Successful!</h4>
 		    <p>Your newsletter has been submitted to the distribution queue.</p>
 		<?php else: ?>
