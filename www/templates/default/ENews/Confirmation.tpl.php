@@ -10,7 +10,7 @@ WDN.initializePlugin('notice');
 		<?php if ($context->options['_type'] == 'sendnews'): ?>
 		    <h4>Oh yeah! Distribution Successful!</h4>
 		    <p>Your newsletter has been submitted to the distribution queue.</p>
-		<?php elseif ($context->type == 'unsubscribe'): ?>
+		<?php elseif ($context->options['_type'] == 'unsubscribe'): ?>
 		    <h4>Congratulations!</h4>
 		    <p>You have been unsubscribed from the newsletter!</p>
 		<?php else: ?>
