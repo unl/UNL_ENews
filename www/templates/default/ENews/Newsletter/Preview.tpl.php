@@ -23,32 +23,29 @@
     });
 </script>
 
-<div class="zenbox">
-<form class="enews energetic" method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>">
-    <fieldset style="float:left">
-    <legend>Your Newsletter</legend>
-    <ol style="margin-top:0">
-        <li>
-            <input type="hidden" name="_type" value="newsletter" />
-            <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-            <label for="emailSubject">Email Subject<span class="required">*</span><span class="helper">Include story keywords!</span></label>
-            <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
-            <label for="releaseDate">Release Date</label>
-            <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
-        </li>
-    </ol>
-
-    </fieldset>
-    <p class="submit" style="float:left;margin-left:60px">
-        <input type="submit" name="submit" value="Save" style="margin:50px 20px 0 0" />
-    </p>
-    <div class="clear"></div>
-</form>
-<div style="float:right;margin-top:-60px;position:relative;right:53px;top:36px;">
-<?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-</div>
+<div id="newsletterDetails">
+	<form method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>">
+	    <fieldset style="float:left">
+	    <legend>Your Newsletter</legend>
+	    <ol style="margin-top:0">
+	        <li>
+	            <input type="hidden" name="_type" value="newsletter" />
+	            <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
+	            <label for="emailSubject">Email Subject<span class="required">*</span><span class="helper">Include story keywords!</span></label>
+	            <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
+	        </li>
+	        <li>
+	            <label for="releaseDate">Release Date</label>
+	            <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
+	        </li>
+	    </ol>
+	    </fieldset>
+	    <input type="submit" name="submit" value="Save" disabled="disabled" />
+	    <a class="action preview" href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
+	</form>
+	<?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
     <div class="email_addresses">
-        This newsletter will be sent to the following email addresses:
+        <h5>Email Listservs</h5>
         <ul>
             <?php
             $existing_emails = $context->newsletter->getEmails()->getArrayCopy(); 
@@ -58,20 +55,26 @@
                     $checked = true;
                 }
             ?>
-            <li><?php echo $email->email; ?>
-                <input type="checkbox" <?php if ($checked) echo 'checked="checked"'; ?> />
-                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="removeemail">
+            <li>
+            	<form class="emailIndicator">
+                	<input type="checkbox" id="email_<?php echo $email->id; ?>" <?php if ($checked) echo 'checked="checked"'; ?> />
+                	<label for="email_<?php echo $email->id; ?>" >
+                		<?php echo $email->email; ?>
+                	</label>
+                </form>
+                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="remove email">
                     <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                     <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                     <input type="hidden" name="_type" value="removenewsletteremail" />
                     <input type="submit" value="Remove" />
                 </form>
-                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="addemail">
+                <form action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="add email">
                     <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                     <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                     <input type="hidden" name="_type" value="addnewsletteremail" />
                     <input type="submit" value="Add" />
                 </form>
+                
             </li>
             <?php endforeach; ?>
         </ul>

@@ -51,6 +51,91 @@
 }
 #maincontent img.spacer {display:none;}
 
+/* Newsletter Details
+************************/
+#newsletterDetails {
+	background:#F1EDE0;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    display:inline-block;
+    padding:20px;
+}
+#newsletterDetails form {
+	width:600px;
+	float:left;
+}
+#newsletterDetails form fieldset {
+	padding:0;
+}
+#newsletterDetails form.email {
+	display:none;
+}
+#newsletterDetails label {
+	color:#705538;
+    font-size:1.1em;
+    font-weight:bold;
+    display:block;
+}
+#newsletterDetails label .helper {
+	font-size:0.6em;
+	font-weight:normal;
+	color:#705538;
+}
+#newsletterDetails input[type='text'] {
+	display:block;
+	font-size:1.2em;
+	border:1px solid #E8D6C1;
+	padding:3px;
+	width:590px;
+}
+#newsletterDetails fieldset ol, #newsletterDetails .email_addresses ul {
+    padding:0;
+}
+#newsletterDetails fieldset ol li {
+    list-style:none;
+    padding:0px 25px 14px 0px;
+}
+#newsletterDetails fieldset legend {
+	display:none;
+}
+#newsletterDetails form input[type='submit'], #newsletterDetails form a.action {
+    background:#78A8C0;
+    border:none;
+    font-size:12px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    padding:3px 5px;
+    color:#fff !important;
+    cursor:pointer;
+}
+#newsletterDetails form input[type='submit'][disabled='disabled'] {
+	opacity:0.5;
+	cursor:default;
+}
+#newsletterDetails form + a.action {display:none;}
+#newsletterDetails .email_addresses {
+	float:right;
+	width:280px;
+	padding-left:20px;
+}
+#newsletterDetails .email_addresses h5 {
+    color:#705538;
+    font-size:1.1em;
+    font-weight:bold;
+    border-bottom:1px solid #CDC4BB;
+    margin-bottom:9px;
+}
+#newsletterDetails .email_addresses ul li {
+	list-style:none;
+	padding:2px 5px;
+}
+#newsletterDetails .email_addresses ul li .emailIndicator {
+	display:inline;
+	float:left;
+}
+#newsletterDetails .email_addresses ul li label {display:inline;font-size:1em;font-weight:normal;}
 /* Newsletter Email Preview
 ************************/
 #maincontent .newsColumn {min-height:75px;}
@@ -107,7 +192,6 @@
 #maincontent .dragItem:hover {
 	background:#f4f4f4;
 }
-
 #maincontent .empty {
 	color: #de8727;
 	padding:30px;
@@ -255,7 +339,7 @@
 .ui-sortable-placeholder * { visibility: hidden; }
 .ui-datepicker-trigger {
 	float:right;
-	left:5px;
+	right:5px;
 	position:relative;
 	top:-23px;
 	cursor:pointer;
