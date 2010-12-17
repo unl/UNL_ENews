@@ -5,8 +5,11 @@ class UNL_ENews_Newsletter_OptOut
 
     function __construct($options = array())
     {
-        $this->url = 'http://listserv.unl.edu/signup-anon/?UNSUB=1&LISTNAME='..'&LOCKTYPE=LIST&SUCCESS_URL=';
-        
-        $this->url .= UNL_ENews_Controller::getURL().'/?view=thanks&_type=unsubscribe';
-    }
-}
+        if (!isset($options['email'])) {
+            throw new Exception('You must pass a newsroom email object!');
+        }
+        $list_name = substr($options['email']->email, 0, strpos($options['email']->email, '@'));
+        $this->url = 'http://listserv.unl.edu/signup-anon/?UNSUB=1&LISTNAME='.urlencode($list_name).'&LOCKTYPE=LIST&SUCCESS_URL=';
+
+        $this->url .= urlencode(UNL_ENews_Controller::getURL().'?view=thanks&_type=unsubscribe');
+    }}
