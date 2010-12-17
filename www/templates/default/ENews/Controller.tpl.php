@@ -95,7 +95,11 @@ if ($context->options['view'] == 'story'
                     </li>
                     <?php
                     $user = UNL_ENews_Controller::getUser();
-                    if (false !== $user && isset($user->newsroom_id) && $user->hasNewsroomPermission($user->newsroom_id)) : ?>
+                    if (false !== $user
+                        && isset($user->newsroom_id)
+                        && $user->hasNewsroomPermission($user->newsroom_id)) :
+                        // This user is a newsroom admin.
+                    ?>
                     <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=manager">Manage News</a>
                         <?php
                         if ($user_newsrooms = $user->getNewsrooms()) {
@@ -126,6 +130,7 @@ if ($context->options['view'] == 'story'
                         }
                         ?>
                     </li>
+                    <li><a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom">Edit Newsroom Details</a></li>
                     <?php endif; ?>
                 </ul>
                 <!-- InstanceEndEditable --></div>
