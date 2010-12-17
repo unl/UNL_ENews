@@ -1,0 +1,1 @@
+If you would no longer like to recieve this newsletter, <a href="<?php echo $context->url; ?>">click here to unsubscribe.</a>
