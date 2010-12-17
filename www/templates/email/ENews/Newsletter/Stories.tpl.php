@@ -20,23 +20,31 @@ foreach ($context as $key=>$story) {
 <tr id="newsStories">
     <td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
         <div id="newsColumn1" class="newsColumn">
-        <?php foreach ($columns[2] as $story): ?>
+        <?php
+        if (isset($columns[2])) :
+            foreach ($columns[2] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
                 <?php echo $savvy->render($story, 'ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
             </div>
-        <?php endforeach; ?>
+            <?php
+            endforeach;
+        endif; ?>
         </div>
     </td>
     <td width="10">&nbsp;</td>
     <td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
         <div id="newsColumn2" class="newsColumn">
-        <?php foreach ($columns[0] as $story): ?>
+        <?php
+        if (isset($columns[0])) :
+            foreach ($columns[0] as $story): ?>
             <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
                 <?php echo $savvy->render($story, 'ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
             </div>
-        <?php endforeach; ?>
+            <?php
+            endforeach;
+        endif; ?>
         </div>
     </td>
 </tr>
