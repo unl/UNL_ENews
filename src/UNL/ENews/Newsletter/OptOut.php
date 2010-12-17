@@ -12,4 +12,5 @@ class UNL_ENews_Newsletter_OptOut
         $this->url = 'http://listserv.unl.edu/signup-anon/?UNSUB=1&LISTNAME='.urlencode($list_name).'&LOCKTYPE=LIST&SUCCESS_URL=';
 
         $this->url .= urlencode(UNL_ENews_Controller::getURL().'?view=thanks&_type=unsubscribe');
-    }}
+    }
+}
