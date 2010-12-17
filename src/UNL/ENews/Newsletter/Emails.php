@@ -8,8 +8,10 @@ class UNL_ENews_Newsletter_Emails extends ArrayIterator implements Countable
         }
         $emails = array();
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'SELECT newsroom_email_id FROM newsletter_emails ';
-        $sql .= ' WHERE newsletter_id = '.(int)$options['newsletter_id'];
+        $sql = 'SELECT newsletter_emails.newsroom_email_id
+                FROM newsletter_emails, newsroom_emails
+                WHERE newsletter_emails.newsletter_id = '.(int)$options['newsletter_id'].'
+                    AND newsletter_emails.newsroom_email_id = newsroom_emails.id;';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $emails[] = $row[0];
