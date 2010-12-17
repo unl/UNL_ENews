@@ -75,7 +75,11 @@ if ($context->options['view'] == 'story'
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
                 <ul>
                     <?php
-                    $newsroom = UNL_ENews_Newsroom::getByID(UNL_ENews_Newsletter::getLastModified()->newsroom_id);
+                    $user = UNL_ENews_Controller::getUser();
+                    $newsroom = UNL_ENews_Newsroom::getByID(1);
+                    if ($user) {
+                        $newsroom = UNL_ENews_Newsroom::getByID($user->newsroom_id);
+                    }
                     if (isset($context->options['newsroom'])) {
                         $newsroom = UNL_ENews_Newsroom::getByID($context->options['newsroom']);
                     }
@@ -83,7 +87,7 @@ if ($context->options['view'] == 'story'
                         $newsroom = UNL_ENews_Newsroom::getByShortName($context->options['shortname']);
                     }
                     ?>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL().$newsroom->shortname;?>"><?php echo $newsroom->name;?></a>
+                    <li><a href="<?php echo $newsroom->getURL();?>"><?php echo $newsroom->name;?></a>
                         <ul>
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=help">Help</a></li>
                         </ul>
@@ -94,7 +98,6 @@ if ($context->options['view'] == 'story'
                         </ul>
                     </li>
                     <?php
-                    $user = UNL_ENews_Controller::getUser();
                     if (false !== $user
                         && isset($user->newsroom_id)
                         && $user->hasNewsroomPermission($user->newsroom_id)) :
