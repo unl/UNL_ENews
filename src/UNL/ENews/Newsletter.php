@@ -229,53 +229,98 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return false;
     }
     
-    function distribute($to = null)
+    function distribute($addresses = null)
     {
+
         if (!isset($this->release_date)) {
             $this->release_date = date('Y-m-d H:i:s');
         }
 
-        $plaintext = $this->getEmailTXT();
-        $html      = $this->getEmailHTML();
+        if (!isset($addresses)) {
+            // No address was sent, let's get the Email addresses we need to send to
+            $addresses = $this->getEmails();
+        }
 
-        // @TODO THIS SHOULD BE NEWSLETTER SPECIFIC, and NOT configurable to be today@unl.edu
+        if (gettype($addresses) == 'string') {
+
+            // Fake an email, and email list object
+            $address              = new UNL_ENews_Newsroom_Email();
+            $address->email       = $addresses;
+            $address->optout      = false;
+            $address->newsroom_id = $this->newsroom_id;
+
+            $addresses = array($address);
+        }
+        
+        // Set a default from address
         $from = 'no-reply@newsroom.unl.edu';
 
-        switch ($this->newsroom_id) {
-            case 1:
-                // Only set from address to today@unl.edu if the default newsroom.
-                $from = 'today@unl.edu';
-                break;
-            case 5:
-                // Newsroom 5 is the student email newsletter, must be configured to send from nextnebraska@unl.edu
-                $from = 'nextnebraska@unl.edu';
-                break;
+        // Get the associated newsroom, and use the from address if necessary
+        $newsroom = $this->getNewsroom();
+        if (isset($newsroom->from_address)) {
+            $from = $newsroom->from_address;
         }
 
-        if (!isset($to)) {
-            $to = $this->getNewsroom()->email_lists;
+        switch ($from) {
+            case 'today@unl.edu':
+                if (1 != $newsroom->id) {
+                    throw new Exception('You are not authorized to send email from that address.');
+                }
+                break;
+            case 'nextnebraska@unl.edu':
+                if (5 != $newsroom->id) {
+                    throw new Exception('You are not authorized to send email from that address.');
+                }
+                break;
+            default:
+                // must be fine
         }
+
+        $html = array();
+        $text = array();
+        foreach ($addresses as $address) {
+            echo $address->email.'<br />';
+            if (!isset($html[$address->optout], $text[$address->optout])) {
+                // We haven't built the html for this type of message, build it
+                $html[$address->optout] = $this->getEmailHTML($address->optout);
+                $text[$address->optout] = $this->getEmailTXT($address->optout);
+            }
+
+            // Send the email!
+            $this->sendEmail(
+                $from,
+                $address->email,
+                $this->subject,
+                $html[$address->optout],
+                $text[$address->optout]
+            );
+        }
+        return true;
+    }
+
+    function sendEmail($from, $to, $subject, $htmlBody, $txtBody)
+    {
+        // Load the mail library
+        require_once 'Mail/mime.php';
 
         $hdrs = array(
           'From'    => $from,
-          'Subject' => $this->subject);
+          'Subject' => $subject);
 
-        require_once 'Mail/mime.php';
         $mime = new Mail_mime("\n");
-        $mime->setTXTBody($plaintext);
-        $mime->setHTMLBody($html);
+        $mime->setTXTBody($txtBody);
+        $mime->setHTMLBody($htmlBody);
 
         $body = $mime->get();
         $hdrs = $mime->headers($hdrs);
         $mail =& Mail::factory('sendmail');
-
 
         // Send the email!
         $mail->send($to, $hdrs, $body);
         return true;
     }
     
-    function getEmailHTML()
+    function getEmailHTML($optout = false)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 
@@ -291,7 +336,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $html;
     }
     
-    function getEmailTXT()
+    function getEmailTXT($optout = false)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
         $savvy = new Savvy();
