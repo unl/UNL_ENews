@@ -25,6 +25,20 @@ var preview = function($) {
 				preview.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
 				preview.updateDates($(this).val());
 			});
+			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
+				preview.saveDetails();
+			})
+		},
+		
+		saveDetails : function() {
+			$.post(
+				$('#detailsForm').attr('action'), 
+				$('#detailsForm').serialize(),
+				function(data) {
+					WDN.log('saved!');
+					$('#detailsForm input[type="submit"]').attr('disabled' , 'disabled');
+				}
+			);
 		},
 		
 		removeStory : function() {
@@ -284,10 +298,8 @@ var preview = function($) {
 		},
 		
 		updateDates : function(selectedDate) {
-			WDN.log(selectedDate);
 			var date = new Date(selectedDate);
 			date.setUTCHours(6);
-			WDN.log(date);
 			var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 			var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 			$('.newsletterDate').html(weekday[date.getDay()]+', '+ month[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear());
