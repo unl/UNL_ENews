@@ -26,20 +26,45 @@ var preview = function($) {
 				preview.updateDates($(this).val());
 			});
 			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
-				preview.saveDetails();
-			})
+				preview.saveDetails.newsletter();
+			});
+			$('.email_addresses h5').click(function(){
+				$('.email_addresses ul').slideToggle();
+			});
+			$('.emailIndicator input[type="checkbox"]').change(function(){
+				preview.saveDetails.emails(this);
+			});
+			$('h3 a.showHide').click(function() {
+				$(this).parent('h3').nextUntil('h3').slideToggle();
+				$(this).toggleClass('show');
+				return false;
+			});
 		},
 		
 		saveDetails : function() {
-			$.post(
-				$('#detailsForm').attr('action'), 
-				$('#detailsForm').serialize(),
-				function(data) {
-					WDN.log('saved!');
-					$('#detailsForm input[type="submit"]').attr('disabled' , 'disabled');
+			return {
+				newsletter : function() {
+					$.post(
+						$('#detailsForm').attr('action'), 
+						$('#detailsForm').serialize(),
+						function(data) {
+							WDN.log('saved!');
+							$('#detailsForm input[type="submit"]').attr('disabled' , 'disabled');
+						}
+					);
+				},
+				
+				emails : function(ls) {
+					if ($(ls).attr('checked')){
+						action = "add";
+					} else {
+						action = "remove";
+					}
+					form = $(ls).closest('li').children('form.'+action);
+					$.post($(form).attr('action'), $(form).serialize());
 				}
-			);
-		},
+			};
+		}(),
 		
 		removeStory : function() {
 			var theStory = $(this).closest('.story');

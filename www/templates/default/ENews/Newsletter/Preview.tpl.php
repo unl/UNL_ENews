@@ -13,18 +13,10 @@
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
-
-    WDN.jQuery(function($){
-        $('h3 a.showHide').click(function() {
-            $(this).parent('h3').nextUntil('h3').slideToggle();
-            $(this).toggleClass('show');
-            return false;
-        });
-    });
 </script>
 
 <div id="newsletterDetails">
-	<form method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>">
+	<form method="post" action="?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" id="detailsForm">
 	    <fieldset style="float:left">
 	    <legend>Your Newsletter</legend>
 	    <ol style="margin-top:0">

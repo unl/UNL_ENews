@@ -127,6 +127,9 @@
     border-bottom:1px solid #CDC4BB;
     margin-bottom:9px;
 }
+#newsletterDetails .email_addresses ul {
+	display:none;
+}
 #newsletterDetails .email_addresses ul li {
 	list-style:none;
 	padding:2px 5px;
