@@ -119,13 +119,26 @@
 	float:right;
 	width:280px;
 	padding-left:20px;
+    position:relative;
 }
 #newsletterDetails .email_addresses h5 {
     color:#705538;
-    font-size:1.1em;
+    font-size:.8em;
     font-weight:bold;
-    border-bottom:1px solid #CDC4BB;
     margin-bottom:9px;
+    position:absolute;
+    right:-20px;
+    top:-20px;
+    background:#f5f4ef;
+    padding:8px 8px 5px 8px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+	-webkit-box-shadow: inset 1px -1px 1px #c0b695;
+	-moz-box-shadow: inset 1px -1px 1px #c0b695;
+	box-shadow: inset 1px -1px 1px #c0b695; 
+	cursor:pointer;
 }
 #newsletterDetails .email_addresses ul {
 	display:none;
