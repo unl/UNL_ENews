@@ -145,7 +145,13 @@
 }
 #newsletterDetails .email_addresses ul li {
 	list-style:none;
-	padding:2px 5px;
+    padding:6px 5px;
+    border-bottom:1px solid #E8D6C1;
+    display:inline-block;
+    width:100%;
+}
+#newsletterDetails .email_addresses ul li:nth-child(even) {
+    background:#fcf6e4;
 }
 #newsletterDetails .email_addresses ul li .emailIndicator {
 	display:inline;
