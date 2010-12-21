@@ -41,10 +41,11 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 		        <?php foreach ($context->newsroom->getEmails() as $email) :
 		        if ($email->optout) :
 			        ?>
-			        <form method="post" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
+			        <form method="get" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
 			        	<label for="address">Email</label>
 			        	<input type="text" id="address" name="ADDRESS" value="" />
 			        	<input type="hidden" id="address" value="<?php echo $context->newsroom->getURL();?>" name="SUCCESS_URL" />
+			        	<input type="hidden" value="BOTH" name="LOCKTYPE" />
 			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
 			        	<input type="submit" value="Subscribe" name="submit" />
 			        </form>
