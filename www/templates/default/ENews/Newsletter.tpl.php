@@ -43,7 +43,8 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 			        ?>
 			        <form method="post" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
 			        	<label for="address">Email</label>
-			        	<input type="text" id="address" name="ADDRESS" />
+			        	<input type="text" id="address" name="ADDRESS" value="" />
+			        	<input type="hidden" id="address" value="<?php echo $context->newsroom->getURL();?>" name="SUCCESS_URL" />
 			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
 			        	<input type="submit" value="Subscribe" name="submit" />
 			        </form>
@@ -54,19 +55,3 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 	    </div>
     </div>
 </div>
-<script type="text/javascript">
-
-WDN.jQuery('document').ready(function() {
-	WDN.jQuery("#subscribe").submit(function() {
-		WDN.get(
-			WDN.jQuery(this).attr('action'),
-			WDN.jQuery(this).serialize(),
-			function(){
-				WDN.log('Posted!');
-			}
-		);
-	return false;
-	});
-});
-
-</script>

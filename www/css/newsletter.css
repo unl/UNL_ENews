@@ -54,6 +54,9 @@
 .sidebar {
 	background: #AC0302; /* old browsers */
     padding:5px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 .sidebar.top{
     border-radius:10px 10px 0 0;
@@ -74,6 +77,9 @@
     border:1px solid rgba(255, 255, 255, .5);
     padding:5px;
     color:#fff;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
 }
 .sidebar.top .inner_sidebar {
     border-radius:5px 5px 0 0;
@@ -98,6 +104,11 @@
 	border-bottom:1px solid rgba(255, 255, 255, .5);
 	margin-bottom:10px;
 	padding-bottom:0.1em;
+}
+#maincontent .inner_sidebar h3 span {
+	font-size:0.6em;
+	text-transform:uppercase;
+	display:block;
 }
 #maincontent .inner_sidebar ul {
     list-style:none;
