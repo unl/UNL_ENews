@@ -16,17 +16,35 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 </div>
 </div>
 <div class="col right">
-    <div class="zenbox primary">
-        <h3 class="sec_main">
-            <?php echo "Recent Newsletters for ".$context->newsroom->name; ?>
-        </h3>
-        <ul>
-        <?php
-        foreach (UNL_ENews_NewsletterList::getRecent($context->newsroom->id, 5) as $newsletter) {
-            echo "<li> <a href=".$newsletter->getURL().">".$newsletter->subject."</a> </li>";
-        }
-        ?>
-        </ul>
-        <a href="<?php echo $context->newsroom->getURL();?>/archive">Full archives</a>
+    <div class="sidebar top">
+    	<div class="inner_sidebar">
+    		<div class="archives">
+		        <h3>
+		            <?php echo "Recent Newsletters for ".$context->newsroom->name; ?>
+		        </h3>
+		        <ul>
+		        <?php
+		        foreach (UNL_ENews_NewsletterList::getRecent($context->newsroom->id, 5) as $newsletter) {
+		            echo "<li> <a href=".$newsletter->getURL().">".date('D. M d, Y', strtotime($newsletter->release_date))."</a> </li>";
+		        }
+		        ?>
+		        </ul>
+		        <a href="<?php echo $context->newsroom->getURL();?>/archive">Full archives</a>
+	        </div>
+	    </div>
+	</div>
+    <div class="sidebar bottom">
+	    <div class="inner_sidebar">
+	        <div class="subscribe">
+		        <h3><?php echo "Subscribe to ".$context->newsroom->name; ?></h3>
+		        <form>
+		        	<label for="address">Email</label>
+		        	<input type="text" id="address" name="ADDRESS" />
+		        	<input type="hidden" name="LISTNAME" value="" />
+		        	<input type="submit" value="Subscribe" name="submit" />
+		        </form>
+	        </div>
+	    </div>
     </div>
+    
 </div>
