@@ -53,7 +53,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 break;
             case 'addemail':
                 $optout             = 0;
-                $newsletter_default = 1;
+                $newsletter_default = 0;
                 if (isset($_POST['optout'])) {
                     $optout = $_POST['optout'];
                 }
