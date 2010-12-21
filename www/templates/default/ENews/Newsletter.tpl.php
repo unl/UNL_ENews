@@ -20,7 +20,8 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
     	<div class="inner_sidebar">
     		<div class="archives">
 		        <h3>
-		            <?php echo "Recent Newsletters for ".$context->newsroom->name; ?>
+		            <?php echo $context->newsroom->name; ?>
+		            <span>Recent Newsletters</span>
 		        </h3>
 		        <ul>
 		        <?php
@@ -36,15 +37,36 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
     <div class="sidebar bottom">
 	    <div class="inner_sidebar">
 	        <div class="subscribe">
-		        <h3><?php echo "Subscribe to ".$context->newsroom->name; ?></h3>
-		        <form>
-		        	<label for="address">Email</label>
-		        	<input type="text" id="address" name="ADDRESS" />
-		        	<input type="hidden" name="LISTNAME" value="" />
-		        	<input type="submit" value="Subscribe" name="submit" />
-		        </form>
+		        <h3><?php echo $context->newsroom->name; ?><span>Subscribe Today!</span></h3>
+		        <?php foreach ($context->newsroom->getEmails() as $email) :
+		        if ($email->optout) :
+			        ?>
+			        <form method="post" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
+			        	<label for="address">Email</label>
+			        	<input type="text" id="address" name="ADDRESS" />
+			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
+			        	<input type="submit" value="Subscribe" name="submit" />
+			        </form>
+		        <?php
+		        	endif;
+		        endforeach; ?>
 	        </div>
 	    </div>
     </div>
-    
 </div>
+<script type="text/javascript">
+
+WDN.jQuery('document').ready(function() {
+	WDN.jQuery("#subscribe").submit(function() {
+		WDN.get(
+			WDN.jQuery(this).attr('action'),
+			WDN.jQuery(this).serialize(),
+			function(){
+				WDN.log('Posted!');
+			}
+		);
+	return false;
+	});
+});
+
+</script>
