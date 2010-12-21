@@ -330,7 +330,12 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $body = $savvy->render($this);
 
         if ($email->optout) {
-            $body .= $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
+            $optout_message = $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
+            $body = str_replace(
+                        '<!-- optout -->', // placeholder text
+                        $optout_message,   // rendered optout message
+                        $body              // current body
+                    );
         }
 
         $html = '<html>'.

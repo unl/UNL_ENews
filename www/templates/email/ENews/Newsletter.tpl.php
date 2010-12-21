@@ -40,7 +40,7 @@
                                 <!--  This the footer -->
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
                                 &copy; 2010 University of Nebraska&ndash;Lincoln <br /> 1400 R Street | Lincoln, NE 68588 | 402-472-8515 <br />
-                                Put opt-out message here.
+                                <!-- optout -->
                                 </p>
                                 <p style="border-top:1px solid #ffffff;">
                                 This email produced and distributed by <a href="http://ucomm.unl.edu/" title="go to the University Communications">University Communications</a>
