@@ -72,14 +72,19 @@
 </div>
 <div class="one_col right">
 <h3 class="sec_main">Email Addresses</h3>
-    <p>Available Email Listservs</p>
     <ul id="emailList">
         <?php
         foreach ($context->getEmails() as $email) {
-            echo '<li>'.$email->email.'
-                <label for="optout">Optout?</label><input type="checkbox" name="optout" disabled="disabled" value="1" '.($email->optout?'checked="checked"':'').' />
-                <label for="newsletter_default">Use by default?</label><input type="checkbox" name="newsletter_default" disabled="disabled" value="1" '.($email->newsletter_default?'checked="checked"':'').' />
-		        <form action="?view=newsroom" method="post">
+            echo '<li><span class="email" title="'.$email->email.'">'.$email->email.'</span>';
+            	if ($email->optout){
+            		echo '<span class="details">Opt Out</span>';
+        		};
+            	
+            	if ($email->newsletter_default) {
+            		echo '<span class="details">Default</span>';
+            	}
+            	
+                echo '<form action="?view=newsroom" method="post">
 		            <input type="hidden" name="email_id" value="'.$email->id.'" />
 		            <input type="hidden" name="_type" value="removeemail" />
 		            <input type="submit" value="X" />

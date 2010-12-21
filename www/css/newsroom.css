@@ -50,6 +50,23 @@
 #maincontent #emailList li:nth-child(even) {
     background:#fcf6e4;
 }
+#maincontent #emailList li span.email {
+	display:block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+#maincontent #emailList li span.details {
+	font-size:0.8em;
+	background:#0c217a;
+	margin-right:15px;
+	color:#fff;
+	font-weight:bold;
+	padding:2px 5px;
+	border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    opacity:0.5;
+}
 #maincontent #emailList li form {
     float:right;
     padding:0;
@@ -77,8 +94,16 @@
 }
 #maincontent .addData input[type='text']{
     border:1px solid #E8D6C1;
-    width:50%;
     padding:3px;
+    width:50%;
+    font-size:1.06em;
+    padding:5px 5px 5px 25px;
+}
+#maincontent #emailList + form input[type='text']{
+    display:block;
+    width:84%;
+    padding-left:25px;
+    background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
 }
 #maincontent .addData input[type='submit']{
     background: #80590E;
