@@ -112,9 +112,10 @@ $today = UNL_ENews_Newsroom::getByID(1);
 $today->from_address = 'today@unl.edu';
 $today->save();
 
-$next = UNL_ENews_Newsroom::getByID(5);
-$next->from_address = 'nextnebraska@unl.edu';
-$next->save();
+if ($next = UNL_ENews_Newsroom::getByID(5)) {
+    $next->from_address = 'nextnebraska@unl.edu';
+    $next->save();
+}
 
 echo 'Adding presentation_id field to stories table<br />';
 $result = $mysqli->query("ALTER TABLE `stories` ADD `presentation_id` INT( 10 ) NOT NULL AFTER `website`;");
