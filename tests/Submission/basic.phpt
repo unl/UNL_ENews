@@ -7,14 +7,19 @@ if (!class_exists('mysqli')) {
 }
 ?>
 --POST--
-storyid=&_type=story&title=The+Title&description=My+summary+of+the+announcement.&full_article=The+FULL+article+text+goes+here.&request_publish_start=2010-05-27&request_publish_end=2010-05-27&website=&sponsor=Office+of+University+Communications&newsroom_id%5B%5D=1&ajaxupload=true
+storyid=&_type=story&presentation_id=1&fileID=&fileDescription=&thumbX1=-1&thumbX2=-1&thumbY1=-1&thumbY2=-1&title=The+title+goes+here&description=This+is+the+summary+text&full_article=Full+article+goes+here&request_publish_start=2011-01-06&request_publish_end=2011-01-27&website=http%3A%2F%2Fgo.unl.edu%2Fpfy&sponsor=Office+of+University+Communications&newsroom_id%5B%5D=1&submit=Submit
 --FILE--
 <?php
 require dirname(__FILE__) . '/../setup.inc.php';
-echo 'INSERT ID SHOULD BE RETURNED'.PHP_EOL;
+
 $controller = new UNL_ENews_Controller(array('view'=>'submit'));
 
+var_dump(headers_list());
 ?>
 --EXPECTF--
-INSERT ID SHOULD BE RETURNED
-%d
+array(2) {
+  [0]=>
+  string(27) "X-Powered-By: PHP/5.3.4-dev"
+  [1]=>
+  string(93) "Location: %s?view=thanks&_type=story&id=%d"
+}
