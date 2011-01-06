@@ -40,18 +40,17 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     function handlePost()
     {
-        if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
-            throw new Exception('You cannot modify a newsroom you don\'t have permission to!', 403);
-        }
         switch($_POST['_type']) {
             case 'removeuser':
             case 'adduser':
+                $this->checkLoggedInUser();
                 $user = UNL_ENews_User::getByUID($_POST['user_uid']);
 
                 $this->{$_POST['_type']}($user);
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
             case 'addemail':
+                $this->checkLoggedInUser();
                 $optout             = 0;
                 $newsletter_default = 0;
                 if (isset($_POST['optout'])) {
@@ -64,6 +63,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
             case 'removeemail':
+                $this->checkLoggedInUser();
                 $email = UNL_ENews_Newsroom_Email::getById($_POST['email_id']);
                 $this->{$_POST['_type']}($email);
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
@@ -188,6 +188,13 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             return $permission->delete();
         }
         return true;
+    }
+
+    function checkLoggedInUser()
+    {
+        if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
+            throw new Exception('You cannot modify a newsroom you don\'t have permission to!', 403);
+        }
     }
 
     function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
