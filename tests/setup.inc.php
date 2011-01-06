@@ -1,4 +1,5 @@
 <?php
+define('CLI', true);
 require_once dirname(__FILE__).'/../www/config.inc.php';
 class UNL_Auth
 {
