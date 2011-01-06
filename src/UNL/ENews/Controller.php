@@ -277,7 +277,8 @@ class UNL_ENews_Controller
                     }
                 }
 
-                self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type']);
+                self::redirect(self::getURL().'?view=thanks&_type='.$_POST['_type'].'&id='.(int)$story->id);
+                break;
             case 'file':
                 if ($_FILES['image']['error'] != UPLOAD_ERR_OK) {
                     throw new Exception("Error Uploading File!");
@@ -481,7 +482,8 @@ class UNL_ENews_Controller
     static function redirect($url, $exit = true)
     {
         header('Location: '.$url);
-        if (false !== $exit) {
+        if (!defined('CLI')
+            && false !== $exit) {
             exit($exit);
         }
     }
