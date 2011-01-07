@@ -11,7 +11,6 @@ WDN.initializePlugin('notice');
 		<a href="#" title="Close this notice">Close this notice</a>
 	</div>
 	<div class="message">
-	<h4>Thanks for your submission!</h4>
 		<h4>Congratulations!</h4>
 	    <p>You have been subscribed to the newsletter! Keep a look out for our next newsletter to arrive in your inbox.</p>
 	</div>
