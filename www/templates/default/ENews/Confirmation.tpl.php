@@ -12,7 +12,10 @@ WDN.initializePlugin('notice');
 		    <p>Your newsletter has been submitted to the distribution queue.</p>
 		<?php elseif ($context->options['_type'] == 'unsubscribe'): ?>
 		    <h4>Congratulations!</h4>
-		    <p>You have been unsubscribed from the newsletter!</p>
+		    <p>You have been unsubscribed from the newsletter and will therefore no longer receive it in your inbox.</p>
+		<?php elseif ($context->options['_type'] == 'subscribed'): ?>
+			<h4>Congratulations!</h4>
+		    <p>You have been subscribed to the newsletter! Keep a look out for our next newsletter to arrive in your inbox.</p>
 		<?php else: ?>
 		    <h4>Thanks for your submission!</h4>
 		    <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>

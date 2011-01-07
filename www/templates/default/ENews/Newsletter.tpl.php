@@ -1,5 +1,23 @@
 <?php
 UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
+
+if ($_GET['_type'] == 'subscribed') : ?>
+<script type="text/javascript">
+// This plugin is only needed for the demo.
+WDN.initializePlugin('notice');
+</script>
+<div class="wdn_notice affirm">
+	<div class="close">
+		<a href="#" title="Close this notice">Close this notice</a>
+	</div>
+	<div class="message">
+	<h4>Thanks for your submission!</h4>
+		<h4>Congratulations!</h4>
+	    <p>You have been subscribed to the newsletter! Keep a look out for our next newsletter to arrive in your inbox.</p>
+	</div>
+</div>
+<?php 
+endif;
 ?>
 <div class="three_col left">
 <h3 class="sec_main">
@@ -44,7 +62,7 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 			        <form method="get" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
 			        	<label for="address">Email</label>
 			        	<input type="text" id="address" name="ADDRESS" value="" />
-			        	<input type="hidden" id="address" value="<?php echo $context->newsroom->getURL();?>" name="SUCCESS_URL" />
+			        	<input type="hidden" id="address" value="<?php echo $context->newsroom->getURL().'?subscribed';?>" name="SUCCESS_URL" />
 			        	<input type="hidden" value="BOTH" name="LOCKTYPE" />
 			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
 			        	<input type="submit" value="Subscribe" name="submit" />
