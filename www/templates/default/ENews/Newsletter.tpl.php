@@ -1,7 +1,7 @@
 <?php
 UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
 
-if ($_GET['_type'] == 'subscribed') : ?>
+if (isset($_GET['_type']) && $_GET['_type'] == 'subscribed') : ?>
 <script type="text/javascript">
 // This plugin is only needed for the demo.
 WDN.initializePlugin('notice');
