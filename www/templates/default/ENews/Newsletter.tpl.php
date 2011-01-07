@@ -11,8 +11,10 @@ WDN.initializePlugin('notice');
 		<a href="#" title="Close this notice">Close this notice</a>
 	</div>
 	<div class="message">
-		<h4>Congratulations!</h4>
-	    <p>You have been subscribed to the newsletter! Keep a look out for our next newsletter to arrive in your inbox.</p>
+		<h4>Almost there!</h4>
+	    <p>We have received your subscription request. An email has been sent to your address asking you to confirm. Simply click the confimation link in
+	    that email, and you'll be set.
+	    </p>
 	</div>
 </div>
 <?php 
