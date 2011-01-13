@@ -108,6 +108,15 @@ if (!$result) {
         exit();
     }
 }
+
+echo 'Adding footer_text field to newsrooms&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `footer_text` VARCHAR( 300 ) NOT NULL;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />';
+    }
+}
+
 $today = UNL_ENews_Newsroom::getByID(1);
 $today->from_address = 'today@unl.edu';
 $today->save();
@@ -159,13 +168,6 @@ if (!$result) {
     }
 }
 
-echo 'Adding footer_text field to newsrooms&hellip;<br />';
-$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `footer_text` VARCHAR( 300 ) NOT NULL;");
-if (!$result) {
-    if (mysqli_errno($mysqli) == 1060) {
-        echo 'Field already has been added<br />';
-    }
-}
 
 $mysqli->close();
 
