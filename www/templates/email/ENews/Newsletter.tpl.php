@@ -39,12 +39,12 @@
                             <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" valign="top">
                                 <!--  This the footer -->
                                 <p style="margin-top:95px;width:530px;"><img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" align="right" />
-                                &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln <br /> 1400 R Street | Lincoln, NE 68588 | 402-472-8515 <br />
+                                &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln <br />
+                                <?php echo $context->newsroom->getRaw('footer_text'); ?>
                                 <!-- optout -->
                                 </p>
                                 <p style="border-top:1px solid #ffffff;">
-                                This email produced and distributed by <a href="http://ucomm.unl.edu/" title="go to the University Communications">University Communications</a>
-                                <br /> <a href="<?php echo UNL_ENews_Controller::getURL().$context->newsroom->shortname."/submit"; ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+                                 <a href="<?php echo UNL_ENews_Controller::getURL().$context->newsroom->shortname."/submit"; ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
                                 </p>
                             </td>
                         </tr>

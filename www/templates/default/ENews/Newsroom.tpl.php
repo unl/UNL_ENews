@@ -43,6 +43,13 @@
                         </label>
                         <input type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> /> Yes
                     </li>
+                    <li>
+                        <label for="footer_text">
+                            Footer Text
+                            <span class="helper">Text displayed at the footer of emails (some HTML allowed)</span>
+                        </label>
+                        <textarea id="footer_text" name="footer_text"><?php echo $context->footer_text; ?></textarea>
+                    </li>
                 </ol>
         </fieldset> 
         <input type="submit" name="submit" value="Submit" />

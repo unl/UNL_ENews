@@ -11,6 +11,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     public $allow_submissions;
 
+    public $footer_text;
+
     public $email_lists;
 
     public $from_address;
