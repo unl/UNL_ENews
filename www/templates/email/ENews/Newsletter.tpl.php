@@ -35,6 +35,24 @@
                             </td>
                         </tr>
                         <?php echo $savvy->render($context->getStories(), 'ENews/Newsletter/Stories.tpl.php'); ?>
+                        <tr>
+                        	<td colspan="3">
+                        	
+                        	</td>
+                        </tr>
+                        <tr>
+    						<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
+    							<div id="adColumn1" class="adColumn">
+    							
+    							</div>
+                        	</td>
+                        	<td width="10">&nbsp;</td>
+                        	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
+                        		<div id="adColumn2" class="adColumn">
+    							
+    							</div>
+                        	</td>
+                        </tr>
                         <tr valign="top" background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" bgcolor="white" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
                             <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" valign="top">
                                 <!--  This the footer -->
