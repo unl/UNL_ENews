@@ -17,7 +17,8 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
         $sql = 'SELECT nrs.story_id FROM newsroom_stories nrs
                 JOIN stories s ON nrs.story_id = s.id AND nrs.newsroom_id = '.(int)$this->options['newsroom_id'].'
                 LEFT JOIN newsletter_stories nls ON s.id = nls.story_id
-                WHERE nls.newsletter_id IS NULL';
+                LEFT JOIN newsletters n ON n.id = nls.newsletter_id
+                WHERE (nls.newsletter_id IS NULL OR n.newsroom_id != '.(int)$this->options['newsroom_id'].')';
 
         if (!empty($this->options['status'])) {
             $sql .= ' AND nrs.status = \''.$mysqli->escape_string($this->options['status']).'\'';
