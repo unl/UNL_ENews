@@ -8,7 +8,7 @@ if ($file = $context->getFileByUse('originalimage')) {
         echo '<a href="'.$context->website.'">';
     }
 
-    echo '<img src="'.$file->getURL().'" style="width:556px;height:212px;margin-bottom:5px;" />';
+    echo '<img src="'.$file->getURL().'" style="width:536px;height:204px;padding:10px;border-top:1px solid #E0E0E0;border-bottom:1px solid #E0E0E0;" />';
 
     if (!empty($context->website)) {
         echo '</a>';

@@ -4,7 +4,7 @@ if (!$context->isWithinRequestedPublishDate()) {
 }
 
 if ($file = $context->getFileByUse('originalimage')) {
-    echo '<div style="background:#fbf9d8;padding:10px;margin-top:10px;margin-bottom:10px;border-top:1px solid #e6e182;border-bottom:1px solid #e6e182;">';
+    echo '<div style="background:#f0f0f0;padding:10px;margin-top:10px;margin-bottom:10px;border-top:1px solid #E0E0E0;border-bottom:1px solid #E0E0E0;">';
     if (!empty($context->website)) {
         echo '<a href="'.$context->website.'">';
     }
