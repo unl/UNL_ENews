@@ -68,7 +68,7 @@ endif;
 			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
 			        	<input type="submit" value="Subscribe" name="submit" />
 			        </form>
-		        <?php
+		        <?php 
 		        	endif;
 		        endforeach; ?>
 	        </div>

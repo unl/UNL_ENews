@@ -2,7 +2,7 @@
 
 <?php
 if ($file = $context->getThumbnail()) {
-    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="right"><tr><td valign="top" algin="left"><img src="'.UNL_ENews_Controller::getURL().'file'
+    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="right"><tr><td valign="top" align="left"><img src="'.UNL_ENews_Controller::getURL().'file'
          . $file->id
          . '.jpg" style="margin-left:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
 }
