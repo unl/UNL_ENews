@@ -35,20 +35,22 @@
                             </td>
                         </tr>
                         <?php echo $savvy->render($context->getStories(), 'ENews/Newsletter/Stories.tpl.php'); ?>
-                        <tr>
+                        <tr class="adStories">
                         	<td colspan="3">
-                        	
+                        		<div id="adColumnIntro" class="adColumn newsColumn">
+    							
+    							</div>
                         	</td>
                         </tr>
-                        <tr>
+                        <tr class="adstories">
     						<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
-    							<div id="adColumn1" class="adColumn">
+    							<div id="adColumn1" class="adColumn newsColumn">
     							
     							</div>
                         	</td>
                         	<td width="10">&nbsp;</td>
                         	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
-                        		<div id="adColumn2" class="adColumn">
+                        		<div id="adColumn2" class="adColumn newsColumn">
     							
     							</div>
                         	</td>
