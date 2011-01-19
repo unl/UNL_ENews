@@ -115,6 +115,8 @@ class UNL_ENews_File_Image extends UNL_ENews_File
                 $create_method = 'imagecreatefromgif';
                 $output_method = 'imagegif';
                 break;
+            default:
+                throw new Exception('I do not know how to resize a file of that content type: '.$this->type);
         }
         $current_image = $create_method($file);
 
