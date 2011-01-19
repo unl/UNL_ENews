@@ -72,4 +72,21 @@ class UNL_ENews_File extends UNL_ENews_Record
         $allowedExtensions = array("gif","jpeg","jpg","png");
         return in_array(end(explode(".", strtolower($filename))), $allowedExtensions);
     }
+
+    public function getURL()
+    {
+        $extension = '.jpg';
+
+        switch($this->type) {
+            case 'image/png':
+                $extension = '.png';
+                break;
+            case 'image/gif':
+                $extension = '.gif';
+                break;
+        }
+        return UNL_ENews_Controller::getURL().'file'
+         . $this->id
+         . $extension;
+    }
 }
