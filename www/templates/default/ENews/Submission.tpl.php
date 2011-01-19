@@ -205,7 +205,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     <div id="sampleLayoutImage">
         <?php if ($id = getValue($context,"id")) {
                 if ($thumbnail = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) { ?>
-                    <img src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$thumbnail->id; ?>" alt="Image to accompany story submission" />
+                    <img src="<?php echo $thumbnail->getURL(); ?>" alt="Image to accompany story submission" />
         <?php   }
               } else { ?>
                 &lt;Upload Image&gt;

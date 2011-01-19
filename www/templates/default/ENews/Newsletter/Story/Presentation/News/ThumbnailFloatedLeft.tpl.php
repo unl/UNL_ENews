@@ -9,8 +9,7 @@
 
 if ($file = $context->getThumbnail()) {
     echo '<a href="'.$storylink.'">'
-         . '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
-         . $file->id
+         . '<img src="'.$file->getURL()
          . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
 }
 

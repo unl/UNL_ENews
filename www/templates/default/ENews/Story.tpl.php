@@ -7,8 +7,7 @@ UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
 <?php 
 foreach ($context->getFiles() as $file) {
     if (preg_match('/^image/', $file->type) && $file->use_for == 'originalimage') {
-        echo '<img src="'.UNL_ENews_Controller::getURL().'?view=file&amp;id='
-             . $file->id
+        echo '<img src="'.$file->getURL()
              . '" style="max-width:300px;" class="frame" alt="'.$file->name.'" />';
         if (isset($file->description)) {
             echo '<p class="caption">'.$file->description.'</p>';

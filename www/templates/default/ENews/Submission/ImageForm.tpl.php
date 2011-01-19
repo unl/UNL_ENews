@@ -32,7 +32,7 @@
             }
         }
     ?>
-        <img onload="if(submission.announcementType != 'ad')submission.loadImageCrop('<?php echo $ratio; ?>');" src="<?php echo UNL_ENews_Controller::getURL().'?view=file&id='.$originalImage->id; ?>" alt="Image to accompany submission" />
+        <img onload="if(submission.announcementType != 'ad')submission.loadImageCrop('<?php echo $ratio; ?>');" src="<?php echo $originalImage->getURL(); ?>" alt="Image to accompany submission" />
     <?php else : ?>
         <div>Image preview</div>
     <?php endif; ?>

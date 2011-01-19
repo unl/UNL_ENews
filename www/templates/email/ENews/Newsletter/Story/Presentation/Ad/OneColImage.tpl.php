@@ -9,9 +9,7 @@ if ($file = $context->getFileByUse('originalimage')) {
         echo '<a href="'.$context->website.'">';
     }
 
-    echo '<img src="'.UNL_ENews_Controller::getURL().'file'
-         . $file->id
-         . '.jpg" style="width:253px;height:96px;" />';
+    echo '<img src="'.$file->getURL().'" style="width:253px;height:96px;" />';
 
     if (!empty($context->website)) {
         echo '</a>';
