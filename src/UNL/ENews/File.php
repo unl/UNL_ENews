@@ -79,6 +79,7 @@ class UNL_ENews_File extends UNL_ENews_Record
 
         switch($this->type) {
             case 'image/png':
+            case 'image/x-png':
                 $extension = '.png';
                 break;
             case 'image/gif':
