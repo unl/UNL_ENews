@@ -198,18 +198,28 @@ var preview = function($) {
 		},
 		
 		initDraggable : function(el) {
-			$(el).draggable({ 
-				revert: 'invalid',
-				snap: '.newsColumn',
-				snapMode : 'inner',
-				connectToSortable: '.newsColumn',
-				helper: 'clone',
-				opacity: 0.45,
-				stop: function(ev, ui) {
-					if (!$(this).hasClass('dragItem')) {
-						$(this).draggable('destroy');
-					}
+			var connectTo, i;
+			i = 0;
+			$(el).each(function(){
+				connectTo = '.newsColumn';
+				if ($(el).eq(i).hasClass('ad')) {
+					connectTo = '.adColumn';
 				}
+				WDN.log(connectTo);
+				$(el).eq(i).draggable({ 
+					revert: 'invalid',
+					snap: connectTo,
+					snapMode : 'inner',
+					connectToSortable: connectTo,
+					helper: 'clone',
+					opacity: 0.45,
+					stop: function(ev, ui) {
+						if (!$(this).hasClass('dragItem')) {
+							$(this).draggable('destroy');
+						}
+					}
+				});
+				i++;
 			});
 		},
 		
@@ -268,8 +278,63 @@ var preview = function($) {
 					}
 				}
 			});
+			
+			$('.adColumn').sortable({ //make all the ads on the newsletter sortable
+				revert: false,
+				connectWith: '.adColumn',
+				scroll: true,
+				delay: 250,
+				opacity: 0.45,
+				tolerance: 'pointer',
+				helper: 'clone',
+				start: function(event, ui){
+					ui.helper.children('.storyTools').hide();
+					ui.item.children('.storyTools').hide();
+				},
+				beforeStop: function(event, ui){
+					if (ui.item.hasClass('dragItem')) {
+						dragClone = ui.item;
+					}
+				},
+				update: function(e, ui) {
+					if (ignoreUpdate == this) {
+						ignoreUpdate = null;
+						return;
+					}
+					preview.saveStoryOrder(this);
+				},
+				receive: function(e, ui) {
+					if (ui.item.hasClass('dragItem')) {
+						var dragList = ui.item.parent();
+						ui.item.removeClass('dragItem').addClass('story');
+						ui.item.children().remove();
+						ui.item.insertBefore(dragClone);
+						dragClone.remove();
+						dragClone = null;
+						if (!dragList.children('.dragItem').length) {
+							dragList.append("<p>Sorry, no unused/available stories.</p>");
+						}
+						$(this).sortable('refresh');
+						ignoreUpdate = this;
+						ui.item.text('Loading...');
+						preview.saveStoryOrder(this, function() {
+							$.get("", {
+								"view" : "previewStory",
+								"id" : $('form input[name=id]').attr('value'),
+								"story_id" : ui.item.data("id"),
+								"format" : "partial"
+							}, function(data) {
+								ui.item.html(data);
+								preview.setupTools(ui.item);
+								preview.setupToolsHover(ui.item);
+							});
+						});
+					}
+				}
+			});
+			WDN.log('sortables setup');
 			preview.initDraggable('.dragItem');
-			$('.newsColumn').disableSelection(); //This keeps content from being highlighted and instead draggable
+			$('.newsColumn, .adColumn').disableSelection(); //This keeps content from being highlighted and instead draggable
 		},
 		
 		saveStoryOrder : function(sortable, callback) { //this function determines the order of the stories and sends it to the DB.

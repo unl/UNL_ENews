@@ -38,7 +38,7 @@
 }
 
 
-/* Newsletter Web View
+/* Newsletter Web View for the rendered stories. (Not the newsletter building web view)
 ************************/
 #maincontent #newsletterWeb .story img {
 	margin-bottom:0;
@@ -266,6 +266,7 @@
 	width: 273px;
 }
 #newsStories #newsColumn2 {float:right;}
+
 
 /*Story Dragging */
 #maincontent #drag_story_list {margin-top:50px;}

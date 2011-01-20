@@ -1,4 +1,7 @@
-<div id="story_<?php echo $context->id; ?>" class="dragItem">
+<?php
+//print_r($context);
+?>
+<div id="story_<?php echo $context->id; ?>" class="dragItem <?php echo $context->getPresentationTypeString(); ?>">
     <div class="story-grip">
         <h4><?php echo $context->title; ?></h4>
         <span class="requestedDates">
