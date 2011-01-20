@@ -132,11 +132,12 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         $output_method($canvas);
         imagedestroy($canvas);
 
-        $resized = new self();
-        $resized->name = $this->name;
-        $resized->type = $this->type;
-        $resized->size = ob_get_length();
-        $resized->data = ob_get_clean();
+        $resized              = new self();
+        $resized->name        = $this->name;
+        $resized->type        = $this->type;
+        $resized->description = $this->description;
+        $resized->size        = ob_get_length();
+        $resized->data        = ob_get_clean();
         
 
         // Save the thumbnail **********************************************************
