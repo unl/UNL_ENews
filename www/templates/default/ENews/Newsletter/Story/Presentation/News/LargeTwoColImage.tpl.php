@@ -2,9 +2,13 @@
 $storylink = $context->getURL();
 
 if ($file = $context->getFileByUse(UNL_ENews_File_Image::MAX_WIDTH.'_wide', true)) {
+    $description = $file->name;
+    if (!empty($file->description)) {
+        $description = $file->description;
+    }
     echo '<a href="'.$storylink.'">'
          . '<img src="'.$file->getURL()
-         . '" style="margin-bottom:5px;width:96%;" class="frame" alt="'.$file->name.'" /></a>';
+         . '" style="margin-bottom:5px;width:96%;" class="frame" alt="'.$description.'" /></a>';
 }
 ?>
 <h4>

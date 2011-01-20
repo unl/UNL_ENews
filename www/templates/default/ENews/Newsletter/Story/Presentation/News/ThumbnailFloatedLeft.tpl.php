@@ -8,9 +8,13 @@
 <?php 
 
 if ($file = $context->getThumbnail()) {
+    $description = $file->name;
+    if (!empty($file->description)) {
+        $description = $file->description;
+    }
     echo '<a href="'.$storylink.'">'
          . '<img src="'.$file->getURL()
-         . '" style="margin-right:15px; float:left;" class="frame" alt="'.$file->name.'" /></a>';
+         . '" style="margin-right:15px; float:left;" class="frame" alt="'.$description.'" /></a>';
 }
 
 echo nl2br($context->description);
