@@ -35,43 +35,5 @@ endif;
 </div>
 </div>
 <div class="col right">
-    <div class="sidebar top">
-    	<div class="inner_sidebar">
-    		<div class="archives">
-		        <h3>
-		            <?php echo $context->newsroom->name; ?>
-		            <span>Recent Newsletters</span>
-		        </h3>
-		        <ul>
-		        <?php
-		        foreach (UNL_ENews_NewsletterList::getRecent($context->newsroom->id, 5) as $newsletter) {
-		            echo "<li> <a href=".$newsletter->getURL().">".date('D. M d, Y', strtotime($newsletter->release_date))."</a> </li>";
-		        }
-		        ?>
-		        </ul>
-		        <a href="<?php echo $context->newsroom->getURL();?>/archive">Full archives</a>
-	        </div>
-	    </div>
-	</div>
-    <div class="sidebar bottom">
-	    <div class="inner_sidebar">
-	        <div class="subscribe">
-		        <h3><?php echo $context->newsroom->name; ?><span>Subscribe Today!</span></h3>
-		        <?php foreach ($context->newsroom->getEmails() as $email) :
-		        if ($email->optout) :
-			        ?>
-			        <form method="get" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
-			        	<label for="address">Email</label>
-			        	<input type="text" id="address" name="ADDRESS" value="" />
-			        	<input type="hidden" id="address" value="<?php echo $context->newsroom->getURL().'?subscribed';?>" name="SUCCESS_URL" />
-			        	<input type="hidden" value="BOTH" name="LOCKTYPE" />
-			        	<input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
-			        	<input type="submit" value="Subscribe" name="submit" />
-			        </form>
-		        <?php 
-		        	endif;
-		        endforeach; ?>
-	        </div>
-	    </div>
-    </div>
+    <?php echo $savvy->render($context, 'ENews/Newsletter/SidebarNav.tpl.php'); ?>
 </div>
