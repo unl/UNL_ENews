@@ -8,7 +8,8 @@
             <ul>
             <?php
             foreach (UNL_ENews_NewsletterList::getRecent($context->newsroom->id, 5) as $newsletter) {
-                echo "<li> <a href=".$newsletter->getURL().">".date('D. M d, Y', strtotime($newsletter->release_date))."</a> </li>";
+                $clean_date = date('D. M d, Y', strtotime($newsletter->release_date));
+                echo '<li><a href="'.$newsletter->getURL().'" title="Go to the '.$context->newsroom->name.' newsletter from '.$clean_date.'">'.$clean_date.'</a></li>';
             }
             ?>
             </ul>
