@@ -14,18 +14,22 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
 
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'SELECT nrs.story_id FROM newsroom_stories nrs
-                JOIN stories s ON nrs.story_id = s.id AND nrs.newsroom_id = '.(int)$this->options['newsroom_id'].'
-                LEFT JOIN newsletter_stories nls ON s.id = nls.story_id
-                WHERE nls.newsletter_id IS NULL';
-
+        $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories 
+                WHERE newsroom_stories.newsroom_id = '.(int)$options['newsroom_id'] . '
+                  AND newsroom_stories.story_id = stories.id
+                  AND newsroom_stories.story_id NOT IN
+                    (
+                    SELECT newsletter_stories.story_id FROM newsletter_stories, newsletters
+                        WHERE newsletters.newsroom_id = '.(int)$options['newsroom_id']. '
+                            AND newsletter_stories.newsletter_id = newsletters.id
+                    )';
         if (!empty($this->options['status'])) {
-            $sql .= ' AND nrs.status = \''.$mysqli->escape_string($this->options['status']).'\'';
+            $sql .= ' AND newsroom_stories.status = \''.$mysqli->escape_string($this->options['status']).'\'';
         }
         if (!empty($this->options['date'])) {
-            $sql .= ' AND \''.$mysqli->escape_string($this->options['date']).'\' BETWEEN s.request_publish_start AND s.request_publish_end';
+            $sql .= ' AND \''.$mysqli->escape_string($this->options['date']).'\' BETWEEN stories.request_publish_start AND stories.request_publish_end';
         }
-        $sql .= ' ORDER BY s.title;';
+        $sql .= ' ORDER BY stories.title;';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $stories[] = $row[0];
