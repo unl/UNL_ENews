@@ -1,7 +1,13 @@
 <?php
 $columns = array();
+$adAreas = array();
 foreach ($context as $key=>$story) {
-    $columns[$story->sort_order % 3][] = $story;
+    $areaPtr =& $columns;
+    if ($story->getPresentation()->type == 'ad') {
+        $areaPtr =& $adAreas;
+    }
+
+    $areaPtr[$story->sort_order % 3][] = $story;
 }
 ?>
 <tr>
@@ -48,3 +54,39 @@ foreach ($context as $key=>$story) {
         </div>
     </td>
 </tr>
+<?php if (!empty($adAreas[1])): ?>
+<tr>
+	<td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
+		<div id="adAreaIntro" class="adArea">
+		<?php $story = $adAreas[1][0]; // Intentional single story ?>
+			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
+		        <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+            </div>
+		</div>
+	</td>
+</tr>
+<?php elseif (!empty($adAreas[2]) || !empty($adAreas[0])): ?>
+<tr>
+	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
+		<div id="adArea1" class="adArea">
+		<?php if (!empty($adAreas[2])): ?>
+		<?php $story = $adAreas[2][0]; // Intentional single story ?>
+			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
+                <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+            </div>
+        <?php endif; ?>
+		</div>
+	</td>
+	<td width="10">&nbsp;</td>
+	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
+		<div id="adArea2" class="adArea">
+		<?php if (!empty($adAreas[0])): ?>
+		<?php $story = $adAreas[0][0]; // Intentional single story ?>
+			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
+                <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
+            </div>
+		<?php endif; ?>
+		</div>
+	</td>
+</tr>
+<?php endif; ?>

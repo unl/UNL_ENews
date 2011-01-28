@@ -1,13 +1,7 @@
 var preview = function($) {
-	var qsParams = {};
-	var initQS = function() {
-		var querystring = window.location.search.replace('?', '').split('&');
-		for (var i = 0; i<querystring.length; i++) {
-			var nvPair = querystring[i].split('=');
-			qsParams[decodeURI(nvPair[0])] = decodeURI(nvPair[1]);
-		}
-	}();
 	var presentationCache = {};
+	// stores the CSS selectors 
+	var presentationDependents = {};
 	return {
 		initialize : function() {
 			$(function() {
@@ -18,8 +12,15 @@ var preview = function($) {
 				$('table .story .story-content a').live('click', function(e) {
 					return false;
 				})
+				$.getJSON("", {
+					"view" : "dependentPresentations",
+					"format" : "partial"
+				}, function(data) {
+					presentationDependents = data;
+				});
 				WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
 				preview.setupDragAndSort();
+				preview.initDraggable($('.adArea .story'));
 			});
 			$('#releaseDate').attr('autocomplete', 'off').change(function(){
 				preview.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
@@ -66,16 +67,14 @@ var preview = function($) {
 			};
 		}(),
 		
-		removeStory : function() {
-			var theStory = $(this).closest('.story');
+		removeStory : function(theStory) {
+			var sortable = theStory.closest('.newsColumn, .adArea');
 			//remove the db record for this story
 			$.post(window.location.toString(), {
 				"_type":"removestory",
 				"story_id":theStory.data("id")
 			}, function() {
-				if (theStory.data('orig_presentaion_id')) {
-					theStory.data('presentation_id', theStory.data('orig_presentaion_id')).removeData('orig_presentaion_id');
-				}
+				theStory.data('presentation_id', theStory.data('default_presentation_id'));
 				//remove the story-content and rebuild the grip
 				theStory.children().remove();
 				var grippy = $('<div class="story-grip" />');
@@ -98,20 +97,39 @@ var preview = function($) {
 				preview.initDraggable(theStory);
 				
 				//update the stored story orders
-				preview.saveStoryOrder(theStory.closest('.ui-sortable'));
+				preview.saveStoryOrder(sortable);
 			});
 			
 			return false;
 		},
 		
+		setStoryPresentation : function(theStory, presentation_id) {
+			$.post(window.location.toString(), {
+				"_type":"setpresentation",
+				"story_id":theStory.data('id'),
+				"presentation_id":presentation_id
+			}, function() {
+				theStory.data('presentation_id', presentation_id);
+				theStory.children('.story-content').text('Loading...');
+				$.get("", {
+					"view" : "previewStory",
+					"id" : $('form input[name=id]').attr('value'),
+					"story_id" : theStory.data("id"),
+					"format" : "partial"
+				}, function(data) {
+					theStory.children('.story-content').remove();
+					theStory.prepend(data);
+				});
+			});
+		},
+		
 		setupTools : function(el) {
 			$(el).append('<div class="storyTools"><a class="edit" href="?view=submit&id='+$(el).data('id')+'"><span />Edit</a><a class="remove" href="#"><span />Remove</a><a class="layout" href="#"><span />Layout</a></div>');
-			$('a.remove', el).click(preview.removeStory);
+			$('a.remove', el).click(function() {
+				preview.removeStory($(this).closest('.story'));
+			});
 			$('a.layout', el).click(function() {
 				var theStory = $(this).closest('.story');
-				if (!theStory.data('orig_presentaion_id')) {
-					theStory.data('orig_presentaion_id', theStory.data('presentation_id'));
-				}
 				var displayPresentationDialog = function (data) {
 					if ($.isEmptyObject(data)) {
 						alert("This story's type does not currently support different layouts.");
@@ -136,23 +154,7 @@ var preview = function($) {
 							"Save": function() {
 								var presentation_id = $('select', this).val();
 								if (presentation_id != theStory.data('presentation_id')) {
-									$.post(window.location.toString(), {
-										"_type":"setpresentation",
-										"story_id":theStory.data('id'),
-										"presentation_id":presentation_id
-									}, function() {
-										theStory.data('presentation_id', presentation_id);
-										theStory.children('.story-content').text('Loading...');
-										$.get("", {
-											"view" : "previewStory",
-											"id" : $('form input[name=id]').attr('value'),
-											"story_id" : theStory.data("id"),
-											"format" : "partial"
-										}, function(data) {
-											theStory.children('.story-content').remove();
-											theStory.prepend(data);
-										});
-									});
+									preview.setStoryPresentation(theStory, presentation_id);
 								}
 								$(this).dialog("close");
 							},
@@ -198,28 +200,37 @@ var preview = function($) {
 		},
 		
 		initDraggable : function(el) {
-			var connectTo, i;
-			i = 0;
 			$(el).each(function(){
-				connectTo = '.newsColumn';
-				if ($(el).eq(i).hasClass('ad')) {
-					connectTo = '.adColumn';
-				}
-				WDN.log(connectTo);
-				$(el).eq(i).draggable({ 
-					revert: 'invalid',
-					snap: connectTo,
-					snapMode : 'inner',
-					connectToSortable: connectTo,
-					helper: 'clone',
-					opacity: 0.45,
-					stop: function(ev, ui) {
-						if (!$(this).hasClass('dragItem')) {
-							$(this).draggable('destroy');
-						}
+				if ($(this).data('type') == 'ad') {
+					if ($(this).data('draggable')) {
+						return true;
 					}
-				});
-				i++;
+					$(this).draggable({
+						revert: 'invalid',
+						snap: '.adArea',
+						snapMode : 'inner',
+						helper: 'clone',
+						opacity: 0.45,
+						start: function(ev, ui) {
+							ui.helper.children('.storyTools').hide();
+							$(this).children('.storyTools').hide();
+						}
+					});
+				} else {
+					$(this).draggable({ 
+						revert: 'invalid',
+						snap: '.newsColumn',
+						snapMode : 'inner',
+						connectToSortable: '.newsColumn',
+						helper: 'clone',
+						opacity: 0.45,
+						stop: function(ev, ui) {
+							if (!$(this).hasClass('dragItem')) {
+								$(this).draggable('destroy');
+							}
+						}
+					});
+				}
 			});
 		},
 		
@@ -258,7 +269,7 @@ var preview = function($) {
 						dragClone.remove();
 						dragClone = null;
 						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>Sorry, no unused/available stories.</p>");
+							dragList.append("<p>No Available Items</p>");
 						}
 						$(this).sortable('refresh');
 						ignoreUpdate = this;
@@ -279,66 +290,149 @@ var preview = function($) {
 				}
 			});
 			
-			$('.adColumn').sortable({ //make all the ads on the newsletter sortable
-				revert: false,
-				connectWith: '.adColumn',
-				scroll: true,
-				delay: 250,
-				opacity: 0.45,
-				tolerance: 'pointer',
-				helper: 'clone',
-				start: function(event, ui){
-					ui.helper.children('.storyTools').hide();
-					ui.item.children('.storyTools').hide();
-				},
-				beforeStop: function(event, ui){
-					if (ui.item.hasClass('dragItem')) {
-						dragClone = ui.item;
-					}
-				},
-				update: function(e, ui) {
-					if (ignoreUpdate == this) {
-						ignoreUpdate = null;
-						return;
-					}
-					preview.saveStoryOrder(this);
-				},
-				receive: function(e, ui) {
-					if (ui.item.hasClass('dragItem')) {
-						var dragList = ui.item.parent();
-						ui.item.removeClass('dragItem').addClass('story');
-						ui.item.children().remove();
-						ui.item.insertBefore(dragClone);
-						dragClone.remove();
-						dragClone = null;
-						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>Sorry, no unused/available stories.</p>");
+			$('.adArea').droppable({
+				accept: function(draggable) {
+					/* STRICT CONSTRAINTS: 
+					if (draggable.data('type') == 'ad' && $('.story', this).length < 1) {
+						var adCount = $('.adArea .story').length
+						if (draggable.hasClass('dragItem')) {
+							if (this.id == 'adAreaIntro') {
+								return !adCount;
+							} else {
+								return adCount < 2 && !$('#adAreaIntro .story').length;
+							}
+						} else if (draggable.closest('.adArea')[0] != this) {
+							var adCount = $('.adArea .story').length - 1; // ignore the cloned helper
+							if (this.id == 'adAreaIntro') {
+								return adCount <= 1;
+							} else {
+								return adCount <= 2;
+							}
 						}
-						$(this).sortable('refresh');
-						ignoreUpdate = this;
-						ui.item.text('Loading...');
-						preview.saveStoryOrder(this, function() {
-							$.get("", {
-								"view" : "previewStory",
-								"id" : $('form input[name=id]').attr('value'),
-								"story_id" : ui.item.data("id"),
-								"format" : "partial"
-							}, function(data) {
-								ui.item.html(data);
-								preview.setupTools(ui.item);
-								preview.setupToolsHover(ui.item);
+					}
+					*/
+					
+					/* RELEXED CONSTRAINTS (use with layout fixes): */
+					if (draggable.data('type') == 'ad') {
+						if (draggable.hasClass('story') && draggable.closest('.adArea')[0] == this) {
+							return false;
+						}
+						
+						return true;
+					}
+					
+					return false;
+				},
+				hoverClass: "ui-state-active",
+				drop: function(e, ui) {
+					ui.helper.remove();
+					var droppable = this;
+					var enforceConstraints = function(story) {
+						var forced_presentation;
+						WDN.jQuery.each(presentationDependents, function(key, value) {
+							try {
+								if ($(droppable).is(value)) {
+									forced_presentation = key;
+									return false;
+								}
+							} catch (e) {
+								WDN.log('Found bad dependent_selector for story presentation:');
+								WDN.log(e);
+							}
+						});
+						if (forced_presentation && story.data('presentation_id') != forced_presentation) {
+							preview.setStoryPresentation(story, forced_presentation);
+							return false;
+						}
+						
+						return true;
+					};
+					
+					//BEGIN LAYOUT FIXES
+					if (this.id == 'adAreaIntro') {
+						$('.adArea .story').not(ui.draggable).each(function() {
+							preview.removeStory($(this));
+						});
+					} else {
+						var existing = $('.story', this)
+						if (ui.draggable.hasClass('story')) {
+							if (existing.length) {
+								// do swap
+								var whence = ui.draggable.closest('.adArea');
+								$(this).bind('afterappend', function() {
+									existing.appendTo(whence);
+									preview.saveStoryOrder(whence, function() {
+										enforceConstraints(existing);
+									});
+								});
+							}
+						} else {
+							$('#adAreaIntro .story').each(function() {
+								preview.removeStory($(this));
 							});
+							
+							if (existing.length) {
+								var otherAreaId = (this.id == 'adArea1') ? 'adArea2' : 'adArea1';
+								var newDest = $('#' + otherAreaId);
+								if (!$('.story', newDest).length) {
+									existing.appendTo(newDest);
+									preview.saveStoryOrder(newDest, function() {
+										enforceConstraints(existing);
+									});
+								} else {									
+									preview.removeStory($('.story', this));
+								}
+							}
+						}
+					}
+					//END LAYOUT FIXES
+					
+					// NOTICE: The save functions below are based on the assumption that each droppable 
+					// can contain one story
+					if (!ui.draggable.hasClass('story')) {
+						var dragList = ui.draggable.parent();
+						ui.draggable.removeClass('dragItem').addClass('story');
+						ui.draggable.children().remove();
+						ui.draggable.appendTo(this);
+						if (!dragList.children('.dragItem').length) {
+							dragList.append("<p>No Available Items</p>");
+						}
+						
+						preview.saveStoryOrder(droppable, function() {
+							if (enforceConstraints(ui.draggable)) {
+								ui.draggable.text('Loading...');
+								$.get("", {
+									"view" : "previewStory",
+									"id" : $('form input[name=id]').attr('value'),
+									"story_id" : ui.draggable.data("id"),
+									"format" : "partial"
+								}, function(data) {
+									ui.draggable.html(data);
+									preview.setupTools(ui.draggable);
+									preview.setupToolsHover(ui.draggable);
+								});
+							} else {
+								preview.setupTools(ui.draggable);
+								preview.setupToolsHover(ui.draggable);
+							}
+						});
+					} else {
+						ui.draggable.appendTo(droppable);
+						$(this).triggerHandler('afterappend')
+						$(this).unbind('afterappend');
+						
+						preview.saveStoryOrder(droppable, function() {
+							enforceConstraints(ui.draggable);
 						});
 					}
 				}
 			});
-			WDN.log('sortables setup');
 			preview.initDraggable('.dragItem');
-			$('.newsColumn, .adColumn').disableSelection(); //This keeps content from being highlighted and instead draggable
+			$('.newsColumn, .adArea').disableSelection(); //This keeps content from being highlighted and instead draggable
 		},
 		
 		saveStoryOrder : function(sortable, callback) { //this function determines the order of the stories and sends it to the DB.
-			sortable = sortable || '.newsColumn';
+			sortable = sortable || '.newsColumn, .adArea';
 			callback = callback || $.noop;
 			var numColumns = 3;
 			var postData = {
@@ -349,11 +443,14 @@ var preview = function($) {
 				var offset;
 				switch (this.id) {
 					case 'newsColumnIntro':
+					case 'adAreaIntro':
 						offset = 1;
 						break;
 					case 'newsColumn1':
+					case 'adArea1':
 						offset = 2;
 						break;
+					case 'adArea2':
 					case 'newsColumn2':
 						offset = 0;
 						break;

@@ -23,6 +23,7 @@ class UNL_ENews_Controller
                                 'preview'            => 'UNL_ENews_Newsletter_Preview',
                                 'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
                                 'presentationList'   => 'UNL_ENews_PresentationLister',
+                                'dependentPresentations' => 'UNL_ENews_DependentPresentationLister',
                                 'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'           => 'UNL_ENews_EmailDistributor',
                                 'help'               => 'UNL_ENews_Help',
@@ -336,30 +337,30 @@ class UNL_ENews_Controller
      *
      * @param mixed $mixed             An object to retrieve the URL to
      * @param array $additional_params Querystring params to add
-     * 
+     *
      * @return string
      */
     public static function getURL($mixed = null, $additional_params = array())
     {
-         
+
         $url = self::$url;
-        
+
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
             default:
-                    
+
             }
         }
-        
+
         return self::addURLParams($url, $additional_params);
     }
 
     /**
      * Add unique querystring parameters to a URL
-     * 
+     *
      * @param string $url               The URL
      * @param array  $additional_params Additional querystring parameters to add
-     * 
+     *
      * @return string
      */
     public static function addURLParams($url, $additional_params = array())
@@ -377,7 +378,7 @@ class UNL_ENews_Controller
         $params = array_merge($params, $additional_params);
 
         $url .= '?';
-        
+
         foreach ($params as $option=>$value) {
             if ($option == 'driver') {
                 continue;

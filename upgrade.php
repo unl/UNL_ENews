@@ -21,7 +21,7 @@ do {
     if ($result = $mysqli->use_result()) {
         $result->close();
     }
-} while ($mysqli->next_result()); 
+} while ($mysqli->next_result());
 
 echo 'initialization complete!<br />';
 
@@ -168,6 +168,32 @@ if (!$result) {
     }
 }
 
+echo 'Adding active field to story_presentations&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `story_presentations` ADD `active` TINYINT( 1 ) NOT NULL DEFAULT 1 AFTER `template`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />';
+    }
+}
+
+echo 'Adding dependent_selector field to story_presentations&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `story_presentations` ADD `dependent_selector` VARCHAR( 255 ) NULL AFTER `active`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already exists but that\'s ok!<br />';
+    } else {
+        echo $mysqli->error;
+        exit();
+    }
+} else {
+    echo 'Setting the default value for dependent_selector of Ad presentations&hellip;<br />';
+    $result = $mysqli->query("UPDATE story_presentations SET dependent_selector = (CASE template WHEN 'Ad/TwoColImage.tpl.php' THEN '#adAreaIntro' WHEN 'Ad/OneColImage.tpl.php' THEN '#adArea1, #adArea2' END) WHERE type = 'ad';");
+    if (!$result) {
+        echo 'Error setting default dependent_selector: ';
+        echo $mysqli->error;
+        exit();
+    }
+}
 
 $mysqli->close();
 

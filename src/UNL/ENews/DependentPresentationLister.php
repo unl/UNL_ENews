@@ -1,8 +1,8 @@
 <?php
-class UNL_ENews_PresentationLister extends UNL_ENews_LoginRequired
+class UNL_ENews_DependentPresentationLister extends UNL_ENews_LoginRequired
 {
     /**
-     * The newsletter
+     * The list
      *
      * @var UNL_ENews_PresentationList
      */
@@ -13,10 +13,7 @@ class UNL_ENews_PresentationLister extends UNL_ENews_LoginRequired
         $presentations = array();
         $mysqli = UNL_ENews_Controller::getDB();
 
-        $sql = 'SELECT id FROM story_presentations WHERE active = TRUE AND dependent_selector IS NULL';
-        if (isset($this->options['type'])) {
-            $sql .= " AND type ='" . $mysqli->escape_string($this->options['type']) . "'";
-        }
+        $sql = 'SELECT id FROM story_presentations WHERE dependent_selector IS NOT NULL';
 
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {

@@ -11,6 +11,10 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
 
     public $template;
 
+    public $active;
+
+    public $dependent_selector;
+
     public static function getDefault($type)
     {
         $mysqli = UNL_ENews_Controller::getDB();
