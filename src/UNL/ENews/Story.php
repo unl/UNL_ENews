@@ -17,7 +17,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     /**
      * Construct a new story
-     * 
+     *
      * @param $options = array([id])
      */
     function __construct($options = array())
@@ -32,7 +32,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         return 'stories';
     }
-    
+
     function save()
     {
         $this->request_publish_start = $this->getDate($this->request_publish_start);
@@ -46,19 +46,19 @@ class UNL_ENews_Story extends UNL_ENews_Record
             $this->date_modified  = date('Y-m-d H:i:s');
         }
         $result = parent::save();
-        
+
         if (!$result) {
             throw new Exception('Error saving your story.', 500);
         }
-        
+
         return true;
     }
 
     /**
      * Retrieve a story
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return UNL_ENews_Story
      */
     public static function getByID($id)
@@ -73,9 +73,9 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     /**
      * Retrieve newsrooms a story belongs to
-     * 
-     * @param 
-     * 
+     *
+     * @param
+     *
      * @return UNL_ENews_Story_Newsrooms array
      */
     function getNewsrooms()
@@ -85,7 +85,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     /**
      * Add a related file to this story.
-     * 
+     *
      * @param UNL_ENews_File $file The file to add
      */
     public function addFile(UNL_ENews_File $file)
@@ -95,7 +95,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $has_file->story_id = $this->id;
         return $has_file->insert();
     }
-    
+
     /**
      * Remove a related file
      *
@@ -108,7 +108,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         }
         return true;
     }
-    
+
     /**
      * Retrieve all files related to this story
      *
@@ -118,12 +118,12 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
-    
+
     /**
      * Retrieves the first file found matching the use given.
-     * 
+     *
      * @param string $use Type of use eg: thumbnail
-     * 
+     *
      * @return UNL_ENews_Story_File
      */
     function getFileByUse($use, $create = false)
@@ -144,6 +144,9 @@ class UNL_ENews_Story extends UNL_ENews_Record
             case UNL_ENews_File_Image::MAX_WIDTH.'_wide':
                 $new = $file->saveMaxWidth();
                 break;
+            case UNL_ENews_File_Image::HALF_WIDTH.'_wide':
+                $new = $file->saveHalfWidth();
+                break;
             default:
                 throw new Exception('I cannot create that for you.');
             }
@@ -155,7 +158,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
         return false;
     }
-    
+
     function getURL()
     {
         return UNL_ENews_Controller::getURL().'?view=story&id='.$this->id;
@@ -170,7 +173,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         return $this->getFileByUse('thumbnail');
     }
-    
+
     function delete()
     {
         foreach ($this->getFiles() as $file) {
@@ -194,13 +197,13 @@ class UNL_ENews_Story extends UNL_ENews_Record
         if ($user->uid == $this->uid_created) {
             return true;
         }
-        
+
         foreach ($user->newsrooms as $newsroom) {
             if (UNL_ENews_Newsroom_Stories::relationshipExists($newsroom->id, $this->id)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -235,7 +238,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     /**
      * Get the presentation to be used for this story.
-     * 
+     *
      * @return UNL_ENews_Story_Presentation
      */
     function getPresentation()

@@ -9,15 +9,16 @@ class UNL_ENews_File_Image extends UNL_ENews_File
 
     const HALF_AD_WIDTH  = 273;
     const HALF_AD_HEIGHT = 104;
-    
-    const MAX_WIDTH = 556;
+
+    const MAX_WIDTH  = 556;
+    const HALF_WIDTH = 273;
 
     // Max image size displayed to the user
     const THUMBNAIL_SELECTION_WIDTH = 410;
 
     /**
      * Save a thumbnail and return the object
-     * 
+     *
      * Sample:
      * ------------------------------
      * |                            |
@@ -26,14 +27,14 @@ class UNL_ENews_File_Image extends UNL_ENews_File
      * |      |          |          |
      * |    x1,y2--------x2         |
      * |-----------------------------
-     * 
+     *
      * @param int $x1  X coordinate offset start
      * @param int $x2  X coordinate offset end
      * @param int $y1  Y coordinate offset start
      * @param int $y2  Y coordinate offset end
      * @param int $width  Final image width
      * @param int $height Final image height
-     * 
+     *
      * @return UNL_ENews_File_Image
      */
     function saveThumbnail($x1=0, $x2=0, $y1=0, $y2=0)
@@ -78,11 +79,21 @@ class UNL_ENews_File_Image extends UNL_ENews_File
 
     function saveMaxWidth()
     {
+        return $this->saveVarWidth(self::MAX_WIDTH);
+    }
+
+    function saveHalfWidth()
+    {
+        return $this->saveVarWidth(self::HALF_WIDTH);
+    }
+
+    protected function saveVarWidth($width)
+    {
         list($current_width, $current_height) = $this->getSize();
 
-        $new_height = self::MAX_WIDTH/$current_width * $current_height;
-        if ($thumb = $this->resizeImage(0, $current_width, 0, $current_height, self::MAX_WIDTH, $new_height)) {
-            $thumb->use_for = self::MAX_WIDTH.'_wide';
+        $new_height = $width/$current_width * $current_height;
+        if ($thumb = $this->resizeImage(0, $current_width, 0, $current_height, $width, $new_height)) {
+            $thumb->use_for = $width.'_wide';
             $thumb->save();
             return $thumb;
         }
@@ -138,7 +149,7 @@ class UNL_ENews_File_Image extends UNL_ENews_File
         $resized->description = $this->description;
         $resized->size        = ob_get_length();
         $resized->data        = ob_get_clean();
-        
+
 
         // Save the thumbnail **********************************************************
         if ($resized->save()) {
