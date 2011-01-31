@@ -5,7 +5,7 @@
     </a>
 </h4>
 <p>
-<?php 
+<?php
 
 if ($file = $context->getThumbnail()) {
     $description = $file->name;
@@ -27,7 +27,6 @@ if (!empty($context->full_article)) {
 if (($context->website)) { ?>
 
 More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage"><?php echo $context->website; ?></a>
-<?php 
+<?php
 }
 ?>
-<div class="clear"></div>

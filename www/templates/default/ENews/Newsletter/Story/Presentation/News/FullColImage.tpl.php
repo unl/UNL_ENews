@@ -1,14 +1,15 @@
-<?php 
+<?php
 $storylink = $context->getURL();
 
-if ($file = $context->getFileByUse(UNL_ENews_File_Image::MAX_WIDTH.'_wide', true)) {
+if ($file = $context->getFileByUse('originalimage')) {
     $description = $file->name;
+    $width = $context->getColFromSort() == 'twocol' ? 690 : 336;
     if (!empty($file->description)) {
         $description = $file->description;
     }
     echo '<a href="'.$storylink.'">'
          . '<img src="'.$file->getURL()
-         . '" style="margin-bottom:5px;width:96%;" class="frame" alt="'.$description.'" /></a>';
+         . '" style="margin-bottom:5px;width:'. $width .'px;" class="frame" alt="'.$description.'" /></a>';
 }
 ?>
 <h4>
@@ -31,4 +32,3 @@ More details at: <a href="<?php echo $context->website; ?>" title="Go to the sup
 <?php
 }
 ?>
-<div class="clear"></div>

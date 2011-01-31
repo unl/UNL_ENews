@@ -30,4 +30,3 @@ More details at: <a href="<?php echo $context->website; ?>" title="Go to the sup
 <?php
 }
 ?>
-<div class="clear"></div>
