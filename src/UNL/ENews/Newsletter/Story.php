@@ -128,6 +128,50 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         throw new Exception('Invalid presentation');
     }
 
+    /**
+     * Gets the template path for the story presentation
+     *
+     * @param string $prefix [OPTIONAL]
+     */
+    public function getRenderer($prefix = '')
+    {
+        if (!empty($prefix)) {
+            $prefix = rtrim($prefix, '/') . '/';
+        }
+
+        /* Do we need to abstract entire templates for each column?
+        $path = $prefix . 'ENews/Newsletter/Story/Presentation/' . $col . '/' . $this->getPresentation()->template;
+        if ($savvy->findTemplateFile($path)) {
+            return $path;
+        }
+        */
+
+        $path = $prefix . 'ENews/Newsletter/Story/Presentation/' . $this->getPresentation()->template;
+        return $path;
+    }
+
+    /**
+     * Gets the string representation of the story's column width
+     * @return string twocol|onecol
+     */
+    public function getColFromSort()
+    {
+        $offset = $this->getSortOrderOffset();
+
+        switch ($offset) {
+            case 1:
+                return 'twocol'; //Full-Width
+            case 2:
+            case 0:
+                return 'onecol'; //Half-Width
+        }
+    }
+
+    public function getSortOrderOffset()
+    {
+        return $this->sort_order % 3;
+    }
+
     public function getURL()
     {
         return $this->newsletter->getURL() . '/' . $this->story_id;
