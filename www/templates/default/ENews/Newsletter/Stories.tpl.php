@@ -1,110 +1,72 @@
 <?php
-$columns = array();
-$adAreas = array();
-foreach ($context as $key=>$story) {
-    $areaPtr =& $columns;
-    if ($story->getPresentation()->type == 'ad') {
-        $areaPtr =& $adAreas;
-    }
-
-    $areaPtr[$story->sort_order % 3][] = $story;
-}
+$areas = $context->getStoriesByColumn();
+$isPreview = $context->getIsPreview();
 ?>
 <tr>
     <td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
         <!-- This is the main content -->
-        <div id="newsColumnIntro" class="newsColumn">
-        <?php if (isset($columns[1])): ?>
-        <?php foreach ($columns[1] as $story): ?>
-            <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <div class="story-content">
-                    <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-        <?php endforeach; ?>
-        <?php endif; ?>
-        </div>
+        <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'newsColumnIntro',
+            'class' => 'newsColumn',
+            'stories' => $areas['news'][1],
+            'preview' => $isPreview
+        ))); ?>
     </td>
-    </tr>
-    <tr id="newsStories">
+</tr>
+<tr id="newsStories">
      <td valign="top" width="273">
-        <div id="newsColumn1" class="newsColumn">
-        <?php if (isset($columns[2])): ?>
-        <?php foreach ($columns[2] as $story): ?>
-            <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <div class="story-content">
-                    <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-        <?php endforeach; ?>
-        <?php endif; ?>
-        </div>
+     	<?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'newsColumn1',
+            'class' => 'newsColumn',
+            'stories' => $areas['news'][2],
+            'preview' => $isPreview
+        ))); ?>
     </td>
     <td width="10">&nbsp;</td>
     <td valign="top" width="273">
-        <div id="newsColumn2" class="newsColumn">
-        <?php if (isset($columns[0])): ?>
-        <?php foreach ($columns[0] as $story): ?>
-            <div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <div class="story-content">
-                    <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-        <?php endforeach; ?>
-        <?php endif; ?>
-        </div>
+        <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'newsColumn2',
+            'class' => 'newsColumn',
+            'stories' => $areas['news'][0],
+            'preview' => $isPreview
+        ))); ?>
     </td>
 </tr>
+
+<?php $showAdIntro = $isPreview || !empty($areas['ads'][1]); ?>
+<?php if ($showAdIntro): ?>
 <tr>
 	<td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
-		<div id="adAreaIntro" class="adArea">
-		<?php if (!empty($adAreas[1])): ?>
-		<?php foreach ($adAreas[1] as $story): // Intentional FOREACH ?>
-			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-            	<div class="story-content">
-			        <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-			    </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-		<?php endforeach; ?>
-		<?php endif; ?>
-		</div>
+		<?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'adAreaIntro',
+            'class' => 'adArea',
+            'stories' => $areas['ads'][1],
+            'preview' => $isPreview,
+		    'filter' => ($isPreview ? -1 : 1) // Forces the non-preview to only render 1 ad
+        ))); ?>
 	</td>
 </tr>
+<?php endif; ?>
+<?php if ($isPreview || (!$showAdIntro && (!empty($areas['ads'][2]) || !empty($areas['ads'][2])))): ?>
 <tr>
 	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
-		<div id="adArea1" class="adArea">
-		<?php if (!empty($adAreas[2])): ?>
-		<?php foreach ($adAreas[2] as $story): // Intentional FOREACH ?>
-			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-				<div class="story-content">
-                    <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-                </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-		<?php endforeach; ?>
-        <?php endif; ?>
-		</div>
+		<?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'adArea1',
+            'class' => 'adArea',
+            'stories' => $areas['ads'][2],
+            'preview' => $isPreview,
+		    'filter' => ($isPreview ? -1 : 1) // Forces the non-preview to only render 1 ad
+        ))); ?>
 	</td>
 	<td width="10">&nbsp;</td>
 	<td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
-		<div id="adArea2" class="adArea">
-		<?php if (!empty($adAreas[0])): ?>
-		<?php foreach ($adAreas[0] as $story): // Intentional FOREACH ?>
-			<div class="story" id="story_<?php echo $story->story_id; ?>" valign="top">
-                <div class="story-content">
-                    <?php echo $savvy->render($story, 'templates/email/ENews/Newsletter/Story/Presentation/'.$story->getPresentation()->template); ?>
-                </div>
-            </div>
-            <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
-		<?php endforeach; ?>
-		<?php endif; ?>
-		</div>
+		<?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
+            'id' => 'adArea2',
+            'class' => 'adArea',
+            'stories' => $areas['ads'][0],
+            'preview' => $isPreview,
+		    'filter' => ($isPreview ? -1 : 1) // Forces the non-preview to only render 1 ad
+        ))); ?>
 	</td>
 </tr>
+<?php endif; ?>
