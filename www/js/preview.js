@@ -1,7 +1,32 @@
 var preview = function($) {
 	var presentationCache = {};
-	// stores the CSS selectors 
-	var presentationDependents = {};
+	var loadStoryContent = function(element, doSetupTools) {
+		if (undefined === doSetupTools) {
+			doSetupTools = true;
+		}
+		
+		var loadingElem = element;
+		if (!doSetupTools) {
+			loadingElem = element.children('.story-content');
+		}
+		loadingElem.text('Loading...')
+		
+		$.get("", {
+			"view" : "previewStory",
+			"id" : $('form input[name=id]').attr('value'),
+			"story_id" : element.data("id"),
+			"format" : "partial"
+		}, function(data) {
+			if (doSetupTools) {
+				element.html(data);
+				preview.setupTools(element);
+				preview.setupToolsHover(element);
+			} else {
+				element.children('.story-content').remove();
+				element.prepend(data);
+			}
+		});
+	};
 	return {
 		initialize : function() {
 			$(function() {
@@ -12,12 +37,6 @@ var preview = function($) {
 				$('table .story .story-content a').live('click', function(e) {
 					return false;
 				})
-				$.getJSON("", {
-					"view" : "dependentPresentations",
-					"format" : "partial"
-				}, function(data) {
-					presentationDependents = data;
-				});
 				WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
 				preview.setupDragAndSort();
 				preview.initDraggable($('.adArea .story'));
@@ -109,16 +128,7 @@ var preview = function($) {
 				"presentation_id":presentation_id
 			}, function() {
 				theStory.data('presentation_id', presentation_id);
-				theStory.children('.story-content').text('Loading...');
-				$.get("", {
-					"view" : "previewStory",
-					"id" : $('form input[name=id]').attr('value'),
-					"story_id" : theStory.data("id"),
-					"format" : "partial"
-				}, function(data) {
-					theStory.children('.story-content').remove();
-					theStory.prepend(data);
-				});
+				loadStoryContent(theStory, false);
 			});
 		},
 		
@@ -273,18 +283,8 @@ var preview = function($) {
 						}
 						$(this).sortable('refresh');
 						ignoreUpdate = this;
-						ui.item.text('Loading...');
 						preview.saveStoryOrder(this, function() {
-							$.get("", {
-								"view" : "previewStory",
-								"id" : $('form input[name=id]').attr('value'),
-								"story_id" : ui.item.data("id"),
-								"format" : "partial"
-							}, function(data) {
-								ui.item.html(data);
-								preview.setupTools(ui.item);
-								preview.setupToolsHover(ui.item);
-							});
+							loadStoryContent(ui.item);
 						});
 					}
 				}
@@ -327,26 +327,6 @@ var preview = function($) {
 				drop: function(e, ui) {
 					ui.helper.remove();
 					var droppable = this;
-					var enforceConstraints = function(story) {
-						var forced_presentation;
-						WDN.jQuery.each(presentationDependents, function(key, value) {
-							try {
-								if ($(droppable).is(value)) {
-									forced_presentation = key;
-									return false;
-								}
-							} catch (e) {
-								WDN.log('Found bad dependent_selector for story presentation:');
-								WDN.log(e);
-							}
-						});
-						if (forced_presentation && story.data('presentation_id') != forced_presentation) {
-							preview.setStoryPresentation(story, forced_presentation);
-							return false;
-						}
-						
-						return true;
-					};
 					
 					//BEGIN LAYOUT FIXES
 					if (this.id == 'adAreaIntro') {
@@ -362,7 +342,7 @@ var preview = function($) {
 								$(this).bind('afterappend', function() {
 									existing.appendTo(whence);
 									preview.saveStoryOrder(whence, function() {
-										enforceConstraints(existing);
+										loadStoryContent(existing, false);
 									});
 								});
 							}
@@ -377,7 +357,7 @@ var preview = function($) {
 								if (!$('.story', newDest).length) {
 									existing.appendTo(newDest);
 									preview.saveStoryOrder(newDest, function() {
-										enforceConstraints(existing);
+										loadStoryContent(existing, false);
 									});
 								} else {									
 									preview.removeStory($('.story', this));
@@ -399,22 +379,7 @@ var preview = function($) {
 						}
 						
 						preview.saveStoryOrder(droppable, function() {
-							if (enforceConstraints(ui.draggable)) {
-								ui.draggable.text('Loading...');
-								$.get("", {
-									"view" : "previewStory",
-									"id" : $('form input[name=id]').attr('value'),
-									"story_id" : ui.draggable.data("id"),
-									"format" : "partial"
-								}, function(data) {
-									ui.draggable.html(data);
-									preview.setupTools(ui.draggable);
-									preview.setupToolsHover(ui.draggable);
-								});
-							} else {
-								preview.setupTools(ui.draggable);
-								preview.setupToolsHover(ui.draggable);
-							}
+							loadStoryContent(ui.draggable);
 						});
 					} else {
 						ui.draggable.appendTo(droppable);
@@ -422,7 +387,7 @@ var preview = function($) {
 						$(this).unbind('afterappend');
 						
 						preview.saveStoryOrder(droppable, function() {
-							enforceConstraints(ui.draggable);
+							loadStoryContent(ui.draggable, false);
 						});
 					}
 				}
