@@ -11,9 +11,11 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
 
     public $template;
 
+    /**
+     * A flag to specify if this presentation can be used in the newsletter generator
+     * @var boolean
+     */
     public $active;
-
-    public $dependent_selector;
 
     public static function getDefault($type)
     {
