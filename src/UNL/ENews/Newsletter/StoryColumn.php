@@ -5,6 +5,8 @@ class UNL_ENews_Newsletter_StoryColumn
 
     protected $isPreview = false;
 
+    protected $isForWeb = false;
+
     protected $countFilter = -1;
 
     protected $stories = array();
@@ -12,14 +14,19 @@ class UNL_ENews_Newsletter_StoryColumn
     public function __construct($options = array())
     {
         foreach ($options as $key => $option) {
-            if ($key == 'filter') {
-                $this->countFilter = (int)$option;
-            } else if ($key == 'preview') {
-                $this->isPreview = (bool)$option;
-            } else if ($key == 'stories') {
-                $this->stories = $option;
-            } else {
-                $this->htmlAttributes[$key] = $option;
+            switch ($key) {
+                case 'filter':
+                    $this->countFilter = (int)$option;
+                    break;
+                case 'preview':
+                    $this->isPreview = (bool)$option;
+                    break;
+                case 'web':
+                     $this->isForWeb = (bool)$option;
+                case 'stories':
+                	$this->stories = $option;
+                default:
+                    $this->htmlAttributes[$key] = $option;
             }
         }
     }
@@ -42,5 +49,10 @@ class UNL_ENews_Newsletter_StoryColumn
     public function isPreview()
     {
         return $this->isPreview;
+    }
+
+    public function isForWeb()
+    {
+        return $this->isForWeb;
     }
 }
