@@ -34,7 +34,13 @@
                                 <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
                             </td>
                         </tr>
-                        <?php echo $savvy->render($context->getStories(), 'ENews/Newsletter/Stories.tpl.php'); ?>
+                        <?php
+                        $stories = $context->getStories();
+                        if (!empty($context->options['preview'])) {
+                            $stories->setIsPreview(true);
+                        }
+                        ?>
+                        <?php echo $savvy->render($stories, 'ENews/Newsletter/Stories.tpl.php'); ?>
                         <tr valign="top" background="http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg" bgcolor="white" style="background-image: url(http://www.unl.edu/wdn/templates_3.0/images/email/insideFooter.jpg)">
                             <td colspan="3" style="color:#606060;font-size:10px;line-height:1.4em;padding:12px;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" valign="top">
                                 <!--  This the footer -->
