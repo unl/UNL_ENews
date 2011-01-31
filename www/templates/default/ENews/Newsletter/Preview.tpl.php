@@ -40,7 +40,7 @@
         <h5>Email Listservs</h5>
         <ul>
             <?php
-            $existing_emails = $context->newsletter->getEmails()->getArrayCopy(); 
+            $existing_emails = $context->newsletter->getEmails()->getArrayCopy();
             foreach ($context->newsletter->newsroom->getEmails() as $email):
                 $checked = false;
                 if (in_array($email->id, $existing_emails)) {
@@ -66,7 +66,7 @@
                     <input type="hidden" name="_type" value="addnewsletteremail" />
                     <input type="submit" value="Add" />
                 </form>
-                
+
             </li>
             <?php endforeach; ?>
         </ul>
@@ -84,5 +84,6 @@
 <?php endforeach; ?>
 </div>
 <div class="three_col right">
+	<?php $context->newsletter->options = array('preview' => true); ?>
     <?php echo $savvy->render($context->newsletter, 'templates/email/ENews/Newsletter.tpl.php'); ?>
 </div>
