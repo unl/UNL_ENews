@@ -232,7 +232,7 @@ var submission = function($) {
 			$('#upload_area span').remove();
 			$('#full_article').parents('li').hide();
 			$('label[for="title"]').html('Advertisement Name<span class="required">*</span>');
-			$('label[for="image"]').html('Image advertisement <span class="helper">Must be 253px X 96px or 536px X 204px</span>')
+			$('label[for="image"]').html('Image advertisement <span class="helper">Must be 253px X 96px or 536px X 96px</span>')
 		},
 
 		setPresentationId : function(value){
