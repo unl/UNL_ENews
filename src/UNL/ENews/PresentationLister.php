@@ -13,7 +13,7 @@ class UNL_ENews_PresentationLister extends UNL_ENews_LoginRequired
         $presentations = array();
         $mysqli = UNL_ENews_Controller::getDB();
 
-        $sql = 'SELECT id FROM story_presentations WHERE active = TRUE AND dependent_selector IS NULL';
+        $sql = 'SELECT id FROM story_presentations WHERE active = TRUE';
         if (isset($this->options['type'])) {
             $sql .= " AND type ='" . $mysqli->escape_string($this->options['type']) . "'";
         }
