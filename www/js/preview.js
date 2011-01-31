@@ -93,13 +93,12 @@ var preview = function($) {
 				
 				$(storyList + ' > p').remove();
 				
-				theStory.removeClass('story').addClass('dragItem').appendTo(storyList);
+				theStory.removeClass('story').addClass('dragItem').css('display', 'inline-block').appendTo(storyList);
 				preview.initDraggable(theStory);
 				
 				//update the stored story orders
 				preview.saveStoryOrder(sortable);
 			});
-			
 			return false;
 		},
 		
@@ -127,6 +126,7 @@ var preview = function($) {
 			$(el).append('<div class="storyTools"><a class="edit" href="?view=submit&id='+$(el).data('id')+'"><span />Edit</a><a class="remove" href="#"><span />Remove</a><a class="layout" href="#"><span />Layout</a></div>');
 			$('a.remove', el).click(function() {
 				preview.removeStory($(this).closest('.story'));
+				return false;
 			});
 			$('a.layout', el).click(function() {
 				var theStory = $(this).closest('.story');
