@@ -23,8 +23,10 @@ class UNL_ENews_Newsletter_StoryColumn
                     break;
                 case 'web':
                      $this->isForWeb = (bool)$option;
+                     break;
                 case 'stories':
                 	$this->stories = $option;
+                	break;
                 default:
                     $this->htmlAttributes[$key] = $option;
             }
