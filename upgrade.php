@@ -176,23 +176,31 @@ if (!$result) {
     }
 }
 
-echo 'Adding dependent_selector field to story_presentations&hellip;<br />';
-$result = $mysqli->query("ALTER TABLE `story_presentations` ADD `dependent_selector` VARCHAR( 255 ) NULL AFTER `active`;");
+echo 'Removing invalid column from story_presentations&hellip;<br />';
+$result = $mysqli->query("ALTER TABLE `story_presentations` DROP COLUMN `dependent_selector`;");
 if (!$result) {
-    if (mysqli_errno($mysqli) == 1060) {
-        echo 'Field already exists but that\'s ok!<br />';
+    if (mysqli_errno($mysqli) == 1091) {
+        echo 'Field does not exist but that\'s ok!<br />';
     } else {
         echo $mysqli->error;
         exit();
     }
-} else {
-    echo 'Setting the default value for dependent_selector of Ad presentations&hellip;<br />';
-    $result = $mysqli->query("UPDATE story_presentations SET dependent_selector = (CASE template WHEN 'Ad/TwoColImage.tpl.php' THEN '#adAreaIntro' WHEN 'Ad/OneColImage.tpl.php' THEN '#adArea1, #adArea2' END) WHERE type = 'ad';");
-    if (!$result) {
-        echo 'Error setting default dependent_selector: ';
-        echo $mysqli->error;
-        exit();
-    }
+}
+
+echo 'Updating existing stories with invalid presentation...<br />';
+$result = $mysqli->query("UPDATE stories SET presentation_id = 6 WHERE presentation_id = 7;");
+if (!$result) {
+    echo 'Error updating stories with invalid presentation: ';
+    echo $mysqli->error;
+    exit();
+}
+
+echo 'Removing invalid story_presentations...<br />';
+$result = $mysqli->query("DELETE FROM story_presentations WHERE id = 7;");
+if (!$result) {
+    echo 'Error removing invalid story_presentations: ';
+    echo $mysqli->error;
+    exit();
 }
 
 $mysqli->close();
