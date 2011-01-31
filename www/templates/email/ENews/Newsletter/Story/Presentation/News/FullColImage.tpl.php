@@ -1,10 +1,19 @@
 <?php
-if ($file = $context->getFileByUse(UNL_ENews_File_Image::MAX_WIDTH.'_wide', true)) {
-    echo '<table cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td valign="top" align="left"><img src="'.UNL_ENews_Controller::getURL().'file'
-         . $file->id
-         . '.jpg" style="margin-bottom:5px;width:100%;" /></td></tr></table>';
+$use = UNL_ENews_File_Image::MAX_WIDTH.'_wide';
+if ($context->getColFromSort() == 'onecol') {
+    $use = UNL_ENews_File_Image::HALF_WIDTH.'_wide';
 }
 ?>
+
+<?php if ($file = $context->getFileByUse($use, true)): ?>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td valign="top" align="left">
+<img src="<?php echo $file->getURL(); ?>" style="margin-bottom:5px;width:100%;" />
+</td>
+</tr>
+</table>
+<?php endif; ?>
 <h4><a style="color:#666; text-decoration:none;" href="<?php echo $context->getURL(); ?>"><?php echo $context->title; ?></a></h4>
 <p style="margin-bottom:5px">
 <?php
