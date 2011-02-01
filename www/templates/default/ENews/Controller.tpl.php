@@ -92,7 +92,7 @@ if ($context->options['view'] == 'story'
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=help">Help</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>todayatunl/submit">Submit A News Item</a>
+                    <li><a href="<?php echo $newsroom->getSubmitURL(); ?>">Submit A News Item</a>
                         <ul>
                             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=mynews">Your News Items</a></li>
                         </ul>
