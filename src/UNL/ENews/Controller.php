@@ -23,7 +23,6 @@ class UNL_ENews_Controller
                                 'preview'            => 'UNL_ENews_Newsletter_Preview',
                                 'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
                                 'presentationList'   => 'UNL_ENews_PresentationLister',
-                                'dependentPresentations' => 'UNL_ENews_DependentPresentationLister',
                                 'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'           => 'UNL_ENews_EmailDistributor',
                                 'help'               => 'UNL_ENews_Help',
