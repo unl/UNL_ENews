@@ -53,7 +53,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
                 throw new Exception('The newsroom does not exist!', 404);
             }
             if (!($this->newsroom->shortname == $options['shortname'])) {
-                throw new Exception('Not a valid news room name.', 400);
+                throw new Exception('Not a valid newsroom name.', 400);
             }
         }
     }
