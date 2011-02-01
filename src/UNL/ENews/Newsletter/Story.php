@@ -166,6 +166,8 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
             case 0:
                 return 'onecol'; //Half-Width
         }
+
+        throw new UnexpectedValueException('That offset is unknown. I don\'t know which column I\'m supposed to be in.', 500);
     }
 
     public function getSortOrderOffset()
