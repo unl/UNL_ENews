@@ -18,4 +18,4 @@ View the full version at <?php echo $context->getURL(); ?>
 
 Copyright <?php echo date('Y'); ?> University of Nebraska-Lincoln
 <?php echo strip_tags($context->newsroom->footer_text); ?>
-Submit Your News at <?php echo UNL_ENews_Controller::getURL().$context->newsroom->shortname."/submit\n"; ?>
+Submit Your News at <?php echo $context->newsroom->getSubmitURL()."\n"; ?>

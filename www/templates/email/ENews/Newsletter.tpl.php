@@ -50,7 +50,7 @@
                                 <!-- optout -->
                                 </p>
                                 <p style="border-top:1px solid #ffffff;">
-                                 <a href="<?php echo UNL_ENews_Controller::getURL().$context->newsroom->shortname."/submit"; ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+                                 <a href="<?php echo $context->newsroom->getSubmitURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
                                 </p>
                             </td>
                         </tr>
