@@ -104,9 +104,10 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     {
         if (null !== $this->presentation_id) {
             return UNL_ENews_Story_Presentation::getByID($this->presentation_id);
-        } else {
-            return $this->getStory()->getPresentation();
         }
+
+        return $this->getStory()->getPresentation();
+
     }
     /**
      * Sets the presentation of this newletter story
