@@ -1,12 +1,15 @@
 <?php $areas = $context->getStoriesByColumn(); ?>
 
+<?php if (!empty($areas['news'][1])): ?>
 <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
     'id' => 'newsColumnIntro',
     'class' => 'newsColumn',
     'stories' => $areas['news'][1],
     'web' => true
 ))); ?>
+<?php endif; ?>
 
+<?php if (!empty($areas['news'][2]) || !empty($areas['news'][0])): ?>
 <div style="width:340px;padding:0 10px 0 0;float:left;">
     <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
         'id' => 'newsColumn1',
@@ -23,6 +26,7 @@
     	'web' => true
     ))); ?>
 </div>
+<?php endif; ?>
 
 <div class="clear"></div>
 <?php if (!empty($areas['ads'][1])): ?>
@@ -33,7 +37,7 @@
         'filter' => 1, // Forces to only render 1 ad
     	'web' => true
     ))); ?>
-<?php elseif (!empty($areas['ads'][2]) || !empty($areas['ads'][2])): ?>
+<?php elseif (!empty($areas['ads'][2]) || !empty($areas['ads'][0])): ?>
 <div style="width:340px;padding:0 10px 0 0;float:left;">
 	<?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
         'id' => 'adArea1',

@@ -2,6 +2,7 @@
 $areas = $context->getStoriesByColumn();
 $isPreview = $context->getIsPreview();
 ?>
+<?php if ($isPreview || !empty($areas['news'][1])): ?>
 <tr>
     <td colspan="3" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
         <!-- This is the main content -->
@@ -13,6 +14,8 @@ $isPreview = $context->getIsPreview();
         ))); ?>
     </td>
 </tr>
+<?php endif; ?>
+<?php if ($isPreview || (!empty($areas['news'][2]) || !empty($areas['news'][0]))): ?>
 <tr id="newsStories">
      <td valign="top" width="273">
          <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
@@ -32,6 +35,7 @@ $isPreview = $context->getIsPreview();
         ))); ?>
     </td>
 </tr>
+<?php endif; ?>
 
 <?php $showAdIntro = $isPreview || !empty($areas['ads'][1]); ?>
 <?php if ($showAdIntro): ?>
@@ -47,7 +51,7 @@ $isPreview = $context->getIsPreview();
     </td>
 </tr>
 <?php endif; ?>
-<?php if ($isPreview || (!$showAdIntro && (!empty($areas['ads'][2]) || !empty($areas['ads'][2])))): ?>
+<?php if ($isPreview || (!$showAdIntro && (!empty($areas['ads'][2]) || !empty($areas['ads'][0])))): ?>
 <tr>
     <td valign="top" style="color:#606060;font-size:12px;line-height:1.4em;font-family:'Lucida Grande',Verdana,Arial;" width="273">
         <?php echo $savvy->render(new UNL_ENews_Newsletter_StoryColumn(array(
