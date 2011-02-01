@@ -19,54 +19,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     function __construct($options = array())
     {
-        if (isset($options['result']) && $options['result'] instanceof mysqli_result) {
-            $record = $options['result']->fetch_assoc();
-            if (!$record) {
-                throw new Exception('The result passed was not a valid result!', 500);
-            }
-        } elseif (isset($options['id'])) {
-            $record = UNL_ENews_Record::getRecordByID('newsrooms', $options['id']);
-        } else {
-            $record = UNL_ENews_Record::getRecordByID('newsrooms', UNL_ENews_Controller::getUser(true)->newsroom_id);
-        }
-        UNL_ENews_Controller::setObjectFromArray($this, $record);
 
-        if (!empty($_POST)) {
-            $this->handlePost();
-        }
-    }
-
-    function handlePost()
-    {
-        switch($_POST['_type']) {
-            case 'removeuser':
-            case 'adduser':
-                $this->checkLoggedInUser();
-                $user = UNL_ENews_User::getByUID($_POST['user_uid']);
-
-                $this->{$_POST['_type']}($user);
-                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
-                break;
-            case 'addemail':
-                $this->checkLoggedInUser();
-                $optout             = 0;
-                $newsletter_default = 0;
-                if (isset($_POST['optout'])) {
-                    $optout = $_POST['optout'];
-                }
-                if (isset($_POST['newsletter_default'])) {
-                    $newsletter_default = $_POST['newsletter_default'];
-                }
-                $this->{$_POST['_type']}($_POST['email'], $optout, $newsletter_default);
-                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
-                break;
-            case 'removeemail':
-                $this->checkLoggedInUser();
-                $email = UNL_ENews_Newsroom_Email::getById($_POST['email_id']);
-                $this->{$_POST['_type']}($email);
-                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
-                break;
-        }
     }
 
     function getStories($status = 'pending')
@@ -111,42 +64,6 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return $email->delete();
     }
 
-    /**
-     * 
-     * @param string $shortname
-     * 
-     * @return UNL_ENews_Newsroom
-     */
-    public static function getByShortname($shortname)
-    {
-        $mysqli = UNL_ENews_Controller::getDB();
-        $sql = "SELECT * FROM newsrooms WHERE shortname = '".$mysqli->escape_string($shortname)."' LIMIT 1;";
-        if ($result = $mysqli->query($sql)) {
-            if (!$result->num_rows) {
-                throw new Exception('A newsroom with that short name could not be found.', 404);
-            }
-            $object = new self(array('result'=>$result));
-            return $object;
-        }
-        return false;
-    }
-
-    /**
-     * 
-     * @param int $id
-     * 
-     * @return UNL_ENews_Newsroom
-     */
-    public static function getByID($id)
-    {
-        if ($record = UNL_ENews_Record::getRecordByID('newsrooms', $id)) {
-            $object = new self(array('id'=>$id));
-            UNL_ENews_Controller::setObjectFromArray($object, $record);
-            return $object;
-        }
-        return false;
-    }
-
     function getTable()
     {
         return 'newsrooms';
@@ -186,13 +103,6 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             return $permission->delete();
         }
         return true;
-    }
-
-    function checkLoggedInUser()
-    {
-        if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
-            throw new Exception('You cannot modify a newsroom you don\'t have permission to!', 403);
-        }
     }
 
     function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
