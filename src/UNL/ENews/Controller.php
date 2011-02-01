@@ -27,7 +27,7 @@ class UNL_ENews_Controller
                                 'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
                                 'sendnews'           => 'UNL_ENews_EmailDistributor',
                                 'help'               => 'UNL_ENews_Help',
-                                'newsroom'           => 'UNL_ENews_Newsroom',
+                                'newsroom'           => 'UNL_ENews_Newsroom_EditForm',
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
                                 'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
                                 'gastats'            => 'UNL_ENews_GAStats',
