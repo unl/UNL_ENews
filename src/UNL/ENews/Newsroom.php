@@ -31,10 +31,6 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         }
         UNL_ENews_Controller::setObjectFromArray($this, $record);
 
-//        if (!UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($this->id)) {
-//            throw new Exception('User does not have permission for this newsroom', 403);
-//        }
-
         if (!empty($_POST)) {
             $this->handlePost();
         }
