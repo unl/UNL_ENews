@@ -6,6 +6,8 @@ class UNL_ENews_Newsletter_Stories extends UNL_ENews_StoryList
 
     protected $isPreview = false;
 
+    protected $areaCache;
+
     function __construct($options = array())
     {
         $this->newsletter_id = (int)$options['newsletter_id'];
@@ -30,31 +32,54 @@ class UNL_ENews_Newsletter_Stories extends UNL_ENews_StoryList
         return UNL_ENews_Newsletter_Story::getById($this->newsletter_id, parent::current()->id);
     }
 
-    function getStoriesByColumn()
+    /**
+     * Retrieve stories from this newslettered grouped by area and column
+     *
+     * @param string $area [OPTIONAL] A specific area to retrieve columns for
+     */
+    function getStoriesByColumn($area = null)
     {
-        $areas = array(
-            'news' => array(
-                0 => array(),
-                1 => array(),
-                2 => array()
-            ),
-            'ads'  => array(
-                0 => array(),
-                1 => array(),
-                2 => array()
-            )
-        );
+        if (empty($this->areaCache)) {
+            $areas = array(
+                'news' => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array()
+                ),
+                'ads'  => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array()
+                )
+            );
 
-        foreach ($this as $story) {
-            $areaPtr =& $areas['news'];
-            if ($story->getPresentation()->type == 'ad') {
-                $areaPtr =& $areas['ads'];
+            foreach ($this as $story) {
+                $areaPtr =& $areas['news'];
+                if ($story->getPresentation()->type == 'ad') {
+                    $areaPtr =& $areas['ads'];
+                }
+
+                $areaPtr[$story->getSortOrderOffset()][] = $story;
             }
 
-            $areaPtr[$story->getSortOrderOffset()][] = $story;
+            $this->areaCache = $areas;
         }
 
-        return $areas;
+        if (!empty($area)) {
+            return $this->areaCache[$area];
+        }
+
+        return $this->areaCache;
+    }
+
+    /**
+     * Factory method for a UNL_ENews_Newsletter_StoryColumn
+     *
+     * @param array $options @see UNL_ENews_Newsletter_StoryColumn
+     */
+    function getStoryColumn($options)
+    {
+        return new UNL_ENews_Newsletter_StoryColumn($options);
     }
 
     function setIsPreview($isPreview)
