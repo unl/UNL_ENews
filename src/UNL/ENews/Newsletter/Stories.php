@@ -75,11 +75,48 @@ class UNL_ENews_Newsletter_Stories extends UNL_ENews_StoryList
     /**
      * Factory method for a UNL_ENews_Newsletter_StoryColumn
      *
-     * @param array $options @see UNL_ENews_Newsletter_StoryColumn
+     * @param array $options An array of options to be transformed to a StoryColumn
      */
-    function getStoryColumn($options)
+    function getStoryColumn($stories, $options)
     {
-        return new UNL_ENews_Newsletter_StoryColumn($options);
+        $columnOptions = array('stories' => $stories);
+
+        $isPreview = false;
+        if (isset($options['preview']) && $options['preview']) {
+            $columnOptions['preview'] = $isPreview = true;
+        }
+
+        if (isset($options['web']) && $options['web']) {
+            $columnOptions['web'] = true;
+        }
+
+        $area = isset($options['area']) ? $options['area'] : 'news';
+
+        if ($area == 'news') {
+           $prefix = 'newsColumn';
+        } else {
+            $prefix = 'adArea';
+            if (!$isPreview) {
+                $columnOptions['filter'] = 1;
+            }
+        }
+        $columnOptions['class'] = $prefix;
+
+        if (isset($options['offset'])) {
+            switch ($options['offset']) {
+                case 1:
+                    $columnOptions['id'] = $prefix . 'Intro';
+                    break;
+                case 2:
+                    $columnOptions['id'] = $prefix . '1';
+                    break;
+                case 0:
+                    $columnOptions['id'] = $prefix . '2';
+                    break;
+            }
+        }
+
+        return new UNL_ENews_Newsletter_StoryColumn($columnOptions);
     }
 
     function setIsPreview($isPreview)
