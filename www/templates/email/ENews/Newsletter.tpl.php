@@ -49,7 +49,7 @@
                                 <?php echo $context->newsroom->getRaw('footer_text'); ?>
                                 <!-- optout -->
                                 </p>
-                                <p style="border-top:1px solid #ffffff;">
+                                <p>
                                  <a href="<?php echo $context->newsroom->getSubmitURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
                                 </p>
                             </td>
