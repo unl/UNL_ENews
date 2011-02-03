@@ -12,7 +12,7 @@ if ($context->getColFromSort() == 'twocol') {
 }
 
 if ($file = $context->getFileByUse('originalimage')) {
-    echo '<div style="background:#f4f2cc;padding:10px;margin-top:10px;margin-bottom:10px;">';
+    echo '<div style="background:#f4f2cc;padding:10px;margin-top:10px;margin-bottom:10px;text-align:center;">';
     if (!empty($context->website)) {
         echo '<a href="'.$context->website.'">';
     }
