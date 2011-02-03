@@ -30,4 +30,9 @@ class UNL_ENews_Newsletter_Preview_Story extends UNL_ENews_LoginRequired
             throw new Exception('Invalid Request. No story exists with that id.', 404);
         }
     }
+
+    public function isPreview()
+    {
+        return true;
+    }
 }
