@@ -112,7 +112,7 @@ form#enewsManage .btnsubmit {
 	background:url('images/typeIndicatorNews.png') no-repeat 0 0;
 }
 #maincontent .storylisting.functionTable tbody tr.ad td:first-of-type {
-	background:url('images/typeIndicatorad.png') no-repeat 0 0;
+	background:url('images/typeIndicatorAd.png') no-repeat 0 0;
 }
 #maincontent .storylisting.functionTable tbody tr td.mainCell {
 	border-left:0;
