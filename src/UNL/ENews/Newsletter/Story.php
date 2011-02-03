@@ -186,7 +186,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
             case 'getThumbnail':
             case 'getFiles':
             case 'getFileByUse':
-            case 'isWithinRequestedPublishDate':
+            case 'hasNotExpired':
             case 'getURL':
                 return call_user_func_array(array($this->getStory(), $method), $params);
         }

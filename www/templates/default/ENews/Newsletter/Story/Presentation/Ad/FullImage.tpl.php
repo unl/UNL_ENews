@@ -1,5 +1,5 @@
 <?php
-if (!$context->isWithinRequestedPublishDate()) {
+if (!$context->hasNotExpired()) {
     return;
 }
 

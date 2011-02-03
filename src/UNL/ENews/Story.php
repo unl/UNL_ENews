@@ -251,13 +251,9 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return $presentation;
     }
 
-    function isWithinRequestedPublishDate()
+    function hasNotExpired()
     {
         $now = time();
-        if ($now < strtotime($this->request_publish_start)) {
-            // Not ready to release yet
-            return false;
-        }
 
         if ($now > strtotime($this->request_publish_end)) {
             // Expired content/advertisement
