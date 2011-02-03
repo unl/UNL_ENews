@@ -4,11 +4,11 @@ class UNL_ENews_File_Image extends UNL_ENews_File
     const THUMB_WIDTH    = 96;
     const THUMB_HEIGHT   = 72;
 
-    const FULL_AD_WIDTH  = 556;
-    const FULL_AD_HEIGHT = 212;
+    const FULL_AD_WIDTH  = 536;
+    const FULL_AD_HEIGHT = 96;
 
-    const HALF_AD_WIDTH  = 273;
-    const HALF_AD_HEIGHT = 104;
+    const HALF_AD_WIDTH  = 253;
+    const HALF_AD_HEIGHT = 96;
 
     const MAX_WIDTH  = 556;
     const HALF_WIDTH = 273;
