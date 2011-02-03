@@ -1,1 +1,1 @@
-If you would no longer like to recieve this newsletter, visit <?php echo $context->url; ?> to unsubscribe.
+If you would no longer like to receive this newsletter, visit <?php echo $context->url; ?> to unsubscribe.
