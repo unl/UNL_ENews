@@ -12,12 +12,12 @@ if ($context->getColFromSort() == 'twocol') {
 }
 
 if ($file = $context->getFileByUse('originalimage')) {
-    echo '<div style="background:#f4f2cc;padding:10px;margin-top:10px;margin-bottom:10px;text-align:center;">';
+    echo '<div style="padding:10px;margin-top:10px;margin-bottom:10px;text-align:center;">';
     if (!empty($context->website)) {
         echo '<a href="'.$context->website.'">';
     }
 
-    echo '<img src="'.$file->getURL().'" style="width:'. $width .'px;height:'. $height .'px;" />';
+    echo '<img src="'.$file->getURL().'" style="width:'. $width .'px;height:'. $height .'px; border:10px solid #f0f0f0;" />';
 
     if (!empty($context->website)) {
         echo '</a>';
