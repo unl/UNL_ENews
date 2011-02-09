@@ -255,7 +255,8 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         $now = time();
 
-        if ($now > strtotime($this->request_publish_end)) {
+        $end_time = substr($this->request_publish_end, 0, 10).' + 1 day';
+        if ($now > strtotime($end_time)) {
             // Expired content/advertisement
             return false;
         }
