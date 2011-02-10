@@ -23,14 +23,11 @@ if ($newsroom = UNL_ENews_Newsroom::getByShortName($_SERVER['argv'][1])) {
 
 echo "Adding newsroom...\n";
 
-$newsroom            = new UNL_ENews_Newsroom();
-$newsroom->name      = $_SERVER['argv'][1];
-$newsroom->shortname = $_SERVER['argv'][1];
-
-// Not happy about how we have to do this because the defaults are populated by the user's default newsroom
-unset($newsroom->id);
-unset($newsroom->allow_submissions);
-unset($newsroom->email_lists);
+$newsroom                    = new UNL_ENews_Newsroom();
+$newsroom->name              = $_SERVER['argv'][1];
+$newsroom->shortname         = $_SERVER['argv'][1];
+$newsroom->footer_text       = ' ';
+$newsroom->allow_submissions = 1;
 
 if (!$newsroom->insert()) {
     echo 'Error creating the newsroom!'.PHP_EOL;
