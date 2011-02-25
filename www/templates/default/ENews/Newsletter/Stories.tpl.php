@@ -24,7 +24,7 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-         <td valign="top" width="273">
+         <td valign="top" width="273" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
              <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
                 'area' => $area,
                 'offset' => 2,
@@ -32,7 +32,7 @@
             ))); ?>
         </td>
         <td width="10">&nbsp;</td>
-        <td valign="top" width="273">
+        <td valign="top" width="273" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
             <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
                 'area' => $area,
                 'offset' => 0,
