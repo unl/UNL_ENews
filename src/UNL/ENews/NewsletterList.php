@@ -25,7 +25,6 @@ class UNL_ENews_NewsletterList extends ArrayIterator
                 $letters[] = $row[0];
             }
         }
-        $mysqli->close();
         return new self($letters);
     }
     
@@ -46,7 +45,6 @@ class UNL_ENews_NewsletterList extends ArrayIterator
                 $letters[] = $row[0];
             }
         }
-        $mysqli->close();
         return new self($letters);
     }
 }

@@ -17,7 +17,6 @@ class UNL_ENews_Newsletter_Emails extends ArrayIterator implements Countable
                 $emails[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($emails);
     }
     

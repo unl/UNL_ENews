@@ -11,7 +11,6 @@ class UNL_ENews_NewsroomList_AllowSubmissions extends UNL_ENews_NewsroomList
                 $newsroom_ids[] = $row['id'];
             }
         }
-        $mysqli->close();
         parent::__construct($newsroom_ids);
     }
 }

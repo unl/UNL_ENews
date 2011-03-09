@@ -23,7 +23,6 @@ class UNL_ENews_PresentationLister extends UNL_ENews_LoginRequired
                 $presentations[] = $row[0];
             }
         }
-        $mysqli->close();
 
         $this->presentation_list = new UNL_ENews_PresentationList($presentations);
     }

@@ -25,7 +25,6 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($stories, $this->options['offset'], $this->options['limit']);
     }
 
@@ -37,11 +36,9 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
                 ' AND story_id = '.(int)$story_id;
         if ($result = $mysqli->query($sql)) {
             if ($result->num_rows > 0) {
-                $mysqli->close();
                 return true;
             }
         }
-        $mysqli->close();
         return false;
     }
 }

@@ -11,7 +11,6 @@ class UNL_ENews_User_Newsrooms extends UNL_ENews_NewsroomList
             	$newsroom_ids[] = $row['newsroom_id'];
             }
         }
-        $mysqli->close();
         parent::__construct($newsroom_ids);
     }
 }

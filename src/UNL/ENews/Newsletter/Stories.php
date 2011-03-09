@@ -22,7 +22,6 @@ class UNL_ENews_Newsletter_Stories extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($stories);
     }
 

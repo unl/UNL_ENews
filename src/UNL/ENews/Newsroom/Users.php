@@ -14,7 +14,6 @@ class UNL_ENews_Newsroom_Users extends UNL_ENews_UserList
                 $users[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($users);
     }
 }

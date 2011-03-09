@@ -35,7 +35,6 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($stories, $this->options['offset'], $this->options['limit']);
     }
 }

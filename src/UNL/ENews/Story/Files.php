@@ -12,7 +12,6 @@ class UNL_ENews_Story_Files extends UNL_ENews_FileList
                 $files[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($files);
     }
 }

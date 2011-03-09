@@ -171,7 +171,6 @@ class UNL_ENews_Record
             $this->id = $mysqli->insert_id;
         }
 
-        $mysqli->close();
         return true;
 
     }

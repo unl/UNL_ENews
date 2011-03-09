@@ -58,7 +58,6 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
                 $ids[] = $row[0];
             }
         }
-        $mysqli->close();
         return $ids;
     }
 
@@ -72,7 +71,6 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
                 $types[] = $row[0];
             }
         }
-        $mysqli->close();
         return $types;
     }
 
