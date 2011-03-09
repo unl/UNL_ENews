@@ -31,7 +31,6 @@ if (UNL_ENews_Newsroom::getByID(1) === false ) {
     if (!$result) {
         echo 'There was an error inserting the sample data!<br />';
         echo $mysqli->error;
-        $mysqli->close();
         exit();
     }
 }
@@ -202,7 +201,5 @@ if (!$result) {
     echo $mysqli->error;
     exit();
 }
-
-$mysqli->close();
 
 echo 'Upgrade complete!';
