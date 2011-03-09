@@ -455,13 +455,16 @@ class UNL_ENews_Controller
      */
     public static function getDB()
     {
-        $settings = self::getDbSettings();
-        $db = new mysqli($settings['host'], $settings['user'], $settings['password'], $settings['dbname']);
-        if (mysqli_connect_error()) {
-            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                    . mysqli_connect_error());
+        static $db = false;
+        if (!$db) {
+            $settings = self::getDbSettings();
+            $db = new mysqli($settings['host'], $settings['user'], $settings['password'], $settings['dbname']);
+            if (mysqli_connect_error()) {
+                throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                        . mysqli_connect_error());
+            }
+            $db->set_charset('utf8');
         }
-        $db->set_charset('utf8');
         return $db;
     }
 
