@@ -34,14 +34,10 @@ class UNL_ENews_PostHandler
 
         switch ($this->post['_type']) {
             case 'story':
-                $this->handleStory();
-                break;
             case 'file':
-                $this->handleFile();
-                break;
             case 'deletenewsletter':
-                $this->handleDeleteNewsletter();
-                break;
+                $method = 'handle' . $this->post['_type'];
+                return $this->$method();
         }
     }
     
