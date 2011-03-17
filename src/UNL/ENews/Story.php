@@ -109,6 +109,17 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return true;
     }
 
+    public function deleteFiles()
+    {
+        $files = $this->getFiles();
+        $mysqli = UNL_ENews_Controller::getDB();
+        $sql = 'DELETE FROM story_files WHERE story_id = '.intval($this->id);
+        $mysqli->query($sql);
+        foreach ($files as $file) {
+            $file->delete();
+        }
+    }
+
     /**
      * Retrieve all files related to this story
      *
@@ -180,14 +191,12 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     function delete()
     {
-        foreach ($this->getFiles() as $file) {
-            $file->delete();
-        }
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'DELETE FROM newsroom_stories WHERE story_id = '.intval($this->id);
         $mysqli->query($sql);
         $sql = 'DELETE FROM newsletter_stories WHERE story_id = '.intval($this->id);
         $mysqli->query($sql);
+        $this->deleteFiles();
         return parent::delete();
     }
 
