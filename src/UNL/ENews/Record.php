@@ -348,8 +348,10 @@ class UNL_ENews_Record
      */
     function synchronizeWithArray($data)
     {
-        foreach ($data as $key=>$value) {
-            $this->$key = $value;
+        foreach (get_object_vars($this) as $key=>$default_value) {
+            if (isset($data[$key]) && !empty($data[$key])) {
+                $this->$key = $data[$key];
+            }
         }
     }
 
