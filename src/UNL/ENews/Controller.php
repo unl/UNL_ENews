@@ -271,11 +271,10 @@ class UNL_ENews_Controller
      */
     function run()
     {
-         if (isset($this->view_map[$this->options['view']])) {
-             $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
-         } else {
+         if (!isset($this->view_map[$this->options['view']])) {
              throw new Exception('Un-registered view');
          }
+         $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
     }
 
     /**
