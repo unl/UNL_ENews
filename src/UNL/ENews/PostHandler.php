@@ -36,11 +36,17 @@ class UNL_ENews_PostHandler
             case 'story':
             case 'file':
             case 'deletenewsletter':
+            case 'deletestoryimages':
                 $method = 'handle' . $this->post['_type'];
                 return $this->$method();
         }
     }
 
+    /**
+     * Get the story we're expected to handle
+     * 
+     * @return UNL_ENews_Story
+     */
     protected function getPostedStory()
     {
         if (!empty($this->post['storyid'])) {
@@ -123,6 +129,14 @@ class UNL_ENews_PostHandler
         }
 
         self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&id='.(int)$story->id);
+    }
+
+    public function handleDeleteStoryImages()
+    {
+        $story = $this->getPostedStory();
+        foreach ($story->getFiles() as $file) {
+            $file->delete();
+        }
     }
 
     public function handleFile()
