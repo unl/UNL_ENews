@@ -9,6 +9,7 @@ class UNL_ENews_PostHandler
     {
         $this->options = $options;
         $this->post    = $post;
+        $this->files   = $files;
     }
 
     /**
