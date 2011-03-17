@@ -40,8 +40,8 @@ class UNL_ENews_PostHandler
                 return $this->$method();
         }
     }
-    
-    function handleStory()
+
+    protected function getPostedStory()
     {
         if (!empty($this->post['storyid'])) {
             if (!($story = UNL_ENews_Story::getByID($this->post['storyid']))) {
@@ -53,6 +53,12 @@ class UNL_ENews_PostHandler
         } else {
             $story = new UNL_ENews_Story;
         }
+        return $story;
+    }
+    
+    function handleStory()
+    {
+        $story = $this->getPostedStory();
         $story->synchronizeWithArray($this->post);
 
         if (!$story->save()) {
