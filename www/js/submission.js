@@ -155,6 +155,22 @@ var submission = function($) {
 				}
 			});
 
+			$('form#deleteImages').bind('submit', function() {
+				var dataString = $('form#deleteImages').serialize();
+
+				$.post(
+					window.location.href,
+					dataString,
+					function(data,status) {
+						$('#sampleLayoutImage img').attr('src', '');
+						$('#upload_area img').attr('src', '');
+						submission.loadImageCrop();
+						submission.updatePreview();
+					}
+				);
+				return false;
+			});
+
 			// Update the sample layout
 			$('#description').bind('keyup', function() {
 				submission.updatePreview();
@@ -169,7 +185,7 @@ var submission = function($) {
 					$('#enewsForm h3').eq(1).removeClass('highlighted');
 					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
 				});
-				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
+				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 				return false;
 			});
 			$('#enewsForm h3').eq(0).bind('click', function() {
@@ -181,7 +197,7 @@ var submission = function($) {
 		},
 
 		goToStep : function(step) {
-			$('#enewsSubmissionButton,#sampleLayout,#enewsImage').hide();
+			$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#deleteImages').hide();
 			switch(step){
 			case 1:
 				oppStep = 2;
@@ -206,7 +222,7 @@ var submission = function($) {
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
-				$('#sampleLayout,#enewsImage,#enewsSubmissionButton').show();
+				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 			});
 		},
 
@@ -448,6 +464,7 @@ var submission = function($) {
 						// We get back the id of the newly saved story
 						$('#enewsSubmission #storyid').val(data);
 						$('#enewsImage #storyid').val(data).change();
+						$('#deleteImages input[name=storyid]').val(data);
 					},
 					function (data, status, e) {
 						$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');

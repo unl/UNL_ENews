@@ -217,7 +217,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 </div>
 
 <?php include(dirname(__FILE__) . '/Submission/ImageForm.tpl.php'); ?>
-
+<?php include(dirname(__FILE__) . '/Submission/DeleteImagesForm.tpl.php'); ?>
 
 <?php //ending div for #enewsForm ?>
 <div class="clear"></div>
