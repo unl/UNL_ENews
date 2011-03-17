@@ -298,6 +298,9 @@ var submission = function($) {
 		},
 
 		createGoURL : function(url) {
+			if (url == 'http://') {
+				return;
+			}
 			$('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
 			submission.utm_content = $('#title').val();
 			submission.utm_source = submission.announcementType;
