@@ -2,7 +2,7 @@
 class UNL_ENews_Archive extends LimitIterator implements Countable
 {
 	public $newsroom;
-	public $options = array('limit'=>10, 'offset'=>0);
+	public $options = array('limit'=>25, 'offset'=>0);
 	
     function __construct($options = array())
     {
