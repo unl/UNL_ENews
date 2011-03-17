@@ -55,7 +55,12 @@ class UNL_ENews_Controller
 
     public static $url = '';
 
-    protected static $db_settings = array();
+    protected static $db_settings = array(
+        'host'     => 'localhost',
+        'user'     => 'enews',
+        'password' => 'enews',
+        'dbname'   => 'enews'
+    );
 
     public $actionable = array();
 
@@ -87,21 +92,7 @@ class UNL_ENews_Controller
 
     public static function setDbSettings($settings = array())
     {
-        $settings = $settings + self::$db_settings;
-        if (empty($settings['host'])) {
-            $settings['host'] = '127.0.0.1';
-        }
-        if (empty($settings['user'])) {
-            $settings['user'] = 'enews';
-        }
-        if (empty($settings['password'])) {
-            $settings['password'] = 'enews';
-        }
-        if (empty($settings['dbname'])) {
-            $settings['dbname'] = 'enews';
-        }
-
-        self::$db_settings = $settings;
+        self::$db_settings = $settings + self::$db_settings;
     }
 
     public static function getDbSettings()
