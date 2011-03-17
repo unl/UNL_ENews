@@ -298,9 +298,9 @@ class UNL_ENews_Controller
         if (!$db) {
             $settings = self::getDbSettings();
             $db = new mysqli($settings['host'], $settings['user'], $settings['password'], $settings['dbname']);
-            if (mysqli_connect_error()) {
-                throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                        . mysqli_connect_error());
+            if ($db->connect_error) {
+                die('Connect Error (' . $db->connect_errno . ') '
+                        . $db->connect_error);
             }
             $db->set_charset('utf8');
         }
