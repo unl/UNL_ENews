@@ -1,4 +1,9 @@
 <?php
+/**
+ * model for a story associated with a newsroom, ties back to records in the
+ * newsroom_stories table
+ *
+ */
 class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
 {
     public $newsroom_id;
@@ -7,7 +12,7 @@ class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
     public $date_created;
     public $status;
     public $source;
-    
+
     function keys()
     {
         return array('newsroom_id', 'story_id');
@@ -17,7 +22,15 @@ class UNL_ENews_Newsroom_Story extends UNL_ENews_Record
     {
         return 'newsroom_stories';
     }
-    
+
+    /**
+     * Static function to retrieve an instance
+     * 
+     * @param $newsroom_id The newsroom id
+     * @param $story_id    The story id
+     * 
+     * @return UNL_ENews_Newsroom_Story
+     */
     public static function getById($newsroom_id, $story_id)
     {
         $mysqli = UNL_ENews_Controller::getDB();

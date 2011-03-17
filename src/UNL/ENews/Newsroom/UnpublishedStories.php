@@ -1,4 +1,7 @@
 <?php
+/**
+ * Get the list of stories which have not been published in a newsletter.
+ */
 class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
 {
     public $options = array('offset' => 0,
