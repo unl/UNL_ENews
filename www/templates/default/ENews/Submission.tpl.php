@@ -54,10 +54,9 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
 <div id="enewsForm">
 
 <?php
+$showAdClass = '';
 if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     $showAdClass = 'showAd';
-} else {
-    $showAdClass = '';
 }
 ?>
 
