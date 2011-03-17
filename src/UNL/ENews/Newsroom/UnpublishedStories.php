@@ -15,12 +15,12 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories 
-                WHERE newsroom_stories.newsroom_id = '.(int)$options['newsroom_id'] . '
+                WHERE newsroom_stories.newsroom_id = '.(int)$this->options['newsroom_id'] . '
                   AND newsroom_stories.story_id = stories.id
                   AND newsroom_stories.story_id NOT IN
                     (
                     SELECT newsletter_stories.story_id FROM newsletter_stories, newsletters
-                        WHERE newsletters.newsroom_id = '.(int)$options['newsroom_id']. '
+                        WHERE newsletters.newsroom_id = '.(int)$this->options['newsroom_id']. '
                             AND newsletter_stories.newsletter_id = newsletters.id
                     )';
         if (!empty($this->options['status'])) {
