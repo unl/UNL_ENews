@@ -67,6 +67,12 @@ class UNL_ENews_PostHandler
         $story = $this->getPostedStory();
         $story->synchronizeWithArray($this->post);
 
+        if (isset($this->post['website'])
+            && $this->post['website'] == '') {
+            // allow unsetting the website field
+            $story->website = null;
+        }
+
         if (!$story->save()) {
             throw new Exception('Could not save the story');
         }
