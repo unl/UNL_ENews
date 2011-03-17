@@ -134,9 +134,7 @@ class UNL_ENews_PostHandler
     public function handleDeleteStoryImages()
     {
         $story = $this->getPostedStory();
-        foreach ($story->getFiles() as $file) {
-            $file->delete();
-        }
+        return $story->deleteFiles();
     }
 
     public function handleFile()
