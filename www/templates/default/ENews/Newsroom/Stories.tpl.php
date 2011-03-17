@@ -54,10 +54,17 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 <table class="storylisting functionTable" >
     <thead>
         <tr>
+            <?php
+            $sortURL = '?view=mynews';
+            if (isset($parent->context->options['newsroom'])) {
+                $sortURL = '?view=manager&amp;newsroom='.$parent->context->options['newsroom'].'&amp;status='.$status;
+            }
+            $sortURL .= '&amp;orderby=starttime';
+            ?>
             <th scope="col" class="select"></th>
             <th scope="col" class="headline">Article</th>
-            <th scope="col" class="firstdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">First Pub Date</a></th>
-            <th scope="col" class="lastdate"><a href="?view=manager&amp;newsroom=<?php echo $parent->context->options['newsroom']; ?>&amp;status=<?php echo $status; ?>&amp;orderby=starttime">Last Pub Date</a></th>
+            <th scope="col" class="firstdate"><a href="<?php echo $sortURL; ?>">First Pub Date</a></th>
+            <th scope="col" class="lastdate"><a href="<?php echo $sortURL; ?>">Last Pub Date</a></th>
         </tr>
     </thead>
     <tbody>
