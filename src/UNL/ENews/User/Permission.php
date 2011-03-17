@@ -33,7 +33,7 @@ class UNL_ENews_User_Permission extends UNL_ENews_Record
         if (($result = $mysqli->query($sql))
             && $result->num_rows > 0) {
             $object = new self();
-            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            $object->synchronizeWithArray($result->fetch_assoc());
             return $object;
         }
         return false;

@@ -60,7 +60,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 $this->removeStory($_POST['story_id']);
                 break;
             case 'newsletter':
-                UNL_ENews_Controller::setObjectFromArray($this->newsletter, $_POST);
+                $this->newsletter->synchronizeWithArray($_POST);
                 $this->newsletter->save();
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=preview&id='.$this->newsletter->id);
                 break;

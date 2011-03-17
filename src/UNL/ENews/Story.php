@@ -24,7 +24,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         if (isset($options['id'])) {
             $story = self::getByID($options['id']);
-            UNL_ENews_Controller::setObjectFromArray($this, $story->toArray());
+            $this->synchronizeWithArray($story->toArray());
         }
     }
 
@@ -65,7 +65,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     {
         if ($record = UNL_ENews_Record::getRecordByID('stories', $id)) {
             $object = new self();
-            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            $object->synchronizeWithArray($record);
             return $object;
         }
         return false;

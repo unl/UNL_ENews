@@ -58,7 +58,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         if ($record = UNL_ENews_Record::getRecordByID('newsletters', $id)) {
             $object = new self();
-            UNL_ENews_Controller::setObjectFromArray($object, $record);
+            $object->synchronizeWithArray($record);
             return $object;
         }
         return false;
@@ -71,7 +71,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $mysqli = UNL_ENews_Controller::getDB();
         if (($result = $mysqli->query($sql))
             && $result->num_rows == 1) {
-            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            $object->synchronizeWithArray($result->fetch_assoc());
             return $object;
         }
         
@@ -101,7 +101,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
             return false;
         }
 
-        UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+        $object->synchronizeWithArray($result->fetch_assoc());
         return $object;
     }
     

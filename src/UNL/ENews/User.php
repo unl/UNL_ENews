@@ -20,11 +20,20 @@ class UNL_ENews_User extends UNL_ENews_Record
             $sql = "SELECT * FROM users WHERE uid = '".$mysqli->escape_string($options['uid'])."';";
             if (($result = $mysqli->query($sql))
                 && $result->num_rows > 0) {
-                UNL_ENews_Controller::setObjectFromArray($this, $result->fetch_assoc());
+                $this->synchronizeWithArray($result->fetch_assoc());
             }
         }
     }
-    
+
+    /**
+     * Get a user object
+     * 
+     * If the user does not exist, it will be inserted into the db.
+     *
+     * @param string $uid User ID eg: bbieber2
+     * 
+     * @return UNL_ENews_User
+     */
     public static function getByUID($uid)
     {
         $mysqli = UNL_ENews_Controller::getDB();

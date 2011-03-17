@@ -54,7 +54,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 } else {
                     $_POST['allow_submissions'] = 0;
                 }
-                UNL_ENews_Controller::setObjectFromArray($newsroom, $_POST);
+                $newsroom->synchronizeWithArray($_POST);
                 $newsroom->save();
 
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');

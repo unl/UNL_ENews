@@ -19,7 +19,7 @@ class UNL_ENews_File extends UNL_ENews_Record
     {
         if (isset($options['id'])) {
             if ($record = self::getRecordByID($this->getTable(), $options['id'])) {
-                UNL_ENews_Controller::setObjectFromArray($this, $record);
+                $this->synchronizeWithArray($record);
             }
         }
     }
@@ -39,7 +39,7 @@ class UNL_ENews_File extends UNL_ENews_Record
             $class = 'UNL_ENews_File_Image';
         }
         $object = new $class;
-        UNL_ENews_Controller::setObjectFromArray($object, $array);
+        $object->synchronizeWithArray($array);
         return $object;
     }
     

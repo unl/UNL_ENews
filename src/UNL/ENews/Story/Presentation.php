@@ -29,7 +29,7 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
         }
         $object = new self();
 
-        UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+        $object->synchronizeWithArray($result->fetch_assoc());
         return $object;
     }
 
@@ -44,7 +44,7 @@ class UNL_ENews_Story_Presentation extends UNL_ENews_Record
         }
         $object = new self();
 
-        UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+        $object->synchronizeWithArray($result->fetch_assoc());
         return $object;
     }
 
