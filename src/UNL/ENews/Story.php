@@ -116,6 +116,10 @@ class UNL_ENews_Story extends UNL_ENews_Record
      */
     function getFiles()
     {
+        if (empty($this->id)) {
+            throw new Exception('This story doesn\'t have a valid ID.');
+        }
+
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
 
