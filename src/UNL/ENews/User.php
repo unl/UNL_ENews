@@ -36,6 +36,10 @@ class UNL_ENews_User extends UNL_ENews_Record
      */
     public static function getByUID($uid)
     {
+        if (empty($uid)) {
+            throw new Exception('User id cannot be empty', 400);
+        }
+
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = "SELECT * FROM users WHERE uid = '".$mysqli->escape_string($uid)."';";
         if (($result = $mysqli->query($sql))
