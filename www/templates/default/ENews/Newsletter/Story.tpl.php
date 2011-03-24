@@ -1,4 +1,5 @@
 <?php
+UNL_ENews_Controller::$sitetitle = $context->newsroom->name;
 $newsletter_url = $context->newsletter->getURL();
 ?>
 <div class="three_col left">

@@ -42,6 +42,8 @@ class UNL_ENews_Controller
                                      'help'        => 'Help! How do I&hellip;',
     );
 
+    public static $sitetitle;
+
     protected static $auth;
 
     protected static $admins = array('admin');
@@ -344,6 +346,11 @@ class UNL_ENews_Controller
         if (isset(self::$pagetitle['dynamic'])) {
             $data = str_replace('<title>UNL | Announce </title>',
                                 '<title>UNL | Announce | '.self::$pagetitle['dynamic'].'</title>',
+                                $data);
+        }
+    	if (isset(self::$sitetitle)) {
+            $data = str_replace('<h1>UNL Announce</h1>',
+                                '<h1>'.self::$sitetitle.'</h1>',
                                 $data);
         }
         return $data;

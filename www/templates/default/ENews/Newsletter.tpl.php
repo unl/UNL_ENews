@@ -1,6 +1,6 @@
 <?php
 UNL_ENews_Controller::setReplacementData('pagetitle', $context->subject);
-
+UNL_ENews_Controller::$sitetitle = $context->newsroom->name;
 if (isset($_GET['_type']) && $_GET['_type'] == 'subscribed') : ?>
 <script type="text/javascript">
 // This plugin is only needed for the demo.
