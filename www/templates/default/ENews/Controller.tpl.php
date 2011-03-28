@@ -109,7 +109,7 @@ if ($context->options['view'] == 'story'
                             if (count($user_newsrooms)) {
                                 echo '<ul>';
                                 foreach ($user_newsrooms as $newsroom) {
-                                    echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=manager&newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
+                                    echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=manager&amp;newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
                                 }
                                 echo '</ul>';
                             }
