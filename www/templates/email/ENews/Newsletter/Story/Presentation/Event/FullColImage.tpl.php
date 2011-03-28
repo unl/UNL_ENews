@@ -7,4 +7,4 @@ if (strpos($context->website, 'http://events.unl.edu/') === 0) {
     $context->ics = $context->website . $tok . 'format=ics';
 }
 
-echo $savvy->render($context, 'templates/email/ENews/Newsletter/Story/Presentation/News/ThumbnailFloatedRight.tpl.php');
+echo $savvy->render($context, 'templates/email/ENews/Newsletter/Story/Presentation/News/FullColImage.tpl.php');

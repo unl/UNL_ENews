@@ -14,6 +14,9 @@ if (!empty($context->full_article)) {
     echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
 }
 ?>
+<?php if ($context->ics): ?>
+	<a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
+<?php endif; ?>
 </p>
 <?php if (($context->website)): ?>
 <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#f7f6f6" width="100%">

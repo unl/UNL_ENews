@@ -22,6 +22,9 @@ if (!empty($context->full_article)) {
     echo ' <a href="'.$storylink.'">Continue reading&hellip;</a>';
 }
 ?>
+<?php if ($context->ics): ?>
+	<a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
+<?php endif; ?>
 </p>
 <?php
 if (($context->website)) { ?>
