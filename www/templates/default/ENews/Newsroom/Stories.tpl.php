@@ -72,7 +72,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         <tr id="row<?php echo $item->id; ?>" class="<?php echo $item->presentation->type; ?>">
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
             <td class="mainCell">
-            	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES).'" />'; } ?>
+            	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
             	<h5><?php echo $item->title; ?></h5>
             	<a href="?view=submit&amp;id=<?php echo $item->id; ?>" class="action edit">Edit</a>
             	<span>Submitted by <?php echo $item->uid_created; ?>.

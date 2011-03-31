@@ -7,11 +7,11 @@ function getValue($object, $field)
         } else {
             $value = $object->$field;
         }
-        return htmlentities($value, ENT_QUOTES);
+        return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 
     if (isset($_POST[$field])) {
-        return htmlentities($_POST[$field], ENT_QUOTES);
+        return htmlentities($_POST[$field], ENT_QUOTES, 'UTF-8');
     }
 
     return '';
