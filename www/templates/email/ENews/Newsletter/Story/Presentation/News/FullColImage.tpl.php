@@ -22,7 +22,7 @@ if (!empty($context->full_article)) {
     echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
 }
 ?>
-<?php if ($context->ics): ?>
+<?php if (isset($context->ics)): ?>
 	<a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
 <?php endif; ?>
 </p>
