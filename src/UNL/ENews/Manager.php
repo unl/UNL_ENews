@@ -10,10 +10,14 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
         if (isset($this->options['newsroom'])) {
             $user = UNL_ENews_Controller::getUser(true);
             if ($user->newsroom_id != $this->options['newsroom']
-                && $user->hasNewsroomPermission($this->options['newsroom'])) {
+                && $user->hasNewsroomPermission((int)$this->options['newsroom'])) {
+
                 // Update the selected newsroom
-                $user->newsroom_id = $this->options['newsroom'];
+                $user->newsroom_id = (int)$this->options['newsroom'];
                 $user->update();
+
+                // Update the user record
+                UNL_ENews_Controller::setUser($user);
             }
         }
         UNL_ENews_Newsroom::archivePastStories();
