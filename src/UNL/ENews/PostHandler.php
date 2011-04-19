@@ -77,6 +77,9 @@ class UNL_ENews_PostHandler
             throw new Exception('Could not save the story');
         }
 
+        // Var to remember what the primary newsroom this story was submitted to
+        $primary_newsroom_id = false;
+
         foreach ($this->post['newsroom_id'] as $id) {
             if (!empty($id)) {
                 if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
@@ -87,6 +90,11 @@ class UNL_ENews_PostHandler
                     $status = 'approved';
                 }
                 $newsroom->addStory($story, $status, UNL_ENews_Controller::getUser(true), 'create story form');
+
+                if (false === $primary_newsroom_id) {
+                    // Save this for the confirmation
+                    $primary_newsroom_id = $id;
+                }
             }
         }
 
@@ -134,7 +142,7 @@ class UNL_ENews_PostHandler
             }
         }
 
-        self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&id='.(int)$story->id);
+        self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&id='.(int)$story->id.'&newsroom='.$primary_newsroom_id);
     }
 
     public function handleDeleteStoryImages()
