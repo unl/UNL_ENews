@@ -4,9 +4,6 @@
  * 
  * @author bbieber
  */
-interface UNL_ENews_CacheableInterface
+interface UNL_ENews_CacheableInterface extends Savvy_Turbo_CacheableInterface
 {
-    public function getCacheKey();
-    public function run();
-    public function preRun();
 }
