@@ -19,7 +19,7 @@ class UNL_ENews_Controller
                                 'submit'             => 'UNL_ENews_Submission',
                                 'thanks'             => 'UNL_ENews_Confirmation',
                                 'manager'            => 'UNL_ENews_Manager',
-                                'file'               => 'UNL_ENews_File',
+                                'file'               => 'UNL_ENews_File_Cacheable',
                                 'preview'            => 'UNL_ENews_Newsletter_Preview',
                                 'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
                                 'presentationList'   => 'UNL_ENews_PresentationLister',
