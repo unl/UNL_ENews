@@ -148,7 +148,8 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 
                 // Check if this story has been published
                 foreach ($story->getNewsletters() as $newsletter) {
-                    if (strtotime($newsletter->release_date) < time()) {
+                    if (isset($newsletter->release_date)
+                        && (strtotime($newsletter->release_date) < time())) {
                         throw new Exception('That story has been published in a newsletter. If you really want to delete it, first remove it from the newsletter.', 403);
                     }
                 }
