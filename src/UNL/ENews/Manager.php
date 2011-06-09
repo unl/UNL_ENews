@@ -145,10 +145,19 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             }
 
             if (isset($_POST['delete'])) {
+
+                // Check if this story has been published
+                foreach ($story->getNewsletters() as $newsletter) {
+                    if (strtotime($newsletter->release_date) < time()) {
+                        throw new Exception('That story has been published in a newsletter. If you really want to delete it, first remove it from the newsletter.', 403);
+                    }
+                }
+
                 if (count($story->getNewsrooms()) === 1 ) {
                     // Story only belongs to one newsroom, delete entirely
                     return $story->delete();
                 }
+
                 // Remove the story from this newsroom only
                 return $has_story->delete();
             } elseif (isset($_POST['pending'])) {
