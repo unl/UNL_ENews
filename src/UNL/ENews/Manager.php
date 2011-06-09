@@ -133,38 +133,39 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
     function processPostStatusChange($story, $source='search')
     {
         if (isset($this->options['newsroom'])) { // view=manager
-            if (UNL_ENews_User_Permission::userHasNewsroomPermission(UNL_ENews_Controller::getUser()->uid, $this->newsroom->id)) {
-                $has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id);
-                if (isset($_POST['delete'])) {
-                    if (count($story->getNewsrooms()) === 1 ) {
-                        // Story only belongs to one newsroom, delete entirely
-                        return $story->delete();
-                    }
-                    // Remove the story from this newsroom only
-                    return $has_story->delete();
-                } elseif (isset($_POST['pending'])) {
-                    $has_story->status = 'pending';
-                    return $has_story->save();
-                } elseif (isset($_POST['approved'])) {
-                    $has_story->status = 'approved';
-                    return $has_story->save();
-                }
-            } else {
+
+            if (!UNL_ENews_User_Permission::userHasNewsroomPermission(UNL_ENews_Controller::getUser()->uid, $this->newsroom->id)) {
                 throw new Exception('You do not have permission to edit this newsroom', 403);
+            }
+
+            $has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id);
+            if (isset($_POST['delete'])) {
+                if (count($story->getNewsrooms()) === 1 ) {
+                    // Story only belongs to one newsroom, delete entirely
+                    return $story->delete();
+                }
+                // Remove the story from this newsroom only
+                return $has_story->delete();
+            } elseif (isset($_POST['pending'])) {
+                $has_story->status = 'pending';
+                return $has_story->save();
+            } elseif (isset($_POST['approved'])) {
+                $has_story->status = 'approved';
+                return $has_story->save();
             }
         } else { // view=mynews
             if (UNL_ENews_Controller::getUser()->uid !== $story->uid_created) {
-                if (isset($_POST['delete'])) {
-                    $newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
-                    foreach ($newsrooms as $newsroom) {
-                        if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') { //@TODO hmmm what about archived?
-                            throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
-                        }
+                throw new Exception('You did not create that story - you cannot delete it', 403);
+            }
+
+            if (isset($_POST['delete'])) {
+                $newsrooms = new UNL_ENews_Story_Newsrooms(array('id'=>$story->id));
+                foreach ($newsrooms as $newsroom) {
+                    if (UNL_ENews_Newsroom_Story::getById($newsroom->id,$story->id)->status !== 'pending') {
+                        throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
                     }
-                    return $story->delete();
                 }
-            } else {
-                throw new Exception('You did not create that story - you can not delete it', 403);
+                return $story->delete();
             }
         }
         return false;
