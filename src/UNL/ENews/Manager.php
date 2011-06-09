@@ -139,6 +139,11 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
             }
 
             $has_story = UNL_ENews_Newsroom_Story::getById($this->newsroom->id, $story->id);
+
+            if (false === $has_story) {
+                throw new Exception('That story is not associated with this newsroom.');
+            }
+
             if (isset($_POST['delete'])) {
                 if (count($story->getNewsrooms()) === 1 ) {
                     // Story only belongs to one newsroom, delete entirely
