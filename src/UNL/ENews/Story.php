@@ -84,6 +84,18 @@ class UNL_ENews_Story extends UNL_ENews_Record
     }
 
     /**
+     * Retrieve newsletters a story belongs to
+     *
+     * @param
+     *
+     * @return UNL_ENews_Story_Newsletters array
+     */
+    function getNewsletters()
+    {
+        return new UNL_ENews_Story_Newsletters(array('id'=>$this->id));
+    }
+
+    /**
      * Add a related file to this story.
      *
      * @param UNL_ENews_File $file The file to add
