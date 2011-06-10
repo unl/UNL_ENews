@@ -169,18 +169,22 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 return $has_story->save();
             }
         } else { // view=mynews
+
+            if (!isset($_POST['delete'])) {
+                return false;
+            }
+
             if (UNL_ENews_Controller::getUser()->uid !== $story->uid_created) {
                 throw new Exception('You did not create that story - you cannot delete it', 403);
             }
 
-            if (isset($_POST['delete'])) {
-                foreach ($story->getNewsrooms() as $newsroom) {
-                    if (UNL_ENews_Newsroom_Story::getById($newsroom->id, $story->id)->status !== 'pending') {
-                        throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
-                    }
+            foreach ($story->getNewsrooms() as $newsroom) {
+                if (UNL_ENews_Newsroom_Story::getById($newsroom->id, $story->id)->status !== 'pending') {
+                    throw new Exception('A story you attempted to delete has already been approved for use by a newsroom', 403);
                 }
-                return $story->delete();
             }
+
+            return $story->delete();
         }
         return false;
     }
