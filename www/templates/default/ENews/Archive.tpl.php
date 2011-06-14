@@ -6,7 +6,8 @@
 <?php 
 foreach ($context as $newsletter) {
     if ($newsletter->distributed) {
-        $clean_date = date('D. M d, Y', strtotime($newsletter->release_date));
+        
+        $clean_date = UNL_ENews_Controller::formatDate($newsletter->release_date);
         echo '<li>
         <a href="'.$newsletter->getURL().'">'.$newsletter->subject.'</a> <span class="release_date caption" title="'.$newsletter->release_date.'">('.$clean_date.')</span></li>';
     }

@@ -355,4 +355,47 @@ class UNL_ENews_Controller
         }
         return $data;
     }
+
+    /**
+     * Format a date in the short/condensed format preferred by Kelly/Troy.
+     * 
+     * In particular this uses AP style month abbreviations.
+     *
+     * @param string $date Date in MySQL date format.
+     */
+    public static function formatDate($date)
+    {
+        $time = strtotime($date);
+        switch(date('n', $time)) {
+            case 1:
+                $month = 'Jan.';
+                break;
+            case 2:
+                $month = 'Feb.';
+                break;
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                $month = date('F', $time);
+                break;
+            case 8:
+                $month = 'Aug.';
+                break;
+            case 9:
+                $month = 'Sept.';
+                break;
+            case 10:
+                $month = 'Oct.';
+                break;
+            case 11:
+                $month = 'Nov.';
+                break;
+            case 12:
+                $month = 'Dec.';
+                break;
+        }
+        return date('D. ', $time).$month.date(' d, Y', $time);
+    }
 }
