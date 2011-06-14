@@ -11,7 +11,7 @@ $newsletter_url = $context->newsletter->getURL();
         <h3>
               <a href="<?php echo $context->getURL(); ?>" title="Go to the newsletter index page"><?php echo $context->newsroom->name; ?>
               <span class="date">
-              <?php echo date('D. M d, Y', strtotime($context->newsletter->release_date)) ?>
+              <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
               </span>
               </a>
           </h3>
