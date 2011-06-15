@@ -25,6 +25,13 @@ class UNL_ENews_Router
                 $options['id']           = $matches[1];
                 $options['content-type'] = $matches[2];
                 break;
+            //For calling a story.  url = www/newsRoomShortName/newsletterID/storyID/summary
+            case preg_match('/^([a-z]+)\/([\d]+)\/([\d]+)\/summary$/i', $requestURI, $matches):
+                $options['view']          = 'storySummary';
+                $options['shortname']     = $matches[1];
+                $options['newsletter_id'] = $matches[2];
+                $options['id']            = $matches[3];
+                break;
             //For calling a story.  url = www/newsRoomShortName/newsletterID/storyID/
             case preg_match('/^([a-z]+)\/([\d]+)\/([\d]+)$/i', $requestURI, $matches):
                 $options['view']          = 'newsletterStory';
