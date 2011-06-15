@@ -43,9 +43,12 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
             if (!($this->newsletter = UNL_ENews_Newsletter::getById($options['newsletter_id']))) {
                 throw new Exception('This newsletter does not exist', 404);
             }
+
             if (!($this->story = UNL_ENews_Story::getById($options['id']))) {
                 throw new Exception('This story does not exist.', 400);
             }
+            $this->story_id = $options['id'];
+
             if (!($this->newsletter->hasStory($this->story))) {
                 throw new Exception('The story does not belong to the given newsletter.', 400);
             }
