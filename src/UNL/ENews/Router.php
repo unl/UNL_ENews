@@ -43,6 +43,11 @@ class UNL_ENews_Router
                 $options['view']         = 'submit';
                 $options['shortname']    = $matches[1];
                 break;
+            // For managing a newsroom.
+            case preg_match('/'.$quotedBase.'([a-z]+)\/manage$/i', $requestURI, $matches):
+                $options['view']         = 'manager';
+                $options['shortname']    = $matches[1];
+                break;
             //For viewing the newest newsletter for a newsroom.
             case preg_match('/'.$quotedBase.'([a-z]+)\/?$/i', $requestURI, $matches):
                 $options['view']         = 'newsletter';
