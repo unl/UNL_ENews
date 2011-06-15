@@ -109,6 +109,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         return $this->getStory()->getPresentation();
 
     }
+
     /**
      * Sets the presentation of this newletter story
      *
