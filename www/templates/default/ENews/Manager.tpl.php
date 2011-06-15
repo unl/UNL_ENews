@@ -1,7 +1,7 @@
 <h3 class="sec_main">
     <?php echo $context->newsroom->name;?>
-    (<a href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>">Live View</a>, 
-     <a class="rsslink" href="?view=latest&amp;newsroom=<?php echo $context->newsroom->id;?>&amp;format=rss">RSS</a>
+    (<a href="<?php echo $context->newsroom->getURL();?>">Live View</a>, 
+     <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>?format=rss">RSS</a>
     )
 </h3>
 
@@ -18,7 +18,7 @@ if ($context->actionable) {
         $class = ' class="selected"';
     }
     ?>
-    <li <?php echo $class; ?>><a href="?view=manager&amp;newsroom=<?php echo $context->newsroom->id;?>&amp;status=<?php echo $type; ?>"><?php echo ucfirst($type); ?>
+    <li <?php echo $class; ?>><a href="<?php echo $context->newsroom->getURL();?>/manage?status=<?php echo $type; ?>"><?php echo ucfirst($type); ?>
         <sup><?php echo count($context->newsroom->getStories($type)); ?></sup></a></li>
     <?php endforeach; ?>
 </ul>

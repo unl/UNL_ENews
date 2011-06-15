@@ -103,13 +103,13 @@ if ($context->options['view'] == 'story'
                         && $user->hasNewsroomPermission($user->newsroom_id)) :
                         // This user is a newsroom admin.
                     ?>
-                    <li><a href="<?php echo UNL_ENews_Controller::getURL();?>?view=manager">Manage News</a>
+                    <li><a href="<?php echo $newsroom->getURL(); ?>/manage">Manage News</a>
                         <?php
                         if ($user_newsrooms = $user->getNewsrooms()) {
                             if (count($user_newsrooms)) {
                                 echo '<ul>';
                                 foreach ($user_newsrooms as $newsroom) {
-                                    echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=manager&amp;newsroom='.$newsroom->id.'">'.$newsroom->name.'</a></li>';
+                                    echo '<li><a href="'.$newsroom->getURL().'/manage">'.$newsroom->name.'</a></li>';
                                 }
                                 echo '</ul>';
                             }
