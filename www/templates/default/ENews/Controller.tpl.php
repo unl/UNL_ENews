@@ -76,7 +76,6 @@ if ($context->options['view'] == 'story'
                 <ul>
                     <?php
                     $user = UNL_ENews_Controller::getUser();
-                    $newsroom = UNL_ENews_Newsroom::getByID(1);
                     if ($user) {
                         $newsroom = UNL_ENews_Newsroom::getByID($user->newsroom_id);
                     }
@@ -85,6 +84,11 @@ if ($context->options['view'] == 'story'
                     }
                     if (isset($context->options['shortname'])) {
                         $newsroom = UNL_ENews_Newsroom::getByShortName($context->options['shortname']);
+                    }
+
+                    if (!$newsroom) {
+                        // Default newsroom
+                        $newsroom = UNL_ENews_Newsroom::getByID(1);
                     }
                     ?>
                     <li><a href="<?php echo $newsroom->getURL();?>"><?php echo $newsroom->name;?></a>
