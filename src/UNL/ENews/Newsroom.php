@@ -143,4 +143,29 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     {
         return $this->getURL().'/submit';
     }
+
+    public static function getByOptions($options)
+    {
+        if (isset($options['shortname'])) {
+            return self::getByShortname($options['shortname']);
+        }
+
+        $id = false;
+
+        if (isset($options['newsroom'])) {
+            $id = $options['newsroom'];
+        }
+        if (isset($options['newsroom_id'])) {
+            $id = $options['newsroom_id'];
+        }
+        if (isset($options['id'])) {
+            $id = $options['id'];
+        }
+
+        if ($id) {
+            return self::getById($id);
+        }
+
+        return false;
+    }
 }
