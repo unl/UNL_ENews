@@ -55,6 +55,12 @@ class UNL_ENews_Router
                 $options['view']         = 'manager';
                 $options['shortname']    = $matches[1];
                 break;
+            // Stories for a newsroom
+            case preg_match('/^([a-z]+)\/stories$/i', $requestURI, $matches):
+            case preg_match('/^([a-z]+)\/latest$/i', $requestURI, $matches):
+                $options['view']         = 'latest';
+                $options['shortname']    = $matches[1];
+                break;
             //For viewing the newest newsletter for a newsroom.
             case preg_match('/^([a-z]+)\/?$/i', $requestURI, $matches):
                 $options['view']         = 'newsletter';
