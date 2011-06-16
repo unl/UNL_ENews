@@ -4,12 +4,11 @@
     </h3>
     <ul>
         <?php foreach($context as $item) :?>
-        <li style="clear:both"><?php echo $savvy->render($item, 'ENews/Newsletter/Story.tpl.php'); ?></li>
+        <li style="clear:both"><?php echo $savvy->render($item); ?></li>
         <?php endforeach; ?>
     </ul>
 </div>
 <div class="col right">
     <a href="<?php echo $context->newsroom->getSubmitURL(); ?>">Submit News</a>
     <br />
-    
 </div>
