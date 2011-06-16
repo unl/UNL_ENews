@@ -8,7 +8,7 @@
     //]]>
     </script>
     <h3 class="zenform">Edit details for the current newsroom</h3>
-    <form class="zenform" action="?view=manager" method="post">
+    <form class="zenform" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=manager" method="post">
         <input type="hidden" name="_type" value="newsroom" />
         <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <fieldset>
@@ -59,7 +59,7 @@
     <?php
     foreach ($context->getUsers() as $user) {
         echo '<li><img class="profile_pic medium" src="http://planetred.unl.edu/pg/icon/unl_'.$user->uid.'/medium/" alt="Planet Red photo for '.$user->uid.'" />
-        <form action="?view=newsroom" method="post">
+        <form action="'.UNL_ENews_Controller::getURL().'?view=newsroom" method="post">
             <input type="hidden" name="newsroom_id" value="'.$context->id.'" />
             <input type="hidden" name="_type" value="removeuser" />
             <input type="hidden" name="user_uid" value="'.$user->uid.'" />
@@ -70,7 +70,7 @@
     }
     ?>
     </ul>
-    <form action="?view=newsroom" method="post" id="addUser" class="addData">
+    <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom" method="post" id="addUser" class="addData">
         <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <input type="hidden" name="_type" value="adduser" />
         <input type="text" name="user_uid" />
@@ -91,7 +91,7 @@
             		echo '<span class="details">Default</span>';
             	}
             	
-                echo '<form action="?view=newsroom" method="post">
+                echo '<form action="'.UNL_ENews_Controller::getURL().'?view=newsroom" method="post">
 		            <input type="hidden" name="email_id" value="'.$email->id.'" />
 		            <input type="hidden" name="_type" value="removeemail" />
 		            <input type="submit" value="X" />
@@ -100,7 +100,7 @@
         }
         ?>
     </ul>
-    <form action="?view=newsroom" method="post" id="addEmail" class="addData">
+    <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom" method="post" id="addEmail" class="addData">
         <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
         <input type="hidden" name="_type" value="addemail" />
         <input type="text" name="email" />
