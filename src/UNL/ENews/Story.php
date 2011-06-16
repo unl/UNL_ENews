@@ -140,7 +140,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
     function getFiles()
     {
         if (empty($this->id)) {
-            throw new Exception('This story doesn\'t have a valid ID.');
+            throw new Exception('This story doesn\'t have a valid ID.', 400);
         }
 
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
@@ -175,7 +175,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
                 $new = $file->saveHalfWidth();
                 break;
             default:
-                throw new Exception('I cannot create that for you.');
+                throw new Exception('I cannot create that for you.', 405);
             }
             if ($new) {
                 $this->addFile($new);
@@ -271,7 +271,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         $presentation = UNL_ENews_Story_Presentation::getByID($this->presentation_id);
 
         if (false == $presentation) {
-            throw new Exception('This story references a presentation type that is unknown!');
+            throw new Exception('This story references a presentation type that is unknown!', 500);
         }
         return $presentation;
     }

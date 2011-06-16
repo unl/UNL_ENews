@@ -137,7 +137,7 @@ class UNL_ENews_Controller
         self::$auth->login();
 
         if (!self::$auth->isLoggedIn()) {
-            throw new Exception('You must log in to view this resource!');
+            throw new Exception('You must log in to view this resource!', 401);
             exit();
         }
         self::$user = UNL_ENews_User::getByUID(self::$auth->getUser());
@@ -267,7 +267,7 @@ class UNL_ENews_Controller
     function run()
     {
          if (!isset($this->view_map[$this->options['view']])) {
-             throw new Exception('Un-registered view');
+             throw new Exception('Un-registered view', 404);
          }
          $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
     }

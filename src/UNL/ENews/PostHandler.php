@@ -51,10 +51,10 @@ class UNL_ENews_PostHandler
     {
         if (!empty($this->post['storyid'])) {
             if (!($story = UNL_ENews_Story::getByID($this->post['storyid']))) {
-                throw new Exception('The story could not be retrieved');
+                throw new Exception('The story could not be retrieved', 400);
             }
             if (!$story->userCanEdit(UNL_ENews_Controller::getUser(true))) {
-                throw new Exception('You cannot edit that story.');
+                throw new Exception('You cannot edit that story.', 401);
             }
         } else {
             $story = new UNL_ENews_Story;
@@ -74,7 +74,7 @@ class UNL_ENews_PostHandler
         }
 
         if (!$story->save()) {
-            throw new Exception('Could not save the story');
+            throw new Exception('Could not save the story', 500);
         }
 
         // Var to remember what the primary newsroom this story was submitted to
@@ -83,7 +83,7 @@ class UNL_ENews_PostHandler
         foreach ($this->post['newsroom_id'] as $id) {
             if (!empty($id)) {
                 if (!$newsroom = UNL_ENews_Newsroom::getByID($id)) {
-                    throw new Exception('Invalid newsroom selected');
+                    throw new Exception('Invalid newsroom selected', 404);
                 }
                 $status = 'pending';
                 if (UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($newsroom->id)) {
@@ -154,7 +154,7 @@ class UNL_ENews_PostHandler
     public function handleFile()
     {
         if ($this->files['image']['error'] != UPLOAD_ERR_OK) {
-            throw new Exception("Error Uploading File!");
+            throw new Exception("Error Uploading File!", 500);
         }
 
         $file = new UNL_ENews_File;
@@ -166,13 +166,13 @@ class UNL_ENews_PostHandler
 
         if (isset($this->options['ajaxupload'])) {
             if (!UNL_ENews_File::validFileName($this->files['image']['name'])) {
-                throw new Exception('Please Upload an Image in .jpg .png or .gif format.');
+                throw new Exception('Please Upload an Image in .jpg .png or .gif format.', 415);
             }
             $file->use_for = 'originalimage';
         }
 
         if (!$file->save()) {
-            throw new Exception('Error saving the file');
+            throw new Exception('Error saving the file', 500);
         }
 
         if (!isset($this->options['ajaxupload'])) {
@@ -187,7 +187,7 @@ class UNL_ENews_PostHandler
     function handleDeleteNewsletter()
     {
         if (!($newsletter = UNL_ENews_Newsletter::getByID($this->post['newsletter_id']))) {
-            throw new Exception('Invalid newsletter selected for delete');
+            throw new Exception('Invalid newsletter selected for delete', 410);
         }
 
         if (UNL_ENews_Controller::getUser(true)->hasNewsroomPermission($newsletter->newsroom_id)) {

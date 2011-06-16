@@ -146,7 +146,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     function removeEmail(UNL_ENews_Newsletter_Email $email)
     {
         if ($email->newsletter_id != $this->id) {
-            throw new Exception('That email doesn\'t belong to you. Take off, eh!');
+            throw new Exception('That email doesn\'t belong to you. Take off, eh!', 403);
         }
         return $email->delete();
     }
@@ -264,12 +264,12 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         switch ($from) {
             case 'today@unl.edu':
                 if (1 != $newsroom->id) {
-                    throw new Exception('You are not authorized to send email from that address.');
+                    throw new Exception('You are not authorized to send email from that address.', 403);
                 }
                 break;
             case 'nextnebraska@unl.edu':
                 if (5 != $newsroom->id) {
-                    throw new Exception('You are not authorized to send email from that address.');
+                    throw new Exception('You are not authorized to send email from that address.', 403);
                 }
                 break;
             default:

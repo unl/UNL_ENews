@@ -59,7 +59,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     function removeEmail(UNL_ENews_Newsroom_Email $email)
     {
         if ($email->newsroom_id != $this->id) {
-            throw new Exception('That email doesn\'t belong to you. Take off, eh!');
+            throw new Exception('That email doesn\'t belong to you. Take off, eh!', 403);
         }
         return $email->delete();
     }

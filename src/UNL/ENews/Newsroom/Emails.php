@@ -4,7 +4,7 @@ class UNL_ENews_Newsroom_Emails extends ArrayIterator implements Countable
     function __construct($options = array())
     {
         if (!isset($options['newsroom_id'])) {
-            throw new Exception('Whoah, what newsroom do you expect me to use here?');
+            throw new Exception('Whoah, what newsroom do you expect me to use here?', 400);
         }
         $emails = array();
         $mysqli = UNL_ENews_Controller::getDB();

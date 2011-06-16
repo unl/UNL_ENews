@@ -7,7 +7,7 @@ class UNL_ENews_Archive extends LimitIterator implements Countable
     function __construct($options = array())
     {
         if (!isset($options['shortname'])) {
-            throw new Exception('No shortname was provided.');
+            throw new Exception('No shortname was provided.', 400);
         }
 
         $this->options = $options + $this->options;
