@@ -1,6 +1,6 @@
 <?php $storylink = $context->getURL();?>
 <div class="article">
-	<h4><a href="<?=echo $storylink ?>" title="Read more about this story"><?php echo $context->title; ?></a></h4>
+	<h4><a href="<?php echo $storylink; ?>" title="Read more about this story"><?php echo $context->title; ?></a></h4>
 	<?php
     if ($file = $context->getThumbnail()) {
         $description = $file->name;
