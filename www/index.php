@@ -15,6 +15,10 @@ if ($enews->options['format'] != 'html') {
         case 'partial':
             Savvy_ClassToTemplateMapper::$output_template['UNL_ENews_Controller'] = 'ENews/Controller-partial';
             break;
+        case 'json':
+            header('Content-type:application/json');
+            $savvy->setTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
+            break;
         case 'rss':
         case 'text':
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
