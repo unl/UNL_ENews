@@ -1,7 +1,7 @@
 <h3 class="sec_main">
     <?php echo $context->newsroom->name;?>
     (<a href="<?php echo $context->newsroom->getURL();?>">Live View</a>, 
-     <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>?format=rss">RSS</a>
+     <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>/latest?format=rss">RSS</a>
     )
 </h3>
 
