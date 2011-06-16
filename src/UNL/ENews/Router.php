@@ -71,9 +71,6 @@ class UNL_ENews_Router
                 $options['view']         = 'archive';
                 $options['shortname']    = $matches[1];
                 break;
-            // Default view
-            case ($requestURI == $base):
-                break;
             default:
                 // No registered view matches.
                 $options['view'] = '404, missing view';
