@@ -1,4 +1,7 @@
 <div>
+<?php
+echo $context;
+?>
 <p>
 Too legit, too legit to quit<br>
 Too legit, too legit to quit<br>

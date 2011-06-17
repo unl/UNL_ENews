@@ -168,14 +168,12 @@ class UNL_ENews_Story extends UNL_ENews_Record
             case 'thumbnail':
                 $new = $file->saveThumbnail();
                 break;
-            case UNL_ENews_File_Image::MAX_WIDTH.'_wide':
-                $new = $file->saveMaxWidth();
-                break;
-            case UNL_ENews_File_Image::HALF_WIDTH.'_wide':
-                $new = $file->saveHalfWidth();
-                break;
             default:
-                throw new Exception('I cannot create that for you.', 405);
+                if (!preg_match('/([\d]+)_wide/', $use, $matches)) {
+                    throw new Exception('I cannot create that for you.', 405);
+                }
+                $method = 'save'.$matches[1].'Width';
+                $new = $file->$method();
             }
             if ($new) {
                 $this->addFile($new);

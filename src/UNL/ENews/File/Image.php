@@ -13,6 +13,18 @@ class UNL_ENews_File_Image extends UNL_ENews_File
     const MAX_WIDTH  = 556;
     const HALF_WIDTH = 273;
 
+    const GRID2_WIDTH  = 140;
+    const GRID3_WIDTH  = 222;
+    const GRID4_WIDTH  = 304;
+    const GRID5_WIDTH  = 386;
+    const GRID6_WIDTH  = 468;
+    const GRID7_WIDTH  = 550;
+    const GRID8_WIDTH  = 632;
+    const GRID9_WIDTH  = 714;
+    const GRID10_WIDTH = 796;
+    const GRID11_WIDTH = 878;
+    const GRID12_WIDTH = 960;
+
     // Max image size displayed to the user
     const THUMBNAIL_SELECTION_WIDTH = 410;
 
@@ -85,6 +97,24 @@ class UNL_ENews_File_Image extends UNL_ENews_File
     function saveHalfWidth()
     {
         return $this->saveVarWidth(self::HALF_WIDTH);
+    }
+
+    function __call($method, $args)
+    {
+        if (preg_match('/save([\w]+)Width/', $method, $matches)) {
+            $reflection = new ReflectionClass(__CLASS__);
+            $valid_sizes = $reflection->getConstants();
+            if (array_key_exists(strtoupper($matches[1].'_WIDTH'), $valid_sizes)) {
+                return $this->saveVarWidth($valid_sizes[strtoupper($matches[1].'_WIDTH')]);
+            }
+            $size = array_search($matches[1], $valid_sizes);
+            if (false !== strpos($size, '_WIDTH')) {
+                return $this->saveVarWidth($matches[1]);
+            }
+            throw new InvalidArgumentException('I cannot create that size image for you', 400);
+            
+        }
+        throw new RuntimeException('Invalid method call', 500);
     }
 
     protected function saveVarWidth($width)
