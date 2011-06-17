@@ -13,6 +13,7 @@ class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
         if (!$this->newsroom = UNL_ENews_Newsroom::getByOptions($options)) {
             throw new Exception('Newsroom not found', 404);
         }
+        $this->options = $options;
 
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
