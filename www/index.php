@@ -9,6 +9,9 @@ $enews = new UNL_ENews_Controller(UNL_ENews_Router::route($_SERVER['REQUEST_URI'
 
 $savvy = new UNL_ENews_OutputController();
 
+if (!isset($theme)) {
+    $theme = 'MockU';
+}
 
 if ($enews->options['format'] != 'html') {
     switch($enews->options['format']) {
@@ -26,6 +29,8 @@ if ($enews->options['format'] != 'html') {
         default:
             header('Content-type:text/html;charset=UTF-8');
     }
+} elseif (isset($theme)) {
+    $savvy->addTemplatePath(__DIR__ . '/themes/'.$theme);
 }
 
 // Always escape output, use $context->getRaw('var'); to get the raw data.
