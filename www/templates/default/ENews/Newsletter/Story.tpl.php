@@ -1,6 +1,7 @@
 <?php
 UNL_ENews_Controller::$sitetitle = $context->newsroom->name;
 $newsletter_url = $context->newsletter->getURL();
+/* @var $context UNL_ENews_Newsletter_Story */
 ?>
 <div class="three_col left">
     <?php echo $savvy->render($context->story); ?>
@@ -24,6 +25,22 @@ $newsletter_url = $context->newsletter->getURL();
         }
         ?>
         </ul>
+      </div>
+      <div class="newsletters">
+		<?php
+		$newsletters = $context->story->getNewsletters();
+		// No sense in showing just the current newsletter
+		if (count($newsletters) > 1) {
+		    echo '
+		    <h3>Other newsletters including this story</h3>
+		    <ul>';
+    		foreach ($newsletters as $newsletter) {
+    		    /* @var $newsletter UNL_ENews_Newsletter */
+    		    echo '<li><a href="'.$newsletter->getURL().'">'.$newsletter->subject.'</a></li>';
+    		}
+    		echo '</ul>';
+		}
+		?>
       </div>
   </div>
   <div class="sidebar bottom">
