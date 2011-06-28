@@ -202,4 +202,11 @@ if (!$result) {
     exit();
 }
 
+echo 'Adding subtitle field to newsrooms...<br />';
+$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `subtitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL AFTER `name`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />';
+    }
+}
 echo 'Upgrade complete!';

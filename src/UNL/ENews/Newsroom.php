@@ -5,6 +5,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     public $name;
 
+    public $subtitle;
+
     public $shortname;
 
     public $website;
