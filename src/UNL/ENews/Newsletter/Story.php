@@ -36,6 +36,18 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
      */
     public $intro;
 
+    /**
+     * @var $story      UNL_ENews_Story
+     * @var $newsletter UNL_ENews_Newsletter
+     */
+
+    /**
+     * Constructor
+     *
+     * @param array $options
+     *
+     * @throws Exception
+     */
     function __construct($options = array())
     {
         //Check to make sure the story is valid for the given newsroom.
