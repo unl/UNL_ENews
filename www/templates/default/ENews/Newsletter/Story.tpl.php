@@ -26,15 +26,16 @@ $newsletter_url = $context->newsletter->getURL();
         ?>
         </ul>
       </div>
-      <div class="newsletters">
+      <div class="inner_sidebar newsletters">
 		<?php
 		$newsletters = $context->story->getNewsletters();
+		$published = new UNL_ENews_NewsletterList_PublishedFilter($newsletters->getRawObject());
 		// No sense in showing just the current newsletter
-		if (count($newsletters) > 1) {
+		if (count($published)) {
 		    echo '
-		    <h3>Other newsletters including this story</h3>
+		    <h3>Newsletters including this story</h3>
 		    <ul>';
-    		foreach ($newsletters as $newsletter) {
+    		foreach ($published as $newsletter) {
     		    /* @var $newsletter UNL_ENews_Newsletter */
     		    echo '<li><a href="'.$newsletter->getURL().'">'.$newsletter->subject.'</a></li>';
     		}
