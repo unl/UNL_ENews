@@ -14,8 +14,8 @@ $newsletter_url = $context->newsletter->getURL();
               <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
               </span>
               </a>
-          </h3>
-          <ul>
+		</h3>
+		<ul>
         <?php 
         foreach ($context->newsletter->getStories() as $key => $story) {
             if ($story->presentation->type != 'ad') {
