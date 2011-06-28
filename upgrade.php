@@ -42,6 +42,14 @@ if (!$result) {
     exit();
 }
 
+echo 'Adding subtitle field to newsrooms...<br />'.PHP_EOL;
+$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `subtitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL AFTER `name`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />'.PHP_EOL;
+    }
+}
+
 /*
 // @todo add a newsroom for all the others here, unltoday, scarlet, etc?
 if (UNL_ENews_Newsroom::getByID(2) === false) {
@@ -202,11 +210,4 @@ if (!$result) {
     exit();
 }
 
-echo 'Adding subtitle field to newsrooms...<br />'.PHP_EOL;
-$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `subtitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL AFTER `name`;");
-if (!$result) {
-    if (mysqli_errno($mysqli) == 1060) {
-        echo 'Field already has been added<br />'.PHP_EOL;
-    }
-}
 echo 'Upgrade complete!';
