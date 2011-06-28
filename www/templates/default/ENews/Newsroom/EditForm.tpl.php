@@ -23,6 +23,13 @@
                         <input type="text" id="name" name="name" value="<?php echo $context->name; ?>" />
                     </li>
                     <li>
+                        <label for="subtitle">
+                            Subtitle
+                            <span class="helper">A short string used as a subheading or subtitle for your newsletters</span>
+                        </label>
+                        <input type="text" id="subtitle" name="subtitle" value="<?php echo $context->subtitle; ?>" />
+                    </li>
+                    <li>
                         <label for="shortname">
                             <span class="required">*</span>
                             Short Name
