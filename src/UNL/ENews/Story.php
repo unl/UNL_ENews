@@ -189,6 +189,11 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return UNL_ENews_Controller::getURL().'?view=story&id='.$this->id;
     }
 
+    function getEditURL()
+    {
+        return UNL_ENews_Controller::getURL().'?view=submit&id='.$this->id;
+    }
+
     /**
      * Gets the thumbnail, if any
      *
