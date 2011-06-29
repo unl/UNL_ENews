@@ -7,13 +7,16 @@ class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
      * @var UNL_ENews_Newsroom
      */
     public $newsroom;
-    
+
+    public $options = array('offset' => 0,
+                            'limit'  => -1);
+
     function __construct($options = array())
     {
         if (!$this->newsroom = UNL_ENews_Newsroom::getByOptions($options)) {
             throw new Exception('Newsroom not found', 404);
         }
-        $this->options = $options;
+        $this->options = $options + $this->options;
 
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
@@ -33,7 +36,7 @@ class UNL_ENews_StoryList_Latest extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        parent::__construct($stories);
+        parent::__construct($stories, $this->options['offset'], $this->options['limit']);
     }
     
 }
