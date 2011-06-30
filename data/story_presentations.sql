@@ -6,5 +6,6 @@ INSERT INTO `story_presentations` (`id`, `type`, `isdefault`, `description`, `te
 (5, 'event', 0, 'Thumbnail floated right', 'Event/ThumbnailFloatedRight.tpl.php'),
 (6, 'ad', 1, 'Full-Width image only', 'Ad/FullImage.tpl.php'),
 -- 7 was reserved for an invalid ad presentation
-(8, 'event', 0, 'Full-Width image above text', 'Event/FullColImage.tpl.php')
+(8, 'event', 0, 'Full-Width image above text', 'Event/FullColImage.tpl.php'),
+(9, 'news', 0, 'Full-Text and Full-Width image above', 'News/FullTextFullColImage.tpl.php')
     ON DUPLICATE KEY UPDATE template=VALUES(template), type=VALUES(type), isdefault=VALUES(isdefault), description=VALUES(description);
