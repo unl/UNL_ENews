@@ -279,16 +279,47 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return $presentation;
     }
 
-    function hasNotExpired()
+    function hasNotExpired($time = null)
     {
-        $now = time();
+        if ($time == null) {
+            $time = time();
+        }
 
         $end_time = substr($this->request_publish_end, 0, 10).' + 1 day';
-        if ($now > strtotime($end_time)) {
+        if ($time > strtotime($end_time)) {
             // Expired content/advertisement
             return false;
         }
 
         return true;
+    }
+
+    function pastPublishStart($time = null)
+    {
+        if ($time == null) {
+            $time = time();
+        }
+
+        $start = strtotime($this->request_publish_start);
+        if (false !== $start
+            && $start < $time) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function withinPublishRange($time = null)
+    {
+        if ($time == null) {
+            $time = time();
+        }
+
+        if ($this->pastPublishStart($time)
+            && $this->hasNotExpired($time)) {
+            return true;
+        }
+
+        return false;
     }
 }
