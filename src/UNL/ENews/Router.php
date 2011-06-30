@@ -25,6 +25,13 @@ class UNL_ENews_Router
                 $options['id']           = $matches[1];
                 $options['content-type'] = $matches[2];
                 break;
+
+            // Story direct URL, no newsroom association
+            case preg_match('/^stories\/([\d]+)$/', $requestURI, $matches):
+                $options['view']         = 'story';
+                $options['id']           = $matches[1];
+                break;
+
             //For calling a story.  url = www/newsRoomShortName/newsletterID/storyID/summary
             case preg_match('/^([a-z]+)\/([\d]+)\/([\d]+)\/summary$/i', $requestURI, $matches):
                 $options['view']          = 'storySummary';
