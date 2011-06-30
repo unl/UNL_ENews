@@ -29,7 +29,7 @@ class UNL_ENews_Controller
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
                                 'storySummary'       => 'UNL_ENews_Newsletter_Story_Summary',
                                 'presentationList'   => 'UNL_ENews_PresentationLister',
-                                'story'              => 'UNL_ENews_Story',
+                                'story'              => 'UNL_ENews_PublishedStory',
                                 'latest'             => 'UNL_ENews_StoryList_Latest',
                                 'submit'             => 'UNL_ENews_Submission',
                                 'mynews'             => 'UNL_ENews_User_StoryList',
