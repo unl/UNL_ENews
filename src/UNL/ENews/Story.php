@@ -186,7 +186,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
     function getURL()
     {
-        return UNL_ENews_Controller::getURL().'?view=story&id='.$this->id;
+        return UNL_ENews_Controller::getURL().'stories/'.$this->id;
     }
 
     function getEditURL()
