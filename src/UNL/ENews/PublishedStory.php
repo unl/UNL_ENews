@@ -23,7 +23,7 @@ class UNL_ENews_PublishedStory extends UNL_ENews_Story
         }
 
         // We must be past the start date
-        if ($this->getTypeString() == 'ad'
+        if ($this->getPresentationTypeString() == 'ad'
             && false === $this->hasNotExpired()) {
             throw new Exception('That advertisement is no longer available to the public.', 400);
         }
