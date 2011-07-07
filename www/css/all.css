@@ -71,7 +71,7 @@
 }
 #maincontent .enews fieldset ol li span.required {
 	position:absolute;
-	left:8px;
+	left:0;
 	text-indent:-9999px;
 	margin-top:-17px;
 	background:url('images/requiredIndicator.png') no-repeat top right;
@@ -96,20 +96,17 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	text-align:center;
 	margin:11px 0 20px 0px;
 	display:inline-block;
-	padding-left:110px;
-}
-#maincontent .enews.showAd .option_step {
-	padding-left:0;
+	width:100%;
+	padding:0;
 }
 #maincontent .enews .option_step li {
 	display:inline;
-	margin:0 0 0 15px;
 	float:left;
 	padding:0;
-	width:340px;
+	width:50%;
 }
 #maincontent .enews.showAd .option_step li {
-	width:290px;
+	width:33%;
 }
 #maincontent .enews .option_step li a {
 	display:block;
@@ -118,6 +115,7 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 	border:1px solid #b8afa1;
 	border-radius:5px;
 	text-indent:-9999px;
+	margin: 0 auto;
 }
 #maincontent .enews p.nextStep {
 	margin-top: 0px;

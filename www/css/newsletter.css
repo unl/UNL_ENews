@@ -250,7 +250,10 @@
 	float:left;
 }
 #newsletterDetails .email_addresses ul li label {display:inline;font-size:1em;font-weight:normal;}
-/* Newsletter Email Preview
+/* 
+
+Newsletter Email Preview (for building the newsletter)
+
 ************************/
 #maincontent .newsColumn, #maincontent .adArea {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
