@@ -349,6 +349,9 @@ class UNL_ENews_Controller
             $data = str_replace('<title>UNL | Announce </title>',
                                 '<title>UNL | Announce | '.self::$pagetitle['dynamic'].'</title>',
                                 $data);
+            $data = str_replace('<h2></h2>',
+                                '<h2>'.self::$pagetitle['dynamic'].'</h2>',
+                                $data);
         }
     	if (isset(self::$sitetitle)) {
             $data = str_replace('<h1>UNL Announce</h1>',

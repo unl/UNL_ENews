@@ -5,6 +5,9 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code.' '.$context->getMessage());
     header('Status: '.$code.' '.$context->getMessage());
 }
+
+UNL_ENews_Controller::setReplacementData('pagetitle', 'Uhoh, we got probrem.');
+UNL_ENews_Controller::setReplacementData('sitetitle', 'Uhoh, we got probrem');
 ?>
 
 <script type="text/javascript">
