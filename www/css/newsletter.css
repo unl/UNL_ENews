@@ -146,15 +146,17 @@
 ************************/
 #newsletterDetails {
 	background:#F1EDE0;
-    border-radius:10px;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+	padding:20px;
     display:inline-block;
-    padding:20px;
 }
-#newsletterDetails form {
-	width:600px;
-	float:left;
+#newsletterDetails .grid8 {
+    width:622px
+}
+#newsletterDetails .grid4 {
+    width:274px
 }
 #newsletterDetails form fieldset {
 	padding:0;
@@ -207,10 +209,7 @@
 }
 #newsletterDetails form + a.action {display:none;}
 #newsletterDetails .email_addresses {
-	float:right;
-	width:280px;
-	padding-left:20px;
-    position:relative;
+	
 }
 #newsletterDetails .email_addresses h5 {
     color:#705538;
@@ -218,8 +217,8 @@
     font-weight:bold;
     margin-bottom:9px;
     position:absolute;
-    right:-20px;
-    top:-20px;
+    right:0px;
+    top:0px;
     background:#f5f4ef;
     padding:8px 8px 5px 8px;
 	-moz-border-radius-topright: 10px;

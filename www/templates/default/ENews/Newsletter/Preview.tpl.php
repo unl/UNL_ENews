@@ -16,7 +16,7 @@
 </script>
 
 <div id="newsletterDetails">
-	<form method="post" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" id="detailsForm">
+	<form class="grid8 first" method="post" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" id="detailsForm">
 	    <fieldset style="float:left">
 	    <legend>Your Newsletter</legend>
 	    <ol style="margin-top:0">
@@ -36,7 +36,7 @@
 	    <a class="action preview" href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
 	</form>
 	<?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-    <div class="email_addresses">
+    <div class="email_addresses grid4">
         <h5>Email Listservs</h5>
         <ul>
             <?php
@@ -72,7 +72,7 @@
         </ul>
     </div>
 </div>
-<div class="col left" id="drag_story_list">
+<div class="first grid4" id="drag_story_list">
 <?php $stories = $context->getRaw('available_stories'); ?>
 <?php foreach (array('news', 'event', 'ad') as $type): ?>
     <div id="<?php echo $type; ?>Available">
@@ -83,7 +83,7 @@
     </div>
 <?php endforeach; ?>
 </div>
-<div class="three_col right">
+<div class="grid8">
 	<?php $context->newsletter->options = array('preview' => true); ?>
     <?php echo $savvy->render($context->newsletter, 'templates/email/ENews/Newsletter.tpl.php'); ?>
 </div>
