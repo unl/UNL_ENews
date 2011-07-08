@@ -20,7 +20,7 @@ WDN.initializePlugin('notice');
 <?php 
 endif;
 ?>
-<div class="three_col left">
+<div class="grid8 first">
 <h3 class="sec_main">
     <?php echo $context->subject; ?>
 </h3>
@@ -34,6 +34,6 @@ endif;
     </div>
 </div>
 </div>
-<div class="col right">
+<div class="grid4">
     <?php echo $savvy->render($context, 'ENews/Newsletter/SidebarNav.tpl.php'); ?>
 </div>

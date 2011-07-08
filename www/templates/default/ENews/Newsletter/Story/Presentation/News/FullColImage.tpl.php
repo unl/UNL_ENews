@@ -3,13 +3,17 @@ $storylink = $context->getURL();
 
 if ($file = $context->getFileByUse('originalimage')) {
     $description = $file->name;
-    $width = $context->getColFromSort() == 'twocol' ? 690 : 336;
+    $width = $context->getColFromSort();
     if (!empty($file->description)) {
         $description = $file->description;
     }
-    echo '<a href="'.$storylink.'">'
-         . '<img src="'.$file->getURL()
-         . '" style="margin-bottom:5px;width:'. $width .'px;" class="frame" alt="'.$description.'" /></a>';
+    echo '<figure class="'. $width .'">'
+         .'<a href="'.$storylink.'">'
+    	 .'<img src="'.$file->getURL()
+         . '" alt="'.$description.'" />'
+         .'</a>'
+         .'<figcaption>'.$description.'</figcaption>'
+         .'</figure>';
 }
 ?>
 <h4>

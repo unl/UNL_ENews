@@ -43,7 +43,7 @@
 #maincontent #newsletterWeb .story img {
 	margin-bottom:0;
 }
-#maincontent #newsletterWeb .story img:hover {
+#maincontent #newsletterWeb .story img.frame:hover {
    border: solid 1px #CCC;
    -moz-box-shadow: 1px 1px 5px #999;
    -webkit-box-shadow: 1px 1px 5px #999;

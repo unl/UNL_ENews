@@ -18,14 +18,14 @@
     }
     ?>
     <?php if ($displayColumn): ?>
-    <div style="width:340px;padding:0 10px 0 0;float:left;">
+    <div class="grid4 first">
         <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
             'area' => $area,
             'offset' => 2,
             'web' => true
         ))); ?>
     </div>
-    <div style="width:340px;padding:0 0 0 10px;float:right;">
+    <div class="grid4">
         <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
             'area' => $area,
             'offset' => 0,

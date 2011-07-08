@@ -2,12 +2,15 @@
 
 if ($file = $context->getFileByUse('originalimage')) {
     $description = $file->name;
-    $width = $context->getColFromSort() == 'twocol' ? 690 : 336;
+    $width = $context->getColFromSort();
     if (!empty($file->description)) {
         $description = $file->description;
     }
-    echo '<img src="'.$file->getURL()
-         . '" style="margin-bottom:5px;width:'. $width .'px;" class="frame" alt="'.$description.'" />';
+    echo '<figure class="'. $width .'">'
+    	 .'<img src="'.$file->getURL()
+         . '" alt="'.$description.'" />'
+         .'<figcaption>'.$description.'</figcaption>'
+         .'</figure>';
 }
 ?>
 <h4>
