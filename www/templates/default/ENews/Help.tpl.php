@@ -1,50 +1,4 @@
-<style type="text/css">
-dt {
-    font-weight: bold;
-    font-size:1.3em;
-    padding:10px 0 0 0;
-    margin-left:60px;
-    border-bottom:1px solid #efefef;
-}
-dt:before {
-     content: "Q:";
-     font-size: 2.5em;
-     font-family: Georgia, "Times New Roman", Times, serif;
-     margin-right: 7px;
-     padding: 0 8px 5px 8px;
-     color: #ccc;
-     font-weight: normal;
-     margin-left: -65px;
-     position: relative;
-     top: 3px;
-}
- 
-dd {
-    padding:10px 0 0 0;
-    margin-left:94px;
-    line-height: 150%;
-    min-height:50px;
-}
-
-dd:before {
-     content: "A:";
-     font-size: 2.5em;
-     font-family: Georgia, "Times New Roman", Times, serif;
-     margin-right: 14px;
-     padding: 0 9px;
-     color: #FFF;
-     background-color: #ccc;
-     margin-left: -65px;
-     position: relative;
-     top: 13px;
-     border-radius:3px;
-     -moz-border-radius:3px;
-     -webkit-border-radius:3px;
-}
-#maincontent dd p+ul {padding-left:20px;}
-</style>
-
-<div class="three_col left">
+<div class="grid8 first">
     <ul class="wdn_tabs">
         <li><a href="#questions">Questions About Submissions</a></li>
         <li><a href="#styleguide">Style Guide</a></li>
@@ -185,11 +139,13 @@ dd:before {
         </div>
     </div>
 </div>
-<div class="col right zenbox primary">
-    <h3>Who To Contact</h3>
-    <?php
-    // @TODO, each newsroom needs a contact person. Then loop through all the newsrooms.
-    ?>
-    <p>For Today@UNL questions, contact Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059.</p>
-    <p>For student enews questions, contact Christopher Dulac.</p>
+<div class="grid4">
+	<div class="zenbox primary">
+	    <h3>Who To Contact</h3>
+	    <?php
+	    // @TODO, each newsroom needs a contact person. Then loop through all the newsrooms.
+	    ?>
+	    <p>For Today@UNL questions, contact Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059.</p>
+	    <p>For student enews questions, contact Christopher Dulac.</p>
+    </div>
 </div>
