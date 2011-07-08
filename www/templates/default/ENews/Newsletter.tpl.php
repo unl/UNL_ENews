@@ -7,23 +7,20 @@ if (isset($_GET['_type']) && $_GET['_type'] == 'subscribed') : ?>
 WDN.initializePlugin('notice');
 </script>
 <div class="wdn_notice affirm">
-	<div class="close">
-		<a href="#" title="Close this notice">Close this notice</a>
-	</div>
-	<div class="message">
-		<h4>Almost there!</h4>
-	    <p>We have received your subscription request. An email has been sent to your address asking you to confirm. Simply click the confimation link in
-	    that email, and you'll be set.
-	    </p>
-	</div>
+    <div class="close">
+        <a href="#" title="Close this notice">Close this notice</a>
+    </div>
+    <div class="message">
+        <h4>Almost there!</h4>
+        <p>We have received your subscription request. An email has been sent to your address asking you to confirm. Simply click the confimation link in
+        that email, and you'll be set.
+        </p>
+    </div>
 </div>
-<?php 
+<?php
 endif;
 ?>
 <div class="grid8 first">
-<h3 class="sec_main">
-    <?php echo $context->subject; ?>
-</h3>
 <div id="newsletterWeb">
     <?php echo $savvy->render($context->getStories(), 'ENews/Newsletter/StoriesWeb.tpl.php'); ?>
 
