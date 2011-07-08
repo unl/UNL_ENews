@@ -52,7 +52,7 @@
 #maincontent img.spacer {display:none;}
 
 .sidebar {
-	background: #AC0302; /* old browsers */
+	background: #B70302;
     padding:5px;
     border-radius:10px;
     -moz-border-radius:10px;
@@ -126,9 +126,9 @@
 #maincontent .inner_sidebar label {display:none;}
 #maincontent .inner_sidebar input[type="email"] {
     display:block;
-    width:84%;
+    width:100%;
     border:1px solid #025176;
-    padding:5px 5px 5px 25px;
+    padding:5px 0px 5px 0px;
     font-size:1.06em;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
 }
