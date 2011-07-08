@@ -11,22 +11,22 @@
     <td align="center" valign="top">
         <table width="600" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td rowspan="3">
+                        <td rowspan="3" background="http://www.unl.edu/wdn/templates_3.0/images/email/email2_07.gif" valign="top">
                             <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_01.gif" width="22" height="95" alt="Left header slice" /></td>
-                        <td rowspan="2">
+                        <td rowspan="2" valign="top">
                             <a href="http://www.unl.edu/" style="outline:none;display:block;">
                                 <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_02.gif" width="67" height="70" alt="Red N" />
                             </a>
                         </td>
-                        <td>
+                        <td valign="top">
                             <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_03.gif" width="489" height="31" alt="University of Nebraska-Lincoln" />
                         </td>
-                        <td rowspan="3">
+                        <td rowspan="3" background="http://www.unl.edu/wdn/templates_3.0/images/email/email2_09.gif" valign="top">
                             <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_04.gif" width="22" height="95" alt="Right header slice" /></td>
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="color:#565656;font-family:arial;text-decoration:none;font-size:21px;line-height:1;font-weight:bold;margin:0;padding-top:3px;padding-bottom:0px;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
+                            <h1 style="color:#565656;font-family:arial;text-decoration:none;font-size:28px;line-height:1;font-weight:bold;margin:0;margin-top:3px;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
                             <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
                             	<h2 style="color:#565656;font-family:arial;text-decoration:none;font-size:10px;line-height:1;font-weight:normal;margin:0;padding-top:2px;padding-bottom:0;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
                             <?php endif;?>
