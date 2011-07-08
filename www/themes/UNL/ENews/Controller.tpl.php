@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><!-- InstanceBegin template="/Templates/php.fixed.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- InstanceBegin template="/Templates/fixed_html5.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <!--
     Membership and regular participation in the UNL Web Developer Network
@@ -13,19 +14,16 @@
     create a derivative work.
     This message may not be removed from any pages based on the UNL site template.
 
-    $Id: php.fixed.dwt.php 536 2009-07-23 15:47:30Z bbieber2 $
+    $Id: fixed_html5.dwt 1918 2011-07-07 15:59:13Z bbieber2 $
 -->
 <link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo UNL_ENews_Controller::getURL();?>css/all.css" />
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/browserspecifics.html'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/metanfavico.html'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/browserspecifics_html5.html'; ?>
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | Announce <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
-<link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="UNL Announce" />
-<link rel="logout" href="<?php echo UNL_ENews_Controller::getURL();?>?logout" title="Log out" />
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
 </script>
@@ -44,7 +42,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
 <!-- InstanceEndEditable -->
 </head>
 <?php
-$body_class = 'fixed';
+$body_class = 'html5 fixed';
 if ($context->options['view'] == 'story'
     && true == isset($_SERVER['HTTP_USER_AGENT'])
     && false !== strpos($_SERVER['HTTP_USER_AGENT'], 'Gecko/2008')) {
