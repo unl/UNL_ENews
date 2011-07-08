@@ -124,7 +124,7 @@
 	color:#fff;
 }
 #maincontent .inner_sidebar label {display:none;}
-#maincontent .inner_sidebar input[type="text"] {
+#maincontent .inner_sidebar input[type="email"] {
     display:block;
     width:84%;
     border:1px solid #025176;
