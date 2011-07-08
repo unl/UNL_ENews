@@ -1,8 +1,6 @@
 <?php
 UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
 ?>
-
-<div style="float:right;width:310px;margin:0 0 20px 10px;">
 <?php
 foreach ($context->getFiles() as $file) {
     if (preg_match('/^image/', $file->type) && $file->use_for == 'originalimage') {
@@ -12,15 +10,16 @@ foreach ($context->getFiles() as $file) {
             $description = $file->description;
         }
 
-        echo '<img src="'.$file->getURL()
-             . '" style="max-width:300px;" class="frame" alt="'.$description.'" />';
-        if (!empty($file->description)) {
-            echo '<p class="caption">'.$file->description.'</p>';
-        }
+        echo '<figure class="half">'
+        	 . '<img src="'.$file->getURL()
+             . '" alt="'.$description.'" />';
+	         if (!empty($file->description)) {
+	             echo '<figcaption>'.$file->description.'</figcaption>';
+	         }
+	    echo '</figure>';
     }
 }
 ?>
-</div>
 
 <?php $full = trim($context->full_article); ?>
 <?php if (!empty($full)) : ?>

@@ -3,9 +3,9 @@ UNL_ENews_Controller::$sitetitle = $context->newsroom->name;
 $newsletter_url = $context->newsletter->getURL();
 /* @var $context UNL_ENews_Newsletter_Story */
 ?>
-<div class="grid8 first">
+<article class="grid8 first">
     <?php echo $savvy->render($context->story); ?>
-</div>
+</article>
 <div class="grid4">
     <div class="sidebar top">
       <div class="inner_sidebar">
