@@ -1,5 +1,5 @@
 form#enewsManage {
-	width:940px;
+	width:100%;
 }
 form#enewsManage .btnsubmit {
 	display:none !important;
@@ -80,7 +80,7 @@ form#enewsManage .btnsubmit {
 *************************/
 
 #maincontent .functionTable {
-	width:940px;
+	width:100%;
 }
 #maincontent .functionTable thead {
 	background-image:-webkit-gradient(
