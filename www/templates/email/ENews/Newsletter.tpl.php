@@ -96,7 +96,7 @@
 		                        </td>
 		                    </tr>
 		                    <tr background="EEEEEE">
-			                    <td colspan="4" valign="top">
+			                    <td colspan="4" valign="top" style="line-height:0;">
 			                        <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email3_10.gif" width="600" height="51" alt="N Seal" />
 			                    </td>
 			                </tr>
