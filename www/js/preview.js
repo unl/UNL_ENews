@@ -30,11 +30,11 @@ var preview = function($) {
 	return {
 		initialize : function() {
 			$(function() {
-				$('table .story').each(function(){ //add the tools to all the stories on the page
+				$('.story').each(function(){ //add the tools to all the stories on the page
 					preview.setupTools(this);
 				});
 				// stop actions on all links in a story
-				$('table .story .story-content a').live('click', function(e) {
+				$('.story .story-content a').live('click', function(e) {
 					return false;
 				})
 				WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
@@ -195,7 +195,7 @@ var preview = function($) {
 		},
 		
 		setupToolsHover : function(el){
-			el = el || $('#maincontent table .story');
+			el = el || $('#maincontent .story');
 			var hoverConfig = {
 				over : function() { 
 					$(this).children('.storyTools').fadeIn(800);

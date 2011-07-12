@@ -257,25 +257,85 @@
 	float:left;
 }
 #newsletterDetails .email_addresses ul li label {display:inline;font-size:1em;font-weight:normal;}
+
 /* 
 
 Newsletter Email Preview (for building the newsletter)
 
 ************************/
+#previewWrapper {
+    text-align:center;	
+    margin-top:10px;
+}
+#preview {
+    width:576px;
+    max-width:576px;
+    border:12px solid #eee;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    text-align:left;
+}
+#previewWrapper > a {
+    font-size:9px;	
+}
+#preview header {
+    background:url('images/previewHeader.png') no-repeat;
+    min-height: 27px;
+    padding:25px 0 5px 76px;
+}
+#preview header hgroup{
+	margin:auto 0;
+}
+#preview header * {
+    margin:auto 0;
+    padding:0;	
+}
+#preview header h1 {
+    font-size:28px;
+    line-height:100%;
+    font-weight:bold;
+}
+#preview header h2 {
+    font-size:10px;	
+    line-height:100%;
+}
+#preview #previewContent {
+    padding : 30px 10px 0 10px;
+    background:#fff url('images/previewRedBar.png') no-repeat 10px 0;   
+    display:inline-block;
+}
+#preview #previewContent time {
+    margin:15px 0 10px 0;
+    font-size:12px;
+    color:#909090;	
+    display:block;
+}
+#preview footer {
+    background:#eee url('images/previewFooter.png') no-repeat 0 0;	
+    padding:51px 10px 10px;
+    font-size:10px;
+    line-height:1.4em;
+    color:#606060;
+}
+#preview footer img {
+    float:right;
+    margin-right:10px;	
+}
 #maincontent .newsColumn, #maincontent .adArea {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
-#maincontent table .story {
+#maincontent .story {
 	cursor:move;
 	position:relative;
 	margin-top:0px;
-	margin-bottom:10px;
+	margin-bottom:15px;
 	display:block !important;
 }
-#newsStories .newsColumn {
+#newsColumn1, #newsColumn2 {
 	float:left;
 	width: 273px;
 }
-#newsStories #newsColumn2 {float:right;}
+#newsColumn2 {float:right;}
 
 
 /*Story Dragging */
