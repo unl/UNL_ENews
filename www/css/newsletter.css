@@ -275,6 +275,7 @@ Newsletter Email Preview (for building the newsletter)
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
     text-align:left;
+    margin:0 auto;
 }
 #previewWrapper > a {
     font-size:9px;	
