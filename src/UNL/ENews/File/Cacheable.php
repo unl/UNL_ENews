@@ -17,9 +17,9 @@ class UNL_ENews_File_Cacheable extends UNL_ENews_File implements UNL_ENews_Cache
 
     function preRun($cached)
     {
-        if (isset($this->options['content-type'])) {
+        if (isset($this->options['content_type'])) {
             $type = 'image/jpeg';
-            switch($this->options['content-type']) {
+            switch($this->options['content_type']) {
                 case 'png':
                     $type ='image/png';
                     break;
@@ -36,8 +36,8 @@ class UNL_ENews_File_Cacheable extends UNL_ENews_File implements UNL_ENews_Cache
 
     function getCacheKey()
     {
-        if (isset($this->options['id'], $this->options['content-type'])) {
-            return __CLASS__.$this->options['id'].$this->options['content-type'];
+        if (isset($this->options['id'], $this->options['content_type'])) {
+            return __CLASS__.$this->options['id'].$this->options['content_type'];
         }
 
         // No clue what key to give for this file

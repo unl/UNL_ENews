@@ -5,7 +5,13 @@ if (file_exists('config.inc.php')) {
     require 'config.sample.php';
 }
 
-$enews = new UNL_ENews_Controller(UNL_ENews_Router::route($_SERVER['REQUEST_URI']) + $_GET);
+$routes = include __DIR__ . '/../data/routes.php';
+UNL_ENews_Router::setRoutes($routes);
+if (isset($_GET['model'])) {
+    unset($_GET['model']);
+}
+
+$enews = new UNL_ENews_Controller(UNL_ENews_Router::route($_SERVER['REQUEST_URI'], $_GET));
 
 $savvy = new UNL_ENews_OutputController();
 

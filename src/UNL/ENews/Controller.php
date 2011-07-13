@@ -7,34 +7,6 @@ class UNL_ENews_Controller
      */
     public $options = array('view' => 'submit', 'format' => 'html');
 
-    /**
-     * A map of views to models
-     *
-     * @var array(view=>CLASSNAME)
-     */
-    protected $view_map = array(
-                                'archive'            => 'UNL_ENews_Archive',
-                                'thanks'             => 'UNL_ENews_Confirmation',
-                                'sendnews'           => 'UNL_ENews_EmailDistributor',
-                                'file'               => 'UNL_ENews_File_Cacheable',
-                                'gastats'            => 'UNL_ENews_GAStats',
-                                'help'               => 'UNL_ENews_Help',
-                                'manager'            => 'UNL_ENews_Manager',
-                                'newsroom'           => 'UNL_ENews_Newsroom_EditForm',
-                                'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
-                                'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
-                                'preview'            => 'UNL_ENews_Newsletter_Preview',
-                                'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
-                                'newsletter'         => 'UNL_ENews_Newsletter_Public',
-                                'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
-                                'storySummary'       => 'UNL_ENews_Newsletter_Story_Summary',
-                                'presentationList'   => 'UNL_ENews_PresentationLister',
-                                'story'              => 'UNL_ENews_PublishedStory',
-                                'latest'             => 'UNL_ENews_StoryList_Latest',
-                                'submit'             => 'UNL_ENews_Submission',
-                                'mynews'             => 'UNL_ENews_User_StoryList',
-    );
-
     public static $pagetitle = array('latest'      => 'Latest News',
                                      'mynews'      => 'Your News Submissions',
                                      'submit'      => 'Submit an Item',
@@ -266,10 +238,10 @@ class UNL_ENews_Controller
      */
     function run()
     {
-         if (!isset($this->view_map[$this->options['view']])) {
+         if (!isset($this->options['model'])) {
              throw new Exception('Un-registered view', 404);
          }
-         $this->actionable[] = new $this->view_map[$this->options['view']]($this->options);
+         $this->actionable[] = new $this->options['model']($this->options);
     }
 
     /**
