@@ -14,12 +14,14 @@
 			</hgroup>
 		</header>
 		<div id="previewContent">
-			<time class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></time>
-			<?php
-				$stories = $context->getStories();
-				$stories->setIsPreview(true);
-				echo $savvy->render($stories, 'templates/default/ENews/Newsletter/Stories.tpl.php');
-			?>
+			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></time>
+				<table>
+				<?php
+					$stories = $context->getStories();
+					$stories->setIsPreview(true);
+					echo $savvy->render($stories, 'templates/default/ENews/Newsletter/Stories.tpl.php');
+				?>
+				</table>
 		</div>
 		<footer>
 		<p>
@@ -65,7 +67,7 @@
 		                    </tr>
 		                    <tr>
 		                        <td valign="top">
-		                            <h1 style="color:#565656;font-family:arial;text-decoration:none;font-size:28px;line-height:1;font-weight:bold;margin:0;margin-top:3px;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
+		                            <h1 style="color:#565656;font-family:arial;text-decoration:none;font-size:30px;line-height:1;font-weight:bold;margin:0;margin-top:3px;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
 		                            <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
 		                            	<h2 style="color:#565656;font-family:arial;text-decoration:none;font-size:10px;line-height:1;font-weight:normal;margin:0;padding-top:0px;padding-bottom:0;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
 		                            <?php endif;?>

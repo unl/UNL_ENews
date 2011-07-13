@@ -8,7 +8,7 @@ if ($context->getColFromSort() == 'onecol') {
 <?php if ($file = $context->getFileByUse($use, true)): ?>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
 <tr>
-<td valign="top" align="left">
+<td align="left">
 <img src="<?php echo $file->getURL(); ?>" style="margin-bottom:5px;width:100%;" />
 </td>
 </tr>
