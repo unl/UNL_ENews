@@ -12,7 +12,7 @@ storyid=&_type=story&presentation_id=1&fileID=&fileDescription=&thumbX1=-1&thumb
 <?php
 require dirname(__FILE__) . '/../setup.inc.php';
 
-$controller = new UNL_ENews_Controller(array('view'=>'submit'));
+$controller = new UNL_ENews_Controller(array('model'=>'UNL_ENews_Submission'));
 
 var_dump(headers_list());
 ?>
@@ -21,5 +21,5 @@ array(2) {
   [0]=>
   string(27) "X-Powered-By: PHP/5.3.4-dev"
   [1]=>
-  string(93) "Location: %s?view=thanks&_type=story&id=%d"
+  string(%d) "Location: %s?view=thanks&_type=story&id=%d&newsroom=%d"
 }
