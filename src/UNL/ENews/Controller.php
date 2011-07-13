@@ -25,7 +25,7 @@ class UNL_ENews_Controller
                                 'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
                                 'preview'            => 'UNL_ENews_Newsletter_Preview',
                                 'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
-    							'newsletter'         => 'UNL_ENews_Newsletter_Public',
+                                'newsletter'         => 'UNL_ENews_Newsletter_Public',
                                 'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
                                 'storySummary'       => 'UNL_ENews_Newsletter_Story_Summary',
                                 'presentationList'   => 'UNL_ENews_PresentationLister',
@@ -353,7 +353,7 @@ class UNL_ENews_Controller
                                 '<h2>'.self::$pagetitle['dynamic'].'</h2>',
                                 $data);
         }
-    	if (isset(self::$sitetitle)) {
+        if (isset(self::$sitetitle)) {
             $data = str_replace('<h1>UNL Announce</h1>',
                                 '<h1>'.self::$sitetitle.'</h1>',
                                 $data);
