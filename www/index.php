@@ -29,14 +29,21 @@ if ($enews->options['format'] != 'html') {
             $savvy->setTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
         case 'email':
+            header('Content-type:text/html;charset=UTF-8');
+            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
+            break;
         case 'rss':
+            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
+            break;
         case 'text':
+            header('Content-type:text/plain;charset=UTF-8');
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
         default:
             header('Content-type:text/html;charset=UTF-8');
     }
 } elseif (isset($theme)) {
+    header('Content-type:text/html;charset=UTF-8');
     $savvy->addTemplatePath(__DIR__ . '/themes/'.$theme);
 }
 
