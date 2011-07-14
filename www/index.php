@@ -28,6 +28,7 @@ if ($enews->options['format'] != 'html') {
             header('Content-type:application/json');
             $savvy->setTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
+        case 'email':
         case 'rss':
         case 'text':
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
