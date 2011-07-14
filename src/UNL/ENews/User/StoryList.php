@@ -25,6 +25,6 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        parent::__construct($stories, $this->options['offset'], $this->options['limit']);
+        parent::__construct($stories, (int)$this->options['offset'], (int)$this->options['limit']);
     }
 }

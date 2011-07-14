@@ -25,7 +25,7 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
                 $stories[] = $row[0];
             }
         }
-        parent::__construct($stories, $this->options['offset'], $this->options['limit']);
+        parent::__construct($stories, (int)$this->options['offset'], (int)$this->options['limit']);
     }
 
     public static function relationshipExists($newsroom_id,$story_id)
