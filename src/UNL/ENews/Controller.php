@@ -5,16 +5,7 @@ class UNL_ENews_Controller
      * Options array
      * Will include $_GET vars
      */
-    public $options = array('view' => 'submit', 'format' => 'html');
-
-    public static $pagetitle = array('latest'      => 'Latest News',
-                                     'mynews'      => 'Your News Submissions',
-                                     'submit'      => 'Submit an Item',
-                                     'manager'     => 'Manage News',
-                                     'preview'     => 'Build Newsletter',
-                                     'newsletters' => 'Newsletters',
-                                     'help'        => 'Help! How do I&hellip;',
-    );
+    public $options = array('model' => 'UNL_ENews_Submission', 'format' => 'html');
 
     public static $sitetitle;
 
@@ -304,33 +295,6 @@ class UNL_ENews_Controller
             && false !== $exit) {
             exit($exit);
         }
-    }
-
-    static function setReplacementData($field, $data)
-    {
-        switch($field) {
-            case 'pagetitle':
-                self::$pagetitle['dynamic'] = $data;
-                break;
-        }
-    }
-
-    public function postRun($data)
-    {
-        if (isset(self::$pagetitle['dynamic'])) {
-            $data = str_replace('<title>UNL | Announce </title>',
-                                '<title>UNL | Announce | '.self::$pagetitle['dynamic'].'</title>',
-                                $data);
-            $data = str_replace('<h2></h2>',
-                                '<h2>'.self::$pagetitle['dynamic'].'</h2>',
-                                $data);
-        }
-        if (isset(self::$sitetitle)) {
-            $data = str_replace('<h1>UNL Announce</h1>',
-                                '<h1>'.self::$sitetitle.'</h1>',
-                                $data);
-        }
-        return $data;
     }
 
     /**

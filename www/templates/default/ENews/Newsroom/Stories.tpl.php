@@ -3,7 +3,7 @@ $status = 'approved';
 if (isset($parent->context->options['status'])) {
     $status = $parent->context->options['status'];
 }
-if ($parent->context->options['view'] === 'mynews') {
+if ($parent->context->options['model'] === 'UNL_ENews_User_StoryList') {
     $status = 'none';
 }
 
@@ -27,7 +27,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 
 <input type="hidden" name="_type" value="change_status" />
 
-<?php if ($parent->context->options['view'] === 'manager') : ?>
+<?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
 <input type="hidden" name="newsroom" value="<?php echo $parent->context->options['newsroom']; ?>" />
 <input type="hidden" name="status" value="<?php echo $status; ?>" />
 <?php endif ?>
@@ -42,7 +42,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         <label for="storyaction">Action</label>
         <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <?php if ($parent->context->options['view'] === 'manager') : ?>
+            <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>
                 <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
                 <option value="recommend" disabled="disabled">Recommend</option>
@@ -97,7 +97,7 @@ WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
         <label for="storyaction">Action</label>
         <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
-            <?php if ($parent->context->options['view'] === 'manager') : ?>
+            <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>
                 <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
                 <option value="recommend" disabled="disabled">Recommend</option>
@@ -120,7 +120,7 @@ if (isset($context->options['limit'])
     $pager->total  = count($context);
     $pager->limit  = $context->options['limit'];
     $pager->offset = $context->options['offset'];
-    $pager->url    = UNL_ENews_Controller::getURL().'?view='.$parent->context->options['view'].'&status='.$status;
+    $pager->url    = $context->getManageURL(array('status'=>$status));
     echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
 }
 ?>

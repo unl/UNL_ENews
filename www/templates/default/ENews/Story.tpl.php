@@ -1,5 +1,5 @@
 <?php
-UNL_ENews_Controller::setReplacementData('pagetitle', $context->title);
+UNL_ENews_PostRunFilter::setReplacementData('pagetitle', $context->title);
 ?>
 <?php
 foreach ($context->getFiles() as $file) {

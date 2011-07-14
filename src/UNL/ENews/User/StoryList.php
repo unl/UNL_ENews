@@ -27,4 +27,10 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
         }
         parent::__construct($stories, (int)$this->options['offset'], (int)$this->options['limit']);
     }
+
+    public function getManageURL($additional_params = array())
+    {
+        $url = UNL_ENews_Controller::getURL().'?view=mynews';
+        return UNL_ENews_Controller::addURLParams($url, $additional_params);
+    }
 }

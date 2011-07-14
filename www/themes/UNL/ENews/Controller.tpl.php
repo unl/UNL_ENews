@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- InstanceBegin template="/Templates/fixed_html5.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -23,7 +26,7 @@
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/browserspecifics_html5.html'; ?>
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>UNL | Announce <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
+<title>UNL | Announce <?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
@@ -44,7 +47,7 @@ if ($user = UNL_ENews_Controller::getUser()) {
 </head>
 <?php
 $body_class = 'html5 fixed';
-if ($context->options['view'] == 'story'
+if ($context->options['model'] == 'UNL_ENews_PublishedStory'
     && true == isset($_SERVER['HTTP_USER_AGENT'])
     && false !== strpos($_SERVER['HTTP_USER_AGENT'], 'Gecko/2008')) {
     // Firefox 2.0.0 series, or Lotus Notes web browser
@@ -67,7 +70,7 @@ if ($context->options['view'] == 'story'
                 <li><a href="http://ucomm.unl.edu/" title="Office of University Communications">UComm</a></li>
                 <li><a href="http://newsroom.unl.edu/" title="UNL Newsroom">Newsroom</a></li>
                 <li><a href="<?php echo UNL_ENews_Controller::getURL();?>">Announce</a></li>
-                <li><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></li>
+                <li><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></li>
             </ul>
             <!-- InstanceEndEditable --></div>
         <div id="wdn_navigation_wrapper">
@@ -81,7 +84,7 @@ if ($context->options['view'] == 'story'
             <h1>UNL Announce</h1>
             <!-- InstanceEndEditable --></div>
         <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" -->
-        	<h2><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></h2>
+        	<h2><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></h2>
         	<!-- InstanceEndEditable --></div>
         <div id="maincontent">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
