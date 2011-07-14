@@ -16,4 +16,9 @@ class UNL_ENews_Newsroom_Users extends UNL_ENews_UserList
         }
         parent::__construct($users);
     }
+
+    public function getManageURL()
+    {
+        return UNL_ENews_Controller::getURL().'/?view=mynews';
+    }
 }

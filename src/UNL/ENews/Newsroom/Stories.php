@@ -4,9 +4,12 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
     public $options = array('offset' => 0,
                             'limit'  => 30);
 
+    protected $newsroom;
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
+        $this->newsroom = UNL_ENews_Newsroom::getById($options['newsroom_id']);
         $stories = array();
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories ';
@@ -40,5 +43,11 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
             }
         }
         return false;
+    }
+
+    public function getManageURL($additional_params = array())
+    {
+        $url = $this->newsroom->getURL().'/manage';
+        return UNL_ENews_Controller::addURLParams($url, $additional_params);
     }
 }
