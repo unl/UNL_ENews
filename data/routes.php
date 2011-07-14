@@ -48,6 +48,7 @@ $routes += array(
     'presentationList'   => 'UNL_ENews_PresentationLister',
     'mynews'             => 'UNL_ENews_User_StoryList',
     'submit'             => 'UNL_ENews_Submission',
+    'manager'            => 'UNL_ENews_Manager',
 );
 
 return $routes;
