@@ -23,7 +23,7 @@ WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/manager.js",function
 WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
 </script>
 
-<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo ($parent->context->options['view']==='manager') ? '?view=manager' : '?view=mynews';?>">
+<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
 
 <input type="hidden" name="_type" value="change_status" />
 
