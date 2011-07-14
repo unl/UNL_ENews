@@ -3,7 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo UNL_ENews_Controller::getURL();?>css/all.css" />
 
-<title>MockU | E-News <?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo '| '.UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></title>
+<title>MockU | E-News <?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></title>
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
@@ -14,7 +14,7 @@ var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
         <ul>
         	<li>MockU</li>
             <li><a href="<?php echo UNL_ENews_Controller::getURL();?>">E-News</a></li>
-            <li><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></li>
+            <li><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></li>
         </ul>
     </div>
     <div id="navigation">
@@ -24,7 +24,7 @@ var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
         <h1>MockU E-News</h1>
     </div>
     <div id="pagetitle">
-    	<h2><?php if (isset(UNL_ENews_Controller::$pagetitle[$context->options['view']])) echo UNL_ENews_Controller::$pagetitle[$context->options['view']]; ?></h2>
+    	<h2><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></h2>
     </div>
     <div id="maincontent">
         <?php echo $savvy->render($context->actionable); ?>
