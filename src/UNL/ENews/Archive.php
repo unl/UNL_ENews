@@ -14,7 +14,7 @@ class UNL_ENews_Archive extends LimitIterator implements Countable
 
         $this->newsroom = UNL_ENews_Newsroom::getByShortname($this->options['shortname']);
         $newsletters = $this->newsroom->getNewsletters(array('distributed'=>true));
-        parent::__construct($newsletters, $this->options['offset'], $this->options['limit']);
+        parent::__construct($newsletters, (int)$this->options['offset'], (int)$this->options['limit']);
     }
 
     function count()
