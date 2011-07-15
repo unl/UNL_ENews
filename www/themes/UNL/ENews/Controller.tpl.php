@@ -28,21 +28,10 @@
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL | Announce <?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+<link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="UNL Announce" />
+<link rel="logout" href="<?php echo UNL_ENews_Controller::getURL();?>?logout" title="Log out" />
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
-
-<?php
-if ($user = UNL_ENews_Controller::getUser()) {
-    echo '
-    try {
-        WDN.initializePlugin("idm", function(){
-            WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
-            WDN.idm.displayNotice("'.$user->uid.'");
-        });
-    } catch(e) {WDN.log(e);}
-';
-}
-?>
 </script>
 <!-- InstanceEndEditable -->
 </head>
