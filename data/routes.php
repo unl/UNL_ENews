@@ -49,6 +49,7 @@ $routes += array(
     'mynews'             => 'UNL_ENews_User_StoryList',
     'submit'             => 'UNL_ENews_Submission',
     'manager'            => 'UNL_ENews_Manager',
+    'file'               => 'UNL_ENews_File_Cacheable',
 );
 
 return $routes;
