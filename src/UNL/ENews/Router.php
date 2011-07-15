@@ -34,7 +34,7 @@ class UNL_ENews_Router
             }
         }
 
-        throw new Exception('Unknown route!', 404);
+        throw new Exception('Unknown route, '.$requestURI, 404);
 
     }
 
