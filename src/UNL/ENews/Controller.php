@@ -229,7 +229,8 @@ class UNL_ENews_Controller
      */
     function run()
     {
-         if (!isset($this->options['model'])) {
+         if (!isset($this->options['model'])
+             || false === $this->options['model']) {
              throw new Exception('Un-registered view', 404);
          }
          $this->actionable[] = new $this->options['model']($this->options);

@@ -34,7 +34,8 @@ class UNL_ENews_Router
             }
         }
 
-        throw new Exception('Unknown route, '.$requestURI, 404);
+        $options['model'] = false;
+        return $options;
 
     }
 
