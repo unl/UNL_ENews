@@ -329,7 +329,7 @@ Newsletter Email Preview (for building the newsletter)
 }
 #maincontent .newsColumn, #maincontent .adArea {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
-#maincontent .story {
+#maincontent .ui-sortable .story {
 	cursor:move;
 	position:relative;
 	margin-top:0px;
