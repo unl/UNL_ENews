@@ -11,7 +11,8 @@
                     $newsroom = UNL_ENews_Newsroom::getByShortName($context->options['shortname']);
                 }
 
-                if (!$newsroom) {
+                if (!isset($newsroom)
+                    || false === $newsroom) {
                     // Default newsroom
                     $newsroom = UNL_ENews_Newsroom::getByID(1);
                 }
