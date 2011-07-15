@@ -34,12 +34,12 @@ var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
     echo '
-            try {
-                WDN.initializePlugin("idm", function(){
-                    WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
-                    WDN.idm.displayNotice("'.$user->uid.'");
-                });
-            } catch(e) {WDN.log(e);}
+    try {
+        WDN.initializePlugin("idm", function(){
+            WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
+            WDN.idm.displayNotice("'.$user->uid.'");
+        });
+    } catch(e) {WDN.log(e);}
 ';
 }
 ?>
