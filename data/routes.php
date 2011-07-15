@@ -36,20 +36,26 @@ $routes['/^(?<shortname>[a-z]+)\/archive$/i'] = 'UNL_ENews_Archive';
 
 // Now all the ?view= routes
 $routes += array(
+    'archive'            => 'UNL_ENews_Archive',
     'thanks'             => 'UNL_ENews_Confirmation',
     'sendnews'           => 'UNL_ENews_EmailDistributor',
+    'file'               => 'UNL_ENews_File_Cacheable',
     'gastats'            => 'UNL_ENews_GAStats',
     'help'               => 'UNL_ENews_Help',
+    'manager'            => 'UNL_ENews_Manager',
     'newsroom'           => 'UNL_ENews_Newsroom_EditForm',
     'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
     'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
     'preview'            => 'UNL_ENews_Newsletter_Preview',
     'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
+    'newsletter'         => 'UNL_ENews_Newsletter_Public',
+    'newsletterStory'    => 'UNL_ENews_Newsletter_Story',
+    'storySummary'       => 'UNL_ENews_Newsletter_Story_Summary',
     'presentationList'   => 'UNL_ENews_PresentationLister',
-    'mynews'             => 'UNL_ENews_User_StoryList',
+    'story'              => 'UNL_ENews_PublishedStory',
+    'latest'             => 'UNL_ENews_StoryList_Latest',
     'submit'             => 'UNL_ENews_Submission',
-    'manager'            => 'UNL_ENews_Manager',
-    'file'               => 'UNL_ENews_File_Cacheable',
+    'mynews'             => 'UNL_ENews_User_StoryList',
 );
 
 return $routes;
