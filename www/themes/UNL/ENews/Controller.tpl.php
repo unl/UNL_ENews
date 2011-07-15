@@ -30,19 +30,20 @@
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
-</script>
+
 <?php
 if ($user = UNL_ENews_Controller::getUser()) {
-    echo '<script type="text/javascript">
+    echo '
             try {
                 WDN.initializePlugin("idm", function(){
                     WDN.idm.logoutURL = "'.UNL_ENews_Controller::getURL().'?logout";
                     WDN.idm.displayNotice("'.$user->uid.'");
                 });
             } catch(e) {WDN.log(e);}
-          </script>';
+';
 }
 ?>
+</script>
 <!-- InstanceEndEditable -->
 </head>
 <?php
