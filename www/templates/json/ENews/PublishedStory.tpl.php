@@ -1,2 +1,5 @@
+"stories":
 <?php
-echo json_encode($context->toArray());
+$stories = array($context->toArray());
+
+echo json_encode($stories);
