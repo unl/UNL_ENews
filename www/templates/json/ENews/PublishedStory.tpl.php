@@ -1,5 +1,5 @@
 "stories":
 <?php
-$stories = array($context->toArray());
+$stories = array($context->getURL() => $context->toExtendedArray());
 
 echo json_encode($stories);

@@ -322,4 +322,17 @@ class UNL_ENews_Story extends UNL_ENews_Record
 
         return false;
     }
+
+    function toExtendedArray()
+    {
+        $story_data = $this->toArray();
+        $files_data = array();
+        foreach ($this->getFiles() as $id=>$file) {
+            $file_data = $file->toArray();
+            unset($file_data['data']);
+            $files_data[$file->getURL()] = $file_data;
+        }
+        $story_data['files'] = $files_data;
+        return $story_data;
+    }
 }
