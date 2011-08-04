@@ -9,30 +9,30 @@ $routes['/^file(?<id>[\d]+)\.(?<content_type>jpg|png|gif)$/'] = 'UNL_ENews_File_
 $routes['/^stories\/(?<id>[\d]+)$/'] = 'UNL_ENews_PublishedStory';
 
 //For calling a story.  url = newsRoomShortName/newsletterID/storyID/summary
-$routes['/^(?<shortname>[a-z]+)\/(?<newsletter_id>[\d]+)\/(?<id>[\d]+)\/summary$/i'] = 'UNL_ENews_Newsletter_Story_Summary';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/(?<newsletter_id>[\d]+)\/(?<id>[\d]+)\/summary$/i'] = 'UNL_ENews_Newsletter_Story_Summary';
 
 //For calling a story.  url = newsRoomShortName/newsletterID/storyID/
-$routes['/^(?<shortname>[a-z]+)\/(?<newsletter_id>[\d]+)\/(?<id>[\d]+)$/i'] = 'UNL_ENews_Newsletter_Story';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/(?<newsletter_id>[\d]+)\/(?<id>[\d]+)$/i'] = 'UNL_ENews_Newsletter_Story';
 
 //For calling a newsletter.  url = www/newsRoomShortName/newsletterID/
-$routes['/^(?<shortname>[a-z]+)\/(?<id>[\d]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/(?<id>[\d]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
 //For submiting to a news letter.  url = www/newsRoomShortName/submit
-$routes['/^(?<shortname>[a-z]+)\/submit$/i'] = 'UNL_ENews_Submission';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/submit$/i'] = 'UNL_ENews_Submission';
 
 // For managing a newsroom.
-$routes['/^(?<shortname>[a-z]+)\/manage$/i'] = 'UNL_ENews_Manager';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/manage$/i'] = 'UNL_ENews_Manager';
 
 // Stories for a newsroom
-$routes['/^(?<shortname>[a-z]+)\/stories$/i'] = 'UNL_ENews_StoryList_Latest';
-$routes['/^(?<shortname>[a-z]+)\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/stories$/i'] = 'UNL_ENews_StoryList_Latest';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
 
 //For viewing the newest newsletter for a newsroom.
-$routes['/^(?<shortname>[a-z]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
 
 //For viewing an archive.  url = www/newsRoomShortName/archive
-$routes['/^(?<shortname>[a-z]+)\/archive$/i'] = 'UNL_ENews_Archive';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/archive$/i'] = 'UNL_ENews_Archive';
 
 // Now all the ?view= routes
 $routes += array(
