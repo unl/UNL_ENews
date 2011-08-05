@@ -5,7 +5,7 @@
 if ($file = $context->getThumbnail()) {
     /* @var $file UNL_ENews_File_Image */
     $size = $file->getSize();
-    echo '<table cellspacing="0" cellpadding="0" border="0" align="right"><tr><td valign="top" align="left">'
+    echo '<table cellspacing="0" cellpadding="0" border="0" width="'.($size[0]+15).'" align="right"><tr><td valign="top" align="left">'
        . '<img src="'.$file->getURL().'" width="'.$size[0].'" height="'.$size[1].'" style="margin-left:15px;margin-bottom:5px;" align="left" />'
        . '</td></tr></table>';
 }
