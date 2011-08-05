@@ -5,11 +5,14 @@ if ($context->getColFromSort() == 'onecol') {
 }
 ?>
 
-<?php if ($file = $context->getFileByUse($use, true)): ?>
+<?php if ($file = $context->getFileByUse($use, true)):
+/* @var $file UNL_ENews_File_Image */
+$size = $file->getSize();
+?>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
 <tr>
 <td align="left">
-<img src="<?php echo $file->getURL(); ?>" style="margin-bottom:5px;width:100%;" />
+<img src="<?php echo $file->getURL(); ?>"  width="<?php $size[0]; ?>" height="<?php $size[1]; ?>" style="margin-bottom:5px;width:100%;" />
 </td>
 </tr>
 </table>
