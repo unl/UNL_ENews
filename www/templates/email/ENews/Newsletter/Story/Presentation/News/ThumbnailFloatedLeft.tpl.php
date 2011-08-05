@@ -1,10 +1,13 @@
 <h4><a style="color:#666; text-decoration:none;" href="<?php echo $context->getURL(); ?>"><?php echo $context->title; ?></a></h4>
 
 <?php
+/* @var $context UNL_ENews_Story */
 if ($file = $context->getThumbnail()) {
     /* @var $file UNL_ENews_File_Image */
-    $file->getURL();
-    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="left"><tr><td valign="top" align="left"><img src="'.$file->getURL().'" style="margin-right:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
+    $size = $file->getSize();
+    echo '<table cellspacing="0" cellpadding="0" border="0" align="left"><tr><td valign="top" align="left">'
+       . '<img src="'.$file->getURL().'" width="'.$size[0].'" height="'.$size[1].'" style="margin-right:15px;margin-bottom:5px;" align="left" />'
+       . '</td></tr></table>';
 }
 ?>
 <p style="margin-bottom:5px">
