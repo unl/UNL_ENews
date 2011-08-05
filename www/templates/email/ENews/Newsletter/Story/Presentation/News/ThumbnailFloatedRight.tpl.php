@@ -3,9 +3,7 @@
 <?php
 if ($file = $context->getThumbnail()) {
     /* @var $file UNL_ENews_File_Image */
-    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="right"><tr><td valign="top" align="left"><img src="'.UNL_ENews_Controller::getURL().'file'
-         . $file->id
-         . '.jpg" style="margin-left:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
+    echo '<table cellspacing="0" cellpadding="0" border="0" width="106" align="right"><tr><td valign="top" align="left"><img src="'.$file->getURL().'" style="margin-left:15px;margin-bottom:5px;" align="left" /></td></tr></table>';
 }
 ?>
 <p style="margin-bottom:5px">
