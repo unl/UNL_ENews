@@ -12,7 +12,7 @@ $size = $file->getSize();
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
 <tr>
 <td align="left">
-<img src="<?php echo $file->getURL(); ?>"  width="<?php $size[0]; ?>" height="<?php $size[1]; ?>" style="margin-bottom:5px;width:100%;" />
+<img src="<?php echo $file->getURL(); ?>"  width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>" style="margin-bottom:5px;width:100%;" />
 </td>
 </tr>
 </table>
