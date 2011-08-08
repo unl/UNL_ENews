@@ -6,8 +6,8 @@ if (false == headers_sent()
     header('Status: '.$code.' '.$context->getMessage());
 }
 
-UNL_ENews_PostRunFilter::setReplacementData('pagetitle', 'Uhoh, we got probrem.');
-UNL_ENews_PostRunFilter::setReplacementData('sitetitle', 'Uhoh, we got probrem');
+UNL_ENews_PostRunFilter::setReplacementData('pagetitle', 'Sorry, an error occurred.');
+UNL_ENews_PostRunFilter::setReplacementData('sitetitle', 'Sorry, an error occurred');
 ?>
 
 <script type="text/javascript">
