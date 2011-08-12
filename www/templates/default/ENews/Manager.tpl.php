@@ -23,7 +23,8 @@ if ($context->actionable) {
     <?php endforeach; ?>
 </ul>
 <?php
-if ($context->actionable) { 
+if ($context->actionable
+    && isset($context->actionable[1])) { 
     echo $savvy->render($context->actionable[1]);
 } else {
     echo '<div class="four_col">No gnews is good gnews with Gary Gnu.</div>';
