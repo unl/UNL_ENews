@@ -112,4 +112,9 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
         }
         throw new Exception('Could not save presentation', 500);
     }
+
+    function getURL()
+    {
+        return $this->newsletter->getEditURL();
+    }
 }
