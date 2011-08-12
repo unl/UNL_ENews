@@ -381,4 +381,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         return $this->newsroom->getURL().'/'.$this->id;
     }
+
+    /**
+     * Get the URL for editing this newsletter
+     *
+     * @return string
+     */
+    function getEditURL()
+    {
+        return UNL_ENews_Controller::getURL().'?view=preview&id='.$this->id;
+    }
 }
