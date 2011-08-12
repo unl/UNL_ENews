@@ -62,7 +62,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
             case 'newsletter':
                 $this->newsletter->synchronizeWithArray($_POST);
                 $this->newsletter->save();
-                UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=preview&id='.$this->newsletter->id);
+                UNL_ENews_Controller::redirect($this->getURL());
                 break;
             case 'addnewsletteremail':
                 $email = UNL_ENews_Newsroom_Email::getByID($_POST['newsroom_email_id']);

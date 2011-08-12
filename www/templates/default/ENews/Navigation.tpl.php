@@ -54,7 +54,7 @@
                             // There is a user logged in
                             foreach($newsletters as $newsletter) {
                                 if (isset($newsletter->release_date)) {
-                                    echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=preview&amp;id='.$newsletter->id.'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
+                                    echo '<li><a href="'.$newsletter->getEditURL().'">'.str_replace(' 00:00:00', '', $newsletter->release_date).'</a></li>';
                                 }
                             }
                             echo '<li><a href="'.UNL_ENews_Controller::getURL().'?view=newsletters&amp;limit=10">All newsletters</a></li>';

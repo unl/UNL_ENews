@@ -16,7 +16,7 @@
 </script>
 
 <div id="newsletterDetails">
-	<form class="grid8 first" method="post" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" id="detailsForm">
+	<form class="grid8 first" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
 	    <fieldset style="float:left">
 	    <legend>Your Newsletter</legend>
 	    <ol style="margin-top:0">
@@ -54,13 +54,13 @@
                 		<?php echo $email->email; ?>
                 	</label>
                 </form>
-                <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="remove email">
+                <form action="<?php echo $context->getURL(); ?>" method="post" class="remove email">
                     <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                     <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                     <input type="hidden" name="_type" value="removenewsletteremail" />
                     <input type="submit" value="Remove" />
                 </form>
-                <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $context->newsletter->id; ?>" method="post" class="add email">
+                <form action="<?php echo $context->getURL(); ?>" method="post" class="add email">
                     <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                     <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                     <input type="hidden" name="_type" value="addnewsletteremail" />

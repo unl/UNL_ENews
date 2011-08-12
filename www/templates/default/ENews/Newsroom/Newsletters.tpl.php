@@ -17,7 +17,7 @@ WDN.jQuery('document').ready(function(){
         ?>
         <tr>
             <td class="mainCell" style="min-width:600px;"><h5><?php echo $newsletter->subject; ?> <span class="caption">(<?php echo date('D. M d, Y', $newsletterDate); ?>)</span></h5>
-                <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=preview&amp;id=<?php echo $newsletter->id; ?>" class="action edit">Edit</a>
+                <a href="<?php echo $newsletter->getEditURL(); ?>" class="action edit">Edit</a>
                 <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
                 <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <input type="hidden" name="_type" value="deletenewsletter" />
