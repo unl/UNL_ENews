@@ -88,7 +88,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
      *
      * @param
      *
-     * @return UNL_ENews_Story_Newsletters array
+     * @return UNL_ENews_Story_Newsletters
      */
     function getNewsletters()
     {
