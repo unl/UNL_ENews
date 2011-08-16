@@ -22,9 +22,11 @@ if (!isset($theme)) {
 if ($enews->options['format'] != 'html') {
     switch($enews->options['format']) {
         case 'partial':
+            $savvy->sendCORSHeaders();
             Savvy_ClassToTemplateMapper::$output_template['UNL_ENews_Controller'] = 'ENews/Controller-partial';
             break;
         case 'json':
+            $savvy->sendCORSHeaders();
             header('Content-type:application/json');
             $savvy->setTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
