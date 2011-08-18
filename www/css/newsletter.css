@@ -336,6 +336,11 @@ Newsletter Email Preview (for building the newsletter)
 	margin-bottom:15px;
 	display:block !important;
 }
+
+#maincontent .adArea .story {
+	position:relative;
+}
+
 #newsColumn1, #newsColumn2 {
 	float:left;
 	width: 273px;
