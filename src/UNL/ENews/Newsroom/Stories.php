@@ -1,21 +1,13 @@
 <?php
-class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
+class UNL_ENews_Newsroom_Stories extends UNL_ENews_Newsroom_StoryList
 {
-    public $options = array('offset' => 0,
-                            'limit'  => 30);
 
-    protected $newsroom;
-
-    function __construct($options = array())
+    function getSQL()
     {
-        $this->options = $options + $this->options;
-        $this->newsroom = UNL_ENews_Newsroom::getById($options['newsroom_id']);
-        $stories = array();
-        $mysqli = UNL_ENews_Controller::getDB();
         $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories ';
-        $sql .= 'WHERE newsroom_stories.newsroom_id = '.(int)$options['newsroom_id'] .
-                ' AND newsroom_stories.status = \''.$options['status'].'\' AND newsroom_stories.story_id = stories.id';
-        switch($options['status']) {
+        $sql .= 'WHERE newsroom_stories.newsroom_id = '.(int)$this->options['newsroom_id'] .
+                        ' AND newsroom_stories.status = \''.$this->options['status'].'\' AND newsroom_stories.story_id = stories.id';
+        switch($this->options['status']) {
             case 'archived':
                 $sql .= ' ORDER BY stories.date_submitted DESC';
                 break;
@@ -23,12 +15,7 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_StoryList
                 $sql .= ' ORDER BY stories.request_publish_start ASC';
                 break;
         }
-        if ($result = $mysqli->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_NUM)) {
-                $stories[] = $row[0];
-            }
-        }
-        parent::__construct($stories, (int)$this->options['offset'], (int)$this->options['limit']);
+        return $sql;
     }
 
     public static function relationshipExists($newsroom_id,$story_id)
