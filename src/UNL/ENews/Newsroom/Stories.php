@@ -4,9 +4,8 @@ class UNL_ENews_Newsroom_Stories extends UNL_ENews_Newsroom_StoryList
 
     function getSQL()
     {
-        $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories ';
-        $sql .= 'WHERE newsroom_stories.newsroom_id = '.(int)$this->options['newsroom_id'] .
-                        ' AND newsroom_stories.status = \''.$this->options['status'].'\' AND newsroom_stories.story_id = stories.id';
+        $sql = $this->getNewsroomSQL();
+        $sql .= ' AND newsroom_stories.status = \''.$this->options['status'].'\' AND newsroom_stories.story_id = stories.id';
         switch($this->options['status']) {
             case 'archived':
                 $sql .= ' ORDER BY stories.date_submitted DESC';
