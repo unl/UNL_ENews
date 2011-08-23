@@ -6,7 +6,7 @@
         <language>en-us</language>
         <generator>Magic</generator>
         <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
-        <atom:link href="<?php echo $context->newsroom->getURL(); ?>/stories?format=xml" rel="self" type="application/rss+xml" />
+        <atom:link href="<?php echo $context->newsroom->getURL(); ?>/stories?format=rss" rel="self" type="application/rss+xml" />
         <?php foreach($context as $item) :?>
             <?php echo $savvy->render($item, 'ENews/Story.tpl.php'); ?>
         <?php endforeach; ?>
