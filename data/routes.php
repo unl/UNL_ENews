@@ -24,7 +24,9 @@ $routes['/^(?<shortname>[a-z\-0-9]+)\/submit$/i'] = 'UNL_ENews_Submission';
 $routes['/^(?<shortname>[a-z\-0-9]+)\/manage$/i'] = 'UNL_ENews_Manager';
 
 // Stories for a newsroom
-$routes['/^(?<shortname>[a-z\-0-9]+)\/stories$/i'] = 'UNL_ENews_StoryList_Latest';
+$routes['/^(?<shortname>[a-z\-0-9]+)\/stories$/i'] = 'UNL_ENews_Newsroom_Stories_Published';
+
+// Stories which have current publish date range
 $routes['/^(?<shortname>[a-z\-0-9]+)\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
 
 //For viewing the newest newsletter for a newsroom.
