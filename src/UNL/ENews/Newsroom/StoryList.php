@@ -9,7 +9,7 @@ abstract class UNL_ENews_Newsroom_StoryList extends UNL_ENews_StoryList
      *
      * @var UNL_ENews_Newsroom
      */
-    protected $newsroom;
+    public $newsroom;
 
     function __construct($options = array())
     {
