@@ -32,8 +32,8 @@ abstract class UNL_ENews_Newsroom_StoryList extends UNL_ENews_StoryList
     function getNewsroomSQL()
     {
         $sql = '
-            SELECT newsroom_stories.story_id
-            FROM newsroom_stories, stories
+            SELECT stories.id
+            FROM stories INNER JOIN newsroom_stories ON stories.id = newsroom_stories.story_id
             WHERE newsroom_stories.newsroom_id = '.(int)$this->newsroom->id;
         return $sql;
     }
