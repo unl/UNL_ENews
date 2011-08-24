@@ -35,6 +35,7 @@ if ($enews->options['format'] != 'html') {
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
         case 'rss':
+            header('Content-type:text/xml;charset=UTF-8');
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
             break;
         case 'text':
