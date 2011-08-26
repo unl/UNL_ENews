@@ -10,14 +10,14 @@ $newsletter_url = $context->newsletter->getURL();
     <div class="sidebar top">
       <div class="inner_sidebar">
         <h3>
-              <a href="<?php echo $context->getURL(); ?>" title="Go to the newsletter index page"><?php echo $context->newsroom->name; ?>
+              <a href="<?php echo $context->newsletter->getURL(); ?>" title="Go to the newsletter index page"><?php echo $context->newsroom->name; ?>
               <span class="date">
               <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
               </span>
               </a>
 		</h3>
 		<ul>
-        <?php 
+        <?php
         foreach ($context->newsletter->getStories() as $key => $story) {
             if ($story->presentation->type != 'ad') {
                 echo '<li><a href="'.$newsletter_url.'/'.$story->id.'">'.$story->title.'</a></li>';
