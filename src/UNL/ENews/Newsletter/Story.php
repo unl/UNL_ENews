@@ -37,8 +37,8 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
     public $intro;
 
     /**
-     * @var $story      UNL_ENews_Story
-     * @var $newsletter UNL_ENews_Newsletter
+     * @property $story      UNL_ENews_Story
+     * @property $newsletter UNL_ENews_Newsletter
      */
 
     /**
