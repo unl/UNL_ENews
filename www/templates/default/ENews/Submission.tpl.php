@@ -151,11 +151,8 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
                     <?php endforeach ?>
                 <div id="newsroom_id_dropdown" style="display:none">
                     <select name="newsroom_id[]">
-                        <option value="1">Today@UNL and other UComm publications (Scarlet, UNL Today, etc)</option>
                         <?php foreach (UNL_ENews_Submission::getOpenNewsrooms() as $item): ?>
-                            <?php if ($item->id != 1) : ?>
                             <option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
-                            <?php endif ?>
                         <?php endforeach ?>
                     </select>
                 </div>
