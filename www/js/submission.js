@@ -102,7 +102,9 @@ var submission = function($) {
 			$('#addAnotherNewsroom').bind('click', function() {
 				var dropdown = $('#newsroom_id_dropdown').html();
 				$(this).before(dropdown);
-				$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>');
+				if ($('#newsroom_id select:last option[value=""]').size() == 0) {
+					$('#newsroom_id select:last').prepend('<option selected="selected" value=""></option>');
+				}
 				return false;
 			});
 
