@@ -27,7 +27,7 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
             }
         } else {
             if (!$this->newsroom = UNL_ENews_Newsroom::getByID(1)) {
-                throw new Exception('Ruh-roh, there is no newsroom 1', 404);
+                throw new Exception('Sorry, there is no newsroom with the id of 1', 404);
             }
         }
 
