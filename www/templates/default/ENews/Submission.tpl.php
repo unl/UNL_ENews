@@ -151,6 +151,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
                     <?php endforeach ?>
                 <div id="newsroom_id_dropdown" style="display:none">
                     <select name="newsroom_id[]">
+                        <option value=""></option>
                         <?php foreach (UNL_ENews_Submission::getOpenNewsrooms() as $item): ?>
                             <?php
                             /* @var $item UNL_ENews_Newsroom */
