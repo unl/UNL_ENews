@@ -45,6 +45,16 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
         }
     }
 
+    /**
+     * Get the story
+     *
+     * @return UNL_ENews_Story
+     */
+    function getStory()
+    {
+        return $this->story;
+    }
+
     function __get($var)
     {
         return $this->story->$var;
