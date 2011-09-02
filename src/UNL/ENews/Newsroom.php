@@ -107,9 +107,25 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return true;
     }
 
-    function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
+    /**
+     * Check if this newsroom has the story, regardless of status
+     *
+     * @param UNL_ENews_Story $story
+     * 
+     * @return false | UNL_ENews_Newsroom_Story
+     */
+    function hasStory(UNL_ENews_Story $story)
     {
         if ($has_story = UNL_ENews_Newsroom_Story::getById($this->id, $story->id)) {
+            return $has_story;
+        }
+
+        return false;
+    }
+
+    function addStory(UNL_ENews_Story $story, $status = 'approved', UNL_ENews_User $user, $source = 'submit form')
+    {
+        if (false !== $this->hasStory($story)) {
             // Already have this story thanks
             return true;
         }
