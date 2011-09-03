@@ -1,4 +1,12 @@
 <?php
+/**
+ * Collection of newsrooms associated with a story
+ *
+ * @author bbieber
+ * 
+ * @see UNL_ENews_Story::getNewsrooms()
+ *
+ */
 class UNL_ENews_Story_Newsrooms extends UNL_ENews_NewsroomList
 {
     function __construct($options = array())
