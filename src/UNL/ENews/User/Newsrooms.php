@@ -1,4 +1,13 @@
 <?php
+/**
+ * Collection of newsrooms a user has permission to.
+ * 
+ * <code>
+ * $newsrooms = new UNL_ENews_User_Newsrooms(array('uid'=>'bbieber2'));
+ * </code>
+ * 
+ * @see UNL_ENews_User::getNewsrooms()
+ */
 class UNL_ENews_User_Newsrooms extends UNL_ENews_NewsroomList
 {
     function __construct($options = array())
