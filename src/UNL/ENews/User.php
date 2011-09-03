@@ -76,6 +76,17 @@ class UNL_ENews_User extends UNL_ENews_Record
         return new UNL_ENews_User_Newsrooms(array('uid'=>$this->uid));
     }
 
+    /**
+     * 
+     * Get the newsrooms this user has permission to
+     * 
+     * @return UNL_ENews_User_NewsroomsWithStories
+     */
+    function getNewsroomsWithStories()
+    {
+        return new UNL_ENews_User_NewsroomsWithStories(array('uid'=>$this->uid));
+    }
+
     function __get($var)
     {
         switch($var) {
