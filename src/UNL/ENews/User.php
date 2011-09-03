@@ -40,6 +40,12 @@ class UNL_ENews_User extends UNL_ENews_Record
             throw new Exception('User id cannot be empty', 400);
         }
 
+        /*
+         * Usernames from CAS may come in with leading spaces, trim them off
+         * and make sure it's lowercase.
+         */
+        $uid = trim(strtolower($uid));
+
         $mysqli = UNL_ENews_Controller::getDB();
         $sql = "SELECT * FROM users WHERE uid = '".$mysqli->escape_string($uid)."';";
         if (($result = $mysqli->query($sql))
