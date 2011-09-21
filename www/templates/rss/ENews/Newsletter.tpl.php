@@ -3,7 +3,7 @@
 ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-        <title><?php echo $context->subject; ?></title>
+        <title>News from the <?php echo $context->newsroom->name; ?> newsletter</title>
         <link><?php echo $context->getURL(); ?></link>
         <description>Stories from the <?php echo $context->newsroom->name; ?> newsletter</description>
         <language>en-us</language>
