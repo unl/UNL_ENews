@@ -4,7 +4,7 @@
         <link><?php echo UNL_ENews_Controller::getURL(); ?></link>
         <description>Published news from <?php echo $context->newsroom->name; ?></description>
         <language>en-us</language>
-        <generator>Magic</generator>
+        <generator>UNL_ENews</generator>
         <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
         <atom:link href="<?php echo $context->newsroom->getURL(); ?>/stories?format=rss" rel="self" type="application/rss+xml" />
         <?php foreach($context as $item) :?>
