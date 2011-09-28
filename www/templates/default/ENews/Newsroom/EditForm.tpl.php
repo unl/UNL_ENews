@@ -51,6 +51,12 @@
                         <input type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> /> Yes
                     </li>
                     <li>
+                        <label for="allow_submissions">Submit News URL
+                        <span class="helper">Where should users submit their news items?</span>
+                        </label>
+                        <input type="text" id="submit_url" name="submit_url" value="<?php echo $context->getSubmitURL(); ?>" />
+                    </li>
+                    <li>
                         <label for="footer_text">
                             Footer Text
                             <span class="helper">Text displayed at the footer of emails (some HTML allowed)</span>

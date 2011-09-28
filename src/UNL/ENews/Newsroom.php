@@ -159,8 +159,18 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return UNL_ENews_Controller::getURL().$this->shortname;
     }
 
+    /**
+     * Gets the URL users can submit news items for review
+     *
+     * @return string URL
+     */
     public function getSubmitURL()
     {
+        if (!empty($this->submit_url)) {
+            return $this->submit_url;
+        }
+
+        // Use default
         return $this->getURL().'/submit';
     }
 
