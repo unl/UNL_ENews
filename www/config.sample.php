@@ -1,7 +1,7 @@
 <?php
 function autoload($class)
 {
-    $class = str_replace('_', '/', $class);
+    $class = str_replace(array('_', '\\'), '/', $class);
     include $class . '.php';
 }
 
