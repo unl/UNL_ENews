@@ -151,6 +151,9 @@
     padding:3px 5px;
     margin-top:10px;
 }
+/* Bad Hack at hiding the extra subscribe forms */
+.inner_sidebar form {display:none;}
+.inner_sidebar .subscribe form {display:block;}
 /* Newsletter Details
 ************************/
 #newsletterDetails {
