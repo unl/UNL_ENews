@@ -26,6 +26,11 @@ if (isset($theme)) {
     $savvy->setTheme($theme);
 }
 
+if (isset($enews->options['shortname'])
+    && is_dir(__DIR__ . '/themes/'.$enews->options['shortname'])) {
+    $savvy->setTheme($enews->options['shortname']);
+}
+
 switch($enews->options['format']) {
     case 'json':
         $savvy->sendCORSHeaders();
