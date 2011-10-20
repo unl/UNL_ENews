@@ -58,24 +58,7 @@ if ($context->options['model'] == 'UNL_ENews_PublishedStory'
 		<a href="http://ternandplover.unl.edu/" title="Tern &amp; Plover Conservation Partnership"><img src="http://ternandplover.unl.edu/sharedcode/affiliate_imgs/affiliate_logo.png" alt="Tern &amp; Plover Conservation Partnership" id="logo" /></a>
     	<div id='tag_line'>Conservation Partnership</div>
 		<!-- InstanceEndEditable -->
-		<div id="wdn_search">
-    <form id="wdn_search_form" action="http://www.google.com/u/UNL1?sa=Google+Search&amp;q=" method="get">
-        <fieldset>
-            <label for="q">Search this site, all UNL or for a person</label>
-            <input accesskey="f" id="q" name="q" type="text" />
-            <input class="search" type="submit" value="Go" name="submit" />
-        </fieldset>
-    </form>
-</div>
-<h3 class="wdn_list_descriptor hidden">UNL Tools</h3>
-<ul id="wdn_tool_links">
-    <!-- <li style="border-color:#ac0203;"><a href="http://emergency.unl.edu/" class="alert tooltip" title="Emergency Alert: An alert has been issued!">Emergency</a></li> -->
-    <li><a href="http://www1.unl.edu/feeds/" class="feeds tooltip" title="RSS Feeds: View and Subscribe to News Feeds">Feeds</a></li>
-    <li><a href="http://forecast.weather.gov/MapClick.php?CityName=Lincoln&amp;state=NE&amp;site=OAX" class="weather tooltip" title="Weather: Local Forecast and Radar">Weather</a></li>
-    <li><a href="http://events.unl.edu/" class="events tooltip" title="UNL Events: Calendar of Upcoming Events">Events</a></li>
-    <li><a href="http://directory.unl.edu/" class="peoplefinder tooltip" title="UNL Directory: Search for Faculty, Staff, Students and Departments">Directory</a></li>
-    <li><a href="http://www.unl.edu/unlpub/cam/cam1.shtml" class="webcams tooltip" title="Webcams: Live UNL Campus Cameras">Webcams</a></li>
-</ul>
+		<?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/wdnTools.html'; ?>
 
     </div>
     <div id="wdn_navigation_bar">
