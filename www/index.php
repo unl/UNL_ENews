@@ -15,8 +15,11 @@ if (isset($_GET['model'])) {
     unset($_GET['model']);
 }
 
+// Initialize ENews, and construct everything the user requested
 $enews = new UNL_ENews_Controller($router->route($_SERVER['REQUEST_URI'], $_GET));
 
+
+// Now render what the user has requested
 $savvy = new UNL_ENews_OutputController();
 
 if (isset($theme)) {
