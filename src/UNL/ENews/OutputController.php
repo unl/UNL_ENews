@@ -2,15 +2,47 @@
 
 class UNL_ENews_OutputController extends Savvy_Turbo
 {
-    
+    protected $theme = 'MockU';
+
     function __construct($options = array())
     {
         parent::__construct();
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-        $this->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/default');
         $this->addFilters(array('UNL_ENews_PostRunFilter', 'postRun'));
     }
-    
+
+    /**
+     * Set a specific theme for this instance
+     * 
+     * @param string $theme Theme name, which corresponds to a directory in www/
+     * 
+     * @throws Exception
+     */
+    function setTheme($theme)
+    {
+        if (!is_dir(dirname(dirname(dirname(__DIR__))) . '/www/themes/'.$theme)) {
+            throw new Exception('Invalid theme, there are no files in '.$dir);
+        }
+        $this->theme = $theme;
+    }
+
+    /**
+     * Set the array of template paths necessary for this format
+     * 
+     * @param string $format Format to use
+     */
+    function setTemplateFormatPaths($format)
+    {
+        $web_dir = dirname(dirname(dirname(__DIR__))) . '/www';
+
+        $this->setTemplatePath(
+            array(
+                $web_dir . '/templates/' . $format,
+                $web_dir . '/themes/' . $this->theme . '/' . $format
+            )
+        );
+    }
+
     /**
      * 
      * @param timestamp $expires timestamp

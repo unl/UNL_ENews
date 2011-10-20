@@ -19,39 +19,38 @@ $enews = new UNL_ENews_Controller($router->route($_SERVER['REQUEST_URI'], $_GET)
 
 $savvy = new UNL_ENews_OutputController();
 
-if (!isset($theme)) {
-    $theme = 'MockU';
+if (isset($theme)) {
+    $savvy->setTheme($theme);
 }
 
-if ($enews->options['format'] != 'html') {
-    switch($enews->options['format']) {
-        case 'partial':
-            $savvy->sendCORSHeaders();
-            Savvy_ClassToTemplateMapper::$output_template['UNL_ENews_Controller'] = 'ENews/Controller-partial';
-            break;
-        case 'json':
-            $savvy->sendCORSHeaders();
-            header('Content-type:application/json');
-            $savvy->setTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-            break;
-        case 'email':
-            header('Content-type:text/html;charset=UTF-8');
-            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-            break;
-        case 'rss':
-            header('Content-type:text/xml;charset=UTF-8');
-            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-            break;
-        case 'text':
-            header('Content-type:text/plain;charset=UTF-8');
-            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-            break;
-        default:
-            header('Content-type:text/html;charset=UTF-8');
-    }
-} elseif (isset($theme)) {
-    header('Content-type:text/html;charset=UTF-8');
-    $savvy->addTemplatePath(__DIR__ . '/themes/'.$theme);
+switch($enews->options['format']) {
+    case 'json':
+        $savvy->sendCORSHeaders();
+        header('Content-type:application/json');
+        $savvy->setTemplateFormatPaths($enews->options['format']);
+        break;
+    case 'email':
+        header('Content-type:text/html;charset=UTF-8');
+        $savvy->setTemplateFormatPaths($enews->options['format']);
+        break;
+    case 'rss':
+        header('Content-type:text/xml;charset=UTF-8');
+        $savvy->setTemplateFormatPaths($enews->options['format']);
+        break;
+    case 'text':
+        header('Content-type:text/plain;charset=UTF-8');
+        $savvy->setTemplateFormatPaths($enews->options['format']);
+        break;
+    case 'partial':
+        $savvy->sendCORSHeaders();
+        Savvy_ClassToTemplateMapper::$output_template['UNL_ENews_Controller'] = 'ENews/Controller-partial';
+        // intentional no-break
+    case 'html':
+        header('Content-type:text/html;charset=UTF-8');
+        $savvy->setTemplateFormatPaths('html');
+        break;
+    default:
+        throw new Exception('Invalid/unsupported output format', 500);
 }
 
 // Always escape output, use $context->getRaw('var'); to get the raw data.
