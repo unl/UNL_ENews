@@ -19,7 +19,7 @@
 				<?php
 					$stories = $context->getStories();
 					$stories->setIsPreview(true);
-					echo $savvy->render($stories, 'templates/default/ENews/Newsletter/Stories.tpl.php');
+					echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
 				?>
 				</table>
 		</div>
@@ -96,7 +96,7 @@
 				                        if (!empty($context->options['preview'])) {
 				                            $stories->setIsPreview(true);
 				                        }
-				                        echo $savvy->render($stories, 'templates/default/ENews/Newsletter/Stories.tpl.php');
+				                        echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
 				                      ?>
 		                              </table>
 		                        </td>

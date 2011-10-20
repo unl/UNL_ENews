@@ -1,2 +1,2 @@
 <?php // FORWARD THIS TEMPLATE TO THE DEFAULT
-echo $savvy->render($context, 'templates/default/ENews/Newsletter/StoryColumn.tpl.php');
+echo $savvy->render($context, 'templates/html/ENews/Newsletter/StoryColumn.tpl.php');
