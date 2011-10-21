@@ -49,6 +49,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     }
     
     /**
+     * Get a newsletter by its primary key
      * 
      * @param int $id
      * 
@@ -63,7 +64,12 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return false;
     }
-    
+
+    /**
+     * Get the last-modified newsletter
+     * 
+     * @return UNL_ENews_Newsletter
+     */
     public static function getLastModified()
     {
         $object = new self();
@@ -85,7 +91,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         
         return $object;
     }
-    
+
+    /**
+     * Get the most recent newsletter
+     * 
+     * @param int $newsroomID Optional newsroom id to get newsletter from
+     * 
+     * @return UNL_ENews_Newsletter
+     */
     public static function getLastReleased($newsroomID)
     {
         $object = new self();
@@ -104,7 +117,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $object->synchronizeWithArray($result->fetch_assoc());
         return $object;
     }
-    
+
     function save()
     {
         if (!empty($this->release_date)) {
@@ -128,13 +141,20 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $result;
     }
 
+    /**
+     * Add email distribution target for this newsletter
+     * 
+     * @param UNL_ENews_Newsroom_Email $email
+     * 
+     * @return boolean
+     */
     function addEmail(UNL_ENews_Newsroom_Email $email)
     {
         $existing = $this->getEmails();
         foreach ($existing as $existing_email) {
             if ($existing_email->id == $email->id) {
                 // we already have this email address
-                return;
+                return true;
             }
         }
         $newsletter_email = new UNL_ENews_Newsletter_Email();
@@ -143,6 +163,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return $newsletter_email->insert();
     }
 
+    /**
+     * Remove an email distribution target for this newsletter
+     * 
+     * @param UNL_ENews_Newsletter_Email $email
+     * @throws Exception
+     * 
+     * @return boolean
+     */
     function removeEmail(UNL_ENews_Newsletter_Email $email)
     {
         if ($email->newsletter_id != $this->id) {
@@ -170,7 +198,16 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     {
         return 'newsletters';
     }
-    
+
+    /**
+     * Add a story to this newsletter
+     * 
+     * @param UNL_ENews_Story $story
+     * @param int             $sort_order
+     * @param string          $intro
+     * 
+     * @return boolean
+     */
     function addStory(UNL_ENews_Story $story, $sort_order = null, $intro = null)
     {
         if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
@@ -196,7 +233,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return $has_story->insert();
     }
-    
+
+    /**
+     * Check if newsletter has a story
+     * 
+     * @param UNL_ENews_Story $story
+     * 
+     * @return boolean
+     */
     function hasStory(UNL_ENews_Story $story)
     {
         if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
@@ -204,7 +248,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return false;
     }
-    
+
+    /**
+     * Remove a story from this newsletter
+     * 
+     * @param UNL_ENews_Story $story
+     * 
+     * @return boolean
+     */
     function removeStory(UNL_ENews_Story $story)
     {
         if ($has_story = UNL_ENews_Newsletter_Story::getById($this->id, $story->id)) {
@@ -214,7 +265,12 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
 
         return true;
     }
-    
+
+    /**
+     * Get the stories associated with this newsletter
+     * 
+     * @return UNL_ENews_Newsletter_Stories
+     */
     function getStories()
     {
         return new UNL_ENews_Newsletter_Stories(array('newsletter_id'=>$this->id));
@@ -228,7 +284,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         }
         return false;
     }
-    
+
+    /**
+     * Distribute this newsletter
+     * 
+     * @param string|array $addresses Email addresses to send to
+     * @throws Exception
+     * @return boolean
+     */
     function distribute($addresses = null)
     {
 
@@ -297,6 +360,17 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return true;
     }
 
+    /**
+     * Send email to specific email address
+     * 
+     * @param string $from     Email from: address
+     * @param string $to       Email to: address
+     * @param string $subject  Email subject
+     * @param string $htmlBody HTML body of the email
+     * @param string $txtBody  Text-only body of the email
+     * 
+     * @return boolean
+     */
     function sendEmail($from, $to, $subject, $htmlBody, $txtBody)
     {
         // Load the mail library
@@ -318,7 +392,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $mail->send($to, $hdrs, $body);
         return true;
     }
-    
+
+    /**
+     * Get the HTML email for this newsletter
+     * 
+     * @param UNL_ENews_Newsroom_Email $email The email to distribute to
+     * 
+     * @return string
+     */
     function getEmailHTML(UNL_ENews_Newsroom_Email $email)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
@@ -351,7 +432,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
                 '</html>';
         return $html;
     }
-    
+
+    /**
+     * Get text-only email of this newsletter
+     * 
+     * @param UNL_ENews_Newsroom_Email $email The email to distribute to
+     * 
+     * @return string
+     */
     function getEmailTXT(UNL_ENews_Newsroom_Email $email)
     {
         Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
@@ -366,7 +454,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
 
         return $text;
     }
-    
+
     /**
      * Get the newsroom associated with this newsletter.
      * 
@@ -377,6 +465,11 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         return UNL_ENews_Newsroom::getByID($this->newsroom_id);
     }
 
+    /**
+     * Get the URL to this newsletter
+     * 
+     * @return string
+     */
     function getURL()
     {
         return $this->newsroom->getURL().'/'.$this->id;
