@@ -44,6 +44,23 @@ class UNL_ENews_OutputController extends Savvy_Turbo
     }
 
     /**
+     * Add a template path for default and theme
+     * 
+     * @param string $format Format to use
+     */
+    function addTemplateFormatPaths($format)
+    {
+        $web_dir = dirname(dirname(dirname(__DIR__))) . '/www';
+
+        $this->addTemplatePath(
+            array(
+                $web_dir . '/templates/' . $format,
+                $web_dir . '/themes/' . $this->theme . '/' . $format
+            )
+        );
+    }
+
+    /**
      * 
      * @param timestamp $expires timestamp
      * 

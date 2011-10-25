@@ -39,7 +39,8 @@ switch($enews->options['format']) {
         break;
     case 'email':
         header('Content-type:text/html;charset=UTF-8');
-        $savvy->setTemplateFormatPaths($enews->options['format']);
+        $savvy->setTemplateFormatPaths('html');
+        $savvy->addTemplateFormatPaths($enews->options['format']);
         break;
     case 'rss':
         header('Content-type:text/xml;charset=UTF-8');
