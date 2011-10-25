@@ -43,6 +43,16 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Emails($options);
     }
 
+    /**
+     * Get the emails that are opt-out
+     * 
+     * @return UNL_ENews_Newsroom_Emails_Filter_ByOptOut
+     */
+    function getOptOutEmails()
+    {
+        return new UNL_ENews_Newsroom_Emails_Filter_ByOptOut($this->getEmails());
+    }
+
     function addEmail($email_address, $optout = 0, $newsletter_default = 1)
     {
         $existing = $this->getEmails();
