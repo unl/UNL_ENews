@@ -1,11 +1,6 @@
-<?php
-$subscribeBoxSet = false;
-foreach ($context->getEmails() as $email) :
-    if ($email->optout) :
-        if (!$subscribeBoxSet) : ?>
+<?php foreach (new LimitIterator($context->getOptOutEmails(), 0, 1) as $email) : ?>
         <div class="subscribe">
         <h3><?php echo $context->name; ?><span>Subscribe Today!</span></h3>
-        <?php endif; ?>
         <form method="get" action="http://listserv.unl.edu/signup-anon/" id="subscribe">
             <label for="address">Email</label>
             <input type="email" id="address" name="ADDRESS" value="" />
@@ -14,9 +9,5 @@ foreach ($context->getEmails() as $email) :
             <input type="hidden" name="LISTNAME" value="<?php echo substr($email->email, 0, strpos($email->email, '@')); ?>" />
             <input type="submit" value="Subscribe" name="submit" />
         </form>
-        <?php if (!$subscribeBoxSet) : ?>
         </div>
-        <?php $subscribeBoxSet = true;
-        endif;
-    endif;
-endforeach;
+<?php endforeach; ?>
