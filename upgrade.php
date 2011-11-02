@@ -58,51 +58,6 @@ if (!$result) {
     }
 }
 
-/*
-// @todo add a newsroom for all the others here, unltoday, scarlet, etc?
-if (UNL_ENews_Newsroom::getByID(2) === false) {
-    $newsroom            = new UNL_ENews_Newsroom();
-    $newsroom->name      = 'UNL Today';
-    $newsroom->shortname = 'unltoday';
-    $newsroom->save();
-}
-
-if (UNL_ENews_Newsroom::getByID(3) === false) {
-    $newsroom            = new UNL_ENews_Newsroom();
-    $newsroom->name      = 'Scarlet';
-    $newsroom->shortname = 'scarlet';
-    $newsroom->save();
-}
-
-if (UNL_ENews_Newsroom::getByID(4) === false) {
-    $newsroom            = new UNL_ENews_Newsroom();
-    $newsroom->name      = 'News Release';
-    $newsroom->shortname = 'newsrelease';
-    $newsroom->save();
-}
-*/
-echo 'Adding newsroom administrators&hellip;<br />'.PHP_EOL;
-// Now let's set up some newsroom admins
-foreach (array(
-    'bbieber2',
-    'smeranda2',
-    'rcrisler1',
-    'acoleman1',
-    'kbartling2',
-    'erasmussen2',
-    'tfedderson2',
-    's-mfairch4',
-    ) as $uid) {
-
-    echo '* adding '.$uid.'&hellip;';
-    UNL_ENews_Newsroom::getByID(1)->addUser(UNL_ENews_User::getByUID($uid));
-    UNL_ENews_Newsroom::getByID(2)->addUser(UNL_ENews_User::getByUID($uid));
-    UNL_ENews_Newsroom::getByID(3)->addUser(UNL_ENews_User::getByUID($uid));
-    UNL_ENews_Newsroom::getByID(4)->addUser(UNL_ENews_User::getByUID($uid));
-    echo 'done.<br />'.PHP_EOL;
-
-}
-
 $result = $mysqli->query("SELECT id, email_lists FROM newsrooms;");
 if ($result) {
     while ($row = $result->fetch_assoc()) {
@@ -130,15 +85,6 @@ if (!$result) {
     if (mysqli_errno($mysqli) == 1060) {
         echo 'Field already has been added<br />'.PHP_EOL;
     }
-}
-
-$today = UNL_ENews_Newsroom::getByID(1);
-$today->from_address = 'today@unl.edu';
-$today->save();
-
-if ($next = UNL_ENews_Newsroom::getByID(5)) {
-    $next->from_address = 'nextnebraska@unl.edu';
-    $next->save();
 }
 
 echo 'Adding presentation_id field to stories table<br />'.PHP_EOL;
