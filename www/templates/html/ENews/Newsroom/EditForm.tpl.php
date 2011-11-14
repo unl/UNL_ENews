@@ -35,14 +35,14 @@
                             Short Name
                             <span class="helper">A short string used in the web address</span>
                         </label>
-                        <?php 
-                            if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) :
+                        <?php
+                        $disabled = '';
+                        if (UNL_ENews_Controller::isAdmin(UNL_ENews_Controller::getUser())) {
+                            // Prevent "regular" users from modifying this field
+                            $disabled = 'disabled="disabled"';
+                        }
                         ?>
-                                <input type="text" id="shortname" name="shortname" value="<?php echo $context->shortname; ?>" />
-                        <?php else: ?>
-                                <input type="text" id="shortname" name="shortname" disabled="disabled" value="<?php echo $context->shortname; ?>" />
-                        <?php endif ?>
-                        
+                        <input type="text" id="shortname" name="shortname" <?php echo $disabled; ?> value="<?php echo $context->shortname; ?>" />
                     </li>
                     <li>
                         <label for="website">
