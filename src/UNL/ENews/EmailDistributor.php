@@ -10,6 +10,10 @@ class UNL_ENews_EmailDistributor extends UNL_ENews_LoginRequired
     
     function __postConstruct()
     {
+        if (empty($_POST)) {
+            throw new Exception('No data posted, you must include a To: email address');
+        }
+
         if (isset($this->options['id'])) {
             $this->newsletter = UNL_ENews_Newsletter::getByID($this->options['id']);
         }
