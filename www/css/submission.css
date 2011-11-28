@@ -182,6 +182,12 @@ form#enewsImage {
 	text-align:center;
 	margin:10px 10px 8px 0;
 }
+#img_description_label {
+    position: relative;
+}
+#maincontent .enews fieldset ol #img_description_label .required {
+    left: -44px;
+}
 #cropMessage {
 	font-size:1.1em;
 	width:200px;
