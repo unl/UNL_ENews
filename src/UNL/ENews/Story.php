@@ -146,6 +146,42 @@ class UNL_ENews_Story extends UNL_ENews_Record
         return new UNL_ENews_Story_Files(array('story_id'=>$this->id));
     }
 
+	/**
+     * Add a related tag to this story.
+     *
+     * @param UNL_ENews_Tag $tag The tag to add
+     */
+    public function addTag(UNL_ENews_Tag $tag)
+    {
+        $has_tag = new UNL_ENews_Story_Tag();
+        $has_tag->tag_id   = $tag->id;
+        $has_tag->story_id = $this->id;
+        return $has_tag->insert();
+    }
+
+	/**
+     * Remove tag
+     *
+     * @param UNL_ENews_Tag $tag The tag to remove
+     */
+    public function removeTag(UNL_ENews_Tag $tag)
+    {
+        if ($has_tag = UNL_ENews_Story_Tag::getById($this->id, $tag->id)) {
+            return $has_tag->delete();
+        }
+        return true;
+    }
+
+	/**
+     * Retrieve all tags related to this story
+     *
+     * @return UNL_ENews_Story_Tags
+     */
+    function getTags()
+    {
+        return new UNL_ENews_Story_Tags(array('story_id'=>$this->id));
+    }
+
     /**
      * Retrieves the first file found matching the use given.
      *
