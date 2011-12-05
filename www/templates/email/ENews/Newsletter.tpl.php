@@ -75,7 +75,7 @@
 		                    </tr>
 		                    <tr height="25">
 		                        <td colspan="2" style="line-height:0;" height="25">
-		                            <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_06.gif" width="556" height="25" alt="Red bar seperator" />
+		                            <img src="http://www.unl.edu/wdn/templates_3.0/images/email/email2_06.gif" width="556" height="25" alt="Header and body separator" />
 		                        </td>
 		                    </tr>
 		                    <tr>
