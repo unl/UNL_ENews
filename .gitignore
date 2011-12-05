@@ -1,3 +1,5 @@
 www/.htaccess
 www/config.inc.php
 *.espressostorage
+tests/pear2coverage.db
+*.xdebug
