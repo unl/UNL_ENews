@@ -10,18 +10,23 @@ $mysqli = UNL_ENews_Controller::getDB();
 echo 'connected successfully!<br />'.PHP_EOL;
 
 echo 'Initializing database structure&hellip;';
-$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/enews.sql'));
-if (!$result) {
-    echo 'There was an error initializing the database.<br />'.PHP_EOL;
-    echo $mysqli->error;
-    exit();
-}
 
-do {
-    if ($result = $mysqli->use_result()) {
-        $result->close();
-    }
-} while ($mysqli->next_result());
+foreach (array('enews.sql', 'story_tags.sql') as $sql_file) {
+
+	$result = $mysqli->multi_query(file_get_contents(dirname(__FILE__).'/data/'.$sql_file));
+	if (!$result) {
+	    echo 'There was an error initializing the database.<br />'.PHP_EOL;
+	    echo $mysqli->error;
+	    exit();
+	}
+	
+	do {
+	    if ($result = $mysqli->use_result()) {
+	        $result->close();
+	    }
+	} while ($mysqli->next_result());
+
+}
 
 echo 'initialization complete!<br />'.PHP_EOL;
 
