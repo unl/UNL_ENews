@@ -120,6 +120,8 @@ var submission = function($) {
 				var imgString = '<img onload="if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
+				$('#img_description_label').append('<span class="required">*</span>');
+				$('#file_description').addClass('required').removeAttr('disabled');
 				ajaxUpload.removeIframe();
 			});
 
@@ -166,6 +168,8 @@ var submission = function($) {
 					function(data,status) {
 						$('#sampleLayoutImage img').attr('src', '');
 						$('#upload_area img').attr('src', '');
+						$('#img_description_label span.required').remove();
+						$('#file_description').removeClass('required').attr('disabled','disabled');
 						submission.loadImageCrop();
 						submission.updatePreview();
 					}
@@ -445,6 +449,11 @@ var submission = function($) {
 			if (validate) {
 				var message = '';
 				$('input.required,textarea.required').each(function() {
+					if ($(this).attr('disabled') !== undefined) {
+						// Field is disabled, user couldn't enter text
+						return;
+					}
+
 					if (this.value == '') {
 						message = 'Required fields cannot be left blank';
 					}
