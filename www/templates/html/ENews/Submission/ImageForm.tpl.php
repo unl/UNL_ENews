@@ -8,14 +8,16 @@
             <input id="image" name="image" type="file" />
         </li>
         <li>
-            <label for="file_description" id="img_description_label">Image Description<span class="required">*</span><span class="helper">To be used as a caption on the web view</span></label>
+            <label for="file_description" id="img_description_label">Image Description
             <?php
             $disabled = 'disabled="disabled"';
-            if (isset($originalImage)) {
-                $disabled = '';
+            if (!empty($originalImage)) {
+                $disabled = 'class="required"';
+                echo '<span class="required">*</span>';
             }
             ?>
-            <input id="file_description" name="file_description" <?php echo $disabled; ?> type="text" class="required" value="<?php echo getValue($originalImage, 'description'); ?>" />
+            <span class="helper">To be used as a caption on the web view</span></label>
+            <input id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
         </li>
     </ol>
     
