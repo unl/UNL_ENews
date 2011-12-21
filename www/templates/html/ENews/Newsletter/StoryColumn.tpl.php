@@ -13,7 +13,7 @@
         <div class="clear"></div>
     <?php else: ?>
         <?php echo $savvy->render($story, $story->getRenderer()); ?>
-        <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
+        <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" style="height:10px;" />
     <?php endif; ?>
     </article>
 <?php endforeach; ?>
