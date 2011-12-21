@@ -12,3 +12,5 @@ News Stories can include:
  * Full text
  * Photos
  * Web link
+
+Use scripts within the scripts directory to create new newsrooms
