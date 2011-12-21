@@ -39,7 +39,7 @@
 	else: //everything else
 ?>
 <div>
-	<table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; margin-bottom:10px;">
+	<table cellspacing="0" cellpadding="0" border="0" width="600" style="margin-top:10px; margin-bottom:10px;">
 		<tr>
 		    <td align="center">
 		    	<span style="font-size:9px;color:#ffffff;">Campus Activities for <span class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></span><br/>
@@ -119,7 +119,7 @@
 		                            <td width="22">
 		                            	&nbsp;
 		                            </td>
-		                            <td width="556" style="color:#606060;font-size:10px;line-height:1em;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;">
+		                            <td width="556" style="color:#606060;font-size:10px;line-height:1em;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;"align="left">
 		                            	<p style="line-height:1.1em;">
 		                            		<img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="University of Nebraska&ndash;Lincoln" width="90" height="37" align="right" />
 		                                	&copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln <br />
