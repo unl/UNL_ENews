@@ -26,6 +26,12 @@ class UNL_ENews_StoryList extends LimitIterator implements Countable
      */
     function current()
     {
-        return UNL_ENews_Story::getByID(parent::current());
+        $story = UNL_ENews_Story::getByID(parent::current());
+
+        if (!$story) {
+            throw new Exception('The story with id of '.(int)parent::current().' does not exist!');
+        }
+
+        return $story;
     }
 }
