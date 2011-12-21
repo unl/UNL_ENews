@@ -66,7 +66,7 @@
 		                        </td>
 		                    </tr>
 		                    <tr>
-		                        <td valign="top">
+		                        <td valign="top" align="left">
 		                            <h1 style="color:#565656;font-family:arial;text-decoration:none;font-size:30px;line-height:1;font-weight:bold;margin:0;margin-top:3px;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
 		                            <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
 		                            	<h2 style="color:#565656;font-family:arial;text-decoration:none;font-size:10px;line-height:1;font-weight:normal;margin:0;padding-top:0px;padding-bottom:0;"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
@@ -85,7 +85,7 @@
 		                        <td bgcolor="FFFFFF" width="10">
 		                        	&nbsp;
 		                        </td>
-		                        <td width="556" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;" colspan="2" valign="top">
+		                        <td width="556" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;" colspan="2" valign="top" align="left">
 		                              <!-- This is the main content -->
 		                              <p style="margin:10px 0 10px 0;font-size:12px;color:#909090;" class="newsletterDate">
 		                              	<?php echo date('l, F j, Y', strtotime($context->release_date)); ?>
