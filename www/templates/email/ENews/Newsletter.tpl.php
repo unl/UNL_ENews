@@ -2,7 +2,7 @@
 <?php 
 	if (!empty($context->options['preview'])) : //For the preview building tool
 ?>
-<div id="previewWrapper">
+<div id="previewWrapper" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
 	<a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a>
 	<div id="preview">
 		<header>
