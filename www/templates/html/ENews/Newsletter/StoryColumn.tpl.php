@@ -12,8 +12,13 @@
         <?php echo $savvy->render($story, $story->getRenderer()); ?>
         <div class="clear"></div>
     <?php else: ?>
-        <?php echo $savvy->render($story, $story->getRenderer()); ?>
-        <img class="spacer" src="http://www.unl.edu/wdn/templates_3.0/images/email/gif.gif" width="100%" height="10" />
+        <?php
+        echo $savvy->render($story, $story->getRenderer());
+        $spacer_width  = $story->getWidthFromSortOrder();
+        $spacer_url    = UNL_ENews_Controller::getURL() . 'templates/email/ENews/images/'.$spacer_width.'_10.gif';
+        $spacer_height = 10;
+        ?>
+        <img class="spacer" src="<?php echo $spacer_url; ?>" width="<?php echo $spacer_width; ?>" height="10" />
     <?php endif; ?>
     </article>
 <?php endforeach; ?>
