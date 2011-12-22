@@ -1,0 +1,20 @@
+Deploying the enews website
+============================================
+
+Prerequisites
+-------------
+The developer needs a SSH account on `newsroom.unl.edu` and
+has to be in the `ucomm` group.
+
+
+Local setup
+-----------
+::
+
+$ git remote add production ssh://newsroom.unl.edu/var/www/html/newsroom.unl.edu/UNL_ENews
+
+Deployment
+----------
+::
+
+$ git push production master
