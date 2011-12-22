@@ -119,7 +119,7 @@
 		                            <td width="22">
 		                            	&nbsp;
 		                            </td>
-		                            <td width="556" style="color:#606060;font-size:10px;line-height:1em;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;"align="left">
+		                            <td width="556" style="color:#606060;font-size:10px;line-height:1em;font-family:'Lucida Grande',Verdana,Arial;min-height:42px;" align="left">
 		                            	<p style="line-height:1.1em;">
 		                            		<img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="University of Nebraska&ndash;Lincoln" width="90" height="37" align="right" />
 		                                	&copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln <br />
