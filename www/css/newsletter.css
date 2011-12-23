@@ -163,6 +163,7 @@
     -moz-border-radius:5px;
 	padding:20px;
     display:inline-block;
+    position:relative;
 }
 #newsletterDetails .grid8 {
     width:622px
