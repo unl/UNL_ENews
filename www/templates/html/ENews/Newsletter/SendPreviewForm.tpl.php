@@ -5,4 +5,24 @@
         Email Address: <input type="text" name="to" value="<?php echo UNL_ENews_Controller::getUser(true)->mail; ?>" />
         <input type="submit" value="Send" />
     </form>
+    <script type="text/javascript">
+	WDN.jQuery('#sendPreview<?php echo $context->id; ?>').submit(function(event) {
+		// Disable submit button
+		WDN.jQuery(this).children('input[type=submit]').attr('disabled', 'disabled');
+		var data = WDN.jQuery(this).serialize();
+		var url  = WDN.jQuery(this).attr('action') + '&format=partial';
+		// Handle post operation
+		WDN.post(url, data, function(response, textStatus) {
+			// Re-enable submit button
+			WDN.jQuery('#sendPreview<?php echo $context->id; ?> input[type=submit]').removeAttr('disabled');
+
+			// Close colorbox
+			WDN.jQuery.colorbox.close();
+
+			// Display response
+			WDN.jQuery('#maincontent').prepend(response);
+		});
+		event.preventDefault();
+	});
+	</script>
 </div>
