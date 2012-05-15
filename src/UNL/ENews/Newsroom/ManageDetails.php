@@ -1,5 +1,5 @@
 <?php
-class UNL_ENews_Newsroom_EditForm extends UNL_ENews_LoginRequired
+class UNL_ENews_Newsroom_ManageDetails extends UNL_ENews_LoginRequired
 {
     public $newsroom;
 

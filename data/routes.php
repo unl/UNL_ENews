@@ -23,6 +23,9 @@ $routes['/^(?P<shortname>[a-z\-0-9]+)\/submit$/i'] = 'UNL_ENews_Submission';
 // For managing a newsroom.
 $routes['/^(?P<shortname>[a-z\-0-9]+)\/manage$/i'] = 'UNL_ENews_Manager';
 
+// For editing newsroom details.
+$routes['/^(?P<shortname>[a-z\-0-9]+)\/details$/i'] = 'UNL_ENews_Newsroom_ManageDetails';
+
 // Stories for a newsroom
 $routes['/^(?P<shortname>[a-z\-0-9]+)\/stories$/i'] = 'UNL_ENews_Newsroom_Stories_Published';
 
@@ -45,7 +48,7 @@ $routes += array(
     'gastats'            => 'UNL_ENews_GAStats',
     'help'               => 'UNL_ENews_Help',
     'manager'            => 'UNL_ENews_Manager',
-    'newsroom'           => 'UNL_ENews_Newsroom_EditForm',
+    'newsroom'           => 'UNL_ENews_Newsroom_ManageDetails',
     'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
     'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
     'preview'            => 'UNL_ENews_Newsletter_Preview',
@@ -58,6 +61,7 @@ $routes += array(
     'latest'             => 'UNL_ENews_StoryList_Latest',
     'submit'             => 'UNL_ENews_Submission',
     'mynews'             => 'UNL_ENews_User_StoryList',
+    'addnewsroom'        => 'UNL_ENews_Admin_AddNewsroom',
 );
 
 return $routes;
