@@ -180,6 +180,10 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
             return $this->submit_url;
         }
 
+        if (empty($this->shortname)) {
+            return '';
+        }
+
         // Use default
         return $this->getURL().'/submit';
     }
