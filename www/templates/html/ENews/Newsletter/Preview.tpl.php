@@ -85,5 +85,5 @@
 </div>
 <div class="grid8">
 	<?php $context->newsletter->options = array('preview' => true); ?>
-    <?php echo $savvy->render($context->newsletter, 'templates/email/ENews/Newsletter.tpl.php'); ?>
+    <?php echo $context->newsletter->getRawObject()->getEmailHTML(); ?>
 </div>
