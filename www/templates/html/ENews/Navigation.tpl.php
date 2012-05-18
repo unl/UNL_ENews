@@ -65,4 +65,15 @@
                 </li>
                 <li><a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom">Edit Newsroom Details</a></li>
                 <?php endif; ?>
+                <?php
+                if (
+                    false !== $user
+                    && UNL_ENews_Controller::isAdmin($user)
+                ): ?>
+                <li><a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=addnewsroom">Administration</a>
+                    <ul>
+                        <li><a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=addnewsroom">Add a Newsroom</a></li>
+                    </ul>
+                </li>
+                <?php endif; ?>
             </ul>
