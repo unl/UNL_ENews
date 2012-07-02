@@ -11,10 +11,10 @@ Local setup
 -----------
 ::
 
-$ git remote add production ssh://newsroom.unl.edu/var/www/html/newsroom.unl.edu/UNL_ENews
+$ git remote add live ssh://newsroom.unl.edu/var/www/html/newsroom.unl.edu/UNL_ENews
 
 Deployment
 ----------
 ::
 
-$ git push production master
+$ git push live master
