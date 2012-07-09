@@ -23,7 +23,7 @@
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/includes/browserspecifics_html5.html'; ?>
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>UNL | Announce <?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></title>
+<title><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?> Announce | University of Nebraska-Lincoln</title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <link rel="home" href="<?php echo UNL_ENews_Controller::getURL();?>" title="UNL Announce" />
 <link rel="logout" href="<?php echo UNL_ENews_Controller::getURL();?>?logout" title="Log out" />

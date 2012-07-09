@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>UNL | Announce <?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?></title>
+	<title><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?> | Announce | University of Nebraska-Lincoln</title>
 </head>
 <body>
 <?php
