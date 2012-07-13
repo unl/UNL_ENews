@@ -4,7 +4,7 @@
 $action = UNL_ENews_Controller::getURL() . '?view=manager';
 $title  = 'Edit details for the current newsroom';
 
-if (!isset($context->id)) {
+if (!$context->id) {
     // Must be adding a newsroom
     $action = UNL_ENews_Controller::getURL() . '?view=addnewsroom';
     $title  = 'Enter details for the new newsroom';
