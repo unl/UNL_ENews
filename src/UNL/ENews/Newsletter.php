@@ -400,17 +400,14 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      * 
      * @return string
      */
-    function getEmailHTML(UNL_ENews_Newsroom_Email $email)
+    function getEmailHTML(UNL_ENews_Newsroom_Email $email = null)
     {
-        Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-
-        $savvy = new Savvy();
-        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/email');
+        $savvy = $this->getEmailRenderer('email');
         $savvy->setEscape('htmlentities');
 
         $body = $savvy->render($this);
 
-        if ($email->optout) {
+        if (isset($email) && $email->optout) {
             $optout_message = $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
             if (strpos($body, '<!-- optout -->') !== false) {
                 // The newsletter html has a placeholder for the optout message, insert it here
@@ -434,6 +431,25 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     }
 
     /**
+     * Get the outputcontroller for rendering emails.
+     * 
+     * @param string $format The email format: email|text
+     * 
+     * @return UNL_ENews_OutputController
+     */
+    protected function getEmailRenderer($format)
+    {
+        $newsroom = $this->getNewsroom();
+        $savvy = new UNL_ENews_OutputController();
+        if (is_dir(dirname(dirname(dirname(__DIR__))) . '/www/themes/'.$newsroom->shortname)) {
+            $savvy->setTheme($newsroom->shortname);
+        }
+        $savvy->setTemplateFormatPaths('html');
+        $savvy->addTemplateFormatPaths($format);
+        return $savvy;
+    }
+
+    /**
      * Get text-only email of this newsletter
      * 
      * @param UNL_ENews_Newsroom_Email $email The email to distribute to
@@ -442,10 +458,7 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      */
     function getEmailTXT(UNL_ENews_Newsroom_Email $email)
     {
-        Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-        $savvy = new Savvy();
-        $savvy->setTemplatePath(dirname(dirname(dirname(dirname(__FILE__)))).'/www/templates/text');
-        
+        $savvy = $this->getEmailRenderer('text');
         $text = $savvy->render($this);
 
         if ($email->optout) {
