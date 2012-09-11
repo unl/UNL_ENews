@@ -88,8 +88,7 @@ var submission = function($) {
 					website = 'http://' + website;
 				}
 				var goURLPrefix = RegExp('http://go.unl.edu');
-				var eventsPrefix = RegExp('http://events.unl.edu');
-				if (!goURLPrefix.test(website) && !eventsPrefix.test(website)) {
+				if (!goURLPrefix.test(website)) {
 					submission.createGoURL(website);
 				} else {
 					if (!submission.urlPreview) {
