@@ -86,7 +86,7 @@ class UNL_ENews_File extends UNL_ENews_Record
                 $extension = '.gif';
                 break;
         }
-        return UNL_ENews_Controller::getURL().'file'
+        return UNL_ENews_Controller::getURL().'files/file'
          . $this->id
          . $extension;
     }
