@@ -5,6 +5,9 @@ $routes = array();
 // Files associated with stories
 $routes['/^file(?P<id>[\d]+)\.(?P<content_type>jpg|png|gif)$/'] = 'UNL_ENews_File_Cacheable';
 
+// Files associated with stories
+$routes['/^files\/file(?P<id>[\d]+)\.(?P<content_type>jpg|png|gif)$/'] = 'UNL_ENews_File_Cacheable';
+
 // Story direct URL, no newsroom association
 $routes['/^stories\/(?P<id>[\d]+)$/'] = 'UNL_ENews_PublishedStory';
 
