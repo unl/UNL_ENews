@@ -23,7 +23,7 @@ var submission = function($) {
 			$('#enewsForm h3').eq(0).css('cursor','pointer');
 			$('#enewsForm h3').eq(1).css('cursor','pointer');
 			submission.bindActions();
-			
+
 			$('textarea.resizable:not(.processed)').TextAreaResizer();
 			if (submission.editing) {
 				$('#enewsForm h3').eq(0).hide();
@@ -136,7 +136,7 @@ var submission = function($) {
 					$('input[name=thumbX2]').val('-1');
 					$('input[name=thumbY1]').val('-1');
 					$('input[name=thumbY2]').val('-1');
-					
+
 					if ($(this).hasClass('r34')) {
 						submission.loadImageCrop('4:3');
 						$(this).removeClass('r34');
@@ -146,7 +146,7 @@ var submission = function($) {
 						$(this).removeClass('r43');
 						$(this).addClass('r34');
 					}
-					
+
 				}
 			);
 
@@ -188,7 +188,7 @@ var submission = function($) {
 				$('#wdn_process_step2').slideToggle();
 				$('#wdn_process_step3').slideToggle(function() {
 					$('#enewsForm h3').eq(1).removeClass('highlighted');
-					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>'); 
+					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>');
 				});
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 				return false;
@@ -207,7 +207,7 @@ var submission = function($) {
 			case 1:
 				oppStep = 2;
 				break;
-			case 2: 
+			case 2:
 				oppStep = 1;
 				break;
 			}
@@ -245,9 +245,9 @@ var submission = function($) {
 				$('#enewsImage,#enewsSubmissionButton').show();
 			});
 			submission.setupAd();
-			
+
 		},
-		
+
 		setupAd : function(){ //let's tweak the main form to streamline when we're doing a simple ad
 			$('#sampleLayout').hide();
 			$('#upload_area span').remove();
@@ -355,19 +355,19 @@ var submission = function($) {
 					width: xWidth + 'px',
 					height: yWidth + 'px'
 				});
-				
+
 				var imgString = '<img src="'+ENEWS_HOME+'?view=file&id='+$('#enewsSubmission #fileID').val()+'" alt="Uploaded Image" />';
 				$('#sampleLayoutImage').html(imgString);
-				
+
 				var scaleX = xWidth / (selection.width || 1);
 				var scaleY = yWidth / (selection.height || 1);
-				
+
 				$('#sampleLayoutImage > img').css({
 					width: Math.round(scaleX * imgWidth) + 'px',
 					height: Math.round(scaleY * imgHeight) + 'px',
 					marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
 					marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
-				}); 
+				});
 			}
 
 			submission.ias = $('#upload_area img').imgAreaSelect({
