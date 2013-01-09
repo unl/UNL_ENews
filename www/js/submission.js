@@ -319,7 +319,7 @@ var submission = function($) {
 					submission.updatePreview(data);
 				},
 				function(){
-					$('#website').attr('value', website).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
+					$('#website').attr('value', url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
 					submission.updatePreview(website);
 				}
 			);
