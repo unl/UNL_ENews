@@ -31,7 +31,7 @@
                 'preview' => $isPreview
             ))); ?>
         </td>
-        <td>&nbsp;</td>
+        <td width="10">&nbsp;</td>
         <td  style="color:#494949; font-size: 12px; line-height: 140%; vertical-align:top;font-family: 'Lucida Grande',Verdana,Arial;">
             <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
                 'area' => $area,
