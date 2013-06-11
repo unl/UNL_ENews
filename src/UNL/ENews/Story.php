@@ -41,6 +41,7 @@ class UNL_ENews_Story extends UNL_ENews_Record
         if (empty($this->id)) {
             $this->uid_created    = strtolower(UNL_ENews_Controller::getUser(true)->uid);
             $this->date_submitted = date('Y-m-d H:i:s');
+            $this->date_modified  = date('Y-m-d H:i:s');
         } else {
             $this->uid_modified   = strtolower(UNL_ENews_Controller::getUser(true)->uid);
             $this->date_modified  = date('Y-m-d H:i:s');
