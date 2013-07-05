@@ -37,7 +37,7 @@ var preview = function($) {
 				$('.story .story-content a').live('click', function(e) {
 					return false;
 				})
-				WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
+				WDN.loadJS('/wdn/templates_3.1/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
 				preview.setupDragAndSort();
 				preview.initDraggable($('.adArea .story'));
 			});
