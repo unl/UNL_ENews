@@ -15,12 +15,14 @@ if (count($context) == 0) {
 ?>
 
 
+<script src="<?php echo UNL_ENews_Controller::getURL();?>/js/manager.js" type="text/javascript"></script>
 <script type="text/javascript">
-WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>/js/manager.js",function(){
-	manager.initialize();
-});
-WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
+    WDN.loadJS("/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js");
+    WDN.loadCSS("/wdn/templates_3.1/css/content/forms.css");
+
+    WDN.jQuery(document).ready(function() {
+        manager.initialize();
+    });
 </script>
 
 <form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
