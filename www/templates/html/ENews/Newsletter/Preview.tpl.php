@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js",function(){
+    WDN.loadJS("/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js",function(){
         WDN.jQuery("#releaseDate").datepicker({
             showOn: 'both',
             buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
@@ -10,9 +10,9 @@
             preview.initialize();
         });
     });
-    WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
-    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
-    WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/ui.datepicker.css");
+    WDN.loadCSS("/wdn/templates_3.1/css/content/forms.css");
+    WDN.loadCSS("/wdn/templates_3.1/scripts/plugins/ui/jquery-ui.css");
+    WDN.loadCSS("/wdn/templates_3.1/scripts/plugins/ui/ui.datepicker.css");
 </script>
 
 <div id="newsletterDetails">
