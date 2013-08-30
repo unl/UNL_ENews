@@ -74,6 +74,7 @@
                         <li>If you have a speaker or event highlighting one or two people, submit "head and shoulders" shots.</li>
                         <li>Provide good quality color photos, saved as RGB jpeg/jpg images and have them already tightly cropped, in good focus with good contrast.</li> 
                         <li>Type treatments, word marks and logos (university-approved) will be considered.</li>
+                        <li>The optimal size for full-width images is 556 pixels wide with varying height, thumbnails are rendered at 72x96 or 96x72 pixels (4x3 aspect ratio).</li>
                     </ul>
                 </dd>
                 
