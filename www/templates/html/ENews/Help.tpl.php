@@ -87,7 +87,7 @@
                 </dd>
                 
                 <dt>What if I have some late-breaking news that I just found out about that I really need to get out and it's after deadline?</dt>
-                <dd>This is probably a news judgment call that we can help with: Call Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059. Most likely, it can wait until the next day; please remember to plan ahead.</dd>
+                <dd>This is probably a news judgment call that we can help with: Call Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226. Most likely, it can wait until the next day; please remember to plan ahead.</dd>
                 
                 <dt>Can I use this site to submit news releases or Scarlet features and briefs (instead of e-mailing them to Tom Simons or Troy?</dt>
                 <dd>
@@ -102,7 +102,7 @@
                 <dd>Yes. Call Troy Fedderson 472-8515</dd>
                 
                 <dt>Who do I call with questions about Today@UNL?</dt>
-                <dd>Call Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059</dd>
+                <dd>Call Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226</dd>
             </dl>
         </div>
         <div id="styleguide">
@@ -117,7 +117,7 @@
             
             <p><strong>Punctuation:</strong> Follow standard punctuation rules. Please: No exclamation points!!!!! No ampersands (&amp;) to shorten or replace the word "and". Ampersands only if they are officially in a brand name.</p>
             
-            <p>Phone numbers have hyphens in them, not periods: 402-472-2059</p>
+            <p>Phone numbers have hyphens in them, not periods: 402-472-8515</p>
             
             <p><strong>Acronyms:</strong> Use an acronym, initials etc. only on second reference. Spell out the entire name in first reference. No need to put the acronym in parentheses after spelling it out on first reference</p>
             
@@ -146,7 +146,7 @@
 	    <?php
 	    // @TODO, each newsroom needs a contact person. Then loop through all the newsrooms.
 	    ?>
-	    <p>For Today@UNL questions, contact Troy Fedderson, 472-8515 or Kelly Bartling, 472-2059.</p>
+	    <p>For Today@UNL questions, contact Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226.</p>
 	    <p>For student enews questions, contact Christopher Dulac.</p>
     </div>
 </div>
