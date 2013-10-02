@@ -120,11 +120,25 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     <input type="hidden" id="thumbX2" name="thumbX2" value="-1" />
     <input type="hidden" id="thumbY1" name="thumbY1" value="-1" />
     <input type="hidden" id="thumbY2" name="thumbY2" value="-1" />
-    
+
+    <?php
+    $full_article_rows = 5;
+    if (isset($context->full_article)) {
+        $full_article_rows = count(explode("\n", $context->full_article));
+        if ($full_article_rows < 5) {
+            // Go back to default size
+            $full_article_rows = 5;
+        }
+        if ($full_article_rows > 15) {
+            // Too many, just show 15
+            $full_article_rows = 15;
+        }
+    }
+    ?>
     <ol>
         <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
         <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" class="resizable" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
-        <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" class="resizable" cols="60" rows="5"><?php echo getValue($context, 'full_article'); ?></textarea></li>
+        <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" class="resizable" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea></li>
         <li><label for="request_publish_start">What date would like this to run?<span class="required">*</span></label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
         <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
         <li><label for="website">Supporting Website</label><input id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" /></li>
