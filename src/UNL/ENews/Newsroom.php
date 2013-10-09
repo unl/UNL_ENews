@@ -156,11 +156,11 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
     public static function archivePastStories()
     {
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'UPDATE newsroom_stories, stories
+        $sql = 'UPDATE newsroom_stories
+                JOIN stories ON newsroom_stories.story_id = stories.id
                 SET newsroom_stories.status = "archived"
-                WHERE newsroom_stories.story_id = stories.id
-                    AND stories.request_publish_end < "'.date('Y-m-d').'"
-                    AND newsroom_stories.story_id != "archived"';
+                WHERE stories.request_publish_end < "'.date('Y-m-d').'"
+                    AND newsroom_stories.status != "archived"';
         return $mysqli->query($sql);
     }
 
