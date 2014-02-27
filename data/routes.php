@@ -2,6 +2,8 @@
 
 $routes = array();
 
+$shortname = '(?P<shortname>[a-z\-0-9_]+)';
+
 // Legacy route for files associated with stories, this was used before StaticCache was put in place
 $routes['/^file(?P<id>[\d]+)\.(?P<content_type>jpg|png|gif)$/'] = 'UNL_ENews_File_Cacheable';
 
@@ -12,35 +14,35 @@ $routes['/^files\/file(?P<id>[\d]+)\.(?P<content_type>jpg|png|gif)$/'] = 'UNL_EN
 $routes['/^stories\/(?P<id>[\d]+)$/'] = 'UNL_ENews_PublishedStory';
 
 //For calling a story.  url = newsRoomShortName/newsletterID/storyID/summary
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/(?P<newsletter_id>[\d]+)\/(?P<id>[\d]+)\/summary$/i'] = 'UNL_ENews_Newsletter_Story_Summary';
+$routes['/^' . $shortname . '\/(?P<newsletter_id>[\d]+)\/(?P<id>[\d]+)\/summary$/i'] = 'UNL_ENews_Newsletter_Story_Summary';
 
 //For calling a story.  url = newsRoomShortName/newsletterID/storyID/
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/(?P<newsletter_id>[\d]+)\/(?P<id>[\d]+)$/i'] = 'UNL_ENews_Newsletter_Story';
+$routes['/^' . $shortname . '\/(?P<newsletter_id>[\d]+)\/(?P<id>[\d]+)$/i'] = 'UNL_ENews_Newsletter_Story';
 
 //For calling a newsletter.  url = www/newsRoomShortName/newsletterID/
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/(?P<id>[\d]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
+$routes['/^' . $shortname . '\/(?P<id>[\d]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
 //For submiting to a news letter.  url = www/newsRoomShortName/submit
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/submit$/i'] = 'UNL_ENews_Submission';
+$routes['/^' . $shortname . '\/submit$/i'] = 'UNL_ENews_Submission';
 
 // For managing a newsroom.
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/manage$/i'] = 'UNL_ENews_Manager';
+$routes['/^' . $shortname . '\/manage$/i'] = 'UNL_ENews_Manager';
 
 // For editing newsroom details.
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/details$/i'] = 'UNL_ENews_Newsroom_ManageDetails';
+$routes['/^' . $shortname . '\/details$/i'] = 'UNL_ENews_Newsroom_ManageDetails';
 
 // Stories for a newsroom
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/stories$/i'] = 'UNL_ENews_Newsroom_Stories_Published';
+$routes['/^' . $shortname . '\/stories$/i'] = 'UNL_ENews_Newsroom_Stories_Published';
 
 // Stories which have current publish date range
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
+$routes['/^' . $shortname . '\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
 
 //For viewing the newest newsletter for a newsroom.
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/?$/i'] = 'UNL_ENews_Newsletter_Public';
+$routes['/^' . $shortname . '\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
 
 //For viewing an archive.  url = www/newsRoomShortName/archive
-$routes['/^(?P<shortname>[a-z\-0-9]+)\/archive$/i'] = 'UNL_ENews_Archive';
+$routes['/^' . $shortname . '\/archive$/i'] = 'UNL_ENews_Archive';
 
 // Now all the ?view= routes
 $routes += array(
