@@ -248,7 +248,7 @@ class UNL_ENews_Controller
         //make sure there is an http:// on all URLs
         $string = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/i", "$1http://$2",$string);
         // make all URLs links
-        $string = preg_replace("/([\w]+:\/\/[\w-?&;#~=\.\/\@]+[\w\/])/i","<a href=\"$1\">$1</a>",$string);
+        $string = preg_replace("/([\w]+:\/\/[\w-?&;#~\+=\.\/\@]+[\w\/])/i","<a href=\"$1\">$1</a>",$string);
         // make all emails links
         $string = preg_replace("/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}|[0-9]{1,4})(\]?))/i","<a href=\"mailto:$1\">$1</a>",$string);
 
