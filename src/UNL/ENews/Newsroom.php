@@ -96,12 +96,25 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
      */
     function addUser($user)
     {
-        if (!$user->hasNewsroomPermission($this->id)) {
-            $permission = new UNL_ENews_User_Permission();
-            $permission->newsroom_id = $this->id;
-            $permission->user_uid    = $user->uid;
-            return $permission->insert();
+        if ($user->hasNewsroomPermission($this->id)) {
+            //User already has premission
+            return true;
         }
+        
+        $permission = new UNL_ENews_User_Permission();
+        $permission->newsroom_id = $this->id;
+        $permission->user_uid    = $user->uid;
+        
+        if (!$permission->insert()) {
+            return false;
+        }
+        
+        if (1 == $user->newsroom_id) {
+            //Change their default newsroom if it is currently the main one
+            $user->newsroom_id = $this->id;
+            $user->save();
+        }
+        
         return true;
     }
 
