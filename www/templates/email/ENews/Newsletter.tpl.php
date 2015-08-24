@@ -6,12 +6,12 @@
 	<a href="<?php echo $context->getURL(); ?>">Problem viewing? Click here to read online.</a>
 	<div id="preview">
 		<header>
-			<hgroup>
-				<h1><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
-				<?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
-				<h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
-				<?php endif;?>
-			</hgroup>
+            <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif">
+            <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_02.gif">
+            <h1><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
+            <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
+            <h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
+            <?php endif;?>
 		</header>
 		<div id="previewContent">
 			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></time>
@@ -25,7 +25,7 @@
 		</div>
 		<footer>
 		<p>
-			<img src="http://www.unl.edu/wdn/templates_3.0/images/email/wordmark.png" alt="" width="90" height="37" />
+			<img src="http://www.unl.edu/wdn/templates_4.0/images/email/wordmark.gif" alt="" width="111" height="43" />
 		    &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln <br />
 		    <?php echo $context->newsroom->getRaw('footer_text'); ?>
 		</p>

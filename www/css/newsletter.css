@@ -269,16 +269,12 @@ Newsletter Email Preview (for building the newsletter)
 
 ************************/
 #previewWrapper {
-    text-align:center;	
+    text-align:center;
     margin-top:10px;
 }
 #preview {
     width:576px;
     max-width:576px;
-    border:12px solid #eee;
-    border-radius:8px;
-    -webkit-border-radius:8px;
-    -moz-border-radius:8px;
     text-align:left;
     margin:0 auto;
 }
@@ -286,12 +282,13 @@ Newsletter Email Preview (for building the newsletter)
     font-size:9px;	
 }
 #preview header {
-    background:url('images/previewHeader.png') no-repeat;
+    background-color: #F8F5EC;
     min-height: 27px;
-    padding:25px 0 5px 76px;
+    text-align: center;
 }
-#preview header hgroup{
-	margin:auto 0;
+#preview header img {
+    width: 100%;
+    display: block;
 }
 #preview header * {
     margin:auto 0;
@@ -307,29 +304,35 @@ Newsletter Email Preview (for building the newsletter)
     line-height:100%;
 }
 #preview #previewContent {
-    padding : 30px 10px 0 10px;
-    background:#fff url('images/previewRedBar.png') no-repeat 10px 0;   
+    background-color: #F8F5EC;
     display:inline-block;
 }
 #preview #previewContent time {
-    margin:15px 0 10px 0;
-    font-size:12px;
-    color:#909090;	
+    background-color:#C80E13;
+    padding:10px 20px 10px 20px;
+    color:#fff;
     display:block;
+    width: 536px;
 }
 #preview #previewContent table tr >td {
     vertical-align:top;	
 }
+#preview #previewContent article:nth-child(even) {
+    background-color: #E7E2D6;
+}
+#preview #previewContent article:nth-child(odd) {
+    background-color: #F8F5EC;
+}
 #preview footer {
-    background:#eee url('images/previewFooter.png') no-repeat 0 0;	
-    padding:51px 10px 10px;
+    background-color: #525151;
+    color: #cfcfcf;
+    padding: 20px 20px;
     font-size:10px;
     line-height:1.4em;
-    color:#606060;
 }
 #preview footer img {
     float:right;
-    margin-right:10px;	
+    margin-right:10px;
 }
 #maincontent .newsColumn, #maincontent .adArea {min-height:75px;}
 #maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
