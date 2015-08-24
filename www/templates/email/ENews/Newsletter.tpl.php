@@ -92,14 +92,20 @@
 </table>
 
 <!-- Start main content -->
-<table border="0" cellpadding="0" cellspacing="0">
-    <?php
-        $stories = $context->getStories();
-        if (!empty($context->options['preview'])) {
-            $stories->setIsPreview(true);
-        }
-        echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
-    ?>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal">
+    <tr>
+        <td bgcolor="#F8F5EC" style="padding:30px 15px 30px 15px" class="unltoday-padding">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
+                <?php
+                    $stories = $context->getStories();
+                    if (!empty($context->options['preview'])) {
+                        $stories->setIsPreview(true);
+                    }
+                    echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
+                ?>
+            </table>
+        </td>
+    </tr>
 </table>
 <!-- End main content -->
 

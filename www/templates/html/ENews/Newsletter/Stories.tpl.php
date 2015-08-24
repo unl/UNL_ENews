@@ -6,7 +6,7 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-        <td colspan="3" style="color:#494949; font-size: 12px; vertical-align:top;line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
+        <td colspan="3">
             <?php echo $savvy->render($context->getStoryColumn($stories[1], array(
                 'area' => $area,
                 'offset' => 1,
@@ -24,7 +24,7 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-         <td style="color:#494949; font-size: 12px; line-height: 140%; vertical-align:top; font-family: 'Lucida Grande',Verdana,Arial;">
+         <td>
              <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
                 'area' => $area,
                 'offset' => 2,
@@ -32,7 +32,7 @@
             ))); ?>
         </td>
         <td width="10">&nbsp;</td>
-        <td  style="color:#494949; font-size: 12px; line-height: 140%; vertical-align:top;font-family: 'Lucida Grande',Verdana,Arial;">
+        <td>
             <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
                 'area' => $area,
                 'offset' => 0,
