@@ -1,5 +1,4 @@
-<?php echo $savvy->render($context, 'ENews/Newsletter/Styles.tpl.php'); ?>
-<?php 
+<?php
 	if (!empty($context->options['preview'])) : //For the preview building tool
 ?>
 <div id="previewWrapper" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">

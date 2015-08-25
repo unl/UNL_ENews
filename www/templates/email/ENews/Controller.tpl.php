@@ -86,6 +86,8 @@
                 font-size:15px!important;
                 line-height:20px!important;}
         }
+
+        #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}
     </style>
 </head>
 <body>
