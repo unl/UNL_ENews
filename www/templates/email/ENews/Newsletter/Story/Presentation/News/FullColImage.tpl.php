@@ -47,8 +47,8 @@ if ($context->getColFromSort() == 'onecol') {
                                                 <?php if (($context->website)): ?>
                                                     <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#E7E2D6" width="100%">
                                                         <tr>
-                                                            <td align="right" style="padding:0 8px 0 0">
-                                                                More details at: <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#BA0000;"><?php echo $context->website; ?></a>
+                                                            <td align="right" style="padding:0 8px 0 0;font-size:14px;line-height:20px;">
+                                                                More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#BA0000;"><?php echo $context->website; ?></a>
                                                             </td>
                                                         </tr>
                                                     </table>
