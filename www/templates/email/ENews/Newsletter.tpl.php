@@ -13,7 +13,7 @@
             <?php endif;?>
 		</header>
 		<div id="previewContent">
-			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></time>
+			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
 				<table>
 				<?php
 					$stories = $context->getStories();
@@ -79,7 +79,7 @@
                     <td bgcolor="#C80E13" style="padding: 10px 20px 10px 20px;">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="font-size:14px;font-family:Helvetica,Arial,sans-serif;color:#FFFFFF;">
                             <tr>
-                                <td class="unltoday-mast" align="left"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></td>
+                                <td class="unltoday-mast" align="left"><?php echo date('F j, Y', strtotime($context->release_date)); ?></td>
                                 <td class="unltoday-mast" align="right"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
                             </tr>
                         </table>

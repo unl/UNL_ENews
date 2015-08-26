@@ -13,7 +13,7 @@
 			</hgroup>
 		</header>
 		<div id="previewContent">
-			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></time>
+			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
 				<table>
 				<?php
 					$stories = $context->getStories();
@@ -41,7 +41,7 @@
 	<table cellspacing="0" cellpadding="0" border="0" width="600" style="margin-top:10px; margin-bottom:10px;">
 		<tr>
 		    <td align="center">
-		    	<span style="font-size:9px;color:#ffffff;">Campus Activities for <span class="newsletterDate"><?php echo date('l, F j, Y', strtotime($context->release_date)); ?></span><br/>
+		    	<span style="font-size:9px;color:#ffffff;">Campus Activities for <span class="newsletterDate"><?php echo date('F j, Y', strtotime($context->release_date)); ?></span><br/>
 		        <a href="<?php echo $context->getURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Problem Ploversing?? Click here to read online.</a></span>
 		    </td>
 		</tr>
@@ -87,7 +87,7 @@
 		                        <td width="556" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;" colspan="2" valign="top" align="left">
 		                              <!-- This is the main content -->
 		                              <p style="margin:10px 0 10px 0;font-size:12px;color:#909090;" class="newsletterDate">
-		                              	<?php echo date('l, F j, Y', strtotime($context->release_date)); ?>
+		                              	<?php echo date('F j, Y', strtotime($context->release_date)); ?>
 		                              </p>
 		                              <table border="0" cellpadding="0" cellspacing="0">
 		                              <?php
