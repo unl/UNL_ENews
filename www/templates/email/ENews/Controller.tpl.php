@@ -21,6 +21,7 @@
         blockquote .original-only, .WordSection1 .original-only {display: none !important;}
         blockquote table.forwarded-only, .WordSection1 table.forwarded-only {display: block !important;}
         p {margin-top:0!important;padding-top:0!important;}
+        td.responsive-column {display: table-cell;}
 
         @media screen and (max-width: 650px) {
             table[class="wrapper"]{
@@ -85,6 +86,12 @@
                 padding:0!important;
                 font-size:15px!important;
                 line-height:20px!important;}
+            td.responsive-column {
+                display: block;
+            }
+            td.separator-column {
+                display:none;
+            }
         }
 
         #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}

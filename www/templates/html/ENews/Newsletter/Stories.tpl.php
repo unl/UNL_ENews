@@ -24,15 +24,15 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-         <td valign="top">
+         <td valign="top" class="responsive-column">
              <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
                 'area' => $area,
                 'offset' => 2,
                 'preview' => $isPreview
             ))); ?>
         </td>
-        <td width="10">&nbsp;</td>
-        <td valign="top">
+        <td width="10" class="separator-column">&nbsp;</td>
+        <td valign="top" class="responsive-column">
             <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
                 'area' => $area,
                 'offset' => 0,
