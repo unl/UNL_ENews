@@ -45,7 +45,7 @@
                     <td bgcolor="#F2EEE4" class="mobile-hide">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td><a href="http://www.unl.edu/" target="_blank"><img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif" alt="" height="41" width="650" border="0" align="left" style="display: block;"></a></td>
+                                <td style="line-height:0"><a href="http://www.unl.edu/" target="_blank"><img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif" alt="" height="41" width="650" border="0" align="left" style="display: block;"></a></td>
                             </tr>
                         </table>
                     </td>
