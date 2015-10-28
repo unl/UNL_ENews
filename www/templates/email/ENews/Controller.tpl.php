@@ -23,6 +23,10 @@
         p {margin-top:0!important;padding-top:0!important;}
         td.responsive-column {display: table-cell;}
 
+        table[class="wrapper-table"] {
+            min-width:100% !important;
+        }
+
         @media screen and (max-width: 650px) {
             table[class="wrapper"]{
                 width:100% !important;}
