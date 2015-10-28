@@ -92,8 +92,9 @@
 
 <!-- Start main content -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal">
-    <tr>
-        <td bgcolor="#F8F5EC" style="padding:30px 15px 30px 15px" class="unltoday-padding">
+    <tr bgcolor="#F8F5EC">
+        <td></td>
+        <td style="padding:30px 15px 30px 15px" width="620" class="unltoday-padding">
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
                 <?php
                     $stories = $context->getStories();
@@ -104,6 +105,7 @@
                 ?>
             </table>
         </td>
+        <td></td>
     </tr>
 </table>
 <!-- End main content -->
