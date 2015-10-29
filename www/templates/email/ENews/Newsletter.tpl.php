@@ -8,12 +8,16 @@
             <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif">
             <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_02.gif">
             <h1><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
-            <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
-            <h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
-            <?php endif;?>
 		</header>
 		<div id="previewContent">
-			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
+            <div id="mast">
+                <time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
+                <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
+                    <h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
+                <?php endif;?>
+                <div style="clear:both"></div>
+            </div>
+            
 				<table>
 				<?php
 					$stories = $context->getStories();
