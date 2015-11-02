@@ -306,12 +306,29 @@ Newsletter Email Preview (for building the newsletter)
     background-color: #F8F5EC;
     display:inline-block;
 }
-#preview #previewContent time {
+
+#preview #previewContent #mast {
     background-color:#C80E13;
     padding:10px 20px 10px 20px;
     color:#fff;
     display:block;
     width: 536px;
+}
+#preview #previewContent #mast time {
+    float: left;
+    font-size:14px;
+    font-family:Helvetica,Arial,sans-serif;
+}
+#preview #previewContent #mast h2 {
+    float: right;
+    width: 75%;
+    text-align: right;
+    font-style: italic;
+    font-size:14px;
+    font-family:Helvetica,Arial,sans-serif;
+    color:#fff;
+    font-weight: normal;
+    padding: 0px;
 }
 #preview #previewContent table tr >td {
     vertical-align:top;	

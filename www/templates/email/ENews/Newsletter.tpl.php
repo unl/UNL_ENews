@@ -8,12 +8,16 @@
             <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif">
             <img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_02.gif">
             <h1><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></h1>
-            <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
-            <h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
-            <?php endif;?>
 		</header>
 		<div id="previewContent">
-			<time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
+            <div id="mast">
+                <time class="newsletterDate" datetime="<?php echo $context->release_date; ?>"><?php echo date('F j, Y', strtotime($context->release_date)); ?></time>
+                <?php if(UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle) :?>
+                    <h2><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></h2>
+                <?php endif;?>
+                <div style="clear:both"></div>
+            </div>
+            
 				<table>
 				<?php
 					$stories = $context->getStories();
@@ -37,7 +41,7 @@
 <?php 
 	else: //everything else
 ?>
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: normal;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: normal; min-width: 650px;" class="wrapper-table">
     <tr>
         <td>
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -45,7 +49,7 @@
                     <td bgcolor="#F2EEE4" class="mobile-hide">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td><a href="http://www.unl.edu/" target="_blank"><img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif" alt="" height="41" width="650" border="0" align="left" style="display: block;"></a></td>
+                                <td style="line-height:0"><a href="http://www.unl.edu/" target="_blank"><img src="http://www.unl.edu/wdn/templates_4.0/images/email/header_01.gif" alt="" height="41" width="650" border="0" align="left" style="display: block;"></a></td>
                             </tr>
                         </table>
                     </td>
@@ -91,9 +95,10 @@
 </table>
 
 <!-- Start main content -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal">
-    <tr>
-        <td bgcolor="#F8F5EC" style="padding:30px 15px 30px 15px" class="unltoday-padding">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal; min-width: 650px;" class="wrapper-table">
+    <tr bgcolor="#F8F5EC">
+        <td></td>
+        <td style="padding:30px 15px 30px 15px" width="620" class="unltoday-padding">
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
                 <?php
                     $stories = $context->getStories();
@@ -104,11 +109,12 @@
                 ?>
             </table>
         </td>
+        <td></td>
     </tr>
 </table>
 <!-- End main content -->
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: normal;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: normal; min-width: 650px;" class="wrapper-table">
     <tr>
         <td bgcolor="#525151" align="center">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
