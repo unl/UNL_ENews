@@ -1,4 +1,4 @@
-<?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?> - <?php echo date('l, F j, Y', strtotime($context->release_date)) . "\n"; ?>
+<?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?> - <?php echo date('F j, Y', strtotime($context->release_date)) . "\n"; ?>
 View the full version at <?php echo $context->getURL(); ?>
 
 

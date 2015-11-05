@@ -405,28 +405,23 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
         $savvy = $this->getEmailRenderer('email');
         $savvy->setEscape('htmlentities');
 
-        $body = $savvy->render($this);
+        $html = $savvy->render($this, 'ENews/Controller.tpl.php');
 
         if (isset($email) && $email->optout) {
             $optout_message = $savvy->render(new UNL_ENews_Newsletter_OptOut(array('email'=>$email)));
-            if (strpos($body, '<!-- optout -->') !== false) {
+            if (strpos($html, '<!-- optout -->') !== false) {
                 // The newsletter html has a placeholder for the optout message, insert it here
-                $body = str_replace(
+                $html = str_replace(
                             '<!-- optout -->', // placeholder text
                             $optout_message,   // rendered optout message
-                            $body              // current body
+                            $html              // current html
                         );
             } else {
                 // No placeholder found, just append the optout message
-                $body .= $optout_message;
+                $html .= $optout_message;
             }
         }
 
-        $html = '<html>'.
-                '<body style="word-wrap: break-word;" bgcolor="#ffffff">'.
-                    $body .
-                '</body>'.
-                '</html>';
         return $html;
     }
 

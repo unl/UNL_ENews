@@ -186,26 +186,6 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         throw new UnexpectedValueException('That offset is unknown. I don\'t know which column I\'m supposed to be in.', 500);
     }
 
-    /**
-     * Get the preferred width of this story by using the sort order
-     * 
-     * @return int
-     */
-    public function getWidthFromSortOrder()
-    {
-        $offset = $this->getSortOrderOffset();
-
-        switch ($offset) {
-            case 1:
-                return UNL_ENews_File_Image::MAX_WIDTH; //Full-Width
-            case 2:
-            case 0:
-                return UNL_ENews_File_Image::HALF_WIDTH; //Half-Width
-        }
-
-        throw new UnexpectedValueException('I don\'t know how wide this story should be.', 500);
-    }
-
     public function getSortOrderOffset()
     {
         return $this->sort_order % 3;

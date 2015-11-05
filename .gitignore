@@ -4,3 +4,4 @@ www/config.inc.php
 tests/pear2coverage.db
 *.xdebug
 /www/files
+.idea
