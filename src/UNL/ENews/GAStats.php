@@ -21,7 +21,8 @@ class UNL_ENews_GAStats extends UNL_ENews_LoginRequired
         $newsletter = UNL_ENews_Newsletter::getByID($newsletter_id);
         $newsroom = $newsletter->getNewsroom();
         $shortname = $newsroom->shortname;
-        $filter = 'pagePath=~^newsroom.unl.edu\/announce\/'.$shortname.'\/'.$newsletter_id.'\/';
+
+        $filter = 'pagePath=~^'.str_replace('/', '\/', str_replace(array('http://', 'https://'), '', UNL_ENews_Controller::$url)).$shortname.'\/'.$newsletter_id.'\/';
         $max_results = 20;
 
         $profileId = 'ga:'.self::$ga_profile_id;
