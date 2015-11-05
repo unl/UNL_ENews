@@ -16,12 +16,17 @@ if ($start_date==$end_date){
     <th>Visits</th>
 </tr>
 <?php
-foreach($context->ga->getResults() as $result):
+
+/**
+ * @var \Widop\GoogleAnalytics\Response $context->response 
+ */
+
+foreach($context->response->getRows() as $result):
 ?>
 <tr>
-    <td><?php echo '<a href="http://'.$result->getPagePath().'">'.$result->getPageTitle().'</a>' ?></td>
-    <td><?php echo $result->getPageviews() ?></td>
-    <td><?php echo $result->getVisits() ?></td>
+    <td><?php echo '<a href="http://'.$result[0].'">'.$result[1].'</a>' ?></td>
+    <td><?php echo $result[2] // pageviews ?></td>
+    <td><?php echo $result[3] // visits ?></td>
 </tr>
 <?php
 endforeach

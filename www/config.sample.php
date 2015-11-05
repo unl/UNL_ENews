@@ -24,8 +24,7 @@ UNL_ENews_Controller::setDbSettings(array(
     'dbname'   => 'enews'
 ));
 
-UNL_ENews_GAStats::$ga_email = '';
-UNL_ENews_GAStats::$ga_password = '';
+UNL_ENews_GAStats::$ga_client_id = '';
 UNL_ENews_GAStats::$ga_profile_id = 111; //integer
 
 // Set the theme you wish to use
