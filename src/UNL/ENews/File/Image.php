@@ -1,8 +1,8 @@
 <?php
 class UNL_ENews_File_Image extends UNL_ENews_File
 {
-    const THUMB_WIDTH    = 96;
-    const THUMB_HEIGHT   = 72;
+    const THUMB_WIDTH    = 256;
+    const THUMB_HEIGHT   = 192;
 
     const FULL_AD_WIDTH  = 536;
     const FULL_AD_HEIGHT = 96;
