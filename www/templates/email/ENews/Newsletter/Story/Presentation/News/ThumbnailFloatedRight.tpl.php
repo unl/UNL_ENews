@@ -20,7 +20,7 @@
                                         <tr>
                                             <td class="unltoday-body" align="top" style="font-size:16px;line-height:25px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
                                                 <?php if ($file = $context->getThumbnail()) : ?>
-                                                    <img src="<?php echo $file->getURL(); ?>" width="30%" style="max-width:35%; margin:0 0 5px 8px" align="right" />
+                                                    <img src="<?php echo $file->getURL(); ?>" width="30%" style="max-width:35%; margin:0 0 5px 8px; padding-top: 5px;" align="right" />
                                                 <?php endif; ?>
                                                 <p>
                                                     <?php
