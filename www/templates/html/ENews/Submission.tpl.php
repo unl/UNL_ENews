@@ -42,6 +42,7 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
 </script>
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
 <script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>
+<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/purify.js"></script>
 <script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
 <script type="text/javascript">
@@ -228,7 +229,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
         <?php }  ?>
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
-    <a href="#"></a>
+    <a href="#" class="supporting_website"></a>
     <div class="clear"></div>
     </div>
 </div>

@@ -276,9 +276,18 @@ var submission = function($) {
 		},
 
 		updatePreview : function() {
-			$('#sampleLayout p').text(function(index){
+			$('#sampleLayout p').html(function(index){
 				if ($('#description').val().length) {
-					return $('#description').val().substring(0,300);
+					var string = $('#description').val().substring(0,300);
+					console.log(string);
+					//Purify it to match what the actual output would look like
+					string = DOMPurify.sanitize(string, {
+						ALLOWED_TAGS: ['a','strong','p','ul','ol','li','em'],
+						ALLOWED_ATTR: ['href'],
+						SAFE_FOR_JQUERY: true
+					});
+					console.log(string);
+					return string;
 				}
 			});
 			$('#sampleLayout h4').text(function(index){
@@ -286,7 +295,7 @@ var submission = function($) {
 					return $('#title').val();
 				}
 			});
-			$('#sampleLayout a').text(function(index){
+			$('#sampleLayout a.supporting_website').text(function(index){
 				return $('#website').val();
 			});
 			var demoText = $('#description').val();
