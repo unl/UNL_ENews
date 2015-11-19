@@ -24,10 +24,10 @@ foreach ($context->getFiles() as $file) {
 <?php $full = trim($context->full_article); ?>
 <?php if (!empty($full)) : ?>
     <p>
-    <?php echo nl2br(UNL_ENews_Controller::makeClickableLinks($context->full_article)); ?>
+    <?php echo $savvy->render($context, 'ENews/Story/field-full_article.tpl.php'); ?>
     </p>
 <?php else : ?>
-    <?php echo nl2br($context->description); ?>
+    <?php echo $savvy->render($context, 'ENews/Story/field-description.tpl.php'); ?>
 <?php endif; ?>
 <?php if ($context->website) : ?>
     <p>

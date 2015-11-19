@@ -18,5 +18,5 @@
     ?>
 	<h4><a href="<?php echo $storylink; ?>" title="Read more about <?php echo $context->title; ?>"><?php echo $context->title; ?></a></h4>
 
-	<p><?php echo nl2br($context->description); ?></p>
+	<p><?php echo $savvy->render($context, 'ENews/Story/field-description.tpl.php'); ?></p>
 </div>

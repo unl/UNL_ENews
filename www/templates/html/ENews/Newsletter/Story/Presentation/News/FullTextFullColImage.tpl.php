@@ -18,7 +18,7 @@ if ($file = $context->getFileByUse('originalimage')) {
 </h4>
 <p>
 <?php
-echo nl2br($context->full_article);
+echo $savvy->render($context, 'ENews/Story/field-full_article.tpl.php');
 ?>
 <?php if (isset($context->ics)): ?>
 	<a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>

@@ -33,7 +33,7 @@ if ($context->getColFromSort() == 'onecol') {
                                         <tr>
                                             <td class="unltoday-body" align="top" style="font-size:18px;line-height:26px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
                                                 <p>
-                                                    <?php echo nl2br($context->full_article); ?>
+                                                    <?php echo $savvy->render($context, 'ENews/Story/field-full_article.tpl.php'); ?>
                                                     <?php if (isset($context->ics)): ?>
                                                         <a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
                                                     <?php endif; ?>
