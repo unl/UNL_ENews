@@ -82,8 +82,15 @@ var submission = function($) {
 			});
 
 			// Make a GoURL with campaign tagging for the Supporting Website
-			$('#website').bind('change', function() {
+			$('#website').bind('blur', function() {
 				var website = $.trim($(this).val());
+				
+				if ('' == website) {
+					//Handle an empty input
+					submission.updatePreview();
+					return;
+				}
+				
 				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 					website = 'http://' + website;
 				}
@@ -293,8 +300,15 @@ var submission = function($) {
 					return $('#title').val();
 				}
 			});
-			$('#sampleLayout a.supporting_website').text(function(index){
-				return $('#website').val();
+			$('#supporting_website').html(function(index){
+				var website = $('#website').val();
+				if (website.length) {
+					return $('<a>').attr({
+						href: website
+					}).text(website)
+				}
+				
+				return '';
 			});
 			var demoText = $('#description').val();
 			if ((submission.characterLimit - demoText.length) < (submission.characterLimit * .08)) {

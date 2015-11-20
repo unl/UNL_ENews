@@ -231,7 +231,9 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
         <?php }  ?>
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
-    <a href="#" class="supporting_website"></a>
+        
+    <div id="supporting_website"></div>
+    
     <div class="clear"></div>
     </div>
 </div>
