@@ -40,12 +40,12 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
 	var editType = false;
 <?php endif; ?>
 </script>
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/purify.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
-<script type="text/javascript">
+<script src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/purify.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
+<script>
     WDN.loadCSS("<?php echo UNL_ENews_Controller::getURL();?>css/imgareaselect-default.css");
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
