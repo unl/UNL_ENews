@@ -39,6 +39,8 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
 <?php else :?>
 	var editType = false;
 <?php endif; ?>
+    var ENEWS_ALLOWED_TAGS_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_tags_description); ?>;
+    var ENEWS_ALLOWED_ATTR_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_attr_description); ?>;
 </script>
 <script src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
 <script src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>

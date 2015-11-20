@@ -31,6 +31,38 @@ class UNL_ENews_Controller
 
     public $actionable = array();
 
+    /**
+     * See http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+     * Maps to the htmlpurifier config option HTML.Allowed
+     * 
+     * @var string
+     */
+    public static $allowed_html_field_description = 'a[href],strong,p,em';
+
+    /**
+     * See http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+     * Maps to the htmlpurifier config option HTML.Allowed
+     * 
+     * @var string
+     */
+    public static $allowed_html_field_full_article = 'a[href],strong,p,ul,ol,li,em';
+
+    /**
+     * See https://github.com/cure53/DOMPurify#can-i-configure-it
+     * Maps to the DOMPurify config option `ALLOWED_TAGS`
+     * 
+     * @var array
+     */
+    public static $js_allowed_tags_description = array('a','strong','p','em');
+
+    /**
+     * See https://github.com/cure53/DOMPurify#can-i-configure-it
+     * Maps to the DOMPurify config option `ALLOWED_ATTR`
+     * 
+     * @var array
+     */
+    public static $js_allowed_attr_description = array('href');
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;

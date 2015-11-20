@@ -281,8 +281,8 @@ var submission = function($) {
 					var string = $('#description').val().substring(0,300);
 					//Purify it to match what the actual output would look like
 					string = DOMPurify.sanitize(string, {
-						ALLOWED_TAGS: ['a','strong','p','em'],
-						ALLOWED_ATTR: ['href'],
+						ALLOWED_TAGS: ENEWS_ALLOWED_TAGS_DESCRIPTION,
+						ALLOWED_ATTR: ENEWS_ALLOWED_ATTR_DESCRIPTION,
 						SAFE_FOR_JQUERY: true
 					});
 					return string;
