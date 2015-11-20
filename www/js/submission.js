@@ -282,7 +282,7 @@ var submission = function($) {
 					console.log(string);
 					//Purify it to match what the actual output would look like
 					string = DOMPurify.sanitize(string, {
-						ALLOWED_TAGS: ['a','strong','p','ul','ol','li','em'],
+						ALLOWED_TAGS: ['a','strong','p','em'],
 						ALLOWED_ATTR: ['href'],
 						SAFE_FOR_JQUERY: true
 					});
