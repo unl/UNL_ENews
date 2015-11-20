@@ -5,6 +5,8 @@ if (file_exists('config.inc.php')) {
     require 'config.sample.php';
 }
 
+require dirname(__FILE__).'/../vendor/autoload.php';
+
 $routes = include __DIR__ . '/../data/routes.php';
 
 $router = new RegExpRouter\Router(array('baseURL' => UNL_ENews_Controller::$url));

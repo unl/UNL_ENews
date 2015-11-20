@@ -1,6 +1,5 @@
 <?php
 require dirname(__FILE__).'/../../../lib/php/gapi.class.php';
-require dirname(__FILE__).'/../../../vendor/autoload.php';
 
 use Widop\GoogleAnalytics\Query;
 use Widop\GoogleAnalytics\Client;
