@@ -279,14 +279,12 @@ var submission = function($) {
 			$('#sampleLayout p').html(function(index){
 				if ($('#description').val().length) {
 					var string = $('#description').val().substring(0,300);
-					console.log(string);
 					//Purify it to match what the actual output would look like
 					string = DOMPurify.sanitize(string, {
 						ALLOWED_TAGS: ['a','strong','p','em'],
 						ALLOWED_ATTR: ['href'],
 						SAFE_FOR_JQUERY: true
 					});
-					console.log(string);
 					return string;
 				}
 			});
