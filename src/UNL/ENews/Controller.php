@@ -37,7 +37,7 @@ class UNL_ENews_Controller
      * 
      * @var string
      */
-    public static $allowed_html_field_description = 'a[href],strong,p,em';
+    public static $allowed_html_field_description = 'a[href],strong,p,em,br';
 
     /**
      * See http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
@@ -45,7 +45,7 @@ class UNL_ENews_Controller
      * 
      * @var string
      */
-    public static $allowed_html_field_full_article = 'a[href],strong,p,ul,ol,li,em';
+    public static $allowed_html_field_full_article = 'a[href],strong,p,ul,ol,li,em,br';
 
     /**
      * See https://github.com/cure53/DOMPurify#can-i-configure-it
@@ -53,7 +53,7 @@ class UNL_ENews_Controller
      * 
      * @var array
      */
-    public static $js_allowed_tags_description = array('a','strong','p','em');
+    public static $js_allowed_tags_description = array('a','strong','p','em','br');
 
     /**
      * See https://github.com/cure53/DOMPurify#can-i-configure-it
