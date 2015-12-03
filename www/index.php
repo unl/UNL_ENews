@@ -45,6 +45,7 @@ switch($enews->options['format']) {
         $savvy->addTemplateFormatPaths($enews->options['format']);
         break;
     case 'rss':
+        $savvy->sendCORSHeaders();
         header('Content-type:text/xml;charset=UTF-8');
         $savvy->setTemplateFormatPaths($enews->options['format']);
         break;
