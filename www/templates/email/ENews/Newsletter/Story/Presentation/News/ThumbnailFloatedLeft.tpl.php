@@ -24,7 +24,7 @@
                                                     <?php endif; ?>
                                                     <p>
                                                     <?php
-                                                    echo nl2br($context->description);
+                                                    echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
                                                     if (!empty($context->full_article)) {
                                                         echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
                                                     }

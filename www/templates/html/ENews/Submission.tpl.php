@@ -39,12 +39,15 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
 <?php else :?>
 	var editType = false;
 <?php endif; ?>
+    var ENEWS_ALLOWED_TAGS_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_tags_description); ?>;
+    var ENEWS_ALLOWED_ATTR_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_attr_description); ?>;
 </script>
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
-<script type="text/javascript" src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
-<script type="text/javascript">
+<script src="/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/purify.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
+<script>
     WDN.loadCSS("<?php echo UNL_ENews_Controller::getURL();?>css/imgareaselect-default.css");
     WDN.loadCSS("/wdn/templates_3.0/css/content/forms.css");
     WDN.loadCSS("/wdn/templates_3.0/scripts/plugins/ui/jquery-ui.css");
@@ -228,7 +231,9 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
         <?php }  ?>
     </div>
     <p>&lt;Enter Your Article Text&gt;</p>
-    <a href="#"></a>
+        
+    <div id="supporting_website"></div>
+    
     <div class="clear"></div>
     </div>
 </div>

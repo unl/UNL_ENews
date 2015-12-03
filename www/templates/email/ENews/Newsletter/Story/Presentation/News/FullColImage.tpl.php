@@ -34,7 +34,7 @@ if ($context->getColFromSort() == 'onecol') {
                                             <td class="unltoday-body" align="top" style="font-size:18px;line-height:26px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
                                                 <p>
                                                     <?php
-                                                    echo nl2br($context->description);
+                                                    echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
                                                     if (!empty($context->full_article)) {
                                                         echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
                                                     }

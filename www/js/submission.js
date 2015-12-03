@@ -82,8 +82,15 @@ var submission = function($) {
 			});
 
 			// Make a GoURL with campaign tagging for the Supporting Website
-			$('#website').bind('change', function() {
+			$('#website').bind('blur', function() {
 				var website = $.trim($(this).val());
+				
+				if ('' == website) {
+					//Handle an empty input
+					submission.updatePreview();
+					return;
+				}
+				
 				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 					website = 'http://' + website;
 				}
@@ -276,9 +283,16 @@ var submission = function($) {
 		},
 
 		updatePreview : function() {
-			$('#sampleLayout p').text(function(index){
+			$('#sampleLayout p').html(function(index){
 				if ($('#description').val().length) {
-					return $('#description').val().substring(0,300);
+					var string = $('#description').val().substring(0,300);
+					//Purify it to match what the actual output would look like
+					string = DOMPurify.sanitize(string, {
+						ALLOWED_TAGS: ENEWS_ALLOWED_TAGS_DESCRIPTION,
+						ALLOWED_ATTR: ENEWS_ALLOWED_ATTR_DESCRIPTION,
+						SAFE_FOR_JQUERY: true
+					});
+					return string;
 				}
 			});
 			$('#sampleLayout h4').text(function(index){
@@ -286,8 +300,15 @@ var submission = function($) {
 					return $('#title').val();
 				}
 			});
-			$('#sampleLayout a').text(function(index){
-				return $('#website').val();
+			$('#supporting_website').html(function(index){
+				var website = $('#website').val();
+				if (website.length) {
+					return $('<a>').attr({
+						href: website
+					}).text(website)
+				}
+				
+				return '';
 			});
 			var demoText = $('#description').val();
 			if ((submission.characterLimit - demoText.length) < (submission.characterLimit * .08)) {

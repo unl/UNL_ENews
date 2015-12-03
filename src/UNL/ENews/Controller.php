@@ -31,6 +31,38 @@ class UNL_ENews_Controller
 
     public $actionable = array();
 
+    /**
+     * See http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+     * Maps to the htmlpurifier config option HTML.Allowed
+     * 
+     * @var string
+     */
+    public static $allowed_html_field_description = 'a[href],strong,p,em,br';
+
+    /**
+     * See http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+     * Maps to the htmlpurifier config option HTML.Allowed
+     * 
+     * @var string
+     */
+    public static $allowed_html_field_full_article = 'a[href],strong,p,ul,ol,li,em,br';
+
+    /**
+     * See https://github.com/cure53/DOMPurify#can-i-configure-it
+     * Maps to the DOMPurify config option `ALLOWED_TAGS`
+     * 
+     * @var array
+     */
+    public static $js_allowed_tags_description = array('a','strong','p','em','br');
+
+    /**
+     * See https://github.com/cure53/DOMPurify#can-i-configure-it
+     * Maps to the DOMPurify config option `ALLOWED_ATTR`
+     * 
+     * @var array
+     */
+    public static $js_allowed_attr_description = array('href');
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -247,9 +279,8 @@ class UNL_ENews_Controller
     {
         //make sure there is an http:// on all URLs
         $string = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/i", "$1http://$2",$string);
-        // make all URLs links
-        $string = preg_replace("/([\w]+:\/\/[\w-?&;#~\+=\.\/\@]+[\w\/])/i","<a href=\"$1\">$1</a>",$string);
-        // make all emails links
+        
+        // make all emails links (not done with HTML Purifier)
         $string = preg_replace("/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}|[0-9]{1,4})(\]?))/i","<a href=\"mailto:$1\">$1</a>",$string);
 
         return $string;
