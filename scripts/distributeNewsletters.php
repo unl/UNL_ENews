@@ -10,6 +10,8 @@ if (file_exists(dirname(__FILE__).'/../www/config.inc.php')) {
     require dirname(__FILE__).'/../www/config.sample.php';
 }
 
+require_once dirname(__FILE__).'/../vendor/autoload.php';
+
 chdir(dirname(__FILE__).'/../www');
 
 foreach (UNL_ENews_NewsletterList::getUndistributed() as $newsletter) {
