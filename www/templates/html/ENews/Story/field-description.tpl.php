@@ -1,6 +1,8 @@
 <?php
 $config = HTMLPurifier_Config::createDefault();
 $config->set('HTML.Allowed', UNL_ENews_Controller::$allowed_html_field_description);
+$config->set('Core.Encoding', 'utf-8');
+$config->set('Core.EscapeNonASCIICharacters', true);
 $config->set('AutoFormat.Linkify', true);
 $purifier = new HTMLPurifier($config);
 
