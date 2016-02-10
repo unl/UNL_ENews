@@ -16,11 +16,8 @@
 **************/
 #maincontent h3.sec_main {
 	border-radius:.3em;
-    -webkit-border-radius:.3em;
-    -moz-border-radius:.3em;
     min-width:700x;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 
     border:1px solid #bbb;
     line-height:100%;
@@ -44,7 +41,7 @@
 
 /* Form Styles 
 ************************/
-#maincontent .enews legend { 
+#maincontent .enews legend {
 	display:none;
 }
 #maincontent .enews fieldset ol {
@@ -54,9 +51,7 @@
 #maincontent .enews fieldset ol li {
 	list-style:none;
 	padding:5px 20px;
-}
-#maincontent .enews fieldset ol li label {
-	font-size:1.3em;
+	margin: 0;
 }
 #maincontent .enews fieldset ol li input, #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
 	border:1px solid #b8afa1;
@@ -64,21 +59,11 @@
 }
 #maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=url], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
 	width:100%;
-	font-size:1.1em;
 }
 #maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=url], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
 	padding:5px;
 }
-#maincontent .enews fieldset ol li span.required {
-	position:absolute;
-	left:0;
-	text-indent:-9999px;
-	margin-top:-17px;
-	background:url('images/requiredIndicator.png') no-repeat top right;
-	width:40px;
-	height:20px;
-	display:block;
-}
+
 #maincontent .enews fieldset ol li .helper{
 	font-size:.6em;
 	color: #7c7c7c;
@@ -87,7 +72,7 @@
 }
 strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
 #maincontent .enews fieldset fieldset {background:none;padding:0;}
-#maincontent .enews fieldset fieldset legend {display:block;font-size:1.3em;}
+#maincontent .enews fieldset fieldset legend {display:block;}
 #maincontent .enews fieldset fieldset ol {margin-left:-20px;margin-top:0px;}
 #maincontent .enews fieldset fieldset ol li {margin-left:-30px;font-size:0.8em;padding:2px 20px;}
 /* First option */

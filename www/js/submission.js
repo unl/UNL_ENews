@@ -25,7 +25,6 @@ define([
 		initialize : function() {
 			WDN.initializePlugin('jqueryui', [function() {
 				$(document).ready(function(){
-					console.log('do date[icker');
 					// Set up date pickers on all inputs with datepicker class
 					$("input.datepicker").datepicker({
 						showOn: 'both',
@@ -151,7 +150,7 @@ define([
 				var imgString = '<img onload="if(plugin.announcementType != \'ad\')plugin.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
-				$('#img_description_label').append('<span class="required">*</span>');
+				$('#img_description_label').prepend('<span class="required">*</span> ');
 				$('#file_description').addClass('required').removeAttr('disabled');
 				ajaxUpload.removeIframe();
 			});
@@ -284,7 +283,7 @@ define([
 			$('#sampleLayout').hide();
 			$('#upload_area span').remove();
 			$('#full_article').parents('li').hide();
-			$('label[for="title"]').html('Advertisement Name<span class="required">*</span>');
+			$('label[for="title"]').html('<span class="required">*</span> Advertisement Name');
 			$('label[for="image"]').html('Image advertisement <span class="helper">Must be 253px X 96px or 536px X 96px</span>')
 		},
 

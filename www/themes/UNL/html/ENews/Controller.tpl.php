@@ -41,7 +41,7 @@ $page->navlinks = $savvy->render($context, 'ENews/Navigation.tpl.php');
 $page->pagetitle = '<h1>' . $savvy->render($context, 'ENews/PageTitle.tpl.php') . '</h1>';
 $page->leftcollinks = '';
 
-$page->maincontentarea = $savvy->render($context->actionable);
+$page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-no-top">' . $savvy->render($context->actionable) . '</div></div>';
 
 $page->contactinfo = '
     <div class="wdn-grid-set">

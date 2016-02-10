@@ -63,7 +63,7 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 }
 ?>
 
-<h3 class="highlighted"><span>1</span>Select News Type</h3>
+<h3 class="highlighted wdn-brand"><span>1</span>Select News Type</h3>
 <form id="enewsStep1" name="enewsStep1" class="enews energetic <?php echo $showAdClass;?>" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step1">
     <legend>Select News Type</legend>
@@ -78,17 +78,17 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 
 
 
-<h3><span>2</span>Enter Date Details for Event</h3>
+<h3 class="wdn-brand"><span>2</span>Enter Date Details for Event</h3>
 <form id="enewsStep2" name="enewsStep2" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step2" style="display:none;">
     <legend><span>Enter Date Details for Event</span></legend>
         <ol>
             <li>
-                <label for="date">Date of Event<span class="required">*</span></label>
+                <label for="date"><span class="required">*</span>Date of Event</label>
                 <input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'request_publish_end'); ?>" />
             </li>
             <li>
-                <label for="event">Which Event?<span class="required">*</span><span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
+                <label for="event"><span class="required">*</span>Which Event?<span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
                 <select id="event">
                     <option value="NewEvent">New Event</option>
 
@@ -102,7 +102,10 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 
 
 
-<h3><span>3</span>Announcement Submission</h3>
+<h3 class="wdn-brand"><span>3</span>Announcement Submission</h3>
+
+<div class="wdn-grid-set">
+<div class="wdn-col-one-half">
 <form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <fieldset id="wdn_process_step3" style="display:none;">
     <legend><span>News Announcement Submission</span></legend>
@@ -139,13 +142,13 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     }
     ?>
     <ol>
-        <li><label for="title">Headline or Title<span class="required">*</span></label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
-        <li><label for="description">Summary<span class="required">*</span><span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" class="resizable" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
+        <li><label for="title"><span class="required">*</span> Headline or Title</label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
+        <li><label for="description"><span class="required">*</span> Summary<span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" class="resizable" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
         <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" class="resizable" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea></li>
-        <li><label for="request_publish_start">What date would like this to run?<span class="required">*</span></label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
-        <li><label for="request_publish_end">Last date this could run<span class="required">*</span></label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
+        <li><label for="request_publish_start"><span class="required">*</span> What date would like this to run?</label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
+        <li><label for="request_publish_end"><span class="required">*</span> Last date this could run</label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
         <li><label for="website">Supporting Website</label><input id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" /></li>
-        <li><label for="sponsor">Sponsoring Unit<span class="required">*</span></label><input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="required" /></li>
+        <li><label for="sponsor"><span class="required">*</span> Sponsoring Unit</label><input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="required" /></li>
         <li>
         <fieldset id="newsroom_id">
          <legend>Please consider for</legend>
@@ -214,7 +217,8 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 
 
 
-
+</div>
+<div class="wdn-col-one-half">
 
 
 <div id="sampleLayout" style="display:none;">
@@ -242,5 +246,6 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
 <?php include(dirname(__FILE__) . '/Submission/DeleteImagesForm.tpl.php'); ?>
 
 <?php //ending div for #enewsForm ?>
+    </div></div>
 <div class="clear"></div>
 </div>

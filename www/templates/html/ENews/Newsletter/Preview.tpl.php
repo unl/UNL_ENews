@@ -23,7 +23,7 @@
 	        <li>
 	            <input type="hidden" name="_type" value="newsletter" />
 	            <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-	            <label for="emailSubject">Email Subject<span class="required">*</span><span class="helper">Include story keywords!</span></label>
+	            <label for="emailSubject"><span class="required">*</span> Email Subject<span class="helper">Include story keywords!</span></label>
 	            <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
 	        </li>
 	        <li>

@@ -1,26 +1,26 @@
-div#enewsForm {
-	width:960px;
+#enewsForm {
 	background:#f7f7f7;
 }
 
 /* Submission Form h3
 *************/
-#maincontent div#enewsForm h3 {
+#enewsForm h3 {
 	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
 	padding:5px 10px;
+	margin: 0;
 	border:1px solid #dadde3;
 	border-top:1px solid #fff;
 	border-bottom:1px solid #ccc;
 	font-size:1.5em;
 	color:#999;
 }
-#maincontent div#enewsForm h3:first-of-type {
+#enewsForm h3:first-of-type {
 	border-top:1px solid #dadde3;
 }
-#maincontent div#enewsForm h3 span {
+#enewsForm h3 span {
 	background:#fff;
 	padding:1px 4px 1px 4px;
-	border-radius:10x;  
+	border-radius:10px;
 	margin-right:10px;
 	margin-top:0px;
 	font-size:12px;
@@ -28,24 +28,28 @@ div#enewsForm {
 	font-weight:bold;
 	border:1px solid #fff;
 }
-#maincontent div#enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;font-weight:bold;}
-#maincontent div#enewsForm h3.highlighted span {
+#enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;}
+#enewsForm h3.highlighted span {
 	border:1px solid #e19c2b;
 	background:#de8727;
 	color:#fff;
 }
-#maincontent div#enewsForm h3.highlighted + fieldset,
-#maincontent div#enewsForm h3.highlighted + fieldset + fieldset {
+#enewsForm h3.highlighted + fieldset,
+#enewsForm h3.highlighted + fieldset + fieldset {
 	border:1px solid #b8afa1;
 	border-top:none;
 	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
 }
-#maincontent div#enewsForm h3 span.announceType {
+#enewsForm h3 span.announceType {
 	border:none;
 	float:right;
 	background:#028a02;
 	margin-top:3px; 
 	color:#fff;
+}
+
+#enewsSubmission {
+	z-index: 2;
 }
 
 /* Resizable Textarea
@@ -88,19 +92,8 @@ div.grippie {
 	color:#fff;
 }
 
-form#enewsSubmission {
-	float:left;
-	width:470px;
-	margin-right:10px;
-}
-
 /* Submission Form Display Sample
 **********************/
-#sampleLayout {
-	float:right;
-	margin:20px 10px 0px 10px;
-	width:430px;
-}
 #sampleLayout > h5 {
 	font-size:1.3em;
 	font-family:"Lucida Grande",Verdana,Arial;
@@ -130,12 +123,10 @@ form#enewsSubmission {
 /* Image Upload Preview
 ********************/
 form#enewsImage {
-	float:right;
-	clear:right;
-	width:430px;
 	border:1px solid #b8afa1;
 	background:#fff;
 	margin:30px 10px;
+	z-index: 1;
 }
 #upload_area {
 	text-align:center;
@@ -207,6 +198,16 @@ form#enewsImage {
 	-webkit-border-radius:3px;
 }
 
+#deleteImages {
+	position: static;
+	float: right;
+}
+#deleteImages input {
+	background: none;
+	color: gray;
+	text-decoration: underline;
+
+}
 /******** Submit Buttons ********/
 .submissionButton {
 	margin:20px 0;
