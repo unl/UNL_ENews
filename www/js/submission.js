@@ -1,5 +1,11 @@
-var submission = function($) {
-	return {
+define([
+	'jquery',
+	'wdn',
+	'modernizr',
+	'require',
+], function($, WDN, Modernizr, require) {
+
+	var plugin = {
 		utm_campaign : 'UNL_ENews',
 
 		utm_medium : 'email',
@@ -17,39 +23,58 @@ var submission = function($) {
 		announcementType : false,
 
 		initialize : function() {
-			$('.hasDatepicker').each(function() {
-				$(this).attr({'autocomplete' : 'off'});
-			});
-			$('#enewsForm h3').eq(0).css('cursor','pointer');
-			$('#enewsForm h3').eq(1).css('cursor','pointer');
-			submission.bindActions();
+			WDN.initializePlugin('jqueryui', [function() {
+				$(document).ready(function(){
+					console.log('do date[icker');
+					// Set up date pickers on all inputs with datepicker class
+					$("input.datepicker").datepicker({
+						showOn: 'both',
+						buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
+						buttonImageOnly: true,
+						dateFormat: 'yy-mm-dd',
+						defaultDate: this.value
+					});
+					if (editType) { // Editing, so update where needed
+						plugin.editing = true;
+						plugin.announcementType = editType;
+					}
+				});
 
-			$('textarea.resizable:not(.processed)').TextAreaResizer();
-			if (submission.editing) {
-				$('#enewsForm h3').eq(0).hide();
-				$('#enewsForm h3').eq(1).hide();
-				$('#enewsForm h3').eq(2).html('Edit Submission');
-				$('#enewsSubmissionButton').show();
-				$('#enewsSaveCopyButton').show();
-				submission.determinePresentation(submission.announcementType);
-				submission.updatePreview();
-			};
+				$('.hasDatepicker').each(function () {
+					$(this).attr({'autocomplete': 'off'});
+				});
+				$('#enewsForm h3').eq(0).css('cursor', 'pointer');
+				$('#enewsForm h3').eq(1).css('cursor', 'pointer');
+				plugin.bindActions();
+
+				$('textarea.resizable:not(.processed)').TextAreaResizer();
+				if (plugin.editing) {
+					$('#enewsForm h3').eq(0).hide();
+					$('#enewsForm h3').eq(1).hide();
+					$('#enewsForm h3').eq(2).html('Edit Submission');
+					$('#enewsSubmissionButton').show();
+					$('#enewsSaveCopyButton').show();
+					plugin.determinePresentation(plugin.announcementType);
+					plugin.updatePreview();
+				}
+				;
+			}]);
 		},
 
 		determinePresentation : function(announcementType) {
-			submission.announcementType = announcementType;
+			plugin.announcementType = announcementType;
 			switch (announcementType) {
 			case 'news' :
-				submission.prepareNewsSubmission();
-				submission.setPresentationId('news');
+				plugin.prepareNewsSubmission();
+				plugin.setPresentationId('news');
 				break;
 			case 'event' :
-				submission.prepareEventSubmission();
-				submission.setPresentationId('event');
+				plugin.prepareEventSubmission();
+				plugin.setPresentationId('event');
 				break;
 			case 'ad' :
-				submission.prepareAdSubmission();
-				submission.setPresentationId('ad');
+				plugin.prepareAdSubmission();
+				plugin.setPresentationId('ad');
 				break;
 			}
 		},
@@ -58,7 +83,7 @@ var submission = function($) {
 			$("#date").bind('change', function() {// Set up the 'Event' story type date select box
 				// Update the story end publish date to match the event date
 				$('#request_publish_end').attr('value', $(this).val());
-				submission.findEvents($(this).val());
+				plugin.findEvents($(this).val());
 			});
 
 			$('select#event').bind('change', function() {
@@ -77,30 +102,30 @@ var submission = function($) {
 			$('ol.option_step a').bind('click', function() {// Sliding action for the three part form
 				var a = $(this).attr('id');
 				announcementType = a.replace('Announcement', '');
-				submission.determinePresentation(announcementType);
+				plugin.determinePresentation(announcementType);
 				return false;
 			});
 
 			// Make a GoURL with campaign tagging for the Supporting Website
 			$('#website').bind('blur', function() {
 				var website = $.trim($(this).val());
-				
+
 				if ('' == website) {
 					//Handle an empty input
-					submission.updatePreview();
+					plugin.updatePreview();
 					return;
 				}
-				
+
 				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 					website = 'http://' + website;
 				}
 				var goURLPrefix = RegExp('http://go.unl.edu');
 				if (!goURLPrefix.test(website)) {
-					submission.createGoURL(website);
+					plugin.createGoURL(website);
 				} else {
-					if (!submission.urlPreview) {
-						submission.updatePreview();
-						submission.urlPreview = true;
+					if (!plugin.urlPreview) {
+						plugin.updatePreview();
+						plugin.urlPreview = true;
 					}
 				}
 			});
@@ -123,7 +148,7 @@ var submission = function($) {
 
 			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
 			$('#enewsSubmission #fileID').bind('change', function() {
-				var imgString = '<img onload="if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
+				var imgString = '<img onload="if(plugin.announcementType != \'ad\')plugin.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
 				$('#img_description_label').append('<span class="required">*</span>');
@@ -145,11 +170,11 @@ var submission = function($) {
 					$('input[name=thumbY2]').val('-1');
 
 					if ($(this).hasClass('r34')) {
-						submission.loadImageCrop('4:3');
+						plugin.loadImageCrop('4:3');
 						$(this).removeClass('r34');
 						$(this).addClass('r43');
 					} else {
-						submission.loadImageCrop('3:4');
+						plugin.loadImageCrop('3:4');
 						$(this).removeClass('r43');
 						$(this).addClass('r34');
 					}
@@ -159,7 +184,7 @@ var submission = function($) {
 
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
-				if (validationErrorMessage = submission.submitStory(true, false)) {
+				if (validationErrorMessage = plugin.submitStory(true, false)) {
 					$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
 					return false;
 				}
@@ -176,8 +201,8 @@ var submission = function($) {
 						$('#upload_area img').attr('src', '');
 						$('#img_description_label span.required').remove();
 						$('#file_description').removeClass('required').attr('disabled','disabled');
-						submission.loadImageCrop();
-						submission.updatePreview();
+						plugin.loadImageCrop();
+						plugin.updatePreview();
 					}
 				);
 				return false;
@@ -185,10 +210,10 @@ var submission = function($) {
 
 			// Update the sample layout
 			$('#description').bind('keyup', function() {
-				submission.updatePreview();
+				plugin.updatePreview();
 			});
 			$('#title').bind('keyup', function() {
-				submission.updatePreview();
+				plugin.updatePreview();
 			});
 
 			$('#next_step3').bind('click', function() {
@@ -201,10 +226,10 @@ var submission = function($) {
 				return false;
 			});
 			$('#enewsForm h3').eq(0).bind('click', function() {
-				submission.goToStep(1);
+				plugin.goToStep(1);
 			});
 			$('#enewsForm h3').eq(1).bind('click', function() {
-				submission.goToStep(2);
+				plugin.goToStep(2);
 			});
 		},
 
@@ -240,7 +265,7 @@ var submission = function($) {
 
 		prepareEventSubmission : function() {
 			$('#wdn_process_step1').slideToggle();
-			submission.goToStep(2);
+			plugin.goToStep(2);
 		},
 
 		prepareAdSubmission : function() {
@@ -251,7 +276,7 @@ var submission = function($) {
 				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">Advertisement</span>');
 				$('#enewsImage,#enewsSubmissionButton').show();
 			});
-			submission.setupAd();
+			plugin.setupAd();
 
 		},
 
@@ -307,20 +332,20 @@ var submission = function($) {
 						href: website
 					}).text(website)
 				}
-				
+
 				return '';
 			});
 			var demoText = $('#description').val();
-			if ((submission.characterLimit - demoText.length) < (submission.characterLimit * .08)) {
+			if ((plugin.characterLimit - demoText.length) < (plugin.characterLimit * .08)) {
 				$('label[for="description"] span.helper strong').addClass('warning');
 			} else {
 				$('label[for="description"] span.helper strong').removeClass('warning');
 			}
-			if (demoText.length > submission.characterLimit) {
-				demoText = demoText.substr(0,submission.characterLimit);
+			if (demoText.length > plugin.characterLimit) {
+				demoText = demoText.substr(0,plugin.characterLimit);
 				$('#description').val(demoText);
 			}
-			$('label[for="description"] span.helper strong').text(submission.characterLimit - demoText.length);
+			$('label[for="description"] span.helper strong').text(plugin.characterLimit - demoText.length);
 		},
 
 		createGoURL : function(url) {
@@ -328,35 +353,35 @@ var submission = function($) {
 				return;
 			}
 			$('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
-			submission.utm_content = $('#title').val();
-			submission.utm_source = submission.announcementType;
+			plugin.utm_content = $('#title').val();
+			plugin.utm_source = plugin.announcementType;
 
-			gaTagging = "utm_campaign="+submission.utm_campaign+"&utm_medium="+submission.utm_medium+"&utm_source="+submission.utm_source+"&utm_content="+submission.utm_content;
+			gaTagging = "utm_campaign="+plugin.utm_campaign+"&utm_medium="+plugin.utm_medium+"&utm_source="+plugin.utm_source+"&utm_content="+plugin.utm_content;
 
 			WDN.socialmediashare.createURL(
 				WDN.socialmediashare.buildGAURL(url, gaTagging),
 				function(data) {
 					$('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
-					submission.updatePreview(data);
+					plugin.updatePreview(data);
 				},
 				function(){
 					$('#website').attr('value', url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
-					submission.updatePreview(website);
+					plugin.updatePreview(website);
 				}
 			);
 		},
 
 		loadImageCrop : function(ratio) {
 			WDN.loadJS(ENEWS_HOME+'/js/jquery.imgareaselect.dev.js',function() {
-				submission.clearImageCrop();
-				submission.setUpImageCrop(ratio);
+				plugin.clearImageCrop();
+				plugin.setUpImageCrop(ratio);
 			},true,true);
 		},
 
 		clearImageCrop : function() {
-			if (submission.ias) {
-				submission.ias.setOptions({disable:true,hide:true,remove:true});
-				submission.ias.update();
+			if (plugin.ias) {
+				plugin.ias.setOptions({disable:true,hide:true,remove:true});
+				plugin.ias.update();
 			}
 			$('#imageControls').hide();
 			$('#file_description').attr('disabled','disabled');
@@ -391,7 +416,7 @@ var submission = function($) {
 				});
 			}
 
-			submission.ias = $('#upload_area img').imgAreaSelect({
+			plugin.ias = $('#upload_area img').imgAreaSelect({
 				instance: true,
 				enable : true,
 				hide : false,
@@ -423,7 +448,7 @@ var submission = function($) {
 				} else {
 					if (ratio == '3:4') {
 						if (imgWidth/imgHeight < 3/4) {
-							submission.ias.setOptions({
+							plugin.ias.setOptions({
 								maxWidth : imgWidth,
 								x1: imgWidth*(1/4),
 								y1: (imgHeight/2)-((imgWidth/2)*(4/3)/2),
@@ -431,7 +456,7 @@ var submission = function($) {
 								y2: (imgHeight/2)+((imgWidth/2)*(4/3)/2)
 							});
 						} else {
-							submission.ias.setOptions({
+							plugin.ias.setOptions({
 								maxHeight : imgHeight,
 								x1 : (imgWidth/2)-((imgHeight/2)*(3/4)/2),
 								y1 : imgHeight*(1/4),
@@ -441,7 +466,7 @@ var submission = function($) {
 						}
 					} else {
 						if (imgWidth/imgHeight > 4/3) {
-							submission.ias.setOptions({
+							plugin.ias.setOptions({
 								maxHeight : imgHeight,
 								x1 : (imgWidth/2)-((imgHeight/2)*(4/3)/2),
 								y1 : imgHeight*(1/4),
@@ -449,7 +474,7 @@ var submission = function($) {
 								y2 : imgHeight*(3/4)
 							});
 						} else {
-							submission.ias.setOptions({
+							plugin.ias.setOptions({
 								maxWidth : imgWidth,
 								x1: imgWidth*(1/4),
 								y1: (imgHeight/2)-((imgWidth/2)*(3/4)/2),
@@ -458,7 +483,7 @@ var submission = function($) {
 							});
 						}
 					}
-					submission.ias.update();
+					plugin.ias.update();
 					return false;
 				}
 			}
@@ -509,20 +534,6 @@ var submission = function($) {
 			return false;
 		}
 	};
-}(WDN.jQuery);
 
-WDN.jQuery(document).ready(function($) {
-	// Set up date pickers on all inputs with datepicker class
-	$("input.datepicker").datepicker({
-		showOn: 'both',
-		buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
-		buttonImageOnly: true,
-		dateFormat: 'yy-mm-dd',
-		defaultDate: this.value
-	});
-	if (editType) { // Editing, so update where needed
-		submission.editing = true;
-		submission.announcementType = editType;
-	}
-	submission.initialize();
+	return plugin;
 });

@@ -1,6 +1,11 @@
 {
   "require": {
+
+        "unl/php-wdn-templates": "^4.1",
     "widop/google-analytics": "*",
     "ezyang/htmlpurifier": "~4.6"
-  }
+  },
+
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
