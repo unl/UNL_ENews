@@ -49,7 +49,6 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
     });
 </script>
 <script src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
-<script src="<?php echo UNL_ENews_Controller::getURL();?>js/jquery.textarearesizer.compressed.js"></script>
 <script>
     WDN.loadCSS("<?php echo UNL_ENews_Controller::getURL();?>css/imgareaselect-default.css");
 </script>
@@ -143,8 +142,8 @@ if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
     ?>
     <ol>
         <li><label for="title"><span class="required">*</span> Headline or Title</label><input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required" /></li>
-        <li><label for="description"><span class="required">*</span> Summary<span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" class="resizable" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
-        <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" class="resizable" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea></li>
+        <li><label for="description"><span class="required">*</span> Summary<span class="helper">You have <strong>300</strong> characters remaining.</span></label><textarea id="description" name="description" cols="60" rows="5" class="required"><?php echo getValue($context, 'description'); ?></textarea></li>
+        <li><label for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label><textarea id="full_article" name="full_article" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea></li>
         <li><label for="request_publish_start"><span class="required">*</span> What date would like this to run?</label><input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" /></li>
         <li><label for="request_publish_end"><span class="required">*</span> Last date this could run</label><input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" /></li>
         <li><label for="website">Supporting Website</label><input id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" /></li>

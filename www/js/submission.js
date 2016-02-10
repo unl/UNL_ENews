@@ -46,7 +46,6 @@ define([
 				$('#enewsForm h3').eq(1).css('cursor', 'pointer');
 				plugin.bindActions();
 
-				$('textarea.resizable:not(.processed)').TextAreaResizer();
 				if (plugin.editing) {
 					$('#enewsForm h3').eq(0).hide();
 					$('#enewsForm h3').eq(1).hide();
