@@ -146,7 +146,7 @@ define([
 
 			// When the file upload returns with the file ID and the iframe updates the hidden fileID input, populate the image previews, then load cropping when img is done loading
 			$('#enewsSubmission #fileID').bind('change', function() {
-				var imgString = '<img onload="if(plugin.announcementType != \'ad\')plugin.loadImageCrop(\'4:3\');" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
+				var imgString = '<img onload="require([ENEWS_HOME+\'js/submission.js\'],function(submission){if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');})" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
 				$('#img_description_label').prepend('<span class="required">*</span> ');
@@ -373,7 +373,7 @@ define([
 			WDN.loadJS(ENEWS_HOME+'/js/jquery.imgareaselect.dev.js',function() {
 				plugin.clearImageCrop();
 				plugin.setUpImageCrop(ratio);
-			},true,true);
+			});
 		},
 
 		clearImageCrop : function() {

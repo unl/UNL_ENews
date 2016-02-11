@@ -42,13 +42,13 @@ var ENEWS_DEFAULT_PRESENTATIONID = {<?php foreach ($types = array('news', 'event
     var ENEWS_ALLOWED_TAGS_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_tags_description); ?>;
     var ENEWS_ALLOWED_ATTR_DESCRIPTION = <?php echo json_encode(UNL_ENews_Controller::$js_allowed_attr_description); ?>;
 </script>
+<script src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
 <script>
     require(["<?php echo UNL_ENews_Controller::getURL();?>js/purify.js", "<?php echo UNL_ENews_Controller::getURL();?>js/submission.js"],
         function(purify, submission){
             submission.initialize();
     });
 </script>
-<script src="<?php echo UNL_ENews_Controller::getURL();?>js/ajaxfileupload.js"></script>
 <script>
     WDN.loadCSS("<?php echo UNL_ENews_Controller::getURL();?>css/imgareaselect-default.css");
 </script>
