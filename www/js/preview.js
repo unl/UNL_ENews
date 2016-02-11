@@ -1,4 +1,10 @@
-var preview = function($) {
+define([
+	'jquery',
+	'wdn',
+	'modernizr',
+	'require',
+], function($, WDN, Modernizr, require) {
+
 	var presentationCache = {};
 	var loadStoryContent = function(element, doSetupTools) {
 		if (undefined === doSetupTools) {
@@ -19,40 +25,41 @@ var preview = function($) {
 		}, function(data) {
 			if (doSetupTools) {
 				element.html(data);
-				preview.setupTools(element);
-				preview.setupToolsHover(element);
+				plugin.setupTools(element);
+				plugin.setupToolsHover(element);
 			} else {
 				element.children('.story-content').remove();
 				element.prepend(data);
 			}
 		});
 	};
-	return {
+
+	var plugin = {
 		initialize : function() {
 			$(function() {
 				$('.story').each(function(){ //add the tools to all the stories on the page
-					preview.setupTools(this);
+					plugin.setupTools(this);
 				});
 				// stop actions on all links in a story
-				$('.story .story-content a').live('click', function(e) {
+				$('.story .story-content').on('click', 'a', function(e) {
 					return false;
 				})
-				WDN.loadJS('/wdn/templates_3.1/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', preview.setupToolsHover);
-				preview.setupDragAndSort();
-				preview.initDraggable($('.adArea .story'));
+				WDN.loadJS('/wdn/templates_3.1/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', plugin.setupToolsHover);
+				plugin.setupDragAndSort();
+				plugin.initDraggable($('.adArea .story'));
 			});
 			$('#releaseDate').attr('autocomplete', 'off').change(function(){
-				preview.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
-				preview.updateDates($(this).val());
+				plugin.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
+				plugin.updateDates($(this).val());
 			});
 			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
-				preview.saveDetails.newsletter();
+				plugin.saveDetails.newsletter();
 			});
 			$('.email_addresses h5').click(function(){
 				$('.email_addresses ul').slideToggle();
 			});
 			$('.emailIndicator input[type="checkbox"]').change(function(){
-				preview.saveDetails.emails(this);
+				plugin.saveDetails.emails(this);
 			});
 			$('h3 a.showHide').click(function() {
 				$(this).parent('h3').nextUntil('h3').slideToggle();
@@ -60,7 +67,7 @@ var preview = function($) {
 				return false;
 			});
 		},
-		
+
 		saveDetails : function() {
 			return {
 				newsletter : function() {
@@ -85,7 +92,7 @@ var preview = function($) {
 				}
 			};
 		}(),
-		
+
 		removeStory : function(theStory) {
 			var sortable = theStory.closest('.newsColumn, .adArea');
 			//remove the db record for this story
@@ -113,10 +120,10 @@ var preview = function($) {
 				$(storyList + ' > p').remove();
 				
 				theStory.removeClass('story').addClass('dragItem').css('display', 'inline-block').appendTo(storyList);
-				preview.initDraggable(theStory);
+				plugin.initDraggable(theStory);
 				
 				//update the stored story orders
-				preview.saveStoryOrder(sortable);
+				plugin.saveStoryOrder(sortable);
 			});
 			return false;
 		},
@@ -135,7 +142,7 @@ var preview = function($) {
 		setupTools : function(el) {
 			$(el).append('<div class="storyTools"><a class="edit" href="?view=submit&id='+$(el).data('id')+'"><span />Edit</a><a class="remove" href="#"><span />Remove</a><a class="layout" href="#"><span />Layout</a></div>');
 			$('a.remove', el).click(function() {
-				preview.removeStory($(this).closest('.story'));
+				plugin.removeStory($(this).closest('.story'));
 				return false;
 			});
 			$('a.layout', el).click(function() {
@@ -164,7 +171,7 @@ var preview = function($) {
 							"Save": function() {
 								var presentation_id = $('select', this).val();
 								if (presentation_id != theStory.data('presentation_id')) {
-									preview.setStoryPresentation(theStory, presentation_id);
+									plugin.setStoryPresentation(theStory, presentation_id);
 								}
 								$(this).dialog("close");
 							},
@@ -193,7 +200,7 @@ var preview = function($) {
 				return false;
 			});
 		},
-		
+
 		setupToolsHover : function(el){
 			el = el || $('#maincontent .story');
 			var hoverConfig = {
@@ -208,7 +215,7 @@ var preview = function($) {
 			};
 			el.hoverIntent(hoverConfig);
 		},
-		
+
 		initDraggable : function(el) {
 			$(el).each(function(){
 				if ($(this).data('type') == 'ad') {
@@ -243,7 +250,7 @@ var preview = function($) {
 				}
 			});
 		},
-		
+
 		setupDragAndSort : function(){ //make all the stories movable
 			var dragClone, ignoreUpdate;
 			$('.newsColumn').sortable({ //make all the stories on the newsletter sortable
@@ -268,7 +275,7 @@ var preview = function($) {
 						ignoreUpdate = null;
 						return;
 					}
-					preview.saveStoryOrder(this);
+					plugin.saveStoryOrder(this);
 				},
 				receive: function(e, ui) {
 					if (ui.item.hasClass('dragItem')) {
@@ -283,13 +290,13 @@ var preview = function($) {
 						}
 						$(this).sortable('refresh');
 						ignoreUpdate = this;
-						preview.saveStoryOrder(this, function() {
+						plugin.saveStoryOrder(this, function() {
 							loadStoryContent(ui.item);
 						});
 					}
 				}
 			});
-			
+
 			$('.adArea').droppable({
 				accept: function(draggable) {
 					/* STRICT CONSTRAINTS: 
@@ -331,7 +338,7 @@ var preview = function($) {
 					//BEGIN LAYOUT FIXES
 					if (this.id == 'adAreaIntro') {
 						$('.adArea .story').not(ui.draggable).each(function() {
-							preview.removeStory($(this));
+							plugin.removeStory($(this));
 						});
 					} else {
 						var existing = $('.story', this)
@@ -341,14 +348,14 @@ var preview = function($) {
 								var whence = ui.draggable.closest('.adArea');
 								$(this).bind('afterappend', function() {
 									existing.appendTo(whence);
-									preview.saveStoryOrder(whence, function() {
+									plugin.saveStoryOrder(whence, function() {
 										loadStoryContent(existing, false);
 									});
 								});
 							}
 						} else {
 							$('#adAreaIntro .story').each(function() {
-								preview.removeStory($(this));
+								plugin.removeStory($(this));
 							});
 							
 							if (existing.length) {
@@ -356,11 +363,11 @@ var preview = function($) {
 								var newDest = $('#' + otherAreaId);
 								if (!$('.story', newDest).length) {
 									existing.appendTo(newDest);
-									preview.saveStoryOrder(newDest, function() {
+									plugin.saveStoryOrder(newDest, function() {
 										loadStoryContent(existing, false);
 									});
 								} else {									
-									preview.removeStory($('.story', this));
+									plugin.removeStory($('.story', this));
 								}
 							}
 						}
@@ -378,7 +385,7 @@ var preview = function($) {
 							dragList.append("<p>No Available Items</p>");
 						}
 						
-						preview.saveStoryOrder(droppable, function() {
+						plugin.saveStoryOrder(droppable, function() {
 							loadStoryContent(ui.draggable);
 						});
 					} else {
@@ -386,16 +393,16 @@ var preview = function($) {
 						$(this).triggerHandler('afterappend')
 						$(this).unbind('afterappend');
 						
-						preview.saveStoryOrder(droppable, function() {
+						plugin.saveStoryOrder(droppable, function() {
 							loadStoryContent(ui.draggable, false);
 						});
 					}
 				}
 			});
-			preview.initDraggable('.dragItem');
+			plugin.initDraggable('.dragItem');
 			$('.newsColumn, .adArea').disableSelection(); //This keeps content from being highlighted and instead draggable
 		},
-		
+
 		saveStoryOrder : function(sortable, callback) { //this function determines the order of the stories and sends it to the DB.
 			sortable = sortable || '.newsColumn, .adArea';
 			callback = callback || $.noop;
@@ -429,7 +436,7 @@ var preview = function($) {
 				$.post(window.location.toString(), postData, callback);
 			}
 		},
-		
+
 		updateAvailableStories : function(type, date) {
 			if (!$.isArray(type)) {
 				type = [type];
@@ -444,11 +451,11 @@ var preview = function($) {
 					"format" : "partial"
 				}, function(data) {
 					$('#'+val+'Available .storyItemWrapper').html(data);
-					preview.initDraggable('#' + val + 'Available .dragItem');
+					plugin.initDraggable('#' + val + 'Available .dragItem');
 				});
 			});
 		},
-		
+
 		updateDates : function(selectedDate) {
 			var date = new Date(selectedDate);
 			date.setUTCHours(6);
@@ -456,5 +463,7 @@ var preview = function($) {
 			var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 			$('.newsletterDate').html(weekday[date.getDay()]+', '+ month[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear());
 		}
-	}
-}(WDN.jQuery);
+	};
+
+	return plugin;
+});

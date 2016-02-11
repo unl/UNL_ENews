@@ -1,18 +1,15 @@
-<script type="text/javascript">
-    WDN.loadJS("/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js",function(){
-        WDN.jQuery("#releaseDate").datepicker({
+<script>
+    require(['jquery', 'jqueryui'], function($) {
+        $("#releaseDate").datepicker({
             showOn: 'both',
             buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
             dateFormat: 'yy-mm-dd',
             buttonImageOnly: true
         });
-        WDN.loadJS("<?php echo UNL_ENews_Controller::getURL();?>js/preview.js", function(){
+        require(["<?php echo UNL_ENews_Controller::getURL();?>js/preview.js"], function(preview){
             preview.initialize();
         });
     });
-    WDN.loadCSS("/wdn/templates_3.1/css/content/forms.css");
-    WDN.loadCSS("/wdn/templates_3.1/scripts/plugins/ui/jquery-ui.css");
-    WDN.loadCSS("/wdn/templates_3.1/scripts/plugins/ui/ui.datepicker.css");
 </script>
 
 <div id="newsletterDetails">
