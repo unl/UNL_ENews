@@ -9,7 +9,7 @@ foreach ($context as $user) {
         <input type="hidden" name="user_uid" value="'.$user->uid.'" />
         <input type="submit" value="Remove" />
     </form>
-    <span class="uid">('.$user->uid.')</span>
+    <span class="uid">'.$user->uid.'</span>
     </li>';
 }
 ?>

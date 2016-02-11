@@ -1,6 +1,6 @@
 #maincontent #userList {
     list-style:none;
-    padding:0;
+    margin:0;
     background:#F1EDE0;
     padding:10px;
 }
@@ -11,8 +11,7 @@
     position:relative;
 }
 #maincontent #userList li .uid {
-    font-size:0.6em;
-    color: #a8a8a8;
+    font-size:0.8em;
     display:block;  
 }
 #maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
@@ -23,25 +22,11 @@
 	display:none;
 }
 #maincontent #userList li:hover form {display:block;}
-#maincontent form input[type='submit'] {
-	background:#ac0302;
-	border:none;
-	border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    color:#fff;
-    cursor:pointer;
-}
-#maincontent #userList li form input[type='submit'] {
-    -webkit-box-shadow: -1px 1px 3px #1a1a1a;
-    -moz-box-shadow: -1px 1px 3px #1a1a1a;
-    box-shadow: -1px 1px 3px #1a1a1a; 
-}
 #maincontent #emailList {
-    padding:0;
     list-style:none;
     background:#F1EDE0;
     padding:10px;
+    margin:0;
 }
 #maincontent #emailList li {
     padding:6px 5px;
@@ -63,8 +48,6 @@
 	font-weight:bold;
 	padding:2px 5px;
 	border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
     opacity:0.5;
 }
 #maincontent #emailList li form {
@@ -74,12 +57,6 @@
 }
 #maincontent #emailList li:hover form {
 	display:inline;
-}
-#maincontent #emailList li form input[type='submit'] {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    margin:0;
 }
 #maincontent #emailList:after {
 	clear:both;
@@ -104,7 +81,4 @@
     width:84%;
     padding-left:25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
-}
-#maincontent .addData input[type='submit']{
-    background: #80590E;
 }

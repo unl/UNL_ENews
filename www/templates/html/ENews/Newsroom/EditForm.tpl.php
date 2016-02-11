@@ -2,25 +2,18 @@
 
 // Set defaults for the edit form
 $action = UNL_ENews_Controller::getURL() . '?view=manager';
-$title  = 'Edit details for the current newsroom';
 
 if (!$context->id) {
     // Must be adding a newsroom
     $action = UNL_ENews_Controller::getURL() . '?view=addnewsroom';
-    $title  = 'Enter details for the new newsroom';
 }
 
 ?>
-<script type="text/javascript">
-//<![CDATA[
-    WDN.jQuery(document).ready(function(){
-         WDN.initializePlugin('zenform');
-         WDN.loadCSS('<?php echo UNL_ENews_Controller::getURL();?>css/newsroom.css');
-    });
-//]]>
+<script>
+    WDN.loadCSS('<?php echo UNL_ENews_Controller::getURL();?>css/newsroom.css');
 </script>
-<h3 class="zenform"><?php echo $title; ?></h3>
-<form class="zenform" action="<?php echo $action; ?>" method="post">
+
+<form action="<?php echo $action; ?>" method="post">
     <input type="hidden" name="_type" value="newsroom" />
     <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
     <fieldset>

@@ -8,6 +8,8 @@ $pagetitle = array(
     'UNL_ENews_Newsletter_Preview'   => 'Build Newsletter',
     'UNL_ENews_Newsroom_Newsletters' => 'Newsletters',
     'UNL_ENews_Help'                 => 'Help! How do I&hellip;',
+    'UNL_ENews_Newsroom_ManageDetails' => 'Edit details for the current newsroom',
+    'UNL_ENews_Admin_AddNewsroom'    => 'Create New Newsroom',
 );
 
 if (isset($pagetitle[$context->options['model']])) {
