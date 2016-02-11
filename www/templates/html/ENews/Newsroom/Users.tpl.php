@@ -1,4 +1,4 @@
-<h3 class="sec_main">Users</h3>
+<h3>Users</h3>
 <ul id="userList">
 <?php
 foreach ($context as $user) {

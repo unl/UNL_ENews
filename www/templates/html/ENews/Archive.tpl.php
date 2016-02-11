@@ -1,4 +1,4 @@
-<h3 class="sec_main">
+<h3>
     <?php echo "Archive for ".$context->newsroom->name; ?>
 </h3>
 

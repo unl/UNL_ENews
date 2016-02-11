@@ -1,4 +1,4 @@
-<h3 class="sec_main">Email Addresses</h3>
+<h3>Email Addresses</h3>
 <ul id="emailList">
     <?php
     foreach ($context as $email) {

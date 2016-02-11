@@ -5,7 +5,7 @@ if ($context->options['format'] == 'partial') {
 }
 ?>
 <div class="three_col left">
-    <h3 class="sec_main">
+    <h3>
         <?php echo $context->newsroom->name;?><a class="rsslink right" href="<?php echo $context->newsroom->getURL(); ?>/latest?format=rss">RSS</a>
     </h3>
     <?php echo $savvy->render($context, 'ENews/StoryList.tpl.php'); ?>

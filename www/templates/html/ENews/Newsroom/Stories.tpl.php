@@ -36,8 +36,8 @@ if (count($context) == 0) {
 
 <div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="checkall">Check All</a>
-        <a href="#" class="uncheckall">Uncheck All</a>
+        <a href="#" class="wdn-button checkall">Check All</a>
+        <a href="#" class="wdn-button uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
@@ -75,8 +75,8 @@ if (count($context) == 0) {
             <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
             <td class="mainCell">
             	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
-            	<h5><?php echo $item->title; ?></h5>
-            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="action edit">Edit</a>
+            	<h5 class="wdn-brand"><?php echo $item->title; ?></h5>
+            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="wdn-button wdn-button-triad action edit">Edit</a>
             	<span>Submitted by <?php echo $item->uid_created; ?>.
             	<?php if (!empty($item->uid_modified)) { ?>
             		Edited by <?php echo $item->uid_modified;?>.
@@ -91,8 +91,8 @@ if (count($context) == 0) {
 </table>
 <div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="checkall">Check All</a>
-        <a href="#" class="uncheckall">Uncheck All</a>
+        <a href="#" class="wdn-button checkall">Check All</a>
+        <a href="#" class="wdn-button uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>

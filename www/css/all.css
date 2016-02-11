@@ -12,32 +12,6 @@
 }
 
 
-/* h3
-**************/
-#maincontent h3.sec_main {
-	border-radius:.3em;
-    min-width:700x;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-
-    border:1px solid #bbb;
-    line-height:100%;
-    margin:0 0 10px 0;
-    padding:6px 6px 5px 9px;
-    color:#fcfcfc;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    
-    background: #8b8b8b; /* for non-css3 browsers */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#a9a9a9', endColorstr='#7a7a7a'); /* for IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#a9a9a9), to(#7a7a7a)); /* for webkit browsers */
-    background: -moz-linear-gradient(top,  #a9a9a9,  #7a7a7a); /* for firefox 3.6+ */
-    
-}
-#maincontent h3.sec_main a {
-	color:#ddd;
-	text-decoration:underline;
-}
-
-
 
 /* Form Styles 
 ************************/
@@ -52,10 +26,6 @@
 	list-style:none;
 	padding:5px 20px;
 	margin: 0;
-}
-#maincontent .enews fieldset ol li input, #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
-	border:1px solid #b8afa1;
-	color:#5f5f5f;
 }
 #maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=url], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
 	width:100%;

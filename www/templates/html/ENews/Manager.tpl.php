@@ -1,4 +1,4 @@
-<h3 class="sec_main">
+<h3 class="clear-top wdn-brand">
     <?php echo $context->newsroom->name;?>
     (<a href="<?php echo $context->newsroom->getURL();?>">Live View</a>, 
      <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>/latest?format=rss">RSS</a>
