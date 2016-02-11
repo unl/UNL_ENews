@@ -65,8 +65,6 @@
     background:#F1EDE0;
     padding:10px;
     border-top:2px solid #E8D6C1;
-    -webkit-box-shadow: inset 0px 1px 3px #E8D6C1;
-    -moz-box-shadow: inset 0px 1px 3px #E8D6C1;
     box-shadow: inset 0px 1px 3px #E8D6C1;
 }
 #maincontent .addData input[type='text']{

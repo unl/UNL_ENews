@@ -53,8 +53,6 @@
 }
 #maincontent #newsletterWeb .story img.frame:hover {
    border: solid 1px #CCC;
-   -moz-box-shadow: 1px 1px 5px #999;
-   -webkit-box-shadow: 1px 1px 5px #999;
    box-shadow: 1px 1px 5px #999;
 }
 #maincontent img.spacer {display:none;}
@@ -63,19 +61,13 @@
     background: #B70302;
     padding:5px;
     border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
 }
 .sidebar.top{
     border-radius:10px 10px 0 0;
-    -moz-border-radius:10px 10px 0 0;
-    -webkit-border-radius:10px 10px 0 0;
     padding-bottom:0;
 }
 .sidebar.bottom{
     border-radius:0 0 10px 10px;
-    -moz-border-radius:0 0 10px 10px;
-    -webkit-border-radius:0 0 10px 10px;
     padding-top:0;
     background:#4F9BBF;
     background: -moz-linear-gradient(top, #4f4f4f 0%, #4F9BBF 5%, #4F9BBF 100%);
@@ -86,20 +78,14 @@
     padding:5px;
     color:#fff;
     border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
 }
 .sidebar.top .inner_sidebar {
     border-radius:5px 5px 0 0;
-    -moz-border-radius:5px 5px 0 0;
-    -webkit-border-radius:5px 5px 0 0;
     border-bottom:none;
     padding-bottom:20px;
 }
 .sidebar.bottom .inner_sidebar {
     border-radius:0 0 5px 5px;
-    -moz-border-radius:0 0 5px 5px;
-    -webkit-border-radius:0 0 5px 5px;
     border-top:none;
     padding-top:20px;
 }
@@ -143,8 +129,6 @@
 #maincontent .inner_sidebar input[type="submit"] {
     background:#025176;
     border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
     border:0;
     color:#fff;
     padding:3px 5px;
@@ -158,8 +142,6 @@
 #newsletterDetails {
     background:#F1EDE0;
     border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
     padding:20px;
     display:inline-block;
     position:relative;
@@ -209,8 +191,6 @@
     border:none;
     font-size:12px;
     border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
     padding:3px 5px;
     color:#fff !important;
     cursor:pointer;
@@ -233,12 +213,8 @@
     top:0px;
     background:#f5f4ef;
     padding:8px 8px 5px 8px;
-    -moz-border-radius-topright: 10px;
     border-top-right-radius: 10px;
-    -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
-    -webkit-box-shadow: inset 1px -1px 1px #c0b695;
-    -moz-box-shadow: inset 1px -1px 1px #c0b695;
     box-shadow: inset 1px -1px 1px #c0b695;
     cursor:pointer;
 }
@@ -377,9 +353,6 @@ Newsletter Email Preview (for building the newsletter)
     postion:relative;
     background:#eee;
     border-radius:5px 5px 0px 0px;
-    -moz-border-radius:5px 5px 0px 0px;
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-top-right-radius:5px;
     padding:5px 8px;
     border-bottom:2px solid #ccc;
     margin-top:20px;
@@ -440,8 +413,6 @@ Newsletter Email Preview (for building the newsletter)
     padding:3px 5px;
     position:relative;
     border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
     display:inline-block;
     max-width:50px;
     line-height:0.9em;
@@ -511,8 +482,6 @@ Newsletter Email Preview (for building the newsletter)
     height:48px;
     border:1px solid #fda967;
     border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
     display:inline-block;
     vertical-align:middle;
     background-color:rgb(253,229,210);
@@ -604,7 +573,5 @@ dd:before {
      position: relative;
      top: 13px;
      border-radius:3px;
-     -moz-border-radius:3px;
-     -webkit-border-radius:3px;
 }
 #maincontent dd p+ul {padding-left:20px;}

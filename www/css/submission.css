@@ -174,8 +174,7 @@ form#enewsImage {
     font-size:0;
     padding:0;
     cursor:pointer;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
 #deleteImages {

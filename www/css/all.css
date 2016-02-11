@@ -129,17 +129,3 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
     top:-2px;
     text-indent:-9999px;
 } 
-
-/* -moz -webkit
-********************/
-#maincontent h3 span {
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-}
-#maincontent .enews .option_step li a  {
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-}
-.dragItem span.requestedDates  {
-}
-

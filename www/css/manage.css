@@ -55,24 +55,6 @@ form#enewsManage .btnsubmit {
 /* Function Tables
 *************************/
 
-#maincontent .functionTable {
-    width:100%;
-}
-#maincontent .functionTable thead {
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.3, rgb(255,255,255)),
-        color-stop(0.97, rgb(228,233,243))
-    );
-    background-image:-moz-linear-gradient(
-        center top,
-        rgb(255,255,255) 30%,
-        rgb(228,233,243) 97%
-    );
-    color: #736357;
-}
 #maincontent .functionTable thead th, #maincontent .functionTable tbody td {
     padding: 5px;
     border-left: 1px solid #DDD;
