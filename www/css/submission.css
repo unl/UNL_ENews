@@ -1,157 +1,157 @@
 #enewsForm {
-	background:#f7f7f7;
+    background:#f7f7f7;
 }
 
 /* Submission Form h3
 *************/
 #enewsForm h3 {
-	background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
-	padding:5px 10px;
-	margin: 0;
-	border:1px solid #dadde3;
-	border-top:1px solid #fff;
-	border-bottom:1px solid #ccc;
-	font-size:1.5em;
-	color:#999;
+    background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
+    padding:5px 10px;
+    margin: 0;
+    border:1px solid #dadde3;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #ccc;
+    font-size:1.5em;
+    color:#999;
 }
 #enewsForm h3:first-of-type {
-	border-top:1px solid #dadde3;
+    border-top:1px solid #dadde3;
 }
 #enewsForm h3 span {
-	background:#fff;
-	padding:1px 4px 1px 4px;
-	border-radius:10px;
-	margin-right:10px;
-	margin-top:0px;
-	font-size:12px;
-	float:left;
-	font-weight:bold;
-	border:1px solid #fff;
+    background:#fff;
+    padding:1px 4px 1px 4px;
+    border-radius:10px;
+    margin-right:10px;
+    margin-top:0px;
+    font-size:12px;
+    float:left;
+    font-weight:bold;
+    border:1px solid #fff;
 }
 #enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;}
 #enewsForm h3.highlighted span {
-	border:1px solid #e19c2b;
-	background:#de8727;
-	color:#fff;
+    border:1px solid #e19c2b;
+    background:#de8727;
+    color:#fff;
 }
 #enewsForm h3.highlighted + fieldset,
 #enewsForm h3.highlighted + fieldset + fieldset {
-	border:1px solid #b8afa1;
-	border-top:none;
-	background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
+    border:1px solid #b8afa1;
+    border-top:none;
+    background:url('images/process_step_fade.jpg') repeat-x top #fbfaf6;
 }
 #enewsForm h3 span.announceType {
-	border:none;
-	float:right;
-	background:#028a02;
-	margin-top:3px; 
-	color:#fff;
+    border:none;
+    float:right;
+    background:#028a02;
+    margin-top:3px;
+    color:#fff;
 }
 
 #enewsSubmission {
-	z-index: 2;
+    z-index: 2;
 }
 
 /* Newsroom Selector
 ************************/
 #newsroom_id select {
-	margin-top:5px;
+    margin-top:5px;
 }
 
 #addAnotherNewsroom {
-	margin:5px 0 0 5px;
-	display:block;
+    margin:5px 0 0 5px;
+    display:block;
 }
 #addAnotherNewsroom:hover {
-	cursor:pointer;
+    cursor:pointer;
 }
 #addAnotherNewsroom span {
-	padding:0 2px;
-	border:1px solid #fff;
-	background:#de8727;
-	color:#fff;
+    padding:0 2px;
+    border:1px solid #fff;
+    background:#de8727;
+    color:#fff;
 }
 
 /* Submission Form Display Sample
 **********************/
 #sampleLayout > h5 {
-	font-size:1.3em;
-	font-family:"Lucida Grande",Verdana,Arial;
-	color:#494949;
-	padding-bottom:0;
+    font-size:1.3em;
+    font-family:"Lucida Grande",Verdana,Arial;
+    color:#494949;
+    padding-bottom:0;
 }
 #sampleLayoutInner {
-	min-height:125px;
-	background:#fff;
-	padding:10px;
-	border:1px solid #b8afa1;
+    min-height:125px;
+    background:#fff;
+    padding:10px;
+    border:1px solid #b8afa1;
 }
 #sampleLayoutImage {
-	min-height:72px;
-	float:left;
-	margin-right:5px;
-	background:#f7f7f7;
-	font-size:.8em;
-	line-height:1em;
-	text-align:center;
-	overflow:hidden;
+    min-height:72px;
+    float:left;
+    margin-right:5px;
+    background:#f7f7f7;
+    font-size:.8em;
+    line-height:1em;
+    text-align:center;
+    overflow:hidden;
 }
 #sampleLayoutImage img {
-	cursor:default !important;
+    cursor:default !important;
 }
 
 /* Image Upload Preview
 ********************/
 form#enewsImage {
-	border:1px solid #b8afa1;
-	background:#fff;
-	margin:30px 10px;
-	z-index: 1;
+    border:1px solid #b8afa1;
+    background:#fff;
+    margin:30px 10px;
+    z-index: 1;
 }
 #upload_area {
-	text-align:center;
-	margin:10px 0;
+    text-align:center;
+    margin:10px 0;
 }
 #upload_area img {
-	height:auto;
-	width:auto;
-	max-width:410px;
-	cursor:default !important;
+    height:auto;
+    width:auto;
+    max-width:410px;
+    cursor:default !important;
 }
 #upload_area div {
-	border:2px dashed #de8727;
-	background:#fcfcfc;
-	text-align:center;
-	margin:0 auto;
-	padding:3px;
-	width:100px;
-	min-height:90px;
+    border:2px dashed #de8727;
+    background:#fcfcfc;
+    text-align:center;
+    margin:0 auto;
+    padding:3px;
+    width:100px;
+    min-height:90px;
 }
 #maincontent #imageControls {
-	display:none;
-	list-style:none;
-	padding:0;
-	margin:0 0 10px 0;
-	border:1px solid #DDDDDD;
-	background-image:-webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(0.3, rgb(255,255,255)),
-		color-stop(0.97, rgb(228,233,243))
-	);
-	background-image:-moz-linear-gradient(
-		center top,
-		rgb(255,255,255) 30%,
-		rgb(228,233,243) 97%
-	);
-	color: #736357;
+    display:none;
+    list-style:none;
+    padding:0;
+    margin:0 0 10px 0;
+    border:1px solid #DDDDDD;
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.3, rgb(255,255,255)),
+        color-stop(0.97, rgb(228,233,243))
+    );
+    background-image:-moz-linear-gradient(
+        center top,
+        rgb(255,255,255) 30%,
+        rgb(228,233,243) 97%
+    );
+    color: #736357;
 }
 #imageControls li {
-	display:inline-block;
-	vertical-align:top;
-	text-align:center;
-	margin:10px 10px 8px 0;
+    display:inline-block;
+    vertical-align:top;
+    text-align:center;
+    margin:10px 10px 8px 0;
 }
 #img_description_label {
     position: relative;
@@ -160,37 +160,37 @@ form#enewsImage {
     left: -44px;
 }
 #cropMessage {
-	font-size:1.1em;
-	width:200px;
+    font-size:1.1em;
+    width:200px;
 }
 #cropRatio {
-	width:80px;
-	height:40px;
-	background-position:3px 3px;
-	background-repeat:no-repeat;
-	background-image:url(images/cropRatio.png);
-	background-color:#78A8C0;
-	color:#FFFFFF;
-	font-size:0;
-	padding:0;
-	cursor:pointer;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
+    width:80px;
+    height:40px;
+    background-position:3px 3px;
+    background-repeat:no-repeat;
+    background-image:url(images/cropRatio.png);
+    background-color:#78A8C0;
+    color:#FFFFFF;
+    font-size:0;
+    padding:0;
+    cursor:pointer;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
 }
 
 #deleteImages {
-	position: static;
-	float: right;
+    position: static;
+    float: right;
 }
 #deleteImages input {
-	background: none;
-	color: gray;
-	text-decoration: underline;
+    background: none;
+    color: gray;
+    text-decoration: underline;
 
 }
 /******** Submit Buttons ********/
 .submissionButton {
-	margin:20px 0;
-	padding-bottom:20px;
-	clear:both;
+    margin:20px 0;
+    padding-bottom:20px;
+    clear:both;
 }

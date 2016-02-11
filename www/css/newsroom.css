@@ -16,10 +16,10 @@
 }
 #maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
 #maincontent #userList li form {
-	position:absolute;
-	top:6px;
-	right:7px;
-	display:none;
+    position:absolute;
+    top:6px;
+    right:7px;
+    display:none;
 }
 #maincontent #userList li:hover form {display:block;}
 #maincontent #emailList {
@@ -36,18 +36,18 @@
     background:#fcf6e4;
 }
 #maincontent #emailList li span.email {
-	display:block;
-	overflow:hidden;
-	text-overflow: ellipsis;
+    display:block;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 #maincontent #emailList li span.details {
-	font-size:0.8em;
-	background:#0c217a;
-	margin-right:15px;
-	color:#fff;
-	font-weight:bold;
-	padding:2px 5px;
-	border-radius:3px;
+    font-size:0.8em;
+    background:#0c217a;
+    margin-right:15px;
+    color:#fff;
+    font-weight:bold;
+    padding:2px 5px;
+    border-radius:3px;
     opacity:0.5;
 }
 #maincontent #emailList li form {
@@ -56,18 +56,18 @@
     display:none;
 }
 #maincontent #emailList li:hover form {
-	display:inline;
+    display:inline;
 }
 #maincontent #emailList:after {
-	clear:both;
+    clear:both;
 }
 #maincontent .addData {
-	background:#F1EDE0;
-	padding:10px;
-	border-top:2px solid #E8D6C1;
-	-webkit-box-shadow: inset 0px 1px 3px #E8D6C1;
-	-moz-box-shadow: inset 0px 1px 3px #E8D6C1;
-	box-shadow: inset 0px 1px 3px #E8D6C1; 
+    background:#F1EDE0;
+    padding:10px;
+    border-top:2px solid #E8D6C1;
+    -webkit-box-shadow: inset 0px 1px 3px #E8D6C1;
+    -moz-box-shadow: inset 0px 1px 3px #E8D6C1;
+    box-shadow: inset 0px 1px 3px #E8D6C1;
 }
 #maincontent .addData input[type='text']{
     border:1px solid #E8D6C1;

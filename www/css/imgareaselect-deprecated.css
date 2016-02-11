@@ -9,11 +9,11 @@
 }
 
 .imgareaselect-border1 {
-	border: solid 1px #000;
+    border: solid 1px #000;
 }
 
 .imgareaselect-border2 {
-	border: dashed 1px #fff;
+    border: dashed 1px #fff;
 }
 
 .imgareaselect-handle {
@@ -30,7 +30,7 @@
 }
 
 .imgareaselect-selection {
-	background-color: #fff;
-	opacity: 0;
-	filter: alpha(opacity=0);
+    background-color: #fff;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
