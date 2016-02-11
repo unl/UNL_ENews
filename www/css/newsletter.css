@@ -141,7 +141,7 @@ img.spacer {display:none;}
 ************************/
 #newsletterDetails {
     background:#F1EDE0;
-    padding:20px;
+    padding: 0 20px 20px;
     position:relative;
 }
 #newsletterDetails form fieldset {
@@ -149,12 +149,6 @@ img.spacer {display:none;}
 }
 #newsletterDetails form.email {
     display:none;
-}
-#newsletterDetails label {
-    color:#705538;
-    font-size:1.1em;
-    font-weight:bold;
-    display:block;
 }
 #newsletterDetails label .helper {
     font-size:0.6em;
@@ -187,18 +181,12 @@ img.spacer {display:none;}
 
 }
 #newsletterDetails .email_addresses h5 {
-    color:#705538;
-    font-size:.8em;
-    font-weight:bold;
-    margin-bottom:9px;
+    margin: 0 0 10px;
     position:absolute;
     right:0px;
     top:0px;
     background:#f5f4ef;
     padding:8px 8px 5px 8px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 5px;
-    box-shadow: inset 1px -1px 1px #c0b695;
     cursor:pointer;
 }
 #newsletterDetails .email_addresses ul {
@@ -375,7 +363,7 @@ Newsletter Email Preview (for building the newsletter)
     background:#f4f4f4;
 }
 .empty {
-    color: #de8727;
+    color: #D4440B;
     padding:30px;
     text-align:center;
     opacity:0.45;
@@ -512,7 +500,7 @@ table .story textarea {
 
 /* jQuery.UI Styles 
 ************************/
-.ui-sortable-placeholder { border:2px dashed #de8727; visibility: visible !important; height: 50px !important; }
+.ui-sortable-placeholder { border:2px dashed #D4440B; visibility: visible !important; height: 50px !important; }
 .ui-sortable-placeholder * { visibility: hidden; }
 .ui-datepicker-trigger {
     float:right;

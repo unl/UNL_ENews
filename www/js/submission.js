@@ -22,6 +22,8 @@ define([
 
 		announcementType : false,
 
+		editType : false,
+
 		initialize : function() {
 			WDN.initializePlugin('jqueryui', [function() {
 				$(document).ready(function(){
@@ -33,15 +35,15 @@ define([
 						dateFormat: 'yy-mm-dd',
 						defaultDate: this.value
 					});
-					if (editType) { // Editing, so update where needed
-						plugin.editing = true;
-						plugin.announcementType = editType;
-					}
+					$('.hasDatepicker').each(function () {
+						$(this).attr({'autocomplete': 'off'});
+					});
 				});
 
-				$('.hasDatepicker').each(function () {
-					$(this).attr({'autocomplete': 'off'});
-				});
+				if (plugin.editType) { // Editing, so update where needed
+					plugin.editing = true;
+					plugin.announcementType = plugin.editType;
+				}
 				$('#enewsForm h3').eq(0).css('cursor', 'pointer');
 				$('#enewsForm h3').eq(1).css('cursor', 'pointer');
 				plugin.bindActions();
@@ -55,7 +57,6 @@ define([
 					plugin.determinePresentation(plugin.announcementType);
 					plugin.updatePreview();
 				}
-				;
 			}]);
 		},
 
@@ -149,6 +150,7 @@ define([
 				var imgString = '<img onload="require([ENEWS_HOME+\'js/submission.js\'],function(submission){if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');})" src="'+ENEWS_HOME+'?view=file&id='+$(this).val()+'" alt="Uploaded Image" />';
 				$('#upload_area').html(imgString);
 				$('#sampleLayoutImage').html('Select Thumbnail Below');
+				$('#img_description_label .required').remove();
 				$('#img_description_label').prepend('<span class="required">*</span> ');
 				$('#file_description').addClass('required').removeAttr('disabled');
 				ajaxUpload.removeIframe();
@@ -218,7 +220,7 @@ define([
 				$('#wdn_process_step2').slideToggle();
 				$('#wdn_process_step3').slideToggle(function() {
 					$('#enewsForm h3').eq(1).removeClass('highlighted');
-					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType">Event Announcement</span>');
+					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType wdn-subhead">Event Announcement</span>');
 				});
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 				return false;
@@ -256,7 +258,7 @@ define([
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">News Announcement</span>');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType wdn-subhead">News Announcement</span>');
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 			});
 		},
@@ -271,7 +273,7 @@ define([
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType">Advertisement</span>');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType wdn-subhead">Advertisement</span>');
 				$('#enewsImage,#enewsSubmissionButton').show();
 			});
 			plugin.setupAd();
@@ -310,10 +312,12 @@ define([
 				if ($('#description').val().length) {
 					var string = $('#description').val().substring(0,300);
 					//Purify it to match what the actual output would look like
-					string = DOMPurify.sanitize(string, {
-						ALLOWED_TAGS: ENEWS_ALLOWED_TAGS_DESCRIPTION,
-						ALLOWED_ATTR: ENEWS_ALLOWED_ATTR_DESCRIPTION,
-						SAFE_FOR_JQUERY: true
+					require([ENEWS_HOME+'js/purify.js'], function(DOMPurify) {
+						string = DOMPurify.sanitize(string, {
+							ALLOWED_TAGS: ENEWS_ALLOWED_TAGS_DESCRIPTION,
+							ALLOWED_ATTR: ENEWS_ALLOWED_ATTR_DESCRIPTION,
+							SAFE_FOR_JQUERY: true
+						});
 					});
 					return string;
 				}

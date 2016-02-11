@@ -5,33 +5,30 @@
 /* Submission Form h3
 *************/
 #enewsForm h3 {
-    background:#eee url('images/process_step_header_fade.gif') repeat-x bottom;
+    background:#eee;
     padding:5px 10px;
     margin: 0;
-    border:1px solid #dadde3;
-    border-top:1px solid #fff;
-    border-bottom:1px solid #ccc;
-    font-size:1.5em;
+    font-size:1.7em;
     color:#999;
-}
-#enewsForm h3:first-of-type {
-    border-top:1px solid #dadde3;
 }
 #enewsForm h3 span {
     background:#fff;
     padding:1px 4px 1px 4px;
     border-radius:10px;
     margin-right:10px;
-    margin-top:0px;
+    margin-top:7px;
     font-size:12px;
     float:left;
     font-weight:bold;
-    border:1px solid #fff;
+    text-align: center;
+    min-width: 16px;
 }
-#enewsForm h3.highlighted {background:#f8f3e4;border:1px solid #b8afa1;color:#de8727;}
+#enewsForm h3.highlighted {
+    background:#D4440B;
+    color:#fff;
+}
 #enewsForm h3.highlighted span {
-    border:1px solid #e19c2b;
-    background:#de8727;
+    background:#F35B1F;
     color:#fff;
 }
 #enewsForm h3.highlighted + fieldset,
@@ -43,9 +40,10 @@
 #enewsForm h3 span.announceType {
     border:none;
     float:right;
-    background:#028a02;
+    background:#B34E26;
     margin-top:3px;
     color:#fff;
+    padding: 3px;
 }
 
 #enewsSubmission {
@@ -68,23 +66,25 @@
 #addAnotherNewsroom span {
     padding:0 2px;
     border:1px solid #fff;
-    background:#de8727;
+    background:#D4440B;
     color:#fff;
 }
 
 /* Submission Form Display Sample
 **********************/
-#sampleLayout > h5 {
-    font-size:1.3em;
-    font-family:"Lucida Grande",Verdana,Arial;
-    color:#494949;
-    padding-bottom:0;
+#sampleLayout h5 {
+    font-size: 1.4rem;
+    margin-bottom: 0.1em;
 }
 #sampleLayoutInner {
-    min-height:125px;
+    min-height: 224px;
     background:#fff;
     padding:10px;
     border:1px solid #b8afa1;
+    font-size: 13px;
+}
+#sampleLayoutInner h4 {
+    margin-top: 0;
 }
 #sampleLayoutImage {
     min-height:72px;
@@ -95,16 +95,19 @@
     line-height:1em;
     text-align:center;
     overflow:hidden;
+    width: 96px;
+    height: 72px;
 }
 #sampleLayoutImage img {
     cursor:default !important;
+    max-width: none;
+    width: 100%;
+    margin-right: 6px;
 }
 
 /* Image Upload Preview
 ********************/
 form#enewsImage {
-    border:1px solid #b8afa1;
-    background:#fff;
     margin:30px 10px;
     z-index: 1;
 }
@@ -119,7 +122,7 @@ form#enewsImage {
     cursor:default !important;
 }
 #upload_area div {
-    border:2px dashed #de8727;
+    border:2px dashed #D4440B;
     background:#fcfcfc;
     text-align:center;
     margin:0 auto;
@@ -146,6 +149,7 @@ form#enewsImage {
         rgb(228,233,243) 97%
     );
     color: #736357;
+    text-align: center;
 }
 #imageControls li {
     display:inline-block;
@@ -160,8 +164,8 @@ form#enewsImage {
     left: -44px;
 }
 #cropMessage {
-    font-size:1.1em;
-    width:200px;
+    font-size: 0.8em;
+    width: 224px;
 }
 #cropRatio {
     width:80px;
@@ -192,4 +196,5 @@ form#enewsImage {
     margin:20px 0;
     padding-bottom:20px;
     clear:both;
+    text-align: center;
 }

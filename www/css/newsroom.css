@@ -29,6 +29,7 @@
     margin:0;
 }
 #maincontent #emailList li {
+    position: relative;
     padding:6px 5px;
     border-bottom:1px solid #E8D6C1;
 }
@@ -51,7 +52,9 @@
     opacity:0.5;
 }
 #maincontent #emailList li form {
-    float:right;
+    position: absolute;
+    top: 0;
+    right: 0;
     padding:0;
     display:none;
 }
@@ -64,8 +67,7 @@
 #maincontent .addData {
     background:#F1EDE0;
     padding:10px;
-    border-top:2px solid #E8D6C1;
-    box-shadow: inset 0px 1px 3px #E8D6C1;
+    border-top: 1px solid #E8D6C1;
 }
 #maincontent .addData input[type='text']{
     border:1px solid #E8D6C1;
