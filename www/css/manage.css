@@ -23,10 +23,6 @@ a.uncheckall:focus {
     color:#fff !important;
 }
 form fieldset.storyFieldsetAction {
-    background:none repeat scroll 0 0 transparent;
-    border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-color #BBBBBB;
-    border-style:none none none solid;
-    border-width:medium medium medium 1px;
     clear:none;
     margin:3px 0 0 0;
     padding:0;
@@ -76,7 +72,6 @@ form fieldset.storyFieldsetAction select {
     border-left:0;
     padding-left:0;
 }
-.functionTable tbody tr:nth-child(even) {background-color: #F1EDE0;}
 .functionTable tbody td {
     padding:10px;
 }
@@ -85,22 +80,14 @@ form fieldset.storyFieldsetAction select {
     padding:15px;
 }
 .functionTable tbody td.mainCell h5 {
-    margin: 0;
+    margin: 0 0 .5em;
 }
-.functionTable tbody tr:nth-child(even) td.mainCell h5 {border-bottom:1px solid #cdc4bb;}
-.functionTable tbody tr:hover {background:#ddd;}
-.functionTable tbody td a.action {
-    padding:3px 5px;
+.functionTable tbody tr td.mainCell h5 {
+    border-bottom:1px solid #cdc4bb;
 }
 .functionTable tbody td.mainCell form a, .functionTable tbody td.mainCell span {
     font-size:0.8em;
-}
-.functionTable tbody td a.action.send {
-    background:#705538;
-    font-weight:bold;
-    font-size:1.2em;
-    padding:5px 8px;
-    margin:0 auto;
+    font-weight: lighter;
 }
 .functionTable tbody td.mainCell form {
     display:inline;

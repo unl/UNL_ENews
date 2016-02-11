@@ -1,7 +1,8 @@
-<script type="text/javascript">
-WDN.jQuery('document').ready(function(){
-    WDN.jQuery("a.gaStats").colorbox();
-});
+<script>
+    WDN.initializePlugin('modal', [function() {
+        var $ = require('jquery');
+        $("a.gaStats").colorbox();
+    }]);
 </script>
 <table class="functionTable">
     <thead>
@@ -17,7 +18,7 @@ WDN.jQuery('document').ready(function(){
         ?>
         <tr>
             <td class="mainCell" style="min-width:600px;"><h5><?php echo $newsletter->subject; ?> <span class="caption">(<?php echo date('D. M d, Y', $newsletterDate); ?>)</span></h5>
-                <a href="<?php echo $newsletter->getEditURL(); ?>" class="action edit">Edit</a>
+                <a href="<?php echo $newsletter->getEditURL(); ?>" class="wdn-button action edit">Edit</a>
                 <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
                 <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <input type="hidden" name="_type" value="deletenewsletter" />
@@ -32,7 +33,7 @@ WDN.jQuery('document').ready(function(){
                 <?php else: ?>
                 <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post" id="sendnewsletter_<?php echo $newsletter->id; ?>">
                     <input type="hidden" name="newsletter_id" value="<?php echo $newsletter->id; ?>" />
-                    <a class="action send" href="#" onclick="if (confirm('This newsletter is scheduled for distribution on <?php echo date('M jS', $newsletterDate); ?>.\n\nAre you sure you want to send it now?')) document.getElementById('sendnewsletter_<?php echo $newsletter->id; ?>').submit();">Distribute Now</a>
+                    <a class="wdn-button wdn-button-complement action send" href="#" onclick="if (confirm('This newsletter is scheduled for distribution on <?php echo date('M jS', $newsletterDate); ?>.\n\nAre you sure you want to send it now?')) document.getElementById('sendnewsletter_<?php echo $newsletter->id; ?>').submit();">Distribute Now</a>
                 </form>
                 <?php endif; ?>
             </td>
