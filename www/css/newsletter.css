@@ -1,41 +1,41 @@
-#maincontent .story { 
+.story { 
     clear:both;
     margin-top:20px;
     min-height:80px;
 }
-#maincontent table .story:hover {
+table .story:hover {
     outline:2px solid #FA6520;
 }
-#maincontent .newsColumn h4 {
+.newsColumn h4 {
     font-size: 1em;
     font-weight:bold;
     padding:2px;
     margin:0 0 7px 0;
 }
-#maincontent .newsColumn h4 a {
+.newsColumn h4 a {
     color:inherit;
 }
-#maincontent .newsColumn h4 a:hover {
+.newsColumn h4 a:hover {
     text-decoration:underline;
     color:#777;
 }
-#maincontent .newsColumn p {
+.newsColumn p {
     padding:2px;
     font-size:98%;
     margin-bottom:15px;
 }
-#maincontent .newsColumn a {
+.newsColumn a {
     margin-top:-10px;
     margin-bottom:5px;
 }
-#maincontent #newsColumnIntro {
+#newsColumnIntro {
     padding-bottom:10px;
     margin-bottom:25px;
 }
-#maincontent #newsColumnIntro > .story:first-child{
+#newsColumnIntro > .story:first-child{
     margin-top:0;
 }
-#maincontent #newsColumnIntro h4 {
+#newsColumnIntro h4 {
     font-size:1.5em;
     margin-bottom:0;
 }
@@ -43,19 +43,19 @@
 
 /* Newsletter Web View for the rendered stories. (Not the newsletter building web view)
 ************************/
-#maincontent .half{
+.half{
     width:50%;
     float:right;
     margin:0 0 10px 10px;
 }
-#maincontent #newsletterWeb .story img {
+#newsletterWeb .story img {
     margin-bottom:0;
 }
-#maincontent #newsletterWeb .story img.frame:hover {
+#newsletterWeb .story img.frame:hover {
    border: solid 1px #CCC;
    box-shadow: 1px 1px 5px #999;
 }
-#maincontent img.spacer {display:none;}
+img.spacer {display:none;}
 
 .sidebar {
     background: #B70302;
@@ -89,7 +89,7 @@
     border-top:none;
     padding-top:20px;
 }
-#maincontent .inner_sidebar h3 {
+.inner_sidebar h3 {
     color:#fff;
     font-size:1.2em;
     font-weight:bold;
@@ -99,26 +99,26 @@
     margin-bottom:10px;
     padding-bottom:0.1em;
 }
-#maincontent .inner_sidebar h3 span {
+.inner_sidebar h3 span {
     font-size:0.6em;
     text-transform:uppercase;
     display:block;
 }
-#maincontent .inner_sidebar ul {
+.inner_sidebar ul {
     list-style:none;
     padding:0;
     margin-bottom:15px;
 }
-#maincontent .inner_sidebar ul li {
+.inner_sidebar ul li {
     font-size:0.9em;
     border-bottom:1px dashed rgba(255, 255, 255, .5);
     padding:3px 0;
 }
-#maincontent .inner_sidebar a {
+.inner_sidebar a {
     color:#fff;
 }
-#maincontent .inner_sidebar label {display:none;}
-#maincontent .inner_sidebar input[type="email"] {
+.inner_sidebar label {display:none;}
+.inner_sidebar input[type="email"] {
     display:block;
     width:100%;
     border:1px solid #025176;
@@ -126,7 +126,7 @@
     font-size:1.06em;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
 }
-#maincontent .inner_sidebar input[type="submit"] {
+.inner_sidebar input[type="submit"] {
     background:#025176;
     border-radius:5px;
     border:0;
@@ -326,9 +326,9 @@ Newsletter Email Preview (for building the newsletter)
     float:right;
     margin-right:10px;
 }
-#maincontent .newsColumn, #maincontent .adArea {min-height:75px;}
-#maincontent .newsColumn form, #maincontent .newsColumn .requestedDates {display:none;}
-#maincontent .ui-sortable .story {
+.newsColumn, .adArea {min-height:75px;}
+.newsColumn form, .newsColumn .requestedDates {display:none;}
+.ui-sortable .story {
     cursor:move;
     position:relative;
     margin-top:0px;
@@ -336,7 +336,7 @@ Newsletter Email Preview (for building the newsletter)
     display:block !important;
 }
 
-#maincontent .adArea .story {
+.adArea .story {
     position:relative;
 }
 
@@ -348,8 +348,8 @@ Newsletter Email Preview (for building the newsletter)
 
 
 /*Story Dragging */
-#maincontent #drag_story_list {margin-top:50px;}
-#maincontent #drag_story_list h3 {
+#drag_story_list {margin-top:50px;}
+#drag_story_list h3 {
     postion:relative;
     background:#eee;
     border-radius:5px 5px 0px 0px;
@@ -357,7 +357,7 @@ Newsletter Email Preview (for building the newsletter)
     border-bottom:2px solid #ccc;
     margin-top:20px;
 }
-#maincontent #drag_story_list h3 a.showHide {
+#drag_story_list h3 a.showHide {
     float:right;
     text-indent:-99999px;
     background:url(/wdn/templates_3.0/css/content/images/zenboxShowHide.png) no-repeat top right;
@@ -366,36 +366,36 @@ Newsletter Email Preview (for building the newsletter)
     width:20px;
     height:20px;
 }
-#maincontent #drag_story_list h3 a.showHide.show {
+#drag_story_list h3 a.showHide.show {
     background-position: 0 -42px;
 }
-#maincontent #drag_story_list h3 span {
+#drag_story_list h3 span {
     font-size:.6em;
     color:#999;
 }
-#maincontent .dragItem {
+.dragItem {
     cursor:move;
     border-bottom:1px solid #ddd;
     display:inline-block;
     padding: 3px 0;
     width:100%;
 }
-#maincontent .dragItem:hover {
+.dragItem:hover {
     background:#f4f4f4;
 }
-#maincontent .empty {
+.empty {
     color: #de8727;
     padding:30px;
     text-align:center;
     opacity:0.45;
 }
-#maincontent .dragItem form,
-#maincontent #drag_story_list .dragItem p,
-#maincontent #drag_story_list .dragItem p a,
-#maincontent #drag_story_list .dragItem table {
+.dragItem form,
+#drag_story_list .dragItem p,
+#drag_story_list .dragItem p a,
+#drag_story_list .dragItem table {
     display:none;
 }
-#maincontent #drag_story_list .dragItem h4 {
+#drag_story_list .dragItem h4 {
     font-size:0.85em;
     font-weight:bold;
     margin:3px 0;
@@ -417,7 +417,7 @@ Newsletter Email Preview (for building the newsletter)
     max-width:50px;
     line-height:0.9em;
 }
-#maincontent .dragItem:hover span.requestedDates {
+.dragItem:hover span.requestedDates {
     background:#fff;
 }
 .dragItem span.dateRange {
@@ -441,11 +441,11 @@ Newsletter Email Preview (for building the newsletter)
     font-size:120%;
     font-weight:bold;
 }
-#maincontent .filled {
+.filled {
     border:none;
 }
 /* Ads */
-#maincontent .dragItem.ad img {
+.dragItem.ad img {
     width:220px !important;
     height:inherit !important;
     float:left;
@@ -472,12 +472,12 @@ Newsletter Email Preview (for building the newsletter)
 
 .ui-sortable-helper .storyTools {display:none;}
 
-#maincontent table .story textarea {
+table .story textarea {
     width:100%;
     min-height:75px;
     font:0.8em "Lucida Grande",Verdana,Arial;
 }
-#maincontent .storyTools a {
+.storyTools a {
     width:48px;
     height:48px;
     border:1px solid #fda967;
@@ -574,4 +574,4 @@ dd:before {
      top: 13px;
      border-radius:3px;
 }
-#maincontent dd p+ul {padding-left:20px;}
+dd p+ul {padding-left:20px;}

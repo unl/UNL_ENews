@@ -5,8 +5,8 @@
 .btnsubmit {
     display:none;
 }
-#maincontent table th {text-align:left;}
-#maincontent fieldset {
+table th {text-align:left;}
+form fieldset {
     padding:10px 10px 0px 10px;
     margin:0px;
 }
@@ -15,38 +15,38 @@
 
 /* Form Styles 
 ************************/
-#maincontent .enews legend {
+.enews legend {
     display:none;
 }
-#maincontent .enews fieldset ol {
+.enews fieldset ol {
     margin-top:15px;
     margin-left:-12px;
 }
-#maincontent .enews fieldset ol li {
+.enews fieldset ol li {
     list-style:none;
     padding:5px 20px;
     margin: 0;
 }
-#maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=url], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
+.enews fieldset ol li input[type=text], .enews fieldset ol li input[type=url], .enews fieldset ol li input[type=file], .enews fieldset ol li textarea, .enews fieldset ol li select {
     width:100%;
 }
-#maincontent .enews fieldset ol li input[type=text], #maincontent .enews fieldset ol li input[type=url], #maincontent .enews fieldset ol li input[type=file], #maincontent .enews fieldset ol li textarea, #maincontent .enews fieldset ol li select {
+.enews fieldset ol li input[type=text], .enews fieldset ol li input[type=url], .enews fieldset ol li input[type=file], .enews fieldset ol li textarea, .enews fieldset ol li select {
     padding:5px;
 }
 
-#maincontent .enews fieldset ol li .helper{
+.enews fieldset ol li .helper{
     font-size:.6em;
     color: #7c7c7c;
     padding-left:15px;
     line-height:1.3em;
 }
 strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
-#maincontent .enews fieldset fieldset {background:none;padding:0;}
-#maincontent .enews fieldset fieldset legend {display:block;}
-#maincontent .enews fieldset fieldset ol {margin-left:-20px;margin-top:0px;}
-#maincontent .enews fieldset fieldset ol li {margin-left:-30px;font-size:0.8em;padding:2px 20px;}
+.enews fieldset fieldset {background:none;padding:0;}
+.enews fieldset fieldset legend {display:block;}
+.enews fieldset fieldset ol {margin-left:-20px;margin-top:0px;}
+.enews fieldset fieldset ol li {margin-left:-30px;font-size:0.8em;padding:2px 20px;}
 /* First option */
-#maincontent .enews .option_step {
+.enews .option_step {
     list-style:none;
     text-align:center;
     margin:11px 0 20px 0px;
@@ -54,16 +54,16 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
     width:100%;
     padding:0;
 }
-#maincontent .enews .option_step li {
+.enews .option_step li {
     display:inline;
     float:left;
     padding:0;
     width:50%;
 }
-#maincontent .enews.showAd .option_step li {
+.enews.showAd .option_step li {
     width:33%;
 }
-#maincontent .enews .option_step li a {
+.enews .option_step li a {
     display:block;
     width:277px;
     height:113px;
@@ -72,7 +72,7 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
     text-indent:-9999px;
     margin: 0 auto;
 }
-#maincontent .enews p.nextStep {
+.enews p.nextStep {
     margin-top: 0px;
     margin-left: 33px;
     background:url('images/actionButtonL.png') top left no-repeat;
@@ -80,7 +80,7 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
     height:37px;
     padding-left:7px;
 }
-#maincontent .enews p.nextStep a {
+.enews p.nextStep a {
     background:url('images/actionButtonR.png') no-repeat top right;
     font-size:1.1em;
     color:#494949;
@@ -92,35 +92,35 @@ strong.warning {color:#ac0302;font-size:1.3em;} /* For the character count*/
     border:none;
     width:auto;
 }
-#maincontent .enews .option_step li a#newsAnnouncement {
+.enews .option_step li a#newsAnnouncement {
     background: #f8f3e4 url('images/typeIconNews.png') no-repeat center;
 }
-#maincontent .enews .option_step li a#newsAnnouncement:hover {
+.enews .option_step li a#newsAnnouncement:hover {
     background: #f5e7bc url('images/typeIconNews_hover.png') no-repeat center;
     border-color:#9f9483;
 }
-#maincontent .enews .option_step li a#eventAnnouncement {
+.enews .option_step li a#eventAnnouncement {
     background: #f8f3e4 url('images/typeIconEvent.png') no-repeat center;
 }
-#maincontent .enews .option_step li a#eventAnnouncement:hover {
+.enews .option_step li a#eventAnnouncement:hover {
     background: #f5e7bc url('images/typeIconEvent_hover.png') no-repeat center;
     border-color:#9f9483;
 }
-#maincontent .enews .option_step li a#adAnnouncement {
+.enews .option_step li a#adAnnouncement {
     display: none;
 }
-#maincontent .enews.showAd .option_step li a#adAnnouncement {
+.enews.showAd .option_step li a#adAnnouncement {
     display:block;
     background: #f8f3e4 url('images/typeIconAd.png') no-repeat center;
 }
-#maincontent .enews .option_step li a#adAnnouncement:hover {
+.enews .option_step li a#adAnnouncement:hover {
     background: #f5e7bc url('images/typeIconAd_hover.png') no-repeat center;
     border-color:#9f9483;
 }
 
 /* rss icon
 ********************/
-#maincontent a.rsslink {
+a.rsslink {
     background:url('images/rss.png') no-repeat;
     display:inline-block;
     height:20px;

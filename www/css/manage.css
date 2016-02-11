@@ -13,16 +13,16 @@ form#enewsManage .btnsubmit {
     padding:6px 5px 10px;
     position:relative;
 }
-#maincontent a.checkall,
-#maincontent a.uncheckall {
+a.checkall,
+a.uncheckall {
     float:left;
     margin-right:6px;
 }
-#maincontent a.checkall:focus,
-#maincontent a.uncheckall:focus {
+a.checkall:focus,
+a.uncheckall:focus {
     color:#fff !important;
 }
-#maincontent form fieldset.storyFieldsetAction {
+form fieldset.storyFieldsetAction {
     background:none repeat scroll 0 0 transparent;
     border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-color #BBBBBB;
     border-style:none none none solid;
@@ -32,22 +32,22 @@ form#enewsManage .btnsubmit {
     padding:0;
     width:210px;
 }
-#maincontent form fieldset.storyFieldsetAction label,
-#maincontent form fieldset.storyFieldsetAction legend {
+form fieldset.storyFieldsetAction label,
+form fieldset.storyFieldsetAction legend {
     display:none;
 }
-#maincontent form fieldset.storyFieldsetAction select {
+form fieldset.storyFieldsetAction select {
     margin:0 5px;
     padding:0;
 }
 /* Newsroom Chooser Form 
 **************************/
-#maincontent .enews.newsroom_choose {
+.enews.newsroom_choose {
     position:relative;
     bottom:72px;
     float:right;
 }
-#maincontent .enews.newsroom_choose li {
+.enews.newsroom_choose li {
     padding:0 10px 10px 0;
     float:left;
 }
@@ -55,54 +55,54 @@ form#enewsManage .btnsubmit {
 /* Function Tables
 *************************/
 
-#maincontent .functionTable thead th, #maincontent .functionTable tbody td {
+.functionTable thead th, .functionTable tbody td {
     padding: 5px;
     border-left: 1px solid #DDD;
     border-right: 1px solid #E8D6C1;
 }
-#maincontent .storylisting.functionTable tbody tr td:first-of-type {
+.storylisting.functionTable tbody tr td:first-of-type {
     border-right:0;
 }
-#maincontent .storylisting.functionTable tbody tr.event td:first-of-type {
+.storylisting.functionTable tbody tr.event td:first-of-type {
     background:url('images/typeIndicatorEvent.png') no-repeat 0 0;
 }
-#maincontent .storylisting.functionTable tbody tr.news td:first-of-type {
+.storylisting.functionTable tbody tr.news td:first-of-type {
     background:url('images/typeIndicatorNews.png') no-repeat 0 0;
 }
-#maincontent .storylisting.functionTable tbody tr.ad td:first-of-type {
+.storylisting.functionTable tbody tr.ad td:first-of-type {
     background:url('images/typeIndicatorAd.png') no-repeat 0 0;
 }
-#maincontent .storylisting.functionTable tbody tr td.mainCell {
+.storylisting.functionTable tbody tr td.mainCell {
     border-left:0;
     padding-left:0;
 }
 .functionTable tbody tr:nth-child(even) {background-color: #F1EDE0;}
-#maincontent .functionTable tbody td {
+.functionTable tbody td {
     padding:10px;
 }
-#maincontent .functionTable tbody td.mainCell {
+.functionTable tbody td.mainCell {
     max-width:600px;
     padding:15px;
 }
-#maincontent .functionTable tbody td.mainCell h5 {
+.functionTable tbody td.mainCell h5 {
     margin: 0;
 }
-#maincontent .functionTable tbody tr:nth-child(even) td.mainCell h5 {border-bottom:1px solid #cdc4bb;}
-#maincontent .functionTable tbody tr:hover {background:#ddd;}
-#maincontent .functionTable tbody td a.action {
+.functionTable tbody tr:nth-child(even) td.mainCell h5 {border-bottom:1px solid #cdc4bb;}
+.functionTable tbody tr:hover {background:#ddd;}
+.functionTable tbody td a.action {
     padding:3px 5px;
 }
-#maincontent .functionTable tbody td.mainCell form a, #maincontent .functionTable tbody td.mainCell span {
+.functionTable tbody td.mainCell form a, .functionTable tbody td.mainCell span {
     font-size:0.8em;
 }
-#maincontent .functionTable tbody td a.action.send {
+.functionTable tbody td a.action.send {
     background:#705538;
     font-weight:bold;
     font-size:1.2em;
     padding:5px 8px;
     margin:0 auto;
 }
-#maincontent .functionTable tbody td.mainCell form {
+.functionTable tbody td.mainCell form {
     display:inline;
 }
 .functionTable a.gaStats {
