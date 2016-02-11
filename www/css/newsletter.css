@@ -141,16 +141,8 @@ img.spacer {display:none;}
 ************************/
 #newsletterDetails {
     background:#F1EDE0;
-    border-radius:5px;
     padding:20px;
-    display:inline-block;
     position:relative;
-}
-#newsletterDetails .grid8 {
-    width:622px
-}
-#newsletterDetails .grid4 {
-    width:274px
 }
 #newsletterDetails form fieldset {
     padding:0;
@@ -185,15 +177,6 @@ img.spacer {display:none;}
 }
 #newsletterDetails fieldset legend {
     display:none;
-}
-#newsletterDetails form input[type='submit'], #newsletterDetails form a.action {
-    background:#78A8C0;
-    border:none;
-    font-size:12px;
-    border-radius:3px;
-    padding:3px 5px;
-    color:#fff !important;
-    cursor:pointer;
 }
 #newsletterDetails form input[type='submit'][disabled='disabled'] {
     opacity:0.5;
@@ -288,7 +271,7 @@ Newsletter Email Preview (for building the newsletter)
     padding:10px 20px 10px 20px;
     color:#fff;
     display:block;
-    width: 536px;
+    width: 576px;
 }
 #preview #previewContent #mast time {
     float: left;
@@ -304,10 +287,21 @@ Newsletter Email Preview (for building the newsletter)
     font-family:Helvetica,Arial,sans-serif;
     color:#fff;
     font-weight: normal;
-    padding: 0px;
+    padding: 0;
+    margin: 0;
 }
 #preview #previewContent table tr >td {
     vertical-align:top;
+}
+#preview #previewContent table td {
+    padding: 0;
+    border: none;
+}
+#preview #previewContent table {
+    border: none;
+}
+#preview #previewContent table tbody tr:nth-of-type(2n) {
+    background-color: initial;
 }
 #preview #previewContent article:nth-child(even) {
     background-color: #E7E2D6;
@@ -350,11 +344,8 @@ Newsletter Email Preview (for building the newsletter)
 /*Story Dragging */
 #drag_story_list {margin-top:50px;}
 #drag_story_list h3 {
-    postion:relative;
     background:#eee;
-    border-radius:5px 5px 0px 0px;
     padding:5px 8px;
-    border-bottom:2px solid #ccc;
     margin-top:20px;
 }
 #drag_story_list h3 a.showHide {
@@ -396,12 +387,11 @@ Newsletter Email Preview (for building the newsletter)
     display:none;
 }
 #drag_story_list .dragItem h4 {
-    font-size:0.85em;
-    font-weight:bold;
+    font-size: 1.5rem;
     margin:3px 0;
     float:left;
     display:inline-block;
-    max-width:160px;
+    max-width:244px;
     padding-left:4px;
 }
 
@@ -414,7 +404,7 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
     border-radius:3px;
     display:inline-block;
-    max-width:50px;
+    max-width:70px;
     line-height:0.9em;
 }
 .dragItem:hover span.requestedDates {

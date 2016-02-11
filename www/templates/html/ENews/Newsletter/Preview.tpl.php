@@ -12,15 +12,15 @@
     });
 </script>
 
-<div id="newsletterDetails">
-   <form class="grid8 first" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
+<div id="newsletterDetails" class="wdn-grid-set">
+   <form class="wdn-col-two-thirds" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
        <fieldset style="float:left">
        <legend>Your Newsletter</legend>
        <ol style="margin-top:0">
            <li>
                <input type="hidden" name="_type" value="newsletter" />
                <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-               <label for="emailSubject"><span class="required">*</span> Email Subject<span class="helper">Include story keywords!</span></label>
+               <label for="emailSubject"><span class="required">*</span> Email Subject <span class="helper">Include story keywords!</span></label>
                <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
            </li>
            <li>
@@ -33,7 +33,7 @@
        <a class="action preview" href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-   <div class="email_addresses grid4">
+   <div class="email_addresses wdn-col-one-third">
        <h5>Email Listservs</h5>
        <ul>
            <?php
@@ -68,18 +68,20 @@
        </ul>
     </div>
 </div>
-<div class="first grid4" id="drag_story_list">
-<?php $stories = $context->getRaw('available_stories'); ?>
-<?php foreach (array('news', 'event', 'ad') as $type): ?>
-    <div id="<?php echo $type; ?>Available">
-        <h3><?php echo ucfirst($type); ?> <span>Submissions</span><a href="#" class="showHide">Hide</a></h3>
-        <div class="storyItemWrapper">
-            <?php echo $savvy->render($stories->setType($type)); ?>
+<div class="wdn-grid-set">
+    <div class="wdn-col-one-third" id="drag_story_list">
+    <?php $stories = $context->getRaw('available_stories'); ?>
+    <?php foreach (array('news', 'event', 'ad') as $type): ?>
+        <div id="<?php echo $type; ?>Available">
+            <h3><?php echo ucfirst($type); ?> <span>Submissions</span><a href="#" class="showHide">Hide</a></h3>
+            <div class="storyItemWrapper">
+                <?php echo $savvy->render($stories->setType($type)); ?>
+            </div>
         </div>
+    <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
-</div>
-<div class="grid8">
-    <?php $context->newsletter->options = array('preview' => true); ?>
-    <?php echo $context->newsletter->getRawObject()->getEmailHTML(); ?>
+    <div class="wdn-col-two-thirds">
+        <?php $context->newsletter->options = array('preview' => true); ?>
+        <?php echo $context->newsletter->getRawObject()->getEmailHTML(); ?>
+    </div>
 </div>
