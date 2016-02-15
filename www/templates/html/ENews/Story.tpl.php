@@ -11,12 +11,12 @@ foreach ($context->getFiles() as $file) {
         }
 
         echo '<figure class="half">'
-        	 . '<img src="'.$file->getURL()
+             . '<img src="'.$file->getURL()
              . '" alt="'.$description.'" />';
-	         if (!empty($file->description)) {
-	             echo '<figcaption>'.$file->description.'</figcaption>';
-	         }
-	    echo '</figure>';
+             if (!empty($file->description)) {
+                 echo '<figcaption>'.$file->description.'</figcaption>';
+             }
+        echo '</figure>';
     }
 }
 ?>
