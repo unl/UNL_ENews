@@ -36,7 +36,7 @@ $page->breadcrumbs = '
         <li>' . $savvy->render($context, "ENews/PageTitle.tpl.php") . '</li>
     </ul>
 ';
-$page->affiliation = '<a href="http://ucomm.unl.edu/">University Communications</a>';
+$page->affiliation = '';
 $page->navlinks = $savvy->render($context, 'ENews/Navigation.tpl.php');
 $page->pagetitle = '<h1>' . $savvy->render($context, 'ENews/PageTitle.tpl.php') . '</h1>';
 $page->leftcollinks = '';
