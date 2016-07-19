@@ -215,99 +215,24 @@ Newsletter Email Preview (for building the newsletter)
 
 ************************/
 #previewWrapper {
-    text-align:center;
-    margin-top:10px;
+    width: 650px;
+    min-width: 650px;
+    font-size:16px;
+    line-height:1.777;
+    font-family:Georgia, serif;
 }
-#preview {
-    width:576px;
-    max-width:576px;
-    text-align:left;
-    margin:0 auto;
-}
-#previewWrapper > a {
-    font-size:9px;
-}
-#preview header {
-    background-color: #F8F5EC;
-    min-height: 27px;
-    text-align: center;
-}
-#preview header img {
-    width: 100%;
-    display: block;
-}
-#preview header * {
-    margin:auto 0;
-    padding:0;
-}
-#preview header h1 {
-    font-size:30px;
-    line-height:100%;
-    font-weight:bold;
-}
-#preview header h2 {
-    font-size:10px;
-    line-height:100%;
-}
-#preview #previewContent {
-    background-color: #F8F5EC;
-    display:inline-block;
-}
-
-#preview #previewContent #mast {
-    background-color:#C80E13;
-    padding:10px 20px 10px 20px;
-    color:#fff;
-    display:block;
-    width: 576px;
-}
-#preview #previewContent #mast time {
-    float: left;
-    font-size:14px;
-    font-family:Helvetica,Arial,sans-serif;
-}
-#preview #previewContent #mast h2 {
-    float: right;
-    width: 75%;
-    text-align: right;
-    font-style: italic;
-    font-size:14px;
-    font-family:Helvetica,Arial,sans-serif;
-    color:#fff;
-    font-weight: normal;
+#previewWrapper table, #previewWrapper tr, #previewWrapper td, #previewWrapper th {
+    border: none;
+    border-top: none;
     padding: 0;
     margin: 0;
 }
-#preview #previewContent table tr >td {
-    vertical-align:top;
-}
-#preview #previewContent table td {
-    padding: 0;
-    border: none;
-}
-#preview #previewContent table {
-    border: none;
-}
-#preview #previewContent table tbody tr:nth-of-type(2n) {
-    background-color: initial;
-}
-#preview #previewContent article:nth-child(even) {
-    background-color: #E7E2D6;
-}
-#preview #previewContent article:nth-child(odd) {
-    background-color: #F8F5EC;
-}
-#preview footer {
-    background-color: #525151;
-    color: #cfcfcf;
-    padding: 20px 20px;
-    font-size:10px;
-    line-height:1.4em;
-}
-#preview footer img {
-    float:right;
-    margin-right:10px;
-}
+
+
+
+
+
+.newsColumn {background-color: #d9f9f9;}
 .newsColumn, .adArea {min-height:75px;}
 .newsColumn form, .newsColumn .requestedDates {display:none;}
 .ui-sortable .story {
@@ -317,6 +242,7 @@ Newsletter Email Preview (for building the newsletter)
     margin-bottom:15px;
     display:block !important;
 }
+
 
 .adArea .story {
     position:relative;
