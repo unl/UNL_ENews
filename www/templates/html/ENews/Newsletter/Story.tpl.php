@@ -11,11 +11,12 @@ $newsletter_url = $context->newsletter->getURL();
         <div class="sidebar top">
             <div class="inner_sidebar">
                 <h3>
-                    <a href="<?php echo $context->newsletter->getURL(); ?>" title="Go to the newsletter index page"><?php echo $context->newsroom->name; ?>
-                        <span class="date">
-                        <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
-                        </span>
+                    <a href="<?php echo $context->newsletter->getURL(); ?>" title="Go to the newsletter index page">
+                        <?php echo $context->newsroom->name; ?>
                     </a>
+                    <span class="wdn-subhead date">
+                        <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
+                    </span>
                 </h3>
                 <ul>
                 <?php
@@ -50,5 +51,4 @@ $newsletter_url = $context->newsletter->getURL();
                 <?php echo $savvy->render($context->newsroom, 'ENews/Newsroom/SubscribeForm.tpl.php'); ?>
             </div>
         </div>
-</div>
 </section>
