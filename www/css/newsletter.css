@@ -217,9 +217,11 @@ Newsletter Email Preview (for building the newsletter)
 #previewWrapper {
     width: 650px;
     min-width: 650px;
+    margin-top: 20px;
     font-size:16px;
     line-height:1.777;
     font-family:Georgia, serif;
+    box-shadow: 4px 4px 13px #bbb;
 }
 #previewWrapper table, #previewWrapper tr, #previewWrapper td, #previewWrapper th {
     border: none;
@@ -227,7 +229,16 @@ Newsletter Email Preview (for building the newsletter)
     padding: 0;
     margin: 0;
 }
-
+#previewWrapper table tbody tr:nth-of-type(2n) {
+    background: inherit;
+}
+.wrapper-table {
+    background-color: #F8F5EC;
+}
+.unltoday-mast i {
+    display: block;
+    text-align: right;
+}
 
 
 

@@ -74,7 +74,7 @@
 
         #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}
         p {margin-top:0!important;padding-top:0!important;}
-        td.responsive-column {display: table-cell;}
+
         table[class="wrapper-table"] {
             min-width:100% !important;
         }

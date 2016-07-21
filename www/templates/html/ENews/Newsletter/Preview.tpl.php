@@ -14,7 +14,7 @@
 
 <div id="newsletterDetails" class="wdn-grid-set">
    <form class="wdn-col-two-thirds" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
-       <fieldset style="float:left">
+       <fieldset>
        <legend>Your Newsletter</legend>
        <ol style="margin-top:0">
            <li>
@@ -30,7 +30,7 @@
        </ol>
        </fieldset>
        <input type="submit" name="submit" value="Save" />
-       <a class="wdn-button action preview" href="#" onclick="WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;">Send Preview</a>
+       <a class="wdn-button action preview" href="#" onclick="WDN.initializePlugin('modal', [function() {WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;}]);">Send Preview</a>
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
    <div class="email_addresses wdn-col-one-third">
