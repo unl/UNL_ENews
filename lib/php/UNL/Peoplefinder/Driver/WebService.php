@@ -30,7 +30,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     
     function getUID($uid)
     {
-        $record = file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php');
+        $record = file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php&src=enews');
         if ($record) {
             $record = unserialize($record);
         }
