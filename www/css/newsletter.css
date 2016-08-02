@@ -228,16 +228,23 @@ Newsletter Email Preview (for building the newsletter)
     border-top: none;
     padding: 0;
     margin: 0;
+    line-height: normal
 }
 #previewWrapper table tbody tr:nth-of-type(2n) {
     background: inherit;
 }
-.wrapper-table {
+#previewWrapper td.wdn-logo-lockup {
+    white-space: normal !important;
+}
+#previewWrapper .wrapper-table {
     background-color: #F8F5EC;
 }
-.unltoday-mast i {
+#previewWrapper .unltoday-mast i {
     display: block;
     text-align: right;
+}
+#previewWrapper p {
+    margin: 0;
 }
 
 
