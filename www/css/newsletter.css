@@ -15,6 +15,7 @@ table .story:hover {
     margin-top:0;
 }
 
+article p {margin-top: 0;}
 
 /* Newsletter Web View for the rendered stories. (Not the newsletter building web view)
 ************************/
@@ -25,6 +26,7 @@ table .story:hover {
 }
 #newsletterWeb .story img {
     margin-bottom:0;
+    max-width: 38%;
 }
 #newsletterWeb .story img.frame:hover {
    border: solid 1px #CCC;
@@ -33,16 +35,13 @@ table .story:hover {
 img.spacer {display:none;}
 
 .sidebar {
-    background: #B70302;
+    background: #d00000;
     padding:5px;
-    border-radius:10px;
 }
 .sidebar.top{
-    border-radius:10px 10px 0 0;
     padding-bottom:0;
 }
 .sidebar.bottom{
-    border-radius:0 0 10px 10px;
     padding-top:0;
     background:#4F9BBF;
     background: -moz-linear-gradient(top, #4f4f4f 0%, #4F9BBF 5%, #4F9BBF 100%);
@@ -52,32 +51,25 @@ img.spacer {display:none;}
     border:1px solid rgba(255, 255, 255, .5);
     padding:5px;
     color:#fff;
-    border-radius:5px;
 }
 .sidebar.top .inner_sidebar {
-    border-radius:5px 5px 0 0;
     border-bottom:none;
     padding-bottom:20px;
 }
 .sidebar.bottom .inner_sidebar {
-    border-radius:0 0 5px 5px;
     border-top:none;
     padding-top:20px;
 }
 .inner_sidebar h3 {
     color:#fff;
-    font-size:1.2em;
-    font-weight:bold;
-    letter-spacing: -0.02em;
-    text-shadow: rgba(66, 66, 66, 0.796875) 1px 1px 1px;
+    font-size: 1.6em;
     border-bottom:1px solid rgba(255, 255, 255, .5);
-    margin-bottom:10px;
-    padding-bottom:0.1em;
 }
 .inner_sidebar h3 span {
     font-size:0.6em;
     text-transform:uppercase;
     display:block;
+    color: white;
 }
 .inner_sidebar ul {
     list-style:none;
@@ -164,10 +156,6 @@ img.spacer {display:none;}
     background:#f5f4ef;
     padding:8px 8px 5px 8px;
     cursor:pointer;
-}
-#newsletterDetails .email_addresses ul {
-    display:none;
-    border-left:2px solid #E8D6C1;
 }
 #newsletterDetails .email_addresses ul li {
     list-style:none;
