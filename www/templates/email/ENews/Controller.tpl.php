@@ -50,26 +50,28 @@
             body[yahoo] .section-padding{
                 padding: 50px 15px 50px 15px !important;}
 
-            td[class="unltoday-padding"]{
+
+            body[yahoo] td.wdn-logo-lockup {
+                font-size: 22px !important;
+                white-space: normal !important;}
+            body[yahoo] td[class="unltoday-padding"]{
                 padding: 20px 15px 20px 15px !important;}
-            td[class="unltoday-mast"]{
+            body[yahoo] td[class="unltoday-mast"]{
                 display:block!important;
                 text-align:left!important;}
-            td[class="unltoday-head"]{
+            body[yahoo] td[class="unltoday-head"]{
                 font-size:20px!important;
                 padding-bottom:14px!important;}
-            td[class="unltoday-body"]{
+            body[yahoo] td[class="unltoday-body"]{
                 display:block!important;
                 width:100%!important;
                 padding:0!important;
                 font-size:15px!important;
                 line-height:20px!important;}
-            td.responsive-column {
-                display: block;
-            }
-            td.separator-column {
-                display:none;
-            }
+            body[yahoo] td.responsive-column {
+                display: block;}
+            body[yahoo] td.separator-column {
+                display:none;}
         }
 
         #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}
