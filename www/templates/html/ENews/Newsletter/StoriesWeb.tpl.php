@@ -18,20 +18,22 @@
     }
     ?>
     <?php if ($displayColumn): ?>
-    <div class="bp768-wdn-col-one-third">
-        <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
-            'area' => $area,
-            'offset' => 2,
-            'web' => true
-        ))); ?>
-    </div>
-    <div class="bp768-wdn-col-one-third">
-        <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
-            'area' => $area,
-            'offset' => 0,
-            'web' => true
-        ))); ?>
-    </div>
+        <div class="wdn-grid-set">
+            <div class="bp768-wdn-col-one-half">
+                <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
+                    'area' => $area,
+                    'offset' => 2,
+                    'web' => true
+                ))); ?>
+            </div>
+            <div class="bp768-wdn-col-one-half">
+                <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
+                    'area' => $area,
+                    'offset' => 0,
+                    'web' => true
+                ))); ?>
+            </div>
+        </div>
     <?php endif; ?>
 
     <div class="clear"></div>

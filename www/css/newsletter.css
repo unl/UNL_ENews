@@ -6,38 +6,13 @@
 table .story:hover {
     outline:2px solid #FA6520;
 }
-.newsColumn h4 {
-    font-size: 1em;
-    font-weight:bold;
-    padding:2px;
-    margin:0 0 7px 0;
-}
-.newsColumn h4 a {
-    color:inherit;
-}
-.newsColumn h4 a:hover {
-    text-decoration:underline;
-    color:#777;
-}
-.newsColumn p {
-    padding:2px;
-    font-size:98%;
-    margin-bottom:15px;
-}
-.newsColumn a {
-    margin-top:-10px;
-    margin-bottom:5px;
-}
+
 #newsColumnIntro {
     padding-bottom:10px;
     margin-bottom:25px;
 }
 #newsColumnIntro > .story:first-child{
     margin-top:0;
-}
-#newsColumnIntro h4 {
-    font-size:1.5em;
-    margin-bottom:0;
 }
 
 
@@ -114,8 +89,9 @@ img.spacer {display:none;}
     border-bottom:1px dashed rgba(255, 255, 255, .5);
     padding:3px 0;
 }
-.inner_sidebar a {
+.wdn-main .inner_sidebar a {
     color:#fff;
+    border-bottom: none;
 }
 .inner_sidebar label {display:none;}
 .inner_sidebar input[type="email"] {
@@ -246,11 +222,12 @@ Newsletter Email Preview (for building the newsletter)
 #previewWrapper p {
     margin: 0;
 }
+#previewWrapper .newsColumn {
+    background-color: #d9f9f9;
+}
 
 
 
-
-.newsColumn {background-color: #d9f9f9;}
 .newsColumn, .adArea {min-height:75px;}
 .newsColumn form, .newsColumn .requestedDates {display:none;}
 .ui-sortable .story {
@@ -266,11 +243,6 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
 }
 
-#newsColumn1, #newsColumn2 {
-    float:left;
-    width: 273px;
-}
-#newsColumn2 {float:right;}
 
 
 /*Story Dragging */
