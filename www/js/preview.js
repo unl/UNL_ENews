@@ -82,7 +82,7 @@ define([
 				},
 				
 				emails : function(ls) {
-					if ($(ls).attr('checked')){
+					if ($(ls).prop('checked')){
 						action = "add";
 					} else {
 						action = "remove";
