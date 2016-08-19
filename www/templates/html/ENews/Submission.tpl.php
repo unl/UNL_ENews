@@ -177,7 +177,7 @@ function getValue($object, $field) {
                                 <div id="newsroom_id_dropdown">
                                     <select name="newsroom_id[]">
                                         <?php if ($newsroom_id == 1) : ?>
-                                        <option value="1">Today@UNL and other UComm publications (Scarlet, UNL Today, etc)</option>
+                                        <option value="1">Nebraska Today and other UComm publications</option>
                                         <?php  else : ?>
                                         <option value="<?php echo $newsroom_id; ?>"><?php echo $newsroom_name;?></option>
                                         <?php endif ?>
