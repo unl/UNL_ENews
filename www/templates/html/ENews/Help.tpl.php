@@ -147,7 +147,7 @@
             <?php
             // @TODO, each newsroom needs a contact person. Then loop through all the newsrooms.
             ?>
-            <p>For Today@UNL questions, contact Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226.</p>
+            <p>For Nebraska Today questions, contact Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226.</p>
             <p>For student enews questions, contact Christopher Dulac.</p>
         </div>
     </div>
