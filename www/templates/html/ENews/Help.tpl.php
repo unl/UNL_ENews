@@ -102,12 +102,12 @@
                     <dt>Can I buy an advertisement or sponsorship within the electronic newsletter?</dt>
                     <dd>Yes. Call Troy Fedderson 472-8515</dd>
 
-                    <dt>Who do I call with questions about Today@UNL?</dt>
+                    <dt>Who do I call with questions about Nebraska Today?</dt>
                     <dd>Call Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226</dd>
                 </dl>
             </div>
             <div id="styleguide">
-                <p><strong>Full sentences:</strong> Often people are tempted to enter an outline or bullet lists. Today@UNL items are news briefs and we need full sentences. Calendar items are not required to be full sentences (although it would be just fine to use the same entry for both).</p>
+                <p><strong>Full sentences:</strong> Often people are tempted to enter an outline or bullet lists. Nebraska Today items are news briefs and we need full sentences. Calendar items are not required to be full sentences (although it would be just fine to use the same entry for both).</p>
 
                 <p><strong>Dates:</strong> Time, Month, Date (in that order). No day of the week and no "th" or "st" at the end of the date.
                 <br />
