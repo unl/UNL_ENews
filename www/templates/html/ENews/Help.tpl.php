@@ -7,7 +7,7 @@
         <div class="wdn_tabs_content">
             <div id="questions">
                 <dl>
-                    <dt>How do I submit a news/event announcement for consideration in Today@UNL?</dt>
+                    <dt>How do I submit a news/event announcement for consideration in Nebraska Today?</dt>
                     <dd>
                         From <a href="<?php echo UNL_ENews_Controller::getURL(); ?>">UNL Announce</a>, select <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit">Submit A News Item</a>:
                         <ul>
@@ -42,7 +42,7 @@
                         Say you have an entire news release or feature story that you want to submit.
                         <ul>
                             <li>Copy and paste it into "Full Article" </li>
-                            <li>This gives editors more that they can use in other ways and in other channels: UNL Today, Scarlet, or as a news release or pitch. If you've written it, submit it. Use the summary box for the edited/shortened version</li>
+                            <li>This gives editors more that they can use in other ways and in other channels: Nebraska Today, Scarlet, or as a news release or pitch. If you've written it, submit it. Use the summary box for the edited/shortened version</li>
                         </ul>
                     </dd>
 
