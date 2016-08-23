@@ -10,7 +10,7 @@ foreach ($context->getFiles() as $file) {
             $description = $file->description;
         }
 
-        echo '<figure class="half">'
+        echo '<figure class="half wdn-frame">'
              . '<img src="'.$file->getURL()
              . '" alt="'.$description.'" />';
              if (!empty($file->description)) {
