@@ -231,7 +231,11 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
 }
 
-
+#newsColumn1, #newsColumn2 {
+    float:left;
+    width: 273px;
+}
+#newsColumn2 {float:right;}
 
 /*Story Dragging */
 #drag_story_list {margin-top:50px;}
