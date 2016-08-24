@@ -3,11 +3,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title><?php echo $context->subject ?></title>
 
     <style type="text/css">
+        @import url(http://fonts.googleapis.com/css?family=Oswald:300);
+    </style>
+    <style type="text/css">
         .ExternalClass {width: 100%;}
         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
         body {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;}
         body {margin:0; padding:0;}
         table td {border-collapse:collapse}
+
+        @media screen {
+            td[class="wdn-logo-lockup"] {
+                font-family:'Oswald','Arial Narrow',Helvetica,Arial,sans-serif!important;
+            }
+        }
 
         @media screen and (max-width: 650px) {
             body[yahoo] .wrapper{
