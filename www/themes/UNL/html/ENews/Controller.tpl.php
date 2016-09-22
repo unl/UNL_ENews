@@ -4,7 +4,7 @@ use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
 $page = Templates::factory('Fixed', Templates::VERSION_4_1);
-$wdnIncludePath = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))));
+$wdnIncludePath = dirname(dirname(dirname(dirname(__DIR__))));
 
 if (file_exists($wdnIncludePath . '/wdn/templates_4.1')) {
     $page->setLocalIncludePath($wdnIncludePath);
