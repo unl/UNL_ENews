@@ -24,7 +24,23 @@ if ($start_date==$end_date){
 foreach($context->response->getRows() as $result):
 ?>
 <tr>
-    <td><?php echo '<a href="http://'.$result[0].'">'.$result[1].'</a>' ?></td>
+    <?php
+    $title = trim(str_ireplace('| Announce | University of Nebraska–Lincoln', '', $result[1]));
+    
+    //If title is missing, try to find it (this shouldn't happen, but there was a bug preventing some story titles from being shown)
+    if (empty($title)) {
+        preg_match('/.*\/([\d]+)$/', $result[0], $matches);
+        if (isset($matches[1]) && $story = UNL_ENews_Story::getByID($matches[1])) {
+            $title = $story->title;
+        }
+    }
+    
+    //If the title is still empty... let the user know we don't know what it is
+    if (empty($title)) {
+        $title = 'unknown story';
+    }
+    ?>
+    <td><?php echo '<a href="http://'.$result[0].'">'.$title.'</a>' ?></td>
     <td><?php echo $result[2] // pageviews ?></td>
     <td><?php echo $result[3] // visits ?></td>
 </tr>
