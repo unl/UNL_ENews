@@ -99,3 +99,8 @@ form fieldset.storyFieldsetAction select {
     width:32px;
     height:32px;
 }
+body #cboxLoadedContent {
+    background-color: #fff;
+    padding: 1em;
+    border: 1px solid #3a3a3a;
+}

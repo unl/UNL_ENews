@@ -11,7 +11,8 @@ class UNL_ENews_PostRunFilter
     public static function postRun($data)
     {
         if (isset(self::$data['pagetitle'])) {
-            $data = str_replace('<title>Announce | University of Nebraska–Lincoln</title>',
+            
+            $data = str_replace('<title> | Announce | University of Nebraska–Lincoln</title>',
                                 '<title>'.self::$data['pagetitle'].' | Announce | University of Nebraska-Lincoln</title>',
             $data);
             $data = str_replace('<h1></h1>',
