@@ -72,6 +72,18 @@ class UNL_ENews_File extends UNL_ENews_Record
         $allowedExtensions = array("gif","jpeg","jpg","png");
         return in_array(end(explode(".", strtolower($filename))), $allowedExtensions);
     }
+    
+    public function delete()
+    {
+      //Delete the cache file for this if it exists
+      $dir = dirname(dirname(dirname(dirname(__FILE__))));
+      $filename = basename($this->getURL());
+      $path = $dir . '/www/files/'.$filename;
+      if (file_exists($path)) {
+        @unlink($path);
+      }
+      return parent::delete();
+    }
 
     public function getURL()
     {
