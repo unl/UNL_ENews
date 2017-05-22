@@ -330,6 +330,7 @@ define([
 					
 					return false;
 				},
+				tolerance: 'pointer',
 				hoverClass: "ui-state-active",
 				drop: function(e, ui) {
 					ui.helper.remove();
