@@ -169,4 +169,20 @@ if (!$result) {
     exit();
 }
 
+echo 'Adding opens field to newsletter&hellip;<br />'.PHP_EOL;
+$result = $mysqli->query("ALTER TABLE `newsletters` ADD `opens` INT( 8 ) NULL DEFAULT 0 AFTER `distributed`;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />'.PHP_EOL;
+    }
+}
+
+echo 'Add new table newsletter_open for tracking&hellip<br />'.PHP_EOL;
+$result = $mysqli->query("CREATE TABLE newsletter_open (ip VARCHAR(64), newsletter_id INT(10));");
+if (!$result) {
+    echo 'Error creating table newsletter_open: ';
+    echo $mysqli->error;
+    exit();
+}
+
 echo 'Upgrade complete!';

@@ -42,6 +42,13 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      * @var int
      */
     public $distributed = 0;
+
+    /**
+     * Number of times the email has been viewed.
+     *
+     * @var int
+     */
+    public $opens;
     
     function __construct($options = array())
     {
@@ -481,6 +488,16 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
     function getURL()
     {
         return $this->newsroom->getURL().'/'.$this->id;
+    }
+
+    /**
+     * Get the URL for the tracking pixel image
+     *
+     * @return string
+     */
+    function getOpenURL()
+    {
+        return $this->newsroom->getURL().'/open/'.$this->id;
     }
 
     /**
