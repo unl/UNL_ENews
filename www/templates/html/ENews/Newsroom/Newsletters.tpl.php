@@ -9,6 +9,7 @@
         <tr>
             <th>Newsletter</th>
             <th>Status</th>
+            <th>Email Opens*</th>
             <th>Reports</th>
         </tr>
     </thead>
@@ -27,7 +28,7 @@
                 </form>
 
             </td>
-            <td align="center">
+            <td>
                 <?php if ($newsletter->distributed): ?>
                 <strong>Sent:</strong> <?php echo date('D. M d, Y', $newsletterDate); ?>
                 <?php else: ?>
@@ -37,7 +38,14 @@
                 </form>
                 <?php endif; ?>
             </td>
-            <td align="center">
+            <td>
+                <?php if ($newsletter->distributed): ?>
+                <?php echo $newsletter->opens; ?>
+                <?php else: ?>
+                0
+                <?php endif; ?>
+            </td>
+            <td>
                 <?php if ($newsletter->distributed): ?>
                 <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=gastats&start_date=<?php echo date('Y-m-d', $newsletterDate); ?>&end_date=<?php echo date('Y-m-d', strtotime(date('Y-m-d', $newsletterDate)."+1 week")); ?>&newsletter=<?php echo $newsletter->id; ?>&format=partial" class="gaStats">Stats</a>
                 <?php endif; ?>
@@ -46,6 +54,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<p style="margin-top:3em;font-size:.8em">* Note: Only recipients who select "Download pictures" or "Display images below" when they view the email can be counted.</p>
 <?php
 if (count($context) > $context->options['limit']) {
     $pager = new stdClass();

@@ -40,9 +40,11 @@ $routes['/^' . $shortname . '\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
 //For viewing the newest newsletter for a newsroom.
 $routes['/^' . $shortname . '\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
-
 //For viewing an archive.  url = www/newsRoomShortName/archive
 $routes['/^' . $shortname . '\/archive$/i'] = 'UNL_ENews_Archive';
+
+// Email open tracking link.
+$routes['/^' . $shortname . '\/open\/(?P<id>[\d]+)\/?$/i'] = 'UNL_ENews_Newsletter_Open';
 
 // Now all the ?view= routes
 $routes += array(
@@ -56,6 +58,7 @@ $routes += array(
     'newsroom'           => 'UNL_ENews_Newsroom_ManageDetails',
     'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
     'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
+    'open'               => 'UNL_ENews_Newsletter_Open',
     'preview'            => 'UNL_ENews_Newsletter_Preview',
     'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
     'newsletter'         => 'UNL_ENews_Newsletter_Public',

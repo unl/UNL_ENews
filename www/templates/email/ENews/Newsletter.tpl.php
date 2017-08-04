@@ -92,3 +92,7 @@
 <?php if (!empty($context->options['preview'])) : //For the preview building tool ?>
   </div>
 <?php endif; ?>
+
+<?php if (!$context->options['preview']) : ?>
+<img src="<?php echo $context->getOpenURL(); ?>?<?php echo time(); ?>" alt="" />
+<?php endif; ?>
