@@ -178,7 +178,7 @@ if (!$result) {
 }
 
 echo 'Add new table newsletter_open for tracking&hellip<br />'.PHP_EOL;
-$result = $mysqli->query("CREATE TABLE newsletter_open (ip VARCHAR(64), newsletter_id INT(10));");
+$result = $mysqli->query("CREATE TABLE newsletter_open (ip VARCHAR(64), newsletter_id INT(10), PRIMARY KEY (ip, newsletter_id));");
 if (!$result) {
     echo 'Error creating table newsletter_open: ';
     echo $mysqli->error;
