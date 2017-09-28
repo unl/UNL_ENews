@@ -17,7 +17,7 @@ if ($file = $context->getThumbnail()) {
          . '" style="margin-left:15px; float:right;" class="frame" alt="'.$description.'" /></a>';
 }
 
-echo nl2br($context->description);
+echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
 if (!empty($context->full_article)) {
     echo ' <a href="'.$storylink.'">Continue reading&hellip;</a>';
 }
