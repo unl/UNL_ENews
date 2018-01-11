@@ -3,7 +3,8 @@ define([
 	'wdn',
 	'modernizr',
 	'require',
-], function($, WDN, Modernizr, require) {
+	'socialmediashare',
+], function($, WDN, Modernizr, require, social) {
 
 	var plugin = {
 		utm_campaign : 'UNL_ENews',
@@ -117,8 +118,9 @@ define([
 
 				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 					website = 'http://' + website;
+					$(this).val(website);
 				}
-				var goURLPrefix = RegExp('http://go.unl.edu');
+				var goURLPrefix = RegExp('//go.unl.edu');
 				if (!goURLPrefix.test(website)) {
 					plugin.createGoURL(website);
 				} else {
@@ -360,14 +362,20 @@ define([
 
 			gaTagging = "utm_campaign="+plugin.utm_campaign+"&utm_medium="+plugin.utm_medium+"&utm_source="+plugin.utm_source+"&utm_content="+plugin.utm_content;
 
-			WDN.socialmediashare.createURL(
-				WDN.socialmediashare.buildGAURL(url, gaTagging),
+			if (url.indexOf('?') != -1) { //check to see if has a ?, if not then go ahead with the ?. Otherwise add with &
+				url = url+"&"+gaTagging;
+			} else {
+				url = url+"?"+gaTagging;
+			}
+
+			social.createURL(
+				url,
 				function(data) {
-					$('#website').attr('value', data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
+					$('#website').val(data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
 					plugin.updatePreview(data);
 				},
 				function(){
-					$('#website').attr('value', url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
+					$('#website').val(url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
 					plugin.updatePreview(website);
 				}
 			);
