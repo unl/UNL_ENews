@@ -1,6 +1,6 @@
 <?php foreach (new LimitIterator($context->getOptOutEmails(), 0, 1) as $email) : ?>
     <div class="subscribe">
-        <h3><?php echo $context->name; ?><span>Subscribe Today!</span></h3>
+        <h3 class="clear-top"><?php echo $context->name; ?><span class="wdn-subhead">Subscribe Today!</span></h3>
         <form method="post" action="https://listserv.unl.edu/signup-anon/" id="subscribe">
             <label for="address">Email</label>
             <input type="email" id="address" name="ADDRESS" value="" />
