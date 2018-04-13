@@ -2,7 +2,7 @@
     require(['jquery', 'jqueryui'], function($) {
         $("#releaseDate").datepicker({
             showOn: 'both',
-            buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
+            buttonImage: '<?php echo UNL_ENews_Controller::getURL(); ?>css/images/x-office-calendar.png',
             dateFormat: 'yy-mm-dd',
             buttonImageOnly: true
         });

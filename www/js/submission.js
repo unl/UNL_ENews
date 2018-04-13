@@ -31,7 +31,7 @@ define([
 					// Set up date pickers on all inputs with datepicker class
 					$("input.datepicker").datepicker({
 						showOn: 'both',
-						buttonImage: '/wdn/templates_3.0/css/content/images/mimetypes/x-office-calendar.png',
+						buttonImage: ENEWS_HOME + 'css/images/x-office-calendar.png',
 						buttonImageOnly: true,
 						dateFormat: 'yy-mm-dd',
 						defaultDate: this.value

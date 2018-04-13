@@ -124,11 +124,9 @@ img.spacer {display:none;}
     color:#705538;
 }
 #newsletterDetails input[type='text'] {
-    display:block;
     font-size:1.2em;
     border:1px solid #E8D6C1;
     padding:3px;
-    width:590px;
 }
 #newsletterDetails fieldset ol, #newsletterDetails .email_addresses ul {
     padding:0;
@@ -414,11 +412,11 @@ table .story textarea {
 .ui-sortable-placeholder { border:2px dashed #D4440B; visibility: visible !important; height: 50px !important; }
 .ui-sortable-placeholder * { visibility: hidden; }
 .ui-datepicker-trigger {
-    float:right;
-    right:5px;
-    position:relative;
-    top:-23px;
-    cursor:pointer;
+    right: 9px;
+    position: relative;
+    cursor: pointer;
+    float: right;
+    top: -29px;
 }
 
 /* Help Page Styles
