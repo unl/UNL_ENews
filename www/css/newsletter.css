@@ -118,16 +118,6 @@ img.spacer {display:none;}
 #newsletterDetails form.email {
     display:none;
 }
-#newsletterDetails label .helper {
-    font-size:0.6em;
-    font-weight:normal;
-    color:#705538;
-}
-#newsletterDetails input[type='text'] {
-    font-size:1.2em;
-    border:1px solid #E8D6C1;
-    padding:3px;
-}
 #newsletterDetails fieldset ol, #newsletterDetails .email_addresses ul {
     padding:0;
 }
@@ -147,29 +137,12 @@ img.spacer {display:none;}
 
 }
 #newsletterDetails .email_addresses h5 {
-    margin: 0 0 10px;
-    position:absolute;
-    right:0px;
-    top:0px;
-    background:#f5f4ef;
-    padding:8px 8px 5px 8px;
     cursor:pointer;
 }
 #newsletterDetails .email_addresses ul li {
     list-style:none;
-    padding:6px 5px;
-    border-bottom:1px solid #E8D6C1;
     display:inline-block;
-    width:100%;
 }
-#newsletterDetails .email_addresses ul li:nth-child(even) {
-    background:#fcf6e4;
-}
-#newsletterDetails .email_addresses ul li .emailIndicator {
-    display:inline;
-    float:left;
-}
-#newsletterDetails .email_addresses ul li label {display:inline;font-size:1em;font-weight:normal;}
 
 /* 
 

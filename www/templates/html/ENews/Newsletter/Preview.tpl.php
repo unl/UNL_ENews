@@ -13,28 +13,25 @@
 </script>
 
 <div id="newsletterDetails" class="wdn-grid-set">
-   <form class="wdn-col-two-thirds" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
-       <fieldset>
-       <legend>Your Newsletter</legend>
+   <form class="bp768-wdn-col-two-thirds" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
        <ol style="margin-top:0">
            <li>
                <input type="hidden" name="_type" value="newsletter" />
                <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-               <label for="emailSubject"><span class="required">*</span> Email Subject <span class="helper">Include story keywords!</span></label>
+               <label for="emailSubject"><span class="required">*</span> Email Subject <span class="helper">(Include story keywords!)</span></label>
                <input name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
            </li>
            <li>
-               <label for="releaseDate">Release Date</label>
+               <label for="releaseDate">Release Date <span class="helper">(Will be sent at 7:00 am)</span></label>
                <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
            </li>
        </ol>
-       </fieldset>
        <input type="submit" name="submit" value="Save" />
        <a class="wdn-button action preview" href="#" onclick="WDN.initializePlugin('modal', [function() {WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;}]);">Send Preview</a>
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-   <div class="email_addresses wdn-col-one-third">
-       <h5>Email Listservs</h5>
+   <div class="email_addresses bp768-wdn-col-one-third">
+       <h5>Distribute this newsletter to:</h5>
        <ul>
            <?php
            $existing_emails = $context->newsletter->getEmails()->getArrayCopy();
