@@ -88,9 +88,9 @@
                     </dd>
 
                     <dt>What if I have some late-breaking news that I just found out about that I really need to get out and it's after deadline?</dt>
-                    <dd>This is probably a news judgment call that we can help with: Call Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226. Most likely, it can wait until the next day; please remember to plan ahead.</dd>
+                    <dd>This is probably a news judgment call that we can help with: Call Troy Fedderson, 402-472-8515. Most likely, it can wait until the next day; please remember to plan ahead.</dd>
 
-                    <dt>Can I use this site to submit news releases or Scarlet features and briefs (instead of e-mailing them to Tom Simons or Troy?</dt>
+                    <dt>Can I use this site to submit news releases or Scarlet features and briefs (instead of e-mailing them to Troy?</dt>
                     <dd>
                     Yes. Until we all get used to this change, it's best to call ahead and explain your request.
                     </dd>
@@ -103,7 +103,7 @@
                     <dd>Yes. Call Troy Fedderson 472-8515</dd>
 
                     <dt>Who do I call with questions about Nebraska Today?</dt>
-                    <dd>Call Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226</dd>
+                    <dd>Call Troy Fedderson, 402-472-8515</dd>
                 </dl>
             </div>
             <div id="styleguide">
@@ -147,7 +147,7 @@
             <?php
             // @TODO, each newsroom needs a contact person. Then loop through all the newsrooms.
             ?>
-            <p>For Nebraska Today questions, contact Troy Fedderson, 402-472-8515 or Steve Smith, 402-472-4226.</p>
+            <p>For Nebraska Today questions, contact Troy Fedderson, 402-472-8515.</p>
             <p>For student enews questions, contact Christopher Dulac.</p>
         </div>
     </div>
