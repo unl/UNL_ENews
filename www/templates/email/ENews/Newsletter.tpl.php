@@ -10,7 +10,7 @@
                     <td bgcolor="#FEFDFA" class="wdn-header-top">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td><a href="http://www.unl.edu/" target="_blank" style="text-decoration: none; color: #d00000;"><img src="http://www.unl.edu/images/email/4-1/41_01.gif" width="320" height="36" alt="" border="0" align="left" style="display: block;"></a></td>
+                                <td><a href="http://www.unl.edu/" target="_blank" style="text-decoration: none; color: #d00000;"><img src="https://www.unl.edu/images/email/4-1/41_01.gif" width="320" height="36" alt="" border="0" align="left" style="display: block;"></a></td>
                             </tr>
                         </table>
                     </td>
@@ -25,7 +25,7 @@
                     <td bgcolor="#FEFDFA">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td width="77" class="wdn-logo"><a href="http://www.unl.edu/" target="_blank"><img src="http://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
+                                <td width="77" class="wdn-logo"><a href="http://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
                                 <td valign="middle" class="wdn-logo-lockup" style="font-size:38px; line-height:1; font-family: 'Arial Narrow', Arial, sans-serif; text-transform:uppercase; white-space:nowrap"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
                             </tr>
                         </table>
@@ -79,7 +79,7 @@
                                         &copy; <?php print date("Y")?> University of Nebraska&ndash;Lincoln<br />
                                         <?php echo $context->newsroom->getRaw('footer_text'); ?>
                                      </span></td>
-                                <td width="111" valign="top" class="mobile-hide" style="padding-left:20px"><a href="http://www.unl.edu/" target="_blank" style="font-family: Verdana; color: #ffffff; font-size: 14px;"><img alt="University of Nebraska-Lincoln" src="http://www.unl.edu/images/email/4-1/wordmark.gif" width="111" height="43" style="display: block;" border="0"></a></td>
+                                <td width="111" valign="top" class="mobile-hide" style="padding-left:20px"><a href="http://www.unl.edu/" target="_blank" style="font-family: Verdana; color: #ffffff; font-size: 14px;"><img alt="University of Nebraska-Lincoln" src="https://www.unl.edu/images/email/4-1/wordmark.gif" width="111" height="43" style="display: block;" border="0"></a></td>
                             </tr>
                         </table>
                     </td>

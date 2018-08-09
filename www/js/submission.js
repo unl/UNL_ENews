@@ -297,7 +297,7 @@ define([
 		findEvents : function(selectedDate) {
 			var date = selectedDate.split(/-/);
 			// Grab the latest events for this date and populate select box
-			WDN.get('http://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
+			WDN.get('https://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
 				function(eventsXML){
 					$("#event").html('<option value="NewEvent">New Event</option>');
 					$(eventsXML).find('Event').each(function(){
