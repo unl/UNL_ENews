@@ -62,6 +62,7 @@ var ajaxUpload = function() {
 
 			var afterSubmit = function() {
 				if (!afterSubmitCalled) {
+					afterSubmitCalled = true;
 					ajaxUpload.removeEvent(document.getElementById(ajaxUpload.iframeID),'load', afterSubmit);
 					// Create the js in the iframe that accepts the POST-back of the form and pushes that value to a hidden input in the submission form
 					var cross = 'javascript:';
@@ -69,7 +70,6 @@ var ajaxUpload = function() {
 					cross += 'window.parent.WDN.jQuery("#fileID").change();';
 					cross += 'void(0);';
 					document.getElementById(ajaxUpload.iframeID).src = cross;
-					afterSubmitCalled = true;
 				}
 			}
 
