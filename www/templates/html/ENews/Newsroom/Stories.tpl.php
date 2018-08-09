@@ -26,7 +26,9 @@ if (count($context) == 0) {
 </script>
 
 <form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
-
+<?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+<input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+<input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
 <input type="hidden" name="_type" value="change_status" />
 
 <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>

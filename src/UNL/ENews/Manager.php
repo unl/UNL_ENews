@@ -41,6 +41,10 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 
     function handlePost()
     {
+        if (!UNL_ENews_Controller::validateCSRF()) {
+            throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+        }
+        
         if (isset($_POST['newsroom'])) {
             $this->options['newsroom'] = $_POST['newsroom'];
         } else {

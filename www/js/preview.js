@@ -97,6 +97,8 @@ define([
 			var sortable = theStory.closest('.newsColumn, .adArea');
 			//remove the db record for this story
 			$.post(window.location.toString(), {
+				"csrf_name": document.querySelector('input[name="csrf_name"]').value,
+				"csrf_value": document.querySelector('input[name="csrf_value"]').value,
 				"_type":"removestory",
 				"story_id":theStory.data("id")
 			}, function() {
@@ -132,6 +134,8 @@ define([
 			$.post(window.location.toString(), {
 				"_type":"setpresentation",
 				"story_id":theStory.data('id'),
+				"csrf_name": document.querySelector('input[name="csrf_name"]').value,
+				"csrf_value": document.querySelector('input[name="csrf_value"]').value,
 				"presentation_id":presentation_id
 			}, function() {
 				theStory.data('presentation_id', presentation_id);
@@ -409,6 +413,8 @@ define([
 			callback = callback || $.noop;
 			var numColumns = 3;
 			var postData = {
+				"csrf_name": document.querySelector('input[name="csrf_name"]').value,
+				"csrf_value": document.querySelector('input[name="csrf_value"]').value,
 				"_type":"addstory",
 				"story_id":{}
 			};

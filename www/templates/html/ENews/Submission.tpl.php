@@ -61,20 +61,26 @@ function getValue($object, $field) {
 
     <h3 class="highlighted wdn-brand"><span>1</span>Select News Type</h3>
     <form id="enewsStep1" name="enewsStep1" class="enews energetic <?php echo $showAdClass;?>" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit" method="post" enctype="multipart/form-data">
-    <fieldset id="wdn_process_step1">
+      <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+      <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+      <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
+      <fieldset id="wdn_process_step1">
         <legend>Select News Type</legend>
         <ol class="option_step">
             <li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
             <li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
             <li><a href="#" id="adAnnouncement">Is this an Advertisement?</a></li>
         </ol>
-    </fieldset>
+      </fieldset>
     </form>
 
 
     <h3 class="wdn-brand"><span>2</span>Enter Date Details for Event</h3>
     <form id="enewsStep2" name="enewsStep2" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
-    <fieldset id="wdn_process_step2" style="display:none;">
+      <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+      <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+      <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
+      <fieldset id="wdn_process_step2" style="display:none;">
         <legend><span>Enter Date Details for Event</span></legend>
             <ol>
                 <li>
@@ -90,7 +96,7 @@ function getValue($object, $field) {
                 </li>
             </ol>
             <p class="nextStep"><a href="#" id="next_step3">Continue</a></p>
-    </fieldset>
+      </fieldset>
     </form>
 
     <h3 class="wdn-brand"><span>3</span>Announcement Submission</h3>
@@ -98,6 +104,9 @@ function getValue($object, $field) {
     <div class="wdn-grid-set">
         <div class="wdn-col-one-half">
             <form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
+                <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+                <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+                <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                 <fieldset id="wdn_process_step3" style="display:none;">
                     <legend><span>News Announcement Submission</span></legend>
                     <?php //Story id if we are editing ?>

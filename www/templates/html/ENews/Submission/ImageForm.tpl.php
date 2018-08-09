@@ -1,5 +1,8 @@
 <form id="enewsImage" name="enewsImage" class="enews energetic" action="#" method="post" enctype="multipart/form-data" style="display:none;">
 <input type="hidden" name="_type" value="file" />
+<?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+<input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+<input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
 
 <fieldset>
     <ol style="padding:0;margin-top:0;">

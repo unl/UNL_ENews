@@ -187,6 +187,13 @@ class UNL_ENews_Controller
      */
     function handlePost()
     {
+        // All POSTs require a valid user session
+        self::authenticate();
+        
+        if (!self::validateCSRF()) {
+            throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+        }
+        
         $postHandler = new UNL_ENews_PostHandler($this->options, $_POST, $_FILES);
         return $postHandler->handle();
     }
@@ -370,5 +377,48 @@ class UNL_ENews_Controller
                 break;
         }
         return date('D. ', $time).$month.date(' d, Y', $time);
+    }
+
+    /**
+     * Wrapper function to help with CSRF tokens
+     *
+     * @return \Slim\Csrf\Guard
+     */
+    public static function getCSRFHelper()
+    {
+        static $csrf;
+
+        if (!$csrf) {
+            $null = null;
+            // Use persistent tokens due to AJAX functionality
+            $csrf = new \Slim\Csrf\Guard('csrf', $null, null, 200, 16, true);
+            $csrf->validateStorage();
+            $csrf->generateToken();
+        }
+
+        return $csrf;
+    }
+
+    /**
+     * Validate a POST request for CSRF
+     *
+     * @return bool
+     */
+    public static function validateCSRF()
+    {
+        $csrf = self::getCSRFHelper();
+
+        if (!isset($_POST[$csrf->getTokenNameKey()])) {
+            return false;
+        }
+
+        if (!isset($_POST[$csrf->getTokenValueKey()])) {
+            return false;
+        }
+
+        $name = $_POST[$csrf->getTokenNameKey()];
+        $value = $_POST[$csrf->getTokenValueKey()];
+
+        return $csrf->validateToken($name, $value);
     }
 }

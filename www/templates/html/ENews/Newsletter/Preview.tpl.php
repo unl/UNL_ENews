@@ -14,6 +14,9 @@
 
 <div id="newsletterDetails" class="wdn-grid-set">
    <form class="bp768-wdn-col-two-thirds" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
+       <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+       <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+       <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
        <ol style="margin-top:0">
            <li>
                <input type="hidden" name="_type" value="newsletter" />
@@ -43,18 +46,27 @@
            ?>
            <li>
                <form class="emailIndicator">
+                   <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+                   <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+                   <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="checkbox" id="email_<?php echo $email->id; ?>" <?php if ($checked) echo 'checked="checked"'; ?> />
                    <label for="email_<?php echo $email->id; ?>" >
                        <?php echo $email->email; ?>
                    </label>
                </form>
                <form action="<?php echo $context->getURL(); ?>" method="post" class="remove email">
+                   <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+                   <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+                   <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="removenewsletteremail" />
                    <input type="submit" value="Remove" />
                </form>
                <form action="<?php echo $context->getURL(); ?>" method="post" class="add email">
+                   <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+                   <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+                   <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="addnewsletteremail" />

@@ -1,22 +1,24 @@
 <h3>Email Addresses</h3>
 <ul id="emailList">
-    <?php
-    foreach ($context as $email) {
-        echo '<li><span class="email" title="'.$email->email.'">'.$email->email.'</span>';
-            if ($email->optout){
-                echo '<span class="details">Opt Out</span>';
-            };
+    <?php foreach ($context as $email): ?>
+        <li>
+            <span class="email" title="<?php echo $email->email ?>"><?php echo $email->email ?></span>
+            <?php if ($email->optout): ?>
+                <span class="details">Opt Out</span>
+            <?php endif ?>
+
+            <?php if ($email->newsletter_default): ?>
+                <span class="details">Default</span>
+            <?php endif ?>
             
-            if ($email->newsletter_default) {
-                echo '<span class="details">Default</span>';
-            }
-            
-            echo '<form action="'.UNL_ENews_Controller::getURL().'?view=newsroom" method="post">
-                <input type="hidden" name="email_id" value="'.$email->id.'" />
+            <form action="<?php echo UNL_ENews_Controller::getURL() ?>?view=newsroom" method="post">
+                <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+                <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
+                <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
+                <input type="hidden" name="email_id" value="<?php echo $email->id ?>" />
                 <input type="hidden" name="_type" value="removeemail" />
                 <input type="submit" value="X" />
             </form>
-    </li>';
-    }
-    ?>
+        </li>
+    <?php endforeach; ?>
 </ul>
