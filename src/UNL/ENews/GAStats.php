@@ -22,7 +22,7 @@ class UNL_ENews_GAStats extends UNL_ENews_LoginRequired
         $shortname = $newsroom->shortname;
 
         $filter = 'pagePath=~^'.str_replace('/', '\/', str_replace(array('http://', 'https://'), '', UNL_ENews_Controller::$url)).$shortname.'\/'.$newsletter_id.'\/';
-        $max_results = 20;
+        $max_results = 100;
 
         $profileId = 'ga:'.self::$ga_profile_id;
         $query = new Query($profileId);
