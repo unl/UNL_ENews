@@ -7,7 +7,7 @@ $savvy->loadScriptDeclaration("
             dateFormat: 'yy-mm-dd',
             buttonImageOnly: true
         });
-        require([\"" . UNL_ENews_Controller::getURL() . ">js/preview.js\"], function(preview){
+        require([\"" . UNL_ENews_Controller::getURL() . "js/preview.js\"], function(preview){
             preview.initialize();
         });
     });");
