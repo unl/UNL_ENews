@@ -10,7 +10,7 @@
     </form>
 <?php
 $savvy->loadScriptDeclaration("
-	WDN.jQuery('#sendPreview<?php echo $context->id; ?>').submit(function(event) {
+	WDN.jQuery('#sendPreview" . $context->id . "').submit(function(event) {
 		// Disable submit button
 		WDN.jQuery(this).children('input[type=submit]').attr('disabled', 'disabled');
 		var data = WDN.jQuery(this).serialize();
