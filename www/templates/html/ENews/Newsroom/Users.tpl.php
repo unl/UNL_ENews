@@ -1,5 +1,5 @@
-<h3>Users</h3>
-<ul id="userList">
+<h3 class="dcf-pt-4">Users</h3>
+<ul id="userList" class="dcf-list-inline">
 <?php foreach ($context as $user): ?>
     <li>
       <img class="profile_pic medium" src="https://directory.unl.edu/avatar/<?php echo $user->uid ?>?s=medium" alt="Profile photo of <?php echo $user->uid ?>" />
@@ -10,7 +10,7 @@
           <input type="hidden" name="newsroom_id" value="<?php echo $parent->context->id ?>" />
           <input type="hidden" name="_type" value="removeuser" />
           <input type="hidden" name="user_uid" value="<?php echo $user->uid ?>" />
-          <input type="submit" value="Remove" />
+          <input class="dcf-btn" type="submit" value="Remove" />
       </form>
       <span class="uid"><?php echo $user->uid ?></span>
     </li>

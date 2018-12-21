@@ -3,7 +3,7 @@
         <div class="archives">
             <h3>
                 <?php echo $context->newsroom->name; ?>
-                <span class="wdn-subhead">Recent Newsletters</span>
+                <span class="dcf-subhead">Recent Newsletters</span>
             </h3>
             <ul>
             <?php

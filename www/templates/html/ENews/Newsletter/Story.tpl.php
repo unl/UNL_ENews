@@ -3,18 +3,18 @@ UNL_ENews_Controller::$sitetitle = $context->newsroom->name;
 $newsletter_url = $context->newsletter->getURL();
 /* @var $context UNL_ENews_Newsletter_Story */
 ?>
-<section class="wdn-grid-set">
-    <article class="bp768-wdn-col-two-thirds">
+<section class="dcf-grid dcf-col-gap-vw">
+    <article class="dcf-col-100% dcf-col-67%-start@md">
         <?php echo $savvy->render($context->story); ?>
     </article>
-    <div class="bp768-wdn-col-one-third">
+    <div class="dcf-col-100% dcf-col-33%-end@md">
         <div class="sidebar top">
             <div class="inner_sidebar">
                 <h3>
                     <a href="<?php echo $context->newsletter->getURL(); ?>" title="Go to the newsletter index page">
                         <?php echo $context->newsroom->name; ?>
                     </a>
-                    <span class="wdn-subhead date">
+                    <span class="dcf-subhead date">
                         <?php echo UNL_ENews_Controller::formatDate($context->newsletter->release_date); ?>
                     </span>
                 </h3>

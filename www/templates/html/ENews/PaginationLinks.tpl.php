@@ -1,6 +1,6 @@
-<script type="text/javascript">
-WDN.loadCSS('/wdn/templates_3.0/css/content/pagination.css');
-</script>
+<?php
+$savvy->loadScriptDeclaration("WDN.loadCSS('/wdn/templates_3.0/css/content/pagination.css');");
+?>
 <ul class="wdn_pagination">
     <?php if ($context->offset != 0) :?>
     <li class="arrow"><a href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset-$context->limit))); ?>" title="Go to the previous page">&larr; prev</a></li>

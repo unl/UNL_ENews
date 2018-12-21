@@ -7,20 +7,20 @@
 <fieldset>
     <ol style="padding:0;margin-top:0;">
         <li>
-            <label for="image">Image<span class="helper">To be displayed with your announcement</span></label>
-            <input id="image" name="image" type="file" />
+            <label class="dcf-label" for="image">Image<span class="helper">To be displayed with your announcement</span></label>
+            <input class="dcf-input-file" id="image" name="image" type="file" />
         </li>
         <li>
-            <label for="file_description" id="img_description_label">Image Description
+            <label class="dcf-label" for="file_description" id="img_description_label">Image Description
             <?php
             $disabled = 'disabled="disabled"';
             if (!empty($originalImage)) {
-                $disabled = 'class="required"';
-                echo '<span class="required">*</span>';
+                $disabled = 'class="dcf-required"';
+                echo '<span class="dcf-required">*</span>';
             }
             ?>
             <span class="helper">To be used as a caption on the web view</span></label>
-            <input id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
+            <input class="dcf-input-text" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
         </li>
     </ol>
     

@@ -11,19 +11,16 @@ if (count($context) == 0) {
     echo '<div class="four_col">No Gnews is Good Gnews with Gary Gnu!</div>';
     return;
 }
-
-?>
-
-
-<script src="<?php echo UNL_ENews_Controller::getURL();?>/js/manager.js" type="text/javascript"></script>
-<script type="text/javascript">
-    WDN.loadJS("/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js");
-    WDN.loadCSS("/wdn/templates_3.1/css/content/forms.css");
+$savvy->loadScript(UNL_ENews_Controller::getURL() . "/js/manager.js");
+$savvy->loadScriptDeclaration("
+    WDN.loadJS(\"/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js\");
+    WDN.loadCSS(\"/wdn/templates_3.1/css/content/forms.css\");
 
     WDN.jQuery(document).ready(function() {
         manager.initialize();
     });
-</script>
+");
+?>
 
 <form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
@@ -38,8 +35,8 @@ if (count($context) == 0) {
 
 <div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="wdn-button checkall">Check All</a>
-        <a href="#" class="wdn-button uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn checkall">Check All</a>
+        <a href="#" class="dcf-btn uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
@@ -78,7 +75,7 @@ if (count($context) == 0) {
             <td class="mainCell">
             	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
             	<h5 class="wdn-brand"><?php echo $item->title; ?></h5>
-            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="wdn-button wdn-button-triad action edit">Edit</a>
+            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="dcf-btn wdn-button-triad action edit">Edit</a>
             	<span>Submitted by <?php echo $item->uid_created; ?>.
             	<?php if (!empty($item->uid_modified)) { ?>
             		Edited by <?php echo $item->uid_modified;?>.
@@ -93,8 +90,8 @@ if (count($context) == 0) {
 </table>
 <div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="wdn-button checkall">Check All</a>
-        <a href="#" class="wdn-button uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn checkall">Check All</a>
+        <a href="#" class="dcf-btn uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
