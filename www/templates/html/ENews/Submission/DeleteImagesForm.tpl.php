@@ -4,5 +4,5 @@
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
     <input type="hidden" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
     <input type="hidden" name="_type" value="deletestoryimages" />
-    <input type="submit" value="Delete Images" />
+    <input class="dcf-btn dcf-btn-secondary" type="submit" value="Delete Images" />
 </form>

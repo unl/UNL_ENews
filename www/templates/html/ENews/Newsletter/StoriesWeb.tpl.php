@@ -18,15 +18,15 @@
     }
     ?>
     <?php if ($displayColumn): ?>
-        <div class="wdn-grid-set">
-            <div class="bp768-wdn-col-one-half">
+        <div class="dcf-grid-full dcf-grid-halves@md dcf-col-gap-vw">
+            <div>
                 <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
                     'area' => $area,
                     'offset' => 2,
                     'web' => true
                 ))); ?>
             </div>
-            <div class="bp768-wdn-col-one-half">
+            <div>
                 <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
                     'area' => $area,
                     'offset' => 0,

@@ -2,10 +2,11 @@
 UNL_ENews_PostRunFilter::setReplacementData('pagetitle', $context->subject);
 UNL_ENews_PostRunFilter::setReplacementData('sitetitle', $context->newsroom->name);
 if (isset($_GET['_type']) && $_GET['_type'] == 'subscribed') : ?>
-<script type="text/javascript">
+<?php
+$savvy->loadScriptDeclaration("
 // This plugin is only needed for the demo.
-WDN.initializePlugin('notice');
-</script>
+WDN.initializePlugin('notice');");
+?>
 <div class="wdn_notice affirm">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>
@@ -20,8 +21,8 @@ WDN.initializePlugin('notice');
 <?php
 endif;
 ?>
-<section class="wdn-grid-set">
-    <div class="bp768-wdn-col-two-thirds">
+<section class="dcf-grid dcf-col-gap-vw">
+    <div class="dcf-col-100% dcf-col-67%-start@md">
         <div id="newsletterWeb">
             <?php echo $savvy->render($context->getStories(), 'ENews/Newsletter/StoriesWeb.tpl.php'); ?>
 
@@ -32,7 +33,7 @@ endif;
             </div>
         </div>
     </div>
-    <div class="bp768-wdn-col-one-third">
+    <div class="dcf-col-100% dcf-col-33%-end@md">
         <?php echo $savvy->render($context, 'ENews/Newsletter/SidebarNav.tpl.php'); ?>
     </div>
 </section>

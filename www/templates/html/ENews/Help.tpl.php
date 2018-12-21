@@ -1,5 +1,5 @@
-<section class="wdn-grid-set">
-    <div class="bp768-wdn-col-two-thirds">
+<section class="dcf-grid dcf-col-gap-vw dcf-row-gap-8">
+    <div class="dcf-col-100% dcf-col-67%-start@md">
         <ul class="wdn_tabs">
             <li><a href="#questions">Questions About Submissions</a></li>
             <li><a href="#styleguide">Style Guide</a></li>
@@ -141,7 +141,7 @@
             </div>
         </div>
     </div>
-    <div class="bp768-wdn-col-one-third">
+    <div class="dcf-col-100% dcf-col-33%-end@md">
         <div class="zenbox primary">
             <h3>Who To Contact</h3>
             <?php

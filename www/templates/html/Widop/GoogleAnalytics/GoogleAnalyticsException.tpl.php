@@ -8,11 +8,11 @@ if (false == headers_sent()
 
 UNL_ENews_PostRunFilter::setReplacementData('pagetitle', 'Sorry, an error occurred.');
 UNL_ENews_PostRunFilter::setReplacementData('sitetitle', 'Sorry, an error occurred');
-?>
 
-<script type="text/javascript">
+$savvy->loadScriptDeclaration("
 WDN.initializePlugin('notice');
-</script>
+");
+?>
 <div class="wdn_notice alert">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>

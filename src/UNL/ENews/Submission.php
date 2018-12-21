@@ -15,6 +15,11 @@ class UNL_ENews_Submission extends UNL_ENews_LoginRequired
         return new UNL_ENews_NewsroomList_AllowSubmissions();
     }
 
+    public static function getOpenNewsroomsStatic()
+    {
+        return new UNL_ENews_NewsroomList_AllowSubmissions();
+    }
+
     function __postConstruct()
     {
         if (isset($this->options['shortname'])) {

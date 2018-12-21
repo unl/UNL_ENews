@@ -1,10 +1,9 @@
 define([
-	'jquery',
-	'wdn',
-	'modernizr',
-	'require',
-	'socialmediashare',
-], function($, WDN, Modernizr, require, social) {
+  'jquery',
+  'wdn',
+  'require',
+  ['js/socialmediashare'],
+], function($, WDN, require, social) {
 
 	var plugin = {
 		utm_campaign : 'UNL_ENews',
@@ -222,7 +221,7 @@ define([
 				$('#wdn_process_step2').slideToggle();
 				$('#wdn_process_step3').slideToggle(function() {
 					$('#enewsForm h3').eq(1).removeClass('highlighted');
-					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType wdn-subhead">Event Announcement</span>');
+					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType dcf-subhead">Event Announcement</span>');
 				});
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 				return false;
@@ -260,7 +259,7 @@ define([
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType wdn-subhead">News Announcement</span>');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType dcf-subhead">News Announcement</span>');
 				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
 			});
 		},
@@ -275,7 +274,7 @@ define([
 			$('#enewsForm h3').eq(1).hide();
 			$('#wdn_process_step3').slideToggle(function() {
 				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType wdn-subhead">Advertisement</span>');
+				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType dcf-subhead">Advertisement</span>');
 				$('#enewsImage,#enewsSubmissionButton').show();
 			});
 			plugin.setupAd();

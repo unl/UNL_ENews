@@ -4,6 +4,9 @@ class UNL_ENews_OutputController extends Savvy_Turbo
 {
     protected $theme = 'MockU';
 
+    private $scriptDeclarations = array();
+    private $scripts = array();
+
     function __construct($options = array())
     {
         parent::__construct();
@@ -86,6 +89,112 @@ class UNL_ENews_OutputController extends Savvy_Turbo
             // Set expires header for 24 hours to improve speed caching.
             header('Expires: '.date('r', $expires));
         }
+    }
+
+    /**
+     *  Load a script tag declaration to be applied to page later
+     *
+     * @param string $content Content of script tag
+     * @param string $type Type of script tag
+     * @param boolean $appendToHead whether to append tag to head
+     *
+     * @return void
+     */
+    function loadScriptDeclaration($content, $type = '', $appendToHead = FALSE) {
+        $this->scriptDeclarations[] = new ScriptDeclaration($content, $type, $appendToHead);
+    }
+
+    /**
+     *  Apply loaded script tags to page
+     *
+     * @param object $page Page to apply loaded script tags
+     *
+     * @return void
+     */
+    function applyScriptDeclarations(&$page) {
+        foreach ($this->scriptDeclarations as $declaration){
+            if ($declaration instanceof ScriptDeclaration) {
+                $page->addScriptDeclaration($declaration->content(), $declaration->type() , $declaration->appendToHead());
+            }
+        }
+    }
+
+    /**
+     *  Load a script file to be applied to page later
+     *
+     * @param string $url URL of script
+     * @param string $type Type of script tag
+     * @param boolean $appendToHead whether to append tag to head
+     *
+     * @return void
+     */
+    function loadScript($url, $type = '', $appendToHead = FALSE) {
+        $this->scripts[] = new Script($url, $type, $appendToHead);
+    }
+
+    /**
+     *  Apply loaded scripts to page
+     *
+     * @param object $page Page to apply loaded scripts
+     *
+     * @return void
+     */
+    function applyScripts(&$page) {
+        foreach ($this->scripts as $script){
+            if ($script instanceof Script) {
+                $page->addScript($script->url(), $script->type() , $script->appendToHead());
+            }
+        }
+    }
+}
+
+class ScriptDeclaration {
+    private $content;
+    private $type;
+    private $appendToHead;
+
+    public function __construct($content, $type = '', $appendToHead = FALSE)
+    {
+        $this->content = $content;
+        $this->type = $type;
+        $this->appendToHead = ($appendToHead === TRUE);
+    }
+
+    public function content() {
+        return $this->content;
+    }
+
+    public function type() {
+        return $this->type;
+    }
+
+    public function appendToHead() {
+        return $this->appendToHead;
+    }
+}
+
+class Script {
+    private $url;
+    private $type;
+    private $appendToHead;
+
+    public function __construct($url, $type = '', $appendToHead = FALSE)
+    {
+        $this->url = $url;
+        $this->type = $type;
+        $this->appendToHead = ($appendToHead === TRUE);
+    }
+
+    public function url() {
+        return $this->url;
+    }
+
+    public function type() {
+        return $this->type;
+    }
+
+    public function appendToHead() {
+        return $this->appendToHead;
     }
 }
 
