@@ -32,7 +32,7 @@ $newsletter_url = $context->newsletter->getURL();
                     $newsletters = $context->story->getNewsletters();
                     $published = new UNL_ENews_NewsletterList_PublishedFilter($newsletters->getRawObject());
                     // No sense in showing just the current newsletter
-                    if (count($published)) {
+                    if (is_array($published) && count($published)) {
                         echo '
                         <h3>Newsletters including this story</h3>
                         <ul>';
