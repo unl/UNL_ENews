@@ -1,9 +1,8 @@
 define([
 	'jquery',
 	'wdn',
-	'modernizr',
 	'require',
-], function($, WDN, Modernizr, require) {
+], function($, WDN, require) {
 
 	var presentationCache = {};
 	var loadStoryContent = function(element, doSetupTools) {
