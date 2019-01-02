@@ -11,7 +11,7 @@ if (file_exists($wdnIncludePath . '/wdn/templates_5.0')) {
 }
 
 $page->doctitle = '<title>' . $savvy->render($context, 'ENews/PageTitle.tpl.php') . ' | Announce | University of Nebraska–Lincoln</title>';
-$page->titlegraphic = 'UNL Announce';
+$page->titlegraphic = '<a class="dcf-txt-h5" href="/">Announce</a>';
 
 $page->head .= '
     <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css" />
