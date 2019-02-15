@@ -13,7 +13,7 @@ $savvy->loadScriptDeclaration("
     });");
 ?>
 
-<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw">
+<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4">
    <form class="dcf-col-100% dcf-col-67%-start@md" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
        <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
        <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
@@ -22,7 +22,7 @@ $savvy->loadScriptDeclaration("
            <li>
                <input type="hidden" name="_type" value="newsletter" />
                <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-               <label class="dcf-label" for="emailSubject"><span class="dcf-required">*</span> Email Subject <span class="helper">(Include story keywords!)</span></label>
+               <label class="dcf-label" for="emailSubject">Email Subject <span class="helper">(Include story keywords!)</span><small class="dcf-required">Required</small></label>
                <input class="dcf-input-text" name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
            </li>
            <li>
@@ -35,7 +35,7 @@ $savvy->loadScriptDeclaration("
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
    <div class="email_addresses dcf-col-100% dcf-col-33%-end@md">
-       <h5>Distribute this newsletter to:</h5>
+       <h5 class="dcf-txt-base">Distribute this newsletter to:</h5>
        <ul>
            <?php
            $existing_emails = $context->newsletter->getEmails()->getArrayCopy();

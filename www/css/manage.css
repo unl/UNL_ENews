@@ -8,7 +8,6 @@ form#enewsManage .btnsubmit {
 /* Check/Uncheck/Action 
 ****************************/
 .storyAction {
-    background:#C0A878;
     padding:6px 5px 10px;
     position:relative;
     z-index: 1;

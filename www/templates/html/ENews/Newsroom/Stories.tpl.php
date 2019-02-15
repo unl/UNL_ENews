@@ -33,10 +33,10 @@ $savvy->loadScriptDeclaration("
 <input type="hidden" name="status" value="<?php echo $status; ?>" />
 <?php endif ?>
 
-<div class="storyAction">
+<div class="storyAction unl-bg-dark-gray">
     <div class="storyButtonAction">
-        <a href="#" class="dcf-btn checkall">Check All</a>
-        <a href="#" class="dcf-btn uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
+        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
@@ -75,7 +75,7 @@ $savvy->loadScriptDeclaration("
             <td class="mainCell">
             	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
             	<h5 class="wdn-brand"><?php echo $item->title; ?></h5>
-            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="dcf-btn wdn-button-triad action edit">Edit</a>
+            	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="dcf-btn dcf-btn-primary action edit">Edit</a>
             	<span>Submitted by <?php echo $item->uid_created; ?>.
             	<?php if (!empty($item->uid_modified)) { ?>
             		Edited by <?php echo $item->uid_modified;?>.
@@ -88,10 +88,10 @@ $savvy->loadScriptDeclaration("
     <?php endforeach; ?>
     </tbody>
 </table>
-<div class="storyAction">
+<div class="storyAction unl-bg-dark-gray">
     <div class="storyButtonAction">
-        <a href="#" class="dcf-btn checkall">Check All</a>
-        <a href="#" class="dcf-btn uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
+        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
     </div>
     <fieldset class="storyFieldsetAction">
         <legend>Action</legend>
