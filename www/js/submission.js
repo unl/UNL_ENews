@@ -186,7 +186,7 @@ define([
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
 				if (validationErrorMessage = plugin.submitStory(true, false)) {
-					$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
+					$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
 					return false;
 				}
 			});
@@ -502,7 +502,7 @@ define([
 		submitStory : function(validate, ajax) {
 			if (validate) {
 				var message = '';
-				$('input.required,textarea.required').each(function() {
+				$('input.dcf-required, textarea.dcf-required').each(function() {
 					if ($(this).attr('disabled') !== undefined) {
 						// Field is disabled, user couldn't enter text
 						return;
@@ -535,7 +535,7 @@ define([
 						$('#deleteImages input[name=storyid]').val(data);
 					},
 					function (data, status, e) {
-						$('#maincontent').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
+						$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
 						return e;
 					}
 				);
