@@ -24,14 +24,13 @@
 #userList li:hover form {display:block;}
 #emailList {
     list-style:none;
-    background:#F1EDE0;
     padding:10px;
     margin:0;
 }
 #emailList li {
     position: relative;
     padding:6px 5px;
-    border-bottom:1px solid #E8D6C1;
+    border-bottom:1px solid #e3e3e2;
 }
 #emailList li span.details {
     font-size:0.8em;
@@ -57,11 +56,9 @@
     clear:both;
 }
 .addData {
-    background:#E3DBC2;
     padding:10px;
 }
 .addData input[type='text']{
-    border:1px solid #E8D6C1;
     padding:3px;
     width:50%;
     font-size:1.06em;
@@ -72,7 +69,4 @@
     width: 100%;
     padding-left:25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
-}
-.addData span.helper {
-    display: block;
 }

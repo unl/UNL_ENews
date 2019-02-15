@@ -57,8 +57,8 @@ form fieldset.storyFieldsetAction select {
 
 .functionTable thead th, .functionTable tbody td {
     padding: 5px;
-    border-left: 1px solid #DDD;
-    border-right: 1px solid #E8D6C1;
+    border-left: 1px solid #e3e3e2;
+    border-right: 1px solid #e3e3e2;
 }
 .storylisting.functionTable tbody tr td:first-of-type {
     border-right:0;
@@ -85,9 +85,6 @@ form fieldset.storyFieldsetAction select {
 }
 .functionTable tbody td.mainCell h5 {
     margin: 0 0 .5em;
-}
-.functionTable tbody tr td.mainCell h5 {
-    border-bottom:1px solid #cdc4bb;
 }
 .functionTable tbody td.mainCell form a, .functionTable tbody td.mainCell span {
     font-size:0.8em;
