@@ -70,7 +70,8 @@ class UNL_ENews_File extends UNL_ENews_Record
     public static function validFileName($filename)
     {
         $allowedExtensions = array("gif","jpeg","jpg","png");
-        return in_array(end(explode(".", strtolower($filename))), $allowedExtensions);
+        $filename = explode(".", strtolower($filename));
+        return in_array(end($filename), $allowedExtensions);
     }
     
     public function delete()
