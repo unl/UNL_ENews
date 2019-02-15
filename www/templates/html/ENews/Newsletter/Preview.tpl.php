@@ -36,7 +36,7 @@ $savvy->loadScriptDeclaration("
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
    <div class="email_addresses dcf-col-100% dcf-col-33%-end@md">
        <h5 class="dcf-txt-base">Distribute this newsletter to:</h5>
-       <ul>
+       <ul class="dcf-list-bare">
            <?php
            $existing_emails = $context->newsletter->getEmails()->getArrayCopy();
            foreach ($context->newsletter->newsroom->getEmails() as $email):

@@ -58,9 +58,6 @@ img.spacer {display:none;}
 #newsletterDetails form.email {
     display:none;
 }
-#newsletterDetails fieldset ol, #newsletterDetails .email_addresses ul {
-    padding:0;
-}
 #newsletterDetails fieldset ol li {
     list-style:none;
     padding:0px 25px 14px 0px;
@@ -73,16 +70,6 @@ img.spacer {display:none;}
     cursor:default;
 }
 #newsletterDetails form + a.action {display:none;}
-#newsletterDetails .email_addresses {
-
-}
-#newsletterDetails .email_addresses h5 {
-    cursor:pointer;
-}
-#newsletterDetails .email_addresses ul li {
-    list-style:none;
-    display:inline-block;
-}
 
 /* 
 
