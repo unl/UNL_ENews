@@ -73,7 +73,7 @@ class UNL_ENews_File extends UNL_ENews_Record
         $filename = explode(".", strtolower($filename));
         return in_array(end($filename), $allowedExtensions);
     }
-    
+
     public function delete()
     {
       //Delete the cache file for this if it exists

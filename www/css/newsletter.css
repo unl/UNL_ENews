@@ -249,12 +249,11 @@ Newsletter Email Preview (for building the newsletter)
     display:none;
 }
 #drag_story_list .dragItem h4 {
-    font-size: 1.5rem;
+    font-size: .9em;
     margin:3px 0;
     float:left;
     display:inline-block;
     max-width:244px;
-    padding-left:4px;
 }
 
 .dragItem span.requestedDates  {
@@ -266,7 +265,7 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
     border-radius:3px;
     display:inline-block;
-    max-width:70px;
+    max-width:80px;
     line-height:0.9em;
 }
 .dragItem:hover span.requestedDates {

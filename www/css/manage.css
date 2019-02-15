@@ -9,9 +9,14 @@ form#enewsManage .btnsubmit {
 ****************************/
 .storyAction {
     background:#C0A878;
-    border-bottom:2px solid #D8C090;
     padding:6px 5px 10px;
     position:relative;
+    z-index: 1;
+}
+.storyAction::after {
+    content: '';
+    clear: both;
+    display: block;
 }
 a.checkall,
 a.uncheckall {
