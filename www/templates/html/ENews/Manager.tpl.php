@@ -19,7 +19,7 @@ if ($context->actionable) {
     }
     ?>
     <li <?php echo $class; ?>><a href="<?php echo $context->newsroom->getURL();?>/manage?status=<?php echo $type; ?>"><?php echo ucfirst($type); ?>
-        <sup><?php echo count($context->newsroom->getStories($type)); ?></sup></a></li>
+        <small class="dcf-badge dcf-badge-pill"><?php echo count($context->newsroom->getStories($type)); ?></small></a></li>
     <?php endforeach; ?>
 </ul>
 <?php

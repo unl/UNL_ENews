@@ -1,10 +1,10 @@
 <h3>Email Addresses</h3>
-<ul id="emailList">
+<ul id="emailList" class="unl-bg-lightest-gray">
     <?php foreach ($context as $email): ?>
         <li>
             <span class="email" title="<?php echo $email->email ?>"><?php echo $email->email ?></span>
             <?php if ($email->optout): ?>
-                <span class="details">Opt Out</span>
+                <span class="details">Can Unsubscribe</span>
             <?php endif ?>
 
             <?php if ($email->newsletter_default): ?>

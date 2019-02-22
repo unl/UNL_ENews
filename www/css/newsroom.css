@@ -1,67 +1,64 @@
-#maincontent #userList {
+#userList {
     list-style:none;
     margin:0;
     background:#F1EDE0;
     padding:10px;
 }
-#maincontent #userList li {
+#userList li {
     display:inline-block;
     text-align:center;
     padding: 0 10px 10px 0;
     position:relative;
 }
-#maincontent #userList li .uid {
+#userList li .uid {
     font-size:0.8em;
     display:block;  
 }
-#maincontent #userList li img {display:block;margin-left:auto;margin-right:auto;}
-#maincontent #userList li form {
+#userList li img {display:block;margin-left:auto;margin-right:auto;}
+#userList li form {
     position:absolute;
     top:6px;
     right:7px;
     display:none;
 }
-#maincontent #userList li:hover form {display:block;}
-#maincontent #emailList {
+#userList li:hover form {display:block;}
+#emailList {
     list-style:none;
-    background:#F1EDE0;
     padding:10px;
     margin:0;
 }
-#maincontent #emailList li {
+#emailList li {
     position: relative;
     padding:6px 5px;
-    border-bottom:1px solid #E8D6C1;
+    border-bottom:1px solid #e3e3e2;
 }
-#maincontent #emailList li span.details {
-    font-size:0.8em;
+#emailList li span.details {
+    font-size:0.7em;
     background:#0c217a;
     margin-left: 5px;
     color:#fff;
-    font-weight:bold;
     padding:2px 5px;
     border-radius:3px;
     opacity:0.5;
+    white-space: nowrap;
 }
-#maincontent #emailList li form {
+#emailList li form {
     position: absolute;
     top: 0;
     right: 0;
     padding:0;
     display:none;
 }
-#maincontent #emailList li:hover form {
+#emailList li:hover form {
     display:inline;
 }
-#maincontent #emailList:after {
+#emailList:after {
     clear:both;
 }
 .addData {
-    background:#E3DBC2;
     padding:10px;
 }
 .addData input[type='text']{
-    border:1px solid #E8D6C1;
     padding:3px;
     width:50%;
     font-size:1.06em;
@@ -72,7 +69,4 @@
     width: 100%;
     padding-left:25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
-}
-.addData span.helper {
-    display: block;
 }

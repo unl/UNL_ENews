@@ -288,7 +288,7 @@ class UNL_ENews_Controller
         $string = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/i", "$1http://$2",$string);
         
         // make all emails links (not done with HTML Purifier)
-        $string = preg_replace("/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}|[0-9]{1,4})(\]?))/i","<a href=\"mailto:$1\">$1</a>",$string);
+        $string = preg_replace("/([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})/i", "<a href=\"mailto:$1\">$1</a>", $string);
 
         return $string;
     }

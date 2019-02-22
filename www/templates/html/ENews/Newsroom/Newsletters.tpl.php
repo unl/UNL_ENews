@@ -20,7 +20,7 @@ $savvy->loadScriptDeclaration("
         ?>
         <tr>
             <td class="mainCell" style="min-width:600px;"><h5><?php echo $newsletter->subject; ?> <span class="caption">(<?php echo date('D. M d, Y', $newsletterDate); ?>)</span></h5>
-                <a href="<?php echo $newsletter->getEditURL(); ?>" class="dcf-btn action edit">Edit</a>
+                <a href="<?php echo $newsletter->getEditURL(); ?>" class="dcf-btn dcf-btn-secondary action edit">Edit</a>
                 <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
                 <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
@@ -28,7 +28,7 @@ $savvy->loadScriptDeclaration("
                     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                     <input type="hidden" name="_type" value="deletenewsletter" />
                     <input type="hidden" name="newsletter_id" value="<?php echo $newsletter->id; ?>" />
-                    <a href="#" onclick="if (confirm('Are you sure?')) document.getElementById('deletenewsletter_<?php echo $newsletter->id; ?>').submit();">Delete</a>
+                    <a href="#" class="dcf-btn dcf-btn-tertiary" onclick="if (confirm('Are you sure?')) document.getElementById('deletenewsletter_<?php echo $newsletter->id; ?>').submit();">Delete</a>
                 </form>
 
             </td>
@@ -41,7 +41,7 @@ $savvy->loadScriptDeclaration("
                     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                     <input type="hidden" name="newsletter_id" value="<?php echo $newsletter->id; ?>" />
-                    <a class="dcf-btn wdn-button-complement action send" href="#" onclick="if (confirm('This newsletter is scheduled for distribution on <?php echo date('M jS', $newsletterDate); ?>.\n\nAre you sure you want to send it now?')) document.getElementById('sendnewsletter_<?php echo $newsletter->id; ?>').submit();">Distribute Now</a>
+                    <a class="dcf-btn dcf-btn-primary action send" href="#" onclick="if (confirm('This newsletter is scheduled for distribution on <?php echo date('M jS', $newsletterDate); ?>.\n\nAre you sure you want to send it now?')) document.getElementById('sendnewsletter_<?php echo $newsletter->id; ?>').submit();">Distribute Now</a>
                 </form>
                 <?php endif; ?>
             </td>

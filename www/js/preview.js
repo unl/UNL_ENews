@@ -54,9 +54,6 @@ define([
 			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
 				plugin.saveDetails.newsletter();
 			});
-			$('.email_addresses h5').click(function(){
-				$('.email_addresses ul').slideToggle();
-			});
 			$('.emailIndicator input[type="checkbox"]').change(function(){
 				plugin.saveDetails.emails(this);
 			});
