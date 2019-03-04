@@ -12,6 +12,11 @@ $savvy->loadScriptDeclaration("
             preview.initialize();
         });
     });");
+
+$savvy->loadScriptDeclaration("
+// This plugin is only needed for the demo.
+WDN.initializePlugin('notice');");
+
 ?>
 
 <div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4 unl-bg-lighter-gray">
