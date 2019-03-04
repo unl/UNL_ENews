@@ -25,7 +25,7 @@ WDN.initializePlugin('notice');
             <h4>Thanks for your submission!</h4>
             <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>
             <?php if (!empty($context->options['newsroom'])): ?>
-            <h4>Have more news you'd like to share?</h4>
+            <h4 class="dcf-mt-4">Have more news you'd like to share?</h4>
             <p><a href="<?php echo UNL_ENews_Newsroom::getById($context->options['newsroom'])->getSubmitURL(); ?>">Submit another story&hellip;</a></p>
             <?php endif; ?>
         <?php endif;?>

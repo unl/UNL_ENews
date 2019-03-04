@@ -142,6 +142,7 @@ class UNL_ENews_PostHandler
             }
         }
 
+
         self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&id='.(int)$story->id.'&newsroom='.$primary_newsroom_id);
     }
 
