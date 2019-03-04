@@ -11,7 +11,8 @@ if (count($context) == 0) {
     echo '<div class="four_col">No Gnews is Good Gnews with Gary Gnu!</div>';
     return;
 }
-$savvy->loadScript(UNL_ENews_Controller::getURL() . "/js/manager.js");
+$cacheBust = uniqid();
+$savvy->loadScript(UNL_ENews_Controller::getURL() . "/js/manager.js?ver=" . $cacheBust);
 $savvy->loadScriptDeclaration("
     WDN.loadJS(\"/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js\");
     WDN.loadCSS(\"/wdn/templates_3.1/css/content/forms.css\");

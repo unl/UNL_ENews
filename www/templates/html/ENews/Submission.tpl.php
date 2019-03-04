@@ -47,13 +47,14 @@ if (!empty($id)) {
       break;
   }
 }
+$cacheBust = uniqid();
 $savvy->loadScriptDeclaration('
-    require(["'. UNL_ENews_Controller::getURL() . 'js/purify.js", "' . UNL_ENews_Controller::getURL() . 'js/submission.js"],
+    require(["'. UNL_ENews_Controller::getURL() . 'js/purify.js?ver=' . $cacheBust . '", "' . UNL_ENews_Controller::getURL() . 'js/submission.js?ver=' . $cacheBust . '"],
         function(DOMPurify, submission){
             ' . $submissionEditType . '
             submission.initialize();
     });
-    WDN.loadCSS("' . UNL_ENews_Controller::getURL(). 'css/imgareaselect-default.css");
+    WDN.loadCSS("' . UNL_ENews_Controller::getURL(). 'css/imgareaselect-default.css?ver=' . $cacheBust . '");
 ');
 
 ?>

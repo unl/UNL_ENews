@@ -1,4 +1,5 @@
 <?php
+$cacheBust = uniqid();
 $savvy->loadScriptDeclaration("
     require(['jquery', 'jqueryui'], function($) {
         $(\"#releaseDate\").datepicker({
@@ -7,7 +8,7 @@ $savvy->loadScriptDeclaration("
             dateFormat: 'yy-mm-dd',
             buttonImageOnly: true
         });
-        require([\"" . UNL_ENews_Controller::getURL() . "js/preview.js\"], function(preview){
+        require([\"" . UNL_ENews_Controller::getURL() . "js/preview.js?ver=" . $cacheBust . "\"], function(preview){
             preview.initialize();
         });
     });");
