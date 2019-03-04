@@ -1,6 +1,6 @@
 <?php
 if (isset($context->options['id']) && $story = UNL_ENews_Story::getById($context->options['id'])) {
-    echo '<div class="grid7">';
+    echo '<div style="min-height: 500px">';
     echo '<h3>Saved Story Summary:</h3>';
     echo $savvy->render($story);
     echo '</div>';

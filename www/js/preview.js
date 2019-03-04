@@ -164,7 +164,7 @@ define([
 					});
 					dialog.find('fieldset').append(selector);
 					dialog.dialog({
-						height: 150,
+						height: 200,
 						width: 350,
 						modal: true,
 						buttons: {
@@ -202,7 +202,7 @@ define([
 		},
 
 		setupToolsHover : function(el){
-			el = el || $('#maincontent .story');
+			el = el || $('#dcf-main .story');
 			var hoverConfig = {
 				over : function() { 
 					$(this).children('.storyTools').fadeIn(800);

@@ -135,7 +135,7 @@ form#enewsImage {
     width:100px;
     min-height:90px;
 }
-#maincontent #imageControls {
+#dcf-main #imageControls {
     display:none;
     list-style:none;
     padding:0;
@@ -165,7 +165,7 @@ form#enewsImage {
 #img_description_label {
     position: relative;
 }
-#maincontent .enews fieldset ol #img_description_label .required {
+#dcf-main .enews fieldset ol #img_description_label .required {
     left: -44px;
 }
 #cropMessage {
