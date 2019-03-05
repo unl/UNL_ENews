@@ -23,6 +23,31 @@ $savvy->loadScriptDeclaration("
 ");
 ?>
 
+
+<?php
+if (!empty($context->options['story_id'])) {
+$savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
+?>
+<div class="wdn_notice affirm dcf-relative">
+  <div class="close">
+    <a href="#" title="Close this notice">Close this notice</a>
+  </div>
+  <div class="message">
+    <?php if (!empty($context->options['newsroom'])): ?>
+    <h4>Thanks for your submission!</h4>
+    <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>
+
+    <h4 class="dcf-mt-4">Have more news you'd like to share?</h4>
+    <p><a href="<?php echo UNL_ENews_Newsroom::getById($context->options['newsroom'])->getSubmitURL(); ?>">Submit another story&hellip;</a></p>
+
+    <?php else: ?>
+    <h4>Submission Saved!</h4>
+    <p>Your article has been saved.</p>
+    <?php endif; ?>
+  </div>
+</div>
+<?php } //end if ?>
+
 <form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
