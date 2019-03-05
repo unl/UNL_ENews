@@ -6,7 +6,7 @@ $savvy->loadScriptDeclaration("
 WDN.initializePlugin('notice');
 ");
 ?>
-<div class="wdn_notice affirm dcf-fixed dcf-z-2">
+<div class="wdn_notice affirm">
     <div class="close">
         <a href="#" title="Close this notice">Close this notice</a>
     </div>

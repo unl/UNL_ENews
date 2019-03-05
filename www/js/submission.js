@@ -186,7 +186,7 @@ define([
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
 				if (validationErrorMessage = plugin.submitStory(true, false)) {
-					$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
+					$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate dcf-fixed dcf-z-2 dcf-w-100%" style="top: 0"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
 					return false;
 				}
 			});
