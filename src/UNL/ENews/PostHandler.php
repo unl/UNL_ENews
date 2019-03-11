@@ -147,7 +147,7 @@ class UNL_ENews_PostHandler
             self::redirect(UNL_ENews_Controller::getURL().'?view=mynews&story_id='.(int)$story->id.'&newsroom='.$primary_newsroom_id);
         } else {
             // redirect to thanks page
-            self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&id='.(int)$story->id.'&newsroom='.$primary_newsroom_id);
+            self::redirect(UNL_ENews_Controller::getURL().'?view=thanks&_type='.$this->post['_type'].'&story_id='.(int)$story->id.'&newsroom='.$primary_newsroom_id);
         }
     }
 

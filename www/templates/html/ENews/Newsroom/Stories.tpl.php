@@ -26,7 +26,7 @@ $savvy->loadScriptDeclaration("
 
 <?php
 if (!empty($context->options['story_id'])) {
-$savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
+  $savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
 ?>
 <div class="wdn_notice affirm dcf-relative">
   <div class="close">
@@ -46,6 +46,7 @@ $savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
     <?php endif; ?>
   </div>
 </div>
+<?php echo $savvy->render($context, 'ENews/Confirmation/Submission.tpl.php'); ?>
 <?php } //end if ?>
 
 <form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
