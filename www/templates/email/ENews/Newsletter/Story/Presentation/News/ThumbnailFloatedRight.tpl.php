@@ -20,11 +20,11 @@
                       <td class="unltoday-body" align="top" style="font-size:16px;line-height:25px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
                           <?php if ($file = $context->getThumbnail()) : ?>
 
-                            <table width="45%" border="0" cellspacing="0" cellpadding="0" align="right" style="width: 45%">
+                            <table width="40%" border="0" cellspacing="0" cellpadding="0" align="right" style="width:40%; max-width:40%; margin-left: 10px">
                               <tbody>
                               <tr>
-                                <td valign="top" style="padding-left: 10px">
-                                  <img src="<?php echo $file->getURL(); ?>"/>
+                                <td valign="top">
+                                  <img width="100%" src="<?php echo $file->getURL(); ?>" style="width: 100%" />
                                 </td>
                               </tr>
                               </tbody>
