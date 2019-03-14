@@ -18,30 +18,29 @@
                     </tr>
                     <tr>
                       <td class="unltoday-body" align="top" style="font-size:16px;line-height:25px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                          <tbody>
-                          <tr>
-                            <td valign="top">
-                              <p>
-                                  <?php
-                                  echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
-                                  if (!empty($context->full_article)) {
-                                      echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
-                                  }
-                                  ?>
-                                  <?php if (isset($context->ics)): ?>
-                                    <a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
-                                  <?php endif; ?>
-                              </p>
-                            </td>
-                            <?php if ($file = $context->getThumbnail()) : ?>
-                              <td valign="top" width="30%" style="padding-left: 10px">
-                                <img src="<?php echo $file->getURL(); ?>"/>
-                              </td>
+                          <?php if ($file = $context->getThumbnail()) : ?>
+
+                            <table width="45%" border="0" cellspacing="0" cellpadding="0" align="right" style="width: 45%">
+                              <tbody>
+                              <tr>
+                                <td valign="top" style="padding-left: 10px">
+                                  <img src="<?php echo $file->getURL(); ?>"/>
+                                </td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          <?php endif; ?>
+                        <p>
+                            <?php
+                            echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
+                            if (!empty($context->full_article)) {
+                                echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
+                            }
+                            ?>
+                            <?php if (isset($context->ics)): ?>
+                              <a href="<?php echo $context->ics ?>" class="icsformat">Add to my calendar (.ics)</a>
                             <?php endif; ?>
-                          </tr>
-                          </tbody>
-                        </table>
+                        </p>
 
                           <?php if (($context->website)): ?>
                             <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#E7E2D6" width="100%">
