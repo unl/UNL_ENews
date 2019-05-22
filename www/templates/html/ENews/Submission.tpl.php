@@ -61,62 +61,13 @@ $savvy->loadScriptDeclaration('
 
 <div id="enewsForm">
 
-    <?php
-    $showAdClass = '';
-    if (UNL_ENews_Controller::getUser()->hasNewsroomPermission()) {
-        $showAdClass = 'showAd';
-    }
-    ?>
-
-    <h3 class="highlighted wdn-brand"><span>1</span>Select News Type</h3>
-    <form id="enewsStep1" name="enewsStep1" class="enews energetic <?php echo $showAdClass;?>" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit" method="post" enctype="multipart/form-data">
-      <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
-      <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
-      <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
-      <fieldset id="wdn_process_step1">
-        <legend>Select News Type</legend>
-        <ol class="option_step">
-            <li><a href="#" id="newsAnnouncement">Is this a News announcement?</a></li>
-            <li><a href="#" id="eventAnnouncement">Is this an Event announcement?</a></li>
-            <li><a href="#" id="adAnnouncement">Is this an Advertisement?</a></li>
-        </ol>
-      </fieldset>
-    </form>
-
-
-    <h3 class="wdn-brand"><span>2</span>Enter Date Details for Event</h3>
-    <form id="enewsStep2" name="enewsStep2" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
-      <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
-      <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
-      <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
-      <fieldset id="wdn_process_step2" style="display:none;">
-        <legend><span>Enter Date Details for Event</span></legend>
-            <ol>
-                <li>
-                    <label for="date"><span class="required">*</span>Date of Event</label>
-                    <input class="datepicker" id="date" name="date" type="text" value="<?php echo getValue($context, 'request_publish_end'); ?>" />
-                </li>
-                <li>
-                    <label for="event"><span class="required">*</span>Which Event?<span class="helper">These are your events, as found at http://events.unl.edu/</span></label>
-                    <select id="event">
-                        <option value="NewEvent">New Event</option>
-
-                    </select>
-                </li>
-            </ol>
-            <p class="nextStep"><a href="#" id="next_step3">Continue</a></p>
-      </fieldset>
-    </form>
-
-    <h3 class="wdn-brand"><span>3</span>Announcement Submission</h3>
-
-    <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw dcf-pt-8">
+    <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw">
         <div>
-            <form id="enewsSubmission" name="enewsSubmission" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
+            <form id="enewsSubmission" name="enewsSubmission" class="dcf-form enews energetic" action="#" method="post" enctype="multipart/form-data">
                 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                 <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
-                <fieldset id="wdn_process_step3" style="display:none;">
+                <fieldset>
                     <legend class="dcf-legend"><span>News Announcement Submission</span></legend>
                     <?php //Story id if we are editing ?>
                     <input type="hidden" id="storyid" name="storyid" value="<?php echo getValue($context, 'id'); ?>" />
@@ -153,11 +104,11 @@ $savvy->loadScriptDeclaration('
                     <ol>
                         <li>
                           <label class="dcf-label" for="title"><span class="dcf-required">*</span> Headline or Title</label>
-                          <input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="dcf-input-text dcf-required" />
+                          <input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="dcf-input-text required" />
                         </li>
                         <li>
                           <label class="dcf-label" for="description"><span class="dcf-required">*</span> Summary<span class="helper">You have <strong>300</strong> characters remaining.</span></label>
-                          <textarea id="description" name="description" cols="60" rows="5" class="dcf-input-text dcf-required"><?php echo getValue($context, 'description'); ?></textarea>
+                          <textarea id="description" name="description" cols="60" rows="5" class="dcf-input-text required"><?php echo getValue($context, 'description'); ?></textarea>
                         </li>
                         <li>
                           <label class="dcf-label" for="full_article">Full Article<span class="helper">For news releases, departmental news feeds, etc...</span></label>
@@ -165,11 +116,11 @@ $savvy->loadScriptDeclaration('
                         </li>
                         <li>
                           <label class="dcf-label" for="request_publish_start"><span class="dcf-required">*</span> What date would like this to run?</label>
-                          <input class="datepicker dcf-required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" />
+                          <input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" />
                         </li>
                         <li>
                           <label class="dcf-label" for="request_publish_end"><span class="dcf-required">*</span> Last date this could run</label>
-                          <input class="datepicker dcf-required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" />
+                          <input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" />
                         </li>
                         <li>
                           <label class="dcf-label" for="website">Supporting Website</label>
@@ -177,7 +128,7 @@ $savvy->loadScriptDeclaration('
                         </li>
                         <li>
                           <label class="dcf-label" for="sponsor"><span class="dcf-required">*</span> Sponsoring Unit</label>
-                          <input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="dcf-input-text dcf-required" />
+                          <input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="dcf-input-text required" />
                         </li>
                         <li>
                         <fieldset id="newsroom_id">
@@ -233,40 +184,12 @@ $savvy->loadScriptDeclaration('
                         </li>
                     </ol>
                 </fieldset>
-                <fieldset id="wdn_process_step3b" style="display:none;">
-                    <legend class="dcf-legendl">Event Announcement Submission</legend>
-                    <p>Pull in the event form.</p>
-                </fieldset>
 
-                <div id="enewsSubmissionButton" class="submissionButton" style="display:none;"><input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Submit" /></div>
-                <?php if (false && !empty($id)): ?>
-                <div id="enewsSaveCopyButton" class="submissionButton" style="display:none;"><input class="dcf-btn dcf-btn-primary" type="submit" name="copy" value="Save As A COPY" /></div>
-                <?php endif; ?>
+                <div id="enewsSubmissionButton" class="submissionButton"><input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Submit" /></div>
             </form>
 
         </div>
         <div>
-
-            <div id="sampleLayout" style="display:none;">
-                <h5 class="dcf-txt-h5">Preview of Your Submission</h5>
-                <div id="sampleLayoutInner">
-                <h4>&lt;Enter Your Title&gt;</h4>
-                <div id="sampleLayoutImage">
-                    <?php if ($id = getValue($context,"id")) {
-                            if ($thumbnail = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) { ?>
-                                <img src="<?php echo $thumbnail->getURL(); ?>" alt="Image to accompany story submission" />
-                    <?php   }
-                          } else { ?>
-                            &lt;Upload Image&gt;
-                    <?php }  ?>
-                </div>
-                <p>&lt;Enter Your Article Text&gt;</p>
-
-                <div id="supporting_website"></div>
-
-                <div class="clear"></div>
-                </div>
-            </div>
 
             <?php include(dirname(__FILE__) . '/Submission/ImageForm.tpl.php'); ?>
             <?php include(dirname(__FILE__) . '/Submission/DeleteImagesForm.tpl.php'); ?>

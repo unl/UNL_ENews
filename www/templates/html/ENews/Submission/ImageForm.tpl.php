@@ -1,4 +1,4 @@
-<form id="enewsImage" name="enewsImage" class="enews energetic" action="#" method="post" enctype="multipart/form-data" style="display:none;">
+<form id="enewsImage" name="enewsImage" class="enews energetic" action="#" method="post" enctype="multipart/form-data">
 <input type="hidden" name="_type" value="file" />
 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
@@ -20,7 +20,7 @@
             }
             ?>
             <span class="helper">To be used as a caption on the web view</span></label>
-            <input class="dcf-input-text" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
+            <input class="dcf-input-text required" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
         </li>
     </ol>
     
@@ -29,7 +29,7 @@
     $ratio       = '4:3';
     $ratio_class = 'r43';
     if ($id && $originalImage) :
-        if ($thumbnail) {
+        if ($thumbnail = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) {
             list($width, $height) = $thumbnail->getSize();
             if ($width/$height == 0.75) {
                 $ratio       = '3:4';
