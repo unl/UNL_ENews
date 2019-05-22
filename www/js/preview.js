@@ -43,7 +43,7 @@ define([
 				$('.story .story-content').on('click', 'a', function(e) {
 					return false;
 				})
-				WDN.loadJS('/wdn/templates_3.1/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', plugin.setupToolsHover);
+				WDN.loadJS(ENEWS_HOME+'/js/jQuery.hoverIntent.js', plugin.setupToolsHover);
 				plugin.setupDragAndSort();
 				plugin.initDraggable($('.adArea .story'));
 			});
@@ -285,9 +285,6 @@ define([
 						ui.item.insertBefore(dragClone);
 						dragClone.remove();
 						dragClone = null;
-						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>No Available Items</p>");
-						}
 						$(this).sortable('refresh');
 						ignoreUpdate = this;
 						plugin.saveStoryOrder(this, function() {
@@ -382,9 +379,6 @@ define([
 						ui.draggable.removeClass('dragItem').addClass('story');
 						ui.draggable.children().remove();
 						ui.draggable.appendTo(this);
-						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>No Available Items</p>");
-						}
 						
 						plugin.saveStoryOrder(droppable, function() {
 							loadStoryContent(ui.draggable);

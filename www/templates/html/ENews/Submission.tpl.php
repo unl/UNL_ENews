@@ -61,7 +61,7 @@ $savvy->loadScriptDeclaration('
 
 <div id="enewsForm">
 
-    <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw">
+    <div class="dcf-grid-full dcf-grid-halves@md dcf-col-gap-vw">
         <div>
             <form id="enewsSubmission" name="enewsSubmission" class="dcf-form enews energetic" action="#" method="post" enctype="multipart/form-data">
                 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>

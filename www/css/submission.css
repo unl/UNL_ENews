@@ -21,10 +21,6 @@
 
 /* Image Upload Preview
 ********************/
-form#enewsImage {
-    margin:30px 10px;
-    z-index: 1;
-}
 #upload_area {
     text-align:center;
     margin:10px 0;

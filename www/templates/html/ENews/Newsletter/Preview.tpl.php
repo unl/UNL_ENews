@@ -89,7 +89,6 @@ WDN.initializePlugin('notice');");
     <?php $stories = $context->getRaw('available_stories'); ?>
     <?php foreach (array('news', 'event', 'ad') as $type): ?>
         <div id="<?php echo $type; ?>Available">
-            <h3><?php echo ucfirst($type); ?> <span>Submissions</span><a href="#" class="showHide">Hide</a></h3>
             <div class="storyItemWrapper">
                 <?php echo $savvy->render($stories->setType($type)); ?>
             </div>
