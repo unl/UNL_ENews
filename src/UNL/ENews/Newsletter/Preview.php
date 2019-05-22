@@ -8,7 +8,9 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
      */
     public $newsletter;
 
-    public $available_stories;
+    public $unpublished_stories;
+
+    public $reusable_stories;
 
     function __postConstruct()
     {
@@ -20,8 +22,17 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
         if (!empty($_POST)) {
             $this->handlePost();
         }
-        $this->available_stories = new UNL_ENews_StoryList_Filter_ByPresentationType(
+        $this->unpublished_stories = new UNL_ENews_StoryList_Filter_ByPresentationType(
             new UNL_ENews_Newsroom_UnpublishedStories(array(
+                'status'      => 'approved',
+                'date'        => $this->newsletter->release_date,
+                'newsroom_id' => UNL_ENews_Controller::getUser(true)->newsroom->id,
+                'limit'       => -1
+            )),
+            'news'
+        );
+        $this->reusable_stories = new UNL_ENews_StoryList_Filter_ByPresentationType(
+            new UNL_ENews_Newsroom_ReusableStories(array(
                 'status'      => 'approved',
                 'date'        => $this->newsletter->release_date,
                 'newsroom_id' => UNL_ENews_Controller::getUser(true)->newsroom->id,

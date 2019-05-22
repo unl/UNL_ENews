@@ -86,14 +86,32 @@ WDN.initializePlugin('notice');");
 </div>
 <div class="dcf-grid dcf-col-gap-vw">
     <div class="dcf-col-100% dcf-col-33%-start@md" id="drag_story_list">
-    <?php $stories = $context->getRaw('available_stories'); ?>
-    <?php foreach (array('news', 'event', 'ad') as $type): ?>
-        <div id="<?php echo $type; ?>Available">
+        <div id="againAvailable">
             <div class="storyItemWrapper">
-                <?php echo $savvy->render($stories->setType($type)); ?>
             </div>
         </div>
-    <?php endforeach; ?>
+        <h3 class="dcf-txt-sm dcf-mt-0">New items</h3>
+        <div id="drag_story_list_unpublished">
+            <?php $stories = $context->getRaw('unpublished_stories'); ?>
+            <?php foreach (array('news', 'event', 'ad') as $type): ?>
+                <div class="<?php echo $type; ?>Available">
+                    <div class="storyItemWrapper">
+                        <?php echo $savvy->render($stories->setType($type)); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <h3 class="dcf-txt-sm">Previously used items</h3>
+        <div id="drag_story_list_reusable">
+            <?php $stories = $context->getRaw('reusable_stories'); ?>
+            <?php foreach (array('news', 'event', 'ad') as $type): ?>
+                <div class="<?php echo $type; ?>Available">
+                    <div class="storyItemWrapper">
+                        <?php echo $savvy->render($stories->setType($type)); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
     <div class="dcf-col-100% dcf-col-67%-end@md">
         <?php $context->newsletter->options = array('preview' => true); ?>
