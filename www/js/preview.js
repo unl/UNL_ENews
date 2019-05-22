@@ -424,7 +424,7 @@ define([
 					postData['story_id'][story.data('id')] = { "sort_order" : idx * numColumns + offset };
 				});
 			});
-			if (!$.isEmptyObject(postData["story_id"])) {console.log(window.location.toString());console.log(postData);
+			if (!$.isEmptyObject(postData["story_id"])) {
 				$.post(window.location.toString(), postData, callback);
 			}
 		},

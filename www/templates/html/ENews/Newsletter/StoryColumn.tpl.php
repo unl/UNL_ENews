@@ -1,7 +1,7 @@
 <?php /* @var $context UNL_ENews_Newsletter_StoryColumn */ ?>
 <div id="<?php echo $context->getHtmlAttribute('id') ?>" class="<?php echo $context->getHtmlAttribute('class') ?>">
 <?php foreach ($context->getStoriesIterator() as $story): ?>
-    <article class="story" id="story_<?php echo $story->story_id; ?>">
+    <article class="story" id="story_<?php echo $story->story_id; ?>" data-id="<?php echo $story->story_id; ?>">
     <?php if ($context->isPreview()): ?>
         <div class="story-content">
             <?php echo $savvy->render($story, $story->getRenderer('templates/email')); ?>
