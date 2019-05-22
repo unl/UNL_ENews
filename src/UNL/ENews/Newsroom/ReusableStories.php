@@ -25,6 +25,7 @@ class UNL_ENews_Newsroom_ReusableStories extends UNL_ENews_StoryList
                     SELECT newsletter_stories.story_id FROM newsletter_stories, newsletters
                         WHERE newsletters.newsroom_id = '.(int)$this->options['newsroom_id']. '
                             AND newsletter_stories.newsletter_id = newsletters.id
+                            AND newsletter_stories.newsletter_id != '.(int)$this->options['newsletter_id']. '
                     )';
         if (!empty($this->options['status'])) {
             $sql .= ' AND newsroom_stories.status = \''.$mysqli->escape_string($this->options['status']).'\'';

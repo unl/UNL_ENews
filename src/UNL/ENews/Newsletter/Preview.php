@@ -36,6 +36,7 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 'status'      => 'approved',
                 'date'        => $this->newsletter->release_date,
                 'newsroom_id' => UNL_ENews_Controller::getUser(true)->newsroom->id,
+                'newsletter_id' => $this->newsletter->id,
                 'limit'       => -1
             )),
             'news'
