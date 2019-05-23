@@ -181,7 +181,7 @@ $savvy->loadScriptDeclaration('
                 </li>
             </ol>
 
-            <div id="enewsSubmissionButton" class="submissionButton"><input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Submit" /></div>
+            <div id="enewsSubmissionButton" class="dcf-mt-6"><input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Submit" /></div>
         </form>
 
     </div>

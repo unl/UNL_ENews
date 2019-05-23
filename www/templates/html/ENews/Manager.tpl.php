@@ -1,15 +1,18 @@
-<h3 class="clear-top wdn-brand">
-    <?php echo $context->newsroom->name;?>
-    (<a href="<?php echo $context->newsroom->getURL();?>">Live View</a>, 
-     <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>/latest?format=rss">RSS</a>
-    )
-</h3>
-
-<?php
-if ($context->actionable) {
-    echo $savvy->render($context->actionable[0]);
-}
-?>
+<div class="dcf-grid dcf-mb-6">
+    <div class="dcf-col-100% dcf-col-33%-end@md dcf-2nd@md">
+        <?php
+        if ($context->actionable) {
+            echo $savvy->render($context->actionable[0]);
+        }
+        ?>
+    </div>
+    <div class="dcf-col-100% dcf-col-67%-start@md dcf-1st@md">
+        <h3 class="wdn-brand">
+            <?php echo $context->newsroom->name;?>
+             <a class="rsslink" href="<?php echo $context->newsroom->getURL();?>/latest?format=rss">RSS</a>
+        </h3>
+    </div>
+</div>
 
 <ul class="wdn_tabs disableSwitching">
     <?php foreach (array('pending', 'approved', 'archived') as $type):

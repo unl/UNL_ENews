@@ -1,18 +1,14 @@
-<form class="enews newsroom_choose" name="newsroom_choose" method="get" action="">
-	<input type="hidden" name="view" value="manager">
-	<fieldset>
-		<ol>
-			<li>
-			<select name="newsroom" id="newsroom" style="padding:0">
-				<option selected="selected" value="<?php echo $parent->context->options['newsroom'] ?>">Choose your newsroom</option>
-				<?php foreach ($context as $item): ?>
-				<option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
-				<?php endforeach; ?>
-			</select></li>
-			<li><input type="submit" value="Go" name="submit" id="submit"></li>
-		</ol>
-	</fieldset>
+<form class="dcf-form-controls-inline dcf-mb-6" name="newsroom_choose" method="get" action="">
+    <input type="hidden" name="view" value="manager">
+    <div class="dcf-input-group">
+        <select name="newsroom" id="newsroom" class="dcf-input-select dcf-mb-0">
+            <option selected="selected" value="<?php echo $parent->context->options['newsroom'] ?>">Choose your newsroom</option>
+            <?php foreach ($context as $item): ?>
+                <option value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
+                <?php endforeach; ?>
+        </select></li>
+        <button class="dcf-btn dcf-btn-primary" type="submit" name="submit" id="submit">Switch</button>
+     </div>
 </form>
 
 <div class="clear"></div>
- 

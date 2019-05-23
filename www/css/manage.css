@@ -1,11 +1,4 @@
-form#enewsManage {
-    width:100%;
-}
-form#enewsManage .btnsubmit {
-    display:none !important;
-}
-
-/* Check/Uncheck/Action 
+/* Check/Uncheck/Action
 ****************************/
 .storyAction {
     padding:6px 5px 10px;
@@ -25,31 +18,6 @@ a.uncheckall {
 a.checkall:focus,
 a.uncheckall:focus {
     color:#fff !important;
-}
-form fieldset.storyFieldsetAction {
-    clear:none;
-    margin:3px 0 0 0;
-    padding:0;
-    width:210px;
-}
-form fieldset.storyFieldsetAction label,
-form fieldset.storyFieldsetAction legend {
-    display:none;
-}
-form fieldset.storyFieldsetAction select {
-    margin:0 5px;
-    padding:0;
-}
-/* Newsroom Chooser Form 
-**************************/
-.enews.newsroom_choose {
-    position:relative;
-    bottom:72px;
-    float:right;
-}
-.enews.newsroom_choose li {
-    padding:0 10px 10px 0;
-    float:left;
 }
 
 /* Function Tables

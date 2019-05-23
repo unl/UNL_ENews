@@ -2,9 +2,6 @@
 @import 'manage.css';
 @import 'newsletter.css';
 
-.btnsubmit {
-    display:none;
-}
 table th {text-align:left;}
 form fieldset {
     padding:10px 10px 0px 10px;
