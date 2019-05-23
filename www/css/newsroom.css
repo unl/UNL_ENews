@@ -1,27 +1,4 @@
-#userList {
-    list-style:none;
-    margin:0;
-    background:#F1EDE0;
-    padding:10px;
-}
-#userList li {
-    display:inline-block;
-    text-align:center;
-    padding: 0 10px 10px 0;
-    position:relative;
-}
-#userList li .uid {
-    font-size:0.8em;
-    display:block;  
-}
-#userList li img {display:block;margin-left:auto;margin-right:auto;}
-#userList li form {
-    position:absolute;
-    top:6px;
-    right:7px;
-    display:none;
-}
-#userList li:hover form {display:block;}
+#userList li:hover form {display:block !important;}
 #emailList {
     list-style:none;
     padding:10px;
