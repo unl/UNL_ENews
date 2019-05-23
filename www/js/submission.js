@@ -170,6 +170,21 @@ define([
 				return false;
 			});
 
+			// Summary 'Characters remaining' helper
+			$('#description').bind('keyup', function() {
+				var demoText = $('#description').val();
+				if ((plugin.characterLimit - demoText.length) < (plugin.characterLimit * .08)) {
+					$('label[for="description"] span.helper strong').addClass('warning');
+				} else {
+					$('label[for="description"] span.helper strong').removeClass('warning');
+				}
+				if (demoText.length > plugin.characterLimit) {
+					demoText = demoText.substr(0,plugin.characterLimit);
+					$('#description').val(demoText);
+				}
+				$('label[for="description"] span.helper strong').text(plugin.characterLimit - demoText.length);
+			});
+
 		},
 
 		setPresentationId : function(value){
