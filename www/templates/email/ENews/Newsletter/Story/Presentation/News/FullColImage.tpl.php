@@ -26,8 +26,8 @@ if ($context->getColFromSort() == 'onecol') {
                                         </tr>
                                         <?php endif; ?>
                                         <tr>
-                                            <td colspan="2" class="unltoday-head" align="left" style="font-size:28px;font-family:Helvetica,Arial,sans-serif;color:#cc0000;padding:10px 0 10px 0">
-                                                <a href="<?php echo $context->getURL(); ?>" style="color:#cc0000;text-decoration:none;"><?php echo $context->title; ?></a>
+                                            <td colspan="2" class="unltoday-head" align="left" style="font-size:28px;font-family:Montserrat,Verdana,sans-serif;color:#d00000;padding:10px 0 10px 0">
+                                                <a href="<?php echo $context->getURL(); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
                                             </td>
                                         </tr>
                                         <tr>
