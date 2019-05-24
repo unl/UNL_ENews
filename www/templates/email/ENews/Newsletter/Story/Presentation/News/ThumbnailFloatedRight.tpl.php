@@ -1,6 +1,6 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal">
   <tr>
-    <td bgcolor="#f6f6f5" style="padding:10px 10px 10px 10px" class="unltoday-padding">
+    <td bgcolor="#f6f6f5" style="padding:10px 10px 10px 10px" class="unltoday-padding" align="center">
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
         <tbody>
         <tr>

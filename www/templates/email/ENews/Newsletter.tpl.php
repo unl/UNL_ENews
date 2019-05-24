@@ -3,10 +3,10 @@
   <div id="previewWrapper" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
 <?php endif; ?>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF" style="background-color:#ffffff;">
     <tr>
-        <td>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;">
                 <tr>
                     <td bgcolor="#FEFDFA" class="wdn-header-top">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
@@ -20,8 +20,8 @@
         </td>
     </tr>
     <tr>
-        <td style="border-top:1px solid #EAE9E6">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <td align="center" style="border-top:1px solid #EAE9E6">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;">
                 <tr>
                     <td bgcolor="#FEFDFA">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
@@ -36,8 +36,8 @@
         </td>
     </tr>
     <tr>
-        <td bgcolor="#D00000" style="padding: 5px 20px 10px 10px;">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="font-size:15px;font-family:Montserrat,Verdana,sans-serif;color:#FFFFFF;">
+        <td align="center" bgcolor="#D00000" style="padding: 5px 20px 10px 10px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="width:610px;font-size:15px;font-family:Montserrat,Verdana,sans-serif;color:#FFFFFF;">
                 <tr>
                     <td class="unltoday-mast" align="left" style="padding:6px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><span style="color:#fffffe"><?php echo date('F j, Y', strtotime($context->release_date)); ?></span></td>
                     <td class="unltoday-mast" align="right" style="padding:8px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
@@ -48,7 +48,7 @@
 </table>
 
 <!-- Start main content -->
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table">
     <?php
         $stories = $context->getStories();
         if (!empty($context->options['preview'])) {
