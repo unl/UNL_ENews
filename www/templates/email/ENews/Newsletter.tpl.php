@@ -48,22 +48,14 @@
 </table>
 
 <!-- Start main content -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal; min-width: 650px;" class="wrapper-table">
-    <tr bgcolor="#f6f6f5">
-        <td></td>
-        <td style="padding:30px 15px 30px 15px" width="620" class="unltoday-padding">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
-                <?php
-                    $stories = $context->getStories();
-                    if (!empty($context->options['preview'])) {
-                        $stories->setIsPreview(true);
-                    }
-                    echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
-                ?>
-            </table>
-        </td>
-        <td></td>
-    </tr>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
+    <?php
+        $stories = $context->getStories();
+        if (!empty($context->options['preview'])) {
+            $stories->setIsPreview(true);
+        }
+        echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
+    ?>
 </table>
 <!-- End main content -->
 

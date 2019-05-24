@@ -84,6 +84,7 @@ Newsletter Email Preview (for building the newsletter)
     line-height:1.777;
     font-family:Georgia, serif;
     box-shadow: 4px 4px 13px #bbb;
+    background-color: #f6f6f5;
 }
 #previewWrapper table, #previewWrapper tr, #previewWrapper td, #previewWrapper th {
     border: none;
@@ -98,9 +99,6 @@ Newsletter Email Preview (for building the newsletter)
 #previewWrapper td.wdn-logo-lockup {
     white-space: normal !important;
     vertical-align: middle;
-}
-#previewWrapper .wrapper-table {
-    background-color: #f6f6f5;
 }
 
 #previewWrapper .unltoday-mast i {

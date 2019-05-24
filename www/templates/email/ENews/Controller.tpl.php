@@ -90,13 +90,9 @@
 
         #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}
         p {margin-top:0!important;padding-top:0!important;}
-
-        table[class="wrapper-table"] {
-            min-width:100% !important;
-        }
     </style>
 </head>
-<body yahoo="fix" style="margin: 0; padding: 0; color:#5b5b5a; font-size:16px; line-height:1.777; font-family:Georgia, serif;" bgcolor="#fefdfa" link="#d00000">
+<body yahoo="fix" style="margin: 0; padding: 0; color:#5b5b5a; font-size:16px; line-height:1.777; font-family:Georgia, serif;" bgcolor="#f6f6f5" link="#d00000">
 <?php endif; ?>
 
 <?php echo $savvy->render($context); ?>
