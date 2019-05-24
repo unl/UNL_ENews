@@ -27,7 +27,7 @@
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
                                 <td width="77" class="wdn-logo"><a href="https://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
-                                <td valign="middle" class="wdn-logo-lockup" style="font-size:27px; line-height:1; font-family:Montserrat,Verdana,sans-serif!important; text-transform:uppercase; font-weight: 600; white-space:nowrap"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
+                                <td valign="middle" class="wdn-logo-lockup" style="font-size:27px; line-height:1; font-family:Montserrat,Verdana,sans-serif!important; text-transform:uppercase; font-weight: 600;"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
                             </tr>
                         </table>
                     </td>
