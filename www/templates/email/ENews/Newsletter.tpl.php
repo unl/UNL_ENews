@@ -49,7 +49,7 @@
 
 <!-- Start main content -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal; min-width: 650px;" class="wrapper-table">
-    <tr bgcolor="#F8F5EC">
+    <tr bgcolor="#f6f6f5">
         <td></td>
         <td style="padding:30px 15px 30px 15px" width="620" class="unltoday-padding">
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
