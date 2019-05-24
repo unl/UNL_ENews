@@ -84,7 +84,7 @@ Newsletter Email Preview (for building the newsletter)
     line-height:1.777;
     font-family:Georgia, serif;
     box-shadow: 4px 4px 13px #bbb;
-    background-color: #f6f6f5;
+    background-color:#f6f6f5;
 }
 #previewWrapper table, #previewWrapper tr, #previewWrapper td, #previewWrapper th {
     border: none;

@@ -36,11 +36,11 @@
         </td>
     </tr>
     <tr>
-        <td bgcolor="#C80E13" style="padding: 10px 20px 10px 20px;">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="font-size:14px;font-family:Montserrat,Verdana,sans-serif;color:#FFFFFF;">
+        <td bgcolor="#D00000" style="padding: 5px 20px 10px 10px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="font-size:15px;font-family:Montserrat,Verdana,sans-serif;color:#FFFFFF;">
                 <tr>
-                    <td class="unltoday-mast" align="left"><?php echo date('F j, Y', strtotime($context->release_date)); ?></td>
-                    <td class="unltoday-mast" align="right"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
+                    <td class="unltoday-mast" align="left" style="padding:6px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><span style="color:#fffffe"><?php echo date('F j, Y', strtotime($context->release_date)); ?></span></td>
+                    <td class="unltoday-mast" align="right" style="padding:8px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
                 </tr>
             </table>
         </td>
