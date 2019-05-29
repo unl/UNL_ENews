@@ -52,14 +52,16 @@ WDN.initializePlugin('notice');");
                }
            ?>
            <li>
-               <form class="emailIndicator">
+               <form class="dcf-form emailIndicator">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                    <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                    <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
-                   <input class="dcf-input-control" type="checkbox" id="email_<?php echo $email->id; ?>" <?php if ($checked) echo 'checked="checked"'; ?> />
-                   <label class="dcf-label" for="email_<?php echo $email->id; ?>" >
-                       <?php echo $email->email; ?>
-                   </label>
+                   <div class="dcf-input-checkbox">
+                       <input type="checkbox" id="email_<?php echo $email->id; ?>" <?php if ($checked) echo 'checked="checked"'; ?> />
+                       <label for="email_<?php echo $email->id; ?>" >
+                           <?php echo $email->email; ?>
+                       </label>
+                   </div>
                </form>
                <form action="<?php echo $context->getURL(); ?>" method="post" class="remove email">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
