@@ -120,12 +120,17 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
     margin-top:0px;
     margin-bottom:15px;
+    word-break: break-word;
     display:block !important;
 }
 
 
 .adArea .story {
     position:relative;
+}
+
+#newsColumn1, #newsColumn2 {
+    width: 305px;
 }
 
 /*Story Dragging */
