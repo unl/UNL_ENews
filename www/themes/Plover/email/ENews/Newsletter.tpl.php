@@ -42,7 +42,7 @@
 		<tr>
 		    <td align="center">
 		    	<span style="font-size:9px;color:#ffffff;">Campus Activities for <span class="newsletterDate"><?php echo date('F j, Y', strtotime($context->release_date)); ?></span><br/>
-		        <a href="<?php echo $context->getURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Problem Ploversing?? Click here to read online.</a></span>
+		        <a href="<?php echo $context->getURL(); ?>" style="outline: none;color: #D00000;text-decoration: none;">Problem Ploversing?? Click here to read online.</a></span>
 		    </td>
 		</tr>
 		<tr>
@@ -125,7 +125,7 @@
 		                                	<?php echo $context->newsroom->getRaw('footer_text'); ?>
 			                            </p>
 			                            <p>
-		                                	<a href="<?php echo $context->newsroom->getSubmitURL(); ?>" style="outline: none;color: #ba0000;text-decoration: none;">Submit Your News</a>
+		                                	<a href="<?php echo $context->newsroom->getSubmitURL(); ?>" style="outline: none;color: #D00000;text-decoration: none;">Submit Your News</a>
 				                        </p>
 				                    </td>
 		                            <td width="22">

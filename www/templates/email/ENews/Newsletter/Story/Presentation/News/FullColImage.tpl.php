@@ -31,12 +31,12 @@ if ($context->getColFromSort() == 'onecol') {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="unltoday-body" align="top" style="font-size:18px;line-height:26px;font-family:Georgia,serif;color:#545350;border-bottom:2px solid #E7E2D6;padding:0 0 6px 0;">
+                                            <td class="unltoday-body" align="top" style="font-size:18px;line-height:26px;font-family:Georgia,serif;color:#545350;padding:0 0 6px 0;">
                                                 <p>
                                                     <?php
                                                     echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
                                                     if (!empty($context->full_article)) {
-                                                        echo ' <a href="'.$context->getURL().'" style="color:#BA0000;">Continue reading&hellip;</a>';
+                                                        echo ' <a href="'.$context->getURL().'" style="color:#D00000;">Continue reading&hellip;</a>';
                                                     }
                                                     ?>
                                                     <?php if (isset($context->ics)): ?>
@@ -45,10 +45,10 @@ if ($context->getColFromSort() == 'onecol') {
                                                 </p>
 
                                                 <?php if (($context->website)): ?>
-                                                    <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#E7E2D6" width="100%">
+                                                    <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#ebebea" style="background-color:#ebebea;" width="100%">
                                                         <tr>
-                                                            <td align="right" style="padding:0 8px 0 0;font-size:14px;line-height:20px;">
-                                                                More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#BA0000;"><?php echo $context->website; ?></a>
+                                                            <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Montserrat,Verdana,sans-serif;font-size:14px;line-height:20px;">
+                                                                More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#D00000;"><?php echo $context->website; ?></a>
                                                             </td>
                                                         </tr>
                                                     </table>
