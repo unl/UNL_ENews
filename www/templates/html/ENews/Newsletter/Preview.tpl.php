@@ -40,7 +40,7 @@ WDN.initializePlugin('notice');");
        <a class="dcf-btn dcf-btn-secondary action preview" href="#" onclick="WDN.initializePlugin('modal', [function() {WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;}]);">Send Preview</a>
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-   <div class="email_addresses dcf-col-100% dcf-col-33%-end@md">
+   <div class="dcf-txt-sm dcf-col-100% dcf-col-33%-end@md">
        <h5 class="dcf-txt-base">Distribute this newsletter to:</h5>
        <ul class="dcf-list-bare">
            <?php
