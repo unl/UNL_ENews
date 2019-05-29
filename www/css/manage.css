@@ -33,10 +33,10 @@ a.uncheckall:focus {
 }
 .storylisting.functionTable tbody tr.event td:first-of-type {
     background:url('images/typeIndicatorEvent.png') no-repeat 0 0;
-}
+} /* No longer show News banner since every item is now news
 .storylisting.functionTable tbody tr.news td:first-of-type {
     background:url('images/typeIndicatorNews.png') no-repeat 0 0;
-}
+} */
 .storylisting.functionTable tbody tr.ad td:first-of-type {
     background:url('images/typeIndicatorAd.png') no-repeat 0 0;
 }
