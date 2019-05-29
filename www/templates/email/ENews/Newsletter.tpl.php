@@ -20,7 +20,7 @@
         </td>
     </tr>
     <tr>
-        <td align="center" style="border-top:1px solid #EAE9E6">
+        <td align="center" style="border-top:1px solid #e3e3e2">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;">
                 <tr>
                     <td bgcolor="#FEFDFA">
