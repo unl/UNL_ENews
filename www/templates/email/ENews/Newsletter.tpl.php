@@ -1,11 +1,12 @@
 <?php if (!empty($context->options['preview'])) : //For the preview building tool ?>
+  <style>@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600');</style>
   <div id="previewWrapper" style="color:#494949; font-size: 12px; line-height: 140%; font-family: 'Lucida Grande',Verdana,Arial;">
 <?php endif; ?>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF" style="background-color:#ffffff;">
     <tr>
-        <td>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;">
                 <tr>
                     <td bgcolor="#FEFDFA" class="wdn-header-top">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
@@ -19,14 +20,14 @@
         </td>
     </tr>
     <tr>
-        <td style="border-top:1px solid #EAE9E6">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <td align="center" style="border-top:1px solid #e3e3e2">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px;">
                 <tr>
                     <td bgcolor="#FEFDFA">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td width="77" class="wdn-logo"><a href="http://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
-                                <td valign="middle" class="wdn-logo-lockup" style="font-size:33px; line-height:2.5; font-family: 'Arial Narrow', Arial, sans-serif; text-transform:uppercase; white-space:nowrap"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
+                                <td width="77" class="wdn-logo"><a href="https://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
+                                <td valign="middle" class="wdn-logo-lockup" style="font-size:27px; line-height:1; font-family:Montserrat,Verdana,sans-serif!important; text-transform:uppercase; font-weight: 600;"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
                             </tr>
                         </table>
                     </td>
@@ -35,11 +36,11 @@
         </td>
     </tr>
     <tr>
-        <td bgcolor="#C80E13" style="padding: 10px 20px 10px 20px;">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="font-size:14px;font-family:Helvetica,Arial,sans-serif;color:#FFFFFF;">
+        <td align="center" bgcolor="#D00000" style="padding: 5px 20px 10px 10px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="610" class="responsive-table" style="width:610px;font-size:15px;font-family:Montserrat,Verdana,sans-serif;color:#FFFFFF;">
                 <tr>
-                    <td class="unltoday-mast" align="left"><?php echo date('F j, Y', strtotime($context->release_date)); ?></td>
-                    <td class="unltoday-mast" align="right"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
+                    <td class="unltoday-mast" align="left" style="padding:6px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><span style="color:#fffffe"><?php echo date('F j, Y', strtotime($context->release_date)); ?></span></td>
+                    <td class="unltoday-mast" align="right" style="padding:8px 0 0 0;font-family:Montserrat,Verdana,sans-serif; font-weight:600;"><i><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->subtitle; ?></i></td>
                 </tr>
             </table>
         </td>
@@ -47,22 +48,14 @@
 </table>
 
 <!-- Start main content -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal; min-width: 650px;" class="wrapper-table">
-    <tr bgcolor="#F8F5EC">
-        <td></td>
-        <td style="padding:30px 15px 30px 15px" width="620" class="unltoday-padding">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
-                <?php
-                    $stories = $context->getStories();
-                    if (!empty($context->options['preview'])) {
-                        $stories->setIsPreview(true);
-                    }
-                    echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
-                ?>
-            </table>
-        </td>
-        <td></td>
-    </tr>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table">
+    <?php
+        $stories = $context->getStories();
+        if (!empty($context->options['preview'])) {
+            $stories->setIsPreview(true);
+        }
+        echo $savvy->render($stories, 'templates/html/ENews/Newsletter/Stories.tpl.php');
+    ?>
 </table>
 <!-- End main content -->
 

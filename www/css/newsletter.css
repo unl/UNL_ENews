@@ -77,13 +77,14 @@ Newsletter Email Preview (for building the newsletter)
 
 ************************/
 #previewWrapper {
-    width: 650px;
-    min-width: 650px;
+    width: 720px;
+    min-width: 720px;
     margin-top: 20px;
     font-size:16px;
     line-height:1.777;
     font-family:Georgia, serif;
     box-shadow: 4px 4px 13px #bbb;
+    background-color:#f6f6f5;
 }
 #previewWrapper table, #previewWrapper tr, #previewWrapper td, #previewWrapper th {
     border: none;
@@ -97,13 +98,9 @@ Newsletter Email Preview (for building the newsletter)
 }
 #previewWrapper td.wdn-logo-lockup {
     white-space: normal !important;
+    vertical-align: middle;
 }
-#previewWrapper .wrapper-table {
-    background-color: #F8F5EC;
-}
-#previewWrapper .wdn-logo-lockup {
-    font-family: "Tungsten A","Tungsten B","Arial Narrow",Arial,sans-serif !important;
-}
+
 #previewWrapper .unltoday-mast i {
     display: block;
     text-align: right;
@@ -113,9 +110,8 @@ Newsletter Email Preview (for building the newsletter)
 }
 #previewWrapper .newsColumn {
     background-color: #d9f9f9;
+    padding-bottom: 10px;
 }
-
-
 
 .newsColumn, .adArea {min-height:75px;}
 .newsColumn form, .newsColumn .requestedDates {display:none;}
@@ -124,6 +120,7 @@ Newsletter Email Preview (for building the newsletter)
     position:relative;
     margin-top:0px;
     margin-bottom:15px;
+    word-break: break-word;
     display:block !important;
 }
 
@@ -133,10 +130,8 @@ Newsletter Email Preview (for building the newsletter)
 }
 
 #newsColumn1, #newsColumn2 {
-    float:left;
-    width: 273px;
+    width: 305px;
 }
-#newsColumn2 {float:right;}
 
 /*Story Dragging */
 #drag_story_list {margin-top:50px;}
@@ -184,11 +179,9 @@ Newsletter Email Preview (for building the newsletter)
     display:none;
 }
 #drag_story_list .dragItem h4 {
-    font-size: .9em;
-    margin:3px 0;
     float:left;
     display:inline-block;
-    max-width:244px;
+    max-width:264px;
 }
 
 .dragItem span.requestedDates  {

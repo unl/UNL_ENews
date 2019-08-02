@@ -65,19 +65,18 @@ if (!empty($context->options['story_id'])) {
         <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
         <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
     </div>
-    <fieldset class="storyFieldsetAction">
-        <legend>Action</legend>
-        <label for="storyaction">Action</label>
-        <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+    <div class="dcf-input-group">
+        <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
+        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>
                 <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
                 <option value="recommend" disabled="disabled">Recommend</option>
             <?php endif ?>
-            <option value="delete"    disabled="disabled">Delete</option>
+            <option value="delete" disabled="disabled">Delete</option>
         </select>
-    </fieldset>
+    </div>
 </div>
 <table class="storylisting functionTable" >
     <thead>
@@ -120,25 +119,24 @@ if (!empty($context->options['story_id'])) {
         <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
         <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
     </div>
-    <fieldset class="storyFieldsetAction">
-        <legend>Action</legend>
-        <label for="storyaction">Action</label>
-        <select name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+    <div class="dcf-input-group">
+        <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
+        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
             <option>Select action...</option>
             <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>
                 <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
                 <option value="recommend" disabled="disabled">Recommend</option>
             <?php endif ?>
-            <option value="delete"    disabled="disabled">Delete</option>
+            <option value="delete" disabled="disabled">Delete</option>
         </select>
-    </fieldset>
+    </div>
 </div>
-<input class="btnsubmit" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
+<input class="dcf-d-none" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
 <?php if ($status=='approved' || $status=='archived') { ?>
-<input class="btnsubmit" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
+<input class="dcf-d-none" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
 <?php } elseif ($status=='pending') { ?>
-<input class="btnsubmit" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
+<input class="dcf-d-none" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
 <?php } ?>
 </form>
 <?php

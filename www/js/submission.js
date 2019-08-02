@@ -44,18 +44,10 @@ define([
 					plugin.editing = true;
 					plugin.announcementType = plugin.editType;
 				}
-				$('#enewsForm h3').eq(0).css('cursor', 'pointer');
-				$('#enewsForm h3').eq(1).css('cursor', 'pointer');
 				plugin.bindActions();
 
 				if (plugin.editing) {
-					$('#enewsForm h3').eq(0).hide();
-					$('#enewsForm h3').eq(1).hide();
-					$('#enewsForm h3').eq(2).html('Edit Submission');
-					$('#enewsSubmissionButton').show();
-					$('#enewsSaveCopyButton').show();
 					plugin.determinePresentation(plugin.announcementType);
-					plugin.updatePreview();
 				}
 			}]);
 		},
@@ -64,15 +56,12 @@ define([
 			plugin.announcementType = announcementType;
 			switch (announcementType) {
 			case 'news' :
-				plugin.prepareNewsSubmission();
 				plugin.setPresentationId('news');
 				break;
 			case 'event' :
-				plugin.prepareEventSubmission();
 				plugin.setPresentationId('event');
 				break;
 			case 'ad' :
-				plugin.prepareAdSubmission();
 				plugin.setPresentationId('ad');
 				break;
 			}
@@ -85,35 +74,9 @@ define([
 				plugin.findEvents($(this).val());
 			});
 
-			$('select#event').bind('change', function() {
-				$('#website').attr('value', $(this).val());
-				// Get the details for this specific event
-				WDN.get($(this).val()+'?format=xml', null, function(data) {
-					// Set the title and description from data we know
-					$('form.enews input[name=title]').val($(data).find('EventTitle').text());
-					$('form.enews textarea[name=description]').val($(data).find('Description').text());
-					// Trigger the keyup on these fields so the preview is updated
-					$('#title').keyup();
-					$('#description').keyup();
-				}, 'xml');
-			});
-
-			$('ol.option_step a').bind('click', function() {// Sliding action for the three part form
-				var a = $(this).attr('id');
-				announcementType = a.replace('Announcement', '');
-				plugin.determinePresentation(announcementType);
-				return false;
-			});
-
 			// Make a GoURL with campaign tagging for the Supporting Website
 			$('#website').bind('blur', function() {
 				var website = $.trim($(this).val());
-
-				if ('' == website) {
-					//Handle an empty input
-					plugin.updatePreview();
-					return;
-				}
 
 				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
 					website = 'http://' + website;
@@ -124,7 +87,6 @@ define([
 					plugin.createGoURL(website);
 				} else {
 					if (!plugin.urlPreview) {
-						plugin.updatePreview();
 						plugin.urlPreview = true;
 					}
 				}
@@ -203,152 +165,30 @@ define([
 						$('#img_description_label span.required').remove();
 						$('#file_description').removeClass('required').attr('disabled','disabled');
 						plugin.loadImageCrop();
-						plugin.updatePreview();
 					}
 				);
 				return false;
 			});
 
-			// Update the sample layout
+			// Summary 'Characters remaining' helper
 			$('#description').bind('keyup', function() {
-				plugin.updatePreview();
-			});
-			$('#title').bind('keyup', function() {
-				plugin.updatePreview();
+				var demoText = $('#description').val();
+				if ((plugin.characterLimit - demoText.length) < (plugin.characterLimit * .08)) {
+					$('label[for="description"] span.helper strong').addClass('warning');
+				} else {
+					$('label[for="description"] span.helper strong').removeClass('warning');
+				}
+				if (demoText.length > plugin.characterLimit) {
+					demoText = demoText.substr(0,plugin.characterLimit);
+					$('#description').val(demoText);
+				}
+				$('label[for="description"] span.helper strong').text(plugin.characterLimit - demoText.length);
 			});
 
-			$('#next_step3').bind('click', function() {
-				$('#wdn_process_step2').slideToggle();
-				$('#wdn_process_step3').slideToggle(function() {
-					$('#enewsForm h3').eq(1).removeClass('highlighted');
-					$('#enewsForm h3').eq(2).addClass('highlighted').append('<span class="announceType dcf-subhead">Event Announcement</span>');
-				});
-				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
-				return false;
-			});
-			$('#enewsForm h3').eq(0).bind('click', function() {
-				plugin.goToStep(1);
-			});
-			$('#enewsForm h3').eq(1).bind('click', function() {
-				plugin.goToStep(2);
-			});
-		},
-
-		goToStep : function(step) {
-			$('#enewsSubmissionButton,#sampleLayout,#enewsImage,#deleteImages').hide();
-			switch(step){
-			case 1:
-				oppStep = 2;
-				break;
-			case 2:
-				oppStep = 1;
-				break;
-			}
-			$('#wdn_process_step'+oppStep).slideUp();
-			$('#wdn_process_step'+step).slideDown();
-			$('#enewsForm h3').eq(oppStep-1).removeClass("highlighted");
-			$('#enewsForm h3').eq(step-1).addClass("highlighted");
-			$('#wdn_process_step3').slideUp();
-			$('#enewsForm h3').eq(2).removeClass("highlighted");
-			$('#enewsForm h3 span.announceType').remove();
-			$('#enewsForm h3').show();
-		},
-
-		prepareNewsSubmission : function() {
-			$('#wdn_process_step1').slideToggle();
-			$('#enewsForm h3').eq(1).hide();
-			$('#wdn_process_step3').slideToggle(function() {
-				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType dcf-subhead">News Announcement</span>');
-				$('#sampleLayout,#enewsImage,#enewsSubmissionButton,#deleteImages').show();
-			});
-		},
-
-		prepareEventSubmission : function() {
-			$('#wdn_process_step1').slideToggle();
-			plugin.goToStep(2);
-		},
-
-		prepareAdSubmission : function() {
-			$('#wdn_process_step1').slideToggle();
-			$('#enewsForm h3').eq(1).hide();
-			$('#wdn_process_step3').slideToggle(function() {
-				$('#enewsForm h3').eq(0).removeClass('highlighted');
-				$('#enewsForm h3').eq(2).addClass('highlighted').append(' <span class="announceType dcf-subhead">Advertisement</span>');
-				$('#enewsImage,#enewsSubmissionButton').show();
-			});
-			plugin.setupAd();
-
-		},
-
-		setupAd : function(){ //let's tweak the main form to streamline when we're doing a simple ad
-			$('#sampleLayout').hide();
-			$('#upload_area span').remove();
-			$('#full_article').parents('li').hide();
-			$('label[for="title"]').html('<span class="required">*</span> Advertisement Name');
-			$('label[for="image"]').html('Image advertisement <span class="helper">Must be 253px X 96px or 536px X 96px</span>')
 		},
 
 		setPresentationId : function(value){
 			$('#presentation_id').attr('value', ENEWS_DEFAULT_PRESENTATIONID[value]);
-		},
-
-		findEvents : function(selectedDate) {
-			var date = selectedDate.split(/-/);
-			// Grab the latest events for this date and populate select box
-			WDN.get('https://events.unl.edu/'+date[0]+'/'+date[1]+'/'+date[2]+'/?format=xml', null,
-				function(eventsXML){
-					$("#event").html('<option value="NewEvent">New Event</option>');
-					$(eventsXML).find('Event').each(function(){
-						var url = $(this).find('WebPage URL:contains(events.unl.edu)').first();
-						$("#event").append('<option value="'+url.text()+'">' + $(this).find('EventTitle').text() + '</option>');
-					});
-				},
-				'xml'
-			);
-		},
-
-		updatePreview : function() {
-			$('#sampleLayout p').html(function(index){
-				if ($('#description').val().length) {
-					var string = $('#description').val().substring(0,300);
-					//Purify it to match what the actual output would look like
-					require([ENEWS_HOME+'js/purify.js'], function(DOMPurify) {
-						string = DOMPurify.sanitize(string, {
-							ALLOWED_TAGS: ENEWS_ALLOWED_TAGS_DESCRIPTION,
-							ALLOWED_ATTR: ENEWS_ALLOWED_ATTR_DESCRIPTION,
-							SAFE_FOR_JQUERY: true
-						});
-					});
-					return string;
-				}
-			});
-			$('#sampleLayout h4').text(function(index){
-				if ($('#title').val().length) {
-					return $('#title').val();
-				}
-			});
-			$('#supporting_website').html(function(index){
-				var website = $('#website').val();
-				if (website.length) {
-					return $('<a>').attr({
-						href: website
-					}).text(website)
-				}
-
-				return '';
-			});
-			var demoText = $('#description').val();
-			if ((plugin.characterLimit - demoText.length) < (plugin.characterLimit * .08)) {
-				$('label[for="description"] span.helper strong').addClass('warning');
-			} else {
-				$('label[for="description"] span.helper strong').removeClass('warning');
-			}
-			if (demoText.length > plugin.characterLimit) {
-				demoText = demoText.substr(0,plugin.characterLimit);
-				$('#description').val(demoText);
-			}
-			$('label[for="description"] span.helper strong').text(plugin.characterLimit - demoText.length);
 		},
 
 		createGoURL : function(url) {
@@ -371,11 +211,9 @@ define([
 				url,
 				function(data) {
 					$('#website').val(data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
-					plugin.updatePreview(data);
 				},
 				function(){
 					$('#website').val(url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
-					plugin.updatePreview(website);
 				}
 			);
 		},
@@ -502,7 +340,7 @@ define([
 		submitStory : function(validate, ajax) {
 			if (validate) {
 				var message = '';
-				$('input.dcf-required, textarea.dcf-required').each(function() {
+				$('input.required, textarea.required').each(function() {
 					if ($(this).attr('disabled') !== undefined) {
 						// Field is disabled, user couldn't enter text
 						return;

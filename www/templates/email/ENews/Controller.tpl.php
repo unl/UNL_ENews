@@ -2,8 +2,8 @@
 <html><head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title><?php echo $context->subject ?></title>
 
-    <style type="text/css">
-        @import url(http://fonts.googleapis.com/css?family=Oswald:300);
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:500,600');
     </style>
     <style type="text/css">
         .ExternalClass {width: 100%;}
@@ -13,8 +13,13 @@
         table td {border-collapse:collapse}
 
         @media screen {
+            td[class="unltoday-head"] {
+                font-family:'Montserrat',Verdana,sans-serif!important;
+                font-weight: 500;
+            }
             td[class="wdn-logo-lockup"] {
-                font-family:'Oswald','Arial Narrow',Helvetica,Arial,sans-serif!important;
+                font-family:'Montserrat',Verdana,sans-serif!important;
+                font-weight: 600;
             }
         }
 
@@ -85,13 +90,9 @@
 
         #newsColumnIntro {padding-bottom:10px;margin-bottom:25px;}
         p {margin-top:0!important;padding-top:0!important;}
-
-        table[class="wrapper-table"] {
-            min-width:100% !important;
-        }
     </style>
 </head>
-<body yahoo="fix" style="margin: 0; padding: 0; color:#5b5b5a; font-size:16px; line-height:1.777; font-family:Georgia, serif;" bgcolor="#fefdfa" link="#d00000">
+<body yahoo="fix" style="margin: 0; padding: 0; color:#5b5b5a; font-size:16px; line-height:1.777; font-family:Georgia, serif;" bgcolor="#f6f6f5" link="#d00000">
 <?php endif; ?>
 
 <?php echo $savvy->render($context); ?>

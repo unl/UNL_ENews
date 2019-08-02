@@ -43,7 +43,7 @@ define([
 				$('.story .story-content').on('click', 'a', function(e) {
 					return false;
 				})
-				WDN.loadJS('/wdn/templates_3.1/scripts/plugins/hoverIntent/jQuery.hoverIntent.min.js', plugin.setupToolsHover);
+				WDN.loadJS(ENEWS_HOME+'/js/jQuery.hoverIntent.js', plugin.setupToolsHover);
 				plugin.setupDragAndSort();
 				plugin.initDraggable($('.adArea .story'));
 			});
@@ -56,11 +56,6 @@ define([
 			});
 			$('.emailIndicator input[type="checkbox"]').change(function(){
 				plugin.saveDetails.emails(this);
-			});
-			$('h3 a.showHide').click(function() {
-				$(this).parent('h3').nextUntil('h3').slideToggle();
-				$(this).toggleClass('show');
-				return false;
 			});
 		},
 
@@ -102,7 +97,7 @@ define([
 				//remove the story-content and rebuild the grip
 				theStory.children().remove();
 				var grippy = $('<div class="story-grip" />');
-				grippy.append('<h4>' + theStory.data('title') + '</h4>');
+				grippy.append('<h4 class="dcf-txt-xs dcf-regular dcf-mb-2">' + theStory.data('title') + '</h4>');
 				var reqDates = [theStory.data('request_publish_start').split(' ')];
 				if (theStory.data('request_publish_end')) {
 					reqDates.push(theStory.data('request_publish_end').split(' '));
@@ -113,7 +108,7 @@ define([
 				});
 				grippy.append(datesSpan).appendTo(theStory);
 				
-				var storyList = '#' + theStory.data('type') + 'Available .storyItemWrapper';
+				var storyList = '#againAvailable .storyItemWrapper';
 				
 				$(storyList + ' > p').remove();
 				
@@ -285,9 +280,6 @@ define([
 						ui.item.insertBefore(dragClone);
 						dragClone.remove();
 						dragClone = null;
-						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>No Available Items</p>");
-						}
 						$(this).sortable('refresh');
 						ignoreUpdate = this;
 						plugin.saveStoryOrder(this, function() {
@@ -382,9 +374,6 @@ define([
 						ui.draggable.removeClass('dragItem').addClass('story');
 						ui.draggable.children().remove();
 						ui.draggable.appendTo(this);
-						if (!dragList.children('.dragItem').length) {
-							dragList.append("<p>No Available Items</p>");
-						}
 						
 						plugin.saveStoryOrder(droppable, function() {
 							loadStoryContent(ui.draggable);
@@ -445,7 +434,7 @@ define([
 				type = [type];
 			}
 			$.each(type, function(i, val) {
-				$('#'+val+'Available .storyItemWrapper').html('Loading');
+				$('#drag_story_list_unpublished .'+val+'Available .storyItemWrapper').html('Loading');
 				$.get("", {
 					"view" : "unpublishedStories",
 					"type" : val,
@@ -453,8 +442,21 @@ define([
 					"limit" : -1,
 					"format" : "partial"
 				}, function(data) {
-					$('#'+val+'Available .storyItemWrapper').html(data);
-					plugin.initDraggable('#' + val + 'Available .dragItem');
+					$('#drag_story_list_unpublished .'+val+'Available .storyItemWrapper').html(data);
+					plugin.initDraggable('#drag_story_list_unpublished .' + val + 'Available .dragItem');
+				});
+			});
+			$.each(type, function(i, val) {
+				$('#drag_story_list_reusable .'+val+'Available .storyItemWrapper').html('Loading');
+				$.get("", {
+					"view" : "reusableStories",
+					"type" : val,
+					"date" : date,
+					"limit" : -1,
+					"format" : "partial"
+				}, function(data) {
+					$('#drag_story_list_reusable .'+val+'Available .storyItemWrapper').html(data);
+					plugin.initDraggable('#drag_story_list_reusable .' + val + 'Available .dragItem');
 				});
 			});
 		},

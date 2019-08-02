@@ -24,20 +24,26 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-         <td valign="top" class="responsive-column">
-             <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
-                'area' => $area,
-                'offset' => 2,
-                'preview' => $isPreview
-            ))); ?>
-        </td>
-        <td width="10" class="separator-column">&nbsp;</td>
-        <td valign="top" class="responsive-column">
-            <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
-                'area' => $area,
-                'offset' => 0,
-                'preview' => $isPreview
-            ))); ?>
+        <td align="center">
+            <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;">
+                <tr>
+                    <td valign="top" class="responsive-column">
+                         <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
+                            'area' => $area,
+                            'offset' => 2,
+                            'preview' => $isPreview
+                        ))); ?>
+                    </td>
+                    <td width="10" class="separator-column">&nbsp;</td>
+                    <td valign="top" class="responsive-column">
+                        <?php echo $savvy->render($context->getStoryColumn($stories[0], array(
+                            'area' => $area,
+                            'offset' => 0,
+                            'preview' => $isPreview
+                        ))); ?>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
     <?php endif; ?>

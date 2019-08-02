@@ -12,7 +12,7 @@ WDN.loadCSS('" . UNL_ENews_Controller::getURL(). "css/newsroom.css');
 ");
 ?>
 
-<form action="<?php echo $action; ?>" method="post">
+<form action="<?php echo $action; ?>" method="post" class="dcf-form">
     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
@@ -56,11 +56,11 @@ WDN.loadCSS('" . UNL_ENews_Controller::getURL(). "css/newsroom.css');
             </label>
             <input class="dcf-input-text" type="text" id="website" name="website" value="<?php echo $context->website; ?>" />
         </li>
-        <li>
+        <li class="dcf-input-checkbox">
             <label class="dcf-label" for="allow_submissions">Allow Submissions
             <span class="helper">Can users send news items for review?</span>
             </label>
-            <input class="dcf-input-control" type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> /> Yes
+            <input class="dcf-input-control" type="checkbox" id="allow_submissions" name="allow_submissions" <?php echo ($context->allow_submissions)? 'checked="checked"': ''; ?> />
         </li>
         <?php if ($context->id) : ?>
         <li>

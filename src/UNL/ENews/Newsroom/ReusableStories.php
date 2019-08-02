@@ -1,8 +1,8 @@
 <?php
 /**
- * Get the list of stories which have not been published in a newsletter.
+ * Get the list of stories which have already been published in a newsletter.
  */
-class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
+class UNL_ENews_Newsroom_ReusableStories extends UNL_ENews_StoryList
 {
     public $options = array('offset' => 0,
                             'limit'  => 30);
@@ -20,12 +20,18 @@ class UNL_ENews_Newsroom_UnpublishedStories extends UNL_ENews_StoryList
         $sql = 'SELECT newsroom_stories.story_id FROM newsroom_stories, stories 
                 WHERE newsroom_stories.newsroom_id = '.(int)$this->options['newsroom_id'] . '
                   AND newsroom_stories.story_id = stories.id
-                  AND newsroom_stories.story_id NOT IN
+                  AND newsroom_stories.story_id IN
                     (
                     SELECT newsletter_stories.story_id FROM newsletter_stories, newsletters
                         WHERE newsletters.newsroom_id = '.(int)$this->options['newsroom_id']. '
                             AND newsletter_stories.newsletter_id = newsletters.id
-                    )';
+                    )
+                  AND newsroom_stories.story_id NOT IN
+                    (
+                    SELECT newsletter_stories.story_id FROM newsletter_stories
+                        WHERE newsletter_stories.newsletter_id = '.(int)$this->options['newsletter_id']. '
+                    )
+                    ';
         if (!empty($this->options['status'])) {
             $sql .= ' AND newsroom_stories.status = \''.$mysqli->escape_string($this->options['status']).'\'';
         }

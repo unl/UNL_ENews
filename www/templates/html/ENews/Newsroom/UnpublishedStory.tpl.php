@@ -3,7 +3,7 @@
 ?>
 <div id="story_<?php echo $context->id; ?>" class="dragItem">
     <div class="story-grip">
-        <h4 class="wdn-brand"><?php echo $context->title; ?></h4>
+        <h4 class="dcf-txt-xs dcf-regular dcf-mb-2"><?php echo $context->title; ?></h4>
         <span class="requestedDates">
             <span class="dateRange">
                  <?php $date = strtotime($context->request_publish_start); ?>
