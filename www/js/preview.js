@@ -148,7 +148,7 @@ define([
 						return;
 					}
 					presentationCache[theStory.data('type')] = data;
-					var dialog = $('<div title="Select a Layout"><form style="text-align:center;"><fieldset /></form></div>');
+					var dialog = $('<div title="Select a Layout"><form class="dcf-form"></form></div>');
 					var selector = $('<select name="presentation_id" />');
 					$.each(data, function(key, label) {
 						var option = $('<option />').text(label).attr("value", key);
@@ -157,10 +157,10 @@ define([
 						}
 						option.appendTo(selector);
 					});
-					dialog.find('fieldset').append(selector);
+					dialog.find('form').append(selector);
 					dialog.dialog({
-						height: 200,
-						width: 350,
+						height: 'auto',
+						width: 'auto',
 						modal: true,
 						buttons: {
 							"Save": function() {
