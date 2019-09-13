@@ -24,7 +24,7 @@ article p {margin-top: 0;}
     float:right;
     margin:0 0 10px 10px;
 }
-#newsletterWeb .story img {
+#newsletterWeb .story img:not(.announcefullwidth) {
     margin-bottom:0;
     max-width: 38%;
 }

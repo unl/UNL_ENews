@@ -31,19 +31,21 @@ if ($context->getColFromSort() == 'onecol') {
                                                 </td>
                                             </tr>
                                         <?php endif; ?>
-                                        <tr>
-                                            <td class="unltoday-body" align="top" style="font-size:0px;line-height:1px;color:#545350;padding:0 0 0 0;">
-                                                <p>
-                                                    <?php if (($context->website)): ?>
-                                                        <a href="<?php echo $context->website; ?>" style="color:#D00000;word-wrap: break-word;">>
-                                                    <?php endif; ?>
-                                                    <?php echo $savvy->render($context, 'ENews/Story/field-description.tpl.php'); ?>
-                                                    <?php if (($context->website)): ?>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                </p>
-                                            </td>
-                                        </tr>
+                                        <?php if ($file = $context->getFileByUse('originalimage')): ?>
+                                            <tr>
+                                                <td class="unltoday-body" align="top" style="font-size:0px;line-height:1px;color:#545350;padding:0 0 0 0;">
+                                                    <p>
+                                                        <?php if (($context->website)): ?>
+                                                            <a href="<?php echo $context->website; ?>" style="color:#D00000;word-wrap: break-word;">
+                                                        <?php endif; ?>
+                                                        <?php echo $file->description; ?>
+                                                        <?php if (($context->website)): ?>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
 
                                         </tbody>
                                     </table>
