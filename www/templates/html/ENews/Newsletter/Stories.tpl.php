@@ -7,7 +7,7 @@
     <?php if ($displayColumn): ?>
     <tr>
         <td align="center" colspan="3" valign="top">
-            <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;">
+            <table width="650" cellpadding="0" cellspacing="0" style="max-width:650px;">
                 <tr>
                     <td>
                         <?php echo $savvy->render($context->getStoryColumn($stories[1], array(
@@ -31,7 +31,7 @@
     <?php if ($displayColumn): ?>
     <tr>
         <td align="center">
-            <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;">
+            <table width="650" cellpadding="0" cellspacing="0" style="max-width:650px;">
                 <tr>
                     <td valign="top" class="responsive-column">
                          <?php echo $savvy->render($context->getStoryColumn($stories[2], array(
