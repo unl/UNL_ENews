@@ -12,7 +12,7 @@
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                     <tr>
-                      <td colspan="2" class="unltoday-head" align="left" style="font-size:24px;font-family:Montserrat,Verdana,sans-serif;color:#d00000;padding-bottom:18px">
+                      <td colspan="2" class="unltoday-head" align="left" style="font-size:24px;font-family:Verdana,sans-serif;color:#d00000;padding-bottom:18px">
                         <a href="<?php echo $context->getURL(); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
                       </td>
                     </tr>
@@ -45,7 +45,7 @@
                           <?php if (($context->website)): ?>
                             <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#ebebea" style="background-color:#ebebea;" width="100%">
                               <tr>
-                                <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Montserrat,Verdana,sans-serif;font-size:14px;line-height:20px;">
+                                <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Verdana,sans-serif;font-size:14px;line-height:20px;">
                                   More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#D00000;"><?php echo $context->website; ?></a>
                                 </td>
                               </tr>
