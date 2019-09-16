@@ -6,7 +6,7 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-        <td align="center" colspan="3" valign="top">
+        <td align="center" valign="top">
             <table width="650" cellpadding="0" cellspacing="0" style="max-width:650px;">
                 <tr>
                     <td>

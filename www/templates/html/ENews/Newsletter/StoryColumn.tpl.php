@@ -10,7 +10,7 @@
         <?php echo $savvy->render($story, 'ENews/Newsletter/Preview/StoryData.tpl.php'); ?>
     <?php else: ?>
         <?php echo $savvy->render($story, $story->getRenderer()); ?>
-        <div class="clear"></div>
+        <div class="clear outlook2016stylefix" style="font-size:0;line-height:0">&nbsp;</div>
     <?php endif; ?>
     </article>
 <?php endforeach; ?>
