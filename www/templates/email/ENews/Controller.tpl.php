@@ -17,6 +17,10 @@
                 font-family:'Montserrat',Verdana,sans-serif!important;
                 font-weight: 500;
             }
+            td[class="unltoday-mast"] {
+                font-family:'Montserrat',Verdana,sans-serif!important;
+                font-weight: 500;
+            }
             td[class="wdn-logo-lockup"] {
                 font-family:'Montserrat',Verdana,sans-serif!important;
                 font-weight: 600;
