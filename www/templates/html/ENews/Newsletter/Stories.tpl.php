@@ -6,12 +6,18 @@
     ?>
     <?php if ($displayColumn): ?>
     <tr>
-        <td colspan="3" valign="top">
-            <?php echo $savvy->render($context->getStoryColumn($stories[1], array(
-                'area' => $area,
-                'offset' => 1,
-                'preview' => $isPreview
-            ))); ?>
+        <td align="center" colspan="3" valign="top">
+            <table width="650" cellpadding="0" cellspacing="0" style="max-width:650px;">
+                <tr>
+                    <td>
+                        <?php echo $savvy->render($context->getStoryColumn($stories[1], array(
+                            'area' => $area,
+                            'offset' => 1,
+                            'preview' => $isPreview
+                        ))); ?>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
     <?php endif; ?>
@@ -25,7 +31,7 @@
     <?php if ($displayColumn): ?>
     <tr>
         <td align="center">
-            <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;">
+            <table width="650" cellpadding="0" cellspacing="0" style="max-width:650px;">
                 <tr>
                     <td valign="top" class="responsive-column">
                          <?php echo $savvy->render($context->getStoryColumn($stories[2], array(

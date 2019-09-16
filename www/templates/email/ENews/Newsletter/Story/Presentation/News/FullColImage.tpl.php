@@ -7,7 +7,7 @@ if ($context->getColFromSort() == 'onecol') {
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height:normal">
     <tr>
         <td bgcolor="#f6f6f5" style="padding:10px 10px 10px 10px" class="unltoday-padding" align="center">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 620px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="responsive-table" style="max-width: 650px;">
                 <tbody>
                 <tr>
                     <td valign="middle">
@@ -26,7 +26,7 @@ if ($context->getColFromSort() == 'onecol') {
                                         </tr>
                                         <?php endif; ?>
                                         <tr>
-                                            <td colspan="2" class="unltoday-head" align="left" style="font-size:28px;font-family:Montserrat,Verdana,sans-serif;color:#d00000;padding:10px 0 10px 0">
+                                            <td colspan="2" class="unltoday-head" align="left" style="font-size:28px;font-family:Verdana,sans-serif;color:#d00000;padding:10px 0 10px 0">
                                                 <a href="<?php echo $context->getURL(); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
                                             </td>
                                         </tr>
@@ -49,6 +49,7 @@ if ($context->getColFromSort() == 'onecol') {
                                                         <tr>
                                                             <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Montserrat,Verdana,sans-serif;font-size:14px;line-height:20px;">
                                                                 More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#D00000;word-wrap: break-word;"><?php echo $context->website; ?></a>
+
                                                             </td>
                                                         </tr>
                                                     </table>
