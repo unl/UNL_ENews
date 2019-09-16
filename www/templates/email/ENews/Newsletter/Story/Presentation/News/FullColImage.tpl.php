@@ -36,7 +36,7 @@ if ($context->getColFromSort() == 'onecol') {
                                                     <?php
                                                     echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
                                                     if (!empty($context->full_article)) {
-                                                        echo ' <a href="'.$context->getURL().'" style="color:#D00000;">Continue reading&hellip;</a>';
+                                                        echo ' <a href="'.$context->getURL().'" style="color:#D00000;word-wrap: break-word;">Continue reading&hellip;</a>';
                                                     }
                                                     ?>
                                                     <?php if (isset($context->ics)): ?>
@@ -47,8 +47,9 @@ if ($context->getColFromSort() == 'onecol') {
                                                 <?php if (($context->website)): ?>
                                                     <table cellspacing="0" cellpadding="3" border="0" valign="top" bgcolor="#ebebea" style="background-color:#ebebea;" width="100%">
                                                         <tr>
-                                                            <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Verdana,sans-serif;font-size:14px;line-height:20px;">
-                                                                More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#D00000;"><?php echo $context->website; ?></a>
+                                                            <td align="right" style="margin:10px 0 10px 0;padding:10px 10px 10px 10px;font-family:Montserrat,Verdana,sans-serif;font-size:14px;line-height:20px;">
+                                                                More details at <a href="<?php echo $context->website; ?>" title="Go to the supporting webpage" style="color:#D00000;word-wrap: break-word;"><?php echo $context->website; ?></a>
+
                                                             </td>
                                                         </tr>
                                                     </table>

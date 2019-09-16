@@ -9,7 +9,7 @@ if ($file = $context->getFileByUse('originalimage')) {
     }
     echo '<figure class="'. $width .'">'
          .'<a href="'.$storylink.'">'
-    	 .'<img src="'.$file->getURL()
+    	 .'<img class="announcefullwidth" src="'.$file->getURL()
          . '" alt="'.$description.'" />'
          .'</a>'
          .'<figcaption>'.$description.'</figcaption>'
