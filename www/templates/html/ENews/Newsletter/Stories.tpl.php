@@ -1,3 +1,4 @@
+<br>
 <?php $isPreview = $context->getIsPreview(); ?>
 <?php foreach (array('news', 'ads') as $area): ?>
     <?php
