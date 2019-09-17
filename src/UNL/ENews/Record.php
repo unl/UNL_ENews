@@ -349,8 +349,13 @@ class UNL_ENews_Record
     function synchronizeWithArray($data)
     {
         foreach (get_object_vars($this) as $key=>$default_value) {
-            if (isset($data[$key]) && !empty($data[$key])) {
-                $this->$key = $data[$key];
+            if (isset($data[$key])) {
+                if (trim($data[$key]) == '') {
+                    // Set the submission of an empty value to NULL so the database NULL constraint can handle validation.
+                    $this->$key = NULL;
+                } else {
+                    $this->$key = $data[$key];
+                }
             }
         }
     }
