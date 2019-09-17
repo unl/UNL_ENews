@@ -350,7 +350,7 @@ class UNL_ENews_Record
     {
         foreach (get_object_vars($this) as $key=>$default_value) {
             if (isset($data[$key])) {
-                if ($data[$key] == '') {
+                if (trim($data[$key]) == '') {
                     // Set the submission of an empty value to NULL so the database NULL constraint can handle validation.
                     $this->$key = NULL;
                 } else {
