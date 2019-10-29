@@ -13,6 +13,9 @@ if (file_exists($wdnIncludePath . '/wdn/templates_5.0')) {
 $page->doctitle = '<title>' . $savvy->render($context, 'ENews/PageTitle.tpl.php') . ' | Announce | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_ENews_Controller::$url . '">Announce</a>';
 
+// Add WDN Deprecated Styles
+$page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>';
+
 $page->head .= '
     <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css" />
     <link rel="home" href="' . UNL_ENews_Controller::getURL() . '" title="UNL Announce" />
