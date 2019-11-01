@@ -2,7 +2,7 @@
 $savvy->loadScriptDeclaration("
     WDN.initializePlugin('modal', [function() {
         var $ = require('jquery');
-        $(\"a.gaStats\").colorbox();
+        $(\"a.gaStats\").colorbox({iframe:true, width:'90%',height:'90%'});
     }]);");
 ?>
 <table class="functionTable">
