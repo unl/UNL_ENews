@@ -49,7 +49,7 @@ class UNL_Auth_SimpleCAS extends UNL_Auth
      */
     protected $options = array('hostname' => 'shib.unl.edu',
                                'port'     => 443,
-                               'uri'      => '/idp/profile/cas');
+                               'uri'      => 'idp/profile/cas');
     
     protected $client;
     
