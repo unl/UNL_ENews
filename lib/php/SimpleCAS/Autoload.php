@@ -42,7 +42,7 @@ if (function_exists('spl_autoload_register')) {
     }
     unset($_____t);
 } elseif (!function_exists('__autoload')) {
-    function __autoload($class) { return SimpleCAS_Autoload($class); }
+    function spl_autoload_register($class) { return SimpleCAS_Autoload($class); }
 }
 
 // set up include_path if it doesn't register our current location
