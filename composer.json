@@ -1,6 +1,5 @@
 {
   "require": {
-
     "unl/php-wdn-templates": "^5.1",
     "widop/google-analytics": "*",
     "ezyang/htmlpurifier": "~4.6",
