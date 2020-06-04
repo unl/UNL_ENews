@@ -6,10 +6,10 @@
     <input type="hidden" name="_type" value="addemail" />
     <input type="text" name="email" />
     <div class="dcf-input-checkbox">
-        <input type="checkbox" class="dcf-input-control" name="newsletter_default" value="1" /><label for="newsletter_default">Use as default when creating new newsletter</label>
+        <input type="checkbox" class="dcf-input-control" id="newsletter_default" name="newsletter_default" value="1" /><label for="newsletter_default">Use as default when creating new newsletter</label>
     </div>
     <div class="dcf-input-checkbox">
-        <input type="checkbox" class="dcf-input-control" name="optout" value="1" /><label for="optout">Recipients can unsubscribe (Requires <a href="https://listserv.unl.edu/">listserv</a> list be properly configured)</label>
+        <input type="checkbox" class="dcf-input-control" id="optout" name="optout" value="1" /><label for="optout">Recipients can unsubscribe (Requires <a href="https://listserv.unl.edu/">listserv</a> list be properly configured)</label>
     </div>
     <input type="submit" value="Add Email" />
 </form>
