@@ -1,6 +1,6 @@
 {
   "require": {
-    "unl/php-wdn-templates": "^5.1",
+    "unl/php-wdn-templates": "^5.2",
     "widop/google-analytics": "*",
     "ezyang/htmlpurifier": "~4.6",
     "slim/csrf": "^0.8.2"
