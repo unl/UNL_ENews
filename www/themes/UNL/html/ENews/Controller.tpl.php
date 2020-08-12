@@ -4,7 +4,8 @@ use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
 $page = Templates::factory('Local', Templates::VERSION_5_2);
-$wdnIncludePath = dirname(dirname(dirname(dirname(__DIR__))));
+// Use set wdn include path or default to www directory
+$wdnIncludePath = !empty(UNL_ENews_Controller::$wdnIncludePath) ? UNL_ENews_Controller::$wdnIncludePath : dirname(dirname(dirname(dirname(__DIR__))));
 
 if (file_exists($wdnIncludePath . '/wdn/templates_5.2')) {
     $page->setLocalIncludePath($wdnIncludePath);

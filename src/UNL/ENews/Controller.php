@@ -21,6 +21,7 @@ class UNL_ENews_Controller
     protected static $user = false;
 
     public static $url = '';
+    public static $wdnIncludePath = '';
 
     protected static $db_settings = array(
         'host'     => 'localhost',

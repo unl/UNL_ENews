@@ -15,6 +15,7 @@ error_reporting(E_ALL);
 UNL_ENews_Controller::setAdmins(array('bbieber2', 'erasmussen2', 's-mfairch4', 'smeranda2'));
 
 UNL_ENews_Controller::$url = 'http://localhost/workspace/UNL_ENews/www/';
+UNL_ENews_Controller::$wdnIncludePath = dirname(__DIR__) . '/www';
 
 //Database config
 UNL_ENews_Controller::setDbSettings(array(
