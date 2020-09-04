@@ -49,7 +49,7 @@ if (!empty($id)) {
 }
 $cacheBust = uniqid();
 $savvy->loadScriptDeclaration('
-    require(["'. UNL_ENews_Controller::getURL() . 'js/purify.js?ver=' . $cacheBust . '", "' . UNL_ENews_Controller::getURL() . 'js/submission.js?ver=' . $cacheBust . '"],
+    require(["'. UNL_ENews_Controller::getURL() . 'js/purify.min.js?ver=' . $cacheBust . '", "' . UNL_ENews_Controller::getURL() . 'js/submission.js?ver=' . $cacheBust . '"],
         function(DOMPurify, submission){
             ' . $submissionEditType . '
             submission.initialize();
