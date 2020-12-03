@@ -1,9 +1,11 @@
 <div class="sidebar top dcf-p-4 unl-bg-scarlet">
     <div class="archives">
-        <h3 class="dcf-inverse dcf-txt-h5">
+        <header>
+            <h3 class="dcf-inverse dcf-mb-0">
             <?php echo $context->newsroom->name; ?>
-            <span class="dcf-subhead">Recent Newsletters</span>
-        </h3>
+            </h3>
+            <p class="dcf-inverse dcf-mt-1 dcf-subhead">Recent Newsletters</p>
+        </header>
         <ul class="dcf-list-bare">
         <?php
         foreach (UNL_ENews_NewsletterList::getRecent($context->newsroom->id, 5) as $newsletter) {
