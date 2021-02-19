@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58b590998015c1ef5cdbe8f328eb54c6",
+    "content-hash": "c7124625e56966256ceae85032265a75",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -251,16 +251,16 @@
         },
         {
             "name": "unl/php-wdn-templates",
-            "version": "v5.2.1",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpunltemplates.git",
-                "reference": "7648850d99cc8b6f03307a7feca7d31b18e9a233"
+                "reference": "090d6c7c8ac8ab2828165bd06574ecb48caf1a88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/7648850d99cc8b6f03307a7feca7d31b18e9a233",
-                "reference": "7648850d99cc8b6f03307a7feca7d31b18e9a233",
+                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/090d6c7c8ac8ab2828165bd06574ecb48caf1a88",
+                "reference": "090d6c7c8ac8ab2828165bd06574ecb48caf1a88",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,11 @@
             ],
             "description": "A PHP library for rendering the UNL templates",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2020-07-16T20:24:35+00:00"
+            "support": {
+                "issues": "https://github.com/unl/phpunltemplates/issues",
+                "source": "https://github.com/unl/phpunltemplates/tree/v5.3.0"
+            },
+            "time": "2021-01-27T17:05:21+00:00"
         },
         {
             "name": "widop/google-analytics",
@@ -589,5 +593,6 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
