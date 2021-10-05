@@ -104,11 +104,11 @@ $savvy->loadScriptDeclaration('
                   <input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="dcf-input-text required" />
                 </li>
                 <li>
-                  <label class="dcf-label" for="description"><span class="dcf-required">*</span> Summary <span class="helper">You have <strong>300</strong> characters remaining:</span></label>
+                  <label class="dcf-label" for="description"><span class="dcf-required">*</span> Summary <span class="dcf-form-help">You have <strong>300</strong> characters remaining:</span></label>
                   <textarea id="description" name="description" cols="60" rows="5" class="dcf-input-text required"><?php echo getValue($context, 'description'); ?></textarea>
                 </li>
                 <li>
-                  <label class="dcf-label" for="full_article">Full Article <span class="helper">For news releases, departmental news feeds, etc...</span></label>
+                  <label class="dcf-label" for="full_article">Full Article <span class="dcf-form-help">For news releases, departmental news feeds, etc...</span></label>
                   <textarea id="full_article" name="full_article" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea>
                 </li>
                 <li>
@@ -137,7 +137,7 @@ $savvy->loadScriptDeclaration('
                     ?>
                     <?php if (!empty($id)) : ?>
                         <?php foreach (UNL_ENews_Story::getByID($id)->getNewsrooms() as $item) : ?>
-                            <select class="dcf-input-select" name="newsroom_id[]" disabled="disabled">
+                            <select class="dcf-input-select" name="newsroom_id[]" disabled="disabled" aria-label="Select Newsroom">
                                 <option value=""></option>
                                 <option selected="selected" value="<?php echo $item->id;?>"><?php echo $item->name;?></option>
                                 <?php foreach (UNL_ENews_Submission::getOpenNewsroomsStatic() as $item2): ?>
@@ -148,7 +148,7 @@ $savvy->loadScriptDeclaration('
                             </select>
                         <?php endforeach ?>
                         <div id="newsroom_id_dropdown" style="display:none">
-                            <select class="dcf-input-select" name="newsroom_id[]">
+                            <select class="dcf-input-select" name="newsroom_id[]" aria-label="Select Newsroom">
                                 <option selected="selected" value=""></option>
                                 <?php foreach (UNL_ENews_Submission::getOpenNewsroomsStatic() as $item): ?>
                                     <?php
@@ -162,7 +162,7 @@ $savvy->loadScriptDeclaration('
                         </div>
                     <?php else : ?>
                         <div id="newsroom_id_dropdown">
-                            <select class="dcf-input-select" name="newsroom_id[]">
+                            <select class="dcf-input-select" name="newsroom_id[]" aria-label="Select Newsroom">
                                 <?php if ($newsroom_id == 1) : ?>
                                 <option value="1">Nebraska Today and other UComm publications</option>
                                 <?php  else : ?>

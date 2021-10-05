@@ -33,7 +33,7 @@
 }
 #upload_area div {
     border:2px dashed #D4440B;
-    background:#fcfcfc;
+    background: var(--bg-light-gray);
     text-align:center;
     margin:0 auto;
     padding:3px;
@@ -97,7 +97,5 @@
 }
 #deleteImages input {
     background: none;
-    color: gray;
-    text-decoration: underline;
-
+    color: var(--btn-secondary);
 }

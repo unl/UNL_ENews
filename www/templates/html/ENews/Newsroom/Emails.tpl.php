@@ -1,5 +1,5 @@
 <h3>Email Addresses</h3>
-<ul id="emailList" class="unl-bg-lightest-gray">
+<ul id="emailList" class="unl-bg-light-gray">
     <?php foreach ($context as $email): ?>
         <li>
             <span class="email" title="<?php echo $email->email ?>"><?php echo $email->email ?></span>

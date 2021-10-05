@@ -1,4 +1,4 @@
-<form action="#" method="post" id="deleteImages" class="dcf-mt-4">
+<form action="#" method="post" id="deleteImages" class="dcf-form dcf-mt-4">
     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">

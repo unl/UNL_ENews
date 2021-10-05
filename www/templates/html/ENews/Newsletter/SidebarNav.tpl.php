@@ -1,4 +1,4 @@
-<div class="sidebar top dcf-p-4 unl-bg-scarlet">
+<div class="sidebar top dcf-p-4">
     <div class="archives">
         <header>
             <h3 class="dcf-inverse dcf-mb-0">
@@ -17,6 +17,6 @@
         <a href="<?php echo $context->newsroom->getURL();?>/archive">Full archives</a>
     </div>
 </div>
-<div class="sidebar bottom dcf-p-4 unl-bg-light-gray">
+<div class="sidebar bottom dcf-p-4">
     <?php echo $savvy->render($context->newsroom, 'ENews/Newsroom/SubscribeForm.tpl.php'); ?>
 </div>

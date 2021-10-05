@@ -34,16 +34,21 @@ article p {margin-top: 0;}
 }
 img.spacer {display:none;}
 
-
+.sidebar {
+    background-color: var(--bg-inverse);
+}
 .sidebar.top h3 {
-    border-bottom:1px solid rgba(255, 255, 255, 1);
+    border-bottom:1px solid var(--b);
 }
 .sidebar.top a {
-    color:#fff;
+    color: var(--inverse);
 }
 .sidebar input[type="email"] {
     padding-left: 25px;
     background: #fff url('images/iconEmail.png') no-repeat 5px 50%;
+}
+.sidebar.bottom {
+    background-color: var(--bg-light-gray);
 }
 
 /* Newsletter Details
@@ -136,7 +141,7 @@ Newsletter Email Preview (for building the newsletter)
 /*Story Dragging */
 #drag_story_list {margin-top:50px;}
 #drag_story_list h3 {
-    background:#eee;
+    background: var(--bg-light-gray);
     padding:5px 8px;
     margin-top:20px;
 }
@@ -158,7 +163,7 @@ Newsletter Email Preview (for building the newsletter)
 }
 .dragItem {
     cursor:move;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid var(--b);
     display:inline-block;
     padding: 3px 0;
     width:100%;

@@ -1,11 +1,11 @@
 <section class="dcf-grid dcf-col-gap-vw dcf-row-gap-8">
     <div class="dcf-col-100% dcf-col-67%-start@md">
-        <ul class="wdn_tabs">
+        <div class="dcf-tabs dcf-tabs-responsive">
+        <ul>
             <li><a href="#questions">Questions About Submissions</a></li>
             <li><a href="#styleguide">Style Guide</a></li>
         </ul>
-        <div class="wdn_tabs_content">
-            <div id="questions">
+        <div id="questions">
                 <dl>
                     <dt>How do I submit a news/event announcement for consideration in Nebraska Today?</dt>
                     <dd>
@@ -152,3 +152,8 @@
         </div>
     </div>
 </section>
+<script>
+  window.addEventListener('inlineJSReady', function() {
+    WDN.initializePlugin('tabs');
+  }, false);
+</script>

@@ -7,7 +7,7 @@
 <fieldset>
     <ol style="padding:0;margin-top:0;">
         <li>
-            <label class="dcf-label" for="image">Image <span class="helper">Displayed with your item</span></label>
+            <label class="dcf-label" for="image">Image <span class="dcf-form-help">Displayed with your item</span></label>
             <input class="dcf-input-file" id="image" name="image" type="file" />
         </li>
         <li>
@@ -19,7 +19,7 @@
                 echo '<span class="dcf-required">*</span>';
             }
             ?>
-            <span class="helper">Used as a caption on the web view</span></label>
+            <span class="dcf-form-help">Used as a caption on the web view</span></label>
             <input class="dcf-input-text required" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
         </li>
     </ol>

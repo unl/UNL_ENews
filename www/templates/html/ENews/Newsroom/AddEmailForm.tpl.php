@@ -4,8 +4,8 @@
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
     <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
     <input type="hidden" name="_type" value="addemail" />
-    <input type="text" name="email" />
-    <div class="dcf-input-checkbox">
+    <input type="text" name="email" aria-label="Enter address" />
+    <div class="dcf-mt-4 dcf-input-checkbox">
         <input type="checkbox" class="dcf-input-control" id="newsletter_default" name="newsletter_default" value="1" /><label for="newsletter_default">Use as default when creating new newsletter</label>
     </div>
     <div class="dcf-input-checkbox">

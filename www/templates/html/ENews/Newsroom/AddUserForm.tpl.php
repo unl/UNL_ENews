@@ -4,9 +4,9 @@
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
     <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
     <input type="hidden" name="_type" value="adduser" />
-    <label for="dcf-input-group-button-input">My.UNL username</label>
     <div class="dcf-input-group">
-        <input type="text" class="dcf-input-group-button-input" name="user_uid" />
+        <label for="user_uid">My.UNL username</label>
+        <input type="text" class="dcf-input-group-button-input" id="user_uid" name="user_uid" />
         <input type="submit" class="dcf-btn dcf-btn-primary" value="Add User" />
     </div>
 </form>
