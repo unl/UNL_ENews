@@ -25,6 +25,7 @@
         <small class="dcf-badge dcf-badge-pill"><?php echo count($context->newsroom->getStories($type)); ?></small></a></li>
     <?php endforeach; ?>
 </ul>
+<div class="dcf-tabs-panel">
 <?php
 if ($context->actionable
     && isset($context->actionable[1])) { 
@@ -33,3 +34,4 @@ if ($context->actionable
     echo '<div class="four_col">No gnews is good gnews with Gary Gnu.</div>';
 }
 ?>
+</div>

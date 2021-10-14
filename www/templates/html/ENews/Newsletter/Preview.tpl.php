@@ -19,8 +19,8 @@ WDN.initializePlugin('notice');");
 
 ?>
 
-<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4 unl-bg-lighter-gray">
-   <form class="dcf-col-100% dcf-col-67%-start@md" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
+<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4 unl-bg-lightest-gray">
+   <form class="dcf-form dcf-col-100% dcf-col-67%-start@md" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
        <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
        <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
        <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
@@ -28,11 +28,11 @@ WDN.initializePlugin('notice');");
            <li>
                <input type="hidden" name="_type" value="newsletter" />
                <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
-               <label class="dcf-label" for="emailSubject">Email Subject <span class="helper">(Include story keywords!)</span><small class="dcf-required">Required</small></label>
+               <label class="dcf-label" for="emailSubject">Email Subject <span class="dcf-form-help">(Include story keywords!)</span><small class="dcf-required">Required</small></label>
                <input class="dcf-input-text" name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
            </li>
            <li>
-               <label class="dcf-label" for="releaseDate">Release Date <span class="helper">(Will be sent at 7:00 am)</span></label>
+               <label class="dcf-label" for="releaseDate">Release Date <span class="dcf-form-help">(Will be sent at 7:00 am)</span></label>
                <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
            </li>
        </ol>

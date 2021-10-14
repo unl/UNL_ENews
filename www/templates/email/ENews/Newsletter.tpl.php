@@ -11,7 +11,7 @@
                     <td bgcolor="#FEFDFA" class="wdn-header-top">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td><a href="http://www.unl.edu/" target="_blank" style="text-decoration: none; color: #d00000;"><img src="https://www.unl.edu/images/email/4-1/41_01.gif" width="320" height="36" alt="" border="0" align="left" style="display: block;"></a></td>
+                                <td><a href="http://www.unl.edu/" target="_blank" style="text-decoration: none; color: #d00000;"><img src="https://www.unl.edu/images/email/4-1/41_01.gif" width="320" height="36" alt="" border="0" align="left"  aria-label="Visit UNL Homepage" style="display: block;"></a></td>
                             </tr>
                         </table>
                     </td>
@@ -26,8 +26,8 @@
                     <td bgcolor="#FEFDFA">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" class="responsive-table">
                             <tr>
-                                <td width="77" class="wdn-logo"><a href="https://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" style="display: block;"></a></td>
-                                <td valign="middle" class="wdn-logo-lockup" style="font-size:27px; line-height:1; font-family:Verdana,sans-serif; text-transform:uppercase; font-weight: 600;"><a href="<?php echo $context->getURL(); ?>" target="_blank" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
+                                <td width="77" class="wdn-logo"><a href="https://www.unl.edu/" target="_blank"><img src="https://www.unl.edu/images/email/4-1/41_02.gif" width="77" height="83" alt="" border="0" align="left" aria-label="Visit UNL Homepage" style="display: block;"></a></td>
+                                <td valign="middle" class="wdn-logo-lockup" style="font-size:27px; line-height:1; font-family:Verdana,sans-serif; text-transform:uppercase; font-weight: 600;"><a href="<?php echo $context->getURL(); ?>" target="_blank" aria-label="View Newsletter" style="text-decoration: none; color:#474746"><?php echo UNL_ENews_Newsroom::getByID($context->newsroom_id)->name; ?></a></td>
                             </tr>
                         </table>
                     </td>

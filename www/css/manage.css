@@ -1,6 +1,7 @@
 /* Check/Uncheck/Action
 ****************************/
 .storyAction {
+    background-color: var(--bg-overlay-dark);
     padding:6px 5px 10px;
     position:relative;
     z-index: 1;
@@ -14,10 +15,7 @@ a.checkall,
 a.uncheckall {
     float:left;
     margin-right:6px;
-}
-a.checkall:focus,
-a.uncheckall:focus {
-    color:#fff !important;
+    color: #fff !important;
 }
 
 /* Function Tables
@@ -69,7 +67,14 @@ a.uncheckall:focus {
     height:32px;
 }
 body #cboxLoadedContent {
-    background-color: #fff;
+    background-color: var(--bg-white);
     padding: 1em;
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--b);
+}
+
+.wdn_tabs>li {
+    background-color: var(--bg-tab);
+}
+.wdn_tabs>li.selected {
+    background-color: var(--bg-tab-selected);
 }

@@ -49,7 +49,7 @@ if (!empty($context->options['story_id'])) {
 <?php echo $savvy->render($context, 'ENews/Confirmation/Submission.tpl.php'); ?>
 <?php } //end if ?>
 
-<form id="enewsManage" name="enewsManage" class="energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
+<form id="enewsManage" name="enewsManage" class="dcf-form energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
 <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
@@ -60,14 +60,14 @@ if (!empty($context->options['story_id'])) {
 <input type="hidden" name="status" value="<?php echo $status; ?>" />
 <?php endif ?>
 
-<div class="storyAction unl-bg-dark-gray">
+<div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
-        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn dcf-btn-tertiary checkall">Check All</a>
+        <a href="#" class="dcf-btn dcf-btn-tertiary uncheckall">Uncheck All</a>
     </div>
     <div class="dcf-input-group">
         <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
-        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)" aria-label="Select bulk story action">
             <option>Select action...</option>
             <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>
@@ -97,7 +97,10 @@ if (!empty($context->options['story_id'])) {
     <tbody>
     <?php foreach ($context as $item) : ?>
         <tr id="row<?php echo $item->id; ?>" class="<?php echo $item->presentation->type; ?>">
-            <td><input type="checkbox" name="story_<?php echo $item->id; ?>" /></td>
+            <td><div class="dcf-input-checkbox">
+                    <input type="checkbox" name="story_<?php echo $item->id; ?>" id="story_<?php echo $item->id; ?>"/>
+                    <label for="story_<?php echo $item->id; ?>"><span class="dcf-sr-only">Check story for action</span></label>
+            </div></td>
             <td class="mainCell">
             	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
             	<h5 class="wdn-brand"><?php echo $item->title; ?></h5>
@@ -114,14 +117,14 @@ if (!empty($context->options['story_id'])) {
     <?php endforeach; ?>
     </tbody>
 </table>
-<div class="storyAction unl-bg-dark-gray">
+<div class="storyAction">
     <div class="storyButtonAction">
-        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary checkall">Check All</a>
-        <a href="#" class="dcf-btn dcf-btn-inverse-tertiary uncheckall">Uncheck All</a>
+        <a href="#" class="dcf-btn dcf-btn-tertiary checkall">Check All</a>
+        <a href="#" class="dcf-btn dcf-btn-tertiary uncheckall">Uncheck All</a>
     </div>
     <div class="dcf-input-group">
         <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
-        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)">
+        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)" aria-label="Select bulk story action">
             <option>Select action...</option>
             <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
                 <option value="approved"  disabled="disabled">Add to Approved</option>

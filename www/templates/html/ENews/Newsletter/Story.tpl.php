@@ -8,7 +8,7 @@ $newsletter_url = $context->newsletter->getURL();
         <?php echo $savvy->render($context->story); ?>
     </article>
     <div class="dcf-col-100% dcf-col-33%-end@md">
-        <div class="sidebar top dcf-p-4 dcf-mb-4 unl-bg-scarlet">
+        <div class="sidebar top dcf-p-4 dcf-mb-4">
             <div class="inner_sidebar">
                 <h3 class="dcf-inverse">
                     <a href="<?php echo $context->newsletter->getURL(); ?>" title="Go to the newsletter index page">
