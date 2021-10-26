@@ -17,7 +17,7 @@ $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_ENews_Controller::$ur
 $page->head .= '<link rel="preload" href="/wdn/templates_5.3/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.3/css/deprecated.css"></noscript>';
 
 $page->head .= '
-    <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css?cb" />
     <link rel="home" href="' . UNL_ENews_Controller::getURL() . '" title="UNL Announce" />
     <link rel="logout" href="' . UNL_ENews_Controller::getURL() . '?logout" title="Log out" />
 ';

@@ -1,6 +1,6 @@
-@import 'submission.css';
-@import 'manage.css';
-@import 'newsletter.css';
+@import 'submission.css?cb';
+@import 'manage.css?cb';
+@import 'newsletter.css?cb';
 
 table th {text-align:left;}
 form fieldset {
