@@ -7,15 +7,11 @@ $savvy->loadScriptDeclaration("
 // This plugin is only needed for the demo.
 WDN.initializePlugin('notice');");
 ?>
-<div class="wdn_notice affirm">
-    <div class="close">
-        <a href="#" title="Close this notice">Close this notice</a>
-    </div>
-    <div class="message">
-        <h4>Almost there!</h4>
+<div class="dcf-notice dcf-notice-success" hidden>
+    <h2>Almost there!</h2>
+    <div>
         <p>We have received your subscription request. An email has been sent to your address asking you to confirm. Simply click the confimation link in
-        that email, and you'll be set.
-        </p>
+        that email, and you'll be set.</p>
     </div>
 </div>
 <?php
