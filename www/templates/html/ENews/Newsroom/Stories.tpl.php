@@ -26,7 +26,7 @@ $savvy->loadScriptDeclaration("
 if (!empty($context->options['story_id'])) {
   $savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
 ?>
-<div class="dcf-notice dcf-notice-success dcf-relative" hidden>
+<div class="dcf-notice dcf-notice-success" hidden>
     <?php if (!empty($context->options['newsroom'])): ?>
     <h2>Thanks for your submission!</h2>
     <div>
