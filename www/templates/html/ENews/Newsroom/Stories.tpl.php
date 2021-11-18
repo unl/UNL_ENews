@@ -14,9 +14,7 @@ if (count($context) == 0) {
 $cacheBust = uniqid();
 $savvy->loadScript(UNL_ENews_Controller::getURL() . "/js/manager.js?ver=" . $cacheBust);
 $savvy->loadScriptDeclaration("
-    WDN.loadJS(\"/wdn/templates_3.1/scripts/plugins/ui/jQuery.ui.js\");
-    WDN.loadCSS(\"/wdn/templates_3.1/css/content/forms.css\");
-
+    WDN.loadJS(\"/wdn/templates_5.3/js/compressed/plugins/ui/jquery-ui.js\");
     WDN.jQuery(document).ready(function() {
         manager.initialize();
     });
@@ -28,23 +26,19 @@ $savvy->loadScriptDeclaration("
 if (!empty($context->options['story_id'])) {
   $savvy->loadScriptDeclaration("WDN.initializePlugin('notice');");
 ?>
-<div class="wdn_notice affirm dcf-relative">
-  <div class="close">
-    <a href="#" title="Close this notice">Close this notice</a>
-  </div>
-  <div class="message">
+<div class="dcf-notice dcf-notice-success" hidden>
     <?php if (!empty($context->options['newsroom'])): ?>
-    <h4>Thanks for your submission!</h4>
-    <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>
+    <h2>Thanks for your submission!</h2>
+    <div>
+        <p>Your article is now in our queue. We will review, adapt and incorporate to the best of our abilities. If we have any questions, we'll contact you. If you have any questions, please contact us.</p>
 
-    <h4 class="dcf-mt-4">Have more news you'd like to share?</h4>
-    <p><a href="<?php echo UNL_ENews_Newsroom::getById($context->options['newsroom'])->getSubmitURL(); ?>">Submit another story&hellip;</a></p>
-
+        <h2 class="dcf-mt-4 dcf-mb-2 dcf-txt-h6" style="color: var(--bg-white);">Have more news you'd like to share?</h3>
+        <p><a href="<?php echo UNL_ENews_Newsroom::getById($context->options['newsroom'])->getSubmitURL(); ?>">Submit another story&hellip;</a></p>
+    </div>
     <?php else: ?>
-    <h4>Submission Saved!</h4>
-    <p>Your article has been saved.</p>
+    <h2>Submission Saved!</h2>
+    <div><p>Your article has been saved.</p></div>
     <?php endif; ?>
-  </div>
 </div>
 <?php echo $savvy->render($context, 'ENews/Confirmation/Submission.tpl.php'); ?>
 <?php } //end if ?>

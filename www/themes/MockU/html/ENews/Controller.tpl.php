@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo UNL_ENews_Controller::getURL();?>css/all.css" />
 
 <title><?php echo $savvy->render($context, 'ENews/PageTitle.tpl.php'); ?> E-News | MockU</title>
-<script type="text/javascript" src="/wdn/templates_3.1/scripts/all.js"></script>
+<script type="text/javascript" src="/wdn/templates_5.3/js/compressed/all.js"></script>
 <script type="text/javascript">
 var ENEWS_HOME = '<?php echo UNL_ENews_Controller::getURL(); ?>';
 </script>

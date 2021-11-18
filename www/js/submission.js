@@ -148,7 +148,8 @@ define([
 			// When the submission button is pressed, save whatever changes were made to the story first
 			$('form#enewsSubmission').bind('submit', function() {
 				if (validationErrorMessage = plugin.submitStory(true, false)) {
-					$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate dcf-fixed dcf-z-2 dcf-w-100%" style="top: 0"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Submit Failed!</h4><p>'+validationErrorMessage+'</p></div></div>');
+					$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="dcf-notice dcf-notice-danger" id="submission-error" hidden data-overlay="dcf-main"><h2>Submit Failed!</h2><div><p>'+validationErrorMessage+'</p></div></div>');
+					window.scrollTo(0, 0);
 					return false;
 				}
 			});
@@ -373,7 +374,7 @@ define([
 						$('#deleteImages input[name=storyid]').val(data);
 					},
 					function (data, status, e) {
-						$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="wdn_notice negate"><div class="close"><a href="#" title="Close this notice">Close this notice</a></div><div class="message"><h4>Error</h4><p>Problem uploading image</p></div></div>');
+						$('#dcf-main').prepend('<script type="text/javascript">WDN.initializePlugin("notice");</script><div class="dcf-notice dcf-notice-danger" hidden><h2>Error</h2><div><p>Problem uploading image</p></div></div>');
 						return e;
 					}
 				);
