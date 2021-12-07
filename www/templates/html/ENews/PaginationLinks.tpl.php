@@ -20,15 +20,15 @@
 	        $link = UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($page-1)*$context->limit));
     ?>
     <?php if ($page === $currentPage): ?>
-        <span class="dcf-pagination-selected"><?php echo $page; ?></span>
+        <li><span class="dcf-pagination-selected"><?php echo $page; ?></span></li>
     <?php elseif ($page <= 3 || $page >= $numberOfPages - 2 || $page == $currentPage - 1 ||
                   $page == $currentPage - 2 || $page == $currentPage + 1 || $page == $currentPage + 2): ?>
-        <a href="<?php echo $link; ?>"><?php echo $page; ?></a>
+        <li><a href="<?php echo $link; ?>"><?php echo $page; ?></a></li>
     <?php elseif ($page < $currentPage && !$before_ellipsis_shown): ?>
-        <span class="dcf-pagination-ellipsis">&mldr;</span>
+        <li><span class="dcf-pagination-ellipsis">&mldr;</span></li>
         <?php $before_ellipsis_shown = true; ?>
     <?php elseif ($page > $currentPage && !$after_ellipsis_shown): ?>
-        <span class="dcf-pagination-ellipsis">&mldr;</span>
+        <li><span class="dcf-pagination-ellipsis">&mldr;</span></li>
         <?php $after_ellipsis_shown = true; ?>
     <?php endif; ?>
     <?php } // end for ?>
