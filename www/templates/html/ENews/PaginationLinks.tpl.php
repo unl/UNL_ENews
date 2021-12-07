@@ -3,8 +3,7 @@
     $cpFudge = $context->limit == 1 ? 2 : 1;
     $currentPage = intval(ceil(($context->offset  - 1) / $context->limit) + $cpFudge);
     $numberOfPages = intval(ceil($context->total / $context->limit));
-    $displayPageLimit = 10;
-    $showFirstLast = $numberOfPages > $displayPageLimit;
+    $showFirstLast = $numberOfPages > 10;
 ?>
 <nav class="dcf-pagination dcf-txt-center">
     <ol class="dcf-list-bare dcf-list-inline">
