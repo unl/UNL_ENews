@@ -1,28 +1,35 @@
 <?php
-$savvy->loadScriptDeclaration("WDN.loadCSS('/wdn/templates_3.0/css/content/pagination.css');");
+    $savvy->loadScriptDeclaration("WDN.initializePlugin('pagination');");
+    $cpFudge = $context->limit == 1 ? 2 : 1;
+    $currentPage = intval(ceil(($context->offset  - 1) / $context->limit) + $cpFudge);
+    $numberOfPages = intval(ceil($context->total / $context->limit));
 ?>
-<ul class="wdn_pagination">
+<nav class="dcf-pagination dcf-txt-center">
+    <ol class="dcf-list-bare dcf-list-inline">
     <?php if ($context->offset != 0) :?>
-    <li class="arrow"><a href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset-$context->limit))); ?>" title="Go to the previous page">&larr; prev</a></li>
+        <li><a class="dcf-pagination-prev" href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset-$context->limit))); ?>">Prev</a></li>
     <?php endif; ?>
-    <?php for ($page = 1; $page*$context->limit < $context->total+$context->limit; $page++ ) {
-        $link = UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($page-1)*$context->limit));
-        $class = '';
-        if (($page-1)*$context->limit == $context->offset) {
-            $class = 'selected';
-        }
+    <?php
+        $before_ellipsis_shown = false;
+        $after_ellipsis_shown = false;
+        for ($page = 1; $page <= $numberOfPages; $page++) {
+	        $link = UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($page-1)*$context->limit));
     ?>
-    <li class="<?php echo $class; ?>">
-        <?php
-        if ($class !== 'selected') { ?>
-            <a href="<?php echo $link; ?>" title="Go to page <?php echo $page; ?>"><?php echo $page; ?></a>
-        <?php
-        } else {
-            echo $page;
-        } ?>
-    </li>
-    <?php } ?>
-    <?php if (($context->offset+$context->limit) < $context->total) :?>
-    <li class="arrow"><a href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset+$context->limit))); ?>" title="Go to the next page">next &rarr;</a></li>
+    <?php if ($page === $currentPage): ?>
+        <li><span class="dcf-pagination-selected"><?php echo $page; ?></span></li>
+    <?php elseif ($page <= 3 || $page >= $numberOfPages - 2 || $page == $currentPage - 1 ||
+                  $page == $currentPage - 2 || $page == $currentPage + 1 || $page == $currentPage + 2): ?>
+        <li><a href="<?php echo $link; ?>"><?php echo $page; ?></a></li>
+    <?php elseif ($page < $currentPage && !$before_ellipsis_shown): ?>
+        <li><span class="dcf-pagination-ellipsis">&mldr;</span></li>
+        <?php $before_ellipsis_shown = true; ?>
+    <?php elseif ($page > $currentPage && !$after_ellipsis_shown): ?>
+        <li><span class="dcf-pagination-ellipsis">&mldr;</span></li>
+        <?php $after_ellipsis_shown = true; ?>
     <?php endif; ?>
-</ul>
+    <?php } // end for ?>
+    <?php if (($context->offset+$context->limit) < $context->total) :?>
+        <li><a class="dcf-pagination-next" href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset+$context->limit))); ?>">Next</a></li>
+    <?php endif; ?>
+    </ol>
+</nav>
