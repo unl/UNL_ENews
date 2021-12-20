@@ -15,6 +15,7 @@
 </div>
 
 <div class="dcf-tabs-faked dcf-mt-4">
+    <ol class="dcf-mb-0">
 	<?php
     // Render DCF Tabs markup with PHP since this use case is not supported
 	const VALID_STATUSES = array('pending', 'approved', 'archived');
