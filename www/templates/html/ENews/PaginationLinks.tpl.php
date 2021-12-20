@@ -4,7 +4,7 @@
     $currentPage = intval(ceil(($context->offset  - 1) / $context->limit) + $cpFudge);
     $numberOfPages = intval(ceil($context->total / $context->limit));
 ?>
-<nav class="dcf-pagination dcf-txt-center">
+<nav class="dcf-pagination dcf-txt-center dcf-mt-3">
     <ol class="dcf-list-bare dcf-list-inline">
     <?php if ($context->offset != 0) :?>
         <li><a class="dcf-pagination-prev" href="<?php echo UNL_ENews_Controller::addURLParams($context->url, array('limit'=>$context->limit, 'offset'=>($context->offset-$context->limit))); ?>">Prev</a></li>

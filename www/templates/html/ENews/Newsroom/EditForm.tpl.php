@@ -18,7 +18,7 @@ WDN.loadCSS('" . UNL_ENews_Controller::getURL(). "css/newsroom.css');
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
     <input type="hidden" name="_type" value="newsroom" />
     <input type="hidden" name="newsroom_id" value="<?php echo $context->id; ?>" />
-    <ol>
+    <ol class="dcf-list-bare">
         <li>
             <label class="dcf-label" for="name">
                 <span class="dcf-required">*</span>
@@ -78,5 +78,5 @@ WDN.loadCSS('" . UNL_ENews_Controller::getURL(). "css/newsroom.css');
             <textarea class="dcf-input-text" id="footer_text" name="footer_text"><?php echo $context->footer_text; ?></textarea>
         </li>
     </ol>
-    <input class="dcf-btn" type="submit" name="submit" value="Submit" />
+    <input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Submit" />
 </form>
