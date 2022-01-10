@@ -15,7 +15,7 @@
 </div>
 
 <div class="dcf-tabs-faked dcf-mt-4">
-    <ol class="dcf-mb-0">
+    <ol class="dcf-tabs-list dcf-list-bare dcf-mb-0" role="tablist">
 	<?php
     // Render DCF Tabs markup with PHP since this use case is not supported
 	const VALID_STATUSES = array('pending', 'approved', 'archived');
@@ -23,7 +23,7 @@
 	foreach (VALID_STATUSES as $type):
         $selected = $status === $type ? 'tabindex="-1" aria-selected="true"' : 'tabindex="0"';
 		?>
-        <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-<?php echo $type; ?>" href="<?php echo $context->newsroom->getURL();?>/manage?status=<?php echo $type; ?>" class="dcf-tab dcf-d-block" role="tab"  <?php echo $selected; ?> data-panel-id="status-<?php echo $type; ?>"><?php echo ucfirst($type); ?><small class="dcf-badge dcf-badge-pill"><?php echo count($context->newsroom->getStories($type)); ?></small></a></li>
+        <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-<?php echo $type; ?>" href="<?php echo $context->newsroom->getURL();?>/manage?status=<?php echo $type; ?>" class="dcf-tab dcf-d-block" role="tab"  <?php echo $selected; ?> data-panel-id="status-<?php echo $type; ?>"><?php echo ucfirst($type); ?> <small class="dcf-badge dcf-badge-pill"><?php echo count($context->newsroom->getStories($type)); ?></small></a></li>
 	<?php endforeach; ?>
     </ol>
     <section id="status-<?php echo $status; ?>" role="tabpanel" tabindex="-1" class="dcf-tabs-panel" aria-labelledby="tab-<?php echo $status; ?>">

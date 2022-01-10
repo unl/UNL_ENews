@@ -58,23 +58,23 @@ WDN.initializePlugin('notice');");
                        </label>
                    </div>
                </form>
-               <form action="<?php echo $context->getURL(); ?>" method="post" class="remove email">
+               <form action="<?php echo $context->getURL(); ?>" method="post" class="dcf-form remove email">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                    <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                    <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="removenewsletteremail" />
-                   <input class="dcf-btn" type="submit" value="Remove" />
+                   <input class="dcf-btn dcf-btn-primary" type="submit" value="Remove" />
                </form>
-               <form action="<?php echo $context->getURL(); ?>" method="post" class="add email">
+               <form action="<?php echo $context->getURL(); ?>" method="post" class="dcf-form add email">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                    <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                    <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="addnewsletteremail" />
-                   <input class="dcf-btn" type="submit" value="Add" />
+                   <input class="dcf-btn dcf-btn-primary" type="submit" value="Add" />
                </form>
            </li>
            <?php endforeach; ?>

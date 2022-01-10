@@ -1,4 +1,4 @@
-<form class="dcf-form-controls-inline dcf-mb-6" name="newsroom_choose" method="get" action="">
+<form class="dcf-form dcf-form-controls-inline dcf-mb-6" name="newsroom_choose" method="get" action="">
     <input type="hidden" name="view" value="manager">
     <div class="dcf-input-group">
         <select name="newsroom" id="newsroom" class="dcf-input-select dcf-mb-0" aria-label="Choose your newsroom">
