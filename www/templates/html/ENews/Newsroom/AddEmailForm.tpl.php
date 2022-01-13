@@ -11,5 +11,5 @@
     <div class="dcf-input-checkbox">
         <input type="checkbox" class="dcf-input-control" id="optout" name="optout" value="1" /><label for="optout">Recipients can unsubscribe (Requires <a href="https://listserv.unl.edu/">listserv</a> list be properly configured)</label>
     </div>
-    <input type="submit" value="Add Email" />
+    <input class="dcf-btn dcf-btn-primary" type="submit" value="Add Email" />
 </form>
