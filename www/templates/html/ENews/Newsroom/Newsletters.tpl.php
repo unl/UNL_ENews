@@ -5,7 +5,7 @@ $savvy->loadScriptDeclaration("
         $(\"a.gaStats\").colorbox({iframe:true, width:'90%',height:'90%'});
     }]);");
 ?>
-<table class="functionTable">
+<table class="dcf-w-100% dcf-table dcf-table-bordered functionTable">
     <thead>
         <tr>
             <th>Newsletter</th>

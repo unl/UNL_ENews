@@ -9,7 +9,7 @@ if ($start_date==$end_date){
 }
 ?>
 
-<table id="gaStats">
+<table class="dcf-table dcf-table-bordered" id="gaStats">
 <tr>
     <th>Story</th>
     <th>Pageviews</th>
