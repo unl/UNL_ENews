@@ -29,3 +29,13 @@ UNL_ENews_GAStats::$ga_profile_id = 111; //integer
 
 // Set the theme you wish to use
 $theme = 'MockU';
+
+// Site Notice
+$siteNotice = new stdClass();
+$siteNotice->display = false;
+$siteNotice->noticePath = 'dcf-notice';
+$siteNotice->containerID = 'dcf-main';
+$siteNotice->type = 'dcf-notice-info';
+$siteNotice->title = 'Maintenance Notice';
+$siteNotice->message = 'We will be performing site maintenance on February 3rd from 4:30 to 5:00 pm CST.  This site may not be available during this time.';
+UNL_ENews_Controller::$siteNotice = $siteNotice;
