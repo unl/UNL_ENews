@@ -13,7 +13,7 @@ class UNL_ENews_Controller
 
     protected static $admins = array('admin');
 
-	public static $siteNotice = NULL;
+    public static $siteNotice = NULL;
 
     /**
      * The currently logged in user.
