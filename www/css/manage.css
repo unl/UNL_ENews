@@ -73,7 +73,7 @@ body #cboxLoadedContent {
 }
 
 .wdn_tabs>li {
-    background-color: var(--bg-tab);
+    background-color: var(--bg-tabs-panel);
 }
 .wdn_tabs>li.selected {
     background-color: var(--bg-tab-selected);
