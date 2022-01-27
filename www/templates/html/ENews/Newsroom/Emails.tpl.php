@@ -11,13 +11,13 @@
                 <span class="details">Default</span>
             <?php endif ?>
             
-            <form action="<?php echo UNL_ENews_Controller::getURL() ?>?view=newsroom" method="post">
+            <form class="dcf-form" action="<?php echo UNL_ENews_Controller::getURL() ?>?view=newsroom" method="post">
                 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                 <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                 <input type="hidden" name="email_id" value="<?php echo $email->id ?>" />
                 <input type="hidden" name="_type" value="removeemail" />
-                <input type="submit" value="X" />
+                <input class="dcf-btn dcf-btn-primary" submit" value="X" />
             </form>
         </li>
     <?php endforeach; ?>

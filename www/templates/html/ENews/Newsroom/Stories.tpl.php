@@ -72,7 +72,7 @@ if (!empty($context->options['story_id'])) {
         </select>
     </div>
 </div>
-<table class="storylisting functionTable" >
+<table class="dcf-table dcf-table-bordered dcf-w-100% storylisting functionTable" >
     <thead>
         <tr>
             <?php
@@ -97,7 +97,7 @@ if (!empty($context->options['story_id'])) {
             </div></td>
             <td class="mainCell">
             	<?php if ($file = $item->getThumbnail()) { echo '<img src="'.$file->getURL().'" style="max-height:55px;float:right;" alt="'.htmlentities($file->getRaw('name'), ENT_QUOTES, 'UTF-8').'" />'; } ?>
-            	<h5 class="wdn-brand"><?php echo $item->title; ?></h5>
+               <h5><?php echo $item->title; ?></h5>
             	<a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=submit&amp;id=<?php echo $item->id; ?>" class="dcf-btn dcf-btn-primary action edit">Edit</a>
             	<span>Submitted by <?php echo $item->uid_created; ?>.
             	<?php if (!empty($item->uid_modified)) { ?>

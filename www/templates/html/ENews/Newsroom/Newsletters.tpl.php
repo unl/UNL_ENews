@@ -5,7 +5,7 @@ $savvy->loadScriptDeclaration("
         $(\"a.gaStats\").colorbox({iframe:true, width:'90%',height:'90%'});
     }]);");
 ?>
-<table class="functionTable">
+<table class="dcf-w-100% dcf-table dcf-table-bordered functionTable">
     <thead>
         <tr>
             <th>Newsletter</th>
@@ -22,7 +22,7 @@ $savvy->loadScriptDeclaration("
             <td class="mainCell" style="min-width:600px;"><h5><?php echo $newsletter->subject; ?> <span class="caption">(<?php echo date('D. M d, Y', $newsletterDate); ?>)</span></h5>
                 <a href="<?php echo $newsletter->getEditURL(); ?>" class="dcf-btn dcf-btn-secondary action edit">Edit</a>
                 <?php echo $savvy->render($newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-                <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
+                <form class="dcf-form" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsletters" method="post" id="deletenewsletter_<?php echo $newsletter->id; ?>" style="width:120px;">
                     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
@@ -36,7 +36,7 @@ $savvy->loadScriptDeclaration("
                 <?php if ($newsletter->distributed): ?>
                 <strong>Sent:</strong> <?php echo date('D. M d, Y', $newsletterDate); ?>
                 <?php else: ?>
-                <form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post" id="sendnewsletter_<?php echo $newsletter->id; ?>">
+                <form class="dcf-form" action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=sendnews&amp;id=<?php echo $newsletter->id; ?>" method="post" id="sendnewsletter_<?php echo $newsletter->id; ?>">
                     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">

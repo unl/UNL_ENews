@@ -5,12 +5,12 @@
 <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
 
 <fieldset>
-    <ol style="padding:0;margin-top:0;">
-        <li>
+    <ol class="dcf-list-bare dcf-p-0 dcf-mt-0">
+        <li class="dcf-form-group">
             <label class="dcf-label" for="image">Image <span class="dcf-form-help">Displayed with your item</span></label>
             <input class="dcf-input-file" id="image" name="image" type="file" />
         </li>
-        <li>
+        <li class="dcf-form-group">
             <label class="dcf-label" for="file_description" id="img_description_label">Image Description
             <?php
             $disabled = 'disabled="disabled"';
@@ -20,7 +20,7 @@
             }
             ?>
             <span class="dcf-form-help">Used as a caption on the web view</span></label>
-            <input class="dcf-input-text required" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
+            <input class="dcf-w-100%" id="file_description" name="file_description" <?php echo $disabled; ?> type="text" value="<?php echo getValue($originalImage, 'description'); ?>" />
         </li>
     </ol>
     

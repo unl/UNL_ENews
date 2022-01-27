@@ -98,34 +98,38 @@ $savvy->loadScriptDeclaration('
                 }
             }
             ?>
-            <ol>
-                <li>
-                  <label class="dcf-label" for="title"><span class="dcf-required">*</span> Headline or Title</label>
-                  <input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="dcf-input-text required" />
+            <ol class="dcf-list-bare dcf-w-100%">
+                <li class="dcf-form-group">
+                  <label for="title">Headline or Title <small class="dcf-required">Required</small></label>
+                  <input id="title" name="title" type="text" value="<?php echo getValue($context, 'title'); ?>" class="required dcf-w-100%" />
                 </li>
-                <li>
-                  <label class="dcf-label" for="description"><span class="dcf-required">*</span> Summary <span class="dcf-form-help">You have <strong>300</strong> characters remaining:</span></label>
+                <li class="dcf-form-group">
+                  <label for="description">Summary <small class="dcf-required">Required</small> <span class="dcf-form-help">You have <strong>300</strong> characters remaining:</span></label>
                   <textarea id="description" name="description" cols="60" rows="5" class="dcf-input-text required"><?php echo getValue($context, 'description'); ?></textarea>
                 </li>
-                <li>
-                  <label class="dcf-label" for="full_article">Full Article <span class="dcf-form-help">For news releases, departmental news feeds, etc...</span></label>
+                <li class="dcf-form-group">
+                  <label for="full_article">Full Article <span class="dcf-form-help">For news releases, departmental news feeds, etc...</span></label>
                   <textarea id="full_article" name="full_article" cols="60" rows="<?php echo $full_article_rows; ?>"><?php echo getValue($context, 'full_article'); ?></textarea>
                 </li>
                 <li>
-                  <label class="dcf-label" for="request_publish_start"><span class="dcf-required">*</span> What date would like this to run?</label>
-                  <input class="datepicker required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_start')); ?>" />
+                    <div class="dcf-form-group dcf-datepicker dcf-flex-grow-1">
+                      <label for="request_publish_start">What date would like this to run? <small class="dcf-required">Required</small></label>
+                      <input class="required" id="request_publish_start" name="request_publish_start" type="text" size="10"  value="<?php if (!empty($context->request_publish_start)) { echo date('n/j/Y', strtotime(getValue($context, 'request_publish_start'))); } ?>" aria-label="Publish Start Date in the format of mm/dd/yyyy" autocomplete="off" />
+                    </div>
                 </li>
                 <li>
-                  <label class="dcf-label" for="request_publish_end"><span class="dcf-required">*</span> Last date this could run</label>
-                  <input class="datepicker required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php echo str_replace(' 00:00:00', '', getValue($context, 'request_publish_end')); ?>" />
+                    <div class="dcf-form-group dcf-datepicker dcf-flex-grow-1">
+                      <label for="request_publish_end">Last date this could run <small class="dcf-required">Required</small></label>
+                      <input class="required" id="request_publish_end" name="request_publish_end" type="text" size="10"  value="<?php if (!empty($context->request_publish_end)) { echo date('n/j/Y', strtotime(getValue($context, 'request_publish_end'))); } ?>" aria-label="Publish End Date in the format of mm/dd/yyyy" autocomplete="off" />
+                    </div>
                 </li>
-                <li>
-                  <label class="dcf-label" for="website">Supporting Website</label>
-                  <input class="dcf-input-text" id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" />
+                <li class="dcf-form-group">
+                  <label for="website">Supporting Website</label>
+                  <input class="dcf-w-100%" id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" />
                 </li>
-                <li>
-                  <label class="dcf-label" for="sponsor"><span class="dcf-required">*</span> Sponsoring Unit</label>
-                  <input id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" class="dcf-input-text required" />
+                <li class="dcf-form-group">
+                  <label for="sponsor">Sponsoring Unit <small class="dcf-required">Required</small></label>
+                  <input class="dcf-w-100%" id="sponsor" name="sponsor" type="text" value="<?php if(getValue($context, 'title') == ''){echo UNL_ENews_Controller::getUser()->unlHRPrimaryDepartment;}else{echo getValue($context, 'sponsor');}?>" />
                 </li>
                 <li>
                 <fieldset id="newsroom_id">

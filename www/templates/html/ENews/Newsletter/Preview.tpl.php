@@ -2,12 +2,6 @@
 $cacheBust = uniqid();
 $savvy->loadScriptDeclaration("
     require(['jquery', 'jqueryui'], function($) {
-        $(\"#releaseDate\").datepicker({
-            showOn: 'both',
-            buttonImage: '" . UNL_ENews_Controller::getURL(). "css/images/x-office-calendar.png',
-            dateFormat: 'yy-mm-dd',
-            buttonImageOnly: true
-        });
         require([\"" . UNL_ENews_Controller::getURL() . "js/preview.js?ver=" . $cacheBust . "\"], function(preview){
             preview.initialize();
         });
@@ -16,7 +10,6 @@ $savvy->loadScriptDeclaration("
 $savvy->loadScriptDeclaration("
 // This plugin is only needed for the demo.
 WDN.initializePlugin('notice');");
-
 ?>
 
 <div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4 unl-bg-lightest-gray">
@@ -24,7 +17,7 @@ WDN.initializePlugin('notice');");
        <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
        <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
        <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
-       <ol style="margin-top:0">
+       <ol class="dcf-list-bare dcf-mt-0">
            <li>
                <input type="hidden" name="_type" value="newsletter" />
                <input type="hidden" name="id" id="id" value="<?php echo $context->newsletter->id; ?>" />
@@ -32,8 +25,10 @@ WDN.initializePlugin('notice');");
                <input class="dcf-input-text" name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
            </li>
            <li>
-               <label class="dcf-label" for="releaseDate">Release Date <span class="dcf-form-help">(Will be sent at 7:00 am)</span></label>
-               <input class="datepicker" name="release_date" type="text" size="10" value="<?php echo str_replace(' 00:00:00', '', $context->newsletter->release_date); ?>" id="releaseDate" />
+               <div class="dcf-form-group dcf-datepicker dcf-flex-grow-1">
+                   <label class="dcf-label" for="releaseDate">Release Date <span class="dcf-form-help">(Will be sent at 7:00 am)</span></label>
+                   <input name="release_date" type="text" size="10" value="<?php if (!empty($context->newsletter->release_date)) { echo date('n/j/Y', strtotime($context->newsletter->release_date)); } ?>" id="releaseDate" autocomplete="off" />
+               </div>
            </li>
        </ol>
        <input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Save" />
@@ -63,23 +58,23 @@ WDN.initializePlugin('notice');");
                        </label>
                    </div>
                </form>
-               <form action="<?php echo $context->getURL(); ?>" method="post" class="remove email">
+               <form action="<?php echo $context->getURL(); ?>" method="post" class="dcf-form remove email">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                    <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                    <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="removenewsletteremail" />
-                   <input class="dcf-btn" type="submit" value="Remove" />
+                   <input class="dcf-btn dcf-btn-primary" type="submit" value="Remove" />
                </form>
-               <form action="<?php echo $context->getURL(); ?>" method="post" class="add email">
+               <form action="<?php echo $context->getURL(); ?>" method="post" class="dcf-form add email">
                    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
                    <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
                    <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                    <input type="hidden" name="newsletter_id" value="<?php echo $context->newsletter->id; ?>" />
                    <input type="hidden" name="newsroom_email_id" value="<?php echo $email->id; ?>" />
                    <input type="hidden" name="_type" value="addnewsletteremail" />
-                   <input class="dcf-btn" type="submit" value="Add" />
+                   <input class="dcf-btn dcf-btn-primary" type="submit" value="Add" />
                </form>
            </li>
            <?php endforeach; ?>

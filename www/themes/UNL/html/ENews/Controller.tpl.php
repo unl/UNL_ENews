@@ -13,9 +13,6 @@ if (file_exists($wdnIncludePath . '/wdn/templates_5.3')) {
 $page->doctitle = '<title>' . $savvy->render($context, 'ENews/PageTitle.tpl.php') . ' | Announce | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_ENews_Controller::$url . '">Announce</a>';
 
-// Add WDN Deprecated Styles
-$page->head .= '<link rel="preload" href="/wdn/templates_5.3/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.3/css/deprecated.css"></noscript>';
-
 $page->head .= '
     <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css?cb" />
     <link rel="home" href="' . UNL_ENews_Controller::getURL() . '" title="UNL Announce" />
@@ -59,6 +56,7 @@ $page->contactinfo = '
 </nav>
 ';
 
+$page->addScriptDeclaration("WDN.initializePlugin('datepickers');");
 $savvy->applyScriptDeclarations($page);
 $savvy->applyScripts($page);
 
