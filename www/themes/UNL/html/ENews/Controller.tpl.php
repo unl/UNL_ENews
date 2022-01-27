@@ -56,6 +56,14 @@ $page->contactinfo = '
 </nav>
 ';
 
+if (isset(UNL_ENews_Controller::$siteNotice) && UNL_ENews_Controller::$siteNotice->display) {
+    $page->displayDCFNoticeMessage(UNL_ENews_Controller::$siteNotice->title,
+        UNL_ENews_Controller::$siteNotice->message,
+        UNL_ENews_Controller::$siteNotice->type,
+        UNL_ENews_Controller::$siteNotice->noticePath,
+        UNL_ENews_Controller::$siteNotice->containerID);
+}
+
 $page->addScriptDeclaration("WDN.initializePlugin('datepickers');");
 $savvy->applyScriptDeclarations($page);
 $savvy->applyScripts($page);

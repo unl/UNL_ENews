@@ -9,8 +9,6 @@ form fieldset {
     margin:0px;
 }
 
-
-
 /* Form Styles
 ************************/
 
@@ -26,4 +24,8 @@ a.rsslink {
     position:relative;
     top:-2px;
     text-indent:-9999px;
-} 
+}
+
+.dcf-notice {
+    margin-top: 1em;
+}
