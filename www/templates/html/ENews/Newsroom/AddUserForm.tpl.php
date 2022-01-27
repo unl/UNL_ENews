@@ -1,4 +1,4 @@
-<form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom" method="post" id="addUser" class="dcf-form-controls-inline addData">
+<form action="<?php echo UNL_ENews_Controller::getURL(); ?>?view=newsroom" method="post" id="addUser" class="dcf-form dcf-form-controls-inline addData">
     <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
     <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">

@@ -1,0 +1,25 @@
+.frame,
+.legacy-wdn-frame {
+    border: 1px solid var(--b);
+    margin-bottom: 1em;
+    padding: 4px;
+}
+
+.frame img,
+.legacy-wdn-frame img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+
+.frame figcaption,
+.legacy-wdn-frame figcaption {
+    background-color: var(--bg-body);
+    height: auto;
+    padding: .5em;
+}
+
+.frame figcaption *,
+.legacy-wdn-frame figcaption * {
+    margin: auto;
+}

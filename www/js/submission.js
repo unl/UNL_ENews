@@ -1,9 +1,8 @@
 define([
   'jquery',
   'wdn',
-  'require',
-  ['js/socialmediashare'],
-], function($, WDN, require, social) {
+  'require'
+], function($, WDN, require) {
 
 	var plugin = {
 		utm_campaign : 'UNL_ENews',
@@ -72,24 +71,6 @@ define([
 				// Update the story end publish date to match the event date
 				$('#request_publish_end').attr('value', $(this).val());
 				plugin.findEvents($(this).val());
-			});
-
-			// Make a GoURL with campaign tagging for the Supporting Website
-			$('#website').bind('blur', function() {
-				var website = $.trim($(this).val());
-
-				if (website.substring(0, 7) !== 'http://' && website.substring(0, 8) !== 'https://' && website.substring(0, 7) !== 'mailto:') {
-					website = 'http://' + website;
-					$(this).val(website);
-				}
-				var goURLPrefix = RegExp('//go.unl.edu');
-				if (!goURLPrefix.test(website)) {
-					plugin.createGoURL(website);
-				} else {
-					if (!plugin.urlPreview) {
-						plugin.urlPreview = true;
-					}
-				}
 			});
 
 			$('#addAnotherNewsroom').bind('click', function() {
@@ -190,33 +171,6 @@ define([
 
 		setPresentationId : function(value){
 			$('#presentation_id').attr('value', ENEWS_DEFAULT_PRESENTATIONID[value]);
-		},
-
-		createGoURL : function(url) {
-			if (url == 'http://') {
-				return;
-			}
-			$('#website').siblings('label').html('Supporting Website <span class="helper">Building a GoURL...</span>');
-			plugin.utm_content = $('#title').val();
-			plugin.utm_source = plugin.announcementType;
-
-			gaTagging = "utm_campaign="+plugin.utm_campaign+"&utm_medium="+plugin.utm_medium+"&utm_source="+plugin.utm_source+"&utm_content="+plugin.utm_content;
-
-			if (url.indexOf('?') != -1) { //check to see if has a ?, if not then go ahead with the ?. Otherwise add with &
-				url = url+"&"+gaTagging;
-			} else {
-				url = url+"?"+gaTagging;
-			}
-
-			social.createURL(
-				url,
-				function(data) {
-					$('#website').val(data).siblings('label').children('span.helper').html('URL converted to a <a href="http://go.unl.edu/" target="_blank">GoURL</a>');
-				},
-				function(){
-					$('#website').val(url).siblings('label').children('span.helper').html('URL can\'t be converted to a GoURL.');
-				}
-			);
 		},
 
 		loadImageCrop : function(ratio) {
