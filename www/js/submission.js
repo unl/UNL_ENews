@@ -305,8 +305,8 @@ define([
 						message = 'Required fields cannot be left blank';
 					}
 				});
-				if ($("input#request_publish_start").val() > $("input#request_publish_end").val()) {
-					message = '"Last date this could run" must be after or equal to "What date would like this to run?"';
+				if (Date.parse($("input#request_publish_start").val()) > Date.parse($("input#request_publish_end").val())) {
+					message = '"Last date this could run" must be after or equal to "What date would you like this to run?"';
 				}
 				if (message != '') {
 					return message;
