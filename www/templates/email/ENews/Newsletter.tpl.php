@@ -86,6 +86,6 @@
   </div>
 <?php endif; ?>
 
-<?php if (isset($context->options) && !$context->options['preview']) : ?>
+<?php if (!isset($context->options) || !$context->options['preview']) : ?>
 <img src="<?php echo $context->getOpenURL(); ?>?<?php echo time(); ?>" alt="" />
 <?php endif; ?>
