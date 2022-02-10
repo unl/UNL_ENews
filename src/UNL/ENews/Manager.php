@@ -3,7 +3,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 {
     public $actionable = array();
 
-    public $options = array('status'=>'pending');
+    public $options = array('status'=>'pending', 'terms' => '');
 
     function __postConstruct()
     {
@@ -80,6 +80,7 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
 
     function run()
     {
+        $term = isset($this->options['term']) ? $this->options['term'] : '';
         switch($this->options['status']) {
             case 'pending':
             case 'posted':
@@ -89,8 +90,13 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                     throw new Exception('Don\'t have permission to view that newsroom', 403);
                 }
                 $this->actionable[] = new UNL_ENews_User_Newsrooms(array('uid' => UNL_ENews_Controller::getUser(false)->uid));
-                $this->actionable[] = new UNL_ENews_Newsroom_Stories($this->options + array('status'      => $this->options['status'],
-                                                                                            'newsroom_id' => $this->newsroom->id));
+                $this->actionable[] = new UNL_ENews_Newsroom_Stories(
+                    $this->options + array(
+                        'status'      => $this->options['status'],
+                        'term'        => $term,
+                        'newsroom_id' => $this->newsroom->id
+                    )
+                );
                 break;
         }
     }
