@@ -28,7 +28,7 @@ $searchTerm = !empty($_GET) ? filter_input(INPUT_GET, 'term', FILTER_SANITIZE_ST
         <input type="hidden" name="status" value="<?php echo $status; ?>">
         <label for="dcf-input-group-button-input">Search News Items</label>
         <div class="dcf-input-group">
-            <input id="dcf-input-group-button-input" name="term" type="search" value="<?php echo $searchTerm; ?>">
+            <input id="dcf-input-group-button-input" name="term" type="search" autocomplete="off" value="<?php echo $searchTerm; ?>">
             <button class="dcf-btn dcf-btn-primary" type="submit">Search</button>
         </div>
     </form>
