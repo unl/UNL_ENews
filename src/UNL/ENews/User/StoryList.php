@@ -1,9 +1,12 @@
 <?php
 class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
 {
-    public $options = array('uid'    => NULL,
-                            'limit'  => 30,
-                            'offset' => 0);
+    public $options = array(
+        'uid'    => NULL,
+        'limit'  => 30,
+        'offset' => 0,
+        'term' => ''
+    );
 
     function __construct($options = array())
     {
@@ -17,11 +20,28 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
         if (!isset($this->options['uid'])) {
             $this->options['uid'] = UNL_ENews_Controller::getUser(true)->uid;
         }
-        $stories = array();
+
         $mysqli = UNL_ENews_Controller::getDB();
-        $sql = 'SELECT id FROM stories WHERE uid_created = "'.$mysqli->escape_string($this->options['uid']).'" ORDER BY date_submitted DESC;';
-        if ($result = $mysqli->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_NUM)) {
+        $sql = 'SELECT id FROM stories WHERE uid_created = ?';
+
+        $termFiltered = false;
+        if (!empty($this->options['term']) && strlen($this->options['term']) >= 3) {
+            $termFiltered = true;
+            $sql .= ' AND (stories.title like ? OR stories.description like ? OR stories.full_article like ?)';
+        }
+        $sql .= ' ORDER BY date_submitted DESC';
+
+        $stmt = $mysqli->prepare($sql);
+        if ($termFiltered) {
+            $likeTerm = '%' . $this->options['term'] . '%';
+            $stmt->bind_param('ssss', $this->options['uid'], $likeTerm, $likeTerm, $likeTerm);
+        } else {
+            $stmt->bind_param('s', $this->options['uid']);
+        }
+        $stories = array();
+        $stmt->execute();
+        if ($result = $stmt->get_result()) {
+            while ($row = $result->fetch_array(MYSQLI_NUM)) {
                 $stories[] = $row[0];
             }
         }

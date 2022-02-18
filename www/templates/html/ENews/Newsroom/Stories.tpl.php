@@ -1,13 +1,20 @@
 <?php
+$showSearch = false;
 $status = 'approved';
 if (isset($parent->context->options['status'])) {
     $status = $parent->context->options['status'];
 }
 if ($parent->context->options['model'] === 'UNL_ENews_User_StoryList') {
+	$showSearch = true;
     $status = 'none';
 }
 
-if (count($context) == 0) {
+$term = '';
+if (isset($parent->context->options['term'])) {
+	$term = $parent->context->options['term'];
+}
+
+if (count($context) == 0 && empty($term)) {
     echo '<div class="four_col">No Gnews is Good Gnews with Gary Gnu!</div>';
     return;
 }
@@ -43,6 +50,30 @@ if (!empty($context->options['story_id'])) {
 <?php echo $savvy->render($context, 'ENews/Confirmation/Submission.tpl.php'); ?>
 <?php } //end if ?>
 
+<?php
+$searchTerm = !empty($_GET) ? filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING) : '';
+$view = !empty($_GET) ? filter_input(INPUT_GET, 'view', FILTER_SANITIZE_STRING) : '';
+?>
+
+<?php if ($showSearch): ?>
+<div class="dcf-d-none" id="search-form-notice">
+    <div class="dcf-notice dcf-notice-warning" hidden data-no-close-button>
+        <h2>Search Notice</h2>
+        <div><p>Your search query must be at least 3 characters.</p></div>
+    </div>
+</div>
+<div class="dcf-mb-3">
+    <form id="search-form" class="dcf-form" id="dcf-input-group-button" method="get">
+        <input type="hidden" name="view" value="<?php echo $view; ?>"
+        <label for="dcf-input-group-button-input">Search News Submissions</label>
+        <div class="dcf-input-group">
+            <input id="dcf-input-group-button-input" name="term" type="search" autocomplete="off" value="<?php echo $searchTerm; ?>">
+            <button class="dcf-btn dcf-btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<?php endif; ?>
+
 <form id="enewsManage" name="enewsManage" class="dcf-form energetic" method="post" action="<?php echo $context->getManageURL(); ?>">
 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
 <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
@@ -54,6 +85,7 @@ if (!empty($context->options['story_id'])) {
 <input type="hidden" name="status" value="<?php echo $status; ?>" />
 <?php endif ?>
 
+<?php if (count($context) > 0): ?>
 <div class="storyAction">
     <div class="storyButtonAction">
         <a href="#" class="dcf-btn dcf-btn-tertiary checkall">Check All</a>
@@ -78,9 +110,12 @@ if (!empty($context->options['story_id'])) {
             <?php
             $sortURL = '?view=mynews';
             if (isset($parent->context->options['newsroom'])) {
-                $sortURL = '?view=manager&amp;newsroom='.$parent->context->options['newsroom'].'&amp;status='.$status;
+                $sortURL = '?view=manager&newsroom=' . urlencode($parent->context->options['newsroom']) . '&status=' . urlencode($status);
             }
-            $sortURL .= '&amp;orderby=starttime';
+            if (isset($term)) {
+	            $sortURL .= '&term=' . urlencode($term);
+            }
+            $sortURL .= '&orderby=starttime';
             ?>
             <th scope="col" class="select"></th>
             <th scope="col" class="headline">Article</th>
@@ -111,39 +146,59 @@ if (!empty($context->options['story_id'])) {
     <?php endforeach; ?>
     </tbody>
 </table>
-<div class="storyAction">
-    <div class="storyButtonAction">
-        <a href="#" class="dcf-btn dcf-btn-tertiary checkall">Check All</a>
-        <a href="#" class="dcf-btn dcf-btn-tertiary uncheckall">Uncheck All</a>
+    <div class="storyAction">
+        <div class="storyButtonAction">
+            <a href="#" class="dcf-btn dcf-btn-tertiary checkall">Check All</a>
+            <a href="#" class="dcf-btn dcf-btn-tertiary uncheckall">Uncheck All</a>
+        </div>
+        <div class="dcf-input-group">
+            <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
+            <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)" aria-label="Select bulk story action">
+                <option>Select action...</option>
+				<?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
+                    <option value="approved"  disabled="disabled">Add to Approved</option>
+                    <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
+                    <option value="recommend" disabled="disabled">Recommend</option>
+				<?php endif ?>
+                <option value="delete" disabled="disabled">Delete</option>
+            </select>
+        </div>
     </div>
-    <div class="dcf-input-group">
-        <label for="storyaction" class="dcf-sr-only">Action to perform on checked items</label>
-        <select class="dcf-input-select dcf-mb-0" style="width:auto" name="storyaction" onfocus="manager.list = '<?php echo $status; ?>'; return manager.updateActionMenus(this)" onchange="return manager.actionMenuChange(this)" aria-label="Select bulk story action">
-            <option>Select action...</option>
-            <?php if ($parent->context->options['model'] === 'UNL_ENews_Manager') : ?>
-                <option value="approved"  disabled="disabled">Add to Approved</option>
-                <option value="pending"   disabled="disabled">Move to Pending/Embargoed</option>
-                <option value="recommend" disabled="disabled">Recommend</option>
-            <?php endif ?>
-            <option value="delete" disabled="disabled">Delete</option>
-        </select>
-    </div>
-</div>
-<input class="dcf-d-none" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
-<?php if ($status=='approved' || $status=='archived') { ?>
-<input class="dcf-d-none" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
-<?php } elseif ($status=='pending') { ?>
-<input class="dcf-d-none" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
-<?php } ?>
+    <input class="dcf-d-none" id="delete_story" type="submit" name="delete" onclick="return confirm('Are you sure?');" value="Delete" />
+	<?php if ($status=='approved' || $status=='archived') { ?>
+        <input class="dcf-d-none" id="moveto_pending" type="submit" name="pending" value="Move to Pending" />
+	<?php } elseif ($status=='pending') { ?>
+        <input class="dcf-d-none" id="moveto_approved" type="submit" name="approved" value="Add to Approved" />
+	<?php } ?>
 </form>
 <?php
-if (isset($context->options['limit'])
-    && count($context) > $context->options['limit']) {
-    $pager = new stdClass();
-    $pager->total  = count($context);
-    $pager->limit  = $context->options['limit'];
-    $pager->offset = $context->options['offset'];
-    $pager->url    = $context->getManageURL(array('status'=>$status));
-    echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
+if (isset($context->options['limit']) && count($context) > $context->options['limit']) {
+	$pager = new stdClass();
+	$pager->total  = count($context);
+	$pager->limit  = $context->options['limit'];
+	$pager->offset = $context->options['offset'];
+	$pager->url    = $context->getManageURL(array('status'=>$status));
+	echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
+}
+?>
+<?php else: ?>
+<div>No news submissions found for <em><?php echo $term; ?></em></div>
+<?php endif; ?>
+
+<?php
+if ($showSearch) {
+	$savvy->loadScriptDeclaration(trim("
+        var searchForm = document.getElementById('search-form');
+        var searchFormNotice = document.getElementById('search-form-notice');
+        searchForm.addEventListener('submit', function(event) {
+            searchFormNotice.classList.add('dcf-d-none');
+            var term = searchForm.elements['term'].value;
+            if (term.length > 0 && term.length < 3) {
+                WDN.initializePlugin('notice');
+                searchFormNotice.classList.add('dcf-d-block');
+                event.preventDefault();
+            }
+        });
+    "));
 }
 ?>

@@ -26,9 +26,9 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     }
 
-    function getStories($status = 'pending')
+    function getStories($status = 'pending', $term = '')
     {
-        return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status));
+        return new UNL_ENews_Newsroom_Stories(array('newsroom_id'=>$this->id, 'status' => $status, 'term' => $term));
     }
 
     function getNewsletters($options = array())
