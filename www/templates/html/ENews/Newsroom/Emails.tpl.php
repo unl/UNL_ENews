@@ -17,7 +17,7 @@
                 <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
                 <input type="hidden" name="email_id" value="<?php echo $email->id ?>" />
                 <input type="hidden" name="_type" value="removeemail" />
-                <input class="dcf-btn dcf-btn-primary" submit" value="X" />
+                <input class="dcf-btn dcf-btn-primary" type="submit" value="X" />
             </form>
         </li>
     <?php endforeach; ?>
