@@ -14,8 +14,8 @@ class UNL_ENews_Newsletter_OptOut
         $this->list_name = substr($options['email']->email, 0, strpos($options['email']->email, '@'));
         $this->list_domain = explode('@', $options['email']->email)[1];
 
-        if ($this->list_domain == 'listserv.unl.edu') {
-          $this->url = 'https://listserv.unl.edu/signup-anon/?UNSUB=1&LISTNAME=' . urlencode($list_name) . '&LOCKTYPE=LIST&SUCCESS_URL=';
+        if ($this->list_domain == 'listserv.unl.edu' || $this->list_domain == 'listserv.nebraska.edu') {
+          $this->url = 'https://listserv.unl.edu/signup-anon/?UNSUB=1&LISTNAME=' . urlencode($this->list_name) . '&LOCKTYPE=LIST&SUCCESS_URL=';
           $this->url .= urlencode(UNL_ENews_Controller::getURL() . '?view=thanks&_type=unsubscribe');
         } elseif ($this->list_domain == 'lists.unl.edu' || $this->list_domain == 'lists.nebraska.edu') {
           $this->url = 'https://mailman.nebraska.edu/';
