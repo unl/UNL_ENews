@@ -1,5 +1,6 @@
 www/.htaccess
 www/config.inc.php
+www/wdn
 *.espressostorage
 tests/pear2coverage.db
 *.xdebug
@@ -7,3 +8,4 @@ tests/pear2coverage.db
 .idea
 ga_cert.p12
 vendor
+.DS_Store
