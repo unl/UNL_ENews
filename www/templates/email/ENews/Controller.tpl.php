@@ -102,6 +102,7 @@
 <?php echo $savvy->render($context); ?>
 
 <?php if (!isset($context->options) || !$context->options['preview']) : ?>
+<!-- optout -->
 </body>
 </html>
 <?php endif; ?>

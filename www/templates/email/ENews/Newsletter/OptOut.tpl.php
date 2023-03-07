@@ -1,4 +1,4 @@
-<p style="text-algin:center; font-size:10px;">
+<p style="text-algin:center; font-size:12px;">
 <?php if ($context->list_domain == 'listserv.unl.edu' || $context->list_domain == 'listserv.nebraska.edu'): ?>
     If you would no longer like to receive this newsletter, <a href="<?php echo $context->url; ?>">click here to unsubscribe</a>
 <?php elseif ($context->list_domain == 'lists.unl.edu' || $context->list_domain == 'lists.nebraska.edu'): ?>
