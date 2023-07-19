@@ -48,7 +48,7 @@ define([
 				plugin.initDraggable($('.adArea .story'));
 			});
 			$('#releaseDate').attr('autocomplete', 'off').change(function(){
-				plugin.updateAvailableStories(['news', 'event', 'ad'], $(this).val());
+				plugin.updateAvailableStories(['news', 'event', 'ad'], new Date($(this).val()).toISOString().split('T')[0]);
 				plugin.updateDates($(this).val());
 			});
 			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
@@ -440,6 +440,7 @@ define([
 					"type" : val,
 					"date" : date,
 					"limit" : -1,
+					"status" : "approved",
 					"format" : "partial"
 				}, function(data) {
 					$('#drag_story_list_unpublished .'+val+'Available .storyItemWrapper').html(data);

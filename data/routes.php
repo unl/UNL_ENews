@@ -58,6 +58,7 @@ $routes += array(
     'newsroom'           => 'UNL_ENews_Newsroom_ManageDetails',
     'newsletters'        => 'UNL_ENews_Newsroom_Newsletters',
     'unpublishedStories' => 'UNL_ENews_Newsroom_UnpublishedStories',
+    'reusableStories'    => 'UNL_ENews_Newsroom_ReusableStories',
     'open'               => 'UNL_ENews_Newsletter_Open',
     'preview'            => 'UNL_ENews_Newsletter_Preview',
     'previewStory'       => 'UNL_ENews_Newsletter_Preview_Story',
