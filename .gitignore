@@ -6,6 +6,5 @@ tests/pear2coverage.db
 *.xdebug
 /www/files
 .idea
-ga_cert.p12
 vendor
 .DS_Store

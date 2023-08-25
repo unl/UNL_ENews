@@ -52,7 +52,6 @@ $routes += array(
     'thanks'             => 'UNL_ENews_Confirmation',
     'sendnews'           => 'UNL_ENews_EmailDistributor',
     'file'               => 'UNL_ENews_File_Cacheable',
-    'gastats'            => 'UNL_ENews_GAStats',
     'help'               => 'UNL_ENews_Help',
     'manager'            => 'UNL_ENews_Manager',
     'newsroom'           => 'UNL_ENews_Newsroom_ManageDetails',

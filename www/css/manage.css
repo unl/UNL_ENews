@@ -59,13 +59,7 @@ a.uncheckall {
 .functionTable tbody td.mainCell form {
     display:inline;
 }
-.functionTable a.gaStats {
-    text-indent: -99999px;
-    background:url('images/iconReport.png') no-repeat 0 0;
-    display:block;
-    width:32px;
-    height:32px;
-}
+
 body #cboxLoadedContent {
     background-color: var(--bg-white);
     padding: 1em;

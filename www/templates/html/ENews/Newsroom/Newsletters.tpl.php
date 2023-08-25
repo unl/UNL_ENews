@@ -1,17 +1,9 @@
-<?php
-$savvy->loadScriptDeclaration("
-    WDN.initializePlugin('modal', [function() {
-        var $ = require('jquery');
-        $(\"a.gaStats\").colorbox({iframe:true, width:'90%',height:'90%'});
-    }]);");
-?>
 <table class="dcf-w-100% dcf-table dcf-table-bordered functionTable">
     <thead>
         <tr>
             <th>Newsletter</th>
             <th>Status</th>
             <th>Email Opens*</th>
-            <th>Reports</th>
         </tr>
     </thead>
     <tbody>
@@ -50,11 +42,6 @@ $savvy->loadScriptDeclaration("
                 <?php echo $newsletter->opens; ?>
                 <?php else: ?>
                 0
-                <?php endif; ?>
-            </td>
-            <td>
-                <?php if ($newsletter->distributed): ?>
-                <a href="<?php echo UNL_ENews_Controller::getURL(); ?>?view=gastats&start_date=<?php echo date('Y-m-d', $newsletterDate); ?>&end_date=<?php echo date('Y-m-d', strtotime(date('Y-m-d', $newsletterDate)."+1 week")); ?>&newsletter=<?php echo $newsletter->id; ?>&format=partial" class="gaStats">Stats</a>
                 <?php endif; ?>
             </td>
         </tr>
