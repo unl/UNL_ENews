@@ -216,7 +216,7 @@ class UNL_ENews_Record
     function getDate($str)
     {
         if ($time = strtotime($str)) {
-            return date('Y-m-d', $time);
+            return date('Y-m-d H:i:s', $time);
         }
 
         if (strpos($str, '/') !== false) {

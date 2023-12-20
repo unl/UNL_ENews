@@ -72,7 +72,36 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 $this->removeStory($_POST['story_id']);
                 break;
             case 'newsletter':
+                // Default value time
+                $release_hour = '7';
+                $release_minute = '00';
+                $release_am_pm = 'am';
+
+                // Validate time data
+                if (
+                    isset($_POST['release_date_hour'])
+                    && in_array($_POST['release_date_hour'], array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'))
+                ) {
+                    $release_hour = $_POST['release_date_hour'];
+                }
+                if (
+                    isset($_POST['release_date_minute'])
+                    && in_array($_POST['release_date_minute'], array('00', '30'))
+                ) {
+                    $release_minute = $_POST['release_date_minute'];
+                }
+                if (
+                    isset($_POST['release_date_am_pm'])
+                    && in_array($_POST['release_date_am_pm'], array('am', 'pm'))
+                ) {
+                    $release_am_pm = $_POST['release_date_am_pm'];
+                }
+
                 $this->newsletter->synchronizeWithArray($_POST);
+
+                // Set the release date with the time
+                $formatted_release_date = $_POST['release_date'] . ' ' . $release_hour . ':' . $release_minute . ' ' . $release_am_pm;
+                $this->newsletter->release_date = date('Y-m-d H:i:s', strtotime($formatted_release_date));
                 $this->newsletter->save();
                 UNL_ENews_Controller::redirect($this->getURL());
                 break;
