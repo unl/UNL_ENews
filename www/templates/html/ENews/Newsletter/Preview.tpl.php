@@ -23,13 +23,13 @@ WDN.initializePlugin('notice');");
             <label class="dcf-label" for="emailSubject">Email Subject <span class="dcf-form-help">(Include story keywords!)</span><small class="dcf-required">Required</small></label>
             <input class="dcf-input-text" name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
         </div>
-        <fieldset style="width: fit-content;">
+        <fieldset style="width: fit-content;" aria-describedby="central-time-help">
             <legend>Release Date &amp; Time</legend>
             <div class="dcf-form-group dcf-datepicker" style="width: 30ch;">
                 <label class="dcf-label" for="releaseDate">Date</label>
                 <input name="release_date" type="text" size="10" value="<?php if (!empty($context->newsletter->release_date)) { echo date('n/j/Y', strtotime($context->newsletter->release_date)); } ?>" id="releaseDate" autocomplete="off" />
             </div>
-            <div class="dcf-d-flex dcf-flex-wrap dcf-ai-center dcf-col-gap-4">
+            <div>
                 <div class="dcf-d-flex dcf-ai-center dcf-flex-grow-1">
                     <div class="dcf-form-group">
                         <?php
@@ -57,12 +57,12 @@ WDN.initializePlugin('notice');");
                     
                     <span class="dcf-pr-1 dcf-pl-1">:</span>
                     <div class="dcf-form-group">
-                    <?php
-                        $release_minute = '00';
-                        if (!empty($context->newsletter->release_date)) {
-                            $release_minute = date('i', strtotime($context->newsletter->release_date));
-                        }
-                    ?>
+                        <?php
+                            $release_minute = '00';
+                            if (!empty($context->newsletter->release_date)) {
+                                $release_minute = date('i', strtotime($context->newsletter->release_date));
+                            }
+                        ?>
                         <label for="release_date_minute">Minute</label>
                         <select
                             class="dcf-flex-grow-1"
@@ -121,6 +121,10 @@ WDN.initializePlugin('notice');");
                         </div>
                     </fieldset>
                 </div>
+                <span id="central-time-help" class="dcf-form-help">
+                    Note that the timezone is set to Central Time. <br>Make sure to adjust your input accordingly.
+                </span>
+            </div>
         </fieldset>
        <input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Save" />
        <a class="dcf-btn dcf-btn-secondary action preview" href="#" onclick="WDN.initializePlugin('modal', [function() {WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;}]);">Send Preview</a>
