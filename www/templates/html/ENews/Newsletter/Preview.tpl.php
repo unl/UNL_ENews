@@ -11,6 +11,15 @@ $savvy->loadScriptDeclaration("
 // This plugin is only needed for the demo.
 WDN.initializePlugin('notice');");
 ?>
+<div class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
+    <h2>Exciting news for your newsletter!</h2>
+    <div>
+        You now have the flexibility to send
+        out your newsletters at any time of the day. However, to ensure a seamless
+        distribution process, there is also a <code>Ready to distribute</code> checkbox. You must
+        mark your newsletter <code>Ready to distribute</code> in order for the system to send it.
+    </div>
+</div>
 
 <div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4">
    <form class="dcf-form dcf-col-100% dcf-col-67%-start@md unl-bg-lightest-gray dcf-rounded dcf-p-4" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
@@ -137,7 +146,7 @@ WDN.initializePlugin('notice');");
             >
             <label for="ready_to_release">Ready to distribute</label>
             <span id="ready_to_release_help" class="dcf-form-help dcf-d-block">
-                The newsletter will not be distributed unless it is marked ready to distribute.
+                The newsletter will not be sent unless it is marked ready to distribute.
             </span>
         </div>
        <input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Save" />
