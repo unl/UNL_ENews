@@ -16,8 +16,8 @@ WDN.initializePlugin('notice');");
     <div>
         You now have the flexibility to send
         out your newsletters at any time of the day. However, to ensure a seamless
-        distribution process, there is also a <code class="dcf-txt-nowrap">Ready to distribute</code> checkbox.  You must
-        mark your newsletter <code class="dcf-txt-nowrap">Ready to distribute</code> in order for the system to send it.
+        distribution process, there is also a <code class="unl-cream dcf-txt-nowrap">Ready to distribute</code> checkbox.  You must
+        mark your newsletter <code class="unl-cream dcf-txt-nowrap">Ready to distribute</code> in order for the system to send it.
     </div>
 </div>
 
