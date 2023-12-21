@@ -57,17 +57,7 @@ img.spacer {display:none;}
     padding: 0 20px 20px;
     position:relative;
 }
-#newsletterDetails form fieldset {
-    padding:0;
-}
 #newsletterDetails form.email {
-    display:none;
-}
-#newsletterDetails fieldset ol li {
-    list-style:none;
-    padding:0px 25px 14px 0px;
-}
-#newsletterDetails fieldset legend {
     display:none;
 }
 #newsletterDetails form input[type='submit'][disabled='disabled'] {
