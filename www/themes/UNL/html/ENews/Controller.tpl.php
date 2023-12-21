@@ -14,7 +14,7 @@ $page->doctitle = '<title>' . $savvy->render($context, 'ENews/PageTitle.tpl.php'
 $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_ENews_Controller::$url . '">Announce</a>';
 
 $page->head .= '
-    <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css?cb" />
+    <link rel="stylesheet" type="text/css" media="screen" href="' . UNL_ENews_Controller::getURL() . 'css/all.css?cb-20231221a" />
     <link rel="home" href="' . UNL_ENews_Controller::getURL() . '" title="UNL Announce" />
     <link rel="logout" href="' . UNL_ENews_Controller::getURL() . '?logout" title="Log out" />
 ';

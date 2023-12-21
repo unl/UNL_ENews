@@ -1,7 +1,7 @@
-@import 'submission.css?cb';
-@import 'manage.css?cb';
-@import 'newsletter.css?cb';
-@import 'legacy-wdn.css?cb';
+@import 'submission.css?cb-20231221a';
+@import 'manage.css?cb-20231221a';
+@import 'newsletter.css?cb-20231221a';
+@import 'legacy-wdn.css?cb-20231221a';
 
 table th {text-align:left;}
 form fieldset {
