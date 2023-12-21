@@ -21,6 +21,13 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
      * @var string Y-m-d H:i:s
      */
     public $release_date;
+
+    /**
+     * Whether this newsletter is ready to release or not
+     * 
+     * @var int
+     */
+    public $ready_to_release = 0;
     
     /**
      * Subject for the email for this newsletter

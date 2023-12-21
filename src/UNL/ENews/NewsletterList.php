@@ -19,6 +19,7 @@ class UNL_ENews_NewsletterList extends ArrayIterator
              . '  distributed = 0 '                             // The newsletter has not been distributed
              . '  AND release_date IS NOT NULL '                // They have a release date set
              . '  AND release_date < "'.date('Y-m-d H:i:s').'"' // They should have been sent
+             . '  AND ready_to_release = 1 '                // They have checked that it is ready to release
              . ' ORDER BY release_date ASC;';                   // Make sure we send them in the correct order
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
