@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `newsletters` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `newsroom_id` int(10) unsigned NOT NULL,
   `release_date` datetime DEFAULT NULL,
+  `ready_to_release` tinyint(1) NOT NULL DEFAULT '0',
   `subject` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `intro` mediumtext COLLATE utf8_unicode_ci,
   `distributed` tinyint(1) NOT NULL DEFAULT '0',

@@ -185,4 +185,12 @@ if (!$result) {
     exit();
 }
 
+echo 'Added column ready to lease on newsletters table&hellip<br />'.PHP_EOL;
+$result = $mysqli->query("ALTER TABLE `newsletters` ADD `ready_to_release` TINYINT( 1 ) NOT NULL DEFAULT 0 AFTER `release_date`;");
+if (!$result) {
+    echo 'Error creating column ready to release: ';
+    echo $mysqli->error;
+    exit();
+}
+
 echo 'Upgrade complete!';

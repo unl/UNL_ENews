@@ -11,10 +11,20 @@ $savvy->loadScriptDeclaration("
 // This plugin is only needed for the demo.
 WDN.initializePlugin('notice');");
 ?>
+<div class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
+    <h2>Exciting news for your newsletter!</h2>
+    <div>
+        You now have the flexibility to send
+        out your newsletters at any time of the day. However, to ensure a seamless
+        distribution process, there is also a <code class="dcf-txt-nowrap">Ready to distribute</code> checkbox.  You must
+        mark your newsletter <code class="dcf-txt-nowrap">Ready to distribute</code> in order for the system to send it.
+    </div>
+</div>
 
-<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4 unl-bg-lightest-gray">
-   <form class="dcf-form dcf-col-100% dcf-col-67%-start@md" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
-       <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
+<div id="newsletterDetails" class="dcf-grid dcf-col-gap-vw dcf-pt-4">
+   <form class="dcf-form dcf-col-100% dcf-col-67%-start@md unl-bg-lightest-gray dcf-rounded dcf-p-4" method="post" action="<?php echo $context->getURL(); ?>" id="detailsForm">
+        <h5 class="dcf-txt-base">Newsletter Details:</h5>
+    <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>
        <input type="hidden" name="<?php echo $csrf->getTokenNameKey() ?>" value="<?php echo $csrf->getTokenName() ?>" />
        <input type="hidden" name="<?php echo $csrf->getTokenValueKey() ?>" value="<?php echo $csrf->getTokenValue() ?>">
        <input type="hidden" name="_type" value="newsletter" />
@@ -24,7 +34,7 @@ WDN.initializePlugin('notice');");
             <input class="dcf-input-text" name="subject" type="text" value="<?php echo $context->newsletter->subject; ?>" id="emailSubject" />
         </div>
         <fieldset style="width: fit-content;" aria-describedby="central-time-help">
-            <legend>Release Date &amp; Time</legend>
+            <legend>Release Date &amp; Time (Central Time)</legend>
             <div class="dcf-form-group dcf-datepicker" style="width: 30ch;">
                 <label class="dcf-label" for="releaseDate">Date</label>
                 <input name="release_date" type="text" size="10" value="<?php if (!empty($context->newsletter->release_date)) { echo date('n/j/Y', strtotime($context->newsletter->release_date)); } ?>" id="releaseDate" autocomplete="off" />
@@ -121,16 +131,29 @@ WDN.initializePlugin('notice');");
                         </div>
                     </fieldset>
                 </div>
-                <span id="central-time-help" class="dcf-form-help">
-                    Note that the timezone is set to Central Time. <br>Make sure to adjust your input accordingly.
-                </span>
+                
             </div>
         </fieldset>
+        <div class="dcf-input-checkbox dcf-mb-4">
+            <input
+                class="dcf-checkbox"
+                type="checkbox"
+                name="ready_to_release"
+                id="ready_to_release"
+                value="1"
+                aria-describedby="ready_to_release_help"
+                <?php if (isset($context->newsletter->ready_to_release) && $context->newsletter->ready_to_release === '1') { echo 'checked="checked"'; }?>
+            >
+            <label for="ready_to_release">Ready to distribute</label>
+            <span id="ready_to_release_help" class="dcf-form-help dcf-d-block">
+                The newsletter will not be sent unless it is marked ready to distribute.
+            </span>
+        </div>
        <input class="dcf-btn dcf-btn-primary" type="submit" name="submit" value="Save" />
        <a class="dcf-btn dcf-btn-secondary action preview" href="#" onclick="WDN.initializePlugin('modal', [function() {WDN.jQuery(this).colorbox({inline:true, href:'#sendPreview<?php echo $context->newsletter->id; ?>', open:true, width:'30%', title:'Send Newsletter Preview'}); return false;}]);">Send Preview</a>
    </form>
    <?php echo $savvy->render($context->newsletter, 'ENews/Newsletter/SendPreviewForm.tpl.php'); ?>
-   <div class="dcf-txt-sm dcf-col-100% dcf-col-33%-end@md">
+   <div class="dcf-txt-sm dcf-col-100% dcf-col-33%-end@md unl-bg-lightest-gray dcf-rounded dcf-p-4">
        <h5 class="dcf-txt-base">Distribute this newsletter to:</h5>
        <ul class="dcf-list-bare">
            <?php
