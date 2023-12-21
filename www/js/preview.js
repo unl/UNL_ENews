@@ -51,9 +51,6 @@ define([
 				plugin.updateAvailableStories(['news', 'event', 'ad'], new Date($(this).val()).toISOString().split('T')[0]);
 				plugin.updateDates($(this).val());
 			});
-			$('#detailsForm input[type="text"]').change(function(){ //auto save newsletter details
-				plugin.saveDetails.newsletter();
-			});
 			$('.emailIndicator input[type="checkbox"]').change(function(){
 				plugin.saveDetails.emails(this);
 			});
@@ -64,11 +61,7 @@ define([
 				newsletter : function() {
 					$.post(
 						$('#detailsForm').attr('action'), 
-						$('#detailsForm').serialize(),
-						function(data) {
-							WDN.log('saved!');
-							$('#detailsForm input[type="submit"]').attr('disabled' , 'disabled');
-						}
+						$('#detailsForm').serialize()
 					);
 				},
 				
