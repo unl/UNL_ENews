@@ -72,6 +72,11 @@ class UNL_ENews_Newsletter_Preview extends UNL_ENews_LoginRequired
                 $this->removeStory($_POST['story_id']);
                 break;
             case 'newsletter':
+                // Set default value for ready to release to 0
+                if (!isset($_POST['ready_to_release']) || $_POST['ready_to_release'] !== '1') {
+                    $_POST['ready_to_release'] = '0';
+                }
+
                 // Default value time
                 $release_hour = '7';
                 $release_minute = '00';
