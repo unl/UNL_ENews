@@ -1,4 +1,4 @@
-E-Newsletter Platform for Educational Institutions
+# E-Newsletter Platform for Educational Institutions
 
 UNL_ENews is a micro-news management platform for funneling news and building
 electronic newsletters.
@@ -15,7 +15,7 @@ News Stories can include:
 
 Use scripts within the scripts directory to create new newsrooms
 
-# Local Installation
+## Local Installation
 
 1. Use php 7.4.
 
@@ -37,4 +37,4 @@ Use scripts within the scripts directory to create new newsrooms
 7. Run `composer install` in your project root directory.
 
 
-### Last Updated: March 29, 2024
+#### Last Updated: March 29, 2024
