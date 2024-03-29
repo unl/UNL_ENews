@@ -40,3 +40,5 @@ If you're already using another PHP version, switch to 7.4 using tools like `sph
 8. Execute the top `two SQL files` on your database under the `data` folder for sample data and necessary table creations. You may also want to run the `upgrade.php` script.
 
 9. Access the local site through a web browser.
+
+### Last Updated: March 29, 2024
