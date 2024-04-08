@@ -21,6 +21,8 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
 
     public $submit_url;
 
+    public $private_web_view;
+
     function __construct($options = array())
     {
 

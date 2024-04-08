@@ -70,6 +70,14 @@ class UNL_ENews_Manager extends UNL_ENews_LoginRequired
                 } else {
                     $_POST['allow_submissions'] = 0;
                 }
+
+                if (isset($_POST['private_web_view'])
+                && $_POST['private_web_view'] == 'on') {
+                $_POST['private_web_view'] = 1;
+                } else {
+                $_POST['private_web_view'] = 0;
+                }
+
                 $newsroom->synchronizeWithArray($_POST);
                 $newsroom->save();
 

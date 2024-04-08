@@ -62,6 +62,12 @@ WDN.loadCSS('" . UNL_ENews_Controller::getURL(). "css/newsroom.css');
                 Allow Submissions <span class="dcf-form-help">Can users send news items for review?</span>
             </label>
         </li>
+        <li class="dcf-input-checkbox">
+            <input class="dcf-input-control" type="checkbox" id="private_web_view" name="private_web_view" <?php echo ($context->private_web_view)? 'checked="checked"': ''; ?> />
+            <label class="dcf-label" for="private_web_view">
+                Private Web View <span class="dcf-form-help">Newsletter webpages will only be viewable to UNL-authenticated users</span>
+            </label>
+        </li>
         <?php if ($context->id) : ?>
         <li>
             <label class="dcf-label" for="submit_url">Submit News URL
