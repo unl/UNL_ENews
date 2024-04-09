@@ -71,7 +71,7 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
                 throw new Exception('Not a valid newsroom name.', 400);
             }
 
-            if(isset($this->newsroom->private_web_view) and $this->newsroom->private_web_view === '1' ) {
+            if(isset($this->newsroom->private_web_view) && $this->newsroom->private_web_view === '1' ) {
                 if (empty(UNL_ENews_Controller::authenticate())) {
                     throw new Exception('You do not have access to view this newsletter page', 404);
                 }                
