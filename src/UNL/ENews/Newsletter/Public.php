@@ -29,7 +29,7 @@ class UNL_ENews_Newsletter_Public
     }
 
 
-    function setNewsroom()
+    private function setNewsroom()
     {   
         if (isset($this->options['shortname'])) {
             if (UNL_ENews_Newsroom::getByShortname($this->options['shortname'])) {
@@ -41,7 +41,7 @@ class UNL_ENews_Newsletter_Public
         }
     }
 
-    function setNewsletter()
+    private function setNewsletter()
     {
         if (isset($this->options['id'])) {
             $this->newsletter = UNL_ENews_Newsletter::getById($this->options['id']);
@@ -51,7 +51,7 @@ class UNL_ENews_Newsletter_Public
         }
     }
 
-    function newsletterIdCheck()
+    private function newsletterIdCheck()
     {
         if (isset($this->options['id'])) {
             return true;
@@ -60,7 +60,7 @@ class UNL_ENews_Newsletter_Public
         }
     }
 
-    function validateNewsletter()
+    private function validateNewsletter()
     {
         // If a newsroom name was passed, verify that the newsroom is correct
         if (isset($this->options['shortname'])) {
@@ -81,7 +81,7 @@ class UNL_ENews_Newsletter_Public
         $this->requestLogin();
     }
 
-    function setLastRealeasedNewsletter($id)
+    private function setLastRealeasedNewsletter($id)
     {
         $this->newsletter = UNL_ENews_Newsletter::getLastReleased($id);
         if (!$this->newsletter && isset($id)) {
@@ -92,7 +92,7 @@ class UNL_ENews_Newsletter_Public
         }
     }
 
-    function requestLogin()
+    private function requestLogin()
     {
         $this->setNewsroom();
         if ($this->newsroom) {
