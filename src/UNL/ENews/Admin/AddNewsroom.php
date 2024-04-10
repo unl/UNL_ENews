@@ -22,6 +22,13 @@ class UNL_ENews_Admin_AddNewsroom extends UNL_ENews_Admin_LoginRequired
                     $newsroom->allow_submissions = 0;
                 }
 
+                if (isset($_POST['private_web_view'])
+                && $_POST['private_web_view'] == 'on') {
+                    $newsroom->private_web_view = 1;
+                } else {
+                    $newsroom->private_web_view = 0;
+                }
+
                 if (empty($newsroom->footer_text)) {
                     $newsroom->footer_text = ' ';
                 }

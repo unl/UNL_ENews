@@ -63,6 +63,14 @@ if (!$result) {
     }
 }
 
+echo 'Adding private_web_view column to the newsrooms table...<br />'.PHP_EOL;
+$result = $mysqli->query("ALTER TABLE `newsrooms` ADD `private_web_view` tinyint(1) NOT NULL DEFAULT 0;");
+if (!$result) {
+    if (mysqli_errno($mysqli) == 1060) {
+        echo 'Field already has been added<br />'.PHP_EOL;
+    }
+}
+
 $result = $mysqli->query("SELECT id, email_lists FROM newsrooms;");
 if ($result) {
     while ($row = $result->fetch_assoc()) {

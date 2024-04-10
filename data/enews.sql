@@ -86,14 +86,15 @@ CREATE TABLE IF NOT EXISTS `newsletter_stories` (
 --
 -- Table structure for table `newsrooms`
 --
-
 CREATE TABLE IF NOT EXISTS `newsrooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `subtitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
   `shortname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email_lists` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
   `allow_submissions` tinyint(1) NOT NULL DEFAULT '1',
+  `private_web_view` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

@@ -103,10 +103,12 @@ INSERT INTO `newsletter_stories` (`newsletter_id`, `story_id`, `sort_order`, `in
 CREATE TABLE IF NOT EXISTS `newsrooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `subtitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
   `shortname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `website` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email_lists` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
   `allow_submissions` tinyint(1) NOT NULL DEFAULT '1',
+  `private_web_view` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortname` (`shortname`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
@@ -115,11 +117,11 @@ CREATE TABLE IF NOT EXISTS `newsrooms` (
 -- Dumping data for table `newsrooms`
 --
 
-INSERT INTO `newsrooms` (`id`, `name`, `shortname`, `website`, `email_lists`, `allow_submissions`) VALUES
-(1, 'Today@UNL', 'todayatunl', 'http://newsroom.unl.edu/announce/todayatunl/', NULL, 1),
-(2, 'UNL Today', 'unltoday', 'http://www.unl.edu/ucomm/unltoday/', NULL, 0),
-(3, 'The Scarlet', 'scarlet', 'http://scarlet.unl.edu/', NULL, 0),
-(4, 'News Release', 'newsrelease', 'http://newsroom.unl.edu/releases/', NULL, 0);
+INSERT INTO `newsrooms` (`id`, `name`, `shortname`, `website`, `email_lists`, `allow_submissions`, `private_web_view`) VALUES
+(1, 'Today@UNL', 'todayatunl', 'http://newsroom.unl.edu/announce/todayatunl/', NULL, 1, 0),
+(2, 'UNL Today', 'unltoday', 'http://www.unl.edu/ucomm/unltoday/', NULL, 0, 0),
+(3, 'The Scarlet', 'scarlet', 'http://scarlet.unl.edu/', NULL, 0, 0),
+(4, 'News Release', 'newsrelease', 'http://newsroom.unl.edu/releases/', NULL, 0, 0);
 
 -- --------------------------------------------------------
 

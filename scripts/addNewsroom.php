@@ -28,6 +28,7 @@ $newsroom->name              = $_SERVER['argv'][1];
 $newsroom->shortname         = $_SERVER['argv'][1];
 $newsroom->footer_text       = ' ';
 $newsroom->allow_submissions = 1;
+$newsroom->private_web_view = 0;
 
 if (!$newsroom->insert()) {
     echo 'Error creating the newsroom!'.PHP_EOL;
