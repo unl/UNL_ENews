@@ -18,7 +18,6 @@ class UNL_ENews_Newsletter_Public
             $this->setNewsletter();
             $this->validateNewsletter();
         } else {
-            //I don't know if we need this logic for checking shortname. When adding a newsroom, shortname is a required field. 
             if (isset($this->options['shortname'])) {
                 $this->requestLogin();
                 $this->setLastRealeasedNewsletter($this->newsroom->id);
@@ -64,7 +63,6 @@ class UNL_ENews_Newsletter_Public
     {
         // If a newsroom name was passed, verify that the newsroom is correct
         if (isset($this->options['shortname'])) {
-            //using the magic method __get(). Do we want to do it this way?
             if ($this->newsletter->newsroom->shortname != $this->options['shortname']) {
                 throw new Exception('This newsletter does not belong in this newsroom.', 404);
             }
@@ -86,7 +84,6 @@ class UNL_ENews_Newsletter_Public
         $this->newsletter = UNL_ENews_Newsletter::getLastReleased($id);
         if (!$this->newsletter && isset($id)) {
             throw new Exception('There are no published newsletters for this newsroom.', 404);
-        //I don't think we need this elseif
         } elseif (!$this->newsletter) {
             throw new Exception('There are no published newsletters.', 404);
         }
