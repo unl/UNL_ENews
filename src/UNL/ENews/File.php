@@ -14,12 +14,15 @@ class UNL_ENews_File extends UNL_ENews_Record
     public $use_for;
     
     public $description;
+
+    public $url;
     
     function __construct($options = array())
     {
         if (isset($options['id'])) {
             if ($record = self::getRecordByID($this->getTable(), $options['id'])) {
                 $this->synchronizeWithArray($record);
+                $this->url = $this->getURL();
             }
         }
     }
@@ -40,6 +43,7 @@ class UNL_ENews_File extends UNL_ENews_Record
         }
         $object = new $class;
         $object->synchronizeWithArray($array);
+        $object->url = $object->getURL();
         return $object;
     }
     

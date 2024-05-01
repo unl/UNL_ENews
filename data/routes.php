@@ -37,6 +37,9 @@ $routes['/^' . $shortname . '\/stories$/i'] = 'UNL_ENews_Newsroom_Stories_Publis
 // Stories which have current publish date range
 $routes['/^' . $shortname . '\/latest$/i']  = 'UNL_ENews_StoryList_Latest';
 
+// Stories which are available to news.unl.edu
+$routes['/^' . $shortname . '\/submissions/i']  = 'UNL_ENews_StoryList_Submissions';
+
 //For viewing the newest newsletter for a newsroom.
 $routes['/^' . $shortname . '\/?$/i'] = 'UNL_ENews_Newsletter_Public';
 
@@ -67,6 +70,7 @@ $routes += array(
     'presentationList'   => 'UNL_ENews_PresentationLister',
     'story'              => 'UNL_ENews_PublishedStory',
     'latest'             => 'UNL_ENews_StoryList_Latest',
+    'submissions'        => 'UNL_ENews_StoryList_Submissions',
     'submit'             => 'UNL_ENews_Submission',
     'mynews'             => 'UNL_ENews_User_StoryList',
     'addnewsroom'        => 'UNL_ENews_Admin_AddNewsroom',
