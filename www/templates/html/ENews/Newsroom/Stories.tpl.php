@@ -177,7 +177,7 @@ if (isset($context->options['limit']) && count($context) > $context->options['li
 	$pager->total  = count($context);
 	$pager->limit  = $context->options['limit'];
 	$pager->offset = $context->options['offset'];
-	$pager->url    = $context->getManageURL(array('status'=>$status));
+	$pager->url    = $context->getManageURL(array('status'=>$status, 'term'=> $term));
 	echo $savvy->render($pager, 'ENews/PaginationLinks.tpl.php');
 }
 ?>
