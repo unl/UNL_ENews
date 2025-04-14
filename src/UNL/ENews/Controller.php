@@ -234,6 +234,7 @@ class UNL_ENews_Controller
     public static function addURLParams($url, $additional_params = array())
     {
         $params = array();
+        $url = str_replace('&amp;', '&', $url);
         if (strpos($url, '?') !== false) {
             list($url, $existing_params) = explode('?', $url);
             $existing_params = explode('&', $existing_params);
