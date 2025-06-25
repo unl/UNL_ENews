@@ -19,9 +19,15 @@ if ($context->getColFromSort() == 'onecol') {
                                         <tbody>
 
                                         <?php if ($file = $context->getFileByUse($use, true)): ?>
+                                            <?php
+                                                $description = $file->name;
+                                                if (!empty($file->description)) {
+                                                    $description = $file->description;
+                                                }
+                                            ?>
                                             <tr>
                                                 <td>
-                                                    <img src="<?php echo $file->getURL(); ?>" width="100%" style="margin-bottom:5px;" />
+                                                    <img src="<?php echo $file->getURL(); ?>" alt="<?php echo $description; ?>" width="100%" style="margin-bottom:5px;" />
                                                 </td>
                                             </tr>
                                         <?php endif; ?>

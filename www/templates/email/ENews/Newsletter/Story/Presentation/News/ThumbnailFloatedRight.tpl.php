@@ -19,12 +19,18 @@
                     <tr>
                       <td class="unltoday-body" align="top" style="font-size:16px;line-height:25px;font-family:Georgia,serif;color:#545350;padding:0 0 6px 0;">
                           <?php if ($file = $context->getThumbnail()) : ?>
+                            <?php
+                              $description = $file->name;
+                              if (!empty($file->description)) {
+                                $description = $file->description;
+                              }
+                            ?>
 
                             <table width="40%" border="0" cellspacing="0" cellpadding="0" align="right" style="width:40%; max-width:40%; margin-left: 10px">
                               <tbody>
                               <tr>
                                 <td valign="top">
-                                  <img width="100%" src="<?php echo $file->getURL(); ?>" style="width: 100%" />
+                                  <img width="100%" alt="<?php echo $description; ?>" src="<?php echo $file->getURL(); ?>" style="width: 100%" />
                                 </td>
                               </tr>
                               </tbody>
