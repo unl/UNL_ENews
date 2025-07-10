@@ -7,7 +7,7 @@ class UNL_ENews_Newsletter_Public
      * @var UNL_ENews_Newsletter
      */
     public $newsletter;
-    private $newsroom;
+    public $newsroom;
     private $options;
 
     function __construct($options = array())
@@ -82,11 +82,6 @@ class UNL_ENews_Newsletter_Public
     private function setLastRealeasedNewsletter($id)
     {
         $this->newsletter = UNL_ENews_Newsletter::getLastReleased($id);
-        if (!$this->newsletter && isset($id)) {
-            throw new Exception('There are no published newsletters for this newsroom.', 404);
-        } elseif (!$this->newsletter) {
-            throw new Exception('There are no published newsletters.', 404);
-        }
     }
 
     private function requestLogin()
