@@ -21,6 +21,17 @@ foreach ($context->getFiles() as $file) {
 }
 ?>
 
+<?php if (
+    strtotime($context->request_publish_end) < strtotime('-1 year') ||
+    strtotime($context->date_modified) < strtotime('-3 year') ||
+    strtotime($context->date_submitted) < strtotime('-3 year')
+): ?>
+<div class="unl-bg-scarlet unl-cream dcf-rounded dcf-p-3 dcf-mb-3">
+    <strong>Archived Story:</strong> This article is part of our newsletter archives. It has
+    been preserved for reference, but the information may no longer be current.
+</div>
+<?php endif ?>
+
 <?php $full = trim($context->full_article); ?>
 <?php if (!empty($full)) : ?>
     <p>
