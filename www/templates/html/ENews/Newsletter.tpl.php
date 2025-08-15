@@ -17,6 +17,12 @@ WDN.initializePlugin('notice');");
 <?php
 endif;
 ?>
+<?php if (strtotime($context->release_date) < strtotime('-1 year')): ?>
+<div class="unl-bg-scarlet unl-cream dcf-rounded dcf-p-3 dcf-mb-3">
+    <strong>Archived Newsletter:</strong> This newsletter is part of our newsletter archives. It has
+    been preserved for reference, but the information may no longer be current.
+</div>
+<?php endif ?>
 <section class="dcf-grid dcf-col-gap-vw">
     <div class="dcf-col-100% dcf-col-67%-start@md">
         <div id="newsletterWeb">
