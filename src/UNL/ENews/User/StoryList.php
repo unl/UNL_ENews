@@ -8,6 +8,8 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
         'term' => ''
     );
 
+    public $actionable = [];
+
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -15,6 +17,7 @@ class UNL_ENews_User_StoryList extends UNL_ENews_StoryList
         //Handle POST from ?view=mynews
         if (!empty($_POST)) {
             $manager = new UNL_ENews_Manager($this->options);
+            $this->actionable = $manager->actionable;
         }
         
         if (!isset($this->options['uid'])) {

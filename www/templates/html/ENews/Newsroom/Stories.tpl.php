@@ -26,6 +26,9 @@ $savvy->loadScriptDeclaration("
         manager.initialize();
     });
 ");
+if (isset($context->actionable) && count($context->actionable) > 0) {
+    echo $savvy->render($context->actionable);
+}
 ?>
 
 
