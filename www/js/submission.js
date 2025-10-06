@@ -224,6 +224,12 @@ define([
 				hide : false,
 				aspectRatio : ratio,
 				handles : true,
+				onInit: function(img, selection) {
+					$('input[name=thumbX1]').val(selection.x1);
+					$('input[name=thumbX2]').val(selection.x2);
+					$('input[name=thumbY1]').val(selection.y1);
+					$('input[name=thumbY2]').val(selection.y2);
+				},
 				onSelectChange : preview,
 				onSelectEnd : function(img, selection) {
 					$('input[name=thumbX1]').val(selection.x1);
