@@ -16,7 +16,7 @@
     </div>
     <div class="dcf-mt-4 dcf-input-checkbox">
         <input type="checkbox" class="dcf-input-control" id="use_subscribe_link" name="use_subscribe_link" value="1" />
-        <label for="use_subscribe_link">Use as the unsubscribe link (Only a max of one address that is subscribable/unsubscriable should be given this.)</label>
+        <label for="use_subscribe_link">Use as the subscribe link on the newsletter webpage view. (Only a max of one address that is subscribeable/unsubscribeable should be given this.)</label>
     </div>
     <input class="dcf-btn dcf-btn-primary" type="submit" value="Add Email" />
 </form>
