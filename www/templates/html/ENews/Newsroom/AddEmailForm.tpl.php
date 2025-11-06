@@ -6,12 +6,17 @@
     <input type="hidden" name="_type" value="addemail" />
     <input type="text" name="email" aria-label="Enter address" />
     <div class="dcf-mt-4 dcf-input-checkbox">
-        <input type="checkbox" class="dcf-input-control" id="newsletter_default" name="newsletter_default" value="1" /><label for="newsletter_default">Use as default when creating new newsletter.</label>
+        <input type="checkbox" class="dcf-input-control" id="newsletter_default" name="newsletter_default" value="1" />
+        <label for="newsletter_default">Use as default when creating new newsletter.</label>
     </div>
     <div class="dcf-input-checkbox">
         <input type="checkbox" class="dcf-input-control" id="optout" name="optout" value="1" />
         <label for="optout">Add unsubscribe link to bottom of email. (Requires <a href="https://mailman.unl.edu/">Mailman</a> or
             <a href="https://listserv.unl.edu/">Listserv</a> list be properly configured.)</label>
+    </div>
+    <div class="dcf-mt-4 dcf-input-checkbox">
+        <input type="checkbox" class="dcf-input-control" id="use_subscribe_link" name="use_subscribe_link" value="1" />
+        <label for="use_subscribe_link">Use as the unsubscribe link (Only a max of one address that is subscribable/unsubscriable should be given this.)</label>
     </div>
     <input class="dcf-btn dcf-btn-primary" type="submit" value="Add Email" />
 </form>

@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `newsroom_emails` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `optout` tinyint(1) NOT NULL COMMENT 'can subscribers opt-out of the newsletter',
   `newsletter_default` tinyint(1) NOT NULL COMMENT 'use by default for newsletters.',
+  `use_subscribe_link` tinyint(1) NOT NULL COMMENT 'use this email for the subscribe link.',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Email addresses associated with newsrooms';
 

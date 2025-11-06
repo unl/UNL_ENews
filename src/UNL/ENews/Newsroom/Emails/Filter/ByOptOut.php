@@ -8,6 +8,6 @@ class UNL_ENews_Newsroom_Emails_Filter_ByOptOut extends FilterIterator
 
     function accept()
     {
-        return (bool)$this->current()->optout;
+        return (bool)$this->current()->optout && (bool)$this->current()->use_subscribe_link;
     }
 }

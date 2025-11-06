@@ -10,6 +10,10 @@
             <?php if ($email->newsletter_default): ?>
                 <span class="details">Default</span>
             <?php endif ?>
+
+              <?php if ($email->use_subscribe_link): ?>
+                  <span class="details">Use as Subscribe Link</span>
+              <?php endif ?>
             
             <form class="dcf-form" action="<?php echo UNL_ENews_Controller::getURL() ?>?view=newsroom" method="post">
                 <?php $csrf = UNL_ENews_Controller::getCSRFHelper() ?>

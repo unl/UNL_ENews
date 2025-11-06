@@ -55,7 +55,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         return new UNL_ENews_Newsroom_Emails_Filter_ByOptOut($this->getEmails());
     }
 
-    function addEmail($email_address, $optout = 0, $newsletter_default = 1)
+    function addEmail($email_address, $optout = 0, $newsletter_default = 1, $use_subscribe_link = 0)
     {
         $existing = $this->getEmails();
         foreach ($existing as $existing_email) {
@@ -69,6 +69,7 @@ class UNL_ENews_Newsroom extends UNL_ENews_Record
         $email->newsroom_id = $this->id;
         $email->newsletter_default = $newsletter_default;
         $email->optout = $optout;
+        $email->use_subscribe_link = $use_subscribe_link;
         return $email->insert();
     }
 

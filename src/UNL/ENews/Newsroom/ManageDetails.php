@@ -33,13 +33,17 @@ class UNL_ENews_Newsroom_ManageDetails extends UNL_ENews_LoginRequired
             case 'addemail':
                 $optout             = 0;
                 $newsletter_default = 0;
+                $use_subscribe_link = 0;
                 if (isset($_POST['optout'])) {
                     $optout = $_POST['optout'];
                 }
                 if (isset($_POST['newsletter_default'])) {
                     $newsletter_default = $_POST['newsletter_default'];
                 }
-                $this->newsroom->{$_POST['_type']}($_POST['email'], $optout, $newsletter_default);
+                if (isset($_POST['use_subscribe_link'])) {
+                    $use_subscribe_link = $_POST['use_subscribe_link'];
+                }
+                $this->newsroom->{$_POST['_type']}($_POST['email'], $optout, $newsletter_default, $use_subscribe_link);
                 UNL_ENews_Controller::redirect(UNL_ENews_Controller::getURL().'?view=newsroom');
                 break;
             case 'removeemail':
