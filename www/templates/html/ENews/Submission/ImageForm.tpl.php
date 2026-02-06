@@ -72,7 +72,7 @@
         if (imageInput.files[0].size > fileSizeLimit) {
             const filename = imageInput.files[0].name;
             imageError.classList.remove('dcf-d-none');
-            imageError.innerText = `The file '${filename}' is too large! Please reduce the size of the image before submitting this story.`;
+            imageError.innerText = `The file '${filename}' is too large. Please reduce the size of the image under 1 MB and try again.`;
         }
     });
 </script>
