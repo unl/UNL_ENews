@@ -38,26 +38,19 @@
     </ol>
     
     <div id="upload_area">
-    <?php
-    $ratio       = '4:3';
-    $ratio_class = 'r43';
-    if ($id && $originalImage) :
-        if ($thumbnail = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) {
-            list($width, $height) = $thumbnail->getSize();
-            if ($width/$height == 0.75) {
-                $ratio       = '3:4';
-                $ratio_class = 'r34';
-            }
-        }
-    ?>
-        <img onload="require([ENEWS_HOME+'js/submission.js'],function(submission){if(submission.announcementType != 'ad')submission.loadImageCrop('<?php echo $ratio; ?>');})" src="<?php echo $originalImage->getURL(); ?>" alt="Image to accompany submission" />
+    <?php if ($id && $thumbnail = UNL_ENews_Story::getByID($id)->getFileByUse('thumbnail')) : ?>
+        <span id="currentThumbnail" style="cursor: pointer !important;">
+            <img src="<?php echo $thumbnail->getURL(); ?>" alt="Current thumbnail" style="cursor: pointer !important;" />
+            <br>
+            <span class="dcf-form-help">Current Thumbnail – Click to Edit</span>
+        </span>
     <?php else : ?>
         <div>Image preview</div>
     <?php endif; ?>
     </div>
     <ul id="imageControls">
         <li id="cropMessage">Click and drag on the image above to select a thumbnail</li>
-        <li id="cropRatio" class="<?php echo $ratio_class; ?>">Change Crop Ratio</li>
+        <li id="cropRatio" class="r43">Change Crop Ratio</li>
     </ul>
 </fieldset>
 </form>

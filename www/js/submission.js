@@ -100,6 +100,16 @@ define([
 				ajaxUpload.removeIframe();
 			});
 
+            // When a story is edited and the existing thumbnail is clicked to edit
+            $('#currentThumbnail').bind('click', function() {
+                var imgString = '<img onload="require([ENEWS_HOME+\'js/submission.js\'],function(submission){if(submission.announcementType != \'ad\')submission.loadImageCrop(\'4:3\');})" src="'+ENEWS_HOME+'?view=file&id='+$('#fileID').val()+'" alt="Uploaded Image" />';
+                $('#upload_area').html(imgString);
+                $('#sampleLayoutImage').html('Select Thumbnail Below');
+                $('#img_description_label .required').remove();
+                $('#img_description_label').prepend('<span class="required">*</span> ');
+                $('#file_description').addClass('required').removeAttr('disabled');
+            });
+
 			// When the file description filed is edited, copy over to the hidden field in the story form that will be submitted
 			$('#file_description').bind('change', function() {
 				$('#fileDescription').val($(this).val());
