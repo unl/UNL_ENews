@@ -197,9 +197,15 @@ class UNL_ENews_Newsletter_Story extends UNL_ENews_Record
         return $this->sort_order % 3;
     }
 
-    public function getURL()
+    public function getURL(string $analytics_medium = null)
     {
-        return $this->newsletter->getURL() . '/' . $this->story_id;
+        $analytics = '';
+        if ($analytics_medium) {
+            $analytics = '?utm_medium=' . $analytics_medium .
+                         '&utm_source=' . $this->newsroom->shortname .
+                         '&utm_campaign=' . date('Y-m-d', strtotime($this->newsletter->release_date)) . '_issue-' . $this->newsletter->id;
+        }
+        return $this->newsletter->getURL() . '/' . $this->story_id . $analytics;
     }
 
     function __call($method, $params)

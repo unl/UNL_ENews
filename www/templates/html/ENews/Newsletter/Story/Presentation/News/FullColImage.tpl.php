@@ -1,5 +1,5 @@
 <?php
-$storylink = $context->getURL();
+$storylink = $context->getURL('website');
 
 if ($file = $context->getFileByUse('originalimage')) {
     $description = $file->name;

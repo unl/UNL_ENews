@@ -13,7 +13,7 @@
                     <tbody>
                     <tr>
                       <td colspan="2" class="unltoday-head" align="left" style="font-size:24px;font-family:Verdana,sans-serif;color:#d00000;padding-bottom:18px">
-                        <a href="<?php echo $context->getURL(); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
+                        <a href="<?php echo $context->getURL('email'); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
                       </td>
                     </tr>
                     <tr>
@@ -40,7 +40,7 @@
                             <?php
                             echo $savvy->render($context, 'ENews/Story/field-description.tpl.php');
                             if (!empty($context->full_article)) {
-                                echo ' <a href="'.$context->getURL().'" style="color:#D00000;word-wrap: break-word;">Continue reading&hellip;</a>';
+                                echo ' <a href="'.$context->getURL('email').'" style="color:#D00000;word-wrap: break-word;">Continue reading&hellip;</a>';
                             }
                             ?>
                             <?php if (isset($context->ics)): ?>

@@ -1,4 +1,4 @@
-<?php $storylink = $context->getURL();?>
+<?php $storylink = $context->getURL('website');?>
 <h4>
     <a href="<?php echo $storylink; ?>">
       <?php echo $context->title; ?>

@@ -33,7 +33,7 @@ if ($context->getColFromSort() == 'onecol') {
                                         <?php endif; ?>
                                         <tr>
                                             <td colspan="2" class="unltoday-head" align="left" style="font-size:28px;font-family:Verdana,sans-serif;color:#d00000;padding:10px 0 10px 0">
-                                                <a href="<?php echo $context->getURL(); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
+                                                <a href="<?php echo $context->getURL('email'); ?>" style="color:#d00000;text-decoration:none;"><?php echo $context->title; ?></a>
                                             </td>
                                         </tr>
                                         <tr>
