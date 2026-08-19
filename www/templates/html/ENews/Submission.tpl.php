@@ -125,7 +125,7 @@ $savvy->loadScriptDeclaration('
                 </li>
                 <li class="dcf-form-group">
                   <label for="website">Supporting Website</label>
-                  <input class="dcf-w-100%" id="website" name="website" type="url" value="<?php echo getValue($context, 'website'); ?>" />
+                  <input class="dcf-w-100%" id="website" name="website" type="url" pattern="https?://.+" title="Please enter a valid URL beginning with http:// or https://" value="<?php echo getValue($context, 'website'); ?>" />
                 </li>
                 <li class="dcf-form-group">
                   <label for="sponsor">Sponsoring Unit <small class="dcf-required">Required</small></label>
