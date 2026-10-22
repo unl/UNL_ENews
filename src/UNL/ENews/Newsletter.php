@@ -400,7 +400,8 @@ class UNL_ENews_Newsletter extends UNL_ENews_Record
 
         $body = $mime->get();
         $hdrs = $mime->headers($hdrs);
-        $mail =& Mail::factory('sendmail');
+        $factory = Mail::factory('sendmail');
+        $mail =& $factory;
 
         // Send the email!
         $mail->send($to, $hdrs, $body);
