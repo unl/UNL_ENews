@@ -11,7 +11,6 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Registry.php 287555 2009-08-21 21:27:27Z dufuz $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -37,7 +36,7 @@ define('PEAR_REGISTRY_ERROR_CHANNEL_FILE', -6);
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.0
+ * @version    Release: 1.10.18
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.0a1
  */
@@ -131,24 +130,27 @@ class PEAR_Registry extends PEAR
      *
      * @access public
      */
-    function PEAR_Registry($pear_install_dir = PEAR_INSTALL_DIR, $pear_channel = false,
-                           $pecl_channel = false)
+    function __construct($pear_install_dir = PEAR_INSTALL_DIR, $pear_channel = false,
+                           $pecl_channel = false, $pear_metadata_dir = '')
     {
-        parent::PEAR();
-        $this->setInstallDir($pear_install_dir);
+        parent::__construct();
+        $this->setInstallDir($pear_install_dir, $pear_metadata_dir);
         $this->_pearChannel = $pear_channel;
         $this->_peclChannel = $pecl_channel;
         $this->_config      = false;
     }
 
-    function setInstallDir($pear_install_dir = PEAR_INSTALL_DIR)
+    function setInstallDir($pear_install_dir = PEAR_INSTALL_DIR, $pear_metadata_dir = '')
     {
         $ds = DIRECTORY_SEPARATOR;
         $this->install_dir = $pear_install_dir;
-        $this->channelsdir = $pear_install_dir.$ds.'.channels';
-        $this->statedir    = $pear_install_dir.$ds.'.registry';
-        $this->filemap     = $pear_install_dir.$ds.'.filemap';
-        $this->lockfile    = $pear_install_dir.$ds.'.lock';
+        if (!$pear_metadata_dir) {
+            $pear_metadata_dir = $pear_install_dir;
+        }
+        $this->channelsdir = $pear_metadata_dir.$ds.'.channels';
+        $this->statedir    = $pear_metadata_dir.$ds.'.registry';
+        $this->filemap     = $pear_metadata_dir.$ds.'.filemap';
+        $this->lockfile    = $pear_metadata_dir.$ds.'.lock';
     }
 
     function hasWriteAccess()
@@ -181,7 +183,7 @@ class PEAR_Registry extends PEAR
     {
         $this->_config = &$config;
         if ($resetInstallDir) {
-            $this->setInstallDir($config->get('php_dir'));
+            $this->setInstallDir($config->get('php_dir'), $config->get('metadata_dir'));
         }
     }
 
@@ -208,10 +210,10 @@ class PEAR_Registry extends PEAR
                         $pear_channel->setServer('pear.php.net');
                         $pear_channel->setSummary('PHP Extension and Application Repository');
                         $pear_channel->setDefaultPEARProtocols();
-                        $pear_channel->setBaseURL('REST1.0', 'http://pear.php.net/rest/');
-                        $pear_channel->setBaseURL('REST1.1', 'http://pear.php.net/rest/');
-                        $pear_channel->setBaseURL('REST1.3', 'http://pear.php.net/rest/');
-                        //$pear_channel->setBaseURL('REST1.4', 'http://pear.php.net/rest/');
+                        $pear_channel->setBaseURL('REST1.0', 'https://pear.php.net/rest/');
+                        $pear_channel->setBaseURL('REST1.1', 'https://pear.php.net/rest/');
+                        $pear_channel->setBaseURL('REST1.3', 'https://pear.php.net/rest/');
+                        //$pear_channel->setBaseURL('REST1.4', 'https://pear.php.net/rest/');
                     } else {
                         $pear_channel->setServer('pear.php.net');
                         $pear_channel->setAlias('pear');
@@ -233,8 +235,8 @@ class PEAR_Registry extends PEAR
                         $pecl_channel->setServer('pecl.php.net');
                         $pecl_channel->setSummary('PHP Extension Community Library');
                         $pecl_channel->setDefaultPEARProtocols();
-                        $pecl_channel->setBaseURL('REST1.0', 'http://pecl.php.net/rest/');
-                        $pecl_channel->setBaseURL('REST1.1', 'http://pecl.php.net/rest/');
+                        $pecl_channel->setBaseURL('REST1.0', 'https://pecl.php.net/rest/');
+                        $pecl_channel->setBaseURL('REST1.1', 'https://pecl.php.net/rest/');
                         $pecl_channel->setValidationPackage('PEAR_Validator_PECL', '1.0');
                     } else {
                         $pecl_channel->setServer('pecl.php.net');
@@ -257,9 +259,9 @@ class PEAR_Registry extends PEAR
                         $doc_channel->setServer('doc.php.net');
                         $doc_channel->setSummary('PHP Documentation Team');
                         $doc_channel->setDefaultPEARProtocols();
-                        $doc_channel->setBaseURL('REST1.0', 'http://doc.php.net/rest/');
-                        $doc_channel->setBaseURL('REST1.1', 'http://doc.php.net/rest/');
-                        $doc_channel->setBaseURL('REST1.3', 'http://doc.php.net/rest/');
+                        $doc_channel->setBaseURL('REST1.0', 'https://doc.php.net/rest/');
+                        $doc_channel->setBaseURL('REST1.1', 'https://doc.php.net/rest/');
+                        $doc_channel->setBaseURL('REST1.3', 'https://doc.php.net/rest/');
                     } else {
                         $doc_channel->setServer('doc.php.net');
                         $doc_channel->setAlias('doc');
@@ -319,7 +321,7 @@ class PEAR_Registry extends PEAR
                 $initializing = true;
                 if (!$this->_config) { // never used?
                     $file = OS_WINDOWS ? 'pear.ini' : '.pearrc';
-                    $this->_config = &new PEAR_Config($this->statedir . DIRECTORY_SEPARATOR .
+                    $this->_config = new PEAR_Config($this->statedir . DIRECTORY_SEPARATOR .
                         $file);
                     $this->_config->setRegistry($this);
                     $this->_config->set('php_dir', $this->install_dir);
@@ -328,9 +330,9 @@ class PEAR_Registry extends PEAR
                 $this->_dependencyDB = &PEAR_DependencyDB::singleton($this->_config);
                 if (PEAR::isError($this->_dependencyDB)) {
                     // attempt to recover by removing the dep db
-                    if (file_exists($this->_config->get('php_dir', null, 'pear.php.net') .
+                    if (file_exists($this->_config->get('metadata_dir', null, 'pear.php.net') .
                         DIRECTORY_SEPARATOR . '.depdb')) {
-                        @unlink($this->_config->get('php_dir', null, 'pear.php.net') .
+                        @unlink($this->_config->get('metadata_dir', null, 'pear.php.net') .
                             DIRECTORY_SEPARATOR . '.depdb');
                     }
 
@@ -778,16 +780,18 @@ class PEAR_Registry extends PEAR
 
         $fp = @fopen($this->filemap, 'r');
         if (!$fp) {
-            return $this->raiseError('PEAR_Registry: could not open filemap "' . $this->filemap . '"', PEAR_REGISTRY_ERROR_FILE, null, null, $php_errormsg);
+            $last_errormsg = '';
+            $last_error = error_get_last();
+            if (!empty($last_error['message'])) {
+                $last_errormsg = $last_error['message'];
+            }
+            return $this->raiseError('PEAR_Registry: could not open filemap "' . $this->filemap . '"', PEAR_REGISTRY_ERROR_FILE, null, null, $last_errormsg);
         }
 
         clearstatcache();
-        $rt = get_magic_quotes_runtime();
-        set_magic_quotes_runtime(0);
         $fsize = filesize($this->filemap);
         fclose($fp);
         $data = file_get_contents($this->filemap);
-        set_magic_quotes_runtime($rt);
         $tmp = unserialize($data);
         if (!$tmp && $fsize > 7) {
             return $this->raiseError('PEAR_Registry: invalid filemap data', PEAR_REGISTRY_ERROR_FORMAT, null, null, $data);
@@ -907,7 +911,7 @@ class PEAR_Registry extends PEAR
     }
 
     /**
-     * Determine whether a mirror exists within the deafult channel in the registry
+     * Determine whether a mirror exists within the default channel in the registry
      *
      * @param string Channel name
      * @param string Mirror name
@@ -1009,7 +1013,7 @@ class PEAR_Registry extends PEAR
         if ($lastmodified) {
             $info['_lastmodified'] = $lastmodified;
         } else {
-            $info['_lastmodified'] = date('r');
+            $info['_lastmodified'] = self::getSourceDateEpoch();
         }
 
         fwrite($fp, serialize($info));
@@ -1136,13 +1140,10 @@ class PEAR_Registry extends PEAR
             return null;
         }
 
-        $rt = get_magic_quotes_runtime();
-        set_magic_quotes_runtime(0);
         clearstatcache();
         $this->_closePackageFile($fp);
         $data = file_get_contents($this->_packageFileName($package, $channel));
-        set_magic_quotes_runtime($rt);
-        $data = unserialize($data);
+        $data = @unserialize($data);
         if ($key === null) {
             return $data;
         }
@@ -1175,12 +1176,9 @@ class PEAR_Registry extends PEAR
             return null;
         }
 
-        $rt = get_magic_quotes_runtime();
-        set_magic_quotes_runtime(0);
         clearstatcache();
         $this->_closeChannelFile($fp);
         $data = file_get_contents($this->_channelFileName($channel));
-        set_magic_quotes_runtime($rt);
         $data = unserialize($data);
         return $data;
     }
@@ -1194,7 +1192,7 @@ class PEAR_Registry extends PEAR
 
         $dp = opendir($this->channelsdir);
         while ($ent = readdir($dp)) {
-            if ($ent{0} == '.' || substr($ent, -4) != '.reg') {
+            if ($ent[0] == '.' || substr($ent, -4) != '.reg') {
                 continue;
             }
 
@@ -1245,13 +1243,14 @@ class PEAR_Registry extends PEAR
         }
 
         while ($ent = readdir($dp)) {
-            if ($ent{0} == '.' || substr($ent, -4) != '.reg') {
+            if ($ent[0] == '.' || substr($ent, -4) != '.reg') {
                 continue;
             }
 
             $pkglist[] = substr($ent, 0, -4);
         }
         closedir($dp);
+        sort($pkglist);
         return $pkglist;
     }
 
@@ -1269,7 +1268,7 @@ class PEAR_Registry extends PEAR
         }
 
         while ($ent = readdir($dp)) {
-            if ($ent{0} == '.' || substr($ent, -4) != '.reg') {
+            if ($ent[0] == '.' || substr($ent, -4) != '.reg') {
                 continue;
             }
             $pkglist[] = substr($ent, 0, -4);
@@ -1307,7 +1306,7 @@ class PEAR_Registry extends PEAR
             return false;
         }
 
-        $info['_lastmodified'] = time();
+        $info['_lastmodified'] = self::getSourceDateEpoch();
         fwrite($fp, serialize($info));
         $this->_closePackageFile($fp);
         if (isset($info['filelist'])) {
@@ -1361,7 +1360,7 @@ class PEAR_Registry extends PEAR
             return false;
         }
 
-        $info['_lastmodified'] = time();
+        $info['_lastmodified'] = self::getSourceDateEpoch();
         fwrite($fp, serialize($info));
         $this->_closePackageFile($fp);
         $this->_rebuildFileMap();
@@ -1389,7 +1388,7 @@ class PEAR_Registry extends PEAR
         if (is_object($info)) {
             $info = $info->toArray();
         }
-        $info['_lastmodified'] = time();
+        $info['_lastmodified'] = self::getSourceDateEpoch();
 
         $newinfo = $info;
         if ($merge) {
@@ -1425,7 +1424,7 @@ class PEAR_Registry extends PEAR
 
         $save = $info;
         $info = $save->getArray(true);
-        $info['_lastmodified'] = time();
+        $info['_lastmodified'] = self::getSourceDateEpoch();
         fwrite($fp, serialize($info));
         $this->_closePackageFile($fp);
         $this->_rebuildFileMap();
@@ -1447,7 +1446,7 @@ class PEAR_Registry extends PEAR
 
         $a = $this->_config;
         if (!$a) {
-            $this->_config = &new PEAR_Config;
+            $this->_config = new PEAR_Config;
             $this->_config->set('php_dir', $this->statedir);
         }
 
@@ -1455,7 +1454,7 @@ class PEAR_Registry extends PEAR
             require_once 'PEAR/PackageFile.php';
         }
 
-        $pkg = &new PEAR_PackageFile($this->_config);
+        $pkg = new PEAR_PackageFile($this->_config);
         $pf = &$pkg->fromArray($info);
         return $pf;
     }
@@ -1504,9 +1503,9 @@ class PEAR_Registry extends PEAR
             $pear_channel->setAlias('pear');
             $pear_channel->setSummary('PHP Extension and Application Repository');
             $pear_channel->setDefaultPEARProtocols();
-            $pear_channel->setBaseURL('REST1.0', 'http://pear.php.net/rest/');
-            $pear_channel->setBaseURL('REST1.1', 'http://pear.php.net/rest/');
-            $pear_channel->setBaseURL('REST1.3', 'http://pear.php.net/rest/');
+            $pear_channel->setBaseURL('REST1.0', 'https://pear.php.net/rest/');
+            $pear_channel->setBaseURL('REST1.1', 'https://pear.php.net/rest/');
+            $pear_channel->setBaseURL('REST1.3', 'https://pear.php.net/rest/');
             return $pear_channel;
         }
 
@@ -1520,8 +1519,8 @@ class PEAR_Registry extends PEAR
             $pear_channel->setAlias('pecl');
             $pear_channel->setSummary('PHP Extension Community Library');
             $pear_channel->setDefaultPEARProtocols();
-            $pear_channel->setBaseURL('REST1.0', 'http://pecl.php.net/rest/');
-            $pear_channel->setBaseURL('REST1.1', 'http://pecl.php.net/rest/');
+            $pear_channel->setBaseURL('REST1.0', 'https://pecl.php.net/rest/');
+            $pear_channel->setBaseURL('REST1.1', 'https://pecl.php.net/rest/');
             $pear_channel->setValidationPackage('PEAR_Validator_PECL', '1.0');
             return $pear_channel;
         }
@@ -1537,9 +1536,9 @@ class PEAR_Registry extends PEAR
             $doc_channel->setAlias('phpdocs');
             $doc_channel->setSummary('PHP Documentation Team');
             $doc_channel->setDefaultPEARProtocols();
-            $doc_channel->setBaseURL('REST1.0', 'http://doc.php.net/rest/');
-            $doc_channel->setBaseURL('REST1.1', 'http://doc.php.net/rest/');
-            $doc_channel->setBaseURL('REST1.3', 'http://doc.php.net/rest/');
+            $doc_channel->setBaseURL('REST1.0', 'https://doc.php.net/rest/');
+            $doc_channel->setBaseURL('REST1.1', 'https://doc.php.net/rest/');
+            $doc_channel->setBaseURL('REST1.3', 'https://doc.php.net/rest/');
             return $doc_channel;
         }
 
@@ -1934,12 +1933,12 @@ class PEAR_Registry extends PEAR
      * @param bool whether to strictly return raw channels (no aliases)
      * @return PEAR_ChannelFile|PEAR_Error
      */
-    function &getChannel($channel, $noaliases = false)
+    function getChannel($channel, $noaliases = false)
     {
         if (PEAR::isError($e = $this->_lock(LOCK_SH))) {
             return $e;
         }
-        $ret = &$this->_getChannel($channel, $noaliases);
+        $ret = $this->_getChannel($channel, $noaliases);
         $this->_unlock();
         if (!$ret) {
             return PEAR::raiseError('Unknown channel: ' . $channel);
@@ -2071,7 +2070,7 @@ class PEAR_Registry extends PEAR
                 if (!class_exists('PEAR_Installer_Role')) {
                     require_once 'PEAR/Installer/Role.php';
                 }
-                $notempty = create_function('$a','return !empty($a);');
+                $notempty = function($a) { return !empty($a); };
             }
             $package = is_array($package) ? array(strtolower($package[0]), strtolower($package[1]))
                 : strtolower($package);
@@ -2211,7 +2210,7 @@ class PEAR_Registry extends PEAR
             }
             if (!isset($components['scheme'])) {
                 if (strpos($components['path'], '/') !== false) {
-                    if ($components['path']{0} == '/') {
+                    if ($components['path'][0] == '/') {
                         return PEAR::raiseError('parsePackageName(): this is not ' .
                             'a package name, it begins with "/" in "' . $param . '"',
                             'invalid', null, null, $param);

@@ -1,4 +1,4 @@
-<?PHP
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
@@ -6,21 +6,47 @@
  *
  * SMTP MX implementation of the PEAR Mail interface. Requires the Net_SMTP class.
  *
- * PHP versions 4 and 5
+ * PHP version 5
  *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
+ * LICENSE:
+ *
+ * Copyright (c) 2010-2017 gERD Schaufelberger
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category   Mail
  * @package    Mail_smtpmx
  * @author     gERD Schaufelberger <gerd@php-tools.net>
- * @copyright  1997-2005 The PHP Group
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: smtpmx.php,v 1.2 2007/10/06 17:00:00 chagenbu Exp $
- * @see        Mail
+ * @copyright  2010-2017 gERD Schaufelberger
+ * @license    http://opensource.org/licenses/BSD-3-Clause New BSD License
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/Mail/
  */
 
 require_once 'Net/SMTP.php';
@@ -32,7 +58,7 @@ require_once 'Net/SMTP.php';
  * @access public
  * @author  gERD Schaufelberger <gerd@php-tools.net>
  * @package Mail
- * @version $Revision: 1.2 $
+ * @version $Revision$
  */
 class Mail_smtpmx extends Mail {
 
@@ -99,16 +125,23 @@ class Mail_smtpmx extends Mail {
     /**
      * Switch to test mode - don't send emails for real
      *
-     * @var boolean $debug
+     * @var boolean $test
      */
     var $test = false;
 
     /**
      * Turn on Net_SMTP debugging?
      *
-     * @var boolean $peardebug
+     * @var boolean $debug
      */
     var $debug = false;
+
+    /**
+     * Set debug_handler on Net_SMTP
+     *
+     * @var string $debug_handler
+     */
+    var $debug_handler = null;
 
     /**
      * internal error codes
@@ -116,7 +149,7 @@ class Mail_smtpmx extends Mail {
      * translate internal error identifier to PEAR-Error codes and human
      * readable messages.
      *
-     * @var boolean $debug
+     * @var array $errorCode
      * @todo as I need unique error-codes to identify what exactly went wrond
      *       I did not use intergers as it should be. Instead I added a "namespace"
      *       for each code. This avoids conflicts with error codes from different
@@ -170,14 +203,15 @@ class Mail_smtpmx extends Mail {
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
      * passed in. It looks for the following parameters:
-     *     mailname    The name of the local mail system (a valid hostname which matches the reverse lookup)
-     *     port        smtp-port - the default comes from getservicebyname() and should work fine
-     *     timeout     The SMTP connection timeout. Defaults to 30 seconds.
-     *     vrfy        Whether to use VRFY or not. Defaults to false.
-     *     verp        Whether to use VERP or not. Defaults to false.
-     *     test        Activate test mode? Defaults to false.
-     *     debug       Activate SMTP and Net_DNS debug mode? Defaults to false.
-     *     netdns      whether to use PEAR:Net_DNS or the PHP build in function getmxrr, default is true
+     *     mailname       The name of the local mail system (a valid hostname which matches the reverse lookup)
+     *     port           smtp-port - the default comes from getservicebyname() and should work fine
+     *     timeout        The SMTP connection timeout. Defaults to 30 seconds.
+     *     vrfy           Whether to use VRFY or not. Defaults to false.
+     *     verp           Whether to use VERP or not. Defaults to false.
+     *     test           Activate test mode? Defaults to false.
+     *     debug          Activate SMTP and Net_DNS debug mode? Defaults to false.
+     *     debug_handler  Set SMTP debug handler function. Defaults to null.
+     *     netdns         whether to use PEAR:Net_DNS or the PHP build in function getmxrr, default is true
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
@@ -201,15 +235,18 @@ class Mail_smtpmx extends Mail {
 
         // port number
         if (isset($params['port'])) {
-            $this->_port = $params['port'];
+            $this->port = $params['port'];
         } else {
-            $this->_port = getservbyname('smtp', 'tcp');
+            $this->port = getservbyname('smtp', 'tcp');
         }
 
         if (isset($params['timeout'])) $this->timeout = $params['timeout'];
+        if (isset($params['vrfy'])) $this->vrfy = (bool)$params['vrfy'];
         if (isset($params['verp'])) $this->verp = $params['verp'];
-        if (isset($params['test'])) $this->test = $params['test'];
-        if (isset($params['peardebug'])) $this->test = $params['peardebug'];
+        if (isset($params['test'])) $this->test = (bool)$params['test'];
+        if (isset($params['peardebug'])) $this->debug = (bool)$params['peardebug'];
+        if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
+        if (isset($params['debug_handler'])) $this->debug_handler = $params['debug_handler'];
         if (isset($params['netdns'])) $this->withNetDns = $params['netdns'];
     }
 
@@ -298,7 +335,7 @@ class Mail_smtpmx extends Mail {
 
                 // configure the SMTP connection.
                 if ($this->debug) {
-                    $this->_smtp->setDebug(true);
+                    $this->_smtp->setDebug(true, $this->debug_handler);
                 }
 
                 // attempt to connect to the configured SMTP server.
@@ -362,7 +399,7 @@ class Mail_smtpmx extends Mail {
             }
 
             // Send data
-            $res = $this->_smtp->data("$textHeaders\r\n$body");
+            $res = $this->_smtp->data($body, $textHeaders);
             if (is_a($res, 'PEAR_Error')) {
                 $info = array('rcpt' => $rcpt);
                 return $this->_raiseError('failed_send_data', $info);
@@ -438,7 +475,7 @@ class Mail_smtpmx extends Mail {
 
         $this->resolver = new Net_DNS_Resolver();
         if ($this->debug) {
-            $this->resolver->test = 1;
+            $this->resolver->debug = 1;
         }
 
         return true;

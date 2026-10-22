@@ -4,42 +4,19 @@
  *
  * PHP version 5
  *
- * LICENSE:
+ * LICENSE
  *
- * Copyright (c) 2008, 2009, Alexey Borzov <avb@php.net>
- * All rights reserved.
+ * This source file is subject to BSD 3-Clause License that is bundled
+ * with this package in the file LICENSE and available at the URL
+ * https://raw.github.com/pear/HTTP_Request2/trunk/docs/LICENSE
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *    * Redistributions of source code must retain the above copyright
- *      notice, this list of conditions and the following disclaimer.
- *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the
- *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products
- *      derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * @category HTTP
- * @package  HTTP_Request2
- * @author   David Jean Louis <izi@php.net>
- * @author   Alexey Borzov <avb@php.net>
- * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Log.php 290743 2009-11-14 13:27:49Z avb $
- * @link     http://pear.php.net/package/HTTP_Request2
+ * @category  HTTP
+ * @package   HTTP_Request2
+ * @author    David Jean Louis <izi@php.net>
+ * @author    Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
+ * @link      http://pear.php.net/package/HTTP_Request2
  */
 
 /**
@@ -86,8 +63,8 @@ require_once 'HTTP/Request2/Exception.php';
  * @package  HTTP_Request2
  * @author   David Jean Louis <izi@php.net>
  * @author   Alexey Borzov <avb@php.net>
- * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 0.5.1
+ * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
+ * @version  Release: 2.7.0
  * @link     http://pear.php.net/package/HTTP_Request2
  */
 class HTTP_Request2_Observer_Log implements SplObserver
@@ -95,25 +72,25 @@ class HTTP_Request2_Observer_Log implements SplObserver
     // properties {{{
 
     /**
-     * The log target, it can be a a resource or a PEAR Log instance.
+     * The log target, it can be a resource or a PEAR Log instance.
      *
      * @var resource|Log $target
      */
-    protected $target = null;
+    protected $target;
 
     /**
      * The events to log.
      *
      * @var array $events
      */
-    public $events = array(
+    public $events = [
         'connect',
         'sentHeaders',
-        'sentBodyPart',
+        'sentBody',
         'receivedHeaders',
         'receivedBody',
         'disconnect',
-    );
+    ];
 
     // }}}
     // __construct() {{{
@@ -121,27 +98,31 @@ class HTTP_Request2_Observer_Log implements SplObserver
     /**
      * Constructor.
      *
-     * @param mixed $target Can be a file path (default: php://output), a resource,
-     *                      or an instance of the PEAR Log class.
-     * @param array $events Array of events to listen to (default: all events)
+     * @param string|resource|Log $target Can be a file path (default: php://output), a resource,
+     *                                    or an instance of the PEAR Log class.
+     * @param array               $events Array of events to listen to (default: all events)
      *
      * @return void
      */
-    public function __construct($target = 'php://output', array $events = array())
+    public function __construct($target = 'php://output', array $events = [])
     {
         if (!empty($events)) {
             $this->events = $events;
         }
         if (is_resource($target) || $target instanceof Log) {
             $this->target = $target;
-        } elseif (false === ($this->target = @fopen($target, 'w'))) {
-            throw new HTTP_Request2_Exception("Unable to open '{$target}'");
+        } else {
+            if (false === $fp = @fopen($target, 'ab')) {
+                throw new HTTP_Request2_Exception("Unable to open '{$target}'");
+            }
+            $this->target = $fp;
         }
     }
 
     // }}}
     // update() {{{
 
+    #[ReturnTypeWillChange]
     /**
      * Called when the request notifies us of an event.
      *
@@ -151,6 +132,9 @@ class HTTP_Request2_Observer_Log implements SplObserver
      */
     public function update(SplSubject $subject)
     {
+        if (!$subject instanceof HTTP_Request2) {
+            return;
+        }
         $event = $subject->getLastEvent();
         if (!in_array($event['name'], $this->events)) {
             return;
@@ -167,14 +151,16 @@ class HTTP_Request2_Observer_Log implements SplObserver
                 $this->log('> ' . $header);
             }
             break;
-        case 'sentBodyPart':
+        case 'sentBody':
             $this->log('> ' . $event['data'] . ' byte(s) sent');
             break;
         case 'receivedHeaders':
-            $this->log(sprintf('< HTTP/%s %s %s',
-                $event['data']->getVersion(),
-                $event['data']->getStatus(),
-                $event['data']->getReasonPhrase()));
+            $this->log(
+                sprintf(
+                    '< HTTP/%s %s %s', $event['data']->getVersion(),
+                    $event['data']->getStatus(), $event['data']->getReasonPhrase()
+                )
+            );
             $headers = $event['data']->getHeader();
             foreach ($headers as $key => $val) {
                 $this->log('< ' . $key . ': ' . $val);

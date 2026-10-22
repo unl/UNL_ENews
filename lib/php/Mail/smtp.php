@@ -1,21 +1,50 @@
 <?php
-//
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.02 of the PHP license,      |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Authors: Chuck Hagenbuch <chuck@horde.org>                           |
-// |          Jon Parise <jon@php.net>                                    |
-// +----------------------------------------------------------------------+
+/**
+ * SMTP implementation of the PEAR Mail interface. Requires the Net_SMTP class.
+ *
+ * PHP version 5
+ *
+ * LICENSE:
+ *
+ * Copyright (c) 2010-2021, Chuck Hagenbuch & Jon Parise
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category    HTTP
+ * @package     HTTP_Request
+ * @author      Jon Parise <jon@php.net>
+ * @author      Chuck Hagenbuch <chuck@horde.org>
+ * @copyright   2010-2021 Chuck Hagenbuch
+ * @license     http://opensource.org/licenses/BSD-3-Clause New BSD License
+ * @version     CVS: $Id$
+ * @link        http://pear.php.net/package/Mail/
+ */
 
 /** Error: Failed to create a Net_SMTP object */
 define('PEAR_MAIL_SMTP_ERROR_CREATE', 10000);
@@ -42,7 +71,7 @@ define('PEAR_MAIL_SMTP_ERROR_DATA', 10006);
  * SMTP implementation of the PEAR Mail interface. Requires the Net_SMTP class.
  * @access public
  * @package Mail
- * @version $Revision: 1.33 $
+ * @version $Revision$
  */
 class Mail_smtp extends Mail {
 
@@ -57,21 +86,43 @@ class Mail_smtp extends Mail {
     /**
      * The list of service extension parameters to pass to the Net_SMTP
      * mailFrom() command.
+     *
      * @var array
      */
     var $_extparams = array();
 
     /**
      * The SMTP host to connect to.
+     *
      * @var string
      */
     var $host = 'localhost';
 
     /**
      * The port the SMTP server is on.
+     *
      * @var integer
      */
     var $port = 25;
+
+    /**
+     * Should STARTTLS connection be used?
+     *
+     * This value may be set to true or false.
+     *
+     * If the value is set to true, the Net_SMTP package will attempt to use
+     * a STARTTLS encrypted connection.
+     *
+     * If the value is set to false, the Net_SMTP package will avoid
+     * a STARTTLS encrypted connection.
+     *
+     * NULL indicates only STARTTLS if $auth is set.
+     *
+     * PEAR/Net_SMTP >= 1.10.0 required.
+     *
+     * @var boolean
+     */
+    var $starttls = null;
 
     /**
      * Should SMTP authentication be used?
@@ -88,12 +139,14 @@ class Mail_smtp extends Mail {
 
     /**
      * The username to use if the SMTP server requires authentication.
+     *
      * @var string
      */
     var $username = '';
 
     /**
      * The password to use if the SMTP server requires authentication.
+     *
      * @var string
      */
     var $password = '';
@@ -121,6 +174,22 @@ class Mail_smtp extends Mail {
     var $debug = false;
 
     /**
+     * Set debug_handler on Net_SMTP
+     *
+     * @var callable $debug_handler
+     */
+    var $debug_handler = null;
+
+    /**
+     * we need the greeting; from it we can extract the authorative name of the mail
+     * server we've really connected to. ideal if we're connecting to a round-robin
+     * of relay servers and need to track which exact one took the email
+     *
+     * @var string
+     */
+    var $greeting = null;
+
+    /**
      * Indicates whether or not the SMTP connection should persist over
      * multiple calls to the send() method.
      *
@@ -132,61 +201,92 @@ class Mail_smtp extends Mail {
      * Use SMTP command pipelining (specified in RFC 2920) if the SMTP server
      * supports it. This speeds up delivery over high-latency connections. By
      * default, use the default value supplied by Net_SMTP.
-     * @var bool
+     *
+     * @var boolean
      */
     var $pipelining;
+
+    /**
+     * The list of socket options
+     *
+     * @var array
+     */
+    var $socket_options = array();
+
+    /**
+     * SMTP response message
+     *
+     * @var string
+     * @since 1.6.0
+     */
+    var $response = null;
+
+    /**
+     * If the message ends up in the queue, on the recipient server,
+     * the response will be saved here.
+     * Some successfully delivered emails will include a “queued”
+     * notation in the SMTP response, such as "250 OK; queued as 12345".
+     * This indicates that the email was delivered to the recipient
+     * as expected, but may require additional processing before it
+     * lands in the recipient’s inbox.
+     *
+     * @var string
+     */
+    var $queued_as = null;
 
     /**
      * Constructor.
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
      * passed in. It looks for the following parameters:
-     *     host        The server to connect to. Defaults to localhost.
-     *     port        The port to connect to. Defaults to 25.
-     *     auth        SMTP authentication.  Defaults to none.
-     *     username    The username to use for SMTP auth. No default.
-     *     password    The password to use for SMTP auth. No default.
-     *     localhost   The local hostname / domain. Defaults to localhost.
-     *     timeout     The SMTP connection timeout. Defaults to none.
-     *     verp        Whether to use VERP or not. Defaults to false.
-     *                 DEPRECATED as of 1.2.0 (use setMailParams()).
-     *     debug       Activate SMTP debug mode? Defaults to false.
-     *     persist     Should the SMTP connection persist?
-     *     pipelining  Use SMTP command pipelining
+     *     host            The server to connect to. Defaults to localhost.
+     *     port            The port to connect to. Defaults to 25.
+     *     auth            SMTP authentication. Defaults to none.
+     *     starttls        Should STARTTLS connection be used? No default. PEAR/Net_SMTP >= 1.10.0 required.
+     *     username        The username to use for SMTP auth. No default.
+     *     password        The password to use for SMTP auth. No default.
+     *     localhost       The local hostname / domain. Defaults to localhost.
+     *     timeout         The SMTP connection timeout. Defaults to none.
+     *     verp            Whether to use VERP or not. Defaults to false.
+     *                     DEPRECATED as of 1.2.0 (use setMailParams()).
+     *     debug           Activate SMTP debug mode? Defaults to false.
+     *     debug_handler   Set SMTP debug handler function. Defaults to null.
+     *     persist         Should the SMTP connection persist?
+     *     pipelining      Use SMTP command pipelining
+     *     socket_options  Socket stream_context_create() options.
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
      *
      * @param array Hash containing any parameters different from the
      *              defaults.
-     * @access public
      */
-    function Mail_smtp($params)
+    public function __construct($params)
     {
         if (isset($params['host'])) $this->host = $params['host'];
         if (isset($params['port'])) $this->port = $params['port'];
         if (isset($params['auth'])) $this->auth = $params['auth'];
+        if (isset($params['starttls'])) $this->starttls = $params['starttls'];
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
         if (isset($params['timeout'])) $this->timeout = $params['timeout'];
         if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
+        if (isset($params['debug_handler'])) $this->debug_handler = $params['debug_handler'];
         if (isset($params['persist'])) $this->persist = (bool)$params['persist'];
         if (isset($params['pipelining'])) $this->pipelining = (bool)$params['pipelining'];
-
+        if (isset($params['socket_options'])) $this->socket_options = $params['socket_options'];
         // Deprecated options
         if (isset($params['verp'])) {
             $this->addServiceExtensionParameter('XVERP', is_bool($params['verp']) ? null : $params['verp']);
         }
-
-        register_shutdown_function(array(&$this, '_Mail_smtp'));
     }
 
     /**
      * Destructor implementation to ensure that we disconnect from any
      * potentially-alive persistent SMTP connections.
      */
-    function _Mail_smtp()
+    public function __destruct()
     {
         $this->disconnect();
     }
@@ -213,12 +313,23 @@ class Mail_smtp extends Mail {
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
-     * @access public
      */
-    function send($recipients, $headers, $body)
+    public function send($recipients, $headers, $body)
+    {
+        $result = $this->send_or_fail($recipients, $headers, $body);
+
+        /* If persistent connections are disabled, destroy our SMTP object. */
+        if ($this->persist === false) {
+            $this->disconnect();
+        }
+
+        return $result;
+    }
+
+    protected function send_or_fail($recipients, $headers, $body)
     {
         /* If we don't already have an SMTP object, create one. */
-        $result = &$this->getSMTPObject();
+        $result = $this->getSMTPObject();
         if (PEAR::isError($result)) {
             return $result;
         }
@@ -249,7 +360,7 @@ class Mail_smtp extends Mail {
                                     PEAR_MAIL_SMTP_ERROR_FROM);
         }
 
-        $params = null;
+        $params = '';
         if (!empty($this->_extparams)) {
             foreach ($this->_extparams as $key => $val) {
                 $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
@@ -277,16 +388,24 @@ class Mail_smtp extends Mail {
         }
 
         /* Send the message's headers and the body as SMTP data. */
-        $res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body);
+        $res = $this->_smtp->data($body, $textHeaders);
+
+        list($code, $args) = $this->_smtp->getResponse();
+
+        $this->response = $code . ' ' . $args;
+
+        if (preg_match("/ queued as (.*)/", $args, $queued)) {
+            $this->queued_as = $queued[1];
+        }
+
+        /* we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
+         * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email */
+        $this->greeting = $this->_smtp->getGreeting();
+
         if (is_a($res, 'PEAR_Error')) {
             $error = $this->_error('Failed to send data', $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_DATA);
-        }
-
-        /* If persistent connections are disabled, destroy our SMTP object. */
-        if ($this->persist === false) {
-            $this->disconnect();
         }
 
         return true;
@@ -300,18 +419,20 @@ class Mail_smtp extends Mail {
      *               failure.
      *
      * @since  1.2.0
-     * @access public
      */
-    function &getSMTPObject()
+    public function getSMTPObject()
     {
         if (is_object($this->_smtp) !== false) {
             return $this->_smtp;
         }
 
         include_once 'Net/SMTP.php';
-        $this->_smtp = &new Net_SMTP($this->host,
+        $this->_smtp = new Net_SMTP($this->host,
                                      $this->port,
-                                     $this->localhost);
+                                     $this->localhost,
+                                     $this->pipelining,
+                                     0,
+                                     $this->socket_options);
 
         /* If we still don't have an SMTP object at this point, fail. */
         if (is_object($this->_smtp) === false) {
@@ -321,7 +442,7 @@ class Mail_smtp extends Mail {
 
         /* Configure the SMTP connection. */
         if ($this->debug) {
-            $this->_smtp->setDebug(true);
+            $this->_smtp->setDebug(true, $this->debug_handler);
         }
 
         /* Attempt to connect to the configured SMTP server. */
@@ -336,13 +457,26 @@ class Mail_smtp extends Mail {
         if ($this->auth) {
             $method = is_string($this->auth) ? $this->auth : '';
 
+            $tls = $this->starttls === false ? false : true;
+
             if (PEAR::isError($res = $this->_smtp->auth($this->username,
                                                         $this->password,
-                                                        $method))) {
+                                                        $method,
+                                                        $tls))) {
                 $error = $this->_error("$method authentication failure",
                                        $res);
                 $this->_smtp->rset();
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
+            }
+        }
+
+        /* Attempt to establish a TLS encrypted connection. PEAR/Net_SMTP >= 1.10.0 required. */
+        if ($this->starttls && !$this->auth) {
+            $starttls = $this->_smtp->starttls();
+            if (PEAR::isError($starttls)) {
+                return PEAR::raiseError($starttls);
+            } elseif ($starttls === false) {
+                return PEAR::raiseError('STARTTLS failed');
             }
         }
 
@@ -356,9 +490,8 @@ class Mail_smtp extends Mail {
      * @param string Any value the keyword needs.
      *
      * @since 1.2.0
-     * @access public
      */
-    function addServiceExtensionParameter($keyword, $value = null)
+    public function addServiceExtensionParameter($keyword, $value = null)
     {
         $this->_extparams[$keyword] = $value;
     }
@@ -369,9 +502,8 @@ class Mail_smtp extends Mail {
      * @return boolean True if the SMTP connection no longer exists.
      *
      * @since  1.1.9
-     * @access public
      */
-    function disconnect()
+    public function disconnect()
     {
         /* If we have an SMTP object, disconnect and destroy it. */
         if (is_object($this->_smtp) && $this->_smtp->disconnect()) {
@@ -383,6 +515,30 @@ class Mail_smtp extends Mail {
     }
 
     /**
+     * Returns the SMTP response message after sending.
+     *
+     * @return string SMTP response message or NULL.
+     *
+     * @since  1.6.0
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Returns the SMTP response message if includes "queue" after sending.
+     *
+     * @return string SMTP queue message or NULL.
+     *
+     * @since  1.6.0
+     */
+    public function getQueuedAs()
+    {
+        return $this->queued_as;
+    }
+
+    /**
      * Build a standardized string describing the current SMTP error.
      *
      * @param string $text  Custom string describing the error context.
@@ -391,9 +547,8 @@ class Mail_smtp extends Mail {
      * @return string       A string describing the current SMTP error.
      *
      * @since  1.1.7
-     * @access private
      */
-    function _error($text, &$error)
+    protected function _error($text, $error)
     {
         /* Split the SMTP response into a code and a response string. */
         list($code, $response) = $this->_smtp->getResponse();

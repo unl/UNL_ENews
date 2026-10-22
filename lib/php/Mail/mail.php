@@ -1,27 +1,54 @@
 <?php
-//
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.02 of the PHP license,      |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Author: Chuck Hagenbuch <chuck@horde.org>                            |
-// +----------------------------------------------------------------------+
-//
-// $Id: mail.php,v 1.20 2007/10/06 17:00:00 chagenbu Exp $
+/**
+ * internal PHP-mail() implementation of the PEAR Mail:: interface.
+ *
+ * PHP version 5
+ *
+ * LICENSE:
+ *
+ * Copyright (c) 2010-2017, Chuck Hagenbuch
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category    Mail
+ * @package     Mail
+ * @author      Chuck Hagenbuch <chuck@horde.org> 
+ * @copyright   2010-2017 Chuck Hagenbuch
+ * @license     http://opensource.org/licenses/BSD-3-Clause New BSD License
+ * @version     CVS: $Id$
+ * @link        http://pear.php.net/package/Mail/
+ */
 
 /**
  * internal PHP-mail() implementation of the PEAR Mail:: interface.
  * @package Mail
- * @version $Revision: 1.20 $
+ * @version $Revision$
  */
 class Mail_mail extends Mail {
 
@@ -39,7 +66,7 @@ class Mail_mail extends Mail {
      *
      * @param array $params Extra arguments for the mail() function.
      */
-    function Mail_mail($params = null)
+    public function __construct($params = null)
     {
         // The other mail implementations accept parameters as arrays.
         // In the interest of being consistent, explode an array into
@@ -48,16 +75,6 @@ class Mail_mail extends Mail {
             $this->_params = join(' ', $params);
         } else {
             $this->_params = $params;
-        }
-
-        /* Because the mail() function may pass headers as command
-         * line arguments, we can't guarantee the use of the standard
-         * "\r\n" separator.  Instead, we use the system's native line
-         * separator. */
-        if (defined('PHP_EOL')) {
-            $this->sep = PHP_EOL;
-        } else {
-            $this->sep = (strpos(PHP_OS, 'WIN') === false) ? "\n" : "\r\n";
         }
     }
 
@@ -84,10 +101,8 @@ class Mail_mail extends Mail {
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
-     *
-     * @access public
      */
-    function send($recipients, $headers, $body)
+    public function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
             return PEAR::raiseError('$headers must be an array');
