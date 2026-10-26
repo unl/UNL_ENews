@@ -720,7 +720,7 @@ class UNL_Cache_Lite
         if ($fp) {
             clearstatcache();
             $length = @filesize($this->_file);
-            $mqr = get_magic_quotes_runtime();
+            $mqr = $this->_safeGetMagicQuotesRuntime();
             if ($mqr) {
                 set_magic_quotes_runtime(0);
             }
@@ -728,7 +728,7 @@ class UNL_Cache_Lite
                 $hashControl = @fread($fp, 32);
                 $length = $length - 32;
             } 
-            if ($length) {
+            if ($length && $length > 0) {
                 $data = @fread($fp, $length);
             } else {
                 $data = '';
@@ -779,7 +779,7 @@ class UNL_Cache_Lite
             if ($this->_readControl) {
                 @fwrite($fp, $this->_hash($data, $this->_readControlType), 32);
             }
-            $mqr = get_magic_quotes_runtime();
+            $mqr = $this->_safeGetMagicQuotesRuntime();
             if ($mqr) {
                 set_magic_quotes_runtime(0);
             }
@@ -837,6 +837,10 @@ class UNL_Cache_Lite
         default:
             return $this->raiseError('Unknown controlType ! (available values are only \'md5\', \'crc32\', \'strlen\')', -5);
         }
+    }
+
+    protected function _safeGetMagicQuotesRuntime() {
+        return version_compare( phpversion(), '5.4', '<' ) && function_exists( 'get_magic_quotes_runtime' ) && get_magic_quotes_runtime();
     }
     
 } 
