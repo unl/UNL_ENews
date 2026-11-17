@@ -234,6 +234,7 @@ define([
 				hide : false,
 				aspectRatio : ratio,
 				handles : true,
+				persistent: true,
 				onInit: function(img, selection) {
 					$('input[name=thumbX1]').val(selection.x1);
 					$('input[name=thumbX2]').val(selection.x2);
